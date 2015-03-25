@@ -1,0 +1,10 @@
+//------------------\
+// START DIALOGUE  |
+//------------------/
+IF
+	True()
+THEN
+	RESPONSE #100
+		ActionOverride(LastSummonerOf(Myself),RemoveSpellRES("QDSORBL")) 
+		StartDialog("QDSORBLD",LastSummonerOf(Myself))
+END

@@ -1,0 +1,1665 @@
+IF 
+	True()
+THEN
+	RESPONSE #100
+		ActionOverride(LastSummonerOf(Myself),Rest())
+		SetGlobal("qd_ora_cur_level_1","GLOBAL",0)
+		SetGlobal("qd_ora_cur_level_2","GLOBAL",0)
+		SetGlobal("qd_ora_cur_level_3","GLOBAL",0)
+		SetGlobal("qd_ora_cur_level_4","GLOBAL",0)
+		SetGlobal("qd_ora_cur_level_5","GLOBAL",0)
+		SetGlobal("qd_ora_cur_level_6","GLOBAL",0)
+		SetGlobal("qd_ora_cur_level_7","GLOBAL",0)
+		SetGlobal("qd_ora_spl_level_1","GLOBAL",0)
+		SetGlobal("qd_ora_spl_level_2","GLOBAL",0)
+		SetGlobal("qd_ora_spl_level_3","GLOBAL",0)
+		SetGlobal("qd_ora_spl_level_4","GLOBAL",0)
+		SetGlobal("qd_ora_spl_level_5","GLOBAL",0)
+		SetGlobal("qd_ora_spl_level_6","GLOBAL",0)
+		SetGlobal("qd_ora_spl_level_7","GLOBAL",0)
+		Continue() 
+END
+
+IF 
+	LevelGT(LastSummonerOf(Myself),0) //level 1+ 
+THEN
+	RESPONSE #100
+		IncrementGlobal("qd_ora_spl_level_1","GLOBAL",2) // L1: 2
+		Continue() 
+END
+
+IF 
+	LevelGT(LastSummonerOf(Myself),2) //level 3+
+THEN
+	RESPONSE #100
+		IncrementGlobal("qd_ora_spl_level_1","GLOBAL",1) // L1: 3
+		IncrementGlobal("qd_ora_spl_level_2","GLOBAL",1) // L2: 1
+		Continue() 
+END
+
+IF 
+	LevelGT(LastSummonerOf(Myself),4) //level 5+
+THEN
+	RESPONSE #100
+		IncrementGlobal("qd_ora_spl_level_1","GLOBAL",1) // L1: 4
+		IncrementGlobal("qd_ora_spl_level_2","GLOBAL",1) // L2: 2
+		IncrementGlobal("qd_ora_spl_level_3","GLOBAL",1) // L3: 1
+		Continue() 
+END
+
+IF 
+	LevelGT(LastSummonerOf(Myself),6) //level 7+
+THEN
+	RESPONSE #100
+		IncrementGlobal("qd_ora_spl_level_1","GLOBAL",1) // L1: 5
+		IncrementGlobal("qd_ora_spl_level_2","GLOBAL",1) // L2: 3
+		IncrementGlobal("qd_ora_spl_level_3","GLOBAL",1) // L3: 2
+		IncrementGlobal("qd_ora_spl_level_4","GLOBAL",1) // L4: 1
+		Continue() 
+END
+
+IF 
+	LevelGT(LastSummonerOf(Myself),8) //level 9+
+THEN
+	RESPONSE #100
+		// L1: 5 
+		IncrementGlobal("qd_ora_spl_level_2","GLOBAL",1) // L2: 4
+		IncrementGlobal("qd_ora_spl_level_3","GLOBAL",1) // L3: 3
+		IncrementGlobal("qd_ora_spl_level_4","GLOBAL",1) // L4: 2
+		IncrementGlobal("qd_ora_spl_level_5","GLOBAL",1) // L5: 1
+		Continue() 
+END
+
+IF 
+	LevelGT(LastSummonerOf(Myself),10) //level 11+
+THEN
+	RESPONSE #100
+		// L1: 5 
+		IncrementGlobal("qd_ora_spl_level_2","GLOBAL",1) // L2: 5
+		IncrementGlobal("qd_ora_spl_level_3","GLOBAL",1) // L3: 4
+		IncrementGlobal("qd_ora_spl_level_4","GLOBAL",1) // L4: 3
+		IncrementGlobal("qd_ora_spl_level_5","GLOBAL",1) // L5: 2
+		IncrementGlobal("qd_ora_spl_level_6","GLOBAL",1) // L6: 1
+		Continue() 
+END
+
+IF 
+	LevelGT(LastSummonerOf(Myself),12) //level 13+
+THEN
+	RESPONSE #100
+		// L1: 5 
+		// L2: 5
+		// L3: 4
+		IncrementGlobal("qd_ora_spl_level_4","GLOBAL",1) // L4: 4
+		IncrementGlobal("qd_ora_spl_level_5","GLOBAL",1) // L5: 3
+		IncrementGlobal("qd_ora_spl_level_6","GLOBAL",1) // L6: 2
+		IncrementGlobal("qd_ora_spl_level_7","GLOBAL",1) // L7: 1
+		Continue() 
+END
+
+IF 
+	LevelGT(LastSummonerOf(Myself),14) //level 15+
+THEN
+	RESPONSE #100
+		// L1: 5 
+		// L2: 5
+		// L3: 4
+		// L4: 4
+		IncrementGlobal("qd_ora_spl_level_5","GLOBAL",1) // L5: 4
+		IncrementGlobal("qd_ora_spl_level_6","GLOBAL",1) // L6: 3
+		IncrementGlobal("qd_ora_spl_level_7","GLOBAL",1) // L7: 2
+		Continue() 
+END
+
+IF 
+	LevelGT(LastSummonerOf(Myself),16) //level 17+
+THEN
+	RESPONSE #100
+		// L1: 5 
+		// L2: 5
+		// L3: 4
+		// L4: 4
+		// L5: 4
+		// L6: 3
+		IncrementGlobal("qd_ora_spl_level_7","GLOBAL",1) // L7: 3
+		Continue() 
+END
+
+IF 
+	LevelGT(LastSummonerOf(Myself),20) //level 21+
+THEN
+	RESPONSE #100
+		// L1: 5 
+		// L2: 5
+		// L3: 4
+		// L4: 4
+		// L5: 4
+		IncrementGlobal("qd_ora_spl_level_6","GLOBAL",1) // L6: 4
+		// L7: 3
+		Continue() 
+END
+
+IF 
+	LevelGT(LastSummonerOf(Myself),21) //level 22+
+THEN
+	RESPONSE #100
+		// L1: 5 
+		// L2: 5
+		IncrementGlobal("qd_ora_spl_level_2","GLOBAL",1) // L3: 5
+		// L4: 4
+		// L5: 4
+		// L6: 4
+		IncrementGlobal("qd_ora_spl_level_7","GLOBAL",1) // L7: 4
+		Continue() 
+END
+
+IF 
+	LevelGT(LastSummonerOf(Myself),22) //level 23+
+THEN
+	RESPONSE #100
+		// L1: 5 
+		// L2: 5
+		// L3: 5
+		IncrementGlobal("qd_ora_spl_level_4","GLOBAL",1) // L4: 5
+		// L5: 4
+		// L6: 4
+		// L7: 4
+		Continue() 
+END
+
+IF 
+	LevelGT(LastSummonerOf(Myself),27) //level 28+
+THEN
+	RESPONSE #100
+		// L1: 5 
+		// L2: 5
+		// L3: 5
+		// L4: 5
+		IncrementGlobal("qd_ora_spl_level_5","GLOBAL",1) // L5: 5
+		// L6: 4
+		// L7: 4
+		Continue() 
+END
+
+IF 
+	LevelGT(LastSummonerOf(Myself),29) //level 30+
+THEN
+	RESPONSE #100
+		// L1: 5 
+		// L2: 5
+		// L3: 5
+		// L4: 5
+		// L5: 5
+		IncrementGlobal("qd_ora_spl_level_6","GLOBAL",1) // L6: 5
+		// L7: 4
+		Continue() 
+END
+
+IF 
+	LevelGT(LastSummonerOf(Myself),30) //level 31+
+THEN
+	RESPONSE #100
+		// L1: 5 
+		// L2: 5
+		// L3: 5
+		// L4: 5
+		// L5: 5
+		// L6: 5
+		IncrementGlobal("qd_ora_spl_level_7","GLOBAL",1) // L7: 5
+		Continue() 
+END
+
+IF
+	Kit(LastSummonerOf(Myself),QDORALOR) //bonus spell known for Oracles of Lore
+THEN
+	RESPONSE #100
+		IncrementGlobal("qd_ora_spl_level_1","GLOBAL",1) 
+		IncrementGlobal("qd_ora_spl_level_2","GLOBAL",1) 
+		IncrementGlobal("qd_ora_spl_level_3","GLOBAL",1) 
+		IncrementGlobal("qd_ora_spl_level_4","GLOBAL",1) 
+		IncrementGlobal("qd_ora_spl_level_5","GLOBAL",1) 
+		IncrementGlobal("qd_ora_spl_level_6","GLOBAL",1) 
+		IncrementGlobal("qd_ora_spl_level_7","GLOBAL",1) 
+		Continue()
+END
+
+//------------------\
+// "DIVINE" SPELLS   |
+//------------------/
+
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR101") //Bless
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_1","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR102") //Command
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_1","GLOBAL",1)
+		Continue() 
+END 
+IF
+	OR(2) 
+	NextTriggerObject(LastSummonerOf(Myself))
+	HaveSpellRES("QDPR103") //Cure Light Wounds
+	NextTriggerObject(LastSummonerOf(Myself))
+	HaveSpellRES("QDOR103") //Cure Light Wounds, ct 0
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_1","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR104") //Detect Evil
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_1","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR105") //Entangle
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_1","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR106") //Magical Stone
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_1","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR107") //Protection from Evil
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_1","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR108") //Remove Fear
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_1","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR109") //Sanctuary
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_1","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR110") //Shillelagh
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_1","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR111") //Armor of Faith
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_1","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR112") //Curse
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_1","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR113") //Doom
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_1","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR114") //Cause Light Wounds
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_1","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR115") //Sunscorch
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_1","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR201") //Aid
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_2","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR202") //Barksin
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_2","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR203") //Chant
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_2","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR204") //Charm Person or Mammal
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_2","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR205") //Find Traps
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_2","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR206") //Flameblade
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_2","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR208") //Hold Person
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_2","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR209") //Know Alignment
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_2","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR211") //Silence: 15-ft Radius
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_2","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR212") //Slow Poison
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_2","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR213") //Spiritual Hammer
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_2","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR214") //Draw Upon Holy Might
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_2","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR215") //Goodberry
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_2","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR216") //Resist Fire and Cold
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_2","GLOBAL",1)
+		Continue() 
+END 
+IF
+	OR(2) 
+	NextTriggerObject(LastSummonerOf(Myself))
+	HaveSpellRES("QDPR217") //Cure Moderate Wounds
+	NextTriggerObject(LastSummonerOf(Myself))
+	HaveSpellRES("QDOR217") //Cure Moderate Wounds, CT=0
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_2","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR218") //Alicorn Lance
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_2","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR219") //Beast Claw
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_2","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR220") //Cause Moderate Wounds
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_2","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR301") //Animate Dead
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_3","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR302") //Call Lightning
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_3","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR303") //Dispel Magic
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_3","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR304") //Glyph of Warding
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_3","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR305") //Hold Animal
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_3","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR306") //Protection from Fire
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_3","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR307") //Remove Curse
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_3","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR308") //Remove Paralysis
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_3","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR309") //Invisibility Purge
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_3","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR310") //Miscast Magic
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_3","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR311") //Rigid Thinking
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_3","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR312") //Strength of One
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_3","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR313") //Holy Smite
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_3","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR314") //Unholy Blight
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_3","GLOBAL",1)
+		Continue() 
+END 
+IF
+	OR(2)
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR315") //Cure Medium Wounds
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDOR315") //Cure Medium Wounds, CT=0
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_3","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR316") //Prayer
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_3","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR317") //Cure Disease
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_3","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR318") //Zone of Sweet Air
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_3","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR319") //Summon Insects
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_3","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR320") //Cause Disease
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_3","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR321") //Exaltation
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_3","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR322") //Moonblade
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_3","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR323") //Circle of Bones
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_3","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR324") //Spike Growth
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_3","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR325") //Cloudburst
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_3","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR326") //Mold Touch
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_3","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR327") //Storm Shell
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_3","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR330") //Cause Medium Wounds
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_3","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR331") //Favor of Ilmater
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_3","GLOBAL",1)
+		Continue() 
+END 
+IF
+	OR(2)
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR401") //Cure Serious Wounds
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDOR401") //Cure Serious Wounds, CT=0
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR402") //Animal Summoning I
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR403") //Free Action
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR404") //Neutralize Poison
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR405") //Mental Domination
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR406") //Defensive Harmony
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR407") //Protection from Lightning
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR408") //Protection from Evil, 10-ft Radius
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR409") //Death Ward
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR410") //Call Woodland Being
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR411") //Poison
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR412") //Holy Power
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR413") //Negative Plane Protection
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR414") //Cause Serious Wounds
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR415") //Farsight
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR416") //Cloak of Fear
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR417") //Lesser Restoration
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR418") //Giant Insect
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR419") //Produce Fire
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR420") //Static Charge
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR421") //Recitation
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR422") //Blood Rage
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR423") //Cloud of Pestilence
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR424") //Unfailing Endurance
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR425") //Star Metal Cudgel
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR426") //Smashing Wave
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR427") //Thorn Spray
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR428") //Wall of Moonlight
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR501") //Animal Summoning II
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_5","GLOBAL",1)
+		Continue() 
+END 
+IF
+	OR(2)
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR502") //Cure Critical Wounds
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDOR502") //Cure Critical Wounds, CT=0
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_5","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR503") //Flame Strike
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_5","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR504") //Raise Dead
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_5","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR505") //True Seeing
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_5","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR506") //Iron Skins
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_5","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR507") //Champion's Strength
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_5","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR508") //Chaotic Commands
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_5","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR509") //Magic Resistance
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_5","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR510") //Cause Critical Wounds
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_5","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR511") //Slay Living
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_5","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR512") //Greater Command
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_5","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR513") //Righteous Magic
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_5","GLOBAL",1)
+		Continue() 
+END 
+IF
+	OR(2)
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR514") //Mass Cure Light Wounds
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDOR514") //Mass Cure Light Wounds,CT=0
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_5","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR515") //Repulse Undead
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_5","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR516") //Pixie Dust
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_5","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR517") //Insect Plague
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_5","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR518") //Righteous Wrath of the Faithful
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_5","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR519") //Spike Stones
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_5","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR520") //Shield of Lathander
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_5","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR521") //Undead Ward
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_5","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR522") //Animal Rage
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_5","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR523") //Mass Cause Light Wounds
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_5","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR601") //Aerial Servant
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_6","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR602") //Animal Summoning III
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_6","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR603") //Blade Barrier
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_6","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR604") //Conjure Animals
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_6","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR605") //Conjure Fire Elemental
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_6","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR606") //Fire Seeds
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_6","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR607") //Heal
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_6","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR608") //Harm
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_6","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR609") //False Dawn
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_6","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR610") //Dolorous Decay
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_6","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR611") //Wondrous Recall
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_6","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR612") //Bolt of Glory
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_6","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR613") //Physical Mirror
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_6","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR614") //Sol's Searing Orb
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_6","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR615") //Entropy Shield
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_6","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR617") //Whirlwind
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_6","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR618") //Spiritual Wrath
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_6","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR701") //Shield of Archons
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_7","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR702") //Conjure Earth Elemental
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_7","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR703") //Gate
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_7","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR704") //Nature's Beauty
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_7","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR705") //Fire Storm
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_7","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR706") //Symbol: Fear
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_7","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR707") //Sunray
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_7","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR708") //Finger of Death
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_7","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR709") //Confusion
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_7","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR710") //Holy Word
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_7","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR711") //Regeneration
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_7","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR712") //Resurrection
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_7","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR713") //Greater Restoration
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_7","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR714") //Symbol: Pain
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_7","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR715") //Unholy Word
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_7","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR716") //Symbol: Hopelessness
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_7","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR717") //Creeping Doom
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_7","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR718") //Symbol: Stun
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_7","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR719") //Symbol: Death
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_7","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR720") //Earthquake
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_7","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR733") //Impervious Sanctity of Mind
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_7","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR734") //Destruction
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_7","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR735") //Greater Shield of Lathander
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_7","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR736") //Mist of Eldath
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_7","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR737") //Stalker
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_7","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR739") //Energy Drain
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_7","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDPR740") //Wither
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_7","GLOBAL",1)
+		Continue() 
+END 
+
+//------------------\
+// MYSTERY SPELLS   |
+//------------------/
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI408") //Battle: Stoneskin
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_4","GLOBAL",1)
+		Continue() 
+END
+
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI103") //Flame: Burning Hands
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_1","GLOBAL",1)
+		Continue() 
+END
+
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI304") //Flame: Fireball
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_3","GLOBAL",1)
+		Continue() 
+END
+
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI110") //Lore: Identify
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_1","GLOBAL",1)
+		Continue() 
+END
+
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI722") //Lore: Limited Wish
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_7","GLOBAL",1)
+		Continue() 
+END
+
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI117") //Winter: Chill Touch
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_1","GLOBAL",1)
+		Continue() 
+END
+
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI404") //Winter: Ice Storm
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_4","GLOBAL",1)
+		Continue() 
+END
+
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI503") //Winter: Cone of Cold
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_5","GLOBAL",1)
+		Continue() 
+END
+
+
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI206") //Murder: Invisibility
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_2","GLOBAL",1)
+		Continue() 
+END
+
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("QDORMU2") //Murder: Apply Poison
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_3","GLOBAL",1)
+		Continue() 
+END
+
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI405") //Murder: Imp. Invisiblity
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_4","GLOBAL",1)
+		Continue() 
+END
+
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI104") //Eyes: Charm Person
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_1","GLOBAL",1)
+		Continue() 
+END
+
+
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI116") //Eyes: Sleep
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_1","GLOBAL",1)
+		Continue() 
+END
+
+
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI312") //Eyes: Slow
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_3","GLOBAL",1)
+		Continue() 
+END
+
+
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI604") //Eyes: Flesh to Stone
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_6","GLOBAL",1)
+		Continue() 
+END
+
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI616") //Eyes: Disintegrate
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_ora_cur_level_6","GLOBAL",1)
+		Continue() 
+END
+
+
+//------------------\
+// START DIALOGUE  |
+//------------------/
+IF
+	True()
+THEN
+	RESPONSE #100
+		StartDialog("QDSPLORA",LastSummonerOf(Myself))
+END

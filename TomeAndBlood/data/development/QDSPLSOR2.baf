@@ -1,0 +1,2102 @@
+IF 
+	True()
+THEN
+	RESPONSE #100
+		ActionOverride(LastSummonerOf(Myself),Rest())
+		SetGlobal("qd_sor_cur_level_1","GLOBAL",0)
+		SetGlobal("qd_sor_cur_level_2","GLOBAL",0)
+		SetGlobal("qd_sor_cur_level_3","GLOBAL",0)
+		SetGlobal("qd_sor_cur_level_4","GLOBAL",0)
+		SetGlobal("qd_sor_cur_level_5","GLOBAL",0)
+		SetGlobal("qd_sor_cur_level_6","GLOBAL",0)
+		SetGlobal("qd_sor_cur_level_7","GLOBAL",0)
+		SetGlobal("qd_sor_cur_level_8","GLOBAL",0)
+		SetGlobal("qd_sor_cur_level_9","GLOBAL",0)
+		SetGlobal("qd_sor_spl_level_1","GLOBAL",0)
+		SetGlobal("qd_sor_spl_level_2","GLOBAL",0)
+		SetGlobal("qd_sor_spl_level_3","GLOBAL",0)
+		SetGlobal("qd_sor_spl_level_4","GLOBAL",0)
+		SetGlobal("qd_sor_spl_level_5","GLOBAL",0)
+		SetGlobal("qd_sor_spl_level_6","GLOBAL",0)
+		SetGlobal("qd_sor_spl_level_7","GLOBAL",0)
+		SetGlobal("qd_sor_spl_level_8","GLOBAL",0)
+		SetGlobal("qd_sor_spl_level_9","GLOBAL",0)
+		Continue() 
+END
+
+IF 
+	LevelGT(LastSummonerOf(Myself),0) //level 1+ 
+THEN
+	RESPONSE #100
+		IncrementGlobal("qd_sor_spl_level_1","GLOBAL",2) // L1: 2
+		Continue() 
+END
+
+IF 
+	LevelGT(LastSummonerOf(Myself),2) //level 3+
+THEN
+	RESPONSE #100
+		IncrementGlobal("qd_sor_spl_level_1","GLOBAL",1) // L1: 3
+		IncrementGlobal("qd_sor_spl_level_2","GLOBAL",1) // L2: 1
+		Continue() 
+END
+
+IF 
+	LevelGT(LastSummonerOf(Myself),4) //level 5+
+THEN
+	RESPONSE #100
+		IncrementGlobal("qd_sor_spl_level_1","GLOBAL",1) // L1: 4
+		IncrementGlobal("qd_sor_spl_level_2","GLOBAL",1) // L2: 2
+		IncrementGlobal("qd_sor_spl_level_3","GLOBAL",1) // L3: 1
+		Continue() 
+END
+
+IF 
+	LevelGT(LastSummonerOf(Myself),6) //level 7+
+THEN
+	RESPONSE #100
+		IncrementGlobal("qd_sor_spl_level_1","GLOBAL",1) // L1: 5
+		IncrementGlobal("qd_sor_spl_level_2","GLOBAL",1) // L2: 3
+		IncrementGlobal("qd_sor_spl_level_3","GLOBAL",1) // L3: 2
+		IncrementGlobal("qd_sor_spl_level_4","GLOBAL",1) // L4: 1
+		Continue() 
+END
+
+IF 
+	LevelGT(LastSummonerOf(Myself),8) //level 9+
+THEN
+	RESPONSE #100
+		// L1: 5 
+		IncrementGlobal("qd_sor_spl_level_2","GLOBAL",1) // L2: 4
+		IncrementGlobal("qd_sor_spl_level_3","GLOBAL",1) // L3: 3
+		IncrementGlobal("qd_sor_spl_level_4","GLOBAL",1) // L4: 2
+		IncrementGlobal("qd_sor_spl_level_5","GLOBAL",1) // L5: 1
+		Continue() 
+END
+
+IF 
+	LevelGT(LastSummonerOf(Myself),10) //level 11+
+THEN
+	RESPONSE #100
+		// L1: 5 
+		IncrementGlobal("qd_sor_spl_level_2","GLOBAL",1) // L2: 5
+		IncrementGlobal("qd_sor_spl_level_3","GLOBAL",1) // L3: 4
+		IncrementGlobal("qd_sor_spl_level_4","GLOBAL",1) // L4: 3
+		IncrementGlobal("qd_sor_spl_level_5","GLOBAL",1) // L5: 2
+		IncrementGlobal("qd_sor_spl_level_6","GLOBAL",1) // L6: 1
+		Continue() 
+END
+
+IF 
+	LevelGT(LastSummonerOf(Myself),12) //level 13+
+THEN
+	RESPONSE #100
+		// L1: 5 
+		// L2: 5
+		// L3: 4
+		IncrementGlobal("qd_sor_spl_level_4","GLOBAL",1) // L4: 4
+		IncrementGlobal("qd_sor_spl_level_5","GLOBAL",1) // L5: 3
+		IncrementGlobal("qd_sor_spl_level_6","GLOBAL",1) // L6: 2
+		IncrementGlobal("qd_sor_spl_level_7","GLOBAL",1) // L7: 1
+		Continue() 
+END
+
+IF 
+	LevelGT(LastSummonerOf(Myself),14) //level 15+
+THEN
+	RESPONSE #100
+		// L1: 5 
+		// L2: 5
+		// L3: 4
+		// L4: 4
+		IncrementGlobal("qd_sor_spl_level_5","GLOBAL",1) // L5: 4
+		IncrementGlobal("qd_sor_spl_level_6","GLOBAL",1) // L6: 3
+		IncrementGlobal("qd_sor_spl_level_7","GLOBAL",1) // L7: 2
+		IncrementGlobal("qd_sor_spl_level_8","GLOBAL",1) // L8: 1
+		Continue() 
+END
+
+IF 
+	LevelGT(LastSummonerOf(Myself),16) //level 17+
+THEN
+	RESPONSE #100
+		// L1: 5 
+		// L2: 5
+		// L3: 4
+		// L4: 4
+		// L5: 4
+		// L6: 3
+		IncrementGlobal("qd_sor_spl_level_7","GLOBAL",1) // L7: 3
+		IncrementGlobal("qd_sor_spl_level_8","GLOBAL",1) // L8: 2
+		IncrementGlobal("qd_sor_spl_level_9","GLOBAL",1) // L9: 1
+		Continue() 
+END
+
+IF 
+	LevelGT(LastSummonerOf(Myself),18) //level 19+
+THEN
+	RESPONSE #100
+		// L1: 5 
+		// L2: 5
+		// L3: 4
+		// L4: 4
+		// L5: 4
+		// L6: 3
+		// L7: 3
+		IncrementGlobal("qd_sor_spl_level_8","GLOBAL",1) // L8: 3
+		IncrementGlobal("qd_sor_spl_level_9","GLOBAL",1) // L9: 2
+		Continue() 
+END
+
+IF 
+	LevelGT(LastSummonerOf(Myself),19) //level 20+
+THEN
+	RESPONSE #100
+		// L1: 5 
+		// L2: 5
+		// L3: 4
+		// L4: 4
+		// L5: 4
+		// L6: 3
+		// L7: 3
+		// L8: 3
+		IncrementGlobal("qd_sor_spl_level_9","GLOBAL",1) // L9: 3
+		Continue() 
+END
+
+IF 
+	LevelGT(LastSummonerOf(Myself),20) //level 21+
+THEN
+	RESPONSE #100
+		// L1: 5 
+		// L2: 5
+		// L3: 4
+		// L4: 4
+		// L5: 4
+		IncrementGlobal("qd_sor_spl_level_6","GLOBAL",1) // L6: 4
+		// L7: 3
+		// L8: 3
+		// L9: 3
+		Continue() 
+END
+
+IF 
+	LevelGT(LastSummonerOf(Myself),21) //level 22+
+THEN
+	RESPONSE #100
+		// L1: 5 
+		// L2: 5
+		IncrementGlobal("qd_sor_spl_level_2","GLOBAL",1) // L3: 5
+		// L4: 4
+		// L5: 4
+		// L6: 4
+		IncrementGlobal("qd_sor_spl_level_7","GLOBAL",1) // L7: 4
+		// L8: 3
+		// L9: 3
+		Continue() 
+END
+
+IF 
+	LevelGT(LastSummonerOf(Myself),22) //level 23+
+THEN
+	RESPONSE #100
+		// L1: 5 
+		// L2: 5
+		// L3: 5
+		IncrementGlobal("qd_sor_spl_level_4","GLOBAL",1) // L4: 5
+		// L5: 4
+		// L6: 4
+		// L7: 4
+		IncrementGlobal("qd_sor_spl_level_8","GLOBAL",1) // L8: 4
+		// L9: 3
+		Continue() 
+END
+
+IF 
+	LevelGT(LastSummonerOf(Myself),24) //level 25+
+THEN
+	RESPONSE #100
+		// L1: 5 
+		// L2: 5
+		// L3: 5
+		// L4: 5
+		// L5: 4
+		// L6: 4
+		// L7: 4
+		// L8: 4
+		IncrementGlobal("qd_sor_spl_level_9","GLOBAL",1) // L9: 4
+		Continue() 
+END
+
+IF 
+	LevelGT(LastSummonerOf(Myself),27) //level 28+
+THEN
+	RESPONSE #100
+		// L1: 5 
+		// L2: 5
+		// L3: 5
+		// L4: 5
+		IncrementGlobal("qd_sor_spl_level_5","GLOBAL",1) // L5: 5
+		// L6: 4
+		// L7: 4
+		// L8: 4
+		// L9: 4
+		Continue() 
+END
+
+IF 
+	LevelGT(LastSummonerOf(Myself),29) //level 30+
+THEN
+	RESPONSE #100
+		// L1: 5 
+		// L2: 5
+		// L3: 5
+		// L4: 5
+		// L5: 5
+		IncrementGlobal("qd_sor_spl_level_6","GLOBAL",1) // L6: 5
+		// L7: 4
+		// L8: 4
+		// L9: 4
+		Continue() 
+END
+
+IF 
+	LevelGT(LastSummonerOf(Myself),30) //level 31+
+THEN
+	RESPONSE #100
+		// L1: 5 
+		// L2: 5
+		// L3: 5
+		// L4: 5
+		// L5: 5
+		// L6: 5
+		IncrementGlobal("qd_sor_spl_level_7","GLOBAL",1) // L7: 5
+		// L8: 4
+		// L9: 4
+		Continue() 
+END
+
+IF 
+	LevelGT(LastSummonerOf(Myself),31) //level 32+
+THEN
+	RESPONSE #100
+		// L1: 5 
+		// L2: 5
+		// L3: 5
+		// L4: 5
+		// L5: 5
+		// L6: 5
+		// L7: 5
+		IncrementGlobal("qd_sor_spl_level_8","GLOBAL",1) // L8: 5
+		// L9: 4
+		Continue() 
+END
+
+IF 
+	LevelGT(LastSummonerOf(Myself),35) //level 36+
+THEN
+	RESPONSE #100
+		// L1: 5 
+		// L2: 5
+		// L3: 5
+		// L4: 5
+		// L5: 5
+		// L6: 5
+		// L7: 5
+		// L8: 5
+		IncrementGlobal("qd_sor_spl_level_8","GLOBAL",1) // L9: 5
+		Continue() 
+END
+
+//------------------\
+// LEVEL ONE SPELLS  |
+//------------------/
+
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI102") //Armor
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_1","GLOBAL",1)
+		Continue() 
+END
+
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI103") //Burning Hands
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_1","GLOBAL",1)
+		Continue() 
+END
+
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI104") //Charm Person
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_1","GLOBAL",1)
+		Continue() 
+END
+
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI117") //Chill Touch
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_1","GLOBAL",1)
+		Continue() 
+END
+
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI118") //Chromatic Orb
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_1","GLOBAL",1)
+		Continue() 
+END
+
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI105") //Color Spray
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_1","GLOBAL",1)
+		Continue() 
+END
+
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI126") //Expeditious Retreat
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_1","GLOBAL",1)
+		Continue() 
+END
+
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI107") //Friends
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_1","GLOBAL",1)
+		Continue() 
+END
+
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI101") //Grease
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_1","GLOBAL",1)
+		Continue() 
+END
+
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI110") //Identify
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_1","GLOBAL",1)
+		Continue() 
+END
+
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI111") //Infravision
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_1","GLOBAL",1)
+		Continue() 
+END
+
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI119") //Larloch's Minor Drain
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_1","GLOBAL",1)
+		Continue() 
+END
+
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI112") //Magic Missile
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_1","GLOBAL",1)
+		Continue() 
+END
+
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI113") //Protection from Evil
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_1","GLOBAL",1)
+		Continue() 
+END
+
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI120") //Reflected Image
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_1","GLOBAL",1)
+		Continue() 
+END
+
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI114") //Shield
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_1","GLOBAL",1)
+		Continue() 
+END
+
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI115") //Shocking Grasp
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_1","GLOBAL",1)
+		Continue() 
+END
+
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI116") //Sleep
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_1","GLOBAL",1)
+		Continue() 
+END
+
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI125") //Spook
+THEN
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_1","GLOBAL",1)
+		Continue() 
+END
+
+//------------------\
+// LEVEL TWO SPELLS  |
+//------------------/
+
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI217") //Aganazzar's Scorcher
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_2","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI226") //Blindness
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_2","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI201") //Blur
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_2","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI225") //Cat's Grace
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_2","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI223") //Deafness
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_2","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI216") //Decastave
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_2","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI202") //Detect Evil
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_2","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI203") //Detect Invisibility
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_2","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI218") //Ghoul Touch
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_2","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI224") //Glitterdust
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_2","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI205") //Horror
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_2","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI206") //Invisibility
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_2","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI207") //Knock
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_2","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI208") //Know Alignment
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_2","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI209") //Luck
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_2","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI211") //Melf's Acid Arrow
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_2","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI212") //Mirror Image
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_2","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI220") //Power Word: Sleep
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_2","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI227") //Protection from Petrification
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_2","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI221") //Ray of Enfeeblement
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_2","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI210") //Resist Fear
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_2","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI204") //Snilloc's Snowball Swarm
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_2","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI213") //Stinking Cloud
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_2","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI214") //Strength
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_2","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI219") //Vocalize
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_2","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI215") //Web
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_2","GLOBAL",1)
+		Continue() 
+END 
+
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI301") //Clairvoyance
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_3","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI302") //Remove Magic
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_3","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI303") //Flame Arrow
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_3","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI304") //Fireball
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_3","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI305") //Haste
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_3","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI306") //Hold Person
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_3","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI307") //Invisibility, 10 ft Radius
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_3","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI308") //Lightning Bolt
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_3","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI309") //Monster Summoning I
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_3","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI310") //Non-detection
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_3","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI311") //Protection from Normal Missiles
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_3","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI312") //Slow
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_3","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI313") //Skull Trap
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_3","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI314") //Vampiric Touch
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_3","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI315") //Wraithform
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_3","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI316") //Dire Charm
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_3","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI317") //Ghost Armor
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_3","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI318") //Minor Spell Deflection
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_3","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI319") //Protection from Fire
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_3","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI320") //Protection from Cold
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_3","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI321") //Spell Thrust
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_3","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI322") //Detect Illusion
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_3","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI323") //Dispel Magic
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_3","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI324") //Hold Undead
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_3","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI325") //Melf's Minute Meteors
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_3","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI327") //Icelance
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_3","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI328") //Lance of Disruption
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_3","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI401") //Confusion
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI402") //Dimension Door
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI403") //Fireshield (Blue)
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI404") //Ice Storm
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI405") //Improved Invisibility
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI406") //Minor Globe of Invulnerability
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI407") //Monster Summoning II
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI408") //Stoneskin
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI409") //Contagion
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI410") //Remove Curse
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI411") //Emotion: Hopelessness
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI412") //Greater Malison
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI413") //Otiluke's Resilient Sphere
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI414") //Spirit Armor
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI415") //Polymorph Other
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI416") //Polymorph Self
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI417") //Enchanted Weapon
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI418") //Fireshield (Red)
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI419") //Secret Word
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI420") //Minor Sequencer
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI421") //Teleport Field
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI422") //Beltyn's Burning Blood
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI423") //Spider Spawn
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI424") //Farsight
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI425") //Wizard Eye
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI426") //Shadow Monsters
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI427") //Emotion: Courage
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI428") //Emotion: Fear
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI429") //Emotion: Hope
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI430") //Mordenkainen's Force Missiles
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI431") //Shout
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI432") //Vitriolic Sphere
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_4","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI501") //Animate Dead
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_5","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI502") //Cloudkill
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_5","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI503") //Cone of Cold
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_5","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI504") //Monster Summoning III
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_5","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI505") //Shadow Door
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_5","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI506") //Domination
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_5","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI507") //Hold Monster
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_5","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI508") //Chaos
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_5","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI509") //Feeblemind
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_5","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI510") //Spell Immunity
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_5","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI511") //Protection from Normal Weapons
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_5","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI512") //Protection from Electricity
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_5","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI513") //Breach
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_5","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI514") //Lower Resistance
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_5","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI515") //Oracle
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_5","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI531") //Conjure Fire Elemental
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_5","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI517") //Protection from Acid
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_5","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI518") //Phantom Blade
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_5","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI519") //Spell Shield
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_5","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI534") //Conjure Air Elemental
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_5","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI532") //Conjure Earth Elemental
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_5","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI522") //Minor Spell Turning
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_5","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI523") //Sunfire
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_5","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI524") //Shroud of Flame
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_5","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI525") //Demi-Shadow Monsters
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_5","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI526") //Summon Shadow
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_5","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI533") //Conjure Water Elemental
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_5","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI528") //Contact Other Plane
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_5","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI601") //Invisible Stalker
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_6","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI602") //Globe of Invulnerability
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_6","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI603") //Tenser's Transformation
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_6","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI604") //Flesh to Stone
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_6","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI605") //Death Spell
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_6","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI606") //Protection from Magic Energy
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_6","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI607") //Mislead
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_6","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI608") //Pierce Magic
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_6","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI609") //True Sight
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_6","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI610") //Antimagic Shell
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_6","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI611") //Protection from Magical Weapons
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_6","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI612") //Power Word: Silence
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_6","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI613") //Improved Haste
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_6","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI614") //Death Fog
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_6","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI615") //Chain Lightning
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_6","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI616") //Disintegrate
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_6","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI617") //Contingency
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_6","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI618") //Spell Deflection
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_6","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI619") //Wyvern Call
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_6","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI623") //Carrion Summons
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_6","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI624") //Summon Nishruu
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_6","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI625") //Stone to Flesh
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_6","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI626") //Lich Touch
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_6","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI627") //Monster Summoning IV
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_6","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI628") //Otiluke's Freezing Sphere
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_6","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI629") //Shades
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_6","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI630") //Darts of Bone
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_6","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI631") //Soul Eater
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_6","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI632") //Trollish Fortitude
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_6","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI701") //Spell Turning
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_7","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI702") //Protection from the Elements
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_7","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI703") //Project Image
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_7","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI704") //Ruby Ray of Reversal
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_7","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI705") //Khelben's Warding Whip
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_7","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI706") //Monster Summoning V
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_7","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI707") //Cacofiend
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_7","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI708") //Mantle
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_7","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI709") //Malavon's Rage
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_7","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI710") //Spell Sequencer
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_7","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI712") //Delayed Blast Fireball
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_7","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI713") //Finger of Death
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_7","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI714") //Prismatic Spray
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_7","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI715") //Power Word: Stun
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_7","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI716") //Mordenkainen's Sword
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_7","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI717") //Summon Efreeti
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_7","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI718") //Summon Djinni
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_7","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI719") //Summon Hakeashar
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_7","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI720") //Control Undead
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_7","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI721") //Mass Invisibility
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_7","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI722") //Limited Wish
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_7","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI724") //Acid Storm
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_7","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI725") //Seven Eyes
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_7","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI726") //Suffocate
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_7","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI801") //Monster Summoning IV
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_8","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI802") //Mind Blank
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_8","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI803") //Protection from Energy
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_8","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI804") //Simulacrum
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_8","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI805") //Pierce Shield
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_8","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI806") //Great Shout
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_8","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI807") //Summon Fiend
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_8","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI808") //Improved Mantle
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_8","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI809") //Spell Trigger
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_8","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI810") //Incendiary Cloud
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_8","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI811") //Symbol: Fear
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_8","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI812") //Abi-Dalzim's Horrid Wilting
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_8","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI813") //Maze
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_8","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI814") //Iron Body
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_8","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI815") //Power Word: Blind
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_8","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI816") //Symbol: Stun
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_8","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI817") //Symbol: Death
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_8","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI818") //Bigby's Clenched Fist
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_8","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI901") //Monster Summoning VII
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_9","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI902") //Spell Trap
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_9","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI903") //Spellstrike
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_9","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI905") //Gate
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_0","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI907") //Absolute Immunity
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_9","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI908") //Chain Contigency
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_9","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI909") //Time Stop
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_9","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI911") //Meteor Swarm
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_9","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI912") //Power Word: Kill
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_9","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI913") //Wail of the Banshee
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_9","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI914") //Energy Drain
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_9","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI915") //Black Blade of Disaster
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_9","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI916") //Shapechange
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_9","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI917") //Freedom
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_9","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI918") //Bigby's Crushing Hand
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_9","GLOBAL",1)
+		Continue() 
+END 
+IF
+	NextTriggerObject(LastSummonerOf(Myself)) 
+	HaveSpellRES("SPWI919") //Wish
+THEN	
+	RESPONSE #100 
+		IncrementGlobal("qd_sor_cur_level_9","GLOBAL",1)
+		Continue() 
+END 
+
+
+
+//------------------\
+// START DIALOGUE  |
+//------------------/
+IF
+	True()
+THEN
+	RESPONSE #100
+		ActionOverride(LastSummonerOf(Myself),StartDialogOverride("QDSPLSOR2",Myself))
+END

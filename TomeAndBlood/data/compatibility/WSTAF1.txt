@@ -1,0 +1,2975 @@
+/*
+	Transformation of the Staff of Wizardry to the Staff of Specialization.
+*/
+APPEND ~WSTAF01~
+
+	IF ~OR(2) XPLT(LastTalkedToBy,249999) XP(LastTalkedToBy,249999)
+~ THEN
+	BEGIN Conversation00a
+		SAY @100
+
+		IF ~~ THEN
+			REPLY @113
+			EXIT
+	END
+
+	IF ~XPGT(LastTalkedToBy,249999) Class(LastTalkedToBy,SORCERER)
+~ THEN
+	BEGIN Conversation001a
+		SAY @101
+
+		IF ~Kit(LastTalkedToBy,TRUECLASS
+)~ THEN
+			REPLY @115
+			GOTO Conversation21a
+
+		IF ~Kit(LastTalkedToBy,DRAGON_DISCIPLE
+)~ THEN
+			REPLY @111
+			GOTO Conversation20a
+
+		IF ~~ THEN
+			REPLY @112
+			EXIT
+	END
+
+	IF ~XPGT(LastTalkedToBy,249999) OR(9) Kit(LastTalkedToBy,MAGESCHOOL_ABJURER) Kit(LastTalkedToBy,MAGESCHOOL_CONJURER) Kit(LastTalkedToBy,MAGESCHOOL_DIVINER) Kit(LastTalkedToBy,MAGESCHOOL_ENCHANTER) Kit(LastTalkedToBy,MAGESCHOOL_ILLUSIONIST) Kit(LastTalkedToBy,MAGESCHOOL_INVOKER) Kit(LastTalkedToBy,MAGESCHOOL_NECROMANCER) Kit(LastTalkedToBy,MAGESCHOOL_TRANSMUTER) Kit(LastTalkedToBy,WILDMAGE)
+~ THEN
+	BEGIN Conversation01a
+		SAY @101
+
+		IF ~Kit(LastTalkedToBy,MAGESCHOOL_ABJURER)~ THEN
+			REPLY @102
+			GOTO Conversation11a
+			
+		IF ~Kit(LastTalkedToBy,MAGESCHOOL_CONJURER)~ THEN
+			REPLY @103
+			GOTO Conversation12a
+			
+		IF ~Kit(LastTalkedToBy,MAGESCHOOL_DIVINER)~ THEN
+			REPLY @104
+			GOTO Conversation13a
+				
+		IF ~Kit(LastTalkedToBy,MAGESCHOOL_ENCHANTER)~ THEN
+			REPLY @105
+			GOTO Conversation14a
+			
+		IF ~Kit(LastTalkedToBy,MAGESCHOOL_ILLUSIONIST)~ THEN
+			REPLY @106
+			GOTO Conversation15a
+			
+		IF ~Kit(LastTalkedToBy,MAGESCHOOL_INVOKER)~ THEN
+			REPLY @107
+			GOTO Conversation16a
+			
+		IF ~Kit(LastTalkedToBy,MAGESCHOOL_NECROMANCER)~ THEN
+			REPLY @108
+			GOTO Conversation17a
+			
+		IF ~Kit(LastTalkedToBy,MAGESCHOOL_TRANSMUTER)~ THEN
+			REPLY @109
+			GOTO Conversation18a
+
+		IF ~Kit(LastTalkedToBy,WILDMAGE
+)~ THEN
+			REPLY @110
+			GOTO Conversation19a
+
+		IF ~~ THEN
+			REPLY @112
+			EXIT
+	END
+
+	IF ~XPGT(LastTalkedToBy,249999)
+~ THEN
+	BEGIN Conversation01a
+		SAY @101
+		
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @102
+			GOTO Conversation02a
+			
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @103
+			GOTO Conversation03a
+			
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @104
+			GOTO Conversation04a
+				
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST
+) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @105
+			GOTO Conversation05a
+			
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST
+) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @106
+			GOTO Conversation06a
+			
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST
+) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @107
+			GOTO Conversation07a
+			
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST
+) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @108
+			GOTO Conversation08a
+			
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST
+) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @109
+			GOTO Conversation09a
+			
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST
+) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @110
+			GOTO Conversation10a
+
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST
+) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @115
+			GOTO Conversation21a
+
+		IF ~~ THEN
+			REPLY @112
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation02a
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf01A","wstaf01",LastTalkedToBy)~
+			DO ~AddKit(MAGESCHOOL_ABJURER)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~ApplySpellRES("WSSPREMA",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation03a
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf01B","wstaf01",LastTalkedToBy)~
+			DO ~AddKit(MAGESCHOOL_CONJURER)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~ApplySpellRES("WSSPREMB",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation04a
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf01C","wstaf01",LastTalkedToBy)~
+			DO ~AddKit(MAGESCHOOL_DIVINER)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~ApplySpellRES("WSSPREMC",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+
+	IF ~~ THEN
+	BEGIN Conversation05a
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf01D","wstaf01",LastTalkedToBy)~
+			DO ~AddKit(MAGESCHOOL_ENCHANTER)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~ApplySpellRES("WSSPREMD",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation06a
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf01E","wstaf01",LastTalkedToBy)~
+			DO ~AddKit(MAGESCHOOL_ILLUSIONIST)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~ApplySpellRES("WSSPREME",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation07a
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf01F","wstaf01",LastTalkedToBy)~
+			DO ~AddKit(MAGESCHOOL_INVOKER)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~ApplySpellRES("WSSPREMF",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation08a
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf01G","wstaf01",LastTalkedToBy)~
+			DO ~AddKit(MAGESCHOOL_NECROMANCER)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~ApplySpellRES("WSSPREMG",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation09a
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf01H","wstaf01",LastTalkedToBy)~
+			DO ~AddKit(MAGESCHOOL_TRANSMUTER)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~ApplySpellRES("WSSPREMH",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation10a
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf01I","wstaf01",LastTalkedToBy)~
+			DO ~AddKit(WILDMAGE)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+
+	IF ~~ THEN
+	BEGIN Conversation11a
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf01A","wstaf01",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation12a
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf01B","wstaf01",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation13a
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf01C","wstaf01",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+
+	IF ~~ THEN
+	BEGIN Conversation14a
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf01D","wstaf01",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation15a
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf01E","wstaf01",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation16a
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf01F","wstaf01",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation17a
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf01G","wstaf01",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation18a
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf01H","wstaf01",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation19a
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf01I","wstaf01",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation20a
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf01J","wstaf01",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation21a
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf01K","wstaf01",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+END
+
+APPEND ~WSTAF02~
+
+	IF ~OR(2) XPLT(LastTalkedToBy,249999) XP(LastTalkedToBy,249999)
+~ THEN
+	BEGIN Conversation00b
+		SAY @100
+
+		IF ~~ THEN
+			REPLY @113
+			EXIT
+	END
+
+	IF ~XPGT(LastTalkedToBy,249999) Class(LastTalkedToBy,SORCERER)
+~ THEN
+	BEGIN Conversation001b
+		SAY @101
+
+		IF ~Kit(LastTalkedToBy,TRUECLASS
+)~ THEN
+			REPLY @115
+			GOTO Conversation21b
+
+		IF ~Kit(LastTalkedToBy,DRAGON_DISCIPLE
+)~ THEN
+			REPLY @111
+			GOTO Conversation20b
+
+		IF ~~ THEN
+			REPLY @112
+			EXIT
+	END
+
+	IF ~XPGT(LastTalkedToBy,249999) OR(9) Kit(LastTalkedToBy,MAGESCHOOL_ABJURER) Kit(LastTalkedToBy,MAGESCHOOL_CONJURER) Kit(LastTalkedToBy,MAGESCHOOL_DIVINER) Kit(LastTalkedToBy,MAGESCHOOL_ENCHANTER) Kit(LastTalkedToBy,MAGESCHOOL_ILLUSIONIST) Kit(LastTalkedToBy,MAGESCHOOL_INVOKER) Kit(LastTalkedToBy,MAGESCHOOL_NECROMANCER) Kit(LastTalkedToBy,MAGESCHOOL_TRANSMUTER) Kit(LastTalkedToBy,WILDMAGE)
+~ THEN
+	BEGIN Conversation01b
+		SAY @101
+
+		IF ~Kit(LastTalkedToBy,MAGESCHOOL_ABJURER)~ THEN
+			REPLY @102
+			GOTO Conversation11b
+			
+		IF ~Kit(LastTalkedToBy,MAGESCHOOL_CONJURER)~ THEN
+			REPLY @103
+			GOTO Conversation12b
+			
+		IF ~Kit(LastTalkedToBy,MAGESCHOOL_DIVINER)~ THEN
+			REPLY @104
+			GOTO Conversation13b
+				
+		IF ~Kit(LastTalkedToBy,MAGESCHOOL_ENCHANTER)~ THEN
+			REPLY @105
+			GOTO Conversation14b
+			
+		IF ~Kit(LastTalkedToBy,MAGESCHOOL_ILLUSIONIST)~ THEN
+			REPLY @106
+			GOTO Conversation15b
+			
+		IF ~Kit(LastTalkedToBy,MAGESCHOOL_INVOKER)~ THEN
+			REPLY @107
+			GOTO Conversation16b
+			
+		IF ~Kit(LastTalkedToBy,MAGESCHOOL_NECROMANCER)~ THEN
+			REPLY @108
+			GOTO Conversation17b
+			
+		IF ~Kit(LastTalkedToBy,MAGESCHOOL_TRANSMUTER)~ THEN
+			REPLY @109
+			GOTO Conversation18b
+
+		IF ~Kit(LastTalkedToBy,WILDMAGE
+)~ THEN
+			REPLY @110
+			GOTO Conversation19b
+
+		IF ~~ THEN
+			REPLY @112
+			EXIT
+	END
+
+	IF ~XPGT(LastTalkedToBy,249999)
+~ THEN
+	BEGIN Conversation01b
+		SAY @101
+		
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @102
+			GOTO Conversation02b
+			
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @103
+			GOTO Conversation03b
+			
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @104
+			GOTO Conversation04b
+				
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST
+) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @105
+			GOTO Conversation05b
+			
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST
+) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @106
+			GOTO Conversation06b
+			
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST
+) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @107
+			GOTO Conversation07b
+			
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST
+) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @108
+			GOTO Conversation08b
+			
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST
+) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @109
+			GOTO Conversation09b
+			
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST
+) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @110
+			GOTO Conversation10b
+
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST
+) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @115
+			GOTO Conversation21b
+
+		IF ~~ THEN
+			REPLY @112
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation02b
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf02A","wstaf02",LastTalkedToBy)~
+			DO ~AddKit(MAGESCHOOL_ABJURER)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~ApplySpellRES("WSSPREMA",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation03b
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf02B","wstaf02",LastTalkedToBy)~
+			DO ~AddKit(MAGESCHOOL_CONJURER)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~ApplySpellRES("WSSPREMB",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation04b
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf02C","wstaf02",LastTalkedToBy)~
+			DO ~AddKit(MAGESCHOOL_DIVINER)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~ApplySpellRES("WSSPREMC",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+
+	IF ~~ THEN
+	BEGIN Conversation05b
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf02D","wstaf02",LastTalkedToBy)~
+			DO ~AddKit(MAGESCHOOL_ENCHANTER)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~ApplySpellRES("WSSPREMD",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation06b
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf02E","wstaf02",LastTalkedToBy)~
+			DO ~AddKit(MAGESCHOOL_ILLUSIONIST)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~ApplySpellRES("WSSPREME",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation07b
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf02F","wstaf02",LastTalkedToBy)~
+			DO ~AddKit(MAGESCHOOL_INVOKER)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~ApplySpellRES("WSSPREMF",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation08b
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf02G","wstaf02",LastTalkedToBy)~
+			DO ~AddKit(MAGESCHOOL_NECROMANCER)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~ApplySpellRES("WSSPREMG",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation09b
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf02H","wstaf02",LastTalkedToBy)~
+			DO ~AddKit(MAGESCHOOL_TRANSMUTER)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~ApplySpellRES("WSSPREMH",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation10b
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf02I","wstaf02",LastTalkedToBy)~
+			DO ~AddKit(WILDMAGE)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+
+	IF ~~ THEN
+	BEGIN Conversation11b
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf02A","wstaf02",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation12b
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf02B","wstaf02",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation13b
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf02C","wstaf02",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+
+	IF ~~ THEN
+	BEGIN Conversation14b
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf02D","wstaf02",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation15b
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf02E","wstaf02",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation16b
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf02F","wstaf02",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation17b
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf02G","wstaf02",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation18b
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf02H","wstaf02",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation19b
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf02I","wstaf02",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation20b
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf02J","wstaf02",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation21b
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf02K","wstaf02",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+END
+
+APPEND ~WSTAF03~
+
+	IF ~OR(2) XPLT(LastTalkedToBy,249999) XP(LastTalkedToBy,249999)
+~ THEN
+	BEGIN Conversation00c
+		SAY @100
+
+		IF ~~ THEN
+			REPLY @113
+			EXIT
+	END
+
+	IF ~XPGT(LastTalkedToBy,249999) Class(LastTalkedToBy,SORCERER)
+~ THEN
+	BEGIN Conversation001c
+		SAY @101
+
+		IF ~Kit(LastTalkedToBy,TRUECLASS
+)~ THEN
+			REPLY @115
+			GOTO Conversation21c
+
+		IF ~Kit(LastTalkedToBy,DRAGON_DISCIPLE
+)~ THEN
+			REPLY @111
+			GOTO Conversation20c
+
+		IF ~~ THEN
+			REPLY @112
+			EXIT
+	END
+
+	IF ~XPGT(LastTalkedToBy,249999) OR(9) Kit(LastTalkedToBy,MAGESCHOOL_ABJURER) Kit(LastTalkedToBy,MAGESCHOOL_CONJURER) Kit(LastTalkedToBy,MAGESCHOOL_DIVINER) Kit(LastTalkedToBy,MAGESCHOOL_ENCHANTER) Kit(LastTalkedToBy,MAGESCHOOL_ILLUSIONIST) Kit(LastTalkedToBy,MAGESCHOOL_INVOKER) Kit(LastTalkedToBy,MAGESCHOOL_NECROMANCER) Kit(LastTalkedToBy,MAGESCHOOL_TRANSMUTER) Kit(LastTalkedToBy,WILDMAGE)
+~ THEN
+	BEGIN Conversation01c
+		SAY @101
+
+		IF ~Kit(LastTalkedToBy,MAGESCHOOL_ABJURER)~ THEN
+			REPLY @102
+			GOTO Conversation11c
+			
+		IF ~Kit(LastTalkedToBy,MAGESCHOOL_CONJURER)~ THEN
+			REPLY @103
+			GOTO Conversation12c
+			
+		IF ~Kit(LastTalkedToBy,MAGESCHOOL_DIVINER)~ THEN
+			REPLY @104
+			GOTO Conversation13c
+				
+		IF ~Kit(LastTalkedToBy,MAGESCHOOL_ENCHANTER)~ THEN
+			REPLY @105
+			GOTO Conversation14c
+			
+		IF ~Kit(LastTalkedToBy,MAGESCHOOL_ILLUSIONIST)~ THEN
+			REPLY @106
+			GOTO Conversation15c
+			
+		IF ~Kit(LastTalkedToBy,MAGESCHOOL_INVOKER)~ THEN
+			REPLY @107
+			GOTO Conversation16c
+			
+		IF ~Kit(LastTalkedToBy,MAGESCHOOL_NECROMANCER)~ THEN
+			REPLY @108
+			GOTO Conversation17c
+			
+		IF ~Kit(LastTalkedToBy,MAGESCHOOL_TRANSMUTER)~ THEN
+			REPLY @109
+			GOTO Conversation18c
+
+		IF ~Kit(LastTalkedToBy,WILDMAGE
+)~ THEN
+			REPLY @110
+			GOTO Conversation19c
+
+		IF ~~ THEN
+			REPLY @112
+			EXIT
+	END
+
+	IF ~XPGT(LastTalkedToBy,249999)
+~ THEN
+	BEGIN Conversation01c
+		SAY @101
+		
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @102
+			GOTO Conversation02c
+			
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @103
+			GOTO Conversation03c
+			
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @104
+			GOTO Conversation04c
+				
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST
+) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @105
+			GOTO Conversation05c
+			
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST
+) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @106
+			GOTO Conversation06c
+			
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST
+) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @107
+			GOTO Conversation07c
+			
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST
+) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @108
+			GOTO Conversation08c
+			
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST
+) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @109
+			GOTO Conversation09c
+			
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST
+) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @110
+			GOTO Conversation10c
+
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST
+) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @115
+			GOTO Conversation21c
+
+		IF ~~ THEN
+			REPLY @112
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation02c
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf03A","wstaf03",LastTalkedToBy)~
+			DO ~AddKit(MAGESCHOOL_ABJURER)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~ApplySpellRES("WSSPREMA",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation03c
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf03B","wstaf03",LastTalkedToBy)~
+			DO ~AddKit(MAGESCHOOL_CONJURER)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~ApplySpellRES("WSSPREMB",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation04c
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf03C","wstaf03",LastTalkedToBy)~
+			DO ~AddKit(MAGESCHOOL_DIVINER)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~ApplySpellRES("WSSPREMC",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+
+	IF ~~ THEN
+	BEGIN Conversation05c
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf03D","wstaf03",LastTalkedToBy)~
+			DO ~AddKit(MAGESCHOOL_ENCHANTER)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~ApplySpellRES("WSSPREMD",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation06c
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf03E","wstaf03",LastTalkedToBy)~
+			DO ~AddKit(MAGESCHOOL_ILLUSIONIST)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~ApplySpellRES("WSSPREME",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation07c
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf03F","wstaf03",LastTalkedToBy)~
+			DO ~AddKit(MAGESCHOOL_INVOKER)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~ApplySpellRES("WSSPREMF",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation08c
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf03G","wstaf03",LastTalkedToBy)~
+			DO ~AddKit(MAGESCHOOL_NECROMANCER)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~ApplySpellRES("WSSPREMG",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation09c
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf03H","wstaf03",LastTalkedToBy)~
+			DO ~AddKit(MAGESCHOOL_TRANSMUTER)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~ApplySpellRES("WSSPREMH",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation10c
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf03I","wstaf03",LastTalkedToBy)~
+			DO ~AddKit(WILDMAGE)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+
+	IF ~~ THEN
+	BEGIN Conversation11c
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf03A","wstaf03",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation12c
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf03B","wstaf03",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation13c
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf03C","wstaf03",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+
+	IF ~~ THEN
+	BEGIN Conversation14c
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf03D","wstaf03",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation15c
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf03E","wstaf03",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation16c
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf03F","wstaf03",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation17c
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf03G","wstaf03",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation18c
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf03H","wstaf03",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation19c
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf03I","wstaf03",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation20c
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf03J","wstaf03",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation21c
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf03K","wstaf03",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+END
+
+APPEND ~WSTAF04~
+
+	IF ~OR(2) XPLT(LastTalkedToBy,249999) XP(LastTalkedToBy,249999)
+~ THEN
+	BEGIN Conversation00d
+		SAY @100
+
+		IF ~~ THEN
+			REPLY @113
+			EXIT
+	END
+
+	IF ~XPGT(LastTalkedToBy,249999) Class(LastTalkedToBy,SORCERER)
+~ THEN
+	BEGIN Conversation001d
+		SAY @101
+
+		IF ~Kit(LastTalkedToBy,TRUECLASS
+)~ THEN
+			REPLY @115
+			GOTO Conversation21d
+
+		IF ~Kit(LastTalkedToBy,DRAGON_DISCIPLE
+)~ THEN
+			REPLY @111
+			GOTO Conversation20d
+
+		IF ~~ THEN
+			REPLY @112
+			EXIT
+	END
+
+	IF ~XPGT(LastTalkedToBy,249999) OR(9) Kit(LastTalkedToBy,MAGESCHOOL_ABJURER) Kit(LastTalkedToBy,MAGESCHOOL_CONJURER) Kit(LastTalkedToBy,MAGESCHOOL_DIVINER) Kit(LastTalkedToBy,MAGESCHOOL_ENCHANTER) Kit(LastTalkedToBy,MAGESCHOOL_ILLUSIONIST) Kit(LastTalkedToBy,MAGESCHOOL_INVOKER) Kit(LastTalkedToBy,MAGESCHOOL_NECROMANCER) Kit(LastTalkedToBy,MAGESCHOOL_TRANSMUTER) Kit(LastTalkedToBy,WILDMAGE)
+~ THEN
+	BEGIN Conversation01d
+		SAY @101
+
+		IF ~Kit(LastTalkedToBy,MAGESCHOOL_ABJURER)~ THEN
+			REPLY @102
+			GOTO Conversation11d
+			
+		IF ~Kit(LastTalkedToBy,MAGESCHOOL_CONJURER)~ THEN
+			REPLY @103
+			GOTO Conversation12d
+			
+		IF ~Kit(LastTalkedToBy,MAGESCHOOL_DIVINER)~ THEN
+			REPLY @104
+			GOTO Conversation13d
+				
+		IF ~Kit(LastTalkedToBy,MAGESCHOOL_ENCHANTER)~ THEN
+			REPLY @105
+			GOTO Conversation14d
+			
+		IF ~Kit(LastTalkedToBy,MAGESCHOOL_ILLUSIONIST)~ THEN
+			REPLY @106
+			GOTO Conversation15d
+			
+		IF ~Kit(LastTalkedToBy,MAGESCHOOL_INVOKER)~ THEN
+			REPLY @107
+			GOTO Conversation16d
+			
+		IF ~Kit(LastTalkedToBy,MAGESCHOOL_NECROMANCER)~ THEN
+			REPLY @108
+			GOTO Conversation17d
+			
+		IF ~Kit(LastTalkedToBy,MAGESCHOOL_TRANSMUTER)~ THEN
+			REPLY @109
+			GOTO Conversation18d
+
+		IF ~Kit(LastTalkedToBy,WILDMAGE
+)~ THEN
+			REPLY @110
+			GOTO Conversation19d
+
+		IF ~~ THEN
+			REPLY @112
+			EXIT
+	END
+
+	IF ~XPGT(LastTalkedToBy,249999)
+~ THEN
+	BEGIN Conversation01d
+		SAY @101
+		
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @102
+			GOTO Conversation02d
+			
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @103
+			GOTO Conversation03d
+			
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @104
+			GOTO Conversation04d
+				
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST
+) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @105
+			GOTO Conversation05d
+			
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST
+) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @106
+			GOTO Conversation06d
+			
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST
+) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @107
+			GOTO Conversation07d
+			
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST
+) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @108
+			GOTO Conversation08d
+			
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST
+) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @109
+			GOTO Conversation09d
+			
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST
+) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @110
+			GOTO Conversation10d
+
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST
+) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @115
+			GOTO Conversation21d
+
+		IF ~~ THEN
+			REPLY @112
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation02d
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf04A","wstaf04",LastTalkedToBy)~
+			DO ~AddKit(MAGESCHOOL_ABJURER)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~ApplySpellRES("WSSPREMA",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation03d
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf04B","wstaf04",LastTalkedToBy)~
+			DO ~AddKit(MAGESCHOOL_CONJURER)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~ApplySpellRES("WSSPREMB",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation04d
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf04C","wstaf04",LastTalkedToBy)~
+			DO ~AddKit(MAGESCHOOL_DIVINER)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~ApplySpellRES("WSSPREMC",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+
+	IF ~~ THEN
+	BEGIN Conversation05d
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf04D","wstaf04",LastTalkedToBy)~
+			DO ~AddKit(MAGESCHOOL_ENCHANTER)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~ApplySpellRES("WSSPREMD",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation06d
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf04E","wstaf04",LastTalkedToBy)~
+			DO ~AddKit(MAGESCHOOL_ILLUSIONIST)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~ApplySpellRES("WSSPREME",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation07d
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf04F","wstaf04",LastTalkedToBy)~
+			DO ~AddKit(MAGESCHOOL_INVOKER)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~ApplySpellRES("WSSPREMF",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation08d
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf04G","wstaf04",LastTalkedToBy)~
+			DO ~AddKit(MAGESCHOOL_NECROMANCER)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~ApplySpellRES("WSSPREMG",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation09d
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf04H","wstaf04",LastTalkedToBy)~
+			DO ~AddKit(MAGESCHOOL_TRANSMUTER)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~ApplySpellRES("WSSPREMH",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation10d
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf04I","wstaf04",LastTalkedToBy)~
+			DO ~AddKit(WILDMAGE)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+
+	IF ~~ THEN
+	BEGIN Conversation11d
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf04A","wstaf04",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation12d
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf04B","wstaf04",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation13d
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf04C","wstaf04",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+
+	IF ~~ THEN
+	BEGIN Conversation14d
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf04D","wstaf04",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation15d
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf04E","wstaf04",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation16d
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf04F","wstaf04",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation17d
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf04G","wstaf04",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation18d
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf04H","wstaf04",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation19d
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf04I","wstaf04",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation20d
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf04J","wstaf04",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation21d
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf04K","wstaf04",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+END
+
+APPEND ~WSTAF05~
+
+	IF ~OR(2) XPLT(LastTalkedToBy,249999) XP(LastTalkedToBy,249999)
+~ THEN
+	BEGIN Conversation00e
+		SAY @100
+
+		IF ~~ THEN
+			REPLY @113
+			EXIT
+	END
+
+	IF ~XPGT(LastTalkedToBy,249999) Class(LastTalkedToBy,SORCERER)
+~ THEN
+	BEGIN Conversation001e
+		SAY @101
+
+		IF ~Kit(LastTalkedToBy,TRUECLASS
+)~ THEN
+			REPLY @115
+			GOTO Conversation21e
+
+		IF ~Kit(LastTalkedToBy,DRAGON_DISCIPLE
+)~ THEN
+			REPLY @111
+			GOTO Conversation20e
+
+		IF ~~ THEN
+			REPLY @112
+			EXIT
+	END
+
+	IF ~XPGT(LastTalkedToBy,249999) OR(9) Kit(LastTalkedToBy,MAGESCHOOL_ABJURER) Kit(LastTalkedToBy,MAGESCHOOL_CONJURER) Kit(LastTalkedToBy,MAGESCHOOL_DIVINER) Kit(LastTalkedToBy,MAGESCHOOL_ENCHANTER) Kit(LastTalkedToBy,MAGESCHOOL_ILLUSIONIST) Kit(LastTalkedToBy,MAGESCHOOL_INVOKER) Kit(LastTalkedToBy,MAGESCHOOL_NECROMANCER) Kit(LastTalkedToBy,MAGESCHOOL_TRANSMUTER) Kit(LastTalkedToBy,WILDMAGE)
+~ THEN
+	BEGIN Conversation01e
+		SAY @101
+
+		IF ~Kit(LastTalkedToBy,MAGESCHOOL_ABJURER)~ THEN
+			REPLY @102
+			GOTO Conversation11e
+			
+		IF ~Kit(LastTalkedToBy,MAGESCHOOL_CONJURER)~ THEN
+			REPLY @103
+			GOTO Conversation12e
+			
+		IF ~Kit(LastTalkedToBy,MAGESCHOOL_DIVINER)~ THEN
+			REPLY @104
+			GOTO Conversation13e
+				
+		IF ~Kit(LastTalkedToBy,MAGESCHOOL_ENCHANTER)~ THEN
+			REPLY @105
+			GOTO Conversation14e
+			
+		IF ~Kit(LastTalkedToBy,MAGESCHOOL_ILLUSIONIST)~ THEN
+			REPLY @106
+			GOTO Conversation15e
+			
+		IF ~Kit(LastTalkedToBy,MAGESCHOOL_INVOKER)~ THEN
+			REPLY @107
+			GOTO Conversation16e
+			
+		IF ~Kit(LastTalkedToBy,MAGESCHOOL_NECROMANCER)~ THEN
+			REPLY @108
+			GOTO Conversation17e
+			
+		IF ~Kit(LastTalkedToBy,MAGESCHOOL_TRANSMUTER)~ THEN
+			REPLY @109
+			GOTO Conversation18e
+
+		IF ~Kit(LastTalkedToBy,WILDMAGE
+)~ THEN
+			REPLY @110
+			GOTO Conversation19e
+
+		IF ~~ THEN
+			REPLY @112
+			EXIT
+	END
+
+	IF ~XPGT(LastTalkedToBy,249999)
+~ THEN
+	BEGIN Conversation01e
+		SAY @101
+		
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @102
+			GOTO Conversation02e
+			
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @103
+			GOTO Conversation03e
+			
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @104
+			GOTO Conversation04e
+				
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST
+) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @105
+			GOTO Conversation05e
+			
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST
+) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @106
+			GOTO Conversation06e
+			
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST
+) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @107
+			GOTO Conversation07e
+			
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST
+) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @108
+			GOTO Conversation08e
+			
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST
+) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @109
+			GOTO Conversation09e
+			
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST
+) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @110
+			GOTO Conversation10e
+
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST
+) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @115
+			GOTO Conversation21e
+
+		IF ~~ THEN
+			REPLY @112
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation02e
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf05A","wstaf05",LastTalkedToBy)~
+			DO ~AddKit(MAGESCHOOL_ABJURER)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~ApplySpellRES("WSSPREMA",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation03e
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf05B","wstaf05",LastTalkedToBy)~
+			DO ~AddKit(MAGESCHOOL_CONJURER)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~ApplySpellRES("WSSPREMB",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation04e
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf05C","wstaf05",LastTalkedToBy)~
+			DO ~AddKit(MAGESCHOOL_DIVINER)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~ApplySpellRES("WSSPREMC",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+
+	IF ~~ THEN
+	BEGIN Conversation05e
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf05D","wstaf05",LastTalkedToBy)~
+			DO ~AddKit(MAGESCHOOL_ENCHANTER)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~ApplySpellRES("WSSPREMD",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation06e
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf05E","wstaf05",LastTalkedToBy)~
+			DO ~AddKit(MAGESCHOOL_ILLUSIONIST)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~ApplySpellRES("WSSPREME",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation07e
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf05F","wstaf05",LastTalkedToBy)~
+			DO ~AddKit(MAGESCHOOL_INVOKER)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~ApplySpellRES("WSSPREMF",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation08e
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf05G","wstaf05",LastTalkedToBy)~
+			DO ~AddKit(MAGESCHOOL_NECROMANCER)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~ApplySpellRES("WSSPREMG",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation09e
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf05H","wstaf05",LastTalkedToBy)~
+			DO ~AddKit(MAGESCHOOL_TRANSMUTER)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~ApplySpellRES("WSSPREMH",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation10e
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf05I","wstaf05",LastTalkedToBy)~
+			DO ~AddKit(WILDMAGE)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+
+	IF ~~ THEN
+	BEGIN Conversation11e
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf05A","wstaf05",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation12e
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf05B","wstaf05",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation13e
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf05C","wstaf05",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+
+	IF ~~ THEN
+	BEGIN Conversation14e
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf05D","wstaf05",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation15e
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf05E","wstaf05",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation16e
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf05F","wstaf05",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation17e
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf05G","wstaf05",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation18e
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf05H","wstaf05",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation19e
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf05I","wstaf05",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation20e
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf05J","wstaf05",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation21e
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf05K","wstaf05",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+END
+
+APPEND ~WSTAF06~
+
+	IF ~OR(2) XPLT(LastTalkedToBy,249999) XP(LastTalkedToBy,249999)
+~ THEN
+	BEGIN Conversation00f
+		SAY @100
+
+		IF ~~ THEN
+			REPLY @113
+			EXIT
+	END
+
+	IF ~XPGT(LastTalkedToBy,249999) Class(LastTalkedToBy,SORCERER)
+~ THEN
+	BEGIN Conversation001f
+		SAY @101
+
+		IF ~Kit(LastTalkedToBy,TRUECLASS
+)~ THEN
+			REPLY @115
+			GOTO Conversation21f
+
+		IF ~Kit(LastTalkedToBy,DRAGON_DISCIPLE
+)~ THEN
+			REPLY @111
+			GOTO Conversation20f
+
+		IF ~~ THEN
+			REPLY @112
+			EXIT
+	END
+
+	IF ~XPGT(LastTalkedToBy,249999) OR(9) Kit(LastTalkedToBy,MAGESCHOOL_ABJURER) Kit(LastTalkedToBy,MAGESCHOOL_CONJURER) Kit(LastTalkedToBy,MAGESCHOOL_DIVINER) Kit(LastTalkedToBy,MAGESCHOOL_ENCHANTER) Kit(LastTalkedToBy,MAGESCHOOL_ILLUSIONIST) Kit(LastTalkedToBy,MAGESCHOOL_INVOKER) Kit(LastTalkedToBy,MAGESCHOOL_NECROMANCER) Kit(LastTalkedToBy,MAGESCHOOL_TRANSMUTER) Kit(LastTalkedToBy,WILDMAGE)
+~ THEN
+	BEGIN Conversation01f
+		SAY @101
+
+		IF ~Kit(LastTalkedToBy,MAGESCHOOL_ABJURER)~ THEN
+			REPLY @102
+			GOTO Conversation11f
+			
+		IF ~Kit(LastTalkedToBy,MAGESCHOOL_CONJURER)~ THEN
+			REPLY @103
+			GOTO Conversation12f
+			
+		IF ~Kit(LastTalkedToBy,MAGESCHOOL_DIVINER)~ THEN
+			REPLY @104
+			GOTO Conversation13f
+				
+		IF ~Kit(LastTalkedToBy,MAGESCHOOL_ENCHANTER)~ THEN
+			REPLY @105
+			GOTO Conversation14f
+			
+		IF ~Kit(LastTalkedToBy,MAGESCHOOL_ILLUSIONIST)~ THEN
+			REPLY @106
+			GOTO Conversation15f
+			
+		IF ~Kit(LastTalkedToBy,MAGESCHOOL_INVOKER)~ THEN
+			REPLY @107
+			GOTO Conversation16f
+			
+		IF ~Kit(LastTalkedToBy,MAGESCHOOL_NECROMANCER)~ THEN
+			REPLY @108
+			GOTO Conversation17f
+			
+		IF ~Kit(LastTalkedToBy,MAGESCHOOL_TRANSMUTER)~ THEN
+			REPLY @109
+			GOTO Conversation18f
+
+		IF ~Kit(LastTalkedToBy,WILDMAGE
+)~ THEN
+			REPLY @110
+			GOTO Conversation19f
+					
+		IF ~~ THEN
+			REPLY @112
+			EXIT
+	END
+
+	IF ~XPGT(LastTalkedToBy,249999)
+~ THEN
+	BEGIN Conversation01f
+		SAY @101
+		
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @102
+			GOTO Conversation02f
+			
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @103
+			GOTO Conversation03f
+			
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @104
+			GOTO Conversation04f
+				
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST
+) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @105
+			GOTO Conversation05f
+			
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST
+) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @106
+			GOTO Conversation06f
+			
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST
+) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @107
+			GOTO Conversation07f
+			
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST
+) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @108
+			GOTO Conversation08f
+			
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST
+) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @109
+			GOTO Conversation09f
+			
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST
+) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @110
+			GOTO Conversation10f
+
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST
+) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @115
+			GOTO Conversation21f
+
+		IF ~~ THEN
+			REPLY @112
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation02f
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf06A","wstaf06",LastTalkedToBy)~
+			DO ~AddKit(MAGESCHOOL_ABJURER)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~ApplySpellRES("WSSPREMA",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation03f
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf06B","wstaf06",LastTalkedToBy)~
+			DO ~AddKit(MAGESCHOOL_CONJURER)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~ApplySpellRES("WSSPREMB",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation04f
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf06C","wstaf06",LastTalkedToBy)~
+			DO ~AddKit(MAGESCHOOL_DIVINER)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~ApplySpellRES("WSSPREMC",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+
+	IF ~~ THEN
+	BEGIN Conversation05f
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf06D","wstaf06",LastTalkedToBy)~
+			DO ~AddKit(MAGESCHOOL_ENCHANTER)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~ApplySpellRES("WSSPREMD",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation06f
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf06E","wstaf06",LastTalkedToBy)~
+			DO ~AddKit(MAGESCHOOL_ILLUSIONIST)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~ApplySpellRES("WSSPREME",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation07f
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf06F","wstaf06",LastTalkedToBy)~
+			DO ~AddKit(MAGESCHOOL_INVOKER)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~ApplySpellRES("WSSPREMF",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation08f
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf06G","wstaf06",LastTalkedToBy)~
+			DO ~AddKit(MAGESCHOOL_NECROMANCER)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~ApplySpellRES("WSSPREMG",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation09f
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf06H","wstaf06",LastTalkedToBy)~
+			DO ~AddKit(MAGESCHOOL_TRANSMUTER)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~ApplySpellRES("WSSPREMH",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation10f
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf06I","wstaf06",LastTalkedToBy)~
+			DO ~AddKit(WILDMAGE)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+
+	IF ~~ THEN
+	BEGIN Conversation11f
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf06A","wstaf06",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation12f
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf06B","wstaf06",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation13f
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf06C","wstaf06",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+
+	IF ~~ THEN
+	BEGIN Conversation14f
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf06D","wstaf06",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation15f
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf06E","wstaf06",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation16f
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf06F","wstaf06",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation17f
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf06G","wstaf06",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation18f
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf06H","wstaf06",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation19f
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf06I","wstaf06",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation20f
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf06J","wstaf06",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation21f
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf06K","wstaf06",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+END
+
+APPEND ~WSTAF07~
+
+	IF ~OR(2) XPLT(LastTalkedToBy,249999) XP(LastTalkedToBy,249999)
+~ THEN
+	BEGIN Conversation00g
+		SAY @100
+
+		IF ~~ THEN
+			REPLY @113
+			EXIT
+	END
+
+	IF ~XPGT(LastTalkedToBy,249999) Class(LastTalkedToBy,SORCERER)
+~ THEN
+	BEGIN Conversation001g
+		SAY @101
+
+		IF ~Kit(LastTalkedToBy,TRUECLASS
+)~ THEN
+			REPLY @115
+			GOTO Conversation21g
+
+		IF ~Kit(LastTalkedToBy,DRAGON_DISCIPLE
+)~ THEN
+			REPLY @111
+			GOTO Conversation20g
+
+		IF ~~ THEN
+			REPLY @112
+			EXIT
+	END
+
+	IF ~XPGT(LastTalkedToBy,249999) OR(9) Kit(LastTalkedToBy,MAGESCHOOL_ABJURER) Kit(LastTalkedToBy,MAGESCHOOL_CONJURER) Kit(LastTalkedToBy,MAGESCHOOL_DIVINER) Kit(LastTalkedToBy,MAGESCHOOL_ENCHANTER) Kit(LastTalkedToBy,MAGESCHOOL_ILLUSIONIST) Kit(LastTalkedToBy,MAGESCHOOL_INVOKER) Kit(LastTalkedToBy,MAGESCHOOL_NECROMANCER) Kit(LastTalkedToBy,MAGESCHOOL_TRANSMUTER) Kit(LastTalkedToBy,WILDMAGE)
+~ THEN
+	BEGIN Conversation01g
+		SAY @101
+
+		IF ~Kit(LastTalkedToBy,MAGESCHOOL_ABJURER)~ THEN
+			REPLY @102
+			GOTO Conversation11g
+			
+		IF ~Kit(LastTalkedToBy,MAGESCHOOL_CONJURER)~ THEN
+			REPLY @103
+			GOTO Conversation12g
+			
+		IF ~Kit(LastTalkedToBy,MAGESCHOOL_DIVINER)~ THEN
+			REPLY @104
+			GOTO Conversation13g
+				
+		IF ~Kit(LastTalkedToBy,MAGESCHOOL_ENCHANTER)~ THEN
+			REPLY @105
+			GOTO Conversation14g
+			
+		IF ~Kit(LastTalkedToBy,MAGESCHOOL_ILLUSIONIST)~ THEN
+			REPLY @106
+			GOTO Conversation15g
+			
+		IF ~Kit(LastTalkedToBy,MAGESCHOOL_INVOKER)~ THEN
+			REPLY @107
+			GOTO Conversation16g
+			
+		IF ~Kit(LastTalkedToBy,MAGESCHOOL_NECROMANCER)~ THEN
+			REPLY @108
+			GOTO Conversation17g
+			
+		IF ~Kit(LastTalkedToBy,MAGESCHOOL_TRANSMUTER)~ THEN
+			REPLY @109
+			GOTO Conversation18g
+
+		IF ~Kit(LastTalkedToBy,WILDMAGE
+)~ THEN
+			REPLY @110
+			GOTO Conversation19g
+
+		IF ~~ THEN
+			REPLY @112
+			EXIT
+	END
+
+	IF ~XPGT(LastTalkedToBy,249999)
+~ THEN
+	BEGIN Conversation01g
+		SAY @101
+		
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @102
+			GOTO Conversation02g
+			
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @103
+			GOTO Conversation03g
+			
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @104
+			GOTO Conversation04g
+				
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST
+) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @105
+			GOTO Conversation05g
+			
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST
+) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @106
+			GOTO Conversation06g
+			
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST
+) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @107
+			GOTO Conversation07g
+			
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST
+) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @108
+			GOTO Conversation08g
+			
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST
+) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @109
+			GOTO Conversation09g
+			
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST
+) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @110
+			GOTO Conversation10g
+
+		IF ~OR(4) Kit(LastTalkedToBy,MAGESCHOOL_GENERALIST
+) Class(LastTalkedToBy,FIGHTER_MAGE) Class(LastTalkedToBy,MAGE_THIEF) Class(LastTalkedToBy,CLERIC_MAGE)~ THEN
+			REPLY @115
+			GOTO Conversation21g
+
+		IF ~~ THEN
+			REPLY @112
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation02g
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf07A","wstaf07",LastTalkedToBy)~
+			DO ~AddKit(MAGESCHOOL_ABJURER)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~ApplySpellRES("WSSPREMA",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation03g
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf07B","wstaf07",LastTalkedToBy)~
+			DO ~AddKit(MAGESCHOOL_CONJURER)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~ApplySpellRES("WSSPREMB",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation04g
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf07C","wstaf07",LastTalkedToBy)~
+			DO ~AddKit(MAGESCHOOL_DIVINER)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~ApplySpellRES("WSSPREMC",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+
+	IF ~~ THEN
+	BEGIN Conversation05g
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf07D","wstaf07",LastTalkedToBy)~
+			DO ~AddKit(MAGESCHOOL_ENCHANTER)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~ApplySpellRES("WSSPREMD",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation06g
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf07E","wstaf07",LastTalkedToBy)~
+			DO ~AddKit(MAGESCHOOL_ILLUSIONIST)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~ApplySpellRES("WSSPREME",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation07g
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf07F","wstaf07",LastTalkedToBy)~
+			DO ~AddKit(MAGESCHOOL_INVOKER)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~ApplySpellRES("WSSPREMF",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation08g
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf07G","wstaf07",LastTalkedToBy)~
+			DO ~AddKit(MAGESCHOOL_NECROMANCER)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~ApplySpellRES("WSSPREMG",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation09g
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf07H","wstaf07",LastTalkedToBy)~
+			DO ~AddKit(MAGESCHOOL_TRANSMUTER)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~ApplySpellRES("WSSPREMH",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation10g
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf07I","wstaf07",LastTalkedToBy)~
+			DO ~AddKit(WILDMAGE)~
+			DO ~ApplySpellRES("WSSPELLS",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+
+	IF ~~ THEN
+	BEGIN Conversation11g
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf07A","wstaf07",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation12g
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf07B","wstaf07",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation13g
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf07C","wstaf07",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+
+	IF ~~ THEN
+	BEGIN Conversation14g
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf07D","wstaf07",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation15g
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf07E","wstaf07",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation16g
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf07F","wstaf07",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation17g
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf07G","wstaf07",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation18g
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf07H","wstaf07",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation19g
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf07I","wstaf07",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation20g
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf07J","wstaf07",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+	IF ~~ THEN
+	BEGIN Conversation21g
+		SAY @114
+
+		IF ~~ THEN
+			DO ~EndCutSceneMode()~
+			DO ~Wait(2)~
+			DO ~CreateVisualEffectObject("SPSTRENH",LastTalkedToBy)~
+			DO ~TakeItemReplace("wstaf07K","wstaf07",LastTalkedToBy)~
+			DO ~StartCutSceneMode()~
+			EXIT
+	END
+	
+END 
