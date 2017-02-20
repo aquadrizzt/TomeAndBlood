@@ -1,0 +1,140 @@
+// -----------------------------
+// SORCERER: ARCANIST
+// -----------------------------
+INCLUDE ~TomeAndBlood/lib/fl#add_kit_ee.tpa~
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN // version without Spell Revisions
+
+	INCLUDE ~TomeAndBlood/data/core/spell_list_base.tpa~
+
+	INCLUDE ~TomeAndBlood/data/core/scroll_list_base.tpa~ 
+END 
+ACTION_IF FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN // version with Spell Revisions
+
+	INCLUDE ~TomeAndBlood/data/core/spell_list_sr.tpa~
+
+	INCLUDE ~TomeAndBlood/data/core/scroll_list_sr.tpa~ 
+END 
+
+ADD_KIT ~QDARCNST~
+	~QDARCNST 1 0 0 1 1 0 0 0~ //clasweap.2da
+	~QDARCNST 0 1 0 0 1 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~ //weapprof.2da 
+	~QDARCNST 0 0 0 0 0 12~ //abclasrq.2da 
+	~QDARCNST 0 0 0 0 0 0~ //abclsmod.2da
+	~QDARCNST 0 0 0 0 0 17~ //abdcdsrq.2da
+	~QDARCNST 0 0 0 0 0 15~ //abdcscrq.2da 
+	~QDARCNST 1 1 1 1 1 1 1 1 1~ //alignmnt.2da
+	~QDARCNST 0 0 0 0 0 0~ //dualclas.2da
+	~TomeAndBlood/data/arcanist/QDARCNST.2da~ //CLAB
+	~K_S_H K_S_HE K_S_E K_S_D K_S_G K_S_HL K_S_HO~ 
+	~0x00004000	19~ 
+	~MA0~ 
+	~* * * * * * * * * * * * * * * * * * * *~
+	SAY @401
+	SAY @402
+	SAY @403
+
+ACTION_IF GAME_IS ~bgee bg2ee iwdee~ THEN BEGIN
+	LAF fl#add_kit_ee
+		INT_VAR
+			briefdesc = RESOLVE_STR_REF (@403)
+		STR_VAR
+			kit_name = QDARCNST
+	END
+END 
+
+COPY ~TomeAndBlood/data/arcanist/QDRCNST1.SPL~ ~override~ //arcanist: -1 casting speed; -1 spell slot 
+
+
+//--------------------------------
+// ARCANE VERSATILITY GENERATION
+//--------------------------------
+
+<<<<<<<< QD/QD_arcanist_spell_exchange_base.d
+BEGIN QD_ARCANIST
+
+IF ~TRUE()~ main_menu
+	SAY ~You can learn the following spells.~
+		//Marker_Base
+	++ ~Exit.~ + end
+END
+
+IF ~~ end
+	SAY ~~ 
+	IF ~~ DO ~DestroySelf()~ EXIT 
+END 
+
+>>>>>>>> 
+
+//dialog: base spell state
+<<<<<<<< QD/QD_arcanist_spell_exchange.d
+	IF ~~ %spl% 
+		SAY ~%desc%~ 
+			// Marker_Spell_%spl%
+			++ ~View other options.~ + main_menu
+			++ ~Exit.~ + end
+	END 
+>>>>>>>>
+
+<<<<<<<< QD/QD_blank.txt
+
+>>>>>>>>
+COPY ~QD/QD_arcanist_spell_exchange_base.d~ ~override/QD_ARCANIST.d~ 
+
+//generate an array linking scrolls to spells 
+COPY_EXISTING_REGEXP GLOB ~.*\.itm~ ~override~
+	PATCH_IF ~SOURCE_SIZE~ >0x71 BEGIN
+		READ_SHORT 0x1c ~type~
+		PATCH_IF ~type~=11 BEGIN // only check scrolls
+			GET_OFFSET_ARRAY ab_array 0x64 4 0x68 2 0 0 0x38
+			PHP_EACH ab_array AS int => ab_off BEGIN
+				CLEAR_ARRAY fx_array
+				GET_OFFSET_ARRAY2 fx_array ab_off ITM_V10_HEAD_EFFECTS
+				PHP_EACH fx_array AS int => fx_off BEGIN
+					READ_SHORT fx_off fx_type
+					PATCH_IF fx_type = 147 BEGIN
+						READ_ASCII fx_off + 0x14 spell
+						SPRINT $scrollmap(~%spell%~) ~%SOURCE_RES%~
+					END
+				END
+			END
+		END
+	END
+BUT_ONLY
+ACTION_PHP_EACH scrollmap AS spell_res => scroll_res BEGIN
+	//stuff that iterates over all scrolls/spells goes here
+
+	COPY_EXISTING ~%spell_res%.spl~ ~override~
+		READ_STRREF NAME1 name 
+		READ_STRREF UNIDENTIFIED_DESC description
+		READ_LONG 0x34 spell_lvl
+	BUT_ONLY
+		
+	//write the actual dialog contents
+	COPY_EXISTING ~override/QD_ARCANIST.d~ ~override~ 
+		SPRINT name "%name%"
+		SPRINT desc "%description%"
+		SPRINT spl "%spell_res%"
+		SPRINT lvl "%spell_lvl%"
+		APPEND_FILE_EVALUATE  ~QD/QD_arcanist_spell_exchange.d~ 
+		REPLACE_TEXTUALLY ~//Marker_Base~ ~~~~~+ ~HasItem("%scroll_res%",LastSummonerOf(Myself)) NextTriggerObject(LastSummonerOf(Myself)) !HaveSpellRES("%spell_res%")~ +~%name%~ + %spell_res% 
+		//Marker_Base~~~~~
+		
+	
+END 
+
+ACTION_PHP_EACH scrollmap AS spell_res2 => scroll_res2 BEGIN 
+		
+		COPY_EXISTING ~%spell_res2%.spl~ ~override~
+			READ_STRREF NAME1 name2 
+			READ_LONG 0x34 spell_lvl2
+		BUT_ONLY
+		
+		PRINT ~%name% %name2% %spell_lvl% %spell_lvl2%~
+		ACTION_IF (%spell_lvl% = %spell_lvl2%) BEGIN 
+			COPY_EXISTING ~override/QD_ARCANIST.d~ ~override~ 
+				REPLACE_TEXTUALLY ~//Marker_Spell_%spell_res%~ ~~~~~+ ~HaveSpellRES("%spell_res2%")~ + ~Replace %name2% with %name%.~ DO ~ActionOverride(LastSummonerOf(Myself),RemoveSpellRES("%spell_res2%")) TakePartyItemNum(%scroll_res%) ActionOverride(LastSummonerOf(Myself),AddSpecialAbility("%spell_res%")) SmallWait(1)~ + end
+			//Marker_Spell_%spell_res%~~~~~
+		END 
+	END 
+COMPILE ~override/QD_ARCANIST.d~ 

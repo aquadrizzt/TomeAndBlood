@@ -1,0 +1,34 @@
+// -----------------------------
+// SYLVAN DISCIPLE
+// -----------------------------
+INCLUDE ~TomeAndBlood/lib/fl#add_kit_ee.tpa~
+
+//sylvan sorcerer
+ADD_KIT ~QDSYLSR~
+	~QDSYLSR 0 1 0 0 1 0 0 1 0~ //clasweap.2da
+	~QDSYLSR 0 1 0 0 1 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~ //weapprof.2da 
+	~QDSYLSR 0 0 0 0 0 9~ //abclasrq.2da 
+	~QDSYLSR 0 0 0 0 0 0~ //abclsmod.2da
+	~QDSYLSR 0 0 0 0 0 17~ //abdcdsrq.2da
+	~QDSYLSR 0 0 0 0 0 15~ //abdcscrq.2da 
+	~QDSYLSR 1 1 1 1 1 1 1 1 1~ //alignmnt.2da
+	~QDSYLSR 0 0 0 0 0 0~ //dualclas.2da
+	~TomeAndBlood/data/sylvan/QDSYLSR.2da~ //CLAB
+	~K_S_H K_S_HE K_S_E K_S_D K_S_G K_S_HL K_S_HO~ 
+	~0x00004000	19~ 
+	~MA0~ 
+	~* * * * * * * * * * * * * * * * * * * *~
+	SAY @701
+	SAY @702
+	SAY @703
+
+ACTION_IF GAME_IS ~bgee bg2ee iwdee~ THEN BEGIN
+	LAF fl#add_kit_ee
+		INT_VAR
+			briefdesc = RESOLVE_STR_REF (@703)
+		STR_VAR
+			kit_name = QDSYLSR
+	END
+END	
+
+COPY ~TomeAndBlood/data/sylvan/QDSLVS1.spl~ ~override~ //+4 vs. spells, imm to charm, nondetection, -1 spell

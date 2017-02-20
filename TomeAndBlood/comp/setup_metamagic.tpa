@@ -1,0 +1,124 @@
+// -----------------------------
+// METAMAGIC
+// -----------------------------
+
+// This component uses code by Subtledoctor and is used with permission of the original author. 
+
+
+INCLUDE ~TomeAndBlood/lib/hla_actions.tpa~
+
+
+//Removing these spells from the levelup table
+//
+ACTION_IF (FILE_EXISTS_IN_GAME ~HIDESPL.2DA~) THEN BEGIN 
+	APPEND ~HIDESPL.2da~ ~SPWI420	1	0~ //Minor Sequencer
+	APPEND ~HIDESPL.2da~ ~SPWI710	1	0~ //Spell Sequencer
+	APPEND ~HIDESPL.2da~ ~SPWI809	1	0~ //Spell Trigger
+	APPEND ~HIDESPL.2da~ ~SPWI617	1	0~ //Contingency
+	APPEND ~HIDESPL.2da~ ~SPWI908	1	0~ //Chain Contingency
+END 
+
+//Sequencers
+//
+COPY ~TomeAndBlood/data/metamagic/d5_sp420.bam~ ~override~
+COPY ~TomeAndBlood/data/metamagic/d5_seq1.spl~ ~override~
+	SAY NAME1 @6041
+	SAY UNIDENTIFIED_DESC @6042
+COPY ~TomeAndBlood/data/metamagic/spwi420.spl~ ~override~
+	SAY NAME1 @6041
+	SAY UNIDENTIFIED_DESC @6042
+COPY ~TomeAndBlood/data/metamagic/spwi420d.spl~ ~override~
+	SAY NAME1 @6041
+COPY ~TomeAndBlood/data/metamagic/spwi420p.spl~ ~override~
+	SAY NAME1 @6041
+COPY ~TomeAndBlood/data/metamagic/d5_sp710.bam~ ~override~
+COPY ~TomeAndBlood/data/metamagic/d5_seq2.spl~ ~override~
+	SAY NAME1 @6043
+	SAY UNIDENTIFIED_DESC @6044
+COPY ~TomeAndBlood/data/metamagic/spwi710.spl~ ~override~
+	SAY NAME1 @6043
+	SAY UNIDENTIFIED_DESC @6044
+COPY ~TomeAndBlood/data/metamagic/spwi710d.spl~ ~override~
+	SAY NAME1 @6043
+COPY ~TomeAndBlood/data/metamagic/spwi710p.spl~ ~override~
+	SAY NAME1 @6043
+COPY ~TomeAndBlood/data/metamagic/d5_sp809.bam~ ~override~
+COPY ~TomeAndBlood/data/metamagic/d5_seq3.spl~ ~override~
+	SAY NAME1 @6045
+	SAY UNIDENTIFIED_DESC @6046
+COPY ~TomeAndBlood/data/metamagic/spwi809.spl~ ~override~
+	SAY NAME1 @6045
+	SAY UNIDENTIFIED_DESC @6046
+COPY ~TomeAndBlood/data/metamagic/spwi809d.spl~ ~override~
+	SAY NAME1 @6045
+COPY ~TomeAndBlood/data/metamagic/spwi809p.spl~ ~override~
+	SAY NAME1 @6045
+ACTION_IF FILE_EXISTS_IN_GAME ~scrl6p.itm~ THEN BEGIN
+	COPY ~TomeAndBlood/data/metamagic/mseqscrl.itm~ ~override/scrl6p.itm~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~scrl8l.itm~ THEN BEGIN
+	COPY ~TomeAndBlood/data/metamagic/seqscrl.itm~ ~override/scrl8l.itm~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~scrl9d.itm~ THEN BEGIN
+	COPY ~TomeAndBlood/data/metamagic/trigscrl.itm~ ~override/scrl9d.itm~
+END
+
+
+//Contingencies
+//
+COPY ~TomeAndBlood/data/metamagic/d5_conti.spl~ ~override/spwi617.spl~
+	SAY NAME1 @6351
+	SAY UNIDENTIFIED_DESC @6352
+COPY ~TomeAndBlood/data/metamagic/d5wi617.spl~ ~override~
+	SAY NAME1 @6351
+	SAY UNIDENTIFIED_DESC @6352
+
+ACTION_IF FILE_EXISTS_IN_GAME ~scrl7u.itm~ THEN BEGIN
+	COPY_EXISTING ~scrl7u.itm~ ~override~
+		LPF ALTER_EFFECT INT_VAR match_opcode = 147 STR_VAR resource = ~d5wi617~ END
+END
+
+
+//Add Chain Contingency as HLA
+//
+COPY ~TomeAndBlood/data/metamagic/d5_ccont.spl~ ~override/spwi908.spl~
+	SAY NAME1 @6353
+	SAY UNIDENTIFIED_DESC @6354
+
+ACTION_IF FILE_EXISTS_IN_GAME ~scrl9a.itm~ THEN BEGIN
+	COPY_EXISTING ~scrl9a.itm~ ~override/scrl9q.itm~ 	// replace CC scrolls with Pierce Shield
+END
+
+LAF action_add_hla STR_VAR kit_name = ~MAGE~ ability = ~GA_SPWI908~ num_allowed = ~1~ END
+
+COPY_EXISTING ~kitlist.2da~ ~override~
+  COUNT_2DA_COLS num_cols
+  READ_2DA_ENTRIES_NOW ~r2en_kitlist~ num_cols
+	FOR (row = 3; row < r2en_kitlist; row += 1) BEGIN
+	  READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 1 kitlist_name
+	  READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 8 class_num
+	  PATCH_IF (class_num == 1) BEGIN // wizard
+		INNER_ACTION BEGIN
+		  LAF action_add_hla STR_VAR kit_name = EVAL ~%kitlist_name%~ ability = ~GA_SPWI908~ num_allowed = ~1~ END
+		END
+	  END
+	  PATCH_IF (class_num == 13) BEGIN // M/T
+		INNER_ACTION BEGIN
+		  LAF action_add_hla STR_VAR kit_name = EVAL ~%kitlist_name%~ ability = ~GA_SPWI908~ num_allowed = ~1~ END
+		END
+	  END
+	  PATCH_IF (class_num == 14) BEGIN // C/M
+		INNER_ACTION BEGIN
+		  LAF action_add_hla STR_VAR kit_name = EVAL ~%kitlist_name%~ ability = ~GA_SPWI908~ num_allowed = ~1~ END
+		END
+	  END
+	END
+BUT_ONLY	
+
+//COMPATIBILITY WITH SPECIALISTS REVISIONS 
+ACTION_FOR_EACH bonusspl IN ~QDMG+ABJ~ ~QDMG+ALT~ ~QDMG+CON~ ~QDMG+EVO~ ~QDMG+ENC~ ~QDMG+ILL~ ~QDMG+NEC~ ~QDMG+DIV~ BEGIN 
+	COPY_EXISTING ~%bonusspl%.spl~ ~override~ 
+		PATCH_FOR_EACH spl IN ~spwi420~ ~spwi617~ ~spwi710~ ~spwi809~ ~spwi908~  BEGIN 
+			LPF ADD_SPELL_EFFECT INT_VAR opcode=172 target=1 timing=9 insert_point = 0  STR_VAR resource= EVAL ~%spl%~ END  
+		END 
+END 

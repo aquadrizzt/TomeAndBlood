@@ -1,0 +1,2069 @@
+@0 = ~Core Revisions~
+@1 = ~Innate Find Familiar~
+@2 = ~Armored Casting For Bards~
+@3 = ~Spell Selection Dialog~ 
+
+@10 = ~This component is not available for Baldur's Gate, Icewind Dale or Icewind Dale 2.~ 
+@11 = ~This component is only available for the Enhanced Editions.~ 
+@12 = ~This component requires the Enhanced Engine v2.0 or later.~ 
+
+@100 = ~~ 
+@101 = ~ABJURER: A Mage who specializes in protective magic and metamagic disciplines. These mages can erect powerful wards and barriers, and are also trained to break those wards and effects that are created by other spellcasters.
+
+Advantages: 
+– May cast one additional spell per level. 
+– Learns all spells from the school of Abjuration as bonus spells.
+– Receives a +2 bonus when making Saving Throws against Abjuration spells. 
+– Targets suffer a -2 penalty when making Saving Throws against Abjuration spells. 
+– Gains a Spell Shield when casting spell protections (such as Globe of Invulnerability) from the school of Abjuration.
+
+Disadvantages:
+– May not learn or cast any spells of the Necromancy school.
+– Receives a -15% penalty when scribing spells from other schools.~
+
+@102 = ~CONJURER: A Mage who specializes in creating or summoning creatures and objects, moving them through space. These wizards ultimately master teleportation magic, able to banish enemies and summon aid from different planes altogether.
+
+Advantages: 
+– May cast one additional spell per level. 
+– Learns all spells from the school of Conjuration as bonus spells.
+– Receives a +2 bonus when making Saving Throws against Conjuration spells. 
+– Targets suffer a -2 penalty when making Saving Throws against Conjuration spells. 
+
+Disadvantages:
+– May not learn or cast any spells of the Necromancy school.
+– Receives a -15% penalty when scribing spells from other schools.~
+
+@103 = ~DIVINER: A Mage who specializes in detection and divining magics. These wizards developer an instinctive ability to glimpse the future; while such visions are rarely clear, they give enough information to provide Diviners with slightly improved reflexes and the ability to use magic to subtly alter the outcome of probabilistic events.
+
+Advantages: 
+– May cast one additional spell per level. 
+– Learns all spells from the school of Divination as bonus spells.
+– Receives a +2 bonus when making Saving Throws against Divination spells. 
+– Targets suffer a -2 penalty when making Saving Throws against Divination spells. 
+– Immune to backstab. 
+
+Disadvantages:
+– May not learn or cast any spells of the Necromancy school.
+– Receives a -15% penalty when scribing spells from other schools.~
+
+@104 = ~ENCHANTER: A Mage who specializes in Charm and Enchantment magic. These wizards are adept both at using magic to influence the minds of others, inducing sleep, friendliness, despair, or dementia.
+
+Advantages: 
+– May cast one additional spell per level. 
+– Learns all spells from the school of Enchantment as bonus spells.
+– Receives a +2 bonus when making Saving Throws against Enchantment spells. 
+– Targets suffer a -2 penalty when making Saving Throws against Enchantment spells. 
+– Immune to charm and sleep. 
+– Nearby enemies suffer a -2 penalty when making Saving Throws against spells. 
+
+Disadvantages:
+– May not learn or cast any spells of the Necromancy school.
+– Receives a -15% penalty when scribing spells from other schools.~
+
+@105 = ~ILLUSIONIST: A Mage who specializes in creating illusions to confuse and mislead. These canny wizards can bend light and manipulate perceptions in various ways. They can duck out of sight when in danger, and eventually gain the power to create illusions of startling substance and realism.
+
+Advantages: 
+– May cast one additional spell per level. 
+– Learns all spells from the school of Illusion as bonus spells.
+– Receives a +2 bonus when making Saving Throws against Illusion spells. 
+– Targets suffer a -2 penalty when making Saving Throws against Illusion spells. 
+– Permanent Non-detection. 
+– May use the Shadowstep ability once per day. Additional uses are gained every 5 levels. 
+
+SHADOWSTEP: Step into the Shadow Plane and move for 7 seconds while others are frozen time. The Illusionist cannot attack or cast spells while in the Shadow Plane. 
+
+Disadvantages:
+– May not learn or cast any spells of the Necromancy school.
+– Receives a -15% penalty when scribing spells from other schools.~
+
+@106 = ~INVOKER: A Mage who specializes in the manipulation of raw and elemental energies. These wizards use magical spells to manipulate the basic energies of the multiverse. They excel at releasing this energy in explosive flashes of fire or lightning, or shunting it away to project an icy freeze.
+
+Advantages: 
+– May cast one additional spell per level. 
+– Learns all spells from the school of Evocation as bonus spells.
+– Receives a +2 bonus when making Saving Throws against Evocation spells. 
+– Targets suffer a -2 penalty when making Saving Throws against Evocation spells. 
+
+Disadvantages:
+– May not learn or cast any spells of the Necromancy school.
+– Receives a -15% penalty when scribing spells from other schools.~
+
+@107 = ~NECROMANCER: A Mage who specializes in magic dealing with death, undeath, and energy from the Negative Material Plane. Necromancy is a disturbing art, reviled by most civilized practitioners and academies of magic. They experiment with the living and the dead, and create undead abominations that straddle the gap in between. 
+
+Advantages: 
+– May cast one additional spell per level. 
+– Learns all spells from the school of Necromancy as bonus spells.
+– Receives a +2 bonus when making Saving Throws against Necromancy spells. 
+– Targets suffer a -2 penalty when making Saving Throws against Necromancy spells. 
+– May use the Chill Touch ability at will. 
+– 3rd level: May use the Ghoul Touch ability at will. 
+– 5th level: May use the Vampiric Touch ability at will.
+
+Disadvantages:
+– Alignment restricted to any evil. 
+– Receives a -15% penalty when scribing spells from other schools.~
+
+@108 = ~TRANSMUTER: A Mage who specializes in magic that alters physical reality. These wizards control and transform matter in all the ways their magical learning affords them. They can cause the air to turn to a toxic mist, change their own shape into that of a powerful monster, and even stop time itself. Transmuters are also alchemists, creating the various magical potions on which so many adventurers rely.
+
+Advantages: 
+– May cast one additional spell per level. 
+– Learns all spells from the school of Alteration as bonus spells.
+– Receives a +2 bonus when making Saving Throws against Alteration spells. 
+– Targets suffer a -2 penalty when making Saving Throws against Alteration spells. 
+– Immune to petrification, polymorph, and disintegration.
+
+Disadvantages:
+– May not learn or cast any spells of the Necromancy school.
+– Receives a -15% penalty when scribing spells from other schools.~
+
+@110 = ~– Targets suffer a -2 penalty when making Saving Throws against Conjuration spells.~ 
+@111 = ~– Targets suffer a -2 penalty when making Saving Throws against Conjuration spells.  
+– 2nd level: May cast Monster Summoning I once per day. An additional use is gained at 4th level. 
+– 6th level: May cast Monster Summoning II once per day. An additional use is gained at 8th level. 
+– 10th level: May cast Monster Summoning III once per day.~ 
+@112 = ~– Targets suffer a -2 penalty when making Saving Throws against Conjuration spells. 
+– May cast the Monster Summoning spells as if they were one level lower.~
+
+@113 = ~– Targets suffer a -2 penalty when making Saving Throws against Evocation spells.~ 
+@114 = ~– Targets suffer a -2 penalty when making Saving Throws against Evocation spells.
+– Deals +20% damage with spells that deal cold, fire, lightning, or magic damage.~ 
+
+@115 = ~Necromancy is a dark and reviled art, taught only to a select few in dark colleges scattered across the Realms. 
+	
+NOTE: This spell is provided as a way to allow Necromancers to complete character creation within the Enhanced Engines. You must memorize a single copy of this spell to complete character creation. This spell will be removed upon entering the game. 
+	
+NOTE: Due to an engine limitation, Wild Mages are required to select this spell as well. This will result in Wild Mages knowing one fewer spell of this level after character creation than other Mages. Wild Mages do NOT need to memorize a copy of this spell to complete character creation.~
+	
+@116 = ~Necromancy I~ 
+@117 = ~Necromancy II~ 
+@118 = ~Necromancy III~ 
+@119 = ~Necromancy IV~ 
+@120 = ~Necromancy V~ 
+@121 = ~Necromancy VI~ 
+@122 = ~Necromancy VII~ 
+@123 = ~Necromancy VIII~ 
+@124 = ~Necromancy IX~ 
+
+//DRAGON DISCIPLES 
+@200 = ~~
+@201 = ~acid dragon disciple~
+@202 = ~Acid Dragon Disciple~ 
+@203 = ~ACID DRAGON DISCIPLE: Dragon Disciples are powerful Sorcerers with dragons' blood somewhere in their lineage. Their natural magical talents bring out their draconic heritage, allowing them to cast powerful magical spells and exhibit dragon-like abilities. Acid Dragon Disciples might trace their heritage back to a cruel Black Dragon, a treacherous Green Dragon, or a clever Copper Dragon. 
+
+Advantages: 
+– May subtract Charisma modifier from base Armor Class. 
+– Gains 50% innate Acid Resistance. 
+– Deals +25% damage with spells that deal acid damage.
+– Hit Die: d6
+
+Disadvantages:
+– May cast one fewer spell per level per day. ~ 
+
+@204 = ~electric dragon disciple~
+@205 = ~Electric Dragon Disciple~ 
+@206 = ~ELECTRIC DRAGON DISCIPLE: Dragon Disciples are powerful Sorcerers with dragons' blood somewhere in their lineage. Their natural magical talents bring out their draconic heritage, allowing them to cast powerful magical spells and exhibit dragon-like abilities. Electric Dragon Disciples might trace their heritage back to a manipulative Blue Dragon or a honorable Bronze Dragon.
+
+Advantages: 
+– May subtract Charisma modifier from base Armor Class. 
+– Gains 50% innate Electricity Resistance. 
+– Deals +25% damage with spells that deal electricity damage.
+– Hit Die: d6
+
+Disadvantages:
+– May cast one fewer spell per level per day.~ 
+
+@207 = ~frost dragon disciple~
+@208 = ~Frost Dragon Disciple~ 
+@209 = ~FROST DRAGON DISCIPLE: Dragon Disciples are powerful Sorcerers with dragons' blood somewhere in their lineage. Their natural magical talents bring out their draconic heritage, allowing them to cast powerful magical spells and exhibit dragon-like abilities. Frost Dragon Disciples might trace their heritage back to a durable White Dragon or a graceful Silver Dragon.
+
+Advantages: 
+– May subtract Charisma modifier from base Armor Class. 
+– Gains 50% innate Cold Resistance. 
+– Deals +25% damage with spells that deal cold damage.
+– Hit Die: d6
+
+Disadvantages:
+– May cast one fewer spell per level per day. ~  
+
+@210 = ~fire dragon disciple~
+@211 = ~Fire Dragon Disciple~ 
+@212 = ~FIRE DRAGON DISCIPLE: Dragon Disciples are powerful Sorcerers with dragons' blood somewhere in their lineage. Their natural magical talents bring out their draconic heritage, allowing them to cast powerful magical spells and exhibit dragon-like abilities. Fire Dragon Disciples might trace their heritage back to a greedy Red Dragon, an inquisitive Brass Dragon or a powerful Gold Dragon.
+
+Advantages: 
+– May subtract Charisma modifier from base Armor Class. 
+– Gains 50% innate Fire Resistance. 
+– Deals +25% damage with spells that deal fire damage.
+– Hit Die: d6
+
+Disadvantages:
+– May cast one fewer spell per level per day. ~ 
+
+@213 = ~May subtract Charisma modifier from base Armor Class.~
+@214 =  ~Has a base Armor Class of 7.~
+
+@300 = ~~
+@301 = ~magus~ 
+@302 = ~Magus~
+@303 = ~MAGUS: A student of both arcane knowledge and martial prowess, a Magus blends together spell and steel to devastating effect. The most defining quality of a magus is their ability to cast complicated arcane spells while wearing even the heaviest armors, an ability that has allowed to them to surprise many a foe expecting a purely physical fight. Magi are perfectionists, and they welcome any opportunity to hone their powerful abilities further. 
+
+Advantages: 
+– May Specialize (two slots) in any melee weapon. 
+– May Specialize (two slots) in Two-Handed and Single Weapon fighting styles. 
+– May cast spells while wearing any armor.
+– Hit Die: d8
+
+Disadvantages:
+– May not use shields. 
+– May cast one fewer spell per level per day. 
+– Has a permanent -2 penalty to casting speed.~ 
+
+@400 = ~~
+@401 = ~arcanist~ 
+@402 = ~Arcanist~ 
+@403 = ~ARCANIST: The Arcanist combines the versatility of the Mage with the raw power of the Sorcerer. While many Sorcerers find themselves unable to learn magic from schools, Arcanists can adapt their own innate magical energy through careful study of arcane tomes and reflection upon the nature of magic. 
+
+Advantages: 
+– May change their known spells by expending arcane scrolls via the Arcane Versatility ability. 
+
+Disadvantages:
+– May cast one fewer spell per level per day. 
+– Has a permanent -1 penalty to casting speed.~
+
+@404 = ~Arcane Versatility~
+@405 = ~Arcane Versatility 
+
+This ability allows you to change your known spells. In order to learn a new spell, you will need to sacrifice another known spell of the same level and provide a scroll of the new spell and .~ 
+
+@500 = ~~ 
+@501 = ~wild sorcerer~ 
+@502 = ~Wild Sorcerer~ 
+@503 = ~WILD SORCERER: [...] 
+
+Advantages: 
+– Learns a set of Wildspells, which allow the Wild Sorcerer to cast any Mage spell of the appropriate level at the cost of incurring a wild surge.  
+
+Disadvantages:
+– Upon casting a spell, there is a 5% chance of incurring a wild surge. 
+– Casting level varies slightly whenever <PRO_HESHE> casts a spell—anywhere between five levels lower and five levels higher than the Wild Sorcerer's true level.~
+
+@600 = ~~
+@601 = ~favoured soul~ 
+@602 = ~Favoured Soul~ 
+@603 = ~FAVOURED SOUL: Favoured Souls attribute their magical powers to the blessing of some divine being. This blessing grants them potent magical protections, as well as access to spells usually beyond the reach of Sorcerers. 
+
+Advantages:
+– Learns all spells from a divine sphere as bonus spells.
+– Is permanently under the effects of a Protection from Evil spell.
+– Gains a +2 bonus to all saving throws. 
+
+Disadvantages:
+– May cast one fewer spell per level per day. 
+~
+
+@604 = ~Sphere Selection~ 
+@605 = ~Sphere Selection 
+	
+This allows the Favoured Soul to select a sphere of divine magic, granting them access to a set of divine spells.~
+@606 = ~Select one of the following spheres.~ 
+@607 = ~Battle~ 
+@608 = ~Death~
+@609 = ~Life~
+@610 = ~Nature~
+@611 = ~Protection~
+@612 = ~Sphere of Battle 
+	
+	 1: Magic Stone
+	 1: Remove Fear
+	 2: Draw Upon Holy Might
+	 2: Flame Blade
+	 3: Strength of One
+	 4: Cloak of Fear
+	 5: Champion's Strength
+	 6: Blade Barrier
+	 7: Gate
+	~ 
+@613 = ~Choose this sphere.~ 
+@614 = ~View other spheres.~
+@615 = ~Exit~
+@616 = ~Sphere of Death 
+	
+	 1: Command
+	 1: Doom
+	 2: Hold Person
+	 2: Spiritual Hammer
+	 3: Animate Dead
+	 4: Death Ward
+	 5: Slay Living
+	 6: Bolt of Glory
+	 7: Unholy Word
+	~ 
+@617 = ~Sphere of Life 
+	
+	 1: Bless
+	 1: Cure Light Wounds
+	 2: Aid
+	 2: Slow Poison
+	 3: Cure Medium Wounds
+	 4: Lesser Restoration
+	 5: Mass Cure
+	 6: Heal
+	 7: Resurrection
+	~ 
+@618 = ~Sphere of Nature 
+	
+	 1: Entangle 
+	 1: Shillelagh
+	 2: Barkskin
+	 2: Goodberry
+	 3: Summon Insects
+	 4: Call Woodland Beings
+	 5: Pixie Dust
+	 6: Fire Seeds
+	 7: Nature's Beauty
+	~
+@619 = ~Sphere of Protection 
+	
+	 1: Armor of Faith 
+	 1: Sanctuary
+	 2: Chant
+	 2: Silence, 15' Radius
+	 3: Glyph of Warding
+	 4: Defensive Harmony
+	 5: Magic Resistance
+	 6: Physical Mirror
+	 7: Shield of the Archons
+	~ 
+
+
+
+
+@700 = ~~
+@701 = ~sylvan disciple~ 
+@702 = ~Sylvan Disciple~ 
+@703 = ~SYLVAN DISCIPLE: The capricious nature of the fey runs in the veins of Sylvan Sorcerers due to some long forgotten intermingling of fey blood or magic. These sorcerers are more emotional than most, prone to bouts of joy and rage. 
+
+Advantages:
+– Is permanently under the effects of a Nondetection spell.
+– Gains a +4 bonus to Saving Throws vs spells. 
+– Is immune to charm. 
+– Creatures attacking the Sylvan Disciple in melee range must save vs. spells or suffer a -2 penalty to attack for 1 round. 
+
+Disadvantages:
+– May cast one fewer spell per level per day. 
+~ 
+
+@800 = ~~
+@801 = ~revenant disciple~ 
+@802 = ~Revenant Disciple~ 
+@803 = ~REVENANT DISCIPLE: The taint of the grave runs through the families of Revenant Disciples. Perhaps one of their ancestors became a powerful lich or vampire, or maybe they were born dead before suddenly returning to life. Either way, the forces of death move through them and touch their every action.
+
+Advantages:
+– Gains a +4 bonus to Saving Throws vs death. 
+– Is immune to sleep and death magic.
+– Hit Die: d6
+
+Disadvantages:
+– May cast one fewer spell per level per day. 
+~ 
+
+@900 = ~~ 
+@901 = ~amorphous disciple~ 
+@902 = ~Amorphous Disciple~ 
+@903 = ~AMORPHOUS DISCIPLE: The foul ichor of oozes runs through your veins, granting you magical control over noxious chemicals and slime, as well as a gift for changing your form to suit your needs. 
+
+Advantages:
+– Gains a +4 bonus to Saving Throws vs polymorph. 
+– Is immune to disease and poison.
+– Is protected from oozes. 
+
+Disadvantages:
+– May cast one fewer spell per level per day. 
+
+~ 
+
+@1001 = ~May cast arcane spells.~
+@1002 = ~May cast arcane spells.
+– May summon a Familiar.~
+
+@1101 = ~(Spells cannot be cast while wearing armor.)~
+@1102 = ~(Spells cannot be cast while wearing armor heavier than studded leather.)~
+
+@1201 = ~May cast arcane spells.~ 
+@1202 = ~May cast arcane spells.
+– May use the Scribe Scrolls ability.
+- 5th level: May use the Brew Potions ability.
+- 10th level: May use the Craft Wands ability.
+- 15th level: May use the Recharge Wands ability.~
+@1203 = ~May cast arcane spells.~
+@1204 = ~May cast arcane spells.
+– 5th level: May use the Brew Potions ability.
+– 10th level: May use the Craft Wands ability.
+– 15th level: May use the Recharge Wands ability.~
+
+@1501 = ~May cast arcane spells.~
+@1502 = ~May cast arcane spells.
+– May select one cantrip.~
+@1503 = ~May cast one additional spell per level.~
+@1504 = ~May cast one additional spell per level.
+– May use the Protective Shell cantrip.~ 
+@1505 = ~May cast one additional spell per level.
+– May use the Conjure Rabbit cantrip.~
+@1506 = ~May cast one additional spell per level.
+– May use the Anticipation cantrip.~
+@1507 = ~May cast one additional spell per level.
+– May use the Drowse cantrip.~
+@1508 = ~May cast one additional spell per level.
+– May use the Bedazzle cantrip.~
+@1509 = ~May cast one additional spell per level.
+– May use the Magic Bolt cantrip.~
+@1510 = ~May cast one additional spell per level.
+– May use the Stiffen Bones cantrip.~
+@1511 = ~May cast one additional spell per level.
+– May use the Earthen Grasp cantrip.~
+@1512 = ~Advantages:~ 
+@1513 = ~Advantages:
+– May use the Fire Bolt cantrip.~
+@1514 = ~Advantages:
+– May use the Protective Shell cantrip.~
+@1515 = ~Advantages:
+– May use the Acid Bolt cantrip.~
+@1516 = ~Advantages:
+– May use the Ice Bolt cantrip.~
+@1517 = ~Advantages:
+– May use the Electric Bolt cantrip.~
+@1518 = ~Advantages:
+– May use the Anticipation cantrip.~
+@1519 = ~Advantages:
+– May use the Drowse cantrip.~
+@1520 = ~Advantages:
+– May use the Stiffen Bones cantrip.~
+@1521 = ~Advantages:
+– May use the Earthen Grasp cantrip.~
+
+@1701 = ~Spell Knowledge~ 
+@1702 = ~Spell Knowledge
+
+This ability allows you to select your spells known for each spell level.~
+@1703 = ~Learn this spell.~
+@1704 = ~View other spells of the same level.~
+@1705 = ~Select a different spell level.~
+@1706 = ~End.~
+@1707 = ~Return to level selection.~ 
+@1708 = ~You can learn more spells of the following levels.~
+@1711 = ~First~
+@1712 = ~Second~
+@1713 = ~Third~
+@1714 = ~Fourth~
+@1715 = ~Fifth~
+@1716 = ~Sixth~
+@1717 = ~Seventh~
+@1718 = ~Eighth~
+@1719 = ~Ninth~
+@1721 = ~You can select new 1st level spells from the following list.~
+@1722 = ~You can select new 2nd level spells from the following list.~
+@1723 = ~You can select new 3rd level spells from the following list.~
+@1724 = ~You can select new 4th level spells from the following list.~
+@1725 = ~You can select new 5th level spells from the following list.~
+@1726 = ~You can select new 6th level spells from the following list.~
+@1727 = ~You can select new 7th level spells from the following list.~
+@1728 = ~You can select new 8th level spells from the following list.~
+@1729 = ~You can select new 9th level spells from the following list.~
+
+
+
+//Subtledoctor TRA strings
+@6012   = ~Choose a cantrip~
+@6013   = ~This power represents a wizard's most basic spellcasting ability. It allows a Mage to choose one of the following cantrips:
+- Protective Shell
+- Conjure Rabbit
+- Anticipation
+- Drowse
+- Bedazzle
+- Stiffen Bones
+- Earthen Grasp
+- Magic Bolt~
+@6014   = ~Protective Shell~
+@6015   = ~Protective Shell
+
+Level: 0
+Range: 0
+Duration: 3 turns
+Area of Effect: The caster
+Saving Throw: None
+
+This cantrip creates a thin magical shell that harmlessly absorbs the first physical strike that hits the caster.~
+@6016   = ~Conjure Rabbit~
+@6017   = ~Conjure Rabbit
+
+Level: 0
+Range: 0
+Duration: 5 rounds
+Area of Effect: The caster
+Saving Throw: None
+
+This cantrip conjures a medium-sized rodent in the location of the caster's choosing.~
+@6018   = ~Rabbit~
+@6019   = ~Anticipation~
+@6020   = ~Anticipation
+
+Level: 0
+Range: 0
+Duration: 3 rounds
+Area of Effect: The caster
+Saving Throw: None
+
+This cantrip gives the caster a temporary, intuitive foreknowledge of the immediate future, resulting in improved reaction time with a +3 bonus to AC.~
+@6021   = ~Drowse~
+@6022   = ~Drowse
+
+Level: 0
+Range: 20 feet
+Duration: 1 round
+Area of Effect: Target
+Saving Throw: vs. Spells
+
+This cantrip causes the target to drift off into a very brief slumber, slumping to the ground for 6 seconds before regaining full consciousness.~
+@6023   = ~Bedazzle~
+@6024   = ~Bedazzle
+
+Level: 0
+Range: 20 feet
+Duration: 2 rounds
+Area of Effect: Target
+Saving Throw: vs. Spells
+
+This cantrip causes intense sparkling light to flash in front of the target's eyes and causes -1 penalties to thac0, damage, and AC for 12 seconds (increasing to -3 penalties, and suffering from Blindness for 6 seconds, if the target fails a saving throw vs. spells).~
+@6025   = ~Magic Bolt~
+@6026   = ~Magic Bolt
+
+Level: 0
+Range: 20 feet
+Duration: instantaneous
+Area of Effect: Target
+Saving Throw: None
+
+This cantrip causes a small bolt of magical energy to leap from the caster's hands, doing 1d5 damage to the target.~
+@6027   = ~Stiffen Bones~
+@6028   = ~Stiffen Bones
+
+Level: 0
+Range: 20 feet
+Duration: 2 rounds
+Area of Effect: Target
+Saving Throw: vs. Death
+
+This cantrip causes the target's body to ache and stiffen, causes -1 penalties to thac0 and AC for 12 seconds (increasing to -2 penalties and being Slowed if the target fails a saving throw).~
+@6029   = ~Earthen Grasp~
+@6030   = ~Earthen Grasp
+
+Level: 0
+Range: 20 feet
+Duration: 2 rounds
+Area of Effect: Target
+Saving Throw: vs. Breath
+
+This cantrip causes tendrils to rise up from the ground and grab at the target's legs, preventing movement for 1 round. The target will be Held and unable to move during that time unless a successful saving throw is made.~
+@6031   = ~Fire Bolt~
+@6032   = ~Fire Bolt
+
+Level: 0
+Range: 0
+Duration: 5 rounds
+Area of Effect: The caster
+Saving Throw: None
+
+This cantrip causes a small bolt of magical flame to leap from the caster's hands, doing 1d5 damage to the target.~
+@6033   = ~Ice Bolt~
+@6034   = ~Ice Bolt
+
+Level: 0
+Range: 0
+Duration: 5 rounds
+Area of Effect: The caster
+Saving Throw: None
+
+This cantrip causes a small bolt of magical cold to leap from the caster's hands, doing 1d5 damage to the target.~
+@6035   = ~Acid Bolt~
+@6036   = ~Acid Bolt
+
+Level: 0
+Range: 0
+Duration: 5 rounds
+Area of Effect: The caster
+Saving Throw: None
+
+This cantrip causes a small bolt of acid to leap from the caster's hands, doing 1d5 damage to the target.~
+@6037   = ~Electric Bolt~
+@6038   = ~Electric Bolt
+
+Level: 0
+Range: 0
+Duration: 5 rounds
+Area of Effect: The caster
+Saving Throw: None
+
+This cantrip causes a small bolt of electricity to leap from the caster's hands, doing 1d5 damage to the target.~
+@6039   = ~Earth Bolt~
+@6040   = ~Earth Bolt
+
+Level: 0
+Range: 0
+Duration: 5 rounds
+Area of Effect: The caster
+Saving Throw: None
+
+This cantrip causes a small chunk of stone to fly from the caster's hands, doing 1d5 damage to the target.~
+@6041   = ~Minor Spell Matrix~
+@6042   = ~Minor Sequencer
+(Invocation/Evocation)
+
+Level: 4
+Range: 0
+Duration: Permanent
+Casting Time: 9
+Area of Effect: Special
+Saving Throw: None
+
+This spell allows a wizard to store spells in a magical ability. This 'Spell Matrix' ability can store three spells of up to 4th level, to be released simultaneously. A wizard can only possess one spell matrix at a time, and the matrix may not be given to other characters. Once the spell matrix is used, the caster will gain the innate ability to create a new one.  (NOTE: upon casting this spell, it will be removed from the spell book, and thenceforth can be used from the Special Abilities button.)~
+@6043   = ~Spell Sequencer~
+@6044   = ~Spell Sequencer
+
+Level: 7
+Range: 0
+Duration: Permanent
+Casting Time: 9
+Area of Effect: Special
+Saving Throw: None
+
+This spell allows a wizard to store spells in a magical ability. This 'Sequencer' ability can store three spells of up to 4th level, to be released simultaneously. A wizard can only possess one spell sequencer at a time, and the sequencer may not be given to other characters. Once the spell sequencer is used, the caster will gain the innate ability to create a new one.  (NOTE: upon casting this spell, it will be removed from the spell book, and thenceforth can be used from the Special Abilities button.)~
+@6045   = ~Spell Trigger~
+@6046   = ~Spell Trigger
+
+Level: 8
+Range: 0 
+Duration: Permanent
+Casting Time: 9
+Area of Effect: The caster 
+Saving Throw: None 
+
+This spell allows a wizard to store spells in a magical ability. This 'Trigger' ability can store three spells of up to 6th level, to be released simultaneously. A wizard can only possess one spell trigger at a time, and the trigger may not be given to other characters. Once the spell trigger is used, the caster will gain the innate ability to create a new one.  (NOTE: upon casting this spell, it will be removed from the spell book, and thenceforth can be used from the Special Abilities button.)~
+@6047   = ~Contingency~
+@6048   = ~Contingency~
+@6049   = ~Shadowstep~
+@6050   = ~Shadowstep
+
+The character steps into the Shadow Plane and may move for 7 seconds while others are frozen in time. The caster cannot attack or cast spells while in the Shadow Plane.~
+@6051   = ~Parry Magic~
+@6052   = ~Parry Magic
+
+Level: 0
+Range: 0
+Duration: 15 rounds
+Area of Effect: The caster
+Saving Throw: None
+
+This ability causes the spells cast against the wizard to be deflected harmlessly away. It blocks a total of 2 spell levels, including spells cast from scrolls and innate spell-like abilities (but excludes area effects that are not aimed directly at the wizard). As long as the spell is cast directly at the wizard, it will be absorbed. If it tries to absorb a spell that over 2nd level, the spell will fail and the Deflection will be disrupted.~
+@6053   = ~Spell Thrust~
+@6054   = ~Spell Thrust
+
+Level: 0
+Range: 25 ft.
+Duration: Instant
+Area of Effect: 1 creature
+Saving Throw: None
+
+When this spell is cast at a target creature, it will dispel a spell protections that has been erected, such as Minor spell Deflection, Minor Globe of Invulnerability, Spell Immunity, and Minor Spell Turning. The target's Magic Resistance does not affect this spell.  This ability can dispel protections of a level equal to the caster's level divided by three, rounded up. (But no matter how powerful the caster, a Spell Thrust will never break a Spell Trap.)~
+@6055   = ~Bolt of Glory~
+@6056   = ~Bolt of Glory
+(Invocation/Evocation)
+
+Sphere: Combat, Summoning
+Level: 6
+Range: 60 ft.
+Duration: Instant
+Casting Time: 9
+Area of Effect: 1 creature
+Saving Throw: None
+
+By casting this spell, the priest channels a bolt of divine energy against the target. No attack roll is needed. Creatures struck suffer varying damage, depending on their plane of origin:
+ Creature Type                       Damage
+ Prime Material Plane            6d6
+ Elemental planes                 3d4
+ Undead creatures                 8d6
+ Fiends                               10d6
+The divine bolt also has the power to dispel a wizard's spell protection (such as Spell Deflection or Spell Turning), though it is not powerful enough to disrupt a Spell Trap.~
+@6057   = ~Secret Word~
+@6058   = ~Secret Word
+
+Level: 4
+Range: 40 ft.
+Duration: Instant
+Casting Time: 4
+Area of Effect: 1 creature
+Saving Throw: None
+
+When this spell is cast at a target creature, it will dispel one spell protection of 8th level or lower. Spells affected by this are Minor Spell Turning, Minor Globe of Invulnerability, Spell Immunity, Spell Deflection, Spell Turning, and Spell Shield. 
+
+Additionally, the target must save vs. spells or be deafened for 5 rounds, resulting in a 50% chance of miscast magic. The target's Magic Resistance, if any, does not affect this spell.~
+@6059   = ~Ruby Ray of Reversal~
+@6060   = ~Ruby Ray of Reversal
+
+Level: 7
+Range: 40 ft.
+Duration: Instant
+Casting Time: 5
+Area of Effect: 1 creature
+Saving Throw: None
+
+When this spell is cast, it dispels one spell protection of any level affecting the target creature. The spells affected by Ruby Ray Of Reversal are Minor Spell Turning, Minor Globe of Invulnerability, Spell Immunity, Globe Of Invulnerability, Minor Spell Deflection, Spell Turning, Spell Shield, Spell Deflection, and Spell Trap. This will always remove the highest-level spell protection affecting the target; if more than one same-level protection is active on the target simultaneously, one of them will be randomly chosen and dispelled.
+
+Additionally, if the target fails a save vs. spells, the target will be blinded by the Ruby Ray for 3 rounds. The target's Magic Resistance, if any, does not affect this spell.~
+@6061   = ~Pierce Shield~
+@6062   = ~Pierce Shield
+
+Level: 8
+Range: 40 ft.
+Duration: Instant
+Casting Time: 8
+Area of Effect: 1 creature
+Saving Throw: None 
+
+When this spell is cast, it launches a massive attack on an enemy wizard's spell defenses. The target's Magic Resistance will be lowered by 10% + 1% per level of the caster. Next, Pierce Shield will cancel one spell protection of any level. The list of spells that this includes: Minor Spell Deflection, Minor Spell Turning, Spell Deflection, Minor Globe of Invulnerability, Spell Immunity, Globe Of Invulnerability, Spell Turning, Spell Shield, and Spell Trap. Finally, Pierce Shield will cancel the target's magical combat protections, such as Shield or Stoneskin (but specific protections, such as Resistance to Fire, will remain).
+
+Magic Resistance does not affect this spell, nor do any of the spell protections. The resistance remains lowered for 1 round per level of the caster. It cannot be dispelled.~
+@6063   = ~Minor Spell Absorption~
+@6064   = ~Minor Spell Absorption
+
+Level: 4
+Range: 0
+Duration: 1 turn
+Casting Time: 5
+Area of Effect: The caster
+Saving Throw: None
+
+This spell creates a barrier of magical protection around the spellcaster. Every spell that hits the barrier is absorbed, making the caster recall a previously cast spell. For example, if hit by a Flame Arrow (a 3rd-level spell), the caster will get three spell levels back—e.g. one spell of up to 3rd level in power. It excludes area effects that are not centered directly upon the wizard. As long as the spell is cast directly at the wizard, it will be reflected back upon the caster. This spell will only affect up to 4th-level spells, but as long as there are levels remaining, a spell will be absorbed. For example, if there is only 1 level left and a 3rd-level spell is cast at the wizard, the spell will be absorbed and will exhaust the protection.
+
+This spell will absorb and protect against a total of 5 spell levels of magic directed at the caster. It will not protect the caster from Dispel Magic, but will not be dispelled by Dispel Magic either.~
+@6065   = ~Spell Absorption~
+@6066   = ~Spell Absorption
+
+Level: 6
+Range: 0
+Duration: 15 rounds
+Casting Time: 5
+Area of Effect: The caster
+Saving Throw: None
+
+This spell creates a barrier of magical protection around the spellcaster. Every spell that hits the barrier is absorbed, making the caster recall a previously cast spell. For example, if hit by a Flame Arrow (a 3rd-level spell), the caster will get three spell levels back—e.g. one spell of up to 3rd level in power. It excludes area effects that are not centered directly upon the wizard. As long as the spell is cast directly at the wizard, it will be reflected back upon the caster. This spell will only affect up to 4th-level spells, but as long as there are levels remaining, a spell will be absorbed. For example, if there is only 1 level left and a 3rd-level spell is cast at the wizard, the spell will be absorbed and will exhaust the protection.
+
+This spell will absorb and protect against a total of 10 spell levels of magic directed at the caster. It will not protect the caster from Dispel Magic, but will not be dispelled by Dispel Magic either.~
+@6067   = ~Greater Spell Absorption~
+@6068   = ~Greater Spell Absorption
+
+Level: 7
+Range: 0
+Duration: 2 turns
+Casting Time: 5
+Area of Effect: The caster
+Saving Throw: None
+
+This spell creates a barrier of magical protection around the spellcaster. Every spell that hits the barrier is absorbed, making the caster recall a previously cast spell.For example, if hit by a Flame Arrow (a 3rd-level spell), the caster will get three spell levels back—e.g. one spell of up to 3rd level in power. It excludes area effects that are not centered directly upon the wizard. As long as the spell is cast directly at the wizard, it will be reflected back upon the caster. This spell will only affect up to 4th-level spells, but as long as there are levels remaining, a spell will be absorbed. For example, if there is only 1 level left and a 3rd-level spell is cast at the wizard, the spell will be absorbed and will exhaust the protection.
+
+This spell will absorb and protect against a total of 15 spell levels of magic directed at the caster. It will not protect the caster from Dispel Magic, but will not be dispelled by Dispel Magic either.~
+@6069   = ~Spell Trap~
+@6070   = ~Spell Trap
+
+Level: 9
+Range: 0
+Duration: 20 turns
+Casting Time: 9
+Area of Effect: The caster 
+Saving Throw: None 
+
+This spell creates an incredibly powerful barrier of magical protection around the spellcaster. Every spell that hits the barrier is absorbed by the power of the spell trap—making the caster recall a previously cast spell. For example, if a wizard is protected by Spell Trap and is then hit by a Flame Arrow (3rd-level spell), the wizard will get three spell levels back—e.g. one spell up to 3rd level in power. 
+
+The Spell Trap is remarkably stable, remaining in place for 4 hours unless dispelled or exhausted. It provides 30 levels of protection (i.e., ten Flame Arrows or five Fingers of Death). The spell trap can absorb any level of spell, from one to nine.~
+@6071   = ~Protected by Spell Absorption~
+@6072  = ~Magic Missile~
+@6073  = ~Magic Missile
+Level: 1
+School: Evocation
+Range: Long
+Duration: Instant
+Casting Time: 1
+Area of Effect: 1 creature
+Saving Throw: None
+
+Use of the Magic Missile spell, one of the most popular first level spells, creates up to four missiles of magical energy that dart forth from the wizard's fingertip and unerringly strike their target, which must be a creature of some sort. Each missile inflicts 1d4+1 points of damage. The spell fires two missiles at 1st level, three at 5th level, and a maximum of four at 9th level.~
+@6098   = ~Sorcerer~
+@6099   = ~SORCERER: Sorcerers are practitioners of magic who were born with the innate ability to cast spells. It is thought that the blood of some powerful creature flows through their veins; perhaps they are the spawn of the gods themselves, or even dragons walking in humanoid form. Regardless, the Sorcerer's magic is intuitive rather than logical. They know fewer spells than Mages, and acquire spells more slowly, but they can cast spells more often and have no need to select and prepare spells ahead of time. Sorcerers cannot specialize in magic the way Mages do. Other than these differences, a Sorcerer is very similar to a Mage.
+
+CLASS FEATURES:
+
+– May not wear any armor.
+– May only use the following weapons: dagger, quarterstaff, dart, sling.
+– May only become Proficient (one slot) in any weapon class.
+– May not place any slots in any fighting style.
+– May cast arcane spells.
+– May not scribe spells into their spellbooks as Mages do. Instead, Sorcerers learn a small number of spells at each level, which they can cast daily without memorization.
+– Hit Die: d4~
+@6111  = ~Grease
+(Alteration)
+
+Level: 1
+Range: 30 ft.
+Duration: 3 rounds + 1 round/level
+Casting Time: 1
+Area of Effect: 30-ft. radius
+Saving Throw: Special
+
+A Grease spell causes the surface of the ground to take on a slippery, greasy nature. Any creature entering the area or caught in it when the spell is cast must save vs. Spell at +2 or slip and slide, unable to move effectively. Those who successfully save can move, albeit slowly, for the rest of the round (but will need to save vs. Spell again the following round). Those who remain in the area are allowed a Saving Throw each round until they escape the area.~
+@6112  = ~Protection From Evil
+(Divination)
+
+Level: 2
+Range: Touch
+Duration: 2 rounds/level
+Casting Time: 1
+Area of Effect: 1 creature
+Saving Throw: None
+
+When this spell is cast, it gives the protected creature a magical insight into the minds of any nearby creatures with evil intent. The slight foreknowledge that results causes all attacks made by evil or evilly enchanted creatures to receive a penalty of -2 to each attack roll. Summoned demons and fiends are acutely affected by this spell; evil is woven into their very beings. Therefore, they are completely unable to target the protected creature.~
+@6113  = ~Mirror Image (Illusion/Phantasm) 
+Level: 3
+Range: 0 
+Duration: 3 rounds + 1 round/level 
+Casting Time: 1
+Area of Effect: Special
+Saving Throw: None 
+
+When a mirror image spell is invoked, the spellcaster causes from two to eight exact duplicates of himself to come into being around him. These images do exactly what the wizard does. Since the spell causes a blurring and slight distortion when it is cast, it is impossible for opponents to be certain which are the illusions and which is the actual wizard. When an image is struck by a melee or missile attack, magical or otherwise, it disappears, but any other existing images remain intact until they are struck.  However, it is important to note that this will not protect the caster against every attack as it is possible for an enemy to choose the real caster amongst all the images.~
+@6114  = ~Glitterdust
+(Illusion)
+
+Level: 2
+Range: 30 ft.
+Duration: 4 rounds
+Casting Time: 2
+Area of Effect: 30 ft.
+Saving Throw: Neg.
+
+This spell was created by an Invoker wizard who was convinced that he was being stalked by assassins with the ability to become invisible. Unfortunately, he had no skill with Divination spells. This spell showers glittering golden particles in the area of effect. Enemies must roll a successful Saving Throw vs. Spell or be blinded (-4 penalty to attack rolls and Armor Class) for 4 rounds. In addition, all enemies who fail their Saving Throw are covered by the dust, which cannot be removed and continues to sparkle until it fades, thus revealing invisible creatures. The dust fades in 4 rounds.~
+@6115  = ~Luck
+(Divination)
+
+Level: 1
+Range: 30 ft.
+Duration: 3 rounds
+Casting Time: 2
+Area of Effect: 1 creature
+Saving Throw: None
+
+The recipient of this gains a very slight, instinctive insight into the immediate future. The result is that the subject appears to be lucky in every regard for the next 3 rounds, receiving a 5% bonus to all actions. This includes Saving Throws, to-hit rolls, damage, thieving skills, etc.~
+@6116  = ~Flame Arrow
+(Alteration)
+
+Level: 3
+Range: 60 ft.
+Duration: 1 round
+Casting Time: 3
+Area of Effect: 1 creature
+Saving Throw: 1/2
+
+This spell begins with one or more common arrows or bolts, superheats them, and then hurls fiery bolts at opponents at very high speed. Each bolt inflicts 1d6 points of piercing damage plus 4d6 points of fire damage. Only half of the fire damage is inflicted if the creature struck saves vs. Spell. The caster receives one bolt every 5 levels beyond the 5th (2 bolts at 10th level, 3 at 15th level, etc.). All of the bolts will streak toward the target of the spell.~
+@6117  = ~Greater Malison
+(Enchantment/Charm)
+
+Level: 4
+Range: 50 ft.
+Duration: 2 rounds/level
+Casting Time: 4
+Area of Effect: 30-ft. radius
+Saving Throw: None
+
+The spell grants the caster the ability to understand and subtly manipulate the flow of time, making any following spells more likely to be successful and effective. The practical result is to adversely affect all enemy Saving Throws. The effect is applied to all hostile creatures within the area of effect, who make all saving throws at a penalty of -4.~
+@6118  = ~Shadow Stalker
+(Illusion/Phamtasm)
+
+Level: 6
+Range: 120 ft.
+Duration: 9 hours
+Casting Time: 9
+Area of Effect: Special
+Saving Throw: None
+
+This spell creates a double of the caster formed from pure shadow, and imparts upon it some degree of form and autonomy. Blurry and shapeless, this entity will fight on the caster's behalf and remain in relatively stable form for up to 9 hours (unless it meets a violent demise).~
+@6119  = ~Mordenkainen's Sword
+(Enchantment/Charm)
+
+Level: 7
+Range: 0
+Duration: 1 round/level
+Casting Time: 7
+Area of Effect: Special
+Saving Throw: None
+
+Upon casting this spell, the wizard temporarily imbues a normal blade with magical power and a will of its own. The sword will float in the air completely under the caster's control. (This does not prevent the caster from doing any other actions during the spell's duration.) The sword acts as a +4 weapon in all respects and deals 5d4 points of damage upon hitting a target.~
+@6120  = ~Abi-Dalzim's Horrid Wilting
+(Necromancy) 
+
+Level: 8
+Range: Visual range of the caster 
+Duration: Instant
+Casting Time: 8
+Area of Effect: 30-ft. radius
+Saving Throw: 1/2
+
+This spell creates violent whorls of magical energy within the area of effect which do grievous harm to all enemies, inflicting 1d8 damage per level of the caster. Affected creatures are allowed a Saving Throw vs. Spell for half damage. This spell is especially devastating to water elementals and plant creatures, who receive a penalty of -2 to their Saving Throws.~
+@6121  = ~Black Blade of Disaster
+(Enchantment/Charm) 
+
+Level: 8
+Range: 0
+Duration: 18 rounds
+Casting Time: 4
+Area of Effect: Special
+Saving Throw: None 
+
+This spell imposes a black, magical planar rift over the blade of a normal weapon. The caster becomes a Grand Master in the use of the weapon. It acts as a +5 weapon and deals 2-24 damage to its victims. Every time it hits a target, the victim must make a Save vs. Death at +4 or be disintegrated. There is also a 10% chance with every hit that the sword drains 4 levels from the target and heals the wielder 20 Hit Points.~
+@6122  = ~Weird
+(Illusion/Phantasm) 
+
+Level: 9
+Range: Visual range of the caster 
+Duration: Instant
+Casting Time: 9
+Area of Effect: 30-ft. radius
+Saving Throw: Neg.
+
+This spell creates phantasmal visions of unimaginable horror in the mind of all enemies in the area of effect. The spell is risky because such intense and unreal illusions may be disbelieved (subjects may avoid the effects if they make a saving throw vs. death). But affected creatures who fail their save are so drastically affected that they die instantly.~
+@6123  = ~Wizard Eye
+(Necromancy)
+
+Level: 4
+Range: Visual range of the caster
+Duration: 1 round/level
+Casting Time: 9
+Area of Effect: Special
+Saving Throw: None
+
+This spell is the result of a Necromancer dipping his toes into the Diviner's sphere of influence. With it, an actual eyeball is enchanted to float around and send visual information to the caster's mind. The Wizard Eye can see with normal vision up to 60 ft. away in brightly lit areas, and can travel in any direction as long as the spell lasts. Solid barriers prevent the passage of a Wizard Eye. The powers of the eye cannot be enhanced by other spells or items. The caster is subject to any gaze attack met by the eye. A successful Dispel Magic spell cast on the wizard or the eye ends the spell.~
+@6124   = ~Discorporate~
+@6125   = ~Discorporate
+(Necromancy)
+
+Level: 6
+Range: Visual range of the caster
+Duration: Instant
+Casting Time: 6
+Area of Effect: 1 creature
+Saving Throw: Neg.
+
+When this spell is cast at another being, a greenish burst of negative energy shoots toward the target, disrupting the very energy that keeps the target whole.  The target creature must make a Saving Throw vs. Spell or burst into a million small particles, resembling dust. This effect is instantaneous and irreversible.~
+@6126   = ~Energy Drain~
+@6127   = ~Energy Drain
+(Necromancy) 
+
+Level: 8
+Range: Touch
+Duration: Permanent
+Casting Time: 3
+Area of Effect: 1 creature
+Saving Throw: None 
+
+The casting of this spell opens a channel between the caster's plane and the Negative Energy Plane. The caster of the spell acts as a conduit between the two planes, sucking life energy from a victim and transferring it to the Negative Energy Plane.  This has the  practical effect of draining the victim of 4 levels of experience. The target loses levels, Hit Dice, Hit Points, and abilities permanently - they can only be restored by a priest's Restoration spell.  There is no saving throw to resist the effect.  What's more, the shock of the effect is so great that if the victim fails a saving throw with a -2 penalty, he or she dies instantly.~
+@6128  = ~Protection From Evil
+Level: 2
+School: Divination
+Range: Touch
+Duration: 2 rounds/level
+Casting Time: 1
+Area of Effect: 1 creature
+Saving Throw: None
+
+When this spell is cast, it gives the protected creature a magical insight into the minds of any nearby creatures with evil intent. The slight foreknowledge that results causes all attacks made by evil or evilly enchanted creatures to receive a penalty of -2 to each attack roll. Summoned demons and fiends are acutely affected by this spell; evil is woven into their very beings. Therefore, they are completely unable to target the protected creature.~
+@6129  = ~Glitterdust
+Level: 2
+School: Illusion
+Range: Medium
+Duration: 4 rounds
+Casting Time: 2
+Area of Effect: 10' radius
+Saving Throw: Special
+
+This spell was created by an Invoker wizard who was convinced that he was being stalked by assassins with the ability to become invisible. Unfortunately, he had no skill with Divination spells. It sprays a cloud of glittering golden particles within the area of effect. The sparkling dust dazzles all opponents in the area (-2 penalty to attack rolls) for 4 rounds and reveals any opponents who are invisible. Those affected must also save vs. breath to avoid becoming completely covered by the dust, which cannot be removed and continues to sparkle for 4 rounds. Those failing the save remain unable to successfully hide themselves until the dust fades.~
+@6130  = ~Mirror Image
+Level: 3
+School: Illusion
+Range: Personal
+Duration: 5 turns
+Casting Time: 2
+Area of Effect: Caster
+Saving Throw: None
+
+When a Mirror Image spell is invoked, the spellcaster causes a number of illusory duplicates of himself to come into being around him. The spell creates two images plus one for every 3 levels of the caster (up to a maximum of eight images at 18th level). These images do exactly what the wizard does, and since the spell causes a blurring and slight distortion when it is cast, it is impossible for opponents to be certain which are the illusions and which is the actual wizard. When an image is directly struck by a melee or missile attack, magical or otherwise, it disappears, while other existing images remain intact. It is important to note that this will not protect the caster against all attacks, as it is possible for an enemy to choose the real caster amongst all the images. This spell cannot be cast on anyone who is under the effects of a Reflected Image spell, and casting the spell multiple times will not multiply the number of images created.~
+@6131  = ~Luck
+Level: 1
+School: Divination
+Range: 30 ft.
+Duration: 5 rounds
+Casting Time: 2
+Area of Effect: 1 creature
+Saving Throw: None
+
+The recipient of this gains a very slight, instinctive insight into the immediate future. The result is that the subject appears to be lucky in every regard for the next 3 rounds, receiving a 5% bonus to all actions. This includes Saving Throws, to-hit rolls, damage, thieving skills, etc.~
+@6132  = ~Flame Arrow
+Level: 3
+School: Alteration
+Range: Long
+Duration: Instant
+Casting Time: 3
+Area of Effect: Special
+Saving Throw: Breath half
+
+This spell begins with one or more common arrows or bolts (one for every two experience levels, up to a maximum of five arrows at level 10), superheats them, and then hurls them at opponents at very high speed. Each arrow inflicts 1d6 points of missile damage plus 2d6 points of fire damage. Only half of the fire damage is inflicted if the creature struck saves vs. breath at -2. Upon completion of the spell, the first arrow will streak towards the creature targeted by the wizard, while additional arrows will randomly target opponents within range.~
+@6133  = ~Greater Malison
+Level: 4
+School: Enchantment
+Range: 50 ft.
+Duration: 2 rounds/level
+Casting Time: 4
+Area of Effect: 30-ft. radius
+Saving Throw: None
+
+The spell grants the caster the ability to understand and subtly manipulate the flow of time, making any following spells more likely to be successful and effective. The practical result is to adversely affect all enemy Saving Throws. The effect is applied to all hostile creatures within the area of effect, who make all saving throws at a penalty of -2.~
+@6134  = ~Wizard Eye
+Level: 4
+School: Necromancy
+Range: Visual range of the caster
+Duration: 1 round/level
+Casting Time: 9
+Area of Effect: Special
+Saving Throw: None
+
+This spell is the result of a Necromancer dipping his toes into the Diviner's sphere of influence. With it, an actual eyeball is enchanted to float around and send visual information to the caster's mind. The Wizard Eye can see with normal vision up to 60 ft. away in brightly lit areas, and can travel in any direction as long as the spell lasts. Solid barriers prevent the passage of a Wizard Eye. The powers of the eye cannot be enhanced by other spells or items. The caster is subject to any gaze attack met by the eye. A successful Dispel Magic spell cast on the wizard or the eye ends the spell.~
+@6135  = ~Shadow Stalker
+Level: 6
+School: Illusion
+Range: 120 ft.
+Duration: 9 hours
+Casting Time: 9
+Area of Effect: Special
+Saving Throw: None
+
+This spell creates a double of the caster formed from pure shadow, and imparts upon it some degree of form and autonomy. Blurry and shapeless, this entity will fight on the caster's behalf and remain in relatively stable form for up to 9 hours (unless it meets a violent demise).~
+@6136   = ~Discorporate
+Level: 6
+School: Necromancy
+Range: Visual range of the caster
+Duration: Instant
+Casting Time: 6
+Area of Effect: 1 creature
+Saving Throw: Neg.
+
+When this spell is cast at another being, a greenish burst of negative energy shoots toward the target, disrupting the very energy that keeps the target whole. Upon contact, the target must make a saving throw vs. breath at -2 or suffer 2d6 points of magic damage per caster level (to a maximum of 40d6). A creature that makes a successful save is partially affected, taking only 5d6 points of damage. The ray affects even objects constructed entirely of force, such as a Mordenkainen's Sword, which is automatically destroyed when struck. This spell has no affect on clothing or equipment carried by the target.~
+@6137  = ~Mordenkainen's Sword
+Level: 7
+School: Enchantment
+Range: 0
+Duration: 1 round/level
+Casting Time: 7
+Area of Effect: Special
+Saving Throw: None
+
+Upon casting this spell, the wizard temporarily imbues a normal blade with magical power and a will of its own. Once the spell is cast, the sword will float in the air completely under the control of the caster, until the spell duration expires or the sword is dispelled. The sword acts as a +4 weapon in all respects and attacks on its own once each round, inflicting 5d4 damage when it hits a target. It has 100% resistance to almost all forms of damage (acid, cold, fire, electricity, poison, etc.), and 95% resistance to physical damage, but it is vulnerable to pure magic damage. The sword is immune to mind affecting spells, has 36 hit points, AC 5, and THAC0 2. Note that this spell does not prevent the caster from performing any other actions while the spell is in effect.~
+@6138  = ~Abi-Dalzim's Horrid Wilting
+Level: 8
+School: Necromancy
+Range: Visual range of the caster 
+Duration: Instant
+Casting Time: 8
+Area of Effect: 30-ft. radius
+Saving Throw: 1/2
+
+This spell creates violent whorls of magical energy within the area of effect which do grievous harm to all enemies, inflicting 1d8 damage per level of the caster. Affected creatures are allowed a Saving Throw vs. Spell for half damage. This spell is especially devastating to water elementals and plant creatures, who receive a penalty of -2 to their Saving Throws.~
+@6139  = ~Black Blade of Disaster
+Level: 8
+School: Enchantment
+Range: 0
+Duration: 18 rounds
+Casting Time: 4
+Area of Effect: Special
+Saving Throw: None 
+
+This spell imposes a black, magical planar rift over the blade of a normal weapon. The caster wields the blade as if proficient with the weapon, and brandishes it with a base THAC0 of 0. The sword deals 2d12 damage per strike, and acts as a +5 magical weapon in all regards, including hit and damage bonuses. With each hit, there is a 15% chance the victim must make a save vs. spell at -2 or be disintegrated (40d6 points of magic damage, 5d6 on a successful save).~
+@6140  = ~Weird
+Level: 9
+School: Illusion
+Range: Visual range of the caster 
+Duration: Instant
+Casting Time: 9
+Area of Effect: 30-ft. radius
+Saving Throw: Neg.
+
+This spell creates phantasmal visions of unimaginable horror in the mind of all enemies in the area of effect. The spell is risky because such intense and unreal illusions may be disbelieved (subjects may avoid the effects if they make a saving throw vs. death). But affected creatures who fail their save are so drastically affected that they die instantly.~
+@6141   = ~Larloch's Energy Drain~
+@6142   = ~Larloch's Energy Drain
+Level: 8
+School: Necromancy
+Range: Touch
+Duration: Permanent
+Casting Time: 3
+Area of Effect: 1 creature
+Saving Throw: None 
+
+The casting of this spell opens a channel between the caster's plane and the Negative Energy Plane. The caster of the spell acts as a conduit between the two planes, sucking life energy from a victim and transferring it to the Negative Energy Plane.  The practical effect is to drain the victim 4 levels of experience - levels, Hit Dice, hit points, and abilities are lost permanently.  These can only be restored by a priest's Restoration spell.  As the life force passes through the caster, it temporarily invigorates him, granting him an additional 20 hit points, a +4 bonus to attack rolls and saving throws, and +20% bonus to every skill.  These effects last for 1 hour.  The target's magic resistance, if any, does not affect this spell, and there is no saving throw to avoid the Drain.  What's more, the shock of the effect is so great that if the victim fails a saving throw with a -2 penalty, he or she dies instantly.~
+@6201   = ~Minor Globe of Invulnerability+~
+@6202   = ~Minor Spell Turning+~
+@6203   = ~Spell Deflection+~
+@6204   = ~Globe of Invulnerability+~
+@6205   = ~Spell Turning+~
+@6206   = ~Spell Trap+~
+@6211   = ~Minor Globe of Invulnerability+~
+@6212   = ~Spell Deflection+~
+@6213   = ~Spell Deflection+~
+@6214   = ~Globe of Invulnerability+~
+@6215   = ~Greater Spell Deflection+~
+@6216   = ~Spell Trap+~
+@6251   = ~Chill Touch~
+@6252   = ~Chill Touch
+
+When a necromancer uses this ability, a blue glow encompasses his hand. This energy attacks the life force of any living creature upon which the wizard makes a successful melee attack. The touched creature suffers 1d4+1 points of cold damage and must save vs. Death or be Slowed and lose three points of Strength for two rounds. 
+
+Undead touched by this energy are Held for two rounds. They do not receive a savign throw to avoid the effect.~
+@6253   = ~Ghoul Touch~
+@6254   = ~Ghoul Touch
+
+When a necromancer uses this ability, a red glow encompasses his hand. On a successful touch, the spell inflicts 1d4+1 points of magic damage. If the victim fails a saving throw vs. death, the spell continues to do 1d4 damage in the second round and 1d3 damage in the third round. Furthermore, the victim is paralyzed for 1 round and infected with a disease that saps his Strength, Dexterity and Constitution by two points each for five rounds.~
+@6255   = ~Vampiric Touch~
+@6256   = ~Vampiric Touch
+
+When a necromancer uses this ability, his hand is encompassed by a pale blue fire. Anyone successfully attacked by the necromancer loses 1d6+1 hit points, while the necromancer gains 1d6+1 hit points (any hit points over the caster's normal maximum treated as temporary additional hit points, lasting for 4 turns). Upon failing a saving throw vs. death with a -2 penalty, the victim loses 1d6 more hit points and also suffers a loss of 3 points of Constitution for one turn. 
+
+Any undead touch by the necromancer while this ability is active are placed under the necromancer's control for five rounds.~
+@6257   = ~Remove Chill Touch~
+@6258   = ~Remove Ghoul Touch~
+@6259   = ~Remove Vampiric Touch~
+@6260   = ~Larloch's Minor Drain~
+@6261   = ~Larloch's Minor Drain
+Level: 1
+School: Necromancy
+Range: Long
+Duration: Special
+Casting Time: 1
+Area of Effect: 1 creature
+Saving Throw: None
+
+With this spell, the wizard drains the life force from a target and adds it to his own. The target creature suffers 1d4+1 points of damage, while the mage gains 1d4+1 hit points. For every three levels of the caster, the draining repeats one round later. The maximum duration of five rounds is reached by 12-level necromancers.
+
+If the mage goes over his maximum hit point total with this spell, he loses it after 1 turn.~
+@6262   = ~Ray of Enfeeblement~
+@6263   = ~Ray of Enfeeblement
+Level: 2
+School: Necromancy
+Range: Visual range of the caster
+Duration: 10 rounds
+Casting Time: 2
+Area of Effect: 1 creature
+Saving Throw: vs. Death
+
+By means of a Ray of Enfeeblement, a wizard launches a magical attack against the vitality of an opponent, reducing its Strength and thereby the attacks that rely upon it. The victim's Strength score is automatically reduced by 4 points for the duration of the spell. Additionally, if the target fails a saving throw vs. Death, the Strength penalty is doubled to -8, and the victim suffers the effects of a Slow spell (half movement rate and -4 penalties to thac0 and AC). These effects last for 1 turn.~
+@6351   = ~Contingency~
+@6352   = ~Contingency
+Upon using this ability, the wizard is allowed to choose a spell from his repertoire of known spells. One spell level every 3 levels of the caster is allowed (rounded up), up to 7th-level spells at 19th level. Once the spell is chosen, the caster can choose a condition of some kind from the list provided. The starting condition can be anything from reaching 10% of <PRO_HISHER> Hit Points to an enemy being sighted. Once this starting condition is satisfied, the spell that was chosen will be cast automatically.
+
+For example, a 12th-level wizard could place the spell Stoneskin in a Contingency with the starting condition being "the wizard reaches 50% of his Hit Points." Once the wizard is reduced to 50% max Hit Points or below, Stoneskin would be immediately cast. This requires no action by the wizard, but happens automatically and instantaneously.~
+
+@6351 = ~Contingency~
+@6352 = ~Contingency
+
+Upon using this ability, the wizard is allowed to choose a spell from his repertoire of known spells. One spell level every 3 levels of the caster is allowed (rounded up), up to 7th-level spells at 19th level. Once the spell is chosen, the caster can choose a condition of some kind from the list provided. The starting condition can be anything from reaching 10% of Hit Points to an enemy being sighted. Once this starting condition is satisfied, the spell that was chosen will be cast automatically.
+
+For example, a 12th-level wizard could place the spell Stoneskin in a Contingency with the starting condition being "the wizard reaches 50% of his Hit Points." Once the wizard is reduced to 50% max Hit Points or below, Stoneskin would be immediately cast. This requires no action by the wizard, but happens automatically and instantaneously.
+~
+@6353 = ~Chain Contingency~
+@6354 = ~Chain Contingency
+
+Chain Contingency channels some of the magical energy of the wizard and releases it only under certain circumstances. The wizard chooses three spells that will be released under certain conditions, such as being hit by an enemy. When this condition occurs, all three spells are cast immediately. Spells of 8th level or lower may be used in the contingency.
+~
+
+@6501   = ~This is Edwin's birthright, inlaid with his family stone.
+
+STATISTICS:
+
+Equipped abilities:
+– Can memorize one extra wizard spell of each level
+
+Weight: 1~
+@6511   = ~Summon Deva~
+@6512   = ~Summon Deva 
+(Conjuration/Summoning) 
+Level: Quest
+Range: 40 yards 
+Duration: 4 rounds + 1 round/level
+Casting Time: 5 
+Area of Effect: Special 
+Saving Throw: None
+
+This spell opens a celestial gate and calls forth an angelic deva to fight at the caster's side until the spell expires or the deva's earthly avatar is slain.
+
+If the summoning priest is 25th level or higher, a powerful planetar is summoned instead.~
+@6513   = ~Summon Fallen Deva~
+@6514   = ~Summon Fallen Deva 
+(Conjuration/Summoning) 
+Level: Quest
+Range: 40 yards 
+Duration: 4 rounds + 1 round/level
+Casting Time: 5 
+Area of Effect: Special 
+Saving Throw: None
+
+This spell opens an abyssal gate and calls forth a demonic deva to fight at the caster's side until the spell expires or the deva's earthly avatar is slain.
+
+If the summoning priest is 25th level or higher, a powerful dark planetar is summoned instead.~
+
+//
+// COPY & PASTE THIS FILE'S CONTENTS INTO SETUP.TRA
+//
+@6271   = ~Shadow Clone~
+@6272   = ~Shadow Clone
+Level: 6
+School: Illusion
+Range: Caster
+Duration: 1 round/level
+Casting Time: 5
+Area of Effect: Special
+Saving Throw: none
+
+This spell creates a rough facsimile of the caster, recognizable though not perfect. (Maybe I'll add a Blur visual effect to the clone.) The shadow clone has the equivalent of 60% of the experience (level, hit dice, skills, etc.) of the original caster, and can replicate some small amount of the caster's magical abilities, able to cast 1st level spells. The shadow clone cannot engage in melee combat or make use of any magical "items" it has equipped.
+~
+@6273   = ~Misleading Clone~
+@6274   = ~Misleading Clone
+Level: 7
+School: Illusion
+Range: Caster
+Duration: 1 round/level
+Casting Time: 2
+Area of Effect: Special
+Saving Throw: none
+
+This spell is cast very quickly, creating a reasonable copy of the caster that can be perceived by all five senses of any onlookers. The clone has the equivalent of 60% of the experience (level, hit dice, skills, etc.) of the caster, and can replicate a moderate amount of the caster's magical abilities, able to cast up to 3rd level spells. The clone cannot engage in melee combat or make use of any magical "items" it has equipped. At the time the clone is created, the caster is rendered invisible for 60 seconds. Onlookers who do not carefully scrutinize the effect might easily believe the clone IS the caster, and the caster may use the distraction to escape or move to some advantageous position.
+~
+@6275   = ~Simulacrum~
+@6276   = ~Simulacrum
+Level: 8
+School: Illusion
+Range: Caster
+Duration: 1 round/level
+Casting Time: 7
+Area of Effect: Special
+Saving Throw: none
+
+This is an improvement on the Misleading Clone spell. The simulacrum created has 60% of the experience (level, hit dice, skills, etc.) of the caster, but can replicate all of the caster's magical abilities, able to cast any spells that the caster could at the clone's reduced level. The simulacrum also has enough substance and stability to engage in melee combat, but cannot use any magical "items" it has equipped. Simultaneously, the caster is affected by Improved Invisibility, able to move unnnoticed and even attack or cast spells without becoming fully visible.
+~
+
+@6277   = ~Project Image~
+@6278   = ~Project Image
+Level: 9
+School: Illusion
+Range: Caster
+Duration: 1 round/level
+Casting Time: 5
+Area of Effect: Special
+Saving Throw: none
+
+This powerful spell creates a perfect clone, with 100% of the experience (level, hit dice, skills, etc.) of the caster. The clone is able to cast any spells that the caster can, and has enough substance and stability to engage in melee combat with skill equal to the caster's. Simultaneously, the caster is affected by Improved Invisibility, able to move unnnoticed and even attack or cast spells without becoming fully visible.
+~
+@6351 = ~Contingency~
+@6352 = ~Contingency
+
+Upon using this ability, the wizard is allowed to choose a spell from his repertoire of known spells. One spell level every 3 levels of the caster is allowed (rounded up), up to 7th-level spells at 19th level. Once the spell is chosen, the caster can choose a condition of some kind from the list provided. The starting condition can be anything from reaching 10% of Hit Points to an enemy being sighted. Once this starting condition is satisfied, the spell that was chosen will be cast automatically.
+
+For example, a 12th-level wizard could place the spell Stoneskin in a Contingency with the starting condition being "the wizard reaches 50% of his Hit Points." Once the wizard is reduced to 50% max Hit Points or below, Stoneskin would be immediately cast. This requires no action by the wizard, but happens automatically and instantaneously.
+~
+@6353 = ~Chain Contingency~
+@6354 = ~Chain Contingency
+
+Chain Contingency channels some of the magical energy of the wizard and releases it only under certain circumstances. The wizard chooses three spells that will be released under certain conditions, such as being hit by an enemy. When this condition occurs, all three spells are cast immediately. Spells of 8th level or lower may be used in the contingency.
+~
+@7011  = ~Grease~
+@7012  = ~Grease
+(Alteration)
+
+Level: 1
+Range: 30 ft.
+Duration: 4 rounds
+Casting Time: 1
+Area of Effect: 30-ft. radius
+Saving Throw: Special
+
+A Grease spell covers a material surface with a slippery layer of a fatty, greasy nature. Any creature entering the area or caught in it when the spell is cast must save vs. Spell at +2 or slip and slide, unable to move effectively. Those who successfully save can move, albeit slowly, for the rest of the round (but will need to save vs. Breath again the following round). Those who remain in the area are allowed a Saving Throw each round until they escape the area.
+~
+@7031  = ~Burning Hands~
+@7032  = ~Burning Hands
+(Alteration)
+
+Level: 1
+Range: 5 ft.
+Duration: Instant 
+Casting Time: 1 
+Area of Effect: 1 creature
+Saving Throw: 1/2
+
+When the wizard casts this spell, a jet of searing flame shoots from <PRO_HISHER> fingertips. The wizard's hands must be held so as to send forth a fanlike sheet of flames: <PRO_HISHER> thumbs must touch each other and the fingers must be spread. The burning hands send out flame jets of 5 ft. length in a horizontal arc of about 120 degrees in front of the wizard. The target suffers 1d4 points of damage, +1 point for each 3 levels of the caster, to a maximum of 1d4+6 points of fire damage. A creature that successfully saves vs. Breath receives half damage.
+~
+@7041  = ~Charm Person~
+@7042  = ~Charm Person
+(Enchantment/Charm)
+
+Level: 1
+Range: Visual range of the caster
+Duration: 5 rounds
+Casting Time: 1
+Area of Effect: 1 person
+Saving Throw: Neg. 
+
+This spell affects any single person it is cast upon. The term person includes any bipedal human, demihuman, or humanoid of man-size or smaller. Thus, a 10th-level fighter could be charmed, but an ogre could not. The person is allowed a Saving Throw vs. Spell to negate the effect.
+
+If the spell's recipient fails his Saving Throw (with a +3 modifier), he regards the caster as a trusted friend and ally to be heeded and protected. The caster may give him orders, and the charmed individual will carry them out as quickly as possible, except the charmed person cannot be compelled to violence.
+
+If the charmed person is harmed, or if a Dispel Magic spell is cast upon the charmed person, the Charm spell is broken. If two or more Charms simultaneously affect a creature, the most recent Charm takes precedence. Note that the subject has full memory of the events that took place while he was charmed. Also note that you cannot have a charmed creature leave the area where he is charmed. 
+
+Anyone who has been the target of this spell - whether they make their saving throw or not - will be suspicious for a time, and cannot be affected by it for 8 hours.
+~
+@7052  = ~Color Spray
+(Alteration)
+
+Level: 1
+Range: 50 ft.
+Duration: Instant
+Casting Time: 1
+Area of Effect: 90-degree arc
+Saving Throw: Special
+
+Upon casting this spell, the wizard causes a vivid, fan-shaped spray of clashing colors to spring forth from <PRO_HISHER> hand. 1d6 creatures within the area are affected in order of increasing distance from the wizard. The spray seems to solidify as it moves; affected creatures in the area of effect must make a successful Saving Throw or be Slowed for 2 rounds.
+~
+@7061  = ~Blind~
+@7062  = ~Blind
+(Illusion/Phantasm)
+
+Level: 1
+Range: 40 ft.
+Duration: 2 rounds
+Casting Time: 2
+Area of Effect: 1 creature
+Saving Throw: Neg.
+
+This 1st-level spell attempts to temporarily blind its target with a flash of light. A Saving Throw is allowed and, if successful, the target merely suffers a -1 penalty to <PRO_HISHER> attack rolls, Armor Class, and damage rolls for two rounds. If the saving throw is unsuccessful, the victim is also partially blinded, <PRO_HESHE> resulting in reduced range of vision and a -4 penalty to <PRO_HISHER> attack rolls and Armor Class. This blindness also wears off after two rounds.
+~
+@7073  = ~Conjure Rabbit~
+@7074  = ~Conjure Rabbit
+
+Level: 1
+School: Conjuration
+Range: Caster
+Duration: 5 rounds
+Casting Time: 5
+Area of Effect: Special
+Saving Throw: None
+
+This spell allows a caster to summon forth a medium-sized rabbit, seemingly out of thin air. The rabbit is docile and will follow the caster's mental directions, even going so far as to bite nearby enemies. A rabbit so conjured will only remain for five rounds.
+~
+@7075   = ~Rabbit~
+@7121  = ~Magic Missile~
+@7122  = ~Magic Missile
+(Evocation)
+
+Level: 1
+Range: Visual range of the caster
+Duration: Instant
+Casting Time: 2
+Area of Effect: 1 creature
+Saving Throw: None 
+
+Use of the Magic Missile spell, popular among wizards, creates a missile of pure magical energy that darts forth from the wizard's fingertip and unerringly strikes a target (which must be a creature of some sort). The missile inflicts 1d6 points of magic damage.
+~
+@7123  = ~Magic Missile~
+@7124  = ~Magic Missile
+(Evocation)
+
+Level: 2
+Range: Visual range of the caster
+Duration: Instant
+Casting Time: 1
+Area of Effect: 1 creature
+Saving Throw: Breath Weapon
+
+This spell creates between one and five missiles of fiery magical energy that dart forth from the wizard's fingertips and unerringly strike their target, which must be a creature of some sort. Each missile inflicts 1d4 points of damage, plus 1d4 points of fire damage (the victim may save vs. Breath to avoid the fire damage). For every 3 extra levels of experience after 1st level, the wizard gains an additional missile - 2 at 4th level, 3 at 7th level, 4 at 10th level, and a maximum of 5 at 13th level.
+~
+@7125  = ~Wand of Magic Missiles~
+@7126  = ~When activated, the wand will eject two missiles of magical energy that dart forth and unerringly strike the target. This includes enemy creatures in a melee. The target creature must be seen or otherwise detected to be hit, however, so near-total concealment, such as that offered by arrow slits, can render the wand ineffective. Each missile will inflict 1d4+1 points of damage.
+
+STATISTICS:
+
+Charge abilities:
+Ð 2 magic missiles will strike the target
+  Damage: 1d4+1 magic each
+  Range: 100 ft.
+  Area of Effect: 1 creature
+
+Requires:
+ 9 Intelligence
+
+Weight: 1
+~
+@7151  = ~Shocking Grasp~
+@7152  = ~Shocking Grasp
+(Alteration)
+
+Level: 1
+Range: Touch
+Duration: Special
+Casting Time: 1
+Area of Effect: 1 creature
+Saving Throw: None
+
+When the wizard touches a creature while this spell is in effect, an electrical charge will deal 1d8 points of damage, plus 1 additional point per two levels of the caster (to a maximum of 1d8+5 points of damage, at 10th level.) In addition, the grasp itself does 1d2 fist damage (Strength bonuses apply). The wizard only has one charge, and once an opponent has been touched, the spell's energies have been used. If the wizard misses, the spell is wasted. The wizard has 1 round per level to touch the target creature.
+~
+@7154  = ~Shocking Grasp
+
+Level: 1
+School: Evocation
+Range: Personal
+Duration: Special
+Casting Time: 1
+Area of Effect: 1 creature
+Saving Throw: Special
+
+When the wizard touches a creature while this spell is in effect, an electrical charge will deal 2d4 points of damage and stun the target for 1 round. If the target makes a successful saving throw vs. spell, he is not stunned. For every two extra experience levels of the caster, the creature will suffer an additional points of damage and roll their saving throw at an increased -1 penalty (to a maximum of 2d4+4 damage and a -4 saving throw penalty, at 9th level). The spell expires once the caster makes a successful melee attack or after 1 turn has passed. The wizard gains a +4 bonus to hit the target.
+~
+@7161  = ~Drowse~
+@7162  = ~Drowse
+(Enchantment/Charm)
+
+Level: 1
+Range: 60 ft.
+Duration: 5 rounds
+Casting Time: 1 
+Area of Effect: 30-ft. radius
+Saving Throw: Neg.
+
+When a wizard casts this spell, <PRO_HESHE> causes slumber to come upon one enemy (other than undead and certain other creatures specifically excluded from the spell's effects). The creature must make a saving throw vs. Spells or fall asleep. Attacks against sleeping opponents never miss.
+
+If the sleeping creature takes damage, <PRO_HESHE> will slowly wake up over the course of 1 round. Additionally, once a creature has been put to sleep by this spell, that being cannot be affected by another casting of the spell for 8 hours.
+~
+@7163  = ~Sleep~
+@7164  = ~Sleep
+(Enchantment/Charm)
+
+Level: 2
+Range: 60 ft.
+Duration: 5 rounds
+Casting Time: 1 
+Area of Effect: 30-ft. radius
+Saving Throw: Neg.
+
+When a wizard casts this spell, <PRO_HESHE> causes a comatose slumber to come upon one or more enemies within a 30-ft. radius (other than undead and certain other creatures specifically excluded from the spell's effects). Creatures in the area of effect must make a saving throw vs. Spells with a -3 penalty or fall asleep. Monsters with 5 Hit Dice or more are unaffected. Attacks against sleeping opponents never miss.
+
+If a sleeping creature takes damage, they will slowly wake up over the course of 1 round. Additionally, once a creature has been put to sleep by this spell, that being cannot be affected by another casting of the spell for 8 hours.
+~
+@7171 = ~Frost Fingers~
+@7172 = ~Frost Fingers
+(Invocation)
+
+Level: 1
+Range: 0
+Duration: Instant
+Casting Time: 1
+Area of Effect: The caster
+Saving Throw: none
+
+When this spell is cast, a jet of chilling frost shoots from the caster's fingertips, in jets of 5 ft. length in a horizontal arc of about 120 degrees in front of the caster. Any creature in the area receives 1d6 points of cold damage, plus 1 additional point for each three levels of the caster (to a maximum of 1d6+6 damage).
+~
+@7181  = ~Chromatic Orb~
+@7182  = ~Chromatic Orb
+(Evocation)
+
+Level: 1
+Range: 90 ft.
+Duration: Special
+Casting Time: 1
+Area of Effect: 1 creature
+Saving Throw: Special
+
+This spell causes a colorful sphere to appear in the caster's hand. When thrown, the sphere heads unerringly to its target. The effect the orb varies. Each orb will do damage to the target against which there is no save, and can trigger a secondary effect against which the target must save vs. Spell with a +2 bonus:
+ 20% chance: 1d4 damage and blinds the target for 1 round.
+ 20% chance: 1d4 damage and inflicts pain (-1 penalty to Strength, Dexterity, AC, and THAC0) upon the target.
+ 20% chance: 1d4 damage and stuns the target for 1 round.
+ 20% chance: 1d4 damage and causes weakness (-4 penalty to THAC0) in the target for 5 rounds.
+ 20% chance: 1d4 damage and panics the target for 2 rounds.
+~
+@7191  = ~Larloch's Minor Drain~
+@7192  = ~Larloch's Minor Drain 
+(Necromancy)
+
+Level: 1
+Range: 30 ft.
+Duration: Special
+Casting Time: 1
+Area of Effect: 1 creature
+Saving Throw: None
+
+With this spell, the wizard drains the life force from a target and adds it to <PRO_HISHER> own. The target creature suffers 2d3 damage (save vs. Death for half damage), while the caster gains 4 hit points. If the caster goes over <PRO_HISHER> maximum hit point total with this spell, <PRO_HESHE> loses any extra hit points after 1 turn.
+
+A caster may only benefit from the extra hit points provided by this spell once per turn, regardless how many victims are drained, or how quickly.
+~
+@7241  = ~Wild Surge~
+@7242  = ~Wild Surge
+(Invocation/Evocation)
+
+Level: 1
+Range: Special
+Duration: Special
+Casting Time: Special
+Area of Effect: Special
+Saving Throw: Special
+
+This is less a spell than a release of pure wild energy. Magic energy surrounds wild mages and courses through them. This effect is what happens if a wild mage loses control and allows such energy to be unleashed. There is no spell, no intended form the magic takes; only pure, random, magical manifestation.
+
+Wild mages may release this energy at any time, as often as they like; but most spend their careers learning how to prevent it happening, rather than how to make it happen.
+~
+@7251  = ~Spook~
+@7252  = ~Spook
+(Illusion/Phantasm)
+
+Level: 1
+Range: 30 ft.
+Duration: 3 rounds
+Casting Time: 1
+Area of Effect: 1 creature
+Saving Throw: Neg.
+
+A Spook spell enables the wizard to play upon natural fears to cause the target creature to perceive the caster as someone or something inimical, which then appears to advance upon it in a threatening manner. If the creature does not make a successful Saving Throw vs. Spell, it turns and flees at maximum speed as far from the wizard as possible. The creature suffers a Saving Throw penalty of -1 every 2 levels of the caster, up to a maximum of -6 at 12th level. Although the caster does not actually pursue the fleeing creature, a phantasm from its own mind does. Undead are completely unaffected.
+
+Anyone who has been the target of this spell - whether they make their saving throw or not - will be suspicious for a time, and cannot be affected by it for 8 hours. 
+~
+
+@7101  = ~Identify~
+@7102  = ~Identify
+
+Level: 1
+School: Divination
+Range: Caster
+Duration: 5 rounds
+Casting Time: 2
+Area of Effect: Special
+Saving Throw: None 
+
+The caster of this spell gains a temporary insight into the history and nature of magical objects. This translates into a temporary Lore bonus of 15 points, plus an additional 15 points for each three levels of experience the caster has attained. If the resulting score is high enough, the spell can identify the name, nature, and function of any magical items in the caster's possession.
+~
+
+
+//Grammarsalad TRA strings
+@115003 = ~Scribe Scrolls~
+@115004 = ~You must have a spell memorized in order to scribe a scroll.  Try again when you have memorized at least one spell.~
+@115005 = ~You must have at least 100 gold to scribe a scroll.  Try again when you have 100 gold or more.~
+@115006 = ~1st Level Spells (100 gold)~
+@115007 = ~2nd Level Spells (200 gold)~
+@115008 = ~3rd Level Spells (300 gold)~
+@115009 = ~4th Level Spells (400 gold)~
+@115010 = ~5th Level Spells (500 gold)~
+@115011 = ~6th Level Spells (1,000 gold)~
+@115012 = ~7th Level Spells (1,500 gold)~
+@115013 = ~8th Level Spells (2,500 gold)~
+@115014 = ~9th Level Spells (5,000 gold)~
+@115015 = ~Exit~
+@115016 = ~Select another Spell Level~
+@115017 = ~Scribe Scroll
+This ability allows you to scribe a scroll from a spell that you currently have memorized if you have the gold.~
+@115018 = ~You must have at least 100 experience points to scribe a spell.  Try again when you have attained the required experience.~
+@115019 = ~Select Spell Level~
+@115020 = ~Craft Wand~
+@115021 = ~Craft Wand
+This ability allows you to craft a wand from a spell that you currently have memorized if you have the gold.  Note that not all spells can be bound to wands.  Typically, only offensive spells are suitable.~
+@115022 = ~You must have at least 900 gold to create a wand.  Try again when you have 900 gold or more.~
+@115023 = ~Craft Wand~
+@115024 = ~You must have at least 75 gold to brew a potion.  Try again when you have 75 gold or more.~
+@115025 = ~Brew Potion~
+@115026 = ~Bonus Spells~
+@115027 = ~Nahal's Reckless Dweomer~
+@115028 = ~Nahal's Reckless Dweomer
+(Invocation/Evocation)
+
+Level: 1
+Range: Special
+Duration: Special
+Casting Time: 5
+Area of Effect: Special
+Saving Throw: Special
+
+This spell is the Wild Mage's ultimate last-resort spell. When cast, the Mage releases a sudden flood of wild magical energy in the hope of seizing and shaping that energy into a desired spell effect. The attempt usually fails, but something almost always occurs in the process.
+
+To use Nahal's Reckless Dweomer simply cast it, then choose from your list of known spells. A burst of magical energy is released, which the Wild Mage will try to manipulate into the desired form. The actual effect of the spell is determined randomly by a dice roll on the Wild Surge Table (see the manual for more details).
+
+Because the release of energy is planned by the Mage, <PRO_HISHER> level is added to the dice roll. If the result indicates success, the Mage has shaped the magical energy into the desired effect. More often than not, the effect is completely unexpected. The result might be beneficial to the Mage, or it might be completely disastrous: This is the risk the Mage takes in casting Nahal's Reckless Dweomer.~
+
+@115029 = ~Chaos Shield~
+@115030 = ~Chaos Shield
+(Abjuration)
+
+Level: 2
+Range: 0
+Duration: 5 rounds + 1 turn/5 levels
+Casting Time: 2
+Area of Effect: The caster
+Saving Throw: None
+
+Chaos Shield increases a Wild Mage's chance to gain a favorable result when a Wild Surge occurs. Every time a roll is made on the Wild Surge chart, an extra 15 is added to the dice roll. When Nahal's Reckless Dweomer is cast, the bonus from Chaos Shield stacks with the Wild Mage's level bonus.~
+
+@115031 = ~Improved Chaos Shield~
+
+@115032 = ~Improved Chaos Shield
+(Abjuration)
+
+Level: 7
+Range: 0
+Duration: 2 turns
+Casting Time: 7
+Area of Effect: The caster
+Saving Throw: None
+
+Improved Chaos Shield increases a Wild Mage's chance to gain a favorable result when a Wild Surge occurs. Every time a roll is made on the Wild Surge chart, an extra 25 is added to the dice roll. When Nahal's Reckless Dweomer is cast, the bonus from Improved Chaos Shield stacks with the Wild Mage's level bonus.~
+
+@115033 = ~1st Tier Wands (900 gp)~
+@115034 = ~2nd Tier Wands (1,900 gp)~
+@115035 = ~3rd Tier Wands (5,000 gp)~
+@115036 = ~4th Tier Wands (10,000 gp)~
+@115037 = ~5th Tier Wands (15,000 gp)~
+
+@115038 = ~Recharge Wands~
+
+@115039 = ~Recharge Wands
+With this ability, you can recharge wands if you have the right spell or scroll, and the gold for special materials.  The spell/scroll requirements for recharging a wand are less restricted than for wand creation (i.e. you can recharge a given wand with lower level spells than would be required to create that wand.)
+You cannot recharge any wand if you have more than one in your immediate possession as the conflict will cause the magical energies to dissipate.~
+
+@115040 = ~You need a minimum of 225 gold to recharge a wand.  Try again when you have at least 225 gold.~
+
+@115041 = ~Select a wand to recharge~
+@115042 = ~Recharge Wand of Magic Missiles~
+@115043 = ~Choose which Scroll or Spell that you wish to use to recharge your Wand~
+@115044 = ~Use Scroll of Magic Missile~
+@115045 = ~Use Magic Missile Spell~
+@115046 = ~Recharge another wand~
+@115047 = ~Wand of Sleep~
+@115048 = ~Wand of Fear~
+@115049 = ~Use Scroll of Spook~
+@115050 = ~Use Spook Spell~
+@115051 = ~Use Scroll of Horror~
+@115052 = ~Use Horror Spell~
+@115053 = ~Use Scroll of Symbol: Fear~
+@115054 = ~Use Symbol: Fear Spell~
+@115055 = ~Wand of Monster Summoning~
+@115056 = ~Wand of Fire~
+@115057 = ~Wand of Paralyzation~
+@115058 = ~Wand of Lightning~
+@115059 = ~Wand of Freezing Death~
+@115060 = ~Use Scroll of Monster Summoning I~
+@115061 = ~Use Monster Summoning I Spell~
+@115062 = ~Use Scroll of Monster Summoning II~
+@115063 = ~Use Monster Summoning II Spell~
+@115064 = ~Use Scroll of Monster Summoning III~
+@115065 = ~Use Monster Summoning III Spell~
+@115066 = ~Use Scroll of Monster Summoning IV~
+@115067 = ~Use Monster Summoning IV Spell~
+@115068 = ~Use Scroll of Monster Summoning V~
+@115069 = ~Use Monster Summoning V Spell~
+@115070 = ~Use Scroll of Burning Hands~
+@115071 = ~Use Burning Hands Spell~
+@115070 = ~Use Scroll of Agannazar's Scorcher~
+@115071 = ~Use Agannazar's Scorcher Spell~
+@115072 = ~Wand of Magic Missiles: You cannot recharge a wand if you have more than one of the same type in your inventory.  Exit and try again when you have a single wand of missiles in your inventory.~
+@115073 = ~*Recharge Wand of Magic Missiles*~
+@115074 = ~Recharge Wand of Sleep~
+@115075 = ~Wand of Sleep: You cannot recharge a wand if you have more than one of the same type in your inventory.  Exit and try again when you have a single wand of missiles in your inventory.~
+@115076 = ~Use Scroll of Sleep~
+@115077 = ~Use Sleep Spell~
+@115078 = ~Use Scroll of Power Word: Sleep~
+@115079 = ~Use Power Word: Sleep Spell~
+@115080 = ~*Recharge Wand of Sleep*~
+@115081 = ~Use Scroll of Sleep~
+@115082 = ~Wand of Magic Missile~
+@115083 = ~Select the wand that you want to create~
+@115084 = ~Choose which Scroll or Spell that you wish to use to create your Wand~
+@115085 = ~Use Scroll of Magic Missile~
+@115086 = ~Use Magic Missile Spell~
+@115087 = ~Select another Tier Level~
+@115088 = ~Select a different 1st Tier wand~
+@115089 = ~Wand of Sleep~
+@115090 = ~Select a different 2nd Tier wand~
+@115091 = ~Use Fireball Spell~
+@115092 = ~Select a different 3rd Tier wand~
+@115093 = ~Use Flame Arrow Spell~
+@115094 = ~Use Conjure Lesser Fire Elemental Spell~
+@115095 = ~Use Sun Fire Spell~
+@115096 = ~Use Shroud of Flame Spell~
+@115097 = ~Use Conjure Fire Elemental Spell~
+@115098 = ~Use Delayed Blast Fireball Spell~
+@115099 = ~Use Incendiary Cloud Spell~
+@115100 = ~Use Meteor Swarm Spell~
+@115101 = ~Use Scroll of Fire Ball~
+@115102 = ~Use Scroll of Flame Arrow~
+@115103 = ~Use Scroll of Conjure Lesser Fire Elemental~
+@115104 = ~Select Tier you wish to recharge.~
+@115105 = ~1st Tier Wands (225 gp)~
+@115106 = ~2nd Tier Wands (475 gp)~
+@115107 = ~3rd Tier Wands (1,250 gp)~
+@115108 = ~4th Tier Wands (2,500 gp)~
+@115109 = ~5th Tier Wands (3,750 gp)~
+@115110 = ~You need a minimum of 475 gold to recharge a Tier 2 wand.  Exit and try again when you have at least 475 gold.~
+@115111 = ~You need a minimum of 1,250 gold to recharge a Tier 3 wand.  Exit and try again when you have at least 1,250 gold.~
+@115112 = ~You need a minimum of 2,500 gold to recharge a Tier 4 wand.  Exit and try again when you have at least 1,250 gold.~
+@115113 = ~You need a minimum of 3,750 gold to recharge a Tier 5 wand.  Exit and try again when you have at least 1,250 gold.~
+@115114 = ~Use Scroll of Lightning Bolt~
+@115115 = ~Use Ligntning Bolt Spell~
+@115116 = ~Use Summon Monster I Spell~
+@115117 = ~Use Scroll of Summon Monster I~
+@115118 = ~This deadly wand can cast a number of cold themed spells
+
+STATISTICS:
+
+Charge abilities:
+â€“ Icelance
+  Damage: 5d6 cold
+  Stuns target for 3 rounds (Save vs. Spell negates)
+  Range: 100 ft.
+  Area of Effect: 1 creature
+
+â€“ Snilloc's Snowball Swarm
+  Damage: 4d3 cold (Save vs. Spell for half)
+  Range: 40 ft.
+  Area of Effect: 30-ft. radius
+
+â€“ Ice Storm
+  Damage: 3d10 cold
+  Range: 40 ft.
+  Area of Effect: 30-ft. radius
+
+Requires:
+ 9 Intelligence
+
+Weight: 1~
+
+@115119 =  ~This deadly wand was crafted by the wizard Hegthen to protect him from his rival's fire-using minions. Hegthen made frequent use of the wand during his protracted war with his enemy. After ten years of hounding, Hegthen decided to take the battle to his rival, defeating him in one of the most spectacular magical duels ever seen in Suzail's history. As his terms of victory, Hethgen demanded that his enemy's name be magically snuffed out of the memory of all who knew him. His enemy accepted and later went on to become the Cloaked Flame, a dangerous terrorist killed by Cormyrean Purple Dragons and War Wizards in 1212 DR.
+
+STATISTICS:
+
+Charge abilities:
+â€“ Icelance
+  Damage: 5d6 cold
+  Stuns target for 3 rounds (Save vs. Spell negates)
+  Range: 100 ft.
+  Area of Effect: 1 creature
+
+â€“ Snilloc's Snowball Swarm
+  Damage: 4d3 cold (Save vs. Spell for half)
+  Range: 40 ft.
+  Area of Effect: 30-ft. radius
+
+â€“ Ice Storm
+  Damage: 3d10 cold
+  Range: 40 ft.
+  Area of Effect: 30-ft. radius
+
+Requires:
+ 9 Intelligence
+
+Weight: 1~
+@115120 =  ~Wand of Freezing Death~
+
+~This deadly wand casts Ice Storm.
+
+STATISTICS:
+
+Charge abilities:
+
+â€“ Ice Storm
+  Damage: 3d10 cold
+  Range: 40 ft.
+  Area of Effect: 30-ft. radius
+
+Requires:
+ 9 Intelligence
+
+Weight: 1~
+@115121 = ~Wand of Freezing Death~
+@115122 = ~Use Ice Storm Spell~
+@115123 = ~Use Scroll of Ice Storm~
+@115124 = ~Select a different 4th Tier wand~
+@115125 = ~Wand of Armory~
+@115126 = ~Often confused with another wand of the same name, the Wand of Armory is used to cast protective spells on the user.
+
+STATISTICS:
+
+Charge abilities:
+â€“ Shield
+  Armor Class set to 4 (2 vs. missile); immunity to magical missiles
+  Duration: 15 rounds
+  Area of Effect: The user
+
+â€“ Ghost Armor
+  Armor Class set to 3
+  Duration: 7 rounds
+  Area of Effect: The user
+
+Requires:
+ 9 Intelligence
+
+Weight: 1~
+@115127 = ~Use Spirit Armor Spell~
+@115128 = ~Use Scroll of Spirit Armor~
+
+@115129 = ~Use Hold Monster Spell~
+@115130 = ~Use Scroll of Hold Monster~
+
+@115131 = ~Select a different 5th Tier wand~
+@115132 = ~Wand of Frost~
+
+@115133 = ~6th Tier Wands (25,000 gp)~
+@115134 = ~Wand of Spell Striking~
+@115135 = ~Select a different 6th Tier wand~
+@115136 = ~Wand of Polymorphing~
+@115137 = ~Wand of Polymorphing
+This wand emits a thin, green beam that darts forth to a maximum distance of 60 ft. Any creature touched by this beam must make a Save vs. Wand or be polymorphed into a squirrel.
+
+STATISTICS:
+
+Charge abilities:
+â€“ Polymorph target into squirrel (Save vs. Wand negates)
+  Range: 100 ft.
+  Area of Effect: 1 creature
+  Duration: Permanent (until dispelled)
+
+Requires:
+ 9 Intelligence
+
+Weight: 1~
+
+@115138 = ~Use Cone of Cold Spell~
+@115139 = ~Use Scroll of Cone of Cold~
+
+@115140 = ~Use Pierce Magic Spell~
+@115141 = ~Use Scroll of Pierce Magic~
+
+@115142 = ~Use Polymorph: Other Spell~
+@115143 = ~Use Scroll of Polymorph: Other~
+@115144 = ~Wand of Cursing~
+
+@115145 = ~This wand instantly renders the target blind, deaf, and mute. But perhaps the most dangerous aspect of this terrible device is that anyone can use it.
+
+STATISTICS:
+
+Charge abilities:
+â€“ Blindness, Deafness, and Silence (Save vs. Spell negates all effects)
+  Duration: 1 turn
+  Area of Effect: 1 creature
+
+Weight: 1~
+
+@115146 = ~Wand of Corrosion~
+
+@115147 = ~A trio of wizards worked on this wand using a number of material components they had available to them and more that were relatively easy to acquire. Otterly the Rotund, Mabdek of the Seventh Star, and Yrgon the Moron only crafted the wand so they could sell it. Their long-term goal was the construction of a vast magical research facility based on the designs of the Naturalist Guild in Myth Drannor. Their wand was a greater success than their research facility.
+
+STATISTICS:
+
+Charge abilities:
+â€“ Death Fog
+  Damage: 4 acid in the 1st round, 8 acid in the 2nd round, 16 acid in the 3rd round
+  Special: Movement speed limited to 50% within fog; must save vs. Spell or suffer -2 to Strength and Dexterity that round
+  Range: Visual range of the user
+  Duration: 15 rounds
+  Area of Effect: 24-ft. radius
+
+â€“ Acid Storm
+  Damage: 1d4 acid for 3 rounds, 1d6 acid for the next 3 rounds, and 1d8 acid for the remaining rounds (Save vs. Spell for half)
+  Range: Visual range of the user
+  Duration: 30 rounds
+  Area of Effect: 24-ft. radius
+
+Requires:
+ 9 Intelligence
+
+Weight: 1~
+
+@115148 = ~When activated, this wand casts either Death Fog or Acid Storm.
+
+STATISTICS:
+
+Charge abilities:
+â€“ Death Fog
+  Damage: 4 acid in the 1st round, 8 acid in the 2nd round, 16 acid in the 3rd round
+  Special: Movement speed limited to 50% within fog; must save vs. Spell or suffer -2 to Strength and Dexterity that round
+  Range: Visual range of the user
+  Duration: 15 rounds
+  Area of Effect: 24-ft. radius
+
+â€“ Acid Storm
+  Damage: 1d4 acid for 3 rounds, 1d6 acid for the next 3 rounds, and 1d8 acid for the remaining rounds (Save vs. Spell for half)
+  Range: Visual range of the user
+  Duration: 30 rounds
+  Area of Effect: 24-ft. radius
+
+Requires:
+ 9 Intelligence
+
+Weight: 1~
+
+@115149 = ~When activated, this wand casts death fog.
+
+STATISTICS:
+
+Charge abilities:
+â€“ Death Fog
+  Damage: 4 acid in the 1st round, 8 acid in the 2nd round, 16 acid in the 3rd round
+  Special: Movement speed limited to 50% within fog; must save vs. Spell or suffer -2 to Strength and Dexterity that round
+  Range: Visual range of the user
+  Duration: 15 rounds
+  Area of Effect: 24-ft. radius
+
+Requires:
+ 9 Intelligence
+
+Weight: 1~
+
+@115150 = ~7th Tier Wands (50,000 gp)~
+
+@115151 = ~Use Acid Storm Spell~
+@115152 = ~Use Scroll of Acid Storm~
+@115153 = ~Select a different 7th Tier wand~
+@115154 = ~Wand of Cloudkill~
+@115155 = ~Wand of Cloudkill
+This wand emits a vapor bubble that travels towards the target exploding into a deadly cloud of noxious gas that expands to fill an area roughly 20 ft. in radius. The cloud will instantly kill any creature with 4 HD or less with no Saving Throw. Any creature within 5 to 6 HD must make a Saving Throw or be slain. Creatures with greater than 6 HD simply take 1d10 damage for every round that they remain within the cloud. The cloud will dissipate after 1d4 turns.
+
+STATISTICS:
+
+Charge abilities:
+â€“ Cloudkill
+  Damage: 1d10 poison per round
+  Special: Slays creatures with 1-4 HD; creatures with 5-6 HD must save vs. Spell or die
+  Range: 60 ft.
+  Area of Effect: 20-ft. radius
+  Duration: 1d4 turns
+
+Requires:
+ 9 Intelligence
+
+Weight: 1~
+
+@115156 = ~Use Cloudkill Spell~
+@115157 = ~Use Scroll of Cloudkill~
+@115158 = ~6th Tier Wands (6,250 gp)~
+@115159 = ~7th Tier Wands (12,500 gp)~
+@115160 = ~You need a minimum of 6,250 gold to recharge a Tier 6 wand.  Exit and try again when you have at least 6,250 gold.~
+@115161 = ~You need a minimum of 12,500 gold to recharge a Tier 7 wand.  Exit and try again when you have at least 12,500 gold.~
+@115162 = ~Wand of Fear: You cannot recharge a wand if you have more than one of the same type in your inventory.  Exit and try again when you have a single wand of missiles in your inventory.~
+@115163 = ~Recharge Wand of Fear~
+@115164 = ~*Recharge Wand of Fear*~
+@115165 = ~Wand of Fire: You cannot recharge a wand if you have more than one of the same type in your inventory.  Exit and try again when you have a single wand of missiles in your inventory.~
+@115166 = ~Recharge Wand of Fire~
+@115167 = ~*Recharge Wand of Fire*~
+@115168 = ~Recharge Wand of Lightning~
+@115169 = ~Wand of Lightning: You cannot recharge a wand if you have more than one of the same type in your inventory.  Exit and try again when you have a single wand of missiles in your inventory.~
+@115170 = ~Recharge Wand of Monster Summoning~
+@115171 = ~Wand of Monster Summoning: You cannot recharge a wand if you have more than one of the same type in your inventory.  Exit and try again when you have a single wand of missiles in your inventory.~
+@115172 = ~Use Scroll of Fireball~
+@115173 = ~Use Scroll of Lightning Bolt~
+@115174 = ~Use Lightning Bolt Spell~
+@115175 = ~*Recharge Wand of Lightning*~
+@115176 = ~*Recharge Wand of Monster Summoning*~
+@115177 = ~Wand of Freezing Death: You cannot recharge a wand if you have more than one of the same type in your inventory.  Exit and try again when you have a single wand of missiles in your inventory.~
+@115178 = ~Recharge Wand of Freezing Death~
+@115179 = ~*Recharge Wand of Freezing Death*~
+@115180 = ~Recharge Wand of Freezing Death~
+@115181 = ~Wand of Armory: You cannot recharge a wand if you have more than one of the same type in your inventory.  Exit and try again when you have a single wand of missiles in your inventory.~
+@115182 = ~Use Scroll of Spirit Armor~
+@115183 = ~Use Spirit Armor Spell~
+@115184 = ~*Recharge Wand of Armory*~
+@115185 = ~Recharge Wand of Polymorph~
+@115186 = ~Wand of Polymorph: You cannot recharge a wand if you have more than one of the same type in your inventory.  Exit and try again when you have a single wand of missiles in your inventory.~
+@115187 = ~Use Scroll of Polymorph: Other~
+@115188 = ~Use Polymorph: Other Spell~
+@115189 = ~*Recharge Wand of Polymorph*~
+@115190 = ~Recharge Wand of Paralyzation~
+@115191 = ~Wand of Paralyzation: You cannot recharge a wand if you have more than one of the same type in your inventory.  Exit and try again when you have a single wand of missiles in your inventory.~
+@115192 = ~Use Scroll of Hold Monster~
+@115193 = ~Use Hold Monster Spell~
+@115194 = ~Recharge Wand of Frost~
+@115195 = ~Wand of Frost: You cannot recharge a wand if you have more than one of the same type in your inventory.  Exit and try again when you have a single wand of missiles in your inventory.~
+@115196 = ~Use Scroll of Cone of Cold~
+@115197 = ~Use Cone of Cold Spell~
+@115198 = ~Recharge Wand of Cloudkill~
+@115199 = ~Wand of Cloudkill: You cannot recharge a wand if you have more than one of the same type in your inventory.  Exit and try again when you have a single wand of missiles in your inventory.~
+@115200 = ~Use Scroll of Cloudkill~
+@115201 = ~Use Cloudkill Spell~
+@115202 = ~*Recharge Wand of Frost*~
+@115203 = ~*Recharge Wand of Paralyzation*~
+@115204 = ~*Recharge Wand of Cloudkill*~
+@115205 = ~*Recharge Wand of Freezing Death*~
+@115206 = ~Recharge Wand of Spell Striking~
+@115207 = ~Wand of Spell Striking: You cannot recharge a wand if you have more than one of the same type in your inventory.  Exit and try again when you have a single wand of missiles in your inventory.~
+@115208 = ~Use Scroll of Pierce Magic~
+@115209 = ~Use Pierce Magic Spell~
+@115210 = ~*Recharge Wand of Spell Striking*~
+@115211 = ~Recharge Wand of Cursing~
+@115212 = ~Wand of Cursing: You cannot recharge a wand if you have more than one of the same type in your inventory.  Exit and try again when you have a single wand of missiles in your inventory.~
+@115213 = ~Use Scroll of Power Word: Silence~
+@115214 = ~Use Power Word: Silence Spell~
+@115215 = ~*Recharge Wand of Cursing*~
+@115216 = ~Recharge Wand of Corrosion~
+@115217 = ~Wand of Corrosion: You cannot recharge a wand if you have more than one of the same type in your inventory.  Exit and try again when you have a single wand of missiles in your inventory.~
+@115218 = ~Use Scroll of Acid Storm~
+@115219 = ~Use Acid Storm Spell~
+@115220 = ~*Recharge Wand of Corrosion*~
+@115221 = ~artificer~
+@115222 = ~Artificer~
+@115223 = ~ARTIFICER: Artificers are gnomish inventers that supplement their spellcasting with a strange and obscure magic called 'science'.  They channel their magic through powerful devices that they construct from spare parts that they find laying around.  A well prepared aritficer is an devistaing opponent.  However, they are less practiced as casting spells 'raw' than other casters.  As such, their casting level is 1/2 their class level, rounded up.
+
+Advantages:
+-
+- Efficient Crafting: Starting at level 6, artificers can craft and recharge items at half the cost
+Disadvantages:
+-  Artificers cast spells at 1/2 their illusionist level.
+-  Artificers do not gain an extra slot as normal for a specialist  ~
+
+@115224 = ~Use Scroll of Death Fog~
+@115225 = ~Use Death Fog Spell~
+@115226 = ~You must have at least 50 gold to scribe a scroll.  Try again when you have 50 gold or more.~
+@115227 = ~Efficient Scribe Scrolls~
+@115228 = ~You must have at least 450 gold to create a wand.  Try again when you have 450 gold or more.~
+@115229 = ~You need a minimum of 115 gold to recharge a wand.  Try again when you have at least 115 gold.~
+@115230 = ~Efficient Craft Wand~
+@115231 = ~Efficient Recharge Wand~
+
+@115232 = ~1st Tier Potions (75 gold)~
+@115233 = ~Potion of Infravision~
+@115234 = ~Potion of Strength~
+@115235 = ~Potion of Fire Resistance~
+@115236 = ~Potion of Invisibility~
+@115237 = ~Oil of Fiery Burning~
+@115238 = ~Potion of Agility~
+@115239 = ~Potion of Cold Resistance~
+@115240 = ~Oil of Speed~
+@115241 = ~Potion of Magic Blocking~
+@115242 = ~Potion of Magic Protection~
+@115243 = ~Potion of Potion of Defense~
+@115244 = ~Potion of Insulation~
+@115245 = ~Potion of Invulnerability~
+@115246 = ~Potion of Fire Breath~
+@115247 = ~Potion of Mirrored Eyes~
+@115248 = ~2nd Tier Potions (300 gold)~
+@115249 = ~3rd Tier Potions (400 gold)~
+
+@115250 = ~4th Tier Potions (500 gold)~
+@115251 = ~5th Tier Potions (1000 gold)~
+@115252 = ~6th Tier Potions (1500 gold)~
+@115253 = ~Select another Tier~
+@115254 = ~Brew Potion
+You can brew potions if you have the right spell and enough gold.~
+@115255 = ~Craft Item~
+@115256 = ~Craft Item
+You can craft and recharge items, if you have the right spell and enough gold.~
