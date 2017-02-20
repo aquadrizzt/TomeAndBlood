@@ -1,0 +1,187 @@
+// -----------------------------
+// REVISED DRAGON DISCIPLE
+// -----------------------------
+INCLUDE ~TomeAndBlood/lib/fl#add_kit_ee.tpa~
+
+//Remove base DD from the sorcerer table 
+ACTION_FOR_EACH rc_sor IN ~K_S_H~ ~K_S_HE~ ~K_S_E~ ~K_S_G~ ~K_S_D~ ~K_S_HL~ ~K_S_HO~ BEGIN 
+	COPY_EXISTING ~%rc_sor%.2da~ ~override~ 
+		COUNT_2DA_COLS num_cols
+		READ_2DA_ENTRIES_NOW ~r2en_sor_tbl~ num_cols
+		FOR (row = 1; row < r2en_sor_tbl; row += 1) BEGIN
+			READ_2DA_ENTRY_FORMER ~r2en_sor_tbl~ row 1 kitref
+			PATCH_IF (~%kitref%~ STRING_EQUAL_CASE ~35~) BEGIN
+				REMOVE_2DA_ROW row num_cols
+			END
+		END 
+	BUT_ONLY
+END 
+
+//Replace old DD clab with fire one (for npcs) 
+COPY ~TomeAndBlood/data/dragon_disciples/QDDDFIR.2da~ ~override/CLABSO01.2da~
+
+//Add the four new kits 
+
+//acid dragon disciple
+ADD_KIT ~QDDDACI~
+	~QDDDACI 1 0 0 1 1 0 0 0~ //clasweap.2da
+	~QDDDACI 0 1 0 0 1 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~ //weapprof.2da 
+	~QDDDACI 0 0 12 0 0 12~ //abclasrq.2da 
+	~QDDDACI 0 0 0 0 0 0~ //abclsmod.2da
+	~QDDDACI 0 0 17 0 0 17~ //abdcdsrq.2da
+	~QDDDACI 0 0 15 0 0 15~ //abdcscrq.2da 
+	~QDDDACI 1 1 1 1 1 1 1 1 1~ //alignmnt.2da
+	~QDDDACI 0 0 0 0 0 0~ //dualclas.2da
+	~TomeAndBlood/data/dragon_disciples/QDDDACI.2da~ //CLAB
+	~K_S_H K_S_HE K_S_E K_S_D K_S_G K_S_HL K_S_HO~ 
+	~0x00004000	19~ 
+	~MA0~ 
+	~* * * * * * * * * * * * * * * * * * * *~
+	SAY @201
+	SAY @202
+	SAY @203
+
+ACTION_IF GAME_IS ~bgee bg2ee iwdee~ THEN BEGIN
+	LAF fl#add_kit_ee
+		INT_VAR
+			briefdesc = RESOLVE_STR_REF (@203)
+		STR_VAR
+			kit_name = QDDDACI
+			hpclass = HPDD
+	END
+END	
+
+//electricity dragon disciple
+ADD_KIT ~QDDDELE~
+	~QDDDELE 1 0 0 1 1 0 0 0~ //clasweap.2da
+	~QDDDELE 0 1 0 0 1 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~ //weapprof.2da 
+	~QDDDELE 0 0 12 0 0 12~ //abclasrq.2da 
+	~QDDDELE 0 0 0 0 0 0~ //abclsmod.2da
+	~QDDDELE 0 0 17 0 0 17~ //abdcdsrq.2da
+	~QDDDELE 0 0 15 0 0 15~ //abdcscrq.2da 
+	~QDDDELE 1 1 1 1 1 1 1 1 1~ //alignmnt.2da
+	~QDDDELE 0 0 0 0 0 0~ //dualclas.2da
+	~TomeAndBlood/data/dragon_disciples/QDDDELE.2da~ //CLAB
+	~K_S_H K_S_HE K_S_E K_S_D K_S_G K_S_HL K_S_HO~
+	~0x00004000	19~ 
+	~MA0~ 
+	~* * * * * * * * * * * * * * * * * * * *~
+	SAY @204
+	SAY @205
+	SAY @206
+
+ACTION_IF GAME_IS ~bgee bg2ee iwdee~ THEN BEGIN
+	LAF fl#add_kit_ee
+		INT_VAR
+			briefdesc = RESOLVE_STR_REF (@206)
+		STR_VAR
+			kit_name = QDDDELE
+			hpclass = HPDD
+	END
+END	
+
+
+//frost dragon disciple
+ADD_KIT ~QDDDCOL~
+	~QDDDCOL 1 0 0 1 1 0 0 0~ //clasweap.2da
+	~QDDDCOL 0 1 0 0 1 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~ //weapprof.2da 
+	~QDDDCOL 0 0 12 0 0 12~ //abclasrq.2da 
+	~QDDDCOL 0 0 0 0 0 0~ //abclsmod.2da
+	~QDDDCOL 0 0 17 0 0 17~ //abdcdsrq.2da
+	~QDDDCOL 0 0 15 0 0 15~ //abdcscrq.2da 
+	~QDDDCOL 1 1 1 1 1 1 1 1 1~ //alignmnt.2da
+	~QDDDCOL 0 0 0 0 0 0~ //dualclas.2da
+	~TomeAndBlood/data/dragon_disciples/QDDDCOL.2da~ //CLAB
+	~K_S_H K_S_HE K_S_E K_S_D K_S_G K_S_HL K_S_HO~ 
+	~0x00004000	19~ 
+	~MA0~ 
+	~* * * * * * * * * * * * * * * * * * * *~
+	SAY @207
+	SAY @208
+	SAY @209
+
+ACTION_IF GAME_IS ~bgee bg2ee iwdee~ THEN BEGIN
+	LAF fl#add_kit_ee
+		INT_VAR
+			briefdesc = RESOLVE_STR_REF (@209)
+		STR_VAR
+			kit_name = QDDDCOL
+			hpclass = HPDD
+	END
+END	
+
+//fire dragon disciple
+ADD_KIT ~QDDDFIR~
+	~QDDDFIR 1 0 0 1 1 0 0 0~ //clasweap.2da
+	~QDDDFIR 0 1 0 0 1 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~ //weapprof.2da 
+	~QDDDFIR 0 0 12 0 0 12~ //abclasrq.2da 
+	~QDDDFIR 0 0 0 0 0 0~ //abclsmod.2da
+	~QDDDFIR 0 0 17 0 0 17~ //abdcdsrq.2da
+	~QDDDFIR 0 0 15 0 0 15~ //abdcscrq.2da 
+	~QDDDFIR 1 1 1 1 1 1 1 1 1~ //alignmnt.2da
+	~QDDDFIR 0 0 0 0 0 0~ //dualclas.2da
+	~TomeAndBlood/data/dragon_disciples/QDDDFIR.2da~ //CLAB
+	~K_S_H K_S_HE K_S_E K_S_D K_S_G K_S_HL K_S_HO~ 
+	~0x00004000	19~ 
+	~MA0~ 
+	~* * * * * * * * * * * * * * * * * * * *~
+	SAY @210
+	SAY @211
+	SAY @212
+
+ACTION_IF GAME_IS ~bgee bg2ee iwdee~ THEN BEGIN
+	LAF fl#add_kit_ee
+		INT_VAR
+			briefdesc = RESOLVE_STR_REF (@212)
+		STR_VAR
+			kit_name = QDDDFIR
+			hpclass = HPDD
+	END
+END	
+
+//Dragon Disciple CLAB abilities
+COPY ~TomeAndBlood/data/dragon_disciples/QDDDA1.spl~ ~override~
+	 ~TomeAndBlood/data/dragon_disciples/QDDDC1.spl~ ~override~
+	 ~TomeAndBlood/data/dragon_disciples/QDDDE1.spl~ ~override~
+	 ~TomeAndBlood/data/dragon_disciples/QDDDF1.spl~ ~override~
+	 
+ACTION_IF (FILE_EXISTS_IN_GAME ~splprot.2da~) THEN BEGIN 
+	COPY ~TomeAndBlood/data/dragon_disciples/QDDD01.spl~ ~override~ //AC bonus, -1 spells
+		 ~TomeAndBlood/data/dragon_disciples/QDDD01A.eff~ ~override~
+		 ~TomeAndBlood/data/dragon_disciples/QDDD01A.spl~ ~override~
+		 ~TomeAndBlood/data/dragon_disciples/QDDD01B1.spl~ ~override~
+		 ~TomeAndBlood/data/dragon_disciples/QDDD01B2.spl~ ~override~
+		 ~TomeAndBlood/data/dragon_disciples/QDDD01B3.spl~ ~override~
+		 ~TomeAndBlood/data/dragon_disciples/QDDD01B4.spl~ ~override~
+		 ~TomeAndBlood/data/dragon_disciples/QDDD01B5.spl~ ~override~
+		 ~TomeAndBlood/data/dragon_disciples/QDDD01B6.spl~ ~override~
+		 ~TomeAndBlood/data/dragon_disciples/QDDD01B7.spl~ ~override~
+END ELSE BEGIN 
+	COPY ~TomeAndBlood/data/dragon_disciples/QDDD01_.spl~ ~override/QDDD01.spl~ //static AC bonus, -1 spells
+	
+	OUTER_SET strref = (0 - 1)
+
+	COPY_EXISTING - ~clastext.2da~ ~override~
+		COUNT_2DA_COLS num_cols
+			READ_2DA_ENTRIES_NOW ~r2en_clastext~ num_cols
+			FOR (row = 1; row < r2en_clastext; row += 1) BEGIN
+				READ_2DA_ENTRY_FORMER ~r2en_clastext~ row 0 kitname
+				READ_2DA_ENTRY_FORMER ~r2en_clastext~ row 4 desc
+				PATCH_IF ((~%kitname%~ STRING_EQUAL_CASE ~QDDDACI~) OR 
+						  (~%kitname%~ STRING_EQUAL_CASE ~QDDDCOL~) OR 
+						  (~%kitname%~ STRING_EQUAL_CASE ~QDDDELE~) OR 
+						  (~%kitname%~ STRING_EQUAL_CASE ~QDDDFIR~)) BEGIN
+					INNER_ACTION  BEGIN 
+						ACTION_IF (desc >= 0) BEGIN
+							ACTION_GET_STRREF desc oldstring
+							OUTER_SPRINT old @113
+							OUTER_SPRINT new @114
+							OUTER_PATCH_SAVE oldstring ~%oldstring%~ BEGIN
+								REPLACE_TEXTUALLY CASE_SENSITIVE ~%old%~ ~%new%~ 
+							END
+							STRING_SET_EVALUATE desc ~%oldstring%~
+						END 
+					END
+				END
+			END 
+END 

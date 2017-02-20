@@ -1,0 +1,105 @@
+//This file includes a list of minor changes that are necessary for components in Tome and Blood to work properly.
+//No mechanical changes have been made.
+
+// CHANGES
+//-----------------------------------
+// Generate clab files for Specialists.
+// Removing the mage unusability flag from most weapons and armor. 
+// Updating spells that prevent casting to use opcode 144 (disable button) instead of 145 (disable spellcasting). 
+//------------------------------------
+
+ACTION_IF (NOT FILE_EXISTS_IN_GAME ~qdtnb_core.qd~) THEN BEGIN 
+	//Define undefined mage clabs
+	ACTION_FOR_EACH kitclab IN ~CLABMA01~ ~CLABMA02~ ~CLABMA03~ ~CLABMA04~ ~CLABMA05~ ~CLABMA06~ ~CLABMA07~ ~CLABMA08~ ~CLABMA09~ BEGIN 
+		ACTION_IF (NOT FILE_EXISTS_IN_GAME ~%kitclab%.2DA~) THEN BEGIN
+			COPY ~TomeAndBlood/data/core/BLANKCLAB.2da~ ~override/%kitclab%.2da~ //generate undefined clab files
+		END 
+	END  
+
+	//Allow Mages and Sorcerers to equip any weapon/armor/shield/helmet (must still meet class/race/ability/alignment reqs)
+	COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
+		PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
+			READ_SHORT 0x31 "prof" ELSE 0
+			READ_SHORT 0x1c "type" ELSE 0
+			PATCH_IF ("%prof%" = 89 || //bastard sword
+					  "%prof%" = 90 || //long sword
+					  "%prof%" = 91 || //short sword
+					  "%prof%" = 92 || //axe
+					  "%prof%" = 93 || //2h sword
+					  "%prof%" = 94 || //katana
+					  "%prof%" = 95 || //scimitar 
+					  "%prof%" = 97 || //war hammer
+					  "%prof%" = 98 || //spear
+					  "%prof%" = 99 || //halberd
+					  "%prof%" = 100 || //flail/morningstar
+					  "%prof%" = 101 || //mace
+					  "%prof%" = 103 || //xbow
+					  "%prof%" = 104 || //long bow
+					  "%prof%" = 105 || //shortbow
+					  "%prof%" = 115 || //club
+					  "%type%" = 31 || //xbow bolts
+					  "%type%" = 5  || //arrows
+					  "%type%" = 2  || //armor
+					  "%type%" = 7  || //helms
+					  "%type%" = 12) BEGIN //shields
+						READ_BYTE 0x1e "bard"
+						READ_BYTE 0x1f "fighter"
+						PATCH_IF (("%fighter%" BAND "0b00001000") = "0b00000000") BEGIN 
+							READ_BYTE   0x20 "mage"
+							WRITE_BYTE 0x20 ("%mage%" BAND "0b11111011")
+							WRITE_BYTE 0x1e ("%bard%" BAND "0b10111111")
+						END	
+			END
+		END
+	BUT_ONLY
+		
+	//Update following spells to use 144 instead of 145 -> allows for armored casting components later. 
+	//SPPR507 Champion's Strength
+	//SPSD02 Shadowstep
+	//SPWI315 Wraithform
+	//SWI603 Tenser's Transformations
+	//SPWI711 Sphere of Chaos 
+
+	ACTION_FOR_EACH spl IN ~sppr507~ ~spsd02~ ~spwi315~ ~spwi603~ ~spwi711~ BEGIN 
+		ACTION_IF (FILE_EXISTS_IN_GAME ~%spl%.spl~) THEN BEGIN
+			COPY_EXISTING ~%spl%.spl~ ~override~ 
+				LPF ALTER_SPELL_EFFECT INT_VAR match_opcode = 145 new_opcode = 144 parameter2 = 2  END
+		END 
+	END 	
+	
+	/*Adding animations for various martial casters*/
+	/*Animations courtesy of Grammarsalad and Dib and used with permission*/
+	COPY ~TomeAndBlood/data/anims/B_ANIFS.spl~ ~override~ //Animation spl
+		 ~TomeAndBlood/data/anims/B_AFSFH.eff~ ~override~ //Female Human
+		 ~TomeAndBlood/data/anims/B_FSFH.eff~ ~override~ //Female Human
+		 ~TomeAndBlood/data/anims/B_AFSFE.eff~ ~override~ //Female Elf
+		 ~TomeAndBlood/data/anims/B_FSFE.eff~ ~override~ //Female Elf
+		 ~TomeAndBlood/data/anims/B_AFSFHE.eff~ ~override~ //Female hElf--ani as elf
+		 ~TomeAndBlood/data/anims/B_AFSFD.eff~ ~override~ //Female Dwarf
+		 ~TomeAndBlood/data/anims/B_FSFD.eff~ ~override~ //Female Dwarf
+		 ~TomeAndBlood/data/anims/B_AFSFHA.eff~ ~override~ //Female Half
+		 ~TomeAndBlood/data/anims/B_FSFHA.eff~ ~override~ //Female Half
+		 ~TomeAndBlood/data/anims/B_AFSFG.eff~ ~override~ //Female Gnome
+		 ~TomeAndBlood/data/anims/B_FSFG.eff~ ~override~ //Female Gnome
+		 ~TomeAndBlood/data/anims/B_AFSFHO.eff~ ~override~ //Female Halforc
+		 ~TomeAndBlood/data/anims/B_FSFHO.eff~ ~override~ //Female Halforc
+		 ~TomeAndBlood/data/anims/B_AFSMH.eff~ ~override~ //Male Human
+		 ~TomeAndBlood/data/anims/B_FSMH.eff~ ~override~ //Male Human
+		 ~TomeAndBlood/data/anims/B_AFSME.eff~ ~override~ //male Elf
+		 ~TomeAndBlood/data/anims/B_FSME.eff~ ~override~ //male Elf
+		 ~TomeAndBlood/data/anims/B_AFSMHE.eff~ ~override~ //male hElf--ani as elf
+		 ~TomeAndBlood/data/anims/B_AFSMD.eff~ ~override~ //male Dwarf
+		 ~TomeAndBlood/data/anims/B_FSMD.eff~ ~override~ //male Dwarf
+		 ~TomeAndBlood/data/anims/B_AFSMHA.eff~ ~override~ //male Half
+		 ~TomeAndBlood/data/anims/B_FSMHA.eff~ ~override~ //male Half
+		 ~TomeAndBlood/data/anims/B_AFSMG.eff~ ~override~ //male Gnome
+		 ~TomeAndBlood/data/anims/B_FSMG.eff~ ~override~ //male Gnome
+		 ~TomeAndBlood/data/anims/B_AFSMHO.eff~ ~override~ //male Halforc
+		 ~TomeAndBlood/data/anims/B_FSMHO.eff~ ~override~ //male Halforc
+		 ~TomeAndBlood/data/anims/D#FAVANI.BCS~ ~override~ //appearance script
+		 ~TomeAndBlood/data/anims/D#FAVANI.SPL~ ~override~ //appearance spell
+	
+	
+	COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_core.qd~ //check file
+	
+END 

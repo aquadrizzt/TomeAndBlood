@@ -1,0 +1,32 @@
+// -----------------------------
+// WILD SORCERER
+// -----------------------------
+INCLUDE ~TomeAndBlood/lib/fl#add_kit_ee.tpa~
+
+//wild sorcerer
+ADD_KIT ~QDWLDSOR~
+	~QDWLDSOR 0 1 0 0 1 0 0 1 0~ //clasweap.2da
+	~QDWLDSOR 0 1 0 0 1 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~ //weapprof.2da 
+	~QDWLDSOR 0 0 0 0 0 9~ //abclasrq.2da 
+	~QDWLDSOR 0 0 0 0 0 0~ //abclsmod.2da
+	~QDWLDSOR 0 0 0 0 0 17~ //abdcdsrq.2da
+	~QDWLDSOR 0 0 0 0 0 15~ //abdcscrq.2da 
+	~QDWLDSOR 1 1 1 1 1 1 1 1 1~ //alignmnt.2da
+	~QDWLDSOR 0 0 0 0 0 0~ //dualclas.2da
+	~TomeAndBlood/data/wild_sorcerer/QDWLDSOR.2da~ //CLAB
+	~K_S_H K_S_HE K_S_E K_S_D K_S_G K_S_HL K_S_HO~ 
+	~0x80004000	19~ 
+	~MA0~ 
+	~* * * * * * * * * * * * * * * * * * * *~
+	SAY @501
+	SAY @502
+	SAY @503
+
+ACTION_IF GAME_IS ~bgee bg2ee iwdee~ THEN BEGIN
+	LAF fl#add_kit_ee
+		INT_VAR
+			briefdesc = RESOLVE_STR_REF (@503)
+		STR_VAR
+			kit_name = QDWLDSOR
+	END
+END	
