@@ -216,9 +216,9 @@ END
 //Base Abilities and CLAB Updates
 COPY ~TomeAndBlood/data/specialists/D5_TRAN1.SPL~ ~override~ //transmuter poly/petrify immunity
 	 ~TomeAndBlood/data/specialists/D5_DIVI1.SPL~ ~override~ //diviner backstab immunity
-	 ~TomeAndBlood/data/specialists/D5_ENCH1.SPL~ ~override~ //enchanter charm/sleep immu
-	 ~TomeAndBlood/data/specialists/D5_ENCH2.SPL~ ~override~ //enchanter aura
-	 ~TomeAndBlood/data/specialists/D5_ENCH2.EFF~ ~override~ //enchanter aura effect
+	 ~TomeAndBlood/data/specialists/D5_ENC1.SPL~ ~override~ //enchanter charm/sleep immu
+	 ~TomeAndBlood/data/specialists/D5_ENC2.SPL~ ~override~ //enchanter aura
+	 ~TomeAndBlood/data/specialists/D5_ENC2.EFF~ ~override~ //enchanter aura effect
 	 ~TomeAndBlood/data/specialists/D5_ENC2A.SPL~ ~override~ //enchanter aura spl
 	 
 	 
@@ -395,10 +395,10 @@ ELSE BEGIN //No SR
 END 
 
 //Invoker EE 
-ACTION_IF (GAME_IS ~iwdee~ OR MOD_IS_INSTALLED "TOBEX.TP2" "100" OR FILE_EXISTS_IN_GAME ~enginest.2da~) THEN BEGIN //iwdee 1.4+, Engine v2.0+, ToBex 
+ACTION_IF (GAME_IS ~iwdee~ OR FILE_EXISTS_IN_GAME ~enginest.2da~) THEN BEGIN //iwdee 1.4+, Engine v2.0+
 
 	//+20% Damage Bonus
-	COPY ~TomeAndBlood/data/specialists/d5_pyrot.spl~ ~override/d5_invo1.spl~
+	COPY ~TomeAndBlood/data/specialists/d5_pyroe.spl~ ~override/d5_invo1.spl~
 	
 	APPEND ~CLABMA07.2da~ ~DMGBONUS 		AP_D5_INVO1~
 	
