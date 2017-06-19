@@ -54,7 +54,7 @@ Advantages:
 – Receives a +2 bonus when making Saving Throws against Enchantment spells. 
 – Targets suffer a -2 penalty when making Saving Throws against Enchantment spells. 
 – Immune to charm and sleep. 
-– Nearby enemies suffer a -2 penalty when making Saving Throws against spells. 
+– Fellow party members benefit from a +1 bonus to Saving Throws against spells. 
 
 Disadvantages:
 – May not learn or cast any spells of the Necromancy school.
@@ -562,7 +562,7 @@ Duration: 2 rounds
 Area of Effect: Target
 Saving Throw: vs. Breath
 
-This cantrip causes tendrils to rise up from the ground and grab at the target's legs, preventing movement for 1 round. The target will be Held and unable to move during that time unless a successful saving throw is made.~
+This cantrip causes tendrils to rise up from the ground and grab at the target's legs, preventing movement for a few seconds. On a failed saving throw vs. Breath, the target will be Held for a couple seconds and unable to move for one round afterward.~
 @6031   = ~Fire Bolt~
 @6032   = ~Fire Bolt
 
@@ -1550,12 +1550,12 @@ Anyone who has been the target of this spell - whether they make their saving th
 Level: 1
 School: Divination
 Range: Caster
-Duration: 5 rounds
+Duration: 3 rounds
 Casting Time: 2
 Area of Effect: Special
 Saving Throw: None 
 
-The caster of this spell gains a temporary insight into the history and nature of magical objects. This translates into a temporary Lore bonus of 15 points, plus an additional 15 points for each three levels of experience the caster has attained. If the resulting score is high enough, the spell can identify the name, nature, and function of any magical items in the caster's possession.
+The caster of this spell gains a temporary insight into the history and nature of magical objects. This translates into a temporary Lore bonus of 20 points, plus an additional 20 points for each five levels of experience the caster has attained. If the resulting score is high enough, the spell can identify the name, nature, and function of any magical items in the caster's possession.
 ~
 
 

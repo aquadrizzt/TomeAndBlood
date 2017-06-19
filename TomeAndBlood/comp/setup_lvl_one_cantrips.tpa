@@ -191,8 +191,6 @@ END
 COPY_EXISTING ~spell.ids~ ~override~
 	REPLACE_TEXTUALLY ~WIZARD_IDENTIFY~ ~WIZARD_IDENTIFY_OLD~
 COPY ~TomeAndBlood/data/level_one_cantrips/spwi110i.spl~ ~override~
-	SAY NAME1 @7101
-	SAY UNIDENTIFIED_DESC @7102
 ADD_SPELL ~override/spwi110i.spl~ 2 1 WIZARD_IDENTIFY_TNB
 COPY_EXISTING ~spell.ids~ ~override~
 	REPLACE_TEXTUALLY ~WIZARD_IDENTIFY_TNB~ ~WIZARD_IDENTIFY~
@@ -201,7 +199,9 @@ LAF RES_NUM_OF_SPELL_NAME
 	RET spell_res
 END
 COPY_EXISTING ~%spell_res%.spl~ ~override~
-	LPF ALTER_EFFECT INT_VAR match_opcode = 321 STR_VAR resource = EVAL ~%spell_res%~ END
+	SAY NAME1 @7101
+	SAY UNIDENTIFIED_DESC @7102
+	LPF ALTER_EFFECT INT_VAR match_opcode = 206 STR_VAR resource = EVAL ~%spell_res%~ END
 ACTION_IF FILE_EXISTS_IN_GAME ~scrl75.itm~ THEN BEGIN
 	COPY_EXISTING ~scrl75.itm~ ~override~
 		SAY NAME2 @7101
