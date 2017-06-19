@@ -223,7 +223,7 @@ COPY ~TomeAndBlood/data/specialists/D5_TRAN1.SPL~ ~override~ //transmuter poly/p
 	 
 	 
 //Abjurer Spell Prot EEs 
-ACTION_IF GAME_IS ~bgee bg2ee iwdee~ THEN BEGIN 
+ACTION_IF GAME_IS ~bgee bg2ee iwdee eet~ THEN BEGIN 
 	
 	//Spell Shield for Abjurers
 	COPY ~TomeAndBlood/data/specialists/d5_abju.eff~ ~override~
