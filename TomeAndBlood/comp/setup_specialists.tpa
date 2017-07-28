@@ -233,7 +233,7 @@ ACTION_IF GAME_IS ~bgee bg2ee iwdee eet~ THEN BEGIN
 			~spwi902.spl~ ~override~
 			~spwi406.spl~ ~override~
 			~spwi602.spl~ ~override~
-		LPF ADD_SPELL_EFFECT INT_VAR opcode=177 target=1 parameter1=9 parameter2=64 resist_dispel=0 timing=9 power=0 STR_VAR resource=~d5_abju~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode=177 target=1 parameter1=64 parameter2=9 resist_dispel=0 timing=9 power=0 STR_VAR resource=~d5_abju~ END
 	
 	//Add new abilities to Bonus Spells
 	COPY_EXISTING ~QDMG+ABJ.SPL~ ~override~ 
