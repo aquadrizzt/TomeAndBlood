@@ -6,7 +6,7 @@ INCLUDE ~TomeAndBlood/lib/fl#add_kit_ee.tpa~
 //amorphous sorcerer
 ADD_KIT ~QDOOZSR~
 	~QDOOZSR 0 1 0 0 1 0 0 1 0~ //clasweap.2da
-	~QDOOZSR 0 1 0 0 1 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~ //weapprof.2da 
+	~QDOOZSR 0 1 0 0 1 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~ //weapprof.2da 
 	~QDOOZSR 0 0 0 0 0 9~ //abclasrq.2da 
 	~QDOOZSR 0 0 0 0 0 0~ //abclsmod.2da
 	~QDOOZSR 0 0 0 0 0 17~ //abdcdsrq.2da
