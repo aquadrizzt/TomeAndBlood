@@ -103,7 +103,6 @@ END
 						PATCH_IF (("%fighter%" BAND "0b00001000") = "0b00000000") BEGIN 
 							READ_BYTE   0x20 "mage"
 							WRITE_BYTE 0x20 ("%mage%" BAND "0b11111011")
-							WRITE_BYTE 0x1e ("%bard%" BAND "0b10111111")
 						END	
 			END
 		END
