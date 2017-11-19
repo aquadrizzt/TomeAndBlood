@@ -2344,5 +2344,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~qdtnb_specialists.qd~ THEN BEGIN
 	END 
 END 
 
+//Adding Clone to the Illusionist CLAB
+APPEND ~CLABMA08.2da~ ~ILLCLONE	GA_D5WI9IL~
 
 CLEAR_ARRAYS 
