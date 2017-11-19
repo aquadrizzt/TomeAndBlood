@@ -16,43 +16,6 @@ ACTION_IF (NOT FILE_EXISTS_IN_GAME ~qdtnb_core.qd~) THEN BEGIN
 		END 
 	END  
 
-	//Allow Mages and Sorcerers to equip any weapon/armor/shield/helmet (must still meet class/race/ability/alignment reqs)
-	COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
-		PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
-			READ_SHORT 0x31 "prof" ELSE 0
-			READ_SHORT 0x1c "type" ELSE 0
-			PATCH_IF ("%prof%" = 89 || //bastard sword
-					  "%prof%" = 90 || //long sword
-					  "%prof%" = 91 || //short sword
-					  "%prof%" = 92 || //axe
-					  "%prof%" = 93 || //2h sword
-					  "%prof%" = 94 || //katana
-					  "%prof%" = 95 || //scimitar 
-					  "%prof%" = 97 || //war hammer
-					  "%prof%" = 98 || //spear
-					  "%prof%" = 99 || //halberd
-					  "%prof%" = 100 || //flail/morningstar
-					  "%prof%" = 101 || //mace
-					  "%prof%" = 103 || //xbow
-					  "%prof%" = 104 || //long bow
-					  "%prof%" = 105 || //shortbow
-					  "%prof%" = 115 || //club
-					  "%type%" = 31 || //xbow bolts
-					  "%type%" = 5  || //arrows
-					  "%type%" = 2  || //armor
-					  "%type%" = 7  || //helms
-					  "%type%" = 12) BEGIN //shields
-						READ_BYTE 0x1e "bard"
-						READ_BYTE 0x1f "fighter"
-						PATCH_IF (("%fighter%" BAND "0b00001000") = "0b00000000") BEGIN 
-							READ_BYTE   0x20 "mage"
-							WRITE_BYTE 0x20 ("%mage%" BAND "0b11111011")
-							WRITE_BYTE 0x1e ("%bard%" BAND "0b10111111")
-						END	
-			END
-		END
-	BUT_ONLY
-		
 	//Update following spells to use 144 instead of 145 -> allows for armored casting components later. 
 	//SPPR507 Champion's Strength
 	//SPSD02 Shadowstep
