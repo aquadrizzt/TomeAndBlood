@@ -150,7 +150,7 @@ ACTION_PHP_EACH arcanespell AS ind => res BEGIN
 					((GAME_IS ~bgee~) AND 
 						(~%ind%~ STRING_EQUAL ~SPWI126~)) //Dancing Lights
 					OR 
-					((GAME_IS ~bg2ee~) AND 
+					((GAME_IS ~bg2ee eet~) AND 
 						(~%ind%~ STRING_EQUAL ~SPWI226~  OR //???
 						 ~%ind%~ STRING_EQUAL ~SPWI228~)) //??? 
 					OR 

@@ -3,20 +3,163 @@
 // -----------------------------
 INCLUDE ~TomeAndBlood/lib/fl#add_kit_ee.tpa~
 INCLUDE ~TomeAndBlood/lib/spell_to_innate.tpa~
+INCLUDE ~TomeAndBlood/lib/add_spell_header.tpa~
 // This component uses code by Subtledoctor; all such code is used with permission of the original author. 
 
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN // version without Spell Revisions
 
+// NEED NINE ICONS! THE FOLLOWING ARE PLACEHOLDERS (three numbered icons, in three colors)
+//
+COPY ~TomeAndBlood/data/specialists/d5spnt1.bam~ ~override~
+	~TomeAndBlood/data/specialists/d5spnt2.bam~ ~override~
+	~TomeAndBlood/data/specialists/d5spnt3.bam~ ~override~
+	~TomeAndBlood/data/specialists/d5spnt4.bam~ ~override~
+	~TomeAndBlood/data/specialists/d5spnt5.bam~ ~override~
+	~TomeAndBlood/data/specialists/d5spnt6.bam~ ~override~
+	~TomeAndBlood/data/specialists/d5spnt7.bam~ ~override~
+	~TomeAndBlood/data/specialists/d5spnt8.bam~ ~override~
+	~TomeAndBlood/data/specialists/d5spnt9.bam~ ~override~
+
+COPY ~TomeAndBlood/data/specialists/d5spont.spl~ ~override~
+	SAY NAME1 @6005
+	SAY UNIDENTIFIED_DESC @6005
+COPY ~TomeAndBlood/data/specialists/d5spntx.spl~ ~override~
+	SAY NAME1 @6006
+	SAY UNIDENTIFIED_DESC @6006
+COPY ~TomeAndBlood/data/specialists/d5spnt.bam~ ~override~
+COPY ~TomeAndBlood/data/specialists/d5spnt0.bam~ ~override~
+
+ACTION_FOR_EACH school IN ~1~ ~2~ ~3~ ~4~ ~5~ ~6~ ~7~ ~8~ BEGIN
+  ACTION_FOR_EACH level IN ~1~ ~2~ ~3~ ~4~ ~5~ ~6~ ~7~ ~8~ ~9~ BEGIN
+	COPY ~TomeAndBlood/data/specialists/spntlist.2da~ ~override/d5spnt%school%%level%.2da~
+	COPY ~TomeAndBlood/data/specialists/d5spont.eff~ ~override/d5spnt%school%%level%.eff~
+	  WRITE_EVALUATED_ASCII 0x30 ~d5spnt%school%%level%~ #8
+  END
+END
+
+/*
+	Note:
+Abjuration = 1
+Conjuration = 2
+Divination = 3
+Enchantment = 4
+Illusion = 5
+Invocation = 6
+Necromancy = 7
+Transmutation = 8
+*/
+
+OUTER_SET count = 0
+//OUTER_SPRINT $wizard_spells("%count%") "%spell%"
+
+COPY_EXISTING_REGEXP GLOB ~^SPWI[1-9][0-5][0-9].spl$~ ~override~
+  READ_SHORT 0x1c type
+  PATCH_IF type = 1 BEGIN
+//	PATCH_IF NOT FILE_CONTAINS_EVALUATED (~hidespl.2da~ ~%SOURCE_RES%~) BEGIN
+	  INNER_PATCH_SAVE res_num ~%SOURCE_RES%~ BEGIN
+		REPLACE_TEXTUALLY ~^[Ss][Pp][Ww][Ii]~ ~2~
+	  END
+	  PATCH_IF FILE_CONTAINS_EVALUATED (~spell.ids~ ~%res_num%~) BEGIN
+	    PATCH_PRINT "%SOURCE_RES%"
+		SPRINT $wizard_spells("%count%") "%SOURCE_RES%"
+		++count
+	  END
+//	END
+  END
+BUT_ONLY
+
+ACTION_PHP_EACH wizard_spells AS ind => wizard_spell BEGIN
+  OUTER_INNER_PATCH_SAVE spont_res ~%wizard_spell%~ BEGIN
+	REPLACE_TEXTUALLY ~^[Ss][Pp][Ww][Ii]~ ~d5wy~
+  END
+  ACTION_IF FILE_EXISTS_IN_GAME ~%wizard_spell%.spl~ BEGIN 
+	COPY_EXISTING ~%wizard_spell%.spl~ ~override/%spont_res%.spl~
+	  READ_SHORT 0x1c spell_type
+	  READ_LONG 0x34 spell_level
+	  READ_BYTE 0x25 spell_school
+	  PATCH_IF (spell_type = 1) BEGIN
+		READ_LONG 0x64 abil_offset
+		READ_SHORT 0x68 abil_number
+		READ_BYTE (%abil_offset% + 0x0c) abil_target
+		READ_SHORT (%abil_offset% + 0x0e) abil_range
+		READ_LONG 0x6a eff_offset
+		WHILE (%abil_number% > 0) BEGIN
+		  SET abil_number = (%abil_number% - 1)
+		  WRITE_SHORT (%abil_offset% + 0x26 + (0x28 * %abil_number%)) 1
+		END
+		READ_BYTE (%eff_offset% + 0x02) eff_target
+		LPF DELETE_EFFECT INT_VAR match_probability2 = 0 END
+		PATCH_IF (%abil_target% = 4) BEGIN
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 148 target = 1 power = %spell_level% parameter1 = 0 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%wizard_spell%~ END
+		  PATCH_IF (%abil_range% < 35) BEGIN
+			PATCH_IF (%abil_range% > 4) BEGIN
+			  LPF ALTER_SPELL_HEADER INT_VAR range = (%abil_range% - 3) END
+			END
+			PATCH_IF (%abil_range% < 5) BEGIN
+			  LPF ALTER_SPELL_HEADER INT_VAR target = 5 END	// self? better than just making it short-range?
+ //			  LPF ALTER_SPELL_HEADER INT_VAR range = 2 END	// alternatively
+			END
+		  END
+		END
+		ELSE BEGIN
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = %eff_target% power = %spell_level% parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = EVAL ~%wizard_spell%~ END
+		END
+	  END
+	  INNER_ACTION BEGIN
+	  	ACTION_IF FILE_EXISTS_IN_GAME ~d5spnt%spell_school%%spell_level%.2da~ BEGIN
+		  APPEND ~d5spnt%spell_school%%spell_level%.2da~ ~%wizard_spell%	%spont_res%	3 ~
+		END
+	  END
+	BUT_ONLY
+	COPY_EXISTING ~%wizard_spell%.spl~ ~override~
+	  READ_SHORT 0x1c spell_type
+	  READ_LONG 0x34 spell_level
+	  READ_BYTE 0x25 spell_school
+	  READ_SHORT 0x68 abil_number
+ 	  LPF ADD_SPELL_HEADER INT_VAR required_level = 51 location = 2 target = 7 speed = 0 projectile = 1 STR_VAR icon = EVAL ~d5spnt%spell_level%~ END 
+	  LPF ADD_SPELL_EFFECT INT_VAR header = (%abil_number% + 1) opcode = 321 target = 1 parameter2 = 0 timing = 9 STR_VAR resource = ~d5spont~ END
+	  LPF ADD_SPELL_EFFECT INT_VAR header = (%abil_number% + 1) opcode = 144 target = 1 parameter2 = 2 timing = 0 duration = 5 END
+	  LPF ADD_SPELL_EFFECT INT_VAR header = (%abil_number% + 1) opcode = 144 target = 1 parameter2 = 3 timing = 0 duration = 5 END
+	  LPF ADD_SPELL_EFFECT INT_VAR header = (%abil_number% + 1) opcode = 144 target = 1 parameter2 = 4 timing = 0 duration = 5 END
+	  LPF ADD_SPELL_EFFECT INT_VAR header = (%abil_number% + 1) opcode = 144 target = 1 parameter2 = 5 timing = 0 duration = 5 END
+	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~d5spont~ END
+	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 172 target = 1 timing = 1 STR_VAR resource = ~d5spntx~ END
+	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 172 target = 1 timing = 1 STR_VAR resource = ~d5spont~ END
+	  PATCH_FOR_EACH specialist IN ~64~ ~128~ ~256~ ~512~ ~1024~ ~2048~ ~4096~ ~8192~ BEGIN
+		PATCH_IF specialist = 64 BEGIN
+		  SET spec_school = 1
+	  	END
+		PATCH_IF specialist = 128 BEGIN
+		  SET spec_school = 2
+	  	END
+		PATCH_IF specialist = 256 BEGIN
+		  SET spec_school = 3
+	  	END
+		PATCH_IF specialist = 512 BEGIN
+		  SET spec_school = 4
+	  	END
+		PATCH_IF specialist = 1024 BEGIN
+		  SET spec_school = 5
+	  	END
+		PATCH_IF specialist = 2048 BEGIN
+		  SET spec_school = 6
+	  	END
+		PATCH_IF specialist = 4096 BEGIN
+		  SET spec_school = 7
+	  	END
+		PATCH_IF specialist = 8192 BEGIN
+		  SET spec_school = 8
+	  	END
+		LPF ADD_SPELL_EFFECT INT_VAR header = (%abil_number% + 1) opcode = 177 parameter2 = 9 parameter1 = %specialist% target = 1 timing = 1 STR_VAR resource = EVAL ~d5spnt%spec_school%%spell_level%~ END
+	  END
+  END
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ BEGIN // version without Spell Revisions
 	INCLUDE ~TomeAndBlood/data/core/spell_list_base.tpa~
-
-	INCLUDE ~TomeAndBlood/data/core/scroll_list_base.tpa~ 
-END 
-ACTION_IF FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN // version with Spell Revisions
-
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ BEGIN // version for Spell Revisions
 	INCLUDE ~TomeAndBlood/data/core/spell_list_sr.tpa~
-
-	INCLUDE ~TomeAndBlood/data/core/scroll_list_sr.tpa~ 
-END 
+END
 
 //Hiding NRD 
 APPEND ~HIDESPL.2da~ ~SPWI124	1	0	0~ //add NRD to hidespl
@@ -73,54 +216,50 @@ COPY ~TomeAndBlood/data/specialists/CLABMA02.2da~ ~override~ //abjurer
 	 ~TomeAndBlood/data/specialists/CLABMA07.2da~ ~override~ //invoker
 	 ~TomeAndBlood/data/specialists/CLABMA08.2da~ ~override~ //illusionist
 	 ~TomeAndBlood/data/specialists/CLABMA09.2da~ ~override~ //enchanter
-	 
+
+/*
+.
+.
+.
+.
+.	 
 //Update Necromancer Alignments
 COPY_EXISTING ~alignmnt.2da~ ~override~
 	REPLACE_TEXTUALLY ~^NECROMANCER[ %TAB%]+.+~     ~NECROMANCER     0 0 1 0 0 1 0 0 1~
     PRETTY_PRINT_2DA
     BUT_ONLY 
+.
+.
+.
+.
+.
+*/
 		
-//Updating Spells and Scrolls 
-ACTION_PHP_EACH arcanespell AS ind => res BEGIN 
-	ACTION_IF (FILE_EXISTS_IN_GAME ~%ind%.spl~) BEGIN 
-		COPY_EXISTING ~%ind%.spl~ ~override~ 	
-			WRITE_LONG 0x1e ("0x00000000") //blocked to: none
-			ACTION_IF (res = 8) BEGIN //necromancy
-				APPEND ~HIDESPL.2da~ ~%ind%	1	0	0~ //add necromancy to hidespl
-				BUT_ONLY  
-			END
-	END
-END
-COPY_EXISTING_REGEXP GLOB ~.*\.itm~ ~override~
-	PATCH_IF ~SOURCE_SIZE~ >0x71 BEGIN
-		READ_SHORT 0x1c ~type~
-		PATCH_IF ~type~=11 BEGIN // only check scrolls
-			GET_OFFSET_ARRAY ab_array 0x64 4 0x68 2 0 0 0x38
-			PHP_EACH ab_array AS int => ab_off BEGIN
-				CLEAR_ARRAY fx_array
-				GET_OFFSET_ARRAY2 fx_array ab_off ITM_V10_HEAD_EFFECTS
-				PHP_EACH fx_array AS int => fx_off BEGIN
-					READ_SHORT fx_off fx_type
-					PATCH_IF fx_type = 147 BEGIN
-						READ_ASCII fx_off + 0x14 spell
-						SPRINT $scrollmap(~%spell%~) ~%SOURCE_RES%~
-					END
-				END
-			END
-		END
+COPY_EXISTING ~qdscrlmap.2da~ ~override~
+	COUNT_2DA_COLS cols
+	READ_2DA_ENTRIES_NOW ~r2en_schools~ cols
+      FOR (row = 1; row < r2en_schools; row += 1) BEGIN
+        READ_2DA_ENTRY_FORMER ~r2en_schools~ row 0 the_spell
+        READ_2DA_ENTRY_FORMER ~r2en_schools~ row 1 the_scroll
+        READ_2DA_ENTRY_FORMER ~r2en_schools~ row 2 the_school
+		TEXT_SPRINT $d5_spell_scroll_school(~%the_spell%~ ~%the_scroll%~) ~%the_school%~
 	END
 BUT_ONLY
-ACTION_PHP_EACH scrollmap AS yo => ko BEGIN
-	COPY_EXISTING ~%yo%.spl~ ~override~
-		READ_BYTE 0x0025 school
-	BUT_ONLY
-	COPY_EXISTING ~%ko%.itm~ ~override~
-		WRITE_BYTE 0x2d ("0x00") //blocked to: none
-		WRITE_BYTE 0x2f ("0x00") //blocked to: none
-		PATCH_IF (%school% = 7) BEGIN // necromancy
-			LPF DELETE_ITEM_EFFECT INT_VAR opcode_to_delete = 147 END
+
+//Updating Spells and Scrolls 
+ACTION_PHP_EACH d5_spell_scroll_school AS spell => school BEGIN 
+	ACTION_IF (FILE_EXISTS_IN_GAME ~%spell%.spl~) BEGIN 
+		COPY_EXISTING ~%spell%.spl~ ~override~ 	
+			WRITE_LONG 0x1e ("0x00000000") //blocked to: none
+//		ACTION_IF (~%school%~ STRING_EQUAL_CASE ~necromancy~) BEGIN
+//			APPEND ~HIDESPL.2da~ ~%spell%	1	0	0~ //add necromancy to hidespl
+//		END
+		ACTION_IF (FILE_EXISTS_IN_GAME ~%spell_1%.itm~) BEGIN 
+			COPY_EXISTING ~%spell_1%.itm~ ~override~ 	
+				WRITE_BYTE 0x2d ("0x00") //blocked to: none
+				WRITE_BYTE 0x2f ("0x00") //blocked to: none
 		END
-	BUT_ONLY
+	END
 END
 
 //Automatic School Spells 
@@ -134,81 +273,81 @@ COPY ~TomeAndBlood/data/specialists/QDMG+SCH.SPL~ ~override/QDMG+ABJ.SPL~ //maki
 	 ~TomeAndBlood/data/specialists/QDMG+SCH.SPL~ ~override/QDMG+DIV.SPL~ //making the new divination spell 
 	 
 	 
-ACTION_PHP_EACH arcanespell AS ind => res BEGIN 
-	ACTION_IF (FILE_EXISTS_IN_GAME ~%ind%.spl~) BEGIN 
-		ACTION_IF (~%ind%~ STRING_EQUAL ~SPWI123~ OR //Find Familiar
-				   ~%ind%~ STRING_EQUAL ~SPWI117~ OR //Chill Touch
-				   ~%ind%~ STRING_EQUAL ~SPWI218~ OR //Ghoul Touch
-				   ~%ind%~ STRING_EQUAL ~SPWI314~ OR //Vampiric Touch
-				   ~%ind%~ STRING_EQUAL ~SPWI124~ OR //NRD
-				   ~%ind%~ STRING_EQUAL ~SPWI222~ OR //Chaos Shield
-				   ~%ind%~ STRING_EQUAL ~SPWI723~ OR //Improved Chaos Shield
-				   ~%ind%~ STRING_EQUAL ~SPWI406~ OR //Minor Globe of Invulnerability
-				   ~%ind%~ STRING_EQUAL ~SPWI522~ OR //Minor Spell Turning
-				   ~%ind%~ STRING_EQUAL ~SPWI602~ OR //Globe of Invulnerability
-				   ~%ind%~ STRING_EQUAL ~SPWI618~ OR //Spell Deflection
-				   ~%ind%~ STRING_EQUAL ~SPWI701~ OR //Spell Turning
-				   ~%ind%~ STRING_EQUAL ~SPWI902~ OR //Spell Trap
+ACTION_PHP_EACH d5_spell_scroll_school AS spell => school BEGIN 
+	ACTION_IF (FILE_EXISTS_IN_GAME ~%spell%.spl~) BEGIN 
+		ACTION_IF (~%spell%~ STRING_EQUAL_CASE ~SPWI123~ OR //Find Familiar
+				   ~%spell%~ STRING_EQUAL_CASE ~SPWI117~ OR //Chill Touch
+				   ~%spell%~ STRING_EQUAL_CASE ~SPWI218~ OR //Ghoul Touch
+				   ~%spell%~ STRING_EQUAL_CASE ~SPWI314~ OR //Vampiric Touch
+				   ~%spell%~ STRING_EQUAL_CASE ~SPWI124~ OR //NRD
+				   ~%spell%~ STRING_EQUAL_CASE ~SPWI222~ OR //Chaos Shield
+				   ~%spell%~ STRING_EQUAL_CASE ~SPWI723~ OR //Improved Chaos Shield
+				   ~%spell%~ STRING_EQUAL_CASE ~SPWI406~ OR //Minor Globe of Invulnerability
+				   ~%spell%~ STRING_EQUAL_CASE ~SPWI522~ OR //Minor Spell Turning
+				   ~%spell%~ STRING_EQUAL_CASE ~SPWI602~ OR //Globe of Invulnerability
+				   ~%spell%~ STRING_EQUAL_CASE ~SPWI618~ OR //Spell Deflection
+				   ~%spell%~ STRING_EQUAL_CASE ~SPWI701~ OR //Spell Turning
+				   ~%spell%~ STRING_EQUAL_CASE ~SPWI902~ OR //Spell Trap
 				   (FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ AND  // Spell Revisions
-					   (~%ind%~ STRING_EQUAL ~SPWI226~ OR //SR: MS 1
-					   ~%ind%~ STRING_EQUAL ~SPWI309~ OR //SR: MS 2
-					   ~%ind%~ STRING_EQUAL ~SPWI423~ OR //SR: MS 3
-					   ~%ind%~ STRING_EQUAL ~SPWI504~ OR //SR: MS 4
-					   ~%ind%~ STRING_EQUAL ~SPWI619~ OR //SR: MS 5
-					   ~%ind%~ STRING_EQUAL ~SPWI724~)	   
+					   (~%spell%~ STRING_EQUAL_CASE ~SPWI226~ OR //SR: MS 1
+					   ~%spell%~ STRING_EQUAL_CASE ~SPWI309~ OR //SR: MS 2
+					   ~%spell%~ STRING_EQUAL_CASE ~SPWI423~ OR //SR: MS 3
+					   ~%spell%~ STRING_EQUAL_CASE ~SPWI504~ OR //SR: MS 4
+					   ~%spell%~ STRING_EQUAL_CASE ~SPWI619~ OR //SR: MS 5
+					   ~%spell%~ STRING_EQUAL_CASE ~SPWI724~)	   
 				   ) OR 
 				   ((NOT FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~) AND //No Spell Revisions
-					   (~%ind%~ STRING_EQUAL ~SPWI309~ OR //Monster Summoning I
-					   ~%ind%~ STRING_EQUAL ~SPWI407~ OR //Monster Summoning II
-					   ~%ind%~ STRING_EQUAL ~SPWI504~) //Monster Summoning III
+					   (~%spell%~ STRING_EQUAL_CASE ~SPWI309~ OR //Monster Summoning I
+					   ~%spell%~ STRING_EQUAL_CASE ~SPWI407~ OR //Monster Summoning II
+					   ~%spell%~ STRING_EQUAL_CASE ~SPWI504~) //Monster Summoning III
 				   ) 
 				   OR //Spell Trap
 				   (GAME_IS ~bgee~ AND  // Dancing Lights in BGEE
-					   (~%ind%~ STRING_EQUAL ~SPWI126~))
+					   (~%spell%~ STRING_EQUAL_CASE ~SPWI126~))
 				   ) BEGIN //exclusion list here 
 			//do nothing
 		END 	
 		ELSE BEGIN 
-		COPY_EXISTING ~%ind%.spl~ ~override~		
-			READ_BYTE 0x25 school
-		ACTION_IF (school = 1) BEGIN //abjuration
+			COPY_EXISTING ~%spell%.spl~ ~override~		
+				READ_BYTE 0x25 school
+			ACTION_IF (school = 1) BEGIN //abjuration
 				COPY_EXISTING ~QDMG+ABJ.SPL~ ~override~ 
-				LPF ADD_SPELL_EFFECT INT_VAR opcode=171 target=1 timing=9 STR_VAR resource= EVAL ~%ind%~ END 
+				LPF ADD_SPELL_EFFECT INT_VAR opcode=171 target=1 timing=9 STR_VAR resource= EVAL ~%spell%~ END 
 			END
 			
 			ACTION_IF (school = 8) BEGIN //alteration
 				COPY_EXISTING ~QDMG+ALT.SPL~ ~override~ 
-				LPF ADD_SPELL_EFFECT INT_VAR opcode=171 target=1 timing=9 STR_VAR resource= EVAL ~%ind%~ END 
+				LPF ADD_SPELL_EFFECT INT_VAR opcode=171 target=1 timing=9 STR_VAR resource= EVAL ~%spell%~ END 
 			END
 			
 			ACTION_IF (school = 2) BEGIN //conjuration
 				COPY_EXISTING ~QDMG+CON.SPL~ ~override~ 
-				LPF ADD_SPELL_EFFECT INT_VAR opcode=171 target=1 timing=9 STR_VAR resource= EVAL ~%ind%~ END 
+				LPF ADD_SPELL_EFFECT INT_VAR opcode=171 target=1 timing=9 STR_VAR resource= EVAL ~%spell%~ END 
 			END
 			
 			ACTION_IF (school = 3) BEGIN //divination
 				COPY_EXISTING ~QDMG+DIV.SPL~ ~override~ 
-				LPF ADD_SPELL_EFFECT INT_VAR opcode=171 target=1 timing=9 STR_VAR resource= EVAL ~%ind%~ END 
+				LPF ADD_SPELL_EFFECT INT_VAR opcode=171 target=1 timing=9 STR_VAR resource= EVAL ~%spell%~ END 
 			END
 			
 			ACTION_IF (school = 4) BEGIN //enchantment
 				COPY_EXISTING ~QDMG+ENC.SPL~ ~override~ 
-				LPF ADD_SPELL_EFFECT INT_VAR opcode=171 target=1 timing=9 STR_VAR resource= EVAL ~%ind%~ END 
+				LPF ADD_SPELL_EFFECT INT_VAR opcode=171 target=1 timing=9 STR_VAR resource= EVAL ~%spell%~ END 
 			END
 			
 			ACTION_IF (school = 6) BEGIN //evocation
 				COPY_EXISTING ~QDMG+EVO.SPL~ ~override~ 
-				LPF ADD_SPELL_EFFECT INT_VAR opcode=171 target=1 timing=9 STR_VAR resource= EVAL ~%ind%~ END 
+				LPF ADD_SPELL_EFFECT INT_VAR opcode=171 target=1 timing=9 STR_VAR resource= EVAL ~%spell%~ END 
 			END
 			
 			ACTION_IF (school = 5) BEGIN //illusion
 				COPY_EXISTING ~QDMG+ILL.SPL~ ~override~ 
-				LPF ADD_SPELL_EFFECT INT_VAR opcode=171 target=1 timing=9 STR_VAR resource= EVAL ~%ind%~ END 
+				LPF ADD_SPELL_EFFECT INT_VAR opcode=171 target=1 timing=9 STR_VAR resource= EVAL ~%spell%~ END 
 			END
 			
 			ACTION_IF (school = 7) BEGIN //necromancy
 				COPY_EXISTING ~QDMG+NEC.SPL~ ~override~ 
-				LPF ADD_SPELL_EFFECT INT_VAR opcode=171 target=1 timing=9 STR_VAR resource= EVAL ~%ind%~ END 
+				LPF ADD_SPELL_EFFECT INT_VAR opcode=171 target=1 timing=9 STR_VAR resource= EVAL ~%spell%~ END 
 			END	
 		END 
 	END 
@@ -223,7 +362,7 @@ COPY ~TomeAndBlood/data/specialists/D5_TRAN1.SPL~ ~override~ //transmuter poly/p
 	 
 	 
 //Abjurer Spell Prot EEs 
-ACTION_IF GAME_IS ~bgee bg2ee iwdee~ THEN BEGIN 
+ACTION_IF GAME_IS ~bgee bg2ee iwdee eet~ THEN BEGIN 
 	
 	//Spell Shield for Abjurers
 	COPY ~TomeAndBlood/data/specialists/d5_abju.eff~ ~override~
@@ -429,6 +568,52 @@ ELSE BEGIN
 	COPY ~TomeAndBlood/data/specialists/d5_illuv.spl~ ~override/d5_illu1.spl~
 END 
 
+//Necromancer "Rebuke Undead" ability
+COPY ~TomeAndBlood/data/specialists/d5nctua.spl~ ~override~
+COPY ~TomeAndBlood/data/specialists/d5nctub.eff~ ~override~
+COPY ~TomeAndBlood/data/specialists/d5nctub.spl~ ~override~
+COPY ~TomeAndBlood/data/specialists/d5nctuc.spl~ ~override~
+COPY ~TomeAndBlood/data/specialists/d5nctuc.eff~ ~override~
+COPY ~TomeAndBlood/data/specialists/d5nctux.spl~ ~override~
+COPY ~TomeAndBlood/data/specialists/d5nctu.bam~ ~override~
+COPY ~TomeAndBlood/data/specialists/d5nctux.bam~ ~override~
+
+//Necromancer Undead Touch" abilities
+COPY ~TomeAndBlood/data/specialists/d5nect1.spl~ ~override~
+	SAY NAME1 @6251
+	SAY IDENTIFIED_DESC @6252
+COPY ~TomeAndBlood/data/specialists/d5nect2.spl~ ~override~
+	SAY NAME1 @6253
+	SAY IDENTIFIED_DESC @6254
+COPY ~TomeAndBlood/data/specialists/d5nect3.spl~ ~override~
+	SAY NAME1 @6255
+	SAY IDENTIFIED_DESC @6256
+COPY ~TomeAndBlood/data/specialists/d5nnct1.spl~ ~override~
+	SAY NAME1 @6257
+	SAY IDENTIFIED_DESC @6257
+COPY ~TomeAndBlood/data/specialists/d5nnct2.spl~ ~override~
+	SAY NAME1 @6258
+	SAY IDENTIFIED_DESC @6258
+COPY ~TomeAndBlood/data/specialists/d5nnct3.spl~ ~override~
+	SAY NAME1 @6259
+	SAY IDENTIFIED_DESC @6259
+COPY ~TomeAndBlood/data/specialists/d5nect1.itm~ ~override~
+	SAY NAME1 @6251
+	SAY IDENTIFIED_DESC @6251
+COPY ~TomeAndBlood/data/specialists/d5nect2.itm~ ~override~
+	SAY NAME1 @6253
+	SAY IDENTIFIED_DESC @6253
+COPY ~TomeAndBlood/data/specialists/d5nect3.itm~ ~override~
+	SAY NAME1 @6255
+	SAY IDENTIFIED_DESC @6255
+COPY ~TomeAndBlood/data/specialists/d5_nect3.bam~ ~override~
+
+/*
+.
+.
+.
+.
+.
 //Necromancer Character Creation Spells
 COPY_EXISTING ~spwi110.spl~ ~override/QDNEC#1.spl~ 
 
@@ -510,4 +695,9 @@ END
 
 //also fixes wild mage, not destructively
 APPEND ~CLABMA01.2da~ ~SPEC_FIX	 	AP_QDNEC#~
-	
+.
+.
+.
+.
+.
+*/

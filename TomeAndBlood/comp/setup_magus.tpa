@@ -22,7 +22,7 @@ ADD_KIT ~QDMAGUS~
 	SAY @302
 	SAY @303
 
-ACTION_IF GAME_IS ~bgee bg2ee iwdee~ THEN BEGIN
+ACTION_IF GAME_IS ~bgee bg2ee iwdee eet~ THEN BEGIN
 	LAF fl#add_kit_ee
 		INT_VAR
 			briefdesc = RESOLVE_STR_REF (@303)
@@ -33,6 +33,26 @@ ACTION_IF GAME_IS ~bgee bg2ee iwdee~ THEN BEGIN
 END 
 
 COPY ~TomeAndBlood/data/magus/QDMGUS1.SPL~ ~override~ //magus: can't use shields; -2 casting speed; -1 spell slot 
+
+//	NEW METHOD:
+
+APPEND ~QDMAGUS.2da~ ~ARMCAST     AP_D5ARCA1  ****        AP_D5ARCA2  ****        AP_D5ARCA3  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+
+//
+
+/*
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+OLD METHOD BELOW
 
 //Armor and Shield Lookup Tables (by Mike1072 for Item Revisions)
 INCLUDE ~TomeAndBlood/data/armored_casting/armor_list.tpa~
@@ -71,3 +91,5 @@ ACTION_PHP_EACH armor AS ind => res BEGIN
 			END
 	END
 END 
+
+*/

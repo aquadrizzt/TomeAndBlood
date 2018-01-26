@@ -59,7 +59,7 @@ ACTION_IF GAME_IS ~iwdee~ THEN BEGIN
 END
 
 //BGEE BG2EE ONLY (need to check for Item revisions)
-ACTION_IF GAME_IS ~bgee bg2ee~ THEN BEGIN
+ACTION_IF GAME_IS ~bgee bg2ee eet~ THEN BEGIN
 COPY ~TomeAndBlood/data/arcane_crafting/wand/b_wnd10.itm~ ~override~
   SAY NAME1 @115125//Armory
   SAY UNIDENTIFIED_DESC @115126
@@ -84,7 +84,7 @@ COPY_EXISTING ~WAND19.itm~ ~override/b_wnd15.itm~
   WRITE_SHORT 0x94 7   //Wand of Cursing 7 charges
   WRITE_BYTE  0x42 0
 
-ACTION_IF GAME_IS ~bgee bg2ee~ THEN BEGIN
+ACTION_IF GAME_IS ~bgee bg2ee eet~ THEN BEGIN
   COPY_EXISTING ~WAND13.itm~ ~override/b_wnd19.itm~
     WRITE_SHORT 0x94 8   //Wand of Cloudkill
     WRITE_BYTE  0x42 0
@@ -143,7 +143,7 @@ END
 //END IWDEE
 
 //BGEE ONLY
-ACTION_IF GAME_IS ~bgee bg2ee~ THEN BEGIN
+ACTION_IF GAME_IS ~bgee bg2ee eet~ THEN BEGIN
   COMPILE ~TomeAndBlood/data/arcane_crafting/wand/bg/b_wand1.baf~ ~override~
   COMPILE ~TomeAndBlood/data/arcane_crafting/wand/bg/b_wand1.d~ ~override~
 END
@@ -177,7 +177,7 @@ COPY_EXISTING ~WAND08.itm~ ~override~
   WRITE_SHORT 0x94 60   //
 
 //BGEE only
-ACTION_IF GAME_IS ~bgee bg2ee~ THEN BEGIN
+ACTION_IF GAME_IS ~bgee bg2ee eet~ THEN BEGIN
   COPY_EXISTING ~WAND09.itm~ ~override~
     WRITE_SHORT 0x94 10   //
   COPY_EXISTING ~WAND13.itm~ ~override~
@@ -232,7 +232,7 @@ END
 //END IWDEE ONLY
 
 //BGEE ONLY
-ACTION_IF GAME_IS ~bgee bg2ee~ THEN BEGIN
+ACTION_IF GAME_IS ~bgee bg2ee eet~ THEN BEGIN
   COMPILE ~TomeAndBlood/data/arcane_crafting/wand/bg/b_rech1.baf~ ~override~
   COMPILE ~TomeAndBlood/data/arcane_crafting/wand/bg/b_rech1.d~ ~override~
 END

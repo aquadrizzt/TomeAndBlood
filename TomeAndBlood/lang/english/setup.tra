@@ -15,10 +15,10 @@ Advantages:
 – Learns all spells from the school of Abjuration as bonus spells.
 – Receives a +2 bonus when making Saving Throws against Abjuration spells. 
 – Targets suffer a -2 penalty when making Saving Throws against Abjuration spells. 
+– May spontaneously cast any spell from the school of Abjuration by expending a memorized spell.
 – Gains a Spell Shield when casting spell protections (such as Globe of Invulnerability) from the school of Abjuration.
 
 Disadvantages:
-– May not learn or cast any spells of the Necromancy school.
 – Receives a -15% penalty when scribing spells from other schools.~
 
 @102 = ~CONJURER: A Mage who specializes in creating or summoning creatures and objects, moving them through space. These wizards ultimately master teleportation magic, able to banish enemies and summon aid from different planes altogether.
@@ -28,9 +28,9 @@ Advantages:
 – Learns all spells from the school of Conjuration as bonus spells.
 – Receives a +2 bonus when making Saving Throws against Conjuration spells. 
 – Targets suffer a -2 penalty when making Saving Throws against Conjuration spells. 
+– May spontaneously cast any spell from the school of Conjuration by expending a memorized spell.
 
 Disadvantages:
-– May not learn or cast any spells of the Necromancy school.
 – Receives a -15% penalty when scribing spells from other schools.~
 
 @103 = ~DIVINER: A Mage who specializes in detection and divining magics. These wizards developer an instinctive ability to glimpse the future; while such visions are rarely clear, they give enough information to provide Diviners with slightly improved reflexes and the ability to use magic to subtly alter the outcome of probabilistic events.
@@ -40,10 +40,10 @@ Advantages:
 – Learns all spells from the school of Divination as bonus spells.
 – Receives a +2 bonus when making Saving Throws against Divination spells. 
 – Targets suffer a -2 penalty when making Saving Throws against Divination spells. 
+– May spontaneously cast any spell from the school of Divination by expending a memorized spell.
 – Immune to backstab. 
 
 Disadvantages:
-– May not learn or cast any spells of the Necromancy school.
 – Receives a -15% penalty when scribing spells from other schools.~
 
 @104 = ~ENCHANTER: A Mage who specializes in Charm and Enchantment magic. These wizards are adept both at using magic to influence the minds of others, inducing sleep, friendliness, despair, or dementia.
@@ -53,11 +53,11 @@ Advantages:
 – Learns all spells from the school of Enchantment as bonus spells.
 – Receives a +2 bonus when making Saving Throws against Enchantment spells. 
 – Targets suffer a -2 penalty when making Saving Throws against Enchantment spells. 
+– May spontaneously cast any spell from the school of Enchantment by expending a memorized spell.
 – Immune to charm and sleep. 
 – Fellow party members benefit from a +1 bonus to Saving Throws against spells. 
 
 Disadvantages:
-– May not learn or cast any spells of the Necromancy school.
 – Receives a -15% penalty when scribing spells from other schools.~
 
 @105 = ~ILLUSIONIST: A Mage who specializes in creating illusions to confuse and mislead. These canny wizards can bend light and manipulate perceptions in various ways. They can duck out of sight when in danger, and eventually gain the power to create illusions of startling substance and realism.
@@ -67,13 +67,13 @@ Advantages:
 – Learns all spells from the school of Illusion as bonus spells.
 – Receives a +2 bonus when making Saving Throws against Illusion spells. 
 – Targets suffer a -2 penalty when making Saving Throws against Illusion spells. 
+– May spontaneously cast any spell from the school of Illusion by expending a memorized spell.
 – Permanent Non-detection. 
 – May use the Shadowstep ability once per day. Additional uses are gained every 5 levels. 
 
 SHADOWSTEP: Step into the Shadow Plane and move for 7 seconds while others are frozen time. The Illusionist cannot attack or cast spells while in the Shadow Plane. 
 
 Disadvantages:
-– May not learn or cast any spells of the Necromancy school.
 – Receives a -15% penalty when scribing spells from other schools.~
 
 @106 = ~INVOKER: A Mage who specializes in the manipulation of raw and elemental energies. These wizards use magical spells to manipulate the basic energies of the multiverse. They excel at releasing this energy in explosive flashes of fire or lightning, or shunting it away to project an icy freeze.
@@ -82,10 +82,10 @@ Advantages:
 – May cast one additional spell per level. 
 – Learns all spells from the school of Evocation as bonus spells.
 – Receives a +2 bonus when making Saving Throws against Evocation spells. 
+– May spontaneously cast any spell from the school of Evocation by expending a memorized spell.
 – Targets suffer a -2 penalty when making Saving Throws against Evocation spells. 
 
 Disadvantages:
-– May not learn or cast any spells of the Necromancy school.
 – Receives a -15% penalty when scribing spells from other schools.~
 
 @107 = ~NECROMANCER: A Mage who specializes in magic dealing with death, undeath, and energy from the Negative Material Plane. Necromancy is a disturbing art, reviled by most civilized practitioners and academies of magic. They experiment with the living and the dead, and create undead abominations that straddle the gap in between. 
@@ -95,12 +95,15 @@ Advantages:
 – Learns all spells from the school of Necromancy as bonus spells.
 – Receives a +2 bonus when making Saving Throws against Necromancy spells. 
 – Targets suffer a -2 penalty when making Saving Throws against Necromancy spells. 
+– May spontaneously cast any spell from the school of Necromancy by expending a memorized spell.
+– May radiate an aura that Rebukes nearby undead.
 – May use the Chill Touch ability at will. 
 – 3rd level: May use the Ghoul Touch ability at will. 
 – 5th level: May use the Vampiric Touch ability at will.
 
+REBUKE UNDEAD: Nearby undead up to 5 levels higher than the necromancer must save vs. petrification each round or be Slowed; those of equal level or up to 5 levels lower must save each round or be Held; and those of 6 or more levels lower must save each round or be Controlled. 
+
 Disadvantages:
-– Alignment restricted to any evil. 
 – Receives a -15% penalty when scribing spells from other schools.~
 
 @108 = ~TRANSMUTER: A Mage who specializes in magic that alters physical reality. These wizards control and transform matter in all the ways their magical learning affords them. They can cause the air to turn to a toxic mist, change their own shape into that of a powerful monster, and even stop time itself. Transmuters are also alchemists, creating the various magical potions on which so many adventurers rely.
@@ -110,10 +113,10 @@ Advantages:
 – Learns all spells from the school of Alteration as bonus spells.
 – Receives a +2 bonus when making Saving Throws against Alteration spells. 
 – Targets suffer a -2 penalty when making Saving Throws against Alteration spells. 
+– May spontaneously cast any spell from the school of Alteration by expending a memorized spell.
 – Immune to petrification, polymorph, and disintegration.
 
 Disadvantages:
-– May not learn or cast any spells of the Necromancy school.
 – Receives a -15% penalty when scribing spells from other schools.~
 
 @110 = ~– Targets suffer a -2 penalty when making Saving Throws against Conjuration spells.~ 
@@ -472,6 +475,9 @@ This ability allows you to select your spells known for each spell level.~
 
 
 //Subtledoctor TRA strings
+@6005   = ~Spontaneous Casting~
+@6006   = ~Cancel Spontaneous Conversion~
+//
 @6012   = ~Choose a cantrip~
 @6013   = ~This power represents a wizard's most basic spellcasting ability. It allows a Mage to choose one of the following cantrips:
 - Protective Shell
@@ -1140,7 +1146,7 @@ When a necromancer uses this ability, a red glow encompasses his hand. On a succ
 
 When a necromancer uses this ability, his hand is encompassed by a pale blue fire. Anyone successfully attacked by the necromancer loses 1d6+1 hit points, while the necromancer gains 1d6+1 hit points (any hit points over the caster's normal maximum treated as temporary additional hit points, lasting for 4 turns). Upon failing a saving throw vs. death with a -2 penalty, the victim loses 1d6 more hit points and also suffers a loss of 3 points of Constitution for one turn. 
 
-Any undead touch by the necromancer while this ability is active are placed under the necromancer's control for five rounds.~
+Any undead touched by the necromancer while this ability is active are placed under the necromancer's control for five rounds.~
 @6257   = ~Remove Chill Touch~
 @6258   = ~Remove Ghoul Touch~
 @6259   = ~Remove Vampiric Touch~

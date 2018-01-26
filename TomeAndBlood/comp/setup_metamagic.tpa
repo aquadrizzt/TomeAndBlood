@@ -115,10 +115,24 @@ COPY_EXISTING ~kitlist.2da~ ~override~
 	END
 BUT_ONLY	
 
+/*
+.
+.
+.
+.
+.
 //COMPATIBILITY WITH SPECIALISTS REVISIONS 
 ACTION_FOR_EACH bonusspl IN ~QDMG+ABJ~ ~QDMG+ALT~ ~QDMG+CON~ ~QDMG+EVO~ ~QDMG+ENC~ ~QDMG+ILL~ ~QDMG+NEC~ ~QDMG+DIV~ BEGIN 
+  ACTION_IF FILE_EXISTS_IN_GAME ~%bonusspl%.spl~ BEGIN
 	COPY_EXISTING ~%bonusspl%.spl~ ~override~ 
 		PATCH_FOR_EACH spl IN ~spwi420~ ~spwi617~ ~spwi710~ ~spwi809~ ~spwi908~  BEGIN 
 			LPF ADD_SPELL_EFFECT INT_VAR opcode=172 target=1 timing=9 insert_point = 0  STR_VAR resource= EVAL ~%spl%~ END  
 		END 
+  END
 END 
+.
+.
+.
+.
+.
+*/

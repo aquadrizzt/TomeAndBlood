@@ -53,6 +53,35 @@ ACTION_IF (NOT FILE_EXISTS_IN_GAME ~qdtnb_core.qd~) THEN BEGIN
 		END
 	BUT_ONLY
 		
+	//new foundation for armored casting
+
+	COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
+	  PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
+		READ_SHORT 0x1c type
+		READ_LONG 0x22 appearance
+		PATCH_IF (type = 2) BEGIN // armor
+		  PATCH_IF (appearance = 16690) BEGIN // leather appearance
+			LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 145 opcode = 177 parameter1 = 0 parameter2 = 2 STR_VAR resource = ~d5arcal~ END
+		  END
+		  PATCH_IF (appearance = 16691) BEGIN // chain appearance
+			LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 145 opcode = 177 parameter1 = 0 parameter2 = 2 STR_VAR resource = ~d5arcac~ END
+		  END
+		  PATCH_IF (appearance = 16692) BEGIN // plate appearance
+			LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 145 opcode = 177 parameter1 = 0 parameter2 = 2 STR_VAR resource = ~d5arcap~ END
+		  END
+		END
+	  END
+	BUT_ONLY
+	COPY ~TomeAndBlood/data/core/d5arcal.eff~ ~override~
+	COPY ~TomeAndBlood/data/core/d5arcac.eff~ ~override~
+	COPY ~TomeAndBlood/data/core/d5arcap.eff~ ~override~
+	COPY ~TomeAndBlood/data/core/d5arca1.spl~ ~override~
+	COPY ~TomeAndBlood/data/core/d5arca2.spl~ ~override~
+	COPY ~TomeAndBlood/data/core/d5arca3.spl~ ~override~
+	COPY ~TomeAndBlood/data/core/d5arca1.eff~ ~override~
+	COPY ~TomeAndBlood/data/core/d5arca2.eff~ ~override~
+	COPY ~TomeAndBlood/data/core/d5arca3.eff~ ~override~
+
 	//Update following spells to use 144 instead of 145 -> allows for armored casting components later. 
 	//SPPR507 Champion's Strength
 	//SPSD02 Shadowstep
@@ -100,6 +129,50 @@ ACTION_IF (NOT FILE_EXISTS_IN_GAME ~qdtnb_core.qd~) THEN BEGIN
 		 ~TomeAndBlood/data/anims/D#FAVANI.SPL~ ~override~ //appearance spell
 	
 	
-	COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_core.qd~ //check file
+	//Add .2da map matching arcane spells to scrolls
+		
+  ACTION_IF NOT FILE_EXISTS_IN_GAME ~qdscrlmap.2da~ BEGIN
+
+<<<<<<<< QD/qdscrlmap.2da
+2DA V1.0 
+SPLRES
+			ITMRES
+>>>>>>>> 
+
+	COPY ~QD/qdscrlmap.2da~ ~override/qdscrlmap.2da~ 
+
+	COPY_EXISTING_REGEXP GLOB ~.*\.itm~ ~override~ 
+		PATCH_IF (SOURCE_SIZE > 0x71) BEGIN 
+			GET_OFFSET_ARRAY headers ITM_V10_HEADERS
+			PHP_EACH headers AS int => hoff BEGIN 
+				GET_OFFSET_ARRAY2 fx hoff ITM_V10_HEAD_EFFECTS
+				PHP_EACH fx AS intj => foff BEGIN 
+					READ_SHORT foff opcode 
+					PATCH_IF (opcode = 147) BEGIN 
+						READ_ASCII (foff + 0x14) splres
+						PHP_EACH arcanespell AS spl => schl BEGIN 
+							PATCH_IF ~%spl%~ STRING_EQUAL_CASE ~%splres%~ BEGIN
+								TEXT_SPRINT splschool ~%schl%~
+							END
+						END
+						//PATCH_PRINT ~%SOURCE_RES%  => %splres% ~
+						INNER_ACTION BEGIN 
+							APPEND ~qdscrlmap.2da~ ~%splres%	%SOURCE_RES%	%splschool% ~
+						END 
+					END 
+				END 
+			END 
+		END 
+	BUT_ONLY
+	
+	COPY_EXISTING ~qdscrlmap.2da~ ~override~
+		PRETTY_PRINT_2DA
+
+  END
+	
+	
+  //check file
+
+  COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_core.qd~
 	
 END 
