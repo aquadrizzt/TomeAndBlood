@@ -1,7 +1,7 @@
 //ARMORED CASTING MACRO__________________________________________________________
 //
 DEFINE_ACTION_MACRO D5_ARMORED_CASTING BEGIN
-
+  ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_armcast.d5~ BEGIN
 	COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
 	  PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
 		READ_SHORT 0x1c type
@@ -29,43 +29,6 @@ DEFINE_ACTION_MACRO D5_ARMORED_CASTING BEGIN
 	COPY ~%MOD_FOLDER%/lib/d5_armored_casting/d5arca2.eff~ ~override~
 	COPY ~%MOD_FOLDER%/lib/d5_armored_casting/d5arca3.eff~ ~override~
 	COPY ~%MOD_FOLDER%/lib/d5_armored_casting/d5_armcast.d5~ ~override~
-
-/*
-	//PDIALOG.2DA exists in all games
-	ACTION_DEFINE_ASSOCIATIVE_ARRAY JOINABLE_NPC_ARRAY_2da BEGIN ~PDIALOG~ => ~~ END
-	//Check PDIALOG.2DA file variants referenced in CAMPAIGN.2DA
-	ACTION_IF FILE_EXISTS_IN_GAME ~CAMPAIGN.2DA~ BEGIN
-		COPY_EXISTING ~CAMPAIGN.2DA~ ~CAMPAIGN.2DA~
-			COUNT_2DA_ROWS 32 "cntrow"
-			FOR (i = 0; i < cntrow; i = i + 1) BEGIN
-				READ_2DA_ENTRY i 11 32 file
-				TO_UPPER file
-				DEFINE_ASSOCIATIVE_ARRAY JOINABLE_NPC_ARRAY_2da BEGIN ~%file%~ => ~~ END
-			END
-		BUT_ONLY
-	END
-	//Generate array with joinable NPC DV
-	ACTION_PHP_EACH JOINABLE_NPC_ARRAY_2da AS file => ~~ BEGIN
-		ACTION_IF FILE_EXISTS_IN_GAME ~%file%.2da~ BEGIN
-			COPY_EXISTING ~%file%.2da~ ~override~
-				COUNT_2DA_ROWS 3 "cntrow"
-				FOR (i = 1; i < cntrow; i = i + 1) BEGIN
-					READ_2DA_ENTRY i 0 3 "dv"
-					TO_UPPER dv
-					DEFINE_ASSOCIATIVE_ARRAY JOINABLE_NPC_ARRAY_dv BEGIN ~%dv%~ => ~~ END
-				END
-			BUT_ONLY
-		END
-	END
-	//Generate array with joinable NPC cre files
-	COPY_EXISTING_REGEXP GLOB ~.+\.CRE~ ~override~
-		READ_ASCII DEATHVAR "dv" (32) NULL
-		TO_UPPER dv
-		PATCH_IF VARIABLE_IS_SET $JOINABLE_NPC_ARRAY_dv(~%dv%~) BEGIN
-			DEFINE_ASSOCIATIVE_ARRAY JOINABLE_NPC_ARRAY BEGIN ~%SOURCE_FILE%~ => ~%dv%~ END
-		END
-	BUT_ONLY
-*/
-
+  END
 END
 //__________________________________________________________________________________
