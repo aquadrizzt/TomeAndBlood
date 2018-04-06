@@ -58,7 +58,8 @@ ACTION_IF (NOT FILE_EXISTS_IN_GAME ~qdtnb_core.qd~) THEN BEGIN
 	INCLUDE ~%MOD_FOLDER%/lib/d5_armored_casting/d5_armored_casting.tpa~
 	LAM D5_ARMORED_CASTING
 
-	//Update following spells to use 144 instead of 145 -> allows for armored casting components later. 
+	//Update following spells to use 144 instead of 145 -> allows for armored casting components later.
+	// 	-- no, this is outdated... no need anymore, I think. 
 	//SPPR507 Champion's Strength
 	//SPSD02 Shadowstep
 	//SPWI315 Wraithform

@@ -1174,12 +1174,6 @@ Area of Effect: 1 creature
 Saving Throw: vs. Death
 
 By means of a Ray of Enfeeblement, a wizard launches a magical attack against the vitality of an opponent, reducing its Strength and thereby the attacks that rely upon it. The victim's Strength score is automatically reduced by 4 points for the duration of the spell. Additionally, if the target fails a saving throw vs. Death, the Strength penalty is doubled to -8, and the victim suffers the effects of a Slow spell (half movement rate and -4 penalties to thac0 and AC). These effects last for 1 turn.~
-@6351   = ~Contingency~
-@6352   = ~Contingency
-Upon using this ability, the wizard is allowed to choose a spell from his repertoire of known spells. One spell level every 3 levels of the caster is allowed (rounded up), up to 7th-level spells at 19th level. Once the spell is chosen, the caster can choose a condition of some kind from the list provided. The starting condition can be anything from reaching 10% of <PRO_HISHER> Hit Points to an enemy being sighted. Once this starting condition is satisfied, the spell that was chosen will be cast automatically.
-
-For example, a 12th-level wizard could place the spell Stoneskin in a Contingency with the starting condition being "the wizard reaches 50% of his Hit Points." Once the wizard is reduced to 50% max Hit Points or below, Stoneskin would be immediately cast. This requires no action by the wizard, but happens automatically and instantaneously.~
-
 @6351 = ~Contingency~
 @6352 = ~Contingency
 
@@ -1192,7 +1186,18 @@ For example, a 12th-level wizard could place the spell Stoneskin in a Contingenc
 
 Chain Contingency channels some of the magical energy of the wizard and releases it only under certain circumstances. The wizard chooses three spells that will be released under certain conditions, such as being hit by an enemy. When this condition occurs, all three spells are cast immediately. Spells of 8th level or lower may be used in the contingency.
 ~
+@6411   = ~Chameleon~
+@6412   = ~Chameleon
+Level: 1
+School: Illusion
+Range: Caster
+Duration: 5 rounds
+Casting Time: 1
+Area of Effect: 1 creature
+Saving Throw: n/a
 
+This spell alters the appearance of the caster, making <PRO_HIMHER> nearly invisible. <PRO_HESHE> cannot be targeted by spells, has a -4 bonus to AC and a +4 onus to saving throws, and has a +25% bonus to the Move Silently, Hide In Shadows, and Pick Pockets skills.  The effect lasts five rounds; however, if the caster casts a spell or strikes an enemy during that time, the spell ends immediately and the caster becomes fully visible.
+~
 @6501   = ~This is Edwin's birthright, inlaid with his family stone.
 
 STATISTICS:

@@ -5,6 +5,8 @@
 
 // This component uses code by Subtledoctor and is used with permission of the original author. 
 
+// NEED TO CHANGE CASTING SOUNDS AS WELL
+
 //re-do the scroll map, with an extra column________________________________________
 //
 <<<<<<<< QD/qdscrlmap.2da
@@ -954,6 +956,228 @@ ACTION_PHP_EACH d5_spell_scroll_school AS spell => school BEGIN
 		END
 	END
 	
+END
+//__________________________________________________________________________________
+
+
+
+//DETECT SPELL REVISIONS____________________________________________________________
+//
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN // version without Spell Revisions
+
+//Grease: just change the description to reflect new school
+  ACTION_IF FILE_EXISTS_IN_GAME ~spwi101.spl~ THEN BEGIN
+	COPY_EXISTING ~spwi101.spl~ ~override~
+	  READ_BYTE 0x25 school
+	  PATCH_IF (%school% = 8) BEGIN		
+		SAY UNIDENTIFIED_DESC @6111
+		INNER_ACTION BEGIN
+		  ACTION_IF FILE_EXISTS_IN_GAME ~scrl66.itm~ BEGIN
+			COPY_EXISTING ~scrl66.itm~ ~override~
+			  SAY IDENTIFIED_DESC @6111
+			BUT_ONLY
+		  END
+		END
+	  END
+	BUT_ONLY
+  END
+//Flame Arrow: just change the description to reflect new school
+  ACTION_IF FILE_EXISTS_IN_GAME ~spwi303.spl~ THEN BEGIN
+	COPY_EXISTING ~spwi303.spl~ ~override~
+	  READ_BYTE 0x25 school
+	  PATCH_IF (%school% = 8) BEGIN		
+		SAY UNIDENTIFIED_DESC @6116
+		INNER_ACTION BEGIN
+		  ACTION_IF FILE_EXISTS_IN_GAME ~scrl1f.itm~ BEGIN
+			COPY_EXISTING ~scrl1f.itm~ ~override~
+			  SAY IDENTIFIED_DESC @6116
+			BUT_ONLY
+		  END
+		END
+	  END
+	BUT_ONLY
+  END
+//Greater Malison: just change the description to reflect new school
+  ACTION_IF FILE_EXISTS_IN_GAME ~spwi412.spl~ THEN BEGIN
+	COPY_EXISTING ~spwi412.spl~ ~override~
+	  READ_BYTE 0x25 school
+	  PATCH_IF (%school% = 3) BEGIN		
+		SAY UNIDENTIFIED_DESC @6117
+		INNER_ACTION BEGIN
+		  ACTION_IF FILE_EXISTS_IN_GAME ~scrl5i.itm~ BEGIN
+			COPY_EXISTING ~scrl5i.itm~ ~override~
+				SAY IDENTIFIED_DESC @6117
+			BUT_ONLY
+		  END
+		END
+	  END
+	BUT_ONLY
+  END
+//Invisible Stalker: just change the description to reflect new school
+  ACTION_IF FILE_EXISTS_IN_GAME ~spwi601.spl~ THEN BEGIN
+	COPY_EXISTING ~spwi601.spl~ ~override~
+	  READ_BYTE 0x25 school
+	  PATCH_IF (%school% = 5) BEGIN		
+		SAY UNIDENTIFIED_DESC @6118
+		INNER_ACTION BEGIN
+		  ACTION_IF FILE_EXISTS_IN_GAME ~scrl7e.itm~ BEGIN
+			COPY_EXISTING ~scrl7e.itm~ ~override~
+				SAY IDENTIFIED_DESC @6118
+			BUT_ONLY
+		  END
+		  ACTION_IF FILE_EXISTS_IN_GAME ~stalkesu.cre~ THEN BEGIN
+			COPY_EXISTING ~stalkesu.cre~ ~override~
+				WRITE_BYTE 0x275 7
+			BUT_ONLY
+		  END
+		END
+	  END
+	BUT_ONLY
+  END
+//Disintegrate: just change the description to reflect new school
+  ACTION_IF FILE_EXISTS_IN_GAME ~spwi616.spl~ THEN BEGIN
+	COPY_EXISTING ~spwi616.spl~ ~override~
+	  READ_BYTE 0x25 school
+	  PATCH_IF (%school% = 7) BEGIN		
+		SAY NAME1 @6124
+		SAY UNIDENTIFIED_DESC @6125
+		INNER_ACTION BEGIN
+		  ACTION_IF FILE_EXISTS_IN_GAME ~scrl7t.itm~ THEN BEGIN
+			COPY_EXISTING ~scrl7t.itm~ ~override~
+				SAY NAME1 @6124
+				SAY IDENTIFIED_DESC @6125
+			BUT_ONLY
+		  END
+		  ACTION_IF FILE_EXISTS_IN_GAME ~scdisi.itm~ THEN BEGIN
+			COPY_EXISTING ~scdisi.itm~ ~override~
+				SAY NAME1 @6124
+				SAY IDENTIFIED_DESC @6125
+			BUT_ONLY
+		  END
+		END
+	  END
+	BUT_ONLY
+  END
+//Mordenkainen's Sword: just change the description to reflect new school
+  ACTION_IF FILE_EXISTS_IN_GAME ~spwi716.spl~ THEN BEGIN
+	COPY_EXISTING ~spwi716.spl~ ~override~
+	  READ_BYTE 0x25 school
+	  PATCH_IF (%school% = 4) BEGIN		
+		SAY UNIDENTIFIED_DESC @6119
+		INNER_ACTION BEGIN
+		  ACTION_IF FILE_EXISTS_IN_GAME ~scrl8r.itm~ THEN BEGIN
+			COPY_EXISTING ~scrl8r.itm~ ~override~
+				SAY IDENTIFIED_DESC @6119
+			BUT_ONLY
+		  END
+		END
+	  END
+	BUT_ONLY
+  END
+
+END														// end no SR
+//__________________________________________________________________________________
+
+
+
+//DETECT SPELL REVISIONS____________________________________________________________
+//
+ACTION_IF FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN // version for Spell Revisions
+
+//Flame Arrow: just change the description to reflect new school
+  ACTION_IF FILE_EXISTS_IN_GAME ~spwi303.spl~ THEN BEGIN
+	COPY_EXISTING ~spwi303.spl~ ~override~
+	  READ_BYTE 0x25 school
+	  PATCH_IF (%school% = 8) BEGIN		
+		SAY UNIDENTIFIED_DESC @6132
+		INNER_ACTION BEGIN
+		  ACTION_IF FILE_EXISTS_IN_GAME ~scrl1f.itm~ BEGIN
+			COPY_EXISTING ~scrl1f.itm~ ~override~
+			  SAY IDENTIFIED_DESC @6132
+			BUT_ONLY
+		  END
+		END
+	  END
+	BUT_ONLY
+  END
+//Greater Malison: just change the description to reflect new school
+  ACTION_IF FILE_EXISTS_IN_GAME ~spwi412.spl~ THEN BEGIN
+	COPY_EXISTING ~spwi412.spl~ ~override~
+	  READ_BYTE 0x25 school
+	  PATCH_IF (%school% = 3) BEGIN		
+		SAY UNIDENTIFIED_DESC @6133
+		INNER_ACTION BEGIN
+		  ACTION_IF FILE_EXISTS_IN_GAME ~scrl5i.itm~ BEGIN
+			COPY_EXISTING ~scrl5i.itm~ ~override~
+				SAY IDENTIFIED_DESC @6133
+			BUT_ONLY
+		  END
+		END
+	  END
+	BUT_ONLY
+  END
+//Invisible Stalker: just change the description to reflect new school
+  ACTION_IF FILE_EXISTS_IN_GAME ~spwi601.spl~ THEN BEGIN
+	COPY_EXISTING ~spwi601.spl~ ~override~
+	  READ_BYTE 0x25 school
+	  PATCH_IF (%school% = 5) BEGIN		
+		SAY UNIDENTIFIED_DESC @6135
+		INNER_ACTION BEGIN
+		  ACTION_IF FILE_EXISTS_IN_GAME ~scrl7e.itm~ BEGIN
+			COPY_EXISTING ~scrl7e.itm~ ~override~
+				SAY IDENTIFIED_DESC @6135
+			BUT_ONLY
+		  END
+		  ACTION_IF FILE_EXISTS_IN_GAME ~stalkesu.cre~ THEN BEGIN
+			COPY_EXISTING ~stalkesu.cre~ ~override~
+				WRITE_BYTE 0x275 7
+			BUT_ONLY
+		  END
+		END
+	  END
+	BUT_ONLY
+  END
+//Disintegrate: just change the description to reflect new school
+  ACTION_IF FILE_EXISTS_IN_GAME ~spwi616.spl~ THEN BEGIN
+	COPY_EXISTING ~spwi616.spl~ ~override~
+	  READ_BYTE 0x25 school
+	  PATCH_IF (%school% = 7) BEGIN		
+		SAY NAME1 @6124
+		SAY UNIDENTIFIED_DESC @6136
+		INNER_ACTION BEGIN
+		  ACTION_IF FILE_EXISTS_IN_GAME ~scrl7t.itm~ THEN BEGIN
+			COPY_EXISTING ~scrl7t.itm~ ~override~
+				SAY NAME1 @6124
+				SAY IDENTIFIED_DESC @6136
+			BUT_ONLY
+		  END
+		  ACTION_IF FILE_EXISTS_IN_GAME ~scdisi.itm~ THEN BEGIN
+			COPY_EXISTING ~scdisi.itm~ ~override~
+				SAY NAME1 @6124
+				SAY IDENTIFIED_DESC @6136
+			BUT_ONLY
+		  END
+		END
+	  END
+	BUT_ONLY
+  END
+//Mordenkainen's Sword: just change the description to reflect new school
+  ACTION_IF FILE_EXISTS_IN_GAME ~spwi716.spl~ THEN BEGIN
+	COPY_EXISTING ~spwi716.spl~ ~override~
+	  READ_BYTE 0x25 school
+	  PATCH_IF (%school% = 4) BEGIN		
+		SAY UNIDENTIFIED_DESC @6137
+		INNER_ACTION BEGIN
+		  ACTION_IF FILE_EXISTS_IN_GAME ~scrl8r.itm~ THEN BEGIN
+			COPY_EXISTING ~scrl8r.itm~ ~override~
+				SAY IDENTIFIED_DESC @6137
+			BUT_ONLY
+		  END
+		END
+	  END
+	BUT_ONLY
+  END
+
 END
 //__________________________________________________________________________________
 
