@@ -67,6 +67,13 @@ COPY_EXISTING_REGEXP GLOB ~^SPWI[1-9][0-5][0-9].spl$~ ~override~
   END
 BUT_ONLY
 
+CREATE EFF ~d5spont~
+    WRITE_LONG 0x10 171
+    WRITE_LONG 0x14 1
+    WRITE_LONG 0x24 9
+    WRITE_SHORT 0x2c 100
+    WRITE_ASCII 0x30 ~d5spont~ #8
+    
 ACTION_PHP_EACH wizard_spells AS ind => wizard_spell BEGIN
   OUTER_INNER_PATCH_SAVE spont_res ~%wizard_spell%~ BEGIN
 	REPLACE_TEXTUALLY ~^[Ss][Pp][Ww][Ii]~ ~d5wy~
@@ -121,7 +128,14 @@ ACTION_PHP_EACH wizard_spells AS ind => wizard_spell BEGIN
 	  LPF ADD_SPELL_EFFECT INT_VAR header = (%abil_number% + 1) opcode = 144 target = 1 parameter2 = 3 timing = 0 duration = 5 END
 	  LPF ADD_SPELL_EFFECT INT_VAR header = (%abil_number% + 1) opcode = 144 target = 1 parameter2 = 4 timing = 0 duration = 5 END
 	  LPF ADD_SPELL_EFFECT INT_VAR header = (%abil_number% + 1) opcode = 144 target = 1 parameter2 = 5 timing = 0 duration = 5 END
-	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~d5spont~ END
+	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 177 target = 1 parameter2 = 9 parameter1 = 64 timing = 9 STR_VAR resource = ~d5spont~ END
+	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 177 target = 1 parameter2 = 9 parameter1 = 128 timing = 9 STR_VAR resource = ~d5spont~ END
+	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 177 target = 1 parameter2 = 9 parameter1 = 256 timing = 9 STR_VAR resource = ~d5spont~ END
+	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 177 target = 1 parameter2 = 9 parameter1 = 512 timing = 9 STR_VAR resource = ~d5spont~ END
+	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 177 target = 1 parameter2 = 9 parameter1 = 1024 timing = 9 STR_VAR resource = ~d5spont~ END
+	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 177 target = 1 parameter2 = 9 parameter1 = 2048 timing = 9 STR_VAR resource = ~d5spont~ END
+	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 177 target = 1 parameter2 = 9 parameter1 = 4096 timing = 9 STR_VAR resource = ~d5spont~ END
+	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 177 target = 1 parameter2 = 9 parameter1 = 8192 timing = 9 STR_VAR resource = ~d5spont~ END
 	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 172 target = 1 timing = 1 STR_VAR resource = ~d5spntx~ END
 	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 172 target = 1 timing = 1 STR_VAR resource = ~d5spont~ END
 	  PATCH_FOR_EACH specialist IN ~64~ ~128~ ~256~ ~512~ ~1024~ ~2048~ ~4096~ ~8192~ BEGIN

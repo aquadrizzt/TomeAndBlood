@@ -7,8 +7,9 @@
 
 //check sanctuary for these tweaks__________________________________________________
 //
- APPEND ~splprot.2da~ ~D5_SANCT%TAB%63%TAB%1%TAB%4~
- COPY_EXISTING ~splprot.2da~ ~override~
+APPEND ~splprot.2da~ ~D5_SANCT%TAB%63%TAB%1%TAB%4~
+
+COPY_EXISTING ~splprot.2da~ ~override~
 	COUNT_2DA_COLS cols
 	READ_2DA_ENTRIES_NOW rows cols
 	FOR (row = 1; row < rows; ++row) BEGIN
@@ -17,40 +18,28 @@
 	    SET d5_sanct_row = %row%
 	  END
 	END
- BUT_ONLY
+BUT_ONLY
 //__________________________________________________________________________________
 
 
 //change to invisibility/detect invisible___________________________________________
 //
+INCLUDE ~%MOD_FOLDER%/lib/d5_insanctibility.tpa~
+
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5_insanctibility.d5~ BEGIN
-  COPY_EXISTING ~sw1h01.itm~ ~override/d5_insanctibility.d5~ // detection for this tweak 
+  LAM D5_INSANCTIBILITY
+END
 
-  COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
-	LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 20 match_parameter2 = 1 opcode = 153 parameter2 = 1 STR_VAR resource = ~~ END
-/*
-	LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 20 match_parameter2 = 1 opcode = 66 parameter1 = 128 parameter2 = 0 STR_VAR insert = ~first~ END
-	LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 20 opcode = 177 target = 1 parameter2 = 2 parameter1 = 0 STR_VAR resource = ~d5sanct~ insert = ~last~ END 
-
-Note: need to make subspell(s) to make translucency work with this... but they must use 321, and we don't know which spells to cancel.
-So, here's the plan:
-- make a list of spells and items that do invisibility
-- patch them to add sanctuary, and translucency, and 177/232 casting spellZ
-- SpellZ has 324 filtered by sanctuary = 1 (!! - need to switch the splprot entry relation)
-- SpellZ then has 321 effects for each of the spells and items on the list.
-*/
-  BUT_ONLY
-  
- ACTION_IF NOT FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ BEGIN 	// no need to patch 203 if SR installed
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ BEGIN 	// no need to patch 203 if SR installed
   COPY_EXISTING ~spwi203.spl~ ~override~
 	LPF CLONE_EFFECT INT_VAR silent = 1 match_opcode = 116 opcode = 193 target = 1 STR_VAR resource = ~~ END
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 116 opcode = 136 duration = 1 END
- END
+END
+
 /*
   COPY_EXISTING ~spwi224.spl~ ~override~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 116 opcode = 136 duration = 1 END 
 */
-END
 //__________________________________________________________________________________
 
 
