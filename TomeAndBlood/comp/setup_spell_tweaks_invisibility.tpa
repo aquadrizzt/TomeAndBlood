@@ -108,4 +108,24 @@ END 													// end sr is installed
 //__________________________________________________________________________________
 
 
+//true sight = illusionary creature immunity________________________________________
+//
+ACTION_IF FILE_EXISTS_IN_GAME ~sppr505.spl~ BEGIN
+  COPY_EXISTING ~sppr505.spl~ ~override~
+	LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 193 opcode = 100 parameter2 = 7 parameter1 = 7 END
+  BUT_ONLY
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~spwi609.spl~ BEGIN
+  COPY_EXISTING ~spwi609.spl~ ~override~
+	LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 193 opcode = 100 parameter2 = 7 parameter1 = 7 END
+  BUT_ONLY
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~spcl232.spl~ BEGIN
+  COPY_EXISTING ~spcl232.spl~ ~override~
+	LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 193 opcode = 100 parameter2 = 7 parameter1 = 7 END
+  BUT_ONLY
+END
+//__________________________________________________________________________________
+
+
 CLEAR_ARRAYS 

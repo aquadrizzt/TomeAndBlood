@@ -113,7 +113,7 @@ ACTION_IF (NOT FILE_EXISTS_IN_GAME ~qdtnb_core.qd~) THEN BEGIN
 <<<<<<<< QD/qdscrlmap.2da
 2DA V1.0 
 SPLRES
-			ITMRES
+			ITMRES	SCHOOL
 >>>>>>>> 
 
 	COPY ~QD/qdscrlmap.2da~ ~override/qdscrlmap.2da~ 
@@ -127,14 +127,43 @@ SPLRES
 					READ_SHORT foff opcode 
 					PATCH_IF (opcode = 147) BEGIN 
 						READ_ASCII (foff + 0x14) splres
-						PHP_EACH arcanespell AS spl => schl BEGIN 
-							PATCH_IF ~%spl%~ STRING_EQUAL_CASE ~%splres%~ BEGIN
-								TEXT_SPRINT splschool ~%schl%~
-							END
+						INNER_PATCH_FILE ~%splres%.spl~ BEGIN
+							READ_BYTE 0x25 spl_school
 						END
-						//PATCH_PRINT ~%SOURCE_RES%  => %splres% ~
-						INNER_ACTION BEGIN 
-							APPEND ~qdscrlmap.2da~ ~%splres%	%SOURCE_RES%	%splschool% ~
+						PATCH_IF (%spl_school% = 0) BEGIN
+							TEXT_SPRINT splschool ~none~
+						END
+						PATCH_IF (%spl_school% = 1) BEGIN
+							TEXT_SPRINT splschool ~abjuration~
+						END
+						PATCH_IF (%spl_school% = 2) BEGIN
+							TEXT_SPRINT splschool ~conjuration~
+						END
+						PATCH_IF (%spl_school% = 3) BEGIN
+							TEXT_SPRINT splschool ~divination~
+						END
+						PATCH_IF (%spl_school% = 4) BEGIN
+							TEXT_SPRINT splschool ~enchantment~
+						END
+						PATCH_IF (%spl_school% = 5) BEGIN
+							TEXT_SPRINT splschool ~illusion~
+						END
+						PATCH_IF (%spl_school% = 6) BEGIN
+							TEXT_SPRINT splschool ~evocation~
+						END
+						PATCH_IF (%spl_school% = 7) BEGIN
+							TEXT_SPRINT splschool ~necromancy~
+						END
+						PATCH_IF (%spl_school% = 8) BEGIN
+							TEXT_SPRINT splschool ~alteration~
+						END
+						PATCH_IF (%spl_school% = 9) BEGIN
+							TEXT_SPRINT splschool ~generalist~
+						END
+						PATCH_IF NOT (FILE_CONTAINS_EVALUATED (~qdscrlmap.2da~ ~%SOURCE_RES%~)) BEGIN
+							INNER_ACTION BEGIN 
+								APPEND ~qdscrlmap.2da~ ~%splres%	%SOURCE_RES% 	%splschool% ~
+							END
 						END 
 					END 
 				END 

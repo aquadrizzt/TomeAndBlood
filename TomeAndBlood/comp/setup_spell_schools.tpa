@@ -27,28 +27,38 @@ SPLRES
 
 	COPY ~QD/qdscrlmap.2da~ ~override/qdscrlmap.2da~ 
 
-	COPY_EXISTING_REGEXP GLOB ~.*\.itm~ ~override~ 
-		PATCH_IF (SOURCE_SIZE > 0x71) BEGIN 
-			GET_OFFSET_ARRAY headers ITM_V10_HEADERS
-			PHP_EACH headers AS int => hoff BEGIN 
-				GET_OFFSET_ARRAY2 fx hoff ITM_V10_HEAD_EFFECTS
-				PHP_EACH fx AS intj => foff BEGIN 
-					READ_SHORT foff opcode 
-					PATCH_IF (opcode = 147) BEGIN 
-						READ_ASCII (foff + 0x14) splres
-						PHP_EACH arcanespell AS spl => schl BEGIN 
-							PATCH_IF ~%spl%~ STRING_EQUAL_CASE ~%splres%~ BEGIN
-								TEXT_SPRINT splschool ~%schl%~
-							END
-						END
-						//PATCH_PRINT ~%SOURCE_RES%  => %splres% ~
-						INNER_ACTION BEGIN 
-							APPEND ~qdscrlmap.2da~ ~%splres%	%SOURCE_RES%	%splschool% ~
-						END 
-					END 
-				END 
-			END 
-		END 
+	COPY_EXISTING_REGEXP GLOB ~.*\.itm~ ~override~
+	  PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
+		GET_OFFSET_ARRAY headers ITM_V10_HEADERS
+		PHP_EACH headers AS int => hoff BEGIN
+		  GET_OFFSET_ARRAY2 fx hoff ITM_V10_HEAD_EFFECTS
+		  PHP_EACH fx AS intj => foff BEGIN
+			READ_SHORT foff opcode
+			PATCH_IF (opcode = 147) BEGIN 
+			  READ_ASCII (foff + 0x14) splres
+			  PHP_EACH arcanespell AS spl => schl BEGIN 
+				PATCH_IF (FILE_CONTAINS_EVALUATED (~spell.ids~ ~%spl%~)) BEGIN
+				  SET the_num = IDS_OF_SYMBOL (~spell~ ~%spl%~)
+				  SNPRINT (0 - 3) the_res ~%the_num%~
+				  SPRINT spell_res ~SPWI%the_res%~
+				END
+				PATCH_IF FILE_EXISTS_IN_GAME ~%spl%.spl~ BEGIN
+				  SPRINT spell_res ~%spl%~
+				END
+				PATCH_IF VARIABLE_IS_SET ~%spell_res%~ BEGIN
+				  PATCH_IF (~%spell_res%~ STRING_EQUAL_CASE ~%splres%~) BEGIN
+					PATCH_IF NOT (FILE_CONTAINS_EVALUATED (~qdscrlmap.2da~ ~%SOURCE_RES%~)) BEGIN
+					  INNER_ACTION BEGIN
+						APPEND ~qdscrlmap.2da~ ~%spell_res%	%SOURCE_RES%	%schl% ~
+					  END
+					END
+				  END
+				END
+			  END
+			END
+		  END
+		END
+	  END
 	BUT_ONLY
 	
 	COPY_EXISTING ~qdscrlmap.2da~ ~override~

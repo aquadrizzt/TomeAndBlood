@@ -322,62 +322,62 @@ COPY_EXISTING ~d5_slots.spl~ ~override/d5slots.spl~
   COPY ~TomeAndBlood/data/ability_bonuses/d5_slotx.spl~ ~override/d5chrsm.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 parameter2 = 0 target = 1 timing = 1 STR_VAR resource = ~d5chrsm~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 42 parameter1 = (0 - 1) parameter2 = 31 target = 1 timing = 0 duration = 7 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 42 parameter1 = (0 - 1) parameter2 = (30 target = 1 timing = 0 duration = 7 END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 42 parameter1 = (0 - 1) parameter2 = (30 + %L1C%) target = 1 timing = 0 duration = 7 END
   COPY ~TomeAndBlood/data/ability_bonuses/d5_slotx.spl~ ~override/d5chrsn.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 parameter2 = 0 target = 1 timing = 1 STR_VAR resource = ~d5chrsn~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 42 parameter1 = (0 - 1) parameter2 = 30 target = 1 timing = 0 duration = 7 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 42 parameter1 = (0 - 1) parameter2 = (30 target = 1 timing = 0 duration = 7 END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 42 parameter1 = (0 - 1) parameter2 = (30 + %L1C%) target = 1 timing = 0 duration = 7 END
   COPY ~TomeAndBlood/data/ability_bonuses/d5_slotx.spl~ ~override/d5chrso.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 parameter2 = 0 target = 1 timing = 1 STR_VAR resource = ~d5chrso~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 42 parameter1 = (0 - 1) parameter2 = 30 target = 1 timing = 0 duration = 7 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 42 parameter1 = (0 - 1) parameter2 = (28 target = 1 timing = 0 duration = 7 END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 42 parameter1 = (0 - 1) parameter2 = (28 + %L1C%) target = 1 timing = 0 duration = 7 END
   COPY ~TomeAndBlood/data/ability_bonuses/d5_slotx.spl~ ~override/d5chrsp.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 parameter2 = 0 target = 1 timing = 1 STR_VAR resource = ~d5chrsp~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 42 parameter1 = (0 - 1) parameter2 = 30 target = 1 timing = 0 duration = 7 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 42 parameter1 = (0 - 1) parameter2 = (28 target = 1 timing = 0 duration = 7 END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 42 parameter1 = (0 - 1) parameter2 = (28 + %L1C%) target = 1 timing = 0 duration = 7 END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 191 parameter1 = 1 parameter2 = 0 target = 1 timing = 0 duration = 7 END
   COPY ~TomeAndBlood/data/ability_bonuses/d5_slotx.spl~ ~override/d5chrsq.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 parameter2 = 0 target = 1 timing = 1 STR_VAR resource = ~d5chrsq~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 42 parameter1 = (0 - 1) parameter2 = 28 target = 1 timing = 0 duration = 7 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 42 parameter1 = (0 - 1) parameter2 = (28 target = 1 timing = 0 duration = 7 END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 42 parameter1 = (0 - 1) parameter2 = (28 + %L1C%) target = 1 timing = 0 duration = 7 END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 191 parameter1 = 1 parameter2 = 0 target = 1 timing = 0 duration = 7 END
   COPY ~TomeAndBlood/data/ability_bonuses/d5_slotx.spl~ ~override/d5chrsr.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 parameter2 = 0 target = 1 timing = 1 STR_VAR resource = ~d5chrsr~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 42 parameter1 = (0 - 1) parameter2 = 28 target = 1 timing = 0 duration = 7 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 42 parameter1 = (0 - 1) parameter2 = (24 target = 1 timing = 0 duration = 7 END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 42 parameter1 = (0 - 1) parameter2 = (24 + %L1C%) target = 1 timing = 0 duration = 7 END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 191 parameter1 = 1 parameter2 = 0 target = 1 timing = 0 duration = 7 END
   COPY ~TomeAndBlood/data/ability_bonuses/d5_slotx.spl~ ~override/d5chrss.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 parameter2 = 0 target = 1 timing = 1 STR_VAR resource = ~d5chrss~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 42 parameter1 = (0 - 1) parameter2 = 28 target = 1 timing = 0 duration = 7 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 42 parameter1 = (0 - 1) parameter2 = (24 target = 1 timing = 0 duration = 7 END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 42 parameter1 = (0 - 1) parameter2 = (24 + %L1C%) target = 1 timing = 0 duration = 7 END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 191 parameter1 = 2 parameter2 = 0 target = 1 timing = 0 duration = 7 END
   COPY ~TomeAndBlood/data/ability_bonuses/d5_slotx.spl~ ~override/d5chrst.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 parameter2 = 0 target = 1 timing = 1 STR_VAR resource = ~d5chrst~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 42 parameter1 = (0 - 1) parameter2 = 24 target = 1 timing = 0 duration = 7 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 42 parameter1 = (0 - 1) parameter2 = (24 target = 1 timing = 0 duration = 7 END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 42 parameter1 = (0 - 1) parameter2 = (24 + %L1C%) target = 1 timing = 0 duration = 7 END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 191 parameter1 = 2 parameter2 = 0 target = 1 timing = 0 duration = 7 END
   COPY ~TomeAndBlood/data/ability_bonuses/d5_slotx.spl~ ~override/d5chrsu.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 parameter2 = 0 target = 1 timing = 1 STR_VAR resource = ~d5chrsu~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 42 parameter1 = (0 - 1) parameter2 = 24 target = 1 timing = 0 duration = 7 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 42 parameter1 = (0 - 1) parameter2 = (16 target = 1 timing = 0 duration = 7 END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 42 parameter1 = (0 - 1) parameter2 = (16 + %L1C%) target = 1 timing = 0 duration = 7 END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 191 parameter1 = 2 parameter2 = 0 target = 1 timing = 0 duration = 7 END
   COPY ~TomeAndBlood/data/ability_bonuses/d5_slotx.spl~ ~override/d5chrsv.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 parameter2 = 0 target = 1 timing = 1 STR_VAR resource = ~d5chrsv~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 42 parameter1 = (0 - 1) parameter2 = 24 target = 1 timing = 0 duration = 7 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 42 parameter1 = (0 - 1) parameter2 = (16 target = 1 timing = 0 duration = 7 END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 42 parameter1 = (0 - 1) parameter2 = (16 + %L1C%) target = 1 timing = 0 duration = 7 END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 191 parameter1 = 3 parameter2 = 0 target = 1 timing = 0 duration = 7 END
   COPY ~TomeAndBlood/data/ability_bonuses/d5_slotx.spl~ ~override/d5chrsw.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 parameter2 = 0 target = 1 timing = 1 STR_VAR resource = ~d5chrsw~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 42 parameter1 = (0 - 1) parameter2 = 16 target = 1 timing = 0 duration = 7 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 42 parameter1 = (0 - 1) parameter2 = (16 target = 1 timing = 0 duration = 7 END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 42 parameter1 = (0 - 1) parameter2 = (16 + %L1C%) target = 1 timing = 0 duration = 7 END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 191 parameter1 = 3 parameter2 = 0 target = 1 timing = 0 duration = 7 END
   COPY ~TomeAndBlood/data/ability_bonuses/d5_slotx.spl~ ~override/d5chrsx.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 parameter2 = 0 target = 1 timing = 1 STR_VAR resource = ~d5chrsx~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 42 parameter1 = (0 - 1) parameter2 = (16 target = 1 timing = 0 duration = 7 END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 42 parameter1 = (0 - 1) parameter2 = (16 + %L1C%) target = 1 timing = 0 duration = 7 END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 191 parameter1 = 3 parameter2 = 0 target = 1 timing = 0 duration = 7 END
   COPY ~TomeAndBlood/data/ability_bonuses/d5_slotx.spl~ ~override/d5chrsy.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 parameter2 = 0 target = 1 timing = 1 STR_VAR resource = ~d5chrsy~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 42 parameter1 = (0 - 1) parameter2 = (16 target = 1 timing = 0 duration = 7 END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 42 parameter1 = (0 - 1) parameter2 = (16 + %L1C%) target = 1 timing = 0 duration = 7 END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 191 parameter1 = 4 parameter2 = 0 target = 1 timing = 0 duration = 7 END
 
 /*
