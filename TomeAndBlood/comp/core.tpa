@@ -55,7 +55,7 @@ ACTION_IF (NOT FILE_EXISTS_IN_GAME ~qdtnb_core.qd~) THEN BEGIN
 		
 	//new foundation for armored casting
 
-	INCLUDE ~%MOD_FOLDER%/lib/d5_armored_casting/d5_armored_casting.tpa~
+	INCLUDE ~%MOD_FOLDER%/lib/d5_armored_casting.tpa~
 	LAM D5_ARMORED_CASTING
 
 	//Update following spells to use 144 instead of 145 -> allows for armored casting components later.

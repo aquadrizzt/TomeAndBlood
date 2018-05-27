@@ -51,6 +51,19 @@
 //
 	COPY ~TomeAndBlood/data/spell_tweaks/d5wi804.spl~ ~override~
 
+//...5th level: nerfed mislead (imp. invisibility, no super invisibility. and 50% hp)
+//
+	COPY_EXISTING ~spwi505.spl~ ~overide~
+	  READ_LONG 0x08 name
+	  READ_LONG 0x50 desc
+	COPY ~TomeAndBlood/data/spell_tweaks/spwi607.spl~ ~override/spwi505.spl~
+	  WRITE_LONG 0x08 %name%
+	  WRITE_LONG 0x50 %desc%
+	COPY ~TomeAndBlood/data/spell_tweaks/spwi505a.spl~ ~override~
+	COPY ~TomeAndBlood/data/spell_tweaks/spwi505a.eff~ ~override~
+	COPY ~TomeAndBlood/data/spell_tweaks/spwi505b.spl~ ~override~
+	COPY ~TomeAndBlood/data/spell_tweaks/mislead.spl~ ~override~
+
 //...6th level: shadow clone
 //
 	COPY_EXISTING ~spwi804.spl~ ~override/spwi607.spl~
@@ -71,7 +84,7 @@
 	  LPF ALTER_ITEM_HEADER STR_VAR icon = ~spwi703a~ END
 	END 
 
-//...7th level: misleading clone
+//...7th level: lesser simulacrum
 	COPY_EXISTING ~spwi804.spl~ ~override/spwi703.spl~
 	  SAY NAME1 @6273
 	  SAY UNIDENTIFIED_DESC @6274

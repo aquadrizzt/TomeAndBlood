@@ -6,9 +6,7 @@ INCLUDE ~TomeAndBlood/lib/spell_to_innate.tpa~
 INCLUDE ~TomeAndBlood/lib/add_spell_header.tpa~
 // This component uses code by Subtledoctor; all such code is used with permission of the original author. 
 
-
-// NEED NINE ICONS! THE FOLLOWING ARE PLACEHOLDERS (three numbered icons, in three colors)
-//
+// spontaneous casting icons
 COPY ~TomeAndBlood/data/specialists/d5spnt1.bam~ ~override~
 	~TomeAndBlood/data/specialists/d5spnt2.bam~ ~override~
 	~TomeAndBlood/data/specialists/d5spnt3.bam~ ~override~
@@ -386,7 +384,7 @@ ACTION_IF GAME_IS ~bgee bg2ee iwdee eet~ THEN BEGIN
 			~spwi902.spl~ ~override~
 			~spwi406.spl~ ~override~
 			~spwi602.spl~ ~override~
-		LPF ADD_SPELL_EFFECT INT_VAR opcode=177 target=1 parameter1=9 parameter2=64 resist_dispel=0 timing=9 power=0 STR_VAR resource=~d5_abju~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode=177 target=1 parameter1=64 parameter2=9 resist_dispel=0 timing=9 power=0 STR_VAR resource=~d5_abju~ END
 	
 	//Add new abilities to Bonus Spells
 	COPY_EXISTING ~QDMG+ABJ.SPL~ ~override~ 
@@ -613,15 +611,46 @@ COPY ~TomeAndBlood/data/specialists/d5nnct3.spl~ ~override~
 	SAY IDENTIFIED_DESC @6259
 COPY ~TomeAndBlood/data/specialists/d5nect1.itm~ ~override~
 	SAY NAME1 @6251
+	SAY NAME2 @6251
 	SAY IDENTIFIED_DESC @6251
 COPY ~TomeAndBlood/data/specialists/d5nect2.itm~ ~override~
 	SAY NAME1 @6253
+	SAY NAME2 @6253
 	SAY IDENTIFIED_DESC @6253
 COPY ~TomeAndBlood/data/specialists/d5nect3.itm~ ~override~
 	SAY NAME1 @6255
+	SAY NAME2 @6255
 	SAY IDENTIFIED_DESC @6255
 COPY ~TomeAndBlood/data/specialists/d5_nect3.bam~ ~override~
 
+APPEND ~hidespl.2da~ ~SPWI117	1	0	0~ //add chill touch to hidespl
+APPEND ~hidespl.2da~ ~SPWI218	1	0	0~ //add ghoul touch to hidespl
+APPEND ~hidespl.2da~ ~SPWI314	1	0	0~ //add vampiric touch to hidespl
+
+// "_____ Touch" scrolls
+ACTION_IF FILE_EXISTS_IN_GAME ~scrl82.itm~ BEGIN
+  COPY_EXISTING ~scrl82.itm~ ~override~
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 147 opcode = 171 STR_VAR resource = d5nect1~ END
+  BUT_ONLY
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~scrl1c.itm~ BEGIN
+  COPY_EXISTING ~scrl1c.itm~ ~override~
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 147 opcode = 171 STR_VAR resource = d5nect2~ END
+  BUT_ONLY
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~scrl1q.itm~ BEGIN
+  COPY_EXISTING ~scrl1q.itm~ ~override~
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 147 opcode = 171 STR_VAR resource = d5nect3~ END
+  BUT_ONLY
+END
+
+// get "_____ Touch abilities from scrolls
+COPY_EXISTING ~clabma03.2da~ ~override~
+  REPACE_TEXTUALLY ~GA_D5NECT1~ ~****      ~
+  REPACE_TEXTUALLY ~GA_D5NECT2~ ~****      ~
+  REPACE_TEXTUALLY ~GA_D5NECT3~ ~****      ~
+BUT_ONLY
+	
 /*
 .
 .

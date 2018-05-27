@@ -1248,8 +1248,8 @@ Saving Throw: none
 
 This spell creates a rough facsimile of the caster, recognizable though not perfect. (Maybe I'll add a Blur visual effect to the clone.) The shadow clone has the equivalent of 60% of the experience (level, hit dice, skills, etc.) of the original caster, and can replicate some small amount of the caster's magical abilities, able to cast 1st level spells. The shadow clone cannot engage in melee combat or make use of any magical "items" it has equipped.
 ~
-@6273   = ~Misleading Clone~
-@6274   = ~Misleading Clone
+@6273   = ~Lesser Simulacrum~
+@6274   = ~Lesser Simulacrum
 Level: 7
 School: Illusion
 Range: Caster
