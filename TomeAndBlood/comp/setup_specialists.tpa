@@ -384,7 +384,7 @@ ACTION_IF GAME_IS ~bgee bg2ee iwdee eet~ THEN BEGIN
 			~spwi902.spl~ ~override~
 			~spwi406.spl~ ~override~
 			~spwi602.spl~ ~override~
-		LPF ADD_SPELL_EFFECT INT_VAR opcode=177 target=1 parameter1=64 parameter2=9 resist_dispel=0 timing=9 power=0 STR_VAR resource=~d5_abju~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode=177 target=1 parameter1=64 parameter2=9 resist_dispel=0 timing=9 power=0 STR_VAR resource = ~d5_abju~ END
 	
 	//Add new abilities to Bonus Spells
 	COPY_EXISTING ~QDMG+ABJ.SPL~ ~override~ 
@@ -630,25 +630,25 @@ APPEND ~hidespl.2da~ ~SPWI314	1	0	0~ //add vampiric touch to hidespl
 // "_____ Touch" scrolls
 ACTION_IF FILE_EXISTS_IN_GAME ~scrl82.itm~ BEGIN
   COPY_EXISTING ~scrl82.itm~ ~override~
-	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 147 opcode = 171 STR_VAR resource = d5nect1~ END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 147 opcode = 171 STR_VAR resource = ~d5nect1~ END
   BUT_ONLY
 END
 ACTION_IF FILE_EXISTS_IN_GAME ~scrl1c.itm~ BEGIN
   COPY_EXISTING ~scrl1c.itm~ ~override~
-	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 147 opcode = 171 STR_VAR resource = d5nect2~ END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 147 opcode = 171 STR_VAR resource = ~d5nect2~ END
   BUT_ONLY
 END
 ACTION_IF FILE_EXISTS_IN_GAME ~scrl1q.itm~ BEGIN
   COPY_EXISTING ~scrl1q.itm~ ~override~
-	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 147 opcode = 171 STR_VAR resource = d5nect3~ END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 147 opcode = 171 STR_VAR resource = ~d5nect3~ END
   BUT_ONLY
 END
 
-// get "_____ Touch abilities from scrolls
+// get '_____ Touch' abilities from scrolls
 COPY_EXISTING ~clabma03.2da~ ~override~
-  REPACE_TEXTUALLY ~GA_D5NECT1~ ~****      ~
-  REPACE_TEXTUALLY ~GA_D5NECT2~ ~****      ~
-  REPACE_TEXTUALLY ~GA_D5NECT3~ ~****      ~
+  REPLACE_TEXTUALLY ~GA_D5NECT1~ ~****      ~
+  REPLACE_TEXTUALLY ~GA_D5NECT2~ ~****      ~
+  REPLACE_TEXTUALLY ~GA_D5NECT3~ ~****      ~
 BUT_ONLY
 	
 /*
