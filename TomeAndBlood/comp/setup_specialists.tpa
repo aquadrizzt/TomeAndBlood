@@ -106,7 +106,7 @@ ACTION_PHP_EACH wizard_spells AS ind => wizard_spell BEGIN
 		  END
 		END
 		ELSE BEGIN
-		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = %eff_target% power = %spell_level% parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = EVAL ~%wizard_spell%~ END
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = %eff_target% power = %spell_level% parameter1 = 0 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%wizard_spell%~ END
 		END
 	  END
 	  INNER_ACTION BEGIN

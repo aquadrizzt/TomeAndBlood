@@ -5,6 +5,17 @@ DEFINE_ACTION_MACRO D5_INSANCTIBILITY BEGIN
 
   COPY_EXISTING ~sw1h01.itm~ ~override/d5_insanctibility.d5~
 
+  COPY_EXISTING ~splprot.2da~ ~override~
+	COUNT_2DA_COLS cols
+	READ_2DA_ENTRIES_NOW rows cols
+	FOR (row = 1; row < rows; ++row) BEGIN
+	  READ_2DA_ENTRY_FORMER rows row 0 ~stat~
+	  PATCH_IF ~%stat%~ STRING_EQUAL_CASE ~D5_SANCT~ BEGIN
+	    SET d5_sanct_row = %row%
+	  END
+	END
+  BUT_ONLY
+
   OUTER_SET invis_spell_index = 0
 
   OUTER_SPRINT $d5_invisibility_spells(~%invis_spell_index%~ ~timing~ ~duration~) ~spell~
@@ -122,6 +133,26 @@ DEFINE_ACTION_MACRO D5_INSANCTIBILITY BEGIN
 		LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 324 target = 1 power = 0 parameter2 = %d5_sanct_row% timing = 1 STR_VAR resource = EVAL ~d5iny%index%~ END
 	END
   END
+
+//change sanctuary's visual effect__________________________________________________
+  CREATE EFF ~d5pr109~
+	WRITE_LONG 0x10 232
+	WRITE_LONG 0x14 1
+	WRITE_LONG 0x20 20
+	WRITE_LONG 0x28 60
+	WRITE_SHORT 0x2c 100
+	WRITE_ASCII 0x30 ~D5PR109A~ #8
+	WRITE_LONG 0x48 102  
+  COPY_EXISTING ~sppr109.spl~ ~override/d5pr109a.spl~
+	LPF DELETE_EFFECT INT_VAR match_target = 1 END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 power = 0 parameter1 = 0 timing = 1 STR_VAR resource = ~SPPR109~ END
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 324 target = 1 power = 0 parameter2 = %d5_sanct_row% timing = 1 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
+  COPY_EXISTING ~sppr109.spl~ ~override~
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 153 parameter2 = 1 STR_VAR resource = ~~ END
+	LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 153 opcode = 59 parameter1 = 25 parameter2 = 0 STR_VAR insert = ~first~ END 
+	LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 153 opcode = 275 parameter1 = 25 parameter2 = 0 STR_VAR insert = ~first~ END 
+	LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 153 opcode = 66 parameter1 = 128 parameter2 = 0 STR_VAR insert = ~first~ END 
+	LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 153 opcode = 177 target = 1 parameter2 = 2 parameter1 = 0 STR_VAR resource = ~d5pr109~ insert = ~last~ END 
  
 END
 //__________________________________________________________________________________
