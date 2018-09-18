@@ -16,8 +16,10 @@ X- d5ssplz is adding all spells - 206 not working
  -- d5slot1a et al. using 171 instead of 177
 X- need to 172 all spells right after chargen
  -- done
-- now not adding any spells!
-- need to add spwi110, 420, 710, 809, 617, 908 to d50wspl
+X- now not adding any spells!
+X- need to add spwi110, 420, 710, 809, 617, 908 to d50wspl
+- don't make scrolls unusable, just add permanent 101 vs. 147
+ 
 */
 
 
@@ -1121,13 +1123,13 @@ LAF action_replace_hla STR_VAR kit_name = ~D5_SORCERER_THIEF~ remove_ability = ~
 LAF action_replace_hla STR_VAR kit_name = ~D5_SORCERER_THIEF~ remove_ability = ~AP_SPWI930~ ability = ~AP_D5HL930~ END
 
 
-//disable quickspell buttons__________________________________________________________
-// ...they would only show the empty display spells anyway
+//disable quickspell buttons and scroll learning______________________________________
 //
 COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5srcnq.spl~
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 144 target = 1 parameter2 = 3 timing = 9 END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 144 target = 1 parameter2 = 4 timing = 9 END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 144 target = 1 parameter2 = 5 timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 101 target = 1 parameter2 = 147 timing = 9 END
 
 APPEND ~d5sorc.2da~ ~NO_QUICK    AP_D5SRCNQ  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
 

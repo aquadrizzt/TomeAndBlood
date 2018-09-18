@@ -522,11 +522,9 @@ Advantages:
 - Sorcerers do not scribe and memorize spells as Mages do. Instead, they learn a small number of spells at each level, and can cast any of those spells without memorization.
 
 Disadvantages:
-- May not wear any armor.
-- May only use the following weapons: dagger, quarterstaff, dart, sling.
-- May only become Proficient (one slot) in any weapon class.
-- May not place any slots in any fighting style.
-- Hit Die: d4
+- May not learn spells from scrolls.
+- May not use the Identify spell.
+- May not use Sequencer or Contingency spells.
 ~
 @17061 = ~sorcerer/cleric~
 @17062 = ~Sorcerer/Cleric~
@@ -537,11 +535,9 @@ Advantages:
 - Sorcerers do not scribe and memorize spells as Mages do. Instead, they learn a small number of spells at each level, and can cast any of those spells without memorization.
 
 Disadvantages:
-- May not wear any armor.
-- May only use the following weapons: dagger, quarterstaff, dart, sling.
-- May only become Proficient (one slot) in any weapon class.
-- May not place any slots in any fighting style.
-- Hit Die: d4
+- May not learn spells from scrolls.
+- May not use the Identify spell.
+- May not use Sequencer or Contingency spells.
 ~
 @17071 = ~sorcerer/thief~
 @17072 = ~Sorcerer/Thief~
@@ -552,11 +548,9 @@ Advantages:
 - Sorcerers do not scribe and memorize spells as Mages do. Instead, they learn a small number of spells at each level, and can cast any of those spells without memorization.
 
 Disadvantages:
-- May not wear any armor.
-- May only use the following weapons: dagger, quarterstaff, dart, sling.
-- May only become Proficient (one slot) in any weapon class.
-- May not place any slots in any fighting style.
-- Hit Die: d4
+- May not learn spells from scrolls.
+- May not use the Identify spell.
+- May not use Sequencer or Contingency spells.
 ~
 @6005   = ~Spontaneous Casting~
 @6006   = ~Cancel Spontaneous Conversion~
