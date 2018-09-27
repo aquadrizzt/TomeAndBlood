@@ -92,8 +92,8 @@ END
 LAF action_add_hla STR_VAR kit_name = ~MAGE~ ability = ~GA_SPWI908~ num_allowed = ~1~ END
 
 COPY_EXISTING ~kitlist.2da~ ~override~
-  COUNT_2DA_COLS num_cols
-  READ_2DA_ENTRIES_NOW ~r2en_kitlist~ num_cols
+//  COUNT_2DA_COLS num_cols
+  READ_2DA_ENTRIES_NOW ~r2en_kitlist~ 9
 	FOR (row = 3; row < r2en_kitlist; row += 1) BEGIN
 	  READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 1 kitlist_name
 	  READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 8 class_num

@@ -426,12 +426,12 @@ END
 */
 
 COPY_EXISTING ~kitlist.2da~ ~override~
-  COUNT_2DA_COLS cols
-  COUNT_2DA_ROWS cols rows
+//  COUNT_2DA_COLS cols
+  COUNT_2DA_ROWS 10 rows
   FOR (row = 3 ; row < rows ; ++row) BEGIN
-	READ_2DA_ENTRY %row% 1 cols modname
-	READ_2DA_ENTRY %row% 5 cols modclab
-	READ_2DA_ENTRY %row% 8 cols modclass
+	READ_2DA_ENTRY %row% 1 10 modname
+	READ_2DA_ENTRY %row% 5 10 modclab
+	READ_2DA_ENTRY %row% 8 10 modclass
 	PATCH_IF (%modclass% = 1) && NOT (%modname% STRING_MATCHES_REGEXP ~C0SA+~ = 0) BEGIN	// mage kits
 	  INNER_ACTION BEGIN
 		APPEND ~%modclab%.2da~ ~XTRA_SPL    AP_D5SLOT1  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****  ~

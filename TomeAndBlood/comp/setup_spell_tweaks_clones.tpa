@@ -31,10 +31,24 @@
 	  PHP_EACH d5_no_midspells AS ind => spell BEGIN
 		LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~%spell%~ END 	//	remove level 3-4 spells
 	  END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5src3.spl~ END 		//	for spontaneous casters
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5src-3.spl~ END 	//		"
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5src4.spl~ END 		//		"
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5src-4.spl~ END 	//		"
 	COPY ~TomeAndBlood/data/spell_tweaks/d5clonh.spl~ ~override~
 	  PHP_EACH d5_no_highspells AS ind => spell BEGIN
 		LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~%spell%~ END 	//	remove level 5+ spells
 	  END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5src5.spl~ END 		//	for spontaneous casters
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5src-5.spl~ END 	//		"
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5src6.spl~ END 		//		"
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5src-6.spl~ END 	//		"
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5src7.spl~ END 		//		"
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5src-7.spl~ END 	//		"
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5src8.spl~ END 		//		"
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5src-8.spl~ END 	//		"
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5src9.spl~ END 		//		"
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~d5src-9.spl~ END 	//		"
 
 //...apply spell removal to simulacra
 //

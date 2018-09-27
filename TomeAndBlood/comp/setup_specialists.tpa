@@ -179,8 +179,8 @@ APPEND ~HIDESPL.2da~ ~SPWI124	1	0	0~ //add NRD to hidespl
 	
 //New Descriptions 
 COPY_EXISTING - ~kitlist.2da~ ~override~
-	COUNT_2DA_COLS num_cols
-		READ_2DA_ENTRIES_NOW ~r2en_kitlist~ num_cols
+//	COUNT_2DA_COLS num_cols
+		READ_2DA_ENTRIES_NOW ~r2en_kitlist~ 9
 		FOR (row = 1; row < r2en_kitlist; row += 1) BEGIN
 			READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 1 kitname
 			PATCH_IF (~%kitname%~ STRING_EQUAL_CASE ~ABJURER~) BEGIN
