@@ -91,6 +91,7 @@ ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
 			kit_name = D5_FIGHTER_SORCERER
 			clswpbon = ~1 0 3~
 			hpclass = ~HPFM~
+			clsrcreq = ~1 1 1 0 0 1 0~
 	END
 END
 
@@ -168,6 +169,7 @@ ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
 			kit_name = D5_SORCERER_CLERIC
 			clswpbon = ~0 0 3~
 			hpclass = ~HPCM~
+			clsrcreq = ~1 1 1 0 0 1 0~
 	END
 END
 
@@ -301,6 +303,7 @@ ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
 			kit_name = D5_SORCERER_THIEF
 			clswpbon = ~0 0 3~
 			hpclass = ~HPMT~
+			clsrcreq = ~1 1 1 0 0 1 0~
 	END
 END
 
@@ -808,7 +811,7 @@ APPEND ~d5sorc.2da~ ~NO_WSPLS    AP_D50WSPL  ****        ****        ****       
 
 //apply EFF protections_______________________________________________________________
 //
-APPEND ~clabma01.2da~ ~NO_WSPLS    AP_D5w206  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+APPEND ~clabma01.2da~ ~NO_WSPLS    AP_D5W206  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
 
 
 //daily spell slot refresh____________________________________________________________
