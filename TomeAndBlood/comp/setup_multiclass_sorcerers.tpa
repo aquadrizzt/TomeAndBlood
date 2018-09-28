@@ -373,6 +373,14 @@ BUT_ONLY
 
 //remove all mage spell slots_________________________________________________________
 //
+/* change to this later to enable sequencers
+COPY ~tomeandblood/lib/d5_base.spl~ ~override/d50wcst.spl~
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 145 target = 1 parameter2 = 0 timing = 9 END
+BUT_ONLY
+
+APPEND ~d5sorc.2da~ ~NO_CAST     AP_D50WCST  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+*/
+
 COPY ~tomeandblood/lib/d5_base.spl~ ~override/d50wslt.spl~
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 42 target = 1 parameter1 = (0 - 1) parameter2 = 511 timing = 9 END
 BUT_ONLY
@@ -547,7 +555,9 @@ SRCSLOTS    ****        ****        ****        AP_D5SRC2   ****        AP_D5SRC
 //make spell selection dialogue_______________________________________________________
 //... adapt from aquadrizzt's spell knowledge dialogue
 //
-COPY_EXISTING ~SPLSRCKN.2da~ ~override/d5_splsrckn.2da~ //save a copy of the existing sorcerer spell progression 
+/* no need to do this, use Aquadrizzt's
+COPY_EXISTING ~SPLSRCKN.2da~ ~override/d5splskn.2da~ //save a copy of the existing sorcerer spell progression 
+*/
 
 COPY ~tomeandblood/data/multi_sorcerers/d5msorc.cre~ ~override~ 
 			WRITE_ASCII 0x248 ~d5msorc~ #8
@@ -600,7 +610,7 @@ COPY 	~tomeandblood/data/multi_sorcerers/d5msorc.d~ ~override~ //easy to access 
 	END 
 >>>>>>>>
 
-COPY ~override/d5_splsrckn.2da~ ~override~ 
+COPY ~override/QD_SPLSRCKN.2da~ ~override~ 
 	COUNT_2DA_COLS num_cols
 //	COUNT_2DA_ROWS num_cols num_rows
 	READ_2DA_ENTRIES_NOW ~r2en_sor_spl_kwn~ num_cols
@@ -683,7 +693,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
   READ_SHORT 0x1c spell_type 
   READ_BYTE 0x25 spell_school
   READ_LONG 0x34 spell_level
-  PATCH_IF (~%SOURCE_RES%~ STRING_MATCHES_REGEXP ~[Ss][Pp][Ww][Ii][1-9][0-9][0-9]~ = 0) && (spell_type = 1) && NOT (spell_school = 10) && NOT (~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI420~) && NOT (~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI710~) && NOT (~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI809~) && NOT (~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI617~) && NOT (~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI908~) && NOT (~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI110~) BEGIN
+  PATCH_IF (~%SOURCE_RES%~ STRING_MATCHES_REGEXP ~[Ss][Pp][Ww][Ii][1-9][0-5][0-9]~ = 0) && (spell_type = 1) && NOT (spell_school = 10) && NOT (~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI420~) && NOT (~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI710~) && NOT (~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI809~) && NOT (~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI617~) && NOT (~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI908~) && NOT (~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI110~) BEGIN
 	SNPRINT (0 - 3) spell_num ~%SOURCE_RES%~
 	PATCH_IF NOT (FILE_CONTAINS_EVALUATED (~hidespl.2da~ ~%SOURCE_RES%~)) BEGIN
 	  SPRINT ~spell_res~ ~%SOURCE_RES%~
