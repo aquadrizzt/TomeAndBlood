@@ -116,10 +116,12 @@ ACTION_PHP_EACH wizard_spells AS ind => wizard_spell BEGIN
 	  END
 	BUT_ONLY
 	COPY_EXISTING ~%wizard_spell%.spl~ ~override~
-	  READ_SHORT 0x1c spell_type
-	  READ_LONG 0x34 spell_level
-	  READ_BYTE 0x25 spell_school
-	  READ_SHORT 0x68 abil_number
+	 READ_SHORT 0x1c spell_type
+	 READ_LONG 0x34 spell_level
+	 SET spont_level = (spell_level - 1)
+	 READ_BYTE 0x25 spell_school
+	 READ_SHORT 0x68 abil_number
+	 PATCH_IF (spell_level > 1) BEGIN
  	  LPF ADD_SPELL_HEADER INT_VAR required_level = 51 location = 2 target = 7 speed = 0 projectile = 1 STR_VAR icon = EVAL ~d5spnt%spell_level%~ END 
 	  LPF ADD_SPELL_EFFECT INT_VAR header = (%abil_number% + 1) opcode = 321 target = 1 parameter2 = 0 timing = 9 STR_VAR resource = ~d5spont~ END
 	  LPF ADD_SPELL_EFFECT INT_VAR header = (%abil_number% + 1) opcode = 144 target = 1 parameter2 = 2 timing = 0 duration = 5 END
@@ -161,8 +163,10 @@ ACTION_PHP_EACH wizard_spells AS ind => wizard_spell BEGIN
 		PATCH_IF specialist = 8192 BEGIN
 		  SET spec_school = 8
 	  	END
-		LPF ADD_SPELL_EFFECT INT_VAR header = (%abil_number% + 1) opcode = 177 parameter2 = 9 parameter1 = %specialist% target = 1 timing = 1 STR_VAR resource = EVAL ~d5spnt%spec_school%%spell_level%~ END
+		LPF ADD_SPELL_EFFECT INT_VAR header = (%abil_number% + 1) opcode = 177 parameter2 = 9 parameter1 = %specialist% target = 1 timing = 1 STR_VAR resource = EVAL ~d5spnt%spec_school%%spont_level%~ END
 	  END
+	 END
+	BUT_ONLY
   END
 END
 

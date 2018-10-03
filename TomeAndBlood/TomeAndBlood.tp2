@@ -1,6 +1,6 @@
 BACKUP ~TomeAndBlood/backup~
 AUTHOR ~aquadrizzt@gmail.com~
-VERSION ~0.8u~ 
+VERSION ~0.8v~ 
 
 ALWAYS
 
@@ -209,6 +209,7 @@ REQUIRE_PREDICATE (ENGINE_IS ~soa tob iwd bgee bg2ee iwdee eet~) @10
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_cantrips.qd~ //detection for this component 
 
 INCLUDE ~TomeAndBlood/comp/setup_cantrips.tpa~
+
 
 BEGIN ~First Level Cantrips~
 DESIGNATED 142
