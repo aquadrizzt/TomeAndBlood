@@ -137,7 +137,7 @@ ADD_KIT ~D5_SORCERER_CLERIC~
 ~D5_SORCERER_CLERIC     0  0  0  0  0  0~
 
 //KIT ABILITIES 2DA FILE______________________________________________________________
-~tomeandblood/data/multi_sorcerers/d5rsorc.2da~
+~tomeandblood/data/multi_sorcerers/d5csorc.2da~
 
 //RACIAL KIT AVAILABILITY_____________________________________________________________
 ~K_CM_E K_CM_H K_CM_HE K_CM_G K_CM_D K_CR_HL K_CR_HO~
@@ -202,7 +202,7 @@ ACTION_INCLUDE ~%MOD_FOLDER%/lib/fnp_compat.tpa~
 	u_bows 				= 2
 	u_crossbows 		= 2  
   STR_VAR
-    clab_name 		= ~d5rsorc~
+    clab_name 		= ~d5csorc~
 	class 			= ~cleric_mage~
 	s_Life 			= ~major~
 	s_Death 		= ~minor~
@@ -373,7 +373,7 @@ BUT_ONLY
 
 //remove all mage spell slots_________________________________________________________
 //
-/* change to this later to enable sequencers
+/* change to this later to enable sequencers... - actually, forget it, use a UI hack instead
 COPY ~tomeandblood/lib/d5_base.spl~ ~override/d50wcst.spl~
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 145 target = 1 parameter2 = 0 timing = 9 END
 BUT_ONLY
@@ -853,7 +853,8 @@ COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5slots.spl~
 
 
 // spell to refresh spell slots_______________________________________________________
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5srfrsh.spl~
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5srfrsh.spl~ BEGIN
+ COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5srfrsh.spl~
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 93 target = 1 parameter1 = 1 parameter2 = 1 timing = 1 END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src-1~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src-2~ END
@@ -865,10 +866,10 @@ COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5srfrsh.spl~
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src-8~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src-9~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5ssplz~ END
+END
 
 
 //manually create versions of sequencer/contingency___________________________________
-// ...eh, don't think this is possible.
 //
 
 
@@ -970,7 +971,7 @@ APPEND ~d5sorc.2da~ ~NO_QUICK    AP_D5SRCNQ  ****        ****        ****       
 //make all three clab tables__________________________________________________________
 //
 COPY_EXISTING ~d5sorc.2da~ ~override/d5fsorc.2da~
-COPY_EXISTING ~d5sorc.2da~ ~override/d5rsorc.2da~
+COPY_EXISTING ~d5sorc.2da~ ~override/d5csorc.2da~
 COPY_EXISTING ~d5sorc.2da~ ~override/d5tsorc.2da~
 
 
@@ -986,11 +987,11 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5fsorc.2da~ BEGIN
   END
 END 
 
-ACTION_IF FILE_EXISTS_IN_GAME ~d5rsorc.2da~ BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~d5csorc.2da~ BEGIN
   LAF qd_multiclass
 	STR_VAR
 		kit_name = ~D5_SORCERER_CLERIC~ 
-		kit_clab = ~d5rsorc~
+		kit_clab = ~d5csorc~
 		base_class = ~M~
 		mc_dir = ~tomeandblood/lib/qd_mc~
   END
