@@ -87,12 +87,13 @@ ACTION_PHP_EACH wizard_spells AS ind => wizard_spell BEGIN
 		READ_BYTE (%abil_offset% + 0x0c) abil_target
 		READ_SHORT (%abil_offset% + 0x0e) abil_range
 		READ_LONG 0x6a eff_offset
+		READ_SHORT 0x70 num_globals
 		WHILE (%abil_number% > 0) BEGIN
 		  SET abil_number = (%abil_number% - 1)
 		  WRITE_SHORT (%abil_offset% + 0x26 + (0x28 * %abil_number%)) 1
 		END
-		READ_BYTE (%eff_offset% + 0x02) eff_target
-		LPF DELETE_EFFECT INT_VAR match_probability2 = 0 END
+		READ_BYTE (%eff_offset% + (%num_globals% * 0x30) + 0x02) eff_target
+		LPF DELETE_EFFECT END
 		PATCH_IF (%abil_target% = 4) BEGIN
 		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 148 target = 1 power = %spell_level% parameter1 = 0 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%wizard_spell%~ END
 		  PATCH_IF (%abil_range% < 35) BEGIN
@@ -105,7 +106,7 @@ ACTION_PHP_EACH wizard_spells AS ind => wizard_spell BEGIN
 			END
 		  END
 		END
-		ELSE BEGIN
+		PATCH_IF NOT (%abil_target% = 4) BEGIN
 		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = %eff_target% power = %spell_level% parameter1 = 0 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%wizard_spell%~ END
 		END
 	  END
