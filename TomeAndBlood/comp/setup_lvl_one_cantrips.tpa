@@ -217,6 +217,9 @@ END
 
 //Infravision/True Strike: move to 2nd level if SR installed
 //
+// ... or maybe just set casting time = 9?
+//
+/*
 ACTION_IF FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN
   COPY_EXISTING ~spwi111.spl~ ~override~
   ADD_SPELL ~override/spwi111.spl~ 2 2 WIZARD_INFRAVISION
@@ -253,6 +256,9 @@ ACTION_IF FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN
 	APPEND ~hidespl.2da~ ~spwi111	1		0~
   END
 END
+*/
+COPY_EXISTING ~spwi111.spl~ ~override~
+  LPF ALTER_SPELL_HEADER INT_VAR speed = 9 END
 
 //Magic Missile: move to 2nd level
 //

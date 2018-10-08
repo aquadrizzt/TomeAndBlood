@@ -67,7 +67,7 @@
 
 //...5th level: nerfed mislead (imp. invisibility, no super invisibility. and 50% hp)
 //
-	COPY_EXISTING ~spwi505.spl~ ~overide~
+	COPY_EXISTING ~spwi505.spl~ ~override~
 	  READ_LONG 0x08 name
 	  READ_LONG 0x50 desc
 	COPY ~TomeAndBlood/data/spell_tweaks/spwi607.spl~ ~override/spwi505.spl~
