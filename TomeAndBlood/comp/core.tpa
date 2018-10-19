@@ -53,11 +53,6 @@ ACTION_IF (NOT FILE_EXISTS_IN_GAME ~qdtnb_core.qd~) THEN BEGIN
 		END
 	BUT_ONLY
 		
-	//new foundation for armored casting
-
-	INCLUDE ~%MOD_FOLDER%/lib/d5_armored_casting.tpa~
-	LAM D5_ARMORED_CASTING
-
 	//Update following spells to use 144 instead of 145 -> allows for armored casting components later.
 	// 	-- no, this is outdated... no need anymore, I think. 
 	//SPPR507 Champion's Strength
@@ -66,12 +61,14 @@ ACTION_IF (NOT FILE_EXISTS_IN_GAME ~qdtnb_core.qd~) THEN BEGIN
 	//SWI603 Tenser's Transformations
 	//SPWI711 Sphere of Chaos 
 
+/*
 	ACTION_FOR_EACH spl IN ~sppr507~ ~spsd02~ ~spwi315~ ~spwi603~ ~spwi711~ BEGIN 
 		ACTION_IF (FILE_EXISTS_IN_GAME ~%spl%.spl~) THEN BEGIN
 			COPY_EXISTING ~%spl%.spl~ ~override~ 
 				LPF ALTER_SPELL_EFFECT INT_VAR match_opcode = 145 new_opcode = 144 parameter2 = 2  END
 		END 
 	END 	
+*/
 	
 	/*Adding animations for various martial casters*/
 	/*Animations courtesy of Grammarsalad and Dib and used with permission*/

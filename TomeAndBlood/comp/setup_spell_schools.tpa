@@ -11,7 +11,7 @@
 
 //re-do the scroll map, with an extra column________________________________________
 //
-<<<<<<<< QD/qdscrlmap.2da
+<<<<<<<< D5/qdscrlmap.2da
 2DA V1.0 
 SPLRES
 			ITMRES	SCHOOL
@@ -25,7 +25,7 @@ SPLRES
 		INCLUDE ~TomeAndBlood/data/core/spell_list_sr.tpa~
 	END
 
-	COPY ~QD/qdscrlmap.2da~ ~override/qdscrlmap.2da~ 
+	COPY ~D5/qdscrlmap.2da~ ~override/qdscrlmap.2da~ 
 
 	COPY_EXISTING_REGEXP GLOB ~.*\.itm~ ~override~
 	  PATCH_IF (SOURCE_SIZE > 0x71) BEGIN

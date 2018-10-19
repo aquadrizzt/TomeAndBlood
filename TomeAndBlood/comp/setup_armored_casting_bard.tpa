@@ -2,6 +2,8 @@
 // ARMORED CASTING FOR BARDS
 // -----------------------------
 
+INCLUDE ~%MOD_FOLDER%/lib/d5_armored_casting.tpa~
+LAM D5_ARMORED_CASTING
 
 COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
 	PATCH_IF (SOURCE_SIZE > 0x71) BEGIN

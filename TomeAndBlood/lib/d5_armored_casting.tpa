@@ -64,17 +64,20 @@ DEFINE_ACTION_MACRO D5_ARMORED_CASTING BEGIN
 	COPY_EXISTING ~spcl221.spl~ ~override/d5arca1.spl~				// 	immunity to d5arcaL
 		SAY NAME1 ~ ~
 		SAY UNIDENTIFIED_DESC ~ ~
-		LPF DELETE_EFFECT INT_VAR match_probability1 = 100 END
+		WRITE_BYTE 0x19 0
+		LPF DELETE_EFFECT END
 		LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5arcal~ END
 	COPY_EXISTING ~spcl221.spl~ ~override/d5arca2.spl~				// 	immunity to d5arcaC
 		SAY NAME1 ~ ~
 		SAY UNIDENTIFIED_DESC ~ ~
-		LPF DELETE_EFFECT INT_VAR match_probability1 = 100 END
+		WRITE_BYTE 0x19 0
+		LPF DELETE_EFFECT END
 		LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5arcac~ END
 	COPY_EXISTING ~spcl221.spl~ ~override/d5arca3.spl~				// 	immunity to d5arcaP
 		SAY NAME1 ~ ~
 		SAY UNIDENTIFIED_DESC ~ ~
-		LPF DELETE_EFFECT INT_VAR match_probability1 = 100 END
+		WRITE_BYTE 0x19 0
+		LPF DELETE_EFFECT END
 		LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5arcap~ END
 	COPY_EXISTING ~sw1h04.itm~ ~override/d5_armcast.d5~				// 	marker file
   END
