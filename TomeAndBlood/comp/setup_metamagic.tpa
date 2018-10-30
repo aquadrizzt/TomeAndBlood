@@ -54,13 +54,31 @@ COPY ~TomeAndBlood/data/metamagic/spwi809d.spl~ ~override~
 COPY ~TomeAndBlood/data/metamagic/spwi809p.spl~ ~override~
 	SAY NAME1 @6045
 ACTION_IF FILE_EXISTS_IN_GAME ~scrl6p.itm~ THEN BEGIN
-	COPY ~TomeAndBlood/data/metamagic/mseqscrl.itm~ ~override/scrl6p.itm~
+//	COPY ~TomeAndBlood/data/metamagic/mseqscrl.itm~ ~override/scrl6p.itm~
+  COPY_EXISTING ~scrl6p.itm~ ~override~
+	SAY NAME2 @6041
+	SAY IDENTIFIED_DESC @6042
+	WRITE_SHORT 0x24 7
+	LPF DELETE_EFFECT INT_VAR opcode = 147 END
+  BUT_ONLY
 END
 ACTION_IF FILE_EXISTS_IN_GAME ~scrl8l.itm~ THEN BEGIN
-	COPY ~TomeAndBlood/data/metamagic/seqscrl.itm~ ~override/scrl8l.itm~
+//	COPY ~TomeAndBlood/data/metamagic/seqscrl.itm~ ~override/scrl8l.itm~
+  COPY_EXISTING ~scrl6p.itm~ ~override~
+	SAY NAME2 @6043
+	SAY IDENTIFIED_DESC @6044
+	WRITE_SHORT 0x24 13
+	LPF DELETE_EFFECT INT_VAR opcode = 147 END
+  BUT_ONLY
 END
 ACTION_IF FILE_EXISTS_IN_GAME ~scrl9d.itm~ THEN BEGIN
-	COPY ~TomeAndBlood/data/metamagic/trigscrl.itm~ ~override/scrl9d.itm~
+//	COPY ~TomeAndBlood/data/metamagic/trigscrl.itm~ ~override/scrl9d.itm~
+  COPY_EXISTING ~scrl9d.itm~ ~override~
+	SAY NAME2 @6045
+	SAY IDENTIFIED_DESC @6046
+	WRITE_SHORT 0x24 16
+	LPF DELETE_EFFECT INT_VAR opcode = 147 END
+  BUT_ONLY
 END
 
 

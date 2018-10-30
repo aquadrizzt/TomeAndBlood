@@ -1,6 +1,6 @@
 BACKUP ~TomeAndBlood/backup~
 AUTHOR ~aquadrizzt@gmail.com~
-VERSION ~0.8.26~ 
+VERSION ~0.8.28~ 
 
 ALWAYS
 
@@ -200,6 +200,7 @@ INCLUDE ~TomeAndBlood/comp/setup_metamagic.tpa~
 // 140: CANTRIPS (Subtledoctor)
 // 141: Cantrips, Original 
 // 142: Cantrips, Level One
+// 143: Cantrips via Wand Weapon
 // -----------------------------
 BEGIN ~Innate Cantrips~
 DESIGNATED 141
@@ -219,6 +220,16 @@ REQUIRE_PREDICATE (ENGINE_IS ~soa tob iwd bgee bg2ee iwdee eet~) @10
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_l1cantrips.qd~ //detection for this component 
 
 INCLUDE ~TomeAndBlood/comp/setup_lvl_one_cantrips.tpa~
+
+BEGIN ~Cantrip Wands~
+DESIGNATED 143
+SUBCOMPONENT ~Cantrips~ 
+REQUIRE_PREDICATE (ENGINE_IS ~soa tob iwd bgee bg2ee iwdee eet~) @10 
+
+COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_cantwand.qd~ //detection for this component 
+
+INCLUDE ~TomeAndBlood/comp/setup_cantrip_wands.tpa~
+
 
 // -----------------------------
 // 150: REVISED SPECIALISTS

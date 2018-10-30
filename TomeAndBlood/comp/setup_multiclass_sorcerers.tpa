@@ -373,7 +373,7 @@ BUT_ONLY
 
 //remove all mage spell slots_________________________________________________________
 //
-/* change to this later to enable sequencers... - actually, forget it, use a UI hack instead
+/* 
 COPY ~tomeandblood/lib/d5_base.spl~ ~override/d50wcst.spl~
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 145 target = 1 parameter2 = 0 timing = 9 END
 BUT_ONLY
@@ -869,8 +869,27 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5srfrsh.spl~ BEGIN
 END
 
 
+/*
 //manually create versions of sequencer/contingency___________________________________
 //
+COPY ~TomeAndBlood/data/metamagic/spwi420.spl~ ~override/d5sseq1.spl~
+	SAY NAME1 @6041
+	SAY UNIDENTIFIED_DESC @6042
+// only allow to be cast if have 1 each 1st- and 2nd-level slots
+// reduce 1st- and 2nd-level slots by 1 when cast
+
+COPY ~TomeAndBlood/data/metamagic/spwi710.spl~ ~override/d5sseq2.spl~
+	SAY NAME1 @6043
+	SAY UNIDENTIFIED_DESC @6044
+// only allow to be cast if have 1 each 2nd/3rd/4th-level slots
+// reduce 2nd/3rd/4th-level slots by 1 when cast
+
+COPY ~TomeAndBlood/data/metamagic/spwi809.spl~ ~override/d5sseq3.spl~
+	SAY NAME1 @6045
+	SAY UNIDENTIFIED_DESC @6046
+// only allow to be cast if have 1 each 4th/5th/6th-level slots
+// reduce 4th/5th/6th-level slots by 1 when cast
+*/
 
 
 //item usability______________________________________________________________________
@@ -1200,3 +1219,4 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src1e.eff~ BEGIN
   BUT_ONLY
 END
 //___________________________________________________________________________________
+

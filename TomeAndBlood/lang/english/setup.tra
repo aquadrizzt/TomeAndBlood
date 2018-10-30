@@ -555,6 +555,17 @@ Disadvantages:
 @6005   = ~Spontaneous Casting~
 @6006   = ~Cancel Spontaneous Conversion~
 //
+@6010   = ~Cantrip Wand~
+@6011   = ~When wizards first learn to use magic, before deciding whether to specialize, they are taught some of the most basic and minor effects from each school. Unable as yet to cast proper spells, they channel these cantrips through a wand. A crutch, to be sure, but it has the benefit of not requiring memorization and not running out of charges.
+
+A wizard may use a Cantrip Wand as a ranged weapon, casting a Magic Bolt at an enemy once per round, which does 1d4+1 magic damage. (Note, while doing so the wizard will be at a tactical disadvantage against nearby attackers using melee weapons.) Alternatively, the wizard can use the wand to cast one of the following cantrips:
+- Deflective Shell: blocks one 1st- through 3rd level spell targeting the wizard. The Shell last 3 rounds.
+- Conjure Rabbit: conjures a small rodent near the wizard, which lasts for 3 rounds.
+- Glimpse: gives the wizard a brief (2-second) look at another area of the map.
+- Drowse: the target will fall asleep for 1 round on a failed save vs. Spells.
+- Bedazzle: the target suffers a -1 penalty to thac0 and AC for 1 round; on a failed save vs. Breath, the penalties are doubled and last for 2 rounds, and the target is blinded for the first round.
+- Stiffen Bones: the target suffers from painful stiffness, suffering a -1 penalty to thac0 and damage for 1 round; on a failed save vs. Death, the penalties are doubled and last for 2 rounds, and the target is Slowed for the first round.
+- Earthen Grasp: the target will be entangled, unable to move, for 2 rounds on a failed save vs. Petrification.~
 @6012   = ~Choose a cantrip~
 @6013   = ~This power represents a wizard's most basic spellcasting ability. It allows a Mage to choose one of the following cantrips:
 - Protective Shell

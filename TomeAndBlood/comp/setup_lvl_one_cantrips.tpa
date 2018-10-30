@@ -567,8 +567,8 @@ END
 
 //Ring of Wizardry: replace with Ring of Acuity
 //
-ACTION_IF FILE_EXISTS_IN_GAME ~ring40.itm~ BEGIN
-  COPY_EXISTING ~ring40.itm~ ~override/ring08.itm~
+ACTION_IF GAME_IS ~bgee eet~ BEGIN
+  COPY ~TomeAndBlood/data/level_one_cantrips/ring40.itm~ ~override/ring08.itm~
 END
 
 ////////////////////////////////////////////////////////////////////////////////////
