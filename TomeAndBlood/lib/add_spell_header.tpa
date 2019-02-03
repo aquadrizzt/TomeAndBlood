@@ -52,10 +52,8 @@ END
 PATCH_IF (SOURCE_SIZE > (0x72 + (hs * hc) + (0x30 * fc))) BEGIN
   DELETE_BYTES (0x72 + (hs * hc) + (0x30 * fc)) (SOURCE_SIZE - (0x72 + (hs * hc) + (0x30 * fc)))
 END
-
 // added by Ardanis
 WRITE_SHORT 0x6e 0
-
 END // end of function
 
 ////////////////////////////////////////////////////////////////////////
@@ -72,7 +70,6 @@ DEFINE_PATCH_FUNCTION ~ADD_SPELL_HEADER~
     required_level=1
     speed=0
     projectile=1
-
     copy_header=0
     insert_point=~-1~
   STR_VAR
@@ -82,13 +79,11 @@ DEFINE_PATCH_FUNCTION ~ADD_SPELL_HEADER~
 BEGIN
   LPF ~FJ_SPL_ITM_REINDEX~ END
   hs=0x28
-
   READ_LONG 0x64 ho
   READ_SHORT 0x68 hc
   READ_LONG 0x6a eo
   insert_point = (insert_point>hc || insert_point<0) ? hc : insert_point
   copy_header = (copy_header<0) ? 0 : copy_header
-
   PATCH_IF copy_header>hc BEGIN
     PATCH_WARN ~Unable to copy %copy_header%th header, %SOURCE_FILE% contains only %hc% headers!~
   END ELSE BEGIN
@@ -104,14 +99,12 @@ BEGIN
     END
     WRITE_SHORT 0x68 hc
     WRITE_LONG 0x6a eo
-
     READ_SHORT 0x70 ei // technically, it is a counter
     FOR (i=ho;i<ho+hc*hs;i+=hs) BEGIN
       READ_SHORT i+0x1e ec
       WRITE_SHORT i+0x20 ei
       ei+=ec
     END
-
     PATCH_IF copy_header BEGIN
       READ_SHORT ho+insert_point*hs+0x1e ec
       READ_SHORT ho+insert_point*hs+0x20 ei

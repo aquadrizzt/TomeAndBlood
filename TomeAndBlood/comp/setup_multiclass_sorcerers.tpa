@@ -10,8 +10,10 @@
 INCLUDE ~tomeandblood/lib/qd_multiclass.tpa~
 
 // TO DO:
-// - what about metamagic?
-// - what about Identify?
+// - what about metamagic? --> looks like it can only be done with no cost to fill... see new innate metamagic subcomponent
+// - ...hmm, it's not working :(
+// - ...even if it does, would still have to use the old way for mages and single-class sorcs :(
+// - what about Identify?  --> looks like in cannot be done by any method
 
 //base .2da file
 //
@@ -405,11 +407,13 @@ NOSLOTS     AP_D50WSLT  ****        ****        ****        ****        ****    
 COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5w206.spl~
 COPY ~tomeandblood/lib/d5_base.spl~ ~override/d50wspl.spl~
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~SPWI110~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~SPWI420~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~SPWI710~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~SPWI809~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~SPWI617~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~SPWI908~ END
+  PATCH_IF !(MOD_IS_INSTALLED ~TomeAndBlood.tp2~ ~135~) BEGIN
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~SPWI420~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~SPWI710~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~SPWI809~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~SPWI617~ END
+  END
 
 COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5slot1a.spl~
 COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5slot1b.spl~
@@ -693,9 +697,15 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
   READ_SHORT 0x1c spell_type 
   READ_BYTE 0x25 spell_school
   READ_LONG 0x34 spell_level
-  PATCH_IF (~%SOURCE_RES%~ STRING_MATCHES_REGEXP ~[Ss][Pp][Ww][Ii][1-9][0-5][0-9]~ = 0) && (spell_type = 1) && NOT (spell_school = 10) && NOT (~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI420~) && NOT (~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI710~) && NOT (~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI809~) && NOT (~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI617~) && NOT (~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI908~) && NOT (~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI110~) BEGIN
+  PATCH_IF (~%SOURCE_RES%~ STRING_MATCHES_REGEXP ~[Ss][Pp][Ww][Ii][1-9][0-5][0-9]~ = 0) && (spell_type = 1) && !(spell_school = 10) && !(~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI908~) && !(~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI110~) && !(~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI124~) BEGIN
 	SNPRINT (0 - 3) spell_num ~%SOURCE_RES%~
-	PATCH_IF NOT (FILE_CONTAINS_EVALUATED (~hidespl.2da~ ~%SOURCE_RES%~)) BEGIN
+	SET go = 1
+	PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI420~) || (~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI710~) || (~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI809~) || (~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI617~) BEGIN
+	  PATCH_IF NOT (MOD_IS_INSTALLED ~TomeAndBlood.tp2~ ~135~) BEGIN
+		SET go = 0
+	  END
+	END	
+	PATCH_IF (go = 1) && !(FILE_CONTAINS_EVALUATED (~hidespl.2da~ ~%SOURCE_RES%~)) BEGIN
 	  SPRINT ~spell_res~ ~%SOURCE_RES%~
 	  READ_STRREF NAME1 spell_name
 	  READ_STRREF UNIDENTIFIED_DESC spell_description
@@ -869,6 +879,13 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5srfrsh.spl~ BEGIN
 END
 
 
+//make sure sequencer/contingency works if possible___________________________________
+//
+ACTION_IF FILE_EXISTS_IN_GAME ~M_d5meta.lua~ BEGIN
+	// umm... actually, maybe the metamagic component will take care of this entirely...h
+END
+
+
 /*
 //manually create versions of sequencer/contingency___________________________________
 //
@@ -892,16 +909,76 @@ COPY ~TomeAndBlood/data/metamagic/spwi809.spl~ ~override/d5sseq3.spl~
 */
 
 
-//item usability______________________________________________________________________
-// ...make sequencer/contingency scrolls unusable by multi sorcerers
+//make sequencer/contingency scrolls unusable by multi sorcerers_______________________
 //
-ACTION_FOR_EACH meta_scroll IN ~scrl6p~ ~scrl8l~ ~scrl9d~ ~scrl7u~ ~scrl9q~ BEGIN
-  ACTION_IF FILE_EXISTS_IN_GAME ~%meta_scroll%.itm~ BEGIN
-	COPY_EXISTING ~%meta_scroll%.itm~ ~override~
+ACTION_IF !(MOD_IS_INSTALLED ~TomeAndBlood.tp2~ ~133~) AND !(MOD_IS_INSTALLED ~TomeAndBlood.tp2~ ~134~) BEGIN
+  ACTION_IF FILE_EXISTS_IN_GAME ~scrl9q.itm~ BEGIN
+	COPY_EXISTING ~scrl9q.itm~ ~override~
 	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 319 parameter1 = %fighter_sorcerer_code% parameter2 = 9 power = 0 timing = 2 END
 	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 319 parameter1 = %sorcerer_cleric_code% parameter2 = 9 power = 0 timing = 2 END
 	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 319 parameter1 = %sorcerer_thief_code% parameter2 = 9 power = 0 timing = 2 END
   END
+END
+ACTION_IF !(MOD_IS_INSTALLED ~TomeAndBlood.tp2~ ~133~) AND !(MOD_IS_INSTALLED ~TomeAndBlood.tp2~ ~134~) AND !(MOD_IS_INSTALLED ~TomeAndBlood.tp2~ ~135~) BEGIN
+  ACTION_FOR_EACH meta_scroll IN ~scrl6p~ ~scrl8l~ ~scrl9d~ ~scrl7u~ BEGIN
+	ACTION_IF FILE_EXISTS_IN_GAME ~%meta_scroll%.itm~ BEGIN
+	  COPY_EXISTING ~%meta_scroll%.itm~ ~override~
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 319 parameter1 = %fighter_sorcerer_code% parameter2 = 9 power = 0 timing = 2 END
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 319 parameter1 = %sorcerer_cleric_code% parameter2 = 9 power = 0 timing = 2 END
+		LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 319 parameter1 = %sorcerer_thief_code% parameter2 = 9 power = 0 timing = 2 END
+	END
+  END
+END
+
+ACTION_IF (MOD_IS_INSTALLED ~TomeAndBlood.tp2~ ~135~) BEGIN
+  ACTION_IF FILE_EXISTS_IN_GAME ~M_d5meta.lua~ BEGIN
+  	APPEND ~M_d5meta.lua~ ~mageBookStrings['D5W4420'] = mageBookStrings['SPWI420'] -- Minor Sequencer clone, replace resource, keep quotes
+mageBookStrings['D5W4617'] = mageBookStrings['SPWI710'] -- Spell Sequencer
+mageBookStrings['D5W4710'] = mageBookStrings['SPWI809'] -- Spell Trigger
+mageBookStrings['D5W4809'] = mageBookStrings['SPWI617'] -- Contingency
+mageBookStrings['D5W4908'] = mageBookStrings['SPWI908'] -- Chain Contingency~
+  END
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~spwi420d.spl~ BEGIN
+  COPY_EXISTING ~spwi420d.spl~ ~override/d5w4420d.spl~
+	LPF ALTER_EFFECT INT_VAR silent = 1 STR_VAR resource = ~d5w4420~ END
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~spwi420p.spl~ BEGIN
+  COPY_EXISTING ~spwi420p.spl~ ~override/d5w4420p.spl~
+	LPF ALTER_EFFECT INT_VAR silent = 1 STR_VAR resource = ~d5w4420~ END
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~spwi710d.spl~ BEGIN
+  COPY_EXISTING ~spwi710d.spl~ ~override/d5w4710d.spl~
+	LPF ALTER_EFFECT INT_VAR silent = 1 STR_VAR resource = ~d5w4710~ END
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~spwi710p.spl~ BEGIN
+  COPY_EXISTING ~spwi710p.spl~ ~override/d5w4710p.spl~
+	LPF ALTER_EFFECT INT_VAR silent = 1 STR_VAR resource = ~d5w4710~ END
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~spwi809d.spl~ BEGIN
+  COPY_EXISTING ~spwi809d.spl~ ~override/d5w4809d.spl~
+	LPF ALTER_EFFECT INT_VAR silent = 1 STR_VAR resource = ~d5w4809~ END
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~spwi809p.spl~ BEGIN
+  COPY_EXISTING ~spwi809p.spl~ ~override/d5w4809p.spl~
+	LPF ALTER_EFFECT INT_VAR silent = 1 STR_VAR resource = ~d5w4809~ END
+END
+
+
+//multisorc no get innate sequencers__________________________________________________
+//
+ACTION_IF FILE_EXISTS_IN_GAME ~d5adsq1m.spl~ BEGIN
+  CREATE SPL ~d5msnseq~
+  COPY_EXISTING ~d5msnseq.spl~ ~override~
+	LPF ADD_SPELL_HEADER INT_VAR target = 1 END 
+  COPY_EXISTING ~d5msnseq.spl~ ~override~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5adsq1m~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5adsq2m~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5adsq3m~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5adcntm~ END
+
+  APPEND ~d5sorc.2da~ ~NO_META     AP_D5MSNSEQ ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
 END
 
 
@@ -1193,7 +1270,6 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src1e.eff~ BEGIN
 	WRITE_SHORT 0x2c 100
 	WRITE_LONG 0x90 1
 	WRITE_EVALUATED_ASCII 0x94 ~D5SRC9F~ #8
-// repeat for levels 2-9
 
   COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
    PATCH_IF (~%SOURCE_SIZE%~ > ~0x71~) BEGIN

@@ -1,16 +1,18 @@
 BACKUP ~TomeAndBlood/backup~
 AUTHOR ~aquadrizzt@gmail.com~
-VERSION ~0.8.28~ 
+VERSION ~0.8.29~ 
 
 ALWAYS
 
-	INCLUDE ~TomeAndBlood/comp/core.tpa~ 
+	INCLUDE ~TomeAndBlood/lib/add_spell_header.tpa~
 
 	INCLUDE ~TomeAndBlood/lib/fl#add_kit_ee.tpa~
 
 	INCLUDE ~TomeAndBlood/lib/joinable_npcs.tpa~
 
 	INCLUDE ~TomeAndBlood/lib/hla_actions.tpa~
+
+	INCLUDE ~TomeAndBlood/comp/core.tpa~ 
 	
 END
 
@@ -187,13 +189,59 @@ INCLUDE ~TomeAndBlood/comp/setup_crafting.tpa~
 
 // -----------------------------
 // 130: INNATE METAMAGIC (Subtledoctor)
+// 131: innate metamagic, learned automatically by everyone
+// 132: innate metamagic, learned automatically (none for sorcerers)
+// 133: innate metamagic, learned from scrolls or in CharGen 
+// 134: innate metamagic, learned from scrolls only (none for sorcerers) 
+// 135: metamagic spells, no cost to fill (compatible with multi sorcerers)
 // -----------------------------
-BEGIN ~Innate Metamagic~
-DESIGNATED 130
+
+BEGIN ~Innate Metamagic; learned automatically by everyone~
+DESIGNATED 131
+SUBCOMPONENT ~Innate Metamagic~ 
 REQUIRE_PREDICATE (ENGINE_IS ~soa tob iwd bgee bg2ee iwdee eet~) @10 
+FORBID_COMPONENT ~setup-stratagems.tp2~ ~4250~ ~conflict~
+REQUIRE_PREDICATE NOT FILE_EXISTS ~weidu_external/markers/dw#innate_triggers.mrk~ ~conflict~
+
+COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_metamagic.qd~ //detection for this component 
+OUTER_SET sequencer_method = 1
+
+INCLUDE ~TomeAndBlood/comp/setup_metamagic.tpa~
+
+BEGIN ~Innate Metamagic; learned automatically but NOT by sorcerers~
+DESIGNATED 132
+SUBCOMPONENT ~Innate Metamagic~ 
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_metamagic.qd~ //detection for this component 
 
+OUTER_SET sequencer_method = 2
+INCLUDE ~TomeAndBlood/comp/setup_metamagic.tpa~
+
+BEGIN ~Innate Metamagic; learned from scrolls or character generation~
+DESIGNATED 133
+SUBCOMPONENT ~Innate Metamagic~ 
+
+COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_metamagic.qd~ //detection for this component 
+
+OUTER_SET sequencer_method = 3
+INCLUDE ~TomeAndBlood/comp/setup_metamagic.tpa~
+
+BEGIN ~Innate Metamagic; learned from scrolls ONLY (none for sorcerers)~
+DESIGNATED 134
+SUBCOMPONENT ~Innate Metamagic~ 
+
+COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_metamagic.qd~ //detection for this component 
+
+OUTER_SET sequencer_method = 4
+INCLUDE ~TomeAndBlood/comp/setup_metamagic.tpa~
+
+BEGIN ~Metamagic = Spells; no cost to fill sequencers (compatible with multiclass sorcerers)~
+DESIGNATED 135
+SUBCOMPONENT ~Innate Metamagic~  (GAME_IS ~bgee bg2ee eet iwdee~)
+
+COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_metamagic.qd~ //detection for this component 
+
+OUTER_SET sequencer_method = 5
 INCLUDE ~TomeAndBlood/comp/setup_metamagic.tpa~
 
 // -----------------------------
@@ -202,6 +250,7 @@ INCLUDE ~TomeAndBlood/comp/setup_metamagic.tpa~
 // 142: Cantrips, Level One
 // 143: Cantrips via Wand Weapon
 // -----------------------------
+
 BEGIN ~Innate Cantrips~
 DESIGNATED 141
 SUBCOMPONENT ~Cantrips~ 
@@ -210,7 +259,6 @@ REQUIRE_PREDICATE (ENGINE_IS ~soa tob iwd bgee bg2ee iwdee eet~) @10
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_cantrips.qd~ //detection for this component 
 
 INCLUDE ~TomeAndBlood/comp/setup_cantrips.tpa~
-
 
 BEGIN ~First Level Cantrips~
 DESIGNATED 142
@@ -258,7 +306,7 @@ INCLUDE ~TomeAndBlood/comp/setup_ability_bonuses.tpa~
 // -----------------------------
 // 170: SPELL SELECTION DIALOG
 // -----------------------------
-BEGIN ~Spell Select Dialog~ 
+BEGIN ~Spell Select Dialog and Multiclass Sorcerers~ 
 DESIGNATED 170
 REQUIRE_PREDICATE (FILE_EXISTS_IN_GAME ~enginest.2da~) @12
 

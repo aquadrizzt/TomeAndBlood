@@ -7,95 +7,62 @@
 
 INCLUDE ~TomeAndBlood/lib/hla_actions.tpa~
 
+// this changes the spells to delete themselves, and the sequencers to create the innates...
+// that needs to vary by install option... or does it??
 
-//Removing these spells from the levelup table
-//
-ACTION_IF (FILE_EXISTS_IN_GAME ~HIDESPL.2DA~) THEN BEGIN 
-	APPEND ~HIDESPL.2da~ ~SPWI420	1	0~ //Minor Sequencer
-	APPEND ~HIDESPL.2da~ ~SPWI710	1	0~ //Spell Sequencer
-	APPEND ~HIDESPL.2da~ ~SPWI809	1	0~ //Spell Trigger
-	APPEND ~HIDESPL.2da~ ~SPWI617	1	0~ //Contingency
-	APPEND ~HIDESPL.2da~ ~SPWI908	1	0~ //Chain Contingency
-END 
+ACTION_IF NOT (%sequencer_method% = 5) BEGIN
 
 //Sequencers
 //
 COPY ~TomeAndBlood/data/metamagic/d5_sp420.bam~ ~override~
+COPY ~TomeAndBlood/data/metamagic/d5_sp710.bam~ ~override~
+COPY ~TomeAndBlood/data/metamagic/d5_sp809.bam~ ~override~
+
 COPY ~TomeAndBlood/data/metamagic/d5_seq1.spl~ ~override~
-	SAY NAME1 @6041
-	SAY UNIDENTIFIED_DESC @6042
-COPY ~TomeAndBlood/data/metamagic/spwi420.spl~ ~override~
 	SAY NAME1 @6041
 	SAY UNIDENTIFIED_DESC @6042
 COPY ~TomeAndBlood/data/metamagic/spwi420d.spl~ ~override~
 	SAY NAME1 @6041
 COPY ~TomeAndBlood/data/metamagic/spwi420p.spl~ ~override~
 	SAY NAME1 @6041
-COPY ~TomeAndBlood/data/metamagic/d5_sp710.bam~ ~override~
 COPY ~TomeAndBlood/data/metamagic/d5_seq2.spl~ ~override~
-	SAY NAME1 @6043
-	SAY UNIDENTIFIED_DESC @6044
-COPY ~TomeAndBlood/data/metamagic/spwi710.spl~ ~override~
 	SAY NAME1 @6043
 	SAY UNIDENTIFIED_DESC @6044
 COPY ~TomeAndBlood/data/metamagic/spwi710d.spl~ ~override~
 	SAY NAME1 @6043
 COPY ~TomeAndBlood/data/metamagic/spwi710p.spl~ ~override~
 	SAY NAME1 @6043
-COPY ~TomeAndBlood/data/metamagic/d5_sp809.bam~ ~override~
 COPY ~TomeAndBlood/data/metamagic/d5_seq3.spl~ ~override~
-	SAY NAME1 @6045
-	SAY UNIDENTIFIED_DESC @6046
-COPY ~TomeAndBlood/data/metamagic/spwi809.spl~ ~override~
 	SAY NAME1 @6045
 	SAY UNIDENTIFIED_DESC @6046
 COPY ~TomeAndBlood/data/metamagic/spwi809d.spl~ ~override~
 	SAY NAME1 @6045
 COPY ~TomeAndBlood/data/metamagic/spwi809p.spl~ ~override~
 	SAY NAME1 @6045
-ACTION_IF FILE_EXISTS_IN_GAME ~scrl6p.itm~ THEN BEGIN
-//	COPY ~TomeAndBlood/data/metamagic/mseqscrl.itm~ ~override/scrl6p.itm~
-  COPY_EXISTING ~scrl6p.itm~ ~override~
-	SAY NAME2 @6041
-	SAY IDENTIFIED_DESC @6042
-	WRITE_SHORT 0x24 7
-	LPF DELETE_EFFECT INT_VAR opcode = 147 END
-  BUT_ONLY
-END
-ACTION_IF FILE_EXISTS_IN_GAME ~scrl8l.itm~ THEN BEGIN
-//	COPY ~TomeAndBlood/data/metamagic/seqscrl.itm~ ~override/scrl8l.itm~
-  COPY_EXISTING ~scrl6p.itm~ ~override~
-	SAY NAME2 @6043
-	SAY IDENTIFIED_DESC @6044
-	WRITE_SHORT 0x24 13
-	LPF DELETE_EFFECT INT_VAR opcode = 147 END
-  BUT_ONLY
-END
-ACTION_IF FILE_EXISTS_IN_GAME ~scrl9d.itm~ THEN BEGIN
-//	COPY ~TomeAndBlood/data/metamagic/trigscrl.itm~ ~override/scrl9d.itm~
-  COPY_EXISTING ~scrl9d.itm~ ~override~
-	SAY NAME2 @6045
-	SAY IDENTIFIED_DESC @6046
-	WRITE_SHORT 0x24 16
-	LPF DELETE_EFFECT INT_VAR opcode = 147 END
-  BUT_ONLY
-END
 
+COPY ~TomeAndBlood/data/metamagic/spwi420.spl~ ~override~
+	SAY NAME1 @6041
+	SAY UNIDENTIFIED_DESC @6042
+COPY ~TomeAndBlood/data/metamagic/spwi710.spl~ ~override~
+	SAY NAME1 @6043
+	SAY UNIDENTIFIED_DESC @6044
+COPY ~TomeAndBlood/data/metamagic/spwi809.spl~ ~override~
+	SAY NAME1 @6045
+	SAY UNIDENTIFIED_DESC @6046
 
 //Contingencies
 //
-COPY ~TomeAndBlood/data/metamagic/d5_conti.spl~ ~override/spwi617.spl~
+COPY ~TomeAndBlood/data/metamagic/d5conti.spl~ ~override~ 
 	SAY NAME1 @6351
 	SAY UNIDENTIFIED_DESC @6352
+COPY ~TomeAndBlood/data/metamagic/spwi617.spl~ ~override~ 
+	SAY NAME1 @6351
+	SAY UNIDENTIFIED_DESC @6352
+/*
 COPY ~TomeAndBlood/data/metamagic/d5wi617.spl~ ~override~
 	SAY NAME1 @6351
 	SAY UNIDENTIFIED_DESC @6352
-
-ACTION_IF FILE_EXISTS_IN_GAME ~scrl7u.itm~ THEN BEGIN
-	COPY_EXISTING ~scrl7u.itm~ ~override~
-		LPF ALTER_EFFECT INT_VAR match_opcode = 147 STR_VAR resource = ~d5wi617~ END
-END
-
+*/
 
 //Add Chain Contingency as HLA
 //
@@ -132,6 +99,304 @@ COPY_EXISTING ~kitlist.2da~ ~override~
 	  END
 	END
 BUT_ONLY	
+
+//Removing Chain Contingency from the levelup table
+//
+ ACTION_IF (FILE_EXISTS_IN_GAME ~HIDESPL.2DA~) THEN BEGIN 
+  ACTION_IF GAME_IS ~bgee bg2ee eet~ BEGIN
+	APPEND ~HIDESPL.2da~ ~SPWI908	1	0	0~ 		//	Chain Contingency
+  END
+  ACTION_IF GAME_IS ~iwdee~ BEGIN
+	APPEND ~HIDESPL.2da~ ~SPWI908	1	0~ 			//	Chain Contingency
+  END
+  ACTION_IF FILE_EXISTS ~tobex_ini/tobexcore.ini~ BEGIN
+	APPEND ~HIDESPL.2da~ ~SPWI908	****~ 			//	Chain Contingency
+  END
+ END 
+
+END 	//	end install method != 5
+
+
+// OPTION 1 + 2
+// -----------------------------
+// innate; learn metamagic automatically in CLAB; sorcerers may or may not use metamagic
+
+ACTION_IF (%sequencer_method% = 1) || (%sequencer_method% = 2) BEGIN
+
+ ACTION_IF FILE_EXISTS_IN_GAME ~scrl6p.itm~ THEN BEGIN
+	COPY_EXISTING ~scrl6o.itm~ ~override/scrl6p.itm~ 	// replace Minor Seq. scrolls with Secret Word
+ END
+ ACTION_IF FILE_EXISTS_IN_GAME ~scrl8l.itm~ THEN BEGIN
+	COPY_EXISTING ~scrl8g.itm~ ~override/scrl8l.itm~ 	// replace Sequencer scrolls with Ruby Ray
+ END
+ ACTION_IF FILE_EXISTS_IN_GAME ~scrl9d.itm~ THEN BEGIN
+	COPY_EXISTING ~scrl9a.itm~ ~override/scrl9d.itm~ 	// replace Trigger scrolls with Pierce Shield
+ END
+ ACTION_IF FILE_EXISTS_IN_GAME ~scrl7u.itm~ THEN BEGIN
+	COPY_EXISTING ~scrl7l.itm~ ~override/scrl7u.itm~ 	// replace Contingency scrolls with Pierce Magic
+ END
+
+ ACTION_IF (FILE_EXISTS_IN_GAME ~HIDESPL.2DA~) THEN BEGIN 
+  ACTION_IF GAME_IS ~bgee bg2ee eet~ BEGIN
+	APPEND ~HIDESPL.2da~ ~SPWI420	1	0	0~ 	//	Minor Sequencer
+	APPEND ~HIDESPL.2da~ ~SPWI710	1	0	0~ 	//	Spell Sequencer
+	APPEND ~HIDESPL.2da~ ~SPWI809	1	0	0~ 	//	Spell Trigger
+	APPEND ~HIDESPL.2da~ ~SPWI617	1	0	0~ 	//	Contingency
+  END
+  ACTION_IF GAME_IS ~iwdee~ BEGIN
+	APPEND ~HIDESPL.2da~ ~SPWI420	1	0~ 		//	Minor Sequencer
+	APPEND ~HIDESPL.2da~ ~SPWI710	1	0~ 		//	Spell Sequencer
+	APPEND ~HIDESPL.2da~ ~SPWI809	1	0~ 		//	Spell Trigger
+	APPEND ~HIDESPL.2da~ ~SPWI617	1	0~ 		//	Contingency
+  END
+  ACTION_IF FILE_EXISTS ~tobex_ini/tobexcore.ini~ BEGIN
+	APPEND ~HIDESPL.2da~ ~SPWI420	****~ 		//	Minor Sequencer
+	APPEND ~HIDESPL.2da~ ~SPWI710	****~ 		//	Spell Sequencer
+	APPEND ~HIDESPL.2da~ ~SPWI809	****~ 		//	Spell Trigger
+	APPEND ~HIDESPL.2da~ ~SPWI617	****~ 		//	Contingency
+  END
+ END 
+
+ // make abilities to add innates
+ CREATE EFF ~d5adsq1~
+  WRITE_LONG 0x10 171
+  WRITE_LONG 0x14 2
+  WRITE_LONG 0x24 9
+  WRITE_LONG 0x28 0
+  WRITE_SHORT 0x2c 100
+  WRITE_EVALUATED_ASCII 0x30 ~d5_seq1~ #8
+ CREATE EFF ~d5adsq2~
+  WRITE_LONG 0x10 171
+  WRITE_LONG 0x14 2
+  WRITE_LONG 0x24 9
+  WRITE_LONG 0x28 0
+  WRITE_SHORT 0x2c 100
+  WRITE_EVALUATED_ASCII 0x30 ~d5_seq2~ #8
+ CREATE EFF ~d5adsq3~
+  WRITE_LONG 0x10 171
+  WRITE_LONG 0x14 2
+  WRITE_LONG 0x24 9
+  WRITE_LONG 0x28 0
+  WRITE_SHORT 0x2c 100
+  WRITE_EVALUATED_ASCII 0x30 ~d5_seq3~ #8
+ CREATE EFF ~d5adcnt~
+  WRITE_LONG 0x10 171
+  WRITE_LONG 0x14 2
+  WRITE_LONG 0x24 9
+  WRITE_LONG 0x28 0
+  WRITE_SHORT 0x2c 100
+  WRITE_EVALUATED_ASCII 0x30 ~spwi617~ #8
+ 
+ CREATE SPL ~d5adsq1b~
+  COPY_EXISTING ~d5adsq1b.spl~ ~override~ 
+	LPF ADD_SPELL_HEADER INT_VAR target = 1 END 
+  COPY_EXISTING ~d5adsq1b.spl~ ~override~ 
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter1 = 5 parameter2 = 5 timing = 9 STR_VAR resource = ~d5adsq1~ END
+
+  COPY_EXISTING ~d5adsq1b.spl~ ~override/d5adsq2b.spl~ 
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 177 STR_VAR match_resource = ~d5adsq1~ resource = ~d5adsq2~ END
+  COPY_EXISTING ~d5adsq1b.spl~ ~override/d5adsq3b.spl~ 
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 177 STR_VAR match_resource = ~d5adsq1~ resource = ~d5adsq3~ END
+  COPY_EXISTING ~d5adsq1b.spl~ ~override/d5adcntb.spl~ 
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 177 STR_VAR match_resource = ~d5adsq1~ resource = ~d5adcnt~ END
+
+  COPY_EXISTING ~d5adsq1b.spl~ ~override/d5adsq1m.spl~ 
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 177 parameter1 = 1 END
+	LPF CLONE_EFFECT INT_VAR silent = 1 match_opcode = 177 match_parameter1 = 1 parameter1 = 7 END
+	LPF CLONE_EFFECT INT_VAR silent = 1 match_opcode = 177 match_parameter1 = 1 parameter1 = 13 END
+	LPF CLONE_EFFECT INT_VAR silent = 1 match_opcode = 177 match_parameter1 = 1 parameter1 = 14 END
+  COPY_EXISTING ~d5adsq2b.spl~ ~override/d5adsq2m.spl~ 
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 177 parameter1 = 1 END
+	LPF CLONE_EFFECT INT_VAR silent = 1 match_opcode = 177 match_parameter1 = 1 parameter1 = 7 END
+	LPF CLONE_EFFECT INT_VAR silent = 1 match_opcode = 177 match_parameter1 = 1 parameter1 = 13 END
+	LPF CLONE_EFFECT INT_VAR silent = 1 match_opcode = 177 match_parameter1 = 1 parameter1 = 14 END
+  COPY_EXISTING ~d5adsq3b.spl~ ~override/d5adsq3m.spl~ 
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 177 parameter1 = 1 END
+	LPF CLONE_EFFECT INT_VAR silent = 1 match_opcode = 177 match_parameter1 = 1 parameter1 = 7 END
+	LPF CLONE_EFFECT INT_VAR silent = 1 match_opcode = 177 match_parameter1 = 1 parameter1 = 13 END
+	LPF CLONE_EFFECT INT_VAR silent = 1 match_opcode = 177 match_parameter1 = 1 parameter1 = 14 END
+  COPY_EXISTING ~d5adcntb.spl~ ~override/d5adcntm.spl~ 
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 177 parameter1 = 1 END
+	LPF CLONE_EFFECT INT_VAR silent = 1 match_opcode = 177 match_parameter1 = 1 parameter1 = 7 END
+	LPF CLONE_EFFECT INT_VAR silent = 1 match_opcode = 177 match_parameter1 = 1 parameter1 = 13 END
+	LPF CLONE_EFFECT INT_VAR silent = 1 match_opcode = 177 match_parameter1 = 1 parameter1 = 14 END
+
+  COPY_EXISTING ~d5adsq1b.spl~ ~override/d5adsq1s.spl~ 
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 177 parameter1 = 19 END
+  COPY_EXISTING ~d5adsq2b.spl~ ~override/d5adsq2s.spl~ 
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 177 parameter1 = 19 END
+  COPY_EXISTING ~d5adsq3b.spl~ ~override/d5adsq3s.spl~ 
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 177 parameter1 = 19 END
+  COPY_EXISTING ~d5adcntb.spl~ ~override/d5adcnts.spl~ 
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 177 parameter1 = 19 END
+
+// add to CLAB tables
+ APPEND ~clabma01.2da~ ~METAMAGIC   ****        ****        ****        ****        ****        ****        AP_D5ADSQ1M ****        ****        AP_D5ADCNTM ****        ****        AP_D5ADSQ2M ****        ****        AP_D5ADSQ3M ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+ APPEND ~clabba01.2da~ ~METAMAGIC   ****        ****        ****        ****        ****        ****        ****        ****        ****        AP_D5ADSQ1B ****        ****        ****        ****        ****        AP_D5ADCNTB ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+ ACTION_IF %sequencer_method% = 1 BEGIN
+  APPEND ~clabma01.2da~ ~METAMAGIC   ****        ****        ****        ****        ****        ****        ****        AP_D5ADSQ1S ****        ****        AP_D5ADCNTS ****        ****        AP_D5ADSQ2S ****        ****        AP_D5ADSQ3S ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+ END
+ COPY_EXISTING ~kitlist.2da~ ~override~
+  COUNT_2DA_ROWS ~9~ "rows"
+  FOR ( index = 2 ; index < rows ; index = index + 1 ) BEGIN
+	READ_2DA_ENTRY %index% 5 9 modclab
+	READ_2DA_ENTRY %index% 8 9 modclass
+	DEFINE_ASSOCIATIVE_ARRAY d5_meta_array BEGIN "%modclab%" => "%modclass%" END
+  END
+ BUT_ONLY
+ ACTION_PHP_EACH d5_meta_array AS bi => ko BEGIN
+// mage: levels 7/10/13/16
+  ACTION_IF (%ko% = 1) BEGIN
+	APPEND ~%bi%.2da~ ~METAMAGIC   ****        ****        ****        ****        ****        ****        AP_D5ADSQ1M ****        ****        AP_D5ADCNTM ****        ****        AP_D5ADSQ2M ****        ****        AP_D5ADSQ3M ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+  END
+// bard: levels 10/16
+  ACTION_IF (%ko% = 5) BEGIN
+	APPEND ~%bi%.2da~ ~METAMAGIC   ****        ****        ****        ****        ****        ****        ****        ****        ****        AP_D5ADSQ1B ****        ****        ****        ****        ****        AP_D5ADCNTB ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+  END
+// sorcerer: levels 8/11/14/17
+  ACTION_IF %sequencer_method% = 1 BEGIN
+	ACTION_IF (%ko% = 19) BEGIN
+	  APPEND ~%bi%.2da~ ~METAMAGIC   ****        ****        ****        ****        ****        ****        ****        AP_D5ADSQ1S ****        ****        AP_D5ADCNTS ****        ****        AP_D5ADSQ2S ****        ****        AP_D5ADSQ3S ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+	END
+  END
+ END
+
+/*
+NOTE: in dialogue component, need to make sure multisorc are immune to these AP_ spells. 
+*/
+
+END	//	end options 1+2
+
+
+// OPTION 3 + 4
+// -----------------------------
+// innate; learn metamagic from scrolls; may or may not be chosen as spells
+
+ACTION_IF (%sequencer_method% = 3) || (%sequencer_method% = 4) BEGIN
+
+ ACTION_IF FILE_EXISTS_IN_GAME ~scrl6p.itm~ THEN BEGIN		// 	minor seq. scroll
+//	COPY ~TomeAndBlood/data/metamagic/mseqscrl.itm~ ~override/scrl6p.itm~
+  COPY_EXISTING ~scrl6p.itm~ ~override~
+	SAY NAME2 @6041
+	SAY IDENTIFIED_DESC @6042
+	WRITE_SHORT 0x24 7
+/*
+	LPF DELETE_EFFECT INT_VAR match_opcode = 146 END
+	LPF DELETE_EFFECT INT_VAR match_opcode = 148 END
+	LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 147 opcode = 171 timing = 9 target = 1 STR_VAR resource = ~d5_seq1~ END
+	LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 147 opcode = 172 timing = 9 target = 1 STR_VAR resource = ~spwi420~ END
+*/
+	LPF DELETE_EFFECT INT_VAR match_opcode = 147 END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 146 opcode = 171 timing = 9 target = 1 STR_VAR resource = ~d5_seq1~ END
+	LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 319 parameter1 = 19 parameter2 = 5 power = 0 timing = 2 END
+  BUT_ONLY
+ END
+ ACTION_IF FILE_EXISTS_IN_GAME ~scrl8l.itm~ THEN BEGIN		// 	sequencer scroll
+//	COPY ~TomeAndBlood/data/metamagic/seqscrl.itm~ ~override/scrl8l.itm~
+  COPY_EXISTING ~scrl8l.itm~ ~override~
+	SAY NAME2 @6043
+	SAY IDENTIFIED_DESC @6044
+	WRITE_SHORT 0x24 13
+	LPF DELETE_EFFECT INT_VAR match_opcode = 147 END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 146 opcode = 171 timing = 9 target = 1 STR_VAR resource = ~d5_seq2~ END
+	LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 319 parameter1 = 19 parameter2 = 5 power = 0 timing = 2 END
+  BUT_ONLY
+ END
+ ACTION_IF FILE_EXISTS_IN_GAME ~scrl9d.itm~ THEN BEGIN		// 	trigger scroll
+//	COPY ~TomeAndBlood/data/metamagic/trigscrl.itm~ ~override/scrl9d.itm~
+  COPY_EXISTING ~scrl9d.itm~ ~override~
+	SAY NAME2 @6045
+	SAY IDENTIFIED_DESC @6046
+	WRITE_SHORT 0x24 16
+	LPF DELETE_EFFECT INT_VAR match_opcode = 147 END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 146 opcode = 171 timing = 9 target = 1 STR_VAR resource = ~d5_seq3~ END
+	LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 319 parameter1 = 19 parameter2 = 5 power = 0 timing = 2 END
+  BUT_ONLY
+ END
+ ACTION_IF FILE_EXISTS_IN_GAME ~scrl7u.itm~ THEN BEGIN		// 	contingency scroll
+  COPY_EXISTING ~scrl7u.itm~ ~override~
+	WRITE_SHORT 0x24 10
+	LPF DELETE_EFFECT INT_VAR match_opcode = 147 END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 146 opcode = 171 timing = 9 target = 1 STR_VAR resource = ~d5conti~ END
+	LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 319 parameter1 = 19 parameter2 = 5 power = 0 timing = 2 END
+ END
+
+// seq_method = 3 means need to replace Contingency in Chargen selection with new spell that gives the innate
+ ACTION_IF (%sequencer_method% = 3) BEGIN
+  ACTION_IF (FILE_EXISTS_IN_GAME ~HIDESPL.2DA~) THEN BEGIN 
+	ACTION_IF GAME_IS ~bgee bg2ee eet~ BEGIN
+	  APPEND ~HIDESPL.2da~ ~SPWI617	1	0	0~ 		//	Contingency
+	END
+	ACTION_IF GAME_IS ~iwdee~ BEGIN
+	  APPEND ~HIDESPL.2da~ ~SPWI617	1	0~ 			//	Contingency
+	END
+	ACTION_IF FILE_EXISTS ~tobex_ini/tobexcore.ini~ BEGIN
+	  APPEND ~HIDESPL.2da~ ~SPWI617	****~ 			//	Contingency
+	END
+  END
+  ADD_SPELL ~override/spwi617.spl~ 2 6 D5_WIZARD_GIVE_CONTINGENCY
+	LPF DELETE_EFFECT END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~d5conti~ END
+ END
+
+// seq_method = 4 means no metamagic at CharGen, and no metamagic for sorcerers
+ ACTION_IF (%sequencer_method% = 4) BEGIN
+  ACTION_IF (FILE_EXISTS_IN_GAME ~HIDESPL.2DA~) THEN BEGIN 
+	ACTION_IF GAME_IS ~bgee bg2ee eet~ BEGIN
+	  APPEND ~HIDESPL.2da~ ~SPWI420	1	0	0~ 	//	Minor Sequencer
+	  APPEND ~HIDESPL.2da~ ~SPWI710	1	0	0~ 	//	Spell Sequencer
+	  APPEND ~HIDESPL.2da~ ~SPWI809	1	0	0~ 	//	Spell Trigger
+	  APPEND ~HIDESPL.2da~ ~SPWI617	1	0	0~ 	//	Contingency
+	END
+	ACTION_IF GAME_IS ~iwdee~ BEGIN
+	  APPEND ~HIDESPL.2da~ ~SPWI420	1	0~ 		//	Minor Sequencer
+	  APPEND ~HIDESPL.2da~ ~SPWI710	1	0~ 		//	Spell Sequencer
+	  APPEND ~HIDESPL.2da~ ~SPWI809	1	0~ 		//	Spell Trigger
+	  APPEND ~HIDESPL.2da~ ~SPWI617	1	0~ 		//	Contingency
+	END
+	ACTION_IF FILE_EXISTS ~tobex_ini/tobexcore.ini~ BEGIN
+	  APPEND ~HIDESPL.2da~ ~SPWI420	****~ 		//	Minor Sequencer
+	  APPEND ~HIDESPL.2da~ ~SPWI710	****~ 		//	Spell Sequencer
+	  APPEND ~HIDESPL.2da~ ~SPWI809	****~ 		//	Spell Trigger
+	  APPEND ~HIDESPL.2da~ ~SPWI617	****~ 		//	Contingency
+	END
+  END 
+ END
+
+END	//	end options 1+2
+
+
+// OPTION 5
+// -----------------------------
+// metamagic stay as spells; picked spells don't cost slots; compatible with multisorc
+
+ACTION_IF %sequencer_method% = 5 BEGIN
+
+// apply UI tweaks
+ COPY_EXISTING ~UI.MENU~ ~override~
+	REPLACE_TEXTUALLY ~function[ %TAB%%WNL%]+filterContingencyMageSpells()~ ~function	filterContingencyMageSpellsDisabled()~
+	REPLACE_TEXTUALLY ~mageScreen:SequenceSpell( bookSpells\[currentBookSpell\].resref, bookSpells\[currentBookSpell\].masterResref )~ ~mageScreen:SequenceSpell( bookSpells[currentBookSpell].resref, 'DEFAULT' )~
+	REPLACE_TEXTUALLY ~mageScreen:UnSequenceSpell( bottomSpells\[currentBottomSpell\].resref, bottomSpells\[currentBottomSpell\].masterResref )~ ~mageScreen:UnSequenceSpell( bottomSpells[currentBottomSpell].resref, 'DEFAULT' )~
+
+ COPY ~TomeAndBlood/data/metamagic/M_d5meta.lua~ ~override~
+
+// set metamagic spells to "non-combat" flag 
+ COPY_EXISTING ~spwi420.spl~ ~override~
+  WRITE_BYTE 0x1a (THIS BOR 0b00000001)
+ COPY_EXISTING ~spwi710.spl~ ~override~
+  WRITE_BYTE 0x1a (THIS BOR 0b00000001)
+ COPY_EXISTING ~spwi809.spl~ ~override~
+  WRITE_BYTE 0x1a (THIS BOR 0b00000001)
+ COPY_EXISTING ~spwi617.spl~ ~override~
+  WRITE_BYTE 0x1a (THIS BOR 0b00000001)
+ COPY_EXISTING ~spwi908.spl~ ~override~
+  WRITE_BYTE 0x1a (THIS BOR 0b00000001)
+
+END	//	end option 5
+
+
+// -----------------------------
+
 
 /*
 .
