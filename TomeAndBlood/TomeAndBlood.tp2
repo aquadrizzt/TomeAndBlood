@@ -1,6 +1,6 @@
 BACKUP ~TomeAndBlood/backup~
 AUTHOR ~aquadrizzt@gmail.com~
-VERSION ~0.8.29~ 
+VERSION ~0.8.30~ 
 
 ALWAYS
 
@@ -19,6 +19,7 @@ END
 /* Language Settings */
 AUTO_TRA ~TomeAndBlood/lang/%s~
 LANGUAGE ~English~ ~english~ ~TomeAndBlood/lang/english/setup.tra~ 
+
 
 // -----------------------------
 // 5: REBALANCED SPELL SCHOOLS (Subtledoctor)
@@ -306,12 +307,22 @@ INCLUDE ~TomeAndBlood/comp/setup_ability_bonuses.tpa~
 // -----------------------------
 // 170: SPELL SELECTION DIALOG
 // -----------------------------
-BEGIN ~Spell Select Dialog and Multiclass Sorcerers~ 
+BEGIN ~Spell Select Dialog~ 
 DESIGNATED 170
 REQUIRE_PREDICATE (FILE_EXISTS_IN_GAME ~enginest.2da~) @12
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_sstd.qd~ //detection for this component 
 
 INCLUDE ~TomeAndBlood/comp/setup_spell_select_dlg.tpa~
+
+
+// -----------------------------
+// 180: MULTICLASS SORCERERS
+// -----------------------------
+BEGIN ~Multiclass Sorcerers~ 
+DESIGNATED 180
+REQUIRE_PREDICATE (FILE_EXISTS_IN_GAME ~enginest.2da~) @12
+
+COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_mcsrc.qd~ //detection for this component 
 
 INCLUDE ~TomeAndBlood/comp/setup_multiclass_sorcerers.tpa~

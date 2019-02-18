@@ -328,6 +328,11 @@ plan:
 
 //get kit identifiers_________________________________________________________________
 //
+OUTER_SET fighter_sorcerer_code = (0x4000 + %D5_FIGHTER_SORCERER%)
+OUTER_SET sorcerer_cleric_code = (0x4000 + %D5_SORCERER_CLERIC%)
+OUTER_SET sorcerer_thief_code = (0x4000 + %D5_SORCERER_THIEF%)
+
+/*
 COPY_EXISTING ~kit.ids~ ~override~
   COUNT_2DA_COLS cols 
   READ_2DA_ENTRIES_NOW rows cols 
@@ -347,7 +352,7 @@ COPY_EXISTING ~kit.ids~ ~override~
     END
   END
 BUT_ONLY
-
+*/
 
 //add spell slot stat checks to SPLPROT_______________________________________________
 //
@@ -556,125 +561,30 @@ SRCSLOTS    ****        ****        ****        AP_D5SRC2   ****        AP_D5SRC
 ~
 
 
-//make spell selection dialogue_______________________________________________________
-//... adapt from aquadrizzt's spell knowledge dialogue
-//
 /* no need to do this, use Aquadrizzt's
 COPY_EXISTING ~SPLSRCKN.2da~ ~override/d5splskn.2da~ //save a copy of the existing sorcerer spell progression 
 */
 
-COPY ~tomeandblood/data/multi_sorcerers/d5msorc.cre~ ~override~ 
-			WRITE_ASCII 0x248 ~d5msorc~ #8
-			WRITE_ASCII 0x2cc ~d5msorc~ #8
 
-COPY ~tomeandblood/data/multi_sorcerers/d5msorc.spl~ ~override~
-			SAY NAME1 @17021 // ~Spell Knowledge~
-			SAY UNIDENTIFIED_DESC @17021
-			LPF ALTER_SPELL_EFFECT INT_VAR match_opcode = 67 STR_VAR resource = ~d5msorc~ END 
-			
-COMPILE ~tomeandblood/data/multi_sorcerers/d5msorc.baf~
-COPY 	~tomeandblood/data/multi_sorcerers/d5msorc.d~ ~override~ //easy to access copy of .d file to update
+//set up spell learn UI screens_______________________________________________________
+//
+INCLUDE ~tomeandblood/lib/sequencer_menu.tpa~
 
-//level spells known snippet
-<<<<<<<< d5/sor_spells_known.baf
-	IF
-		Level(LastSummonerOf(Myself),%lvl%)
-	THEN	
-		RESPONSE #100 
-			SetGlobal("qd_sor_max_1","GLOBAL",%first%)
-			SetGlobal("qd_sor_max_2","GLOBAL",%second%)
-			SetGlobal("qd_sor_max_3","GLOBAL",%third%)
-			SetGlobal("qd_sor_max_4","GLOBAL",%fourth%)
-			SetGlobal("qd_sor_max_5","GLOBAL",%fifth%)
-			SetGlobal("qd_sor_max_6","GLOBAL",%sixth%)
-			SetGlobal("qd_sor_max_7","GLOBAL",%seventh%)
-			SetGlobal("qd_sor_max_8","GLOBAL",%eighth%)
-			SetGlobal("qd_sor_max_9","GLOBAL",%ninth%)
-			Continue() 
-	END 
->>>>>>>>
-//level spells known ([second to] last defined level) snippet
-<<<<<<<< d5/sor_spells_known_max.baf
-	IF
-		OR(2)
-		Level(LastSummonerOf(Myself),%lvl%)
-		LevelGT(LastSummonerOf(Myself),%lvl%)
-	THEN	
-		RESPONSE #100 
-			SetGlobal("qd_sor_max_1","GLOBAL",%first%)
-			SetGlobal("qd_sor_max_2","GLOBAL",%second%)
-			SetGlobal("qd_sor_max_3","GLOBAL",%third%)
-			SetGlobal("qd_sor_max_4","GLOBAL",%fourth%)
-			SetGlobal("qd_sor_max_5","GLOBAL",%fifth%)
-			SetGlobal("qd_sor_max_6","GLOBAL",%sixth%)
-			SetGlobal("qd_sor_max_7","GLOBAL",%seventh%)
-			SetGlobal("qd_sor_max_8","GLOBAL",%eighth%)
-			SetGlobal("qd_sor_max_9","GLOBAL",%ninth%)
-			Continue() 
-	END 
->>>>>>>>
-
-COPY ~override/QD_SPLSRCKN.2da~ ~override~ 
-	COUNT_2DA_COLS num_cols
-//	COUNT_2DA_ROWS num_cols num_rows
-	READ_2DA_ENTRIES_NOW ~r2en_sor_spl_kwn~ num_cols
-	FOR (row = 0; row < r2en_sor_spl_kwn; row += 1) BEGIN
-		READ_2DA_ENTRY_FORMER ~r2en_sor_spl_kwn~ row 1 first
-		READ_2DA_ENTRY_FORMER ~r2en_sor_spl_kwn~ row 2 second
-		READ_2DA_ENTRY_FORMER ~r2en_sor_spl_kwn~ row 3 third
-		READ_2DA_ENTRY_FORMER ~r2en_sor_spl_kwn~ row 4 fourth
-		READ_2DA_ENTRY_FORMER ~r2en_sor_spl_kwn~ row 5 fifth
-		READ_2DA_ENTRY_FORMER ~r2en_sor_spl_kwn~ row 6 sixth
-		READ_2DA_ENTRY_FORMER ~r2en_sor_spl_kwn~ row 7 seventh
-		READ_2DA_ENTRY_FORMER ~r2en_sor_spl_kwn~ row 8 eighth
-		READ_2DA_ENTRY_FORMER ~r2en_sor_spl_kwn~ row 9 ninth
-		INNER_ACTION BEGIN 
-			ACTION_IF (row = %r2en_sor_spl_kwn%-1) THEN BEGIN 
-				EXTEND_BOTTOM ~d5msorc.bcs~ ~d5/sor_spells_known_max.baf~ 
-					lvl = (%row% + 1)
-					EVAL 
-			END 
-			ELSE BEGIN 
-				EXTEND_BOTTOM ~d5msorc.bcs~ ~d5/sor_spells_known.baf~ 
-					lvl = (%row% + 1)
-					EVAL 
-			END 
-		END 
-	END 
-BUT_ONLY	
-
-//script spell check snippet
-<<<<<<<< d5/script_add_spell_check.baf
-	IF
-		NextTriggerObject(LastSummonerOf(Myself)) 
-//		HaveKnownSpellRES("%real_spell%") 
-		Global("%real_spell%","LOCALS",1)
-	THEN	
-		RESPONSE #100 
-			IncrementGlobal("%cur_lvl%","GLOBAL",1)
-			Continue() 
-	END 
->>>>>>>>
-//script initiate dialog snippet
-<<<<<<<< d5/script_spells_end.baf
-	IF
-		True()
-	THEN
-		RESPONSE #100
-//			ActionOverride(LastSummonerOf(Myself),StartDialogOverride("D5MSORC",Myself)) // use this if/when switch to LOCALS
-			StartDialog("D5MSORC",LastSummonerOf(Myself))
-	END
->>>>>>>>
-//dialog spell details snippet
-<<<<<<<< d5/dialog_spell_info.d
-	IF ~~ %spl% 
-		SAY ~%desc%~ 
-			++ @17023 DO ~ActionOverride(LastSummonerOf(Myself),AddSpecialAbility("%real_spell%")) ActionOverride(LastSummonerOf(Myself),ApplySpellRES("%learn_spell%",Myself)) ActionOverride(LastSummonerOf(Myself),Rest()) IncrementGlobal("%cur_lvl%","GLOBAL",1) SmallWait(1)~ + refresh
-			++ @17024 + %lvl_menu%
-			++ @17025 + main_menu
-			++ @17026 + end
-	END 
->>>>>>>>
+LAF CREATE_SEQUENCER_MENU 
+  INT_VAR 
+	name = RESOLVE_STR_REF (~Spell Selection~)
+	tip = RESOLVE_STR_REF (~Spell Selection~)
+	desc = RESOLVE_STR_REF (~This ability allows you to learn new spells~)
+	class = 1
+	maxlevel = 9
+	exclude = 0x00004000 
+  STR_VAR 
+	resref = ~d5msorc~
+	icon = ~spcl919b~
+	title = ~Spell Selection~
+	label = ~Select a spell to learn~
+	subspell = ~M~
+END
 
 
 //clone arcane spells_________________________________________________________________
@@ -682,11 +592,15 @@ BUT_ONLY
 //... to innates, with added 146 casting subspells with 233 reducing level 1-9 stats (see below)
 //... and to blank mage spells w/ 146/148 casting innates
 //... and to blank cleric spells w/ nuthin'
-//
+
+// make a little arcane spell that does nothing; cast it from every bard spell
+// ... to trigger cowled wizards
+// COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5swiz.spl~
+
 <<<<<<<< d5/d5wclons.2da
 2DA V1.0 
 SPLRES
-		206		LEARN	EFF		INNATE	DISPLAY
+		206		LEARN		EFF		INNATE	DISPLAY
 >>>>>>>> 
 
 COPY ~d5/d5wclons.2da~ ~override/d5wclons.2da~ 
@@ -715,7 +629,8 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
 		  REPLACE_TEXTUALLY ~^[Ss][Pp][Ww][Ii]~ ~d5w6~
 		END
 		INNER_PATCH_SAVE learn_spell ~%SOURCE_RES%~ BEGIN
-		  REPLACE_TEXTUALLY ~^[Ss][Pp][Ww][Ii]~ ~d5wx~
+//		  REPLACE_TEXTUALLY ~^[Ss][Pp][Ww][Ii]~ ~d5wx~
+		  REPLACE_TEXTUALLY ~%spell_res%~ ~%spell_res%M~
 		END
 		INNER_PATCH_SAVE spell_eff ~%SOURCE_RES%~ BEGIN
 		  REPLACE_TEXTUALLY ~^[Ss][Pp][Ww][Ii]~ ~D5WV~
@@ -725,11 +640,6 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
 		  REPLACE_TEXTUALLY ~^[Ss][Pp][Ww][Ii]~ ~d5w4~
 		END
 		TEXT_SPRINT real_spell ~%SOURCE_RES%~
-/*
-		INNER_PATCH_SAVE real_spell ~%SOURCE_RES%~ BEGIN
-		  REPLACE_TEXTUALLY ~^[Ss][Pp][Ww][Ii]~ ~spwi~
-		END
-*/
 		INNER_ACTION BEGIN
 		  APPEND ~d5wclons.2da~ ~%SOURCE_RES%	%206_spell%	%learn_spell%	%spell_eff%	%innate_spell%	%real_spell% ~
 // make innates with cloned spell effects
@@ -764,17 +674,16 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
 // why isn't d5w206 working with qd_multi??
 		  COPY_EXISTING ~d5w206.spl~ ~override~
 			LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = EVAL ~%206_spell%~ END
-/* this doesn't work either!!
-		  APPEND ~d5sorc.2da~ ~NO_WSPLS    AP_%206_spell%  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
-*/
 // make learn spells canceling the 206
 		  COPY ~tomeandblood/lib/d5_base.spl~ ~override/%learn_spell%.spl~
 		  	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = EVAL ~%206_spell%~ END
 			LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~%206_spell%~ END
 		  	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = EVAL ~%real_spell%~ END
-		  	LPF ADD_SPELL_EFFECT INT_VAR opcode = 309 target = 1 parameter1 = 1 parameter2 = 0 timing = 9 STR_VAR resource = EVAL ~%real_spell%~ END
+//		  	LPF ADD_SPELL_EFFECT INT_VAR opcode = 309 target = 1 parameter1 = 1 parameter2 = 0 timing = 9 STR_VAR resource = EVAL ~%real_spell%~ END
 		  	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5ssplz~ END
-// add 172 to proper to d5ssplz#
+// make copy of learn spell for kjeron's UI system (eventually, just rename the learn spell to this name)
+//		  COPY_EXISTING ~%learn_spell%.spl~ ~override/%spell_res%M.spl~
+// add 172 to d5ssplz#
 		  COPY_EXISTING ~d5ssplz.spl~ ~override~
 			LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~%innate_spell%~ END
 // generate slot#x spells
@@ -800,21 +709,6 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
 // remove all known spells after chargen
 		  COPY_EXISTING ~d50wspl.spl~ ~override~
 			LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~%real_spell%~ END
-// put dialogue together
-		  EXTEND_BOTTOM ~d5msorc.bcs~ ~d5/script_add_spell_check.baf~ 
-			SPRINT spl ~%spell_res%~ 
-			SPRINT cur_lvl ~qd_sor_cur_~^~%spell_level%~
-			EVAL 
-		  COPY_EXISTING ~override/d5msorc.d~ ~override~ 
-			SPRINT name "%spell_name%"
-			SPRINT desc "%spell_description%"
-			SPRINT cur_lvl "qd_sor_cur_"^"%spell_level%"
-			SPRINT spl "%spell_res%"
-			SPRINT lvl "%spell_level%"
-			SPRINT lvl_menu "level_"^"%lvl%"
-			APPEND_FILE_EVALUATE  ~d5/dialog_spell_info.d~ 
-			REPLACE_TEXTUALLY ~//Marker %spell_level%~ ~~~~~+ ~NextTriggerObject(LastSummonerOf(Myself)) !Global("%real_spell%","LOCALS",1)~ +~%spell_name%~ + %spl% 
-								//Marker %spell_level%~~~~~
 		END // end inner_action
 	  END
 	END
@@ -823,12 +717,16 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
 BUT_ONLY
 
 
-//finish spell learning dialogue______________________________________________________
-//
-EXTEND_BOTTOM ~d5msorc.bcs~ ~d5/script_spells_end.baf~ EVAL 
-COMPILE ~override/d5msorc.d~ 
+COPY ~tomeandblood/data/multi_sorcerers/d5msorc.itm~ ~override~			//	learn spells .itm
+  LPF ALTER_ITEM_HEADER INT_VAR target = 7 speed = 0 STR_VAR icon = ~spcl919b~ END
 
-APPEND ~d5sorc.2da~ ~LEARNSPLS   GA_D5MSORC  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5msor1.spl~
+  WRITE_SHORT 0x1c 4
+  LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~spcl919b~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 143 target = 1 parameter1 = 14 timing = 9 STR_VAR resource = ~d5msorc~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5msor1~ END
+
+APPEND ~d5sorc.2da~ ~LEARNSPLS   GA_D5MSOR1  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
 
 
 //remove known spells right after chargen_____________________________________________
@@ -879,11 +777,13 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5srfrsh.spl~ BEGIN
 END
 
 
+/*
 //make sure sequencer/contingency works if possible___________________________________
 //
 ACTION_IF FILE_EXISTS_IN_GAME ~M_d5meta.lua~ BEGIN
 	// umm... actually, maybe the metamagic component will take care of this entirely...h
 END
+*/
 
 
 /*
