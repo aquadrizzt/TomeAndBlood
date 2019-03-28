@@ -374,11 +374,54 @@ ACTION_IF %sequencer_method% = 5 BEGIN
 
 // apply UI tweaks
  COPY_EXISTING ~UI.MENU~ ~override~
-	REPLACE_TEXTUALLY ~function[ %TAB%%WNL%]+filterContingencyMageSpells()~ ~function	filterContingencyMageSpellsDisabled()~
+//	REPLACE_TEXTUALLY ~function[ %TAB%%WNL%]+filterContingencyMageSpells()~ ~function	filterContingencyMageSpellsDisabled()~
 	REPLACE_TEXTUALLY ~mageScreen:SequenceSpell( bookSpells\[currentBookSpell\].resref, bookSpells\[currentBookSpell\].masterResref )~ ~mageScreen:SequenceSpell( bookSpells[currentBookSpell].resref, 'DEFAULT' )~
 	REPLACE_TEXTUALLY ~mageScreen:UnSequenceSpell( bottomSpells\[currentBottomSpell\].resref, bottomSpells\[currentBottomSpell\].masterResref )~ ~mageScreen:UnSequenceSpell( bottomSpells[currentBottomSpell].resref, 'DEFAULT' )~
 
+	INCLUDE	~TomeAndBlood/lib/SEQUENCER_MENU.TPA~
+
+	OUTER_SPRINT	resref ~DEFAULT~
+	OUTER_SPRINT custom ~~~~~
+	function()
+		local out = {}
+		if characters[id].mageSpells ~= nil and characters[id].mageSpells[currentSpellLevel] ~= nil then
+			for k,v in pairs(characters[id].mageSpells[currentSpellLevel]) do
+				if mageScreen:SpellAllowedForContingency(v.level, v.resref) then
+					if mageScreen:SpellSwappedInContingency(v.resref) then
+						for key,value in pairs(contingencySwapTable) do
+							value.castableCount = v.castableCount
+							value.level = v.level
+							table.insert(out, value)
+						end
+					else
+						table.insert(out, v)
+					end
+				end
+			end
+		end
+		if characters[id].priestSpells ~= nil and characters[id].priestSpells[currentSpellLevel] ~= nil then
+			for k,v in pairs(characters[id].priestSpells[currentSpellLevel]) do
+				if mageScreen:SpellAllowedForContingency(v.level, v.resref) then
+					if mageScreen:SpellSwappedInContingency(v.resref) then
+						for key,value in pairs(contingencySwapTable) do
+							value.castableCount = v.castableCount
+							value.level = v.level
+							table.insert(out, value)
+						end
+					else
+						table.insert(out, v)
+					end
+				end
+			end
+		end
+		bookSpells = out
+	end~~~~~
+	LAF	CREATE_SEQUENCER_MENU	STR_VAR	resref = ~~ custom = ~nil~	END
+	APPEND	~M_SQTOOL.LUA~	~~~~~SequencerMenu['%resref%'] = %WNL%%custom%~~~~~
+			
+/* not anymore
  COPY ~TomeAndBlood/data/metamagic/M_d5meta.lua~ ~override~
+*/
 
 // set metamagic spells to "non-combat" flag 
  COPY_EXISTING ~spwi420.spl~ ~override~

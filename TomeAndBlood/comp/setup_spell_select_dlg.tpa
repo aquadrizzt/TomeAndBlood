@@ -2,7 +2,7 @@
 // SPELL SELECT DIALOG 
 // -----------------------------
 
-COPY_EXISTING ~SPLSRCKN.2da~ ~override/QD_SPLSRCKN.2da~ //save a copy of the existing sorcerer spell progression 
+//COPY_EXISTING ~SPLSRCKN.2da~ ~override/QD_SPLSRCKN.2da~ //save a copy of the existing sorcerer spell progression 
 
 COPY ~TomeAndBlood/data/spell_select/SPLSRCKN.2da~ ~override~ //set all sorcerer spells known to 0 
 

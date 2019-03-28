@@ -173,7 +173,10 @@ SPLRES
 
   END
 	
-	
+  ACTION_IF !(FILE_EXISTS_IN_GAME ~QD_SPLSRCKN.2da~) BEGIN
+	COPY_EXISTING ~SPLSRCKN.2da~ ~override/QD_SPLSRCKN.2da~ //save a copy of the existing sorcerer spell progression 
+  END
+
   //check file
 
   COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_core.qd~
