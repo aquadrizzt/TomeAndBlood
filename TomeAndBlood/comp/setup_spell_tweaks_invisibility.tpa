@@ -81,23 +81,44 @@ END 													// end sr is installed
 
 //true sight = illusionary creature immunity________________________________________
 //
-// NO! make this cause a huge luck penalty aura to illusionary creatures
+// add a huge luck penalty aura to illusionary creatures
+// and deafness
 
-ACTION_IF FILE_EXISTS_IN_GAME ~sppr505.spl~ BEGIN
-  COPY_EXISTING ~sppr505.spl~ ~override~
+COPY_EXISTING ~sppr505.spl~ ~override~
 	LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 193 opcode = 100 parameter2 = 7 parameter1 = 7 END
-  BUT_ONLY
-END
-ACTION_IF FILE_EXISTS_IN_GAME ~spwi609.spl~ BEGIN
-  COPY_EXISTING ~spwi609.spl~ ~override~
+IF_EXISTS BUT_ONLY
+COPY_EXISTING ~spwi609.spl~ ~override~
 	LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 193 opcode = 100 parameter2 = 7 parameter1 = 7 END
-  BUT_ONLY
-END
-ACTION_IF FILE_EXISTS_IN_GAME ~spcl232.spl~ BEGIN
-  COPY_EXISTING ~spcl232.spl~ ~override~
+IF_EXISTS BUT_ONLY
+COPY_EXISTING ~spcl232.spl~ ~override~
 	LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 193 opcode = 100 parameter2 = 7 parameter1 = 7 END
-  BUT_ONLY
-END
+IF_EXISTS BUT_ONLY
+COPY_EXISTING ~sppr505d.spl~ ~override~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 2 parameter1 = 7 parameter2 = 7 timing = 0 duration = 7 STR_VAR resource = ~d5tsill1~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 2 parameter1 = 7 parameter2 = 7 timing = 0 duration = 7 STR_VAR resource = ~d5tsill2~ END
+IF_EXISTS BUT_ONLY
+COPY_EXISTING ~spwi609d.spl~ ~override~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 2 parameter1 = 7 parameter2 = 7 timing = 0 duration = 7 STR_VAR resource = ~d5tsill1~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 2 parameter1 = 7 parameter2 = 7 timing = 0 duration = 7 STR_VAR resource = ~d5tsill2~ END
+IF_EXISTS BUT_ONLY
+COPY_EXISTING ~spcl232d.spl~ ~override~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 2 parameter1 = 7 parameter2 = 7 timing = 0 duration = 7 STR_VAR resource = ~d5tsill1~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 2 parameter1 = 7 parameter2 = 7 timing = 0 duration = 7 STR_VAR resource = ~d5tsill2~ END
+IF_EXISTS BUT_ONLY
+CREATE EFF ~d5tsill1~
+	WRITE_LONG 0x10 22
+	WRITE_LONG 0x14 2
+	WRITE_LONG 0x1c (0 - 5)
+	WRITE_LONG 0x20 0
+	WRITE_LONG 0x24 0
+	WRITE_LONG 0x28 7
+	WRITE_SHORT 0x2c 100
+CREATE EFF ~d5tsill2~
+	WRITE_LONG 0x10 80
+	WRITE_LONG 0x14 2
+	WRITE_LONG 0x24 0
+	WRITE_LONG 0x28 7
+	WRITE_SHORT 0x2c 100
 //__________________________________________________________________________________
 
 

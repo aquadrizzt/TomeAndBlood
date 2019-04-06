@@ -486,7 +486,8 @@ This ability allows you to select your spells known for each spell level.~
 @17017  = ~7th-level spells~
 @17018  = ~8th-level spells~
 @17019  = ~9th-level spells~
-@17021  = ~Spell Knowledge
+@17021  = ~Spell Knowledge~
+@17022  = ~Spell Knowledge
 
 This ability allows you to select your spells known for each spell level.~
 @17023 = ~Learn this spell.~
@@ -513,6 +514,7 @@ This ability allows you to select your spells known for each spell level.~
 @17047 = ~You can select new 7th level spells from the following list.~
 @17048 = ~You can select new 8th level spells from the following list.~
 @17049 = ~You can select new 9th level spells from the following list.~
+@17050 = ~Initialize sorcerer spellcasting~
 @17051 = ~fighter/sorcerer~
 @17052 = ~Fighter/Sorcerer~
 @17053 = ~FIGHTER/SORCERER: Sorcerers are practitioners of magic who were born with the innate ability to cast spells. It is thought that the blood of some powerful creature flows through their veins; perhaps they are the spawn of the gods themselves, or even dragons walking in humanoid form. Regardless, the Sorcerer's magic is intuitive rather than logical. They know fewer spells than Mages, and acquire spells more slowly, but they can cast spells more often and have no need to select and prepare spells ahead of time.
