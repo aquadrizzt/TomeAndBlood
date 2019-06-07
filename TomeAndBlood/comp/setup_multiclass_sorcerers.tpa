@@ -555,16 +555,19 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5src8a.spl~) BEGIN
   COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src8a.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 20) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5src8a~ END
+END
 ACTION_IF !(FILE_EXISTS_IN_GAME ~d5src9a.spl~) BEGIN
   COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src9a.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 24) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5src9a~ END
+END
 ACTION_FOR_EACH lev IN ~1~ ~2~ ~3~ ~4~ ~5~ ~6~ ~7~ ~8~ ~9~ BEGIN
   ACTION_FOR_EACH let IN ~b~ ~c~ ~d~ ~e~ ~f~ ~g~ ~h~ ~i~ ~j~ ~k~ ~l~ ~m~ ~n~ ~o~ ~p~ ~q~ ~r~ ~s~ ~t~ BEGIN
 	ACTION_IF !(FILE_EXISTS_IN_GAME ~d5src%lev%%let%.spl~) BEGIN
-	COPY_EXISTING ~d5src%lev%a.spl~ ~override/d5src%lev%%let%.spl~
-	  LPF ALTER_EFFECT INT_VAR match_opcode = 206 STR_VAR match_resource = EVAL ~d5src%lev%a.spl~ resource = EVAL ~d5src%lev%%let%~ END
-	IF_EXISTS
+	  COPY_EXISTING ~d5src%lev%a.spl~ ~override/d5src%lev%%let%.spl~
+		LPF ALTER_EFFECT INT_VAR match_opcode = 206 STR_VAR match_resource = EVAL ~d5src%lev%a.spl~ resource = EVAL ~d5src%lev%%let%~ END
+	  IF_EXISTS
+	END
   END
 END
 
@@ -1009,6 +1012,17 @@ APPEND ~d5sorc.2da~ ~NO_QUICK    AP_D5SRCNQ  ****        ****        ****       
 //stat-based bonus spells_____________________________________________________________
 //
 ACTION_IF (FILE_EXISTS_IN_GAME ~qdtnb_attrbon.qd~) BEGIN
+
+  COPY_EXISTING ~splprot.2da~ ~override~
+	COUNT_2DA_COLS cols 
+	READ_2DA_ENTRIES_NOW rows cols   
+	FOR (row = 1; row < rows; ++row) BEGIN 
+	  READ_2DA_ENTRY_FORMER rows row 0 ~stat~ 
+	  PATCH_IF ~%stat%~ STRING_EQUAL_CASE ~D5_CHR_SLOTS~ BEGIN
+	    SET chr_slots = %row%
+	  END
+	END
+  BUT_ONLY
 
   ACTION_IF !(FILE_EXISTS_IN_GAME ~d5nabsw.spl~) BEGIN
 	COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5nabsw.spl~
