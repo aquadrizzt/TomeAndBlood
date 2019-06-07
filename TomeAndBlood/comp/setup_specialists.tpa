@@ -101,13 +101,12 @@ ACTION_PHP_EACH wizard_spells AS ind => wizard_spell BEGIN
 			  LPF ALTER_SPELL_HEADER INT_VAR range = (%abil_range% - 3) END
 			END
 			PATCH_IF (%abil_range% < 5) BEGIN
-			  LPF ALTER_SPELL_HEADER INT_VAR target = 5 END	// self? better than just making it short-range?
- //			  LPF ALTER_SPELL_HEADER INT_VAR range = 2 END	// alternatively
+			  LPF ALTER_SPELL_HEADER INT_VAR target = 5 END	
 			END
 		  END
 		END
 		PATCH_IF NOT (%abil_target% = 4) BEGIN
-		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = %eff_target% power = %spell_level% parameter1 = 0 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%wizard_spell%~ END
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 2 power = %spell_level% parameter1 = 0 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%wizard_spell%~ END
 		END
 	  END
 	  INNER_ACTION BEGIN

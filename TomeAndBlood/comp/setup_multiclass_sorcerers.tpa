@@ -516,24 +516,57 @@ COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5ssplz.spl~
 // level 8 = (108 << 20)
 // level 9 = (108 << 24)
 //
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src1.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 8) parameter2 = (134 + (0x10000 * 1)) timing = 9 END
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src2.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 12) parameter2 = (134 + (0x10000 * 1)) timing = 9 END
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src3.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 16) parameter2 = (134 + (0x10000 * 1)) timing = 9 END
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src4.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 20) parameter2 = (134 + (0x10000 * 1)) timing = 9 END
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src5.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 8) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src6.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 12) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src7.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 16) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src8.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 20) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src9.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 24) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5src1a.spl~) BEGIN
+  COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src1a.spl~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 8) parameter2 = (134 + (0x10000 * 1)) timing = 9 END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5src1a~ END
+END
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5src2a.spl~) BEGIN
+  COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src2a.spl~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 12) parameter2 = (134 + (0x10000 * 1)) timing = 9 END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5src2a~ END
+END
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5src3a.spl~) BEGIN
+  COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src3a.spl~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 16) parameter2 = (134 + (0x10000 * 1)) timing = 9 END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5src3a~ END
+END
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5src4a.spl~) BEGIN
+  COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src4a.spl~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 20) parameter2 = (134 + (0x10000 * 1)) timing = 9 END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5src4a~ END
+END
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5src5a.spl~) BEGIN
+  COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src5a.spl~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 8) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5src5a~ END
+END
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5src6a.spl~) BEGIN
+  COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src6a.spl~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 12) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5src6a~ END
+END
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5src7a.spl~) BEGIN
+  COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src7a.spl~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 16) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5src7a~ END
+END
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5src8a.spl~) BEGIN
+  COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src8a.spl~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 20) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5src8a~ END
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5src9a.spl~) BEGIN
+  COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src9a.spl~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 24) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5src9a~ END
+ACTION_FOR_EACH lev IN ~1~ ~2~ ~3~ ~4~ ~5~ ~6~ ~7~ ~8~ ~9~ BEGIN
+  ACTION_FOR_EACH let IN ~b~ ~c~ ~d~ ~e~ ~f~ ~g~ ~h~ ~i~ ~j~ ~k~ ~l~ ~m~ ~n~ ~o~ ~p~ ~q~ ~r~ ~s~ ~t~ BEGIN
+	ACTION_IF !(FILE_EXISTS_IN_GAME ~d5src%lev%%let%.spl~) BEGIN
+	COPY_EXISTING ~d5src%lev%a.spl~ ~override/d5src%lev%%let%.spl~
+	  LPF ALTER_EFFECT INT_VAR match_opcode = 206 STR_VAR match_resource = EVAL ~d5src%lev%a.spl~ resource = EVAL ~d5src%lev%%let%~ END
+	IF_EXISTS
+  END
+END
 
 COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src-1.spl~
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 8) parameter2 = (134 + (0x10000 * 1)) timing = 1 END
@@ -554,10 +587,10 @@ COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src-8.spl~
 COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src-9.spl~
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 24) parameter2 = (108 + (0x10000 * 1)) timing = 1 END
 
-APPEND ~d5sorc.2da~ ~SRCSLOTS    AP_D5SRC1   AP_D5SRC1   AP_D5SRC1   AP_D5SRC1   AP_D5SRC2   AP_D5SRC2   AP_D5SRC2   AP_D5SRC3   AP_D5SRC3   AP_D5SRC4   AP_D5SRC4   AP_D5SRC5   AP_D5SRC5   AP_D5SRC6   AP_D5SRC6   AP_D5SRC7   AP_D5SRC7   AP_D5SRC8   AP_D5SRC8   AP_D5SRC9   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
-SRCSLOTS    AP_D5SRC1   ****        ****        AP_D5SRC2   ****        AP_D5SRC3   AP_D5SRC3   AP_D5SRC4   AP_D5SRC4   AP_D5SRC5   AP_D5SRC5   AP_D5SRC6   AP_D5SRC6   AP_D5SRC7   AP_D5SRC7   AP_D5SRC8   AP_D5SRC8   AP_D5SRC9   AP_D5SRC9   AP_D5SRC9   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
-SRCSLOTS    AP_D5SRC1   ****        ****        AP_D5SRC2   ****        AP_D5SRC3   ****        AP_D5SRC4   ****        AP_D5SRC5   ****        AP_D5SRC6   ****        AP_D5SRC7   ****        AP_D5SRC8   ****        AP_D5SRC9   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
-SRCSLOTS    ****        ****        ****        AP_D5SRC2   ****        AP_D5SRC3   ****        AP_D5SRC4   ****        AP_D5SRC5   ****        AP_D5SRC6   ****        AP_D5SRC7   ****        AP_D5SRC8   ****        AP_D5SRC9   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+APPEND ~d5sorc.2da~ ~SRCSLOTS    AP_D5SRC1A  AP_D5SRC1D  AP_D5SRC1E  AP_D5SRC1F  AP_D5SRC2D  AP_D5SRC2E  AP_D5SRC2F  AP_D5SRC3E  AP_D5SRC3F  AP_D5SRC4E  AP_D5SRC4F  AP_D5SRC5E  AP_D5SRC5F  AP_D5SRC6E  AP_D5SRC6F  AP_D5SRC7E  AP_D5SRC7F  AP_D5SRC8E  AP_D5SRC8F  AP_D5SRC9E  AP_D5SRC9F  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+					SRCSLOTS    AP_D5SRC1B  ****        ****        AP_D5SRC2A  ****        AP_D5SRC3A  AP_D5SRC3D  AP_D5SRC4A  AP_D5SRC4D  AP_D5SRC5A  AP_D5SRC5D  AP_D5SRC6A  AP_D5SRC6D  AP_D5SRC7A  AP_D5SRC7D  AP_D5SRC8A  AP_D5SRC8D  AP_D5SRC9A  AP_D5SRC9D  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+					SRCSLOTS    AP_D5SRC1C  ****        ****        AP_D5SRC2B  ****        AP_D5SRC3B  ****        AP_D5SRC4B  ****        AP_D5SRC5B  ****        AP_D5SRC6B  ****        AP_D5SRC7B  ****        AP_D5SRC8B  ****        AP_D5SRC9B  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+					SRCSLOTS    ****        ****        ****        AP_D5SRC2C  ****        AP_D5SRC3C  ****        AP_D5SRC4C  ****        AP_D5SRC5C  ****        AP_D5SRC6C  ****        AP_D5SRC7C  ****        AP_D5SRC8C  ****        AP_D5SRC9C  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
 ~
 
 
@@ -1065,7 +1098,7 @@ STATSLOTS   AP_D5SRC5   ****        ****        ****        ****        ****    
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 20) parameter2 = (134 + (0x10000 * 1)) timing = 0 duration = 7 END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 20) parameter2 = (134 + (0x10000 * 1)) timing = 0 duration = 7 END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 8) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 7 END
-  COPY ~tomeandblood/lib/d5_base.spl~ ~overrid/d5chrmo.sple~
+  COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5chrmo.spl~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5chrmo~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 12) parameter2 = (134 + (0x10000 * 1)) timing = 0 duration = 7 END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 16) parameter2 = (134 + (0x10000 * 1)) timing = 0 duration = 7 END

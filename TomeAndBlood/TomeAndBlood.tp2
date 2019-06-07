@@ -1,6 +1,6 @@
 BACKUP ~TomeAndBlood/backup~
 AUTHOR ~aquadrizzt@gmail.com~
-VERSION ~0.8.32~ 
+VERSION ~0.8.33~ 
 
 ALWAYS
 
@@ -285,7 +285,7 @@ INCLUDE ~TomeAndBlood/comp/setup_cantrip_wands.tpa~
 // -----------------------------
 BEGIN ~Revised Specialists~  
 DESIGNATED 150
-REQUIRE_PREDICATE (ENGINE_IS ~soa tob iwd bgee bg2ee iwdee eet~) @10 
+REQUIRE_PREDICATE (ENGINE_IS ~bgee bg2ee iwdee eet~) @10 
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_specialists.qd~ //detection for this component 
 
