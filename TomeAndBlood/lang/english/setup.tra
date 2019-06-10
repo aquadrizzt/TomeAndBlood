@@ -1338,8 +1338,8 @@ Saving Throw: none
 
 This spell creates a rough facsimile of the caster, recognizable though not perfect. (Maybe I'll add a Blur visual effect to the clone.) The shadow clone has the equivalent of 60% of the experience (level, hit dice, skills, etc.) of the original caster, and can replicate some small amount of the caster's magical abilities, able to cast 1st level spells. The shadow clone cannot engage in melee combat or make use of any magical "items" it has equipped.
 ~
-@6273   = ~Lesser Simulacrum~
-@6274   = ~Lesser Simulacrum
+@6273   = ~Misleading Clone~
+@6274   = ~Misleading Clone
 Level: 7
 School: Illusion
 Range: Caster
@@ -1350,8 +1350,8 @@ Saving Throw: none
 
 This spell is cast very quickly, creating a reasonable copy of the caster that can be perceived by all five senses of any onlookers. The clone has the equivalent of 60% of the experience (level, hit dice, skills, etc.) of the caster, and can replicate a moderate amount of the caster's magical abilities, able to cast up to 3rd level spells. The clone cannot engage in melee combat or make use of any magical "items" it has equipped. At the time the clone is created, the caster is rendered invisible for 60 seconds. Onlookers who do not carefully scrutinize the effect might easily believe the clone IS the caster, and the caster may use the distraction to escape or move to some advantageous position.
 ~
-@6275   = ~Simulacrum~
-@6276   = ~Simulacrum
+@6275   = ~Projected Clone~
+@6276   = ~Proje ted Clone
 Level: 8
 School: Illusion
 Range: Caster
@@ -1360,11 +1360,11 @@ Casting Time: 7
 Area of Effect: Special
 Saving Throw: none
 
-This is an improvement on the Misleading Clone spell. The simulacrum created has 60% of the experience (level, hit dice, skills, etc.) of the caster, but can replicate all of the caster's magical abilities, able to cast any spells that the caster could at the clone's reduced level. The simulacrum also has enough substance and stability to engage in melee combat, but cannot use any magical "items" it has equipped. Simultaneously, the caster is affected by Improved Invisibility, able to move unnnoticed and even attack or cast spells without becoming fully visible.
+This is an improvement on the Misleading Clone spell. The double created has 60% of the experience (level, hit dice, skills, etc.) of the caster, but can replicate all of the caster's magical abilities, able to cast any spells that the caster could at the clone's reduced level. The simulacrum also has enough substance and stability to engage in melee combat, but cannot use any magical "items" it has equipped. Simultaneously, the caster is affected by Improved Invisibility, able to move unnnoticed and even attack or cast spells without becoming fully visible.
 ~
 
-@6277   = ~Project Image~
-@6278   = ~Project Image
+@6277   = ~Simulacrum~
+@6278   = ~Simulacrum
 Level: 9
 School: Illusion
 Range: Caster

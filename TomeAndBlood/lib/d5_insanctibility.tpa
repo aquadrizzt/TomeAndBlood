@@ -54,12 +54,14 @@ DEFINE_ACTION_MACRO D5_INSANCTIBILITY BEGIN
 	  WHILE (%eff_number% > 0) BEGIN
 		SET eff_number = (%eff_number% - 1)
 	  	READ_SHORT (%eff_offset% + (eff_number * 0x30)) eff_opcode
+	  	READ_BYTE (%eff_offset% + (eff_number * 0x30) + 0x2) eff_target
 	  	READ_SHORT (%eff_offset% + (eff_number * 0x30) + 0x8) param_2
 	  	READ_BYTE (%eff_offset% + (eff_number * 0x30) + 0xc) eff_timing
 	  	READ_LONG (%eff_offset% + (eff_number * 0x30) + 0xe) eff_duration
 	  	PATCH_IF (%eff_opcode% = 20) BEGIN
 		  PATCH_IF (%param_2% = 0) BEGIN
 			SET invis_spell = 1
+			SET invis_target = %eff_target%
 			SET invis_timing = %eff_timing%
 			SET invis_duration = %eff_duration%
 			SET ++invis_spell_index
@@ -71,7 +73,7 @@ DEFINE_ACTION_MACRO D5_INSANCTIBILITY BEGIN
 		END
 	  END
 	  PATCH_IF (invis_spell = 1) BEGIN
-		TEXT_SPRINT $d5_invisibility_spells(~%invis_spell_index%~ ~%invis_timing%~ ~%invis_duration%~) ~%SOURCE_RES%~
+		TEXT_SPRINT $d5_invisibility_spells(~%invis_spell_index%~ ~%invis_target%~ ~%invis_timing%~ ~%invis_duration%~) ~%SOURCE_RES%~
 	  END
 	END
    END
@@ -83,19 +85,21 @@ DEFINE_ACTION_MACRO D5_INSANCTIBILITY BEGIN
 	  COPY_EXISTING ~%spell%.spl~ ~override~
 		LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 20 match_parameter2 = 0 opcode = 153 parameter2 = 1 STR_VAR resource = ~~ END
 		LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 20 match_parameter2 = 0 opcode = 66 parameter1 = 128 parameter2 = 0 STR_VAR insert = ~first~ END
-		LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 20 opcode = 177 target = 1 parameter2 = 2 parameter1 = 0 STR_VAR resource = EVAL ~d5inx%index%~ insert = ~last~ END 
-		LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 20 opcode = 177 target = 1 parameter2 = 2 parameter1 = 0 STR_VAR resource = ~d5pr109~ insert = ~last~ END 
+		LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 20 opcode = 177 /*target = 1*/ parameter2 = 2 parameter1 = 0 STR_VAR resource = EVAL ~d5inx%index%~ insert = ~last~ END 
+//		LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 20 opcode = 177 target = 1 parameter2 = 2 parameter1 = 0 STR_VAR resource = ~d5pr109~ insert = ~last~ END 
 	  CREATE EFF ~d5inx%index%~
 		WRITE_LONG 0x10 232
-		WRITE_LONG 0x14 1
+		WRITE_LONG 0x14 %index_1%
 		WRITE_LONG 0x20 20
-		WRITE_LONG 0x28 %index_2%
+		WRITE_LONG 0x24 %index_2%
+		WRITE_LONG 0x28 %index_3%
 		WRITE_SHORT 0x2c 100
 		WRITE_EVALUATED_ASCII 0x30 ~d5inx%index%~ #8
 		WRITE_LONG 0x48 102  
 	  COPY ~%MOD_FOLDER%/lib/d5_base.spl~ ~override/d5inx%index%.spl~
-		LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 power = 0 parameter1 = 0 timing = 1 STR_VAR resource = EVAL ~%spell%~ END
-		LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 power = 0 parameter2 = %d5_sanct_row% timing = 1 STR_VAR resource = EVAL ~d5inx%index%~ END
+		LPF ALTER_SPELL_HEADER INT_VAR target = 1 range = 999 END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = %index_1% power = 0 parameter1 = 0 timing = 1 STR_VAR resource = EVAL ~%spell%~ END
+		LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = %index_1% power = 0 parameter2 = %d5_sanct_row% timing = 1 STR_VAR resource = EVAL ~d5inx%index%~ END
 	END
   END
 
@@ -115,12 +119,14 @@ DEFINE_ACTION_MACRO D5_INSANCTIBILITY BEGIN
 	  WHILE (%eff_number% > 0) BEGIN
 		SET eff_number = (%eff_number% - 1)
 	  	READ_SHORT (%eff_offset% + (eff_number * 0x30)) eff_opcode
+	  	READ_BYTE (%eff_offset% + (eff_number * 0x30) + 0x2) eff_target
 	  	READ_SHORT (%eff_offset% + (eff_number * 0x30) + 0x8) param_2
 	  	READ_BYTE (%eff_offset% + (eff_number * 0x30) + 0xc) eff_timing
 	  	READ_LONG (%eff_offset% + (eff_number * 0x30) + 0xe) eff_duration
 	  	PATCH_IF (%eff_opcode% = 20) BEGIN
 		  PATCH_IF (%param_2% = 0) BEGIN
 			SET invis_item = 1
+			SET invis_timing = %eff_target%
 			SET invis_timing = %eff_timing%
 			SET invis_duration = %eff_duration%
 			SET ++invis_item_index
@@ -132,7 +138,7 @@ DEFINE_ACTION_MACRO D5_INSANCTIBILITY BEGIN
 		END
 	  END
 	  PATCH_IF (invis_item = 1) BEGIN
-		TEXT_SPRINT $d5_invisibility_items(~%invis_item_index%~ ~%invis_timing%~ ~%invis_duration%~) ~%SOURCE_RES%~
+		TEXT_SPRINT $d5_invisibility_items(~%invis_item_index%~ ~%invis_target%~ ~%invis_timing%~ ~%invis_duration%~) ~%SOURCE_RES%~
 	  END
 	END
    END
@@ -144,19 +150,21 @@ DEFINE_ACTION_MACRO D5_INSANCTIBILITY BEGIN
 	  COPY_EXISTING ~%item%.itm~ ~override~
 		LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 20 match_parameter2 = 0 opcode = 153 parameter2 = 1 STR_VAR resource = ~~ END
 		LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 20 match_parameter2 = 0 opcode = 66 parameter1 = 128 parameter2 = 0 STR_VAR insert = ~first~ END
-		LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 20 opcode = 177 target = 1 parameter2 = 2 parameter1 = 0 STR_VAR resource = EVAL ~d5iny%index%~ insert = ~last~ END 
-		LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 20 opcode = 177 target = 1 parameter2 = 2 parameter1 = 0 STR_VAR resource = ~d5pr109~ insert = ~last~ END 
+		LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 20 opcode = 177 /*target = 1*/ parameter2 = 2 parameter1 = 0 STR_VAR resource = EVAL ~d5iny%index%~ insert = ~last~ END 
+//		LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 20 opcode = 177 target = 1 parameter2 = 2 parameter1 = 0 STR_VAR resource = ~d5pr109~ insert = ~last~ END 
 	  CREATE EFF ~d5iny%index%~
 		WRITE_LONG 0x10 232
-		WRITE_LONG 0x14 1
+		WRITE_LONG 0x14 %index_1%
 		WRITE_LONG 0x20 20
-		WRITE_LONG 0x28 %index_2%
+		WRITE_LONG 0x24 %index_2%
+		WRITE_LONG 0x28 %index_3%
 		WRITE_SHORT 0x2c 100
 		WRITE_EVALUATED_ASCII 0x30 ~d5iny%index%~ #8
 		WRITE_LONG 0x48 102  
 	  COPY ~%MOD_FOLDER%/lib/d5_base.spl~ ~override/d5iny%index%.spl~
-		LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 power = 0 parameter1 = 0 timing = 1 STR_VAR resource = EVAL ~%item%~ END
-		LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 power = 0 parameter2 = %d5_sanct_row% timing = 1 STR_VAR resource = EVAL ~d5iny%index%~ END
+		LPF ALTER_SPELL_HEADER INT_VAR target = 1 range = 999 END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = %index_1% power = 0 parameter1 = 0 timing = 1 STR_VAR resource = EVAL ~%item%~ END
+		LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = %index_1% power = 0 parameter2 = %d5_sanct_row% timing = 1 STR_VAR resource = EVAL ~d5iny%index%~ END
 	END
   END
 
