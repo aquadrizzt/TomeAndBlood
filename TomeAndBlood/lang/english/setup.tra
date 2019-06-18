@@ -1322,58 +1322,56 @@ Saving Throw: None
 This spell opens an abyssal gate and calls forth a demonic deva to fight at the caster's side until the spell expires or the deva's earthly avatar is slain.
 
 If the summoning priest is 25th level or higher, a powerful dark planetar is summoned instead.~
-
 //
-// COPY & PASTE THIS FILE'S CONTENTS INTO SETUP.TRA
 //
 @6271   = ~Shadow Clone~
 @6272   = ~Shadow Clone
 Level: 6
 School: Illusion
-Range: Caster
+Range: 0
 Duration: 1 round/level
 Casting Time: 5
-Area of Effect: Special
+Area of Effect: caster
 Saving Throw: none
 
-This spell creates a rough facsimile of the caster, recognizable though not perfect. (Maybe I'll add a Blur visual effect to the clone.) The shadow clone has the equivalent of 60% of the experience (level, hit dice, skills, etc.) of the original caster, and can replicate some small amount of the caster's magical abilities, able to cast 1st level spells. The shadow clone cannot engage in melee combat or make use of any magical "items" it has equipped.
+This spell creates a rough facsimile of the caster, recognizable though not perfect. The shadow clone has 40% of the caster's hit points and 7-point penalties on to-hit rolls and effective caster level.  The clone may not use consumable items like potions or scrolls (which are not truly replicated), and may not cast priest spells. The clone can however replicate some small amount of the caster's magical abilities, able to cast any 1st level spells the caster memorized that day.
 ~
-@6273   = ~Misleading Clone~
-@6274   = ~Misleading Clone
+@6273   = ~Lesser Simulacrum~
+@6274   = ~Lesser Simulacrum
 Level: 7
 School: Illusion
-Range: Caster
+Range: 0
 Duration: 1 round/level
 Casting Time: 2
-Area of Effect: Special
+Area of Effect: Caster
 Saving Throw: none
 
-This spell is cast very quickly, creating a reasonable copy of the caster that can be perceived by all five senses of any onlookers. The clone has the equivalent of 60% of the experience (level, hit dice, skills, etc.) of the caster, and can replicate a moderate amount of the caster's magical abilities, able to cast up to 3rd level spells. The clone cannot engage in melee combat or make use of any magical "items" it has equipped. At the time the clone is created, the caster is rendered invisible for 60 seconds. Onlookers who do not carefully scrutinize the effect might easily believe the clone IS the caster, and the caster may use the distraction to escape or move to some advantageous position.
+This spell is cast very quickly, creating a reasonable copy of the caster that can be perceived by all five senses of any onlookers. The clone has 60% of the caster's hit points, and 5-point penalties on to-hit rolls and effective caster level. The clone may not use consumable items like potions or scrolls (which are not truly replicated), and may not cast priest spells. The clone can however replicate a moderate amount of the caster's magical abilities, able to cast any spells the caster memorized that day, up to 4th spell level. At the time the clone is created, the caster is rendered invisible for 60 seconds. Onlookers who do not carefully scrutinize the effect might easily believe the clone IS the caster, and the caster may use the distraction to escape or move to some advantageous position.
 ~
-@6275   = ~Projected Clone~
-@6276   = ~Proje ted Clone
+@6275   = ~Simulacrum~
+@6276   = ~Simulacrum
 Level: 8
 School: Illusion
-Range: Caster
-Duration: 1 round/level
-Casting Time: 7
-Area of Effect: Special
-Saving Throw: none
-
-This is an improvement on the Misleading Clone spell. The double created has 60% of the experience (level, hit dice, skills, etc.) of the caster, but can replicate all of the caster's magical abilities, able to cast any spells that the caster could at the clone's reduced level. The simulacrum also has enough substance and stability to engage in melee combat, but cannot use any magical "items" it has equipped. Simultaneously, the caster is affected by Improved Invisibility, able to move unnnoticed and even attack or cast spells without becoming fully visible.
-~
-
-@6277   = ~Simulacrum~
-@6278   = ~Simulacrum
-Level: 9
-School: Illusion
-Range: Caster
+Range: 0
 Duration: 1 round/level
 Casting Time: 5
-Area of Effect: Special
+Area of Effect: Caster
 Saving Throw: none
 
-This powerful spell creates a perfect clone, with 100% of the experience (level, hit dice, skills, etc.) of the caster. The clone is able to cast any spells that the caster can, and has enough substance and stability to engage in melee combat with skill equal to the caster's. Simultaneously, the caster is affected by Improved Invisibility, able to move unnnoticed and even attack or cast spells without becoming fully visible.
+This is an improvement on the Lesser Simulacrum spell. The clone created has 75% of the caster's hit points, and 3-point penalties on to-hit rolls and effective caster level. The clone may not use consumable items like potions or scrolls (which are not truly replicated). The clone can, however replicate a substantial amount of the caster's magical abilities, able to cast any arcane spells the caster memorized that day, up to 7th spell level. Additionally, the clone is so real and has such a sense of identity that it can successfully use divine magic (if the caster has such capabilities). Upon casting, the caster is affected by Improved Invisibility, able to move unnoticed and even attack or cast spells without becoming fully visible.
+~
+
+@6277   = ~Projected Simulacrum~
+@6278   = ~Projected Simulacrum
+Level: 9
+School: Illusion
+Range: Touch
+Duration: 1 round/level
+Casting Time: 5
+Area of Effect: One creature
+Saving Throw: none
+
+This powerful spell creates a clone of the target creature, similar to the 8th-lev el Simulacrum spell. The  with 100% of the experience (level, hit dice, skills, etc.) of the caster. The clone created has 75% of the target creature's hit points, and 3-point penalties on to-hit rolls and effective caster level (if relevant). The clone may not use consumable items like potions or scrolls (which are not truly replicated). The clone can, however replicate a substantial amount of the target's arcane magical abilities, if the target has any - able to cast any arcane spells memorized that day, up to 7th spell level. Additionally, the clone is so real and has such a sense of identity that it can successfully use divine magic (if the target creature has such capabilities).
 ~
 @6351 = ~Contingency~
 @6352 = ~Contingency

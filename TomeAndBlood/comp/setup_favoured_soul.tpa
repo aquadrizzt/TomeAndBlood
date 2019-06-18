@@ -121,3 +121,4 @@ COPY ~TomeAndBlood/data/favoured_soul/QDFVSLS.spl~ ~override~
 		STR_VAR 
 			resource = EVALUATE_BUFFER ~QDFVSLS~ 
 	END 
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~%SOURCE_RES%~ END

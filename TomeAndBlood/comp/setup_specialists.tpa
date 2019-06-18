@@ -368,6 +368,12 @@ ACTION_PHP_EACH d5_spell_scroll_school AS spell => school BEGIN
 		END 
 	END 
 END 
+
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5si9il.spl~) BEGIN
+  COPY_EXISTING ~QDMG+ILL.SPL~ ~override~ 
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~d5si9il~ END
+END
+
 //Base Abilities and CLAB Updates
 COPY ~TomeAndBlood/data/specialists/D5_TRAN1.SPL~ ~override~ //transmuter poly/petrify immunity
 	 ~TomeAndBlood/data/specialists/D5_DIVI1.SPL~ ~override~ //diviner backstab immunity

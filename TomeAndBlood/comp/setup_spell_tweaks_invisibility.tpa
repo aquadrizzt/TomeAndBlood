@@ -37,6 +37,40 @@ END
 //__________________________________________________________________________________
 
 
+//change Dispel Illusion to Invisibility Purge______________________________________
+//
+COPY_EXISTING ~sppr309.spl~ ~override/spwi322.spl~
+  	WRITE_SHORT 0x1c 1
+  	WRITE_SHORT 0x22 16
+  	WRITE_BYTE 0x25 3
+  	WRITE_BYTE 0x27 5
+  	WRITE_LONG 0x34 3
+  	WRITE_BYTE 0x1e (THIS BOR 0b10000000)
+IF_EXISTS
+//__________________________________________________________________________________
+
+
+//faerie fire/glitterdust counter RI/MI/Blur________________________________________
+//
+ACTION_IF FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ BEGIN 							// Spell Revisions
+  COPY_EXISTING ~sppr114.spl~ ~override~
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 47 opcode = 221 parameter1 = 3 parameter2 = 3 timing = 1 savingthrow = 1 END
+  IF_EXISTS BUT_ONLY
+END
+
+ACTION_IF (FILE_CONTAINS_EVALUATED (~SPELL.IDS~ ~[ %TAB%]CLERIC_FAERIE_FIRE$~)) BEGIN 	// SoD
+  LAF RES_NUM_OF_SPELL_NAME STR_VAR spell_name = ~CLERIC_FAERIE_FIRE~ RET spell_res END
+  COPY_EXISTING ~%spell_res%.spl~ ~override~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 221 target = 2 parameter1 = 3 parameter2 = 3 timing = 1 savingthrow = 1 END
+  IF_EXISTS BUT_ONLY
+END
+
+COPY_EXISTING ~spwi224.spl~ ~override~
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 116 opcode = 221 parameter1 = 3 parameter2 = 3 timing = 1 duration = 0 END
+IF_EXISTS BUT_ONLY
+//__________________________________________________________________________________
+
+
 /*
 //change SR Expeditious Retreat to Chameleon___________________________________________
 //
@@ -83,8 +117,9 @@ END 													// end sr is installed
 
 //true sight = illusionary creature immunity________________________________________
 //
-// add a huge luck penalty aura to illusionary creatures
-// and deafness
+// plus a huge luck penalty aura to illusionary creatures
+// plus deafness
+// and/or caster level penalty? 
 
 COPY_EXISTING ~sppr505.spl~ ~override~
 	LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 193 opcode = 100 parameter2 = 7 parameter1 = 7 END

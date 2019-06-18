@@ -29,7 +29,7 @@ ACTION_FOR_EACH mage_table IN ~mxsplwiz~ BEGIN
 		END
 	  END
 	END
-  BUT_ONLY
+  IF_EXISTS BUT_ONLY
 END
 ACTION_FOR_EACH bard_table IN ~mxsplbrd~ BEGIN
   COPY_EXISTING ~%bard_table%.2da~ ~override~
@@ -43,7 +43,7 @@ ACTION_FOR_EACH bard_table IN ~mxsplbrd~ BEGIN
 		END
 	  END
 	END
-  BUT_ONLY
+  IF_EXISTS BUT_ONLY
 END
 ACTION_FOR_EACH sorc_table IN ~mxsplsrc~ ~mxspldd~ BEGIN
   COPY_EXISTING ~%sorc_table%.2da~ ~override~
@@ -57,7 +57,7 @@ ACTION_FOR_EACH sorc_table IN ~mxsplsrc~ ~mxspldd~ BEGIN
 		END
 	  END
 	END
-  BUT_ONLY
+  IF_EXISTS BUT_ONLY
 END
 
 /*

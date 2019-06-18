@@ -6,6 +6,8 @@ ALWAYS
 
 	INCLUDE ~TomeAndBlood/lib/add_spell_header.tpa~
 
+	INCLUDE ~TomeAndBlood/lib/add_spellstate.tpa~
+
 	INCLUDE ~TomeAndBlood/lib/fl#add_kit_ee.tpa~
 
 	INCLUDE ~TomeAndBlood/lib/joinable_npcs.tpa~

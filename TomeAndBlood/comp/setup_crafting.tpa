@@ -137,15 +137,15 @@ COPY ~TomeAndBlood/data/arcane_crafting/wand/b_wnd18.itm~ ~override~ //player cr
 
 //IWDEE ONLY
 ACTION_IF GAME_IS ~iwdee~ THEN BEGIN
-  COMPILE ~TomeAndBlood/data/arcane_crafting/wand/iwd/b_wand1.baf~ ~override~
-  COMPILE ~TomeAndBlood/data/arcane_crafting/wand/iwd/b_wand1.d~ ~override~
+  COMPILE ~TomeAndBlood/data/arcane_crafting/wand/iwd/b_wand1.baf~
+  COMPILE ~TomeAndBlood/data/arcane_crafting/wand/iwd/b_wand1.d~
 END
 //END IWDEE
 
 //BGEE ONLY
 ACTION_IF GAME_IS ~bgee bg2ee eet~ THEN BEGIN
-  COMPILE ~TomeAndBlood/data/arcane_crafting/wand/bg/b_wand1.baf~ ~override~
-  COMPILE ~TomeAndBlood/data/arcane_crafting/wand/bg/b_wand1.d~ ~override~
+  COMPILE ~TomeAndBlood/data/arcane_crafting/wand/bg/b_wand1.baf~
+  COMPILE ~TomeAndBlood/data/arcane_crafting/wand/bg/b_wand1.d~
 END
 //END BGEE
 
@@ -226,15 +226,15 @@ COPY ~TomeAndBlood/data/arcane_crafting/wand/b_rech1.spl~ ~override~
 
 //IWDEE ONLY
 ACTION_IF GAME_IS ~iwdee~ THEN BEGIN
-  COMPILE ~TomeAndBlood/data/arcane_crafting/wand/iwd/b_rech1.baf~ ~override~
-  COMPILE ~TomeAndBlood/data/arcane_crafting/wand/iwd/b_rech1.d~ ~override~
+  COMPILE ~TomeAndBlood/data/arcane_crafting/wand/iwd/b_rech1.baf~ 
+  COMPILE ~TomeAndBlood/data/arcane_crafting/wand/iwd/b_rech1.d~ 
 END
 //END IWDEE ONLY
 
 //BGEE ONLY
 ACTION_IF GAME_IS ~bgee bg2ee eet~ THEN BEGIN
-  COMPILE ~TomeAndBlood/data/arcane_crafting/wand/bg/b_rech1.baf~ ~override~
-  COMPILE ~TomeAndBlood/data/arcane_crafting/wand/bg/b_rech1.d~ ~override~
+  COMPILE ~TomeAndBlood/data/arcane_crafting/wand/bg/b_rech1.baf~
+  COMPILE ~TomeAndBlood/data/arcane_crafting/wand/bg/b_rech1.d~
 END
 //END BGEE ONLY
 
@@ -270,9 +270,9 @@ COPY ~TomeAndBlood/data/arcane_crafting/scroll/b_scrib.spl~ ~override~   //Scrib
   SAY UNIDENTIFIED_DESC @115017
 
 
-COMPILE ~TomeAndBlood/data/arcane_crafting/scroll/b_scrib.baf~ ~override~   //Scribe script
-COMPILE ~TomeAndBlood/data/arcane_crafting/scroll/b_scrib.d~ ~override~     //Scribe dlg
-COPY ~TomeAndBlood/data/arcane_crafting/scroll/b_scrib.cre~ ~override~      //scribe creature
+COMPILE ~TomeAndBlood/data/arcane_crafting/scroll/b_scrib.baf~   //Scribe script
+COMPILE ~TomeAndBlood/data/arcane_crafting/scroll/b_scrib.d~    //Scribe dlg
+COPY ~TomeAndBlood/data/arcane_crafting/scroll/b_scrib.cre~ ~override~    //scribe creature
 
 ////////////////////////////////////////////////////////////////
 /////////////////         Brew Potion       ////////////////////
@@ -281,8 +281,8 @@ COPY ~TomeAndBlood/data/arcane_crafting/scroll/b_scrib.cre~ ~override~      //sc
 COPY ~TomeAndBlood/data/arcane_crafting/potion/b_Brew1.spl~ ~override~
   SAY NAME1 @115025//Brew Potion
   SAY UNIDENTIFIED_DESC @115254
-COMPILE ~TomeAndBlood/data/arcane_crafting/potion/b_Brew1.baf~ ~override~
-COMPILE ~TomeAndBlood/data/arcane_crafting/potion/b_Brew1.d~ ~override~
+COMPILE ~TomeAndBlood/data/arcane_crafting/potion/b_Brew1.baf~
+COMPILE ~TomeAndBlood/data/arcane_crafting/potion/b_Brew1.d~
 COPY ~TomeAndBlood/data/arcane_crafting/potion/b_Brew1.cre~ ~override~
 
 ///////////////////////////////////////////////////////////////

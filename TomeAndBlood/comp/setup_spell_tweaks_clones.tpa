@@ -7,75 +7,143 @@
 
 //updated illusionary clone spells___________________________________________________
 //
-  ACTION_IF FILE_EXISTS_IN_GAME ~spwi804.spl~ BEGIN
+LAF d5_resolve_state STR_VAR new_state_id = ~D5_MISLEAD~ RET new_state_ind END
+OUTER_SET mislead_clone_state = %new_state_ind%
+
+LAF d5_resolve_state STR_VAR new_state_id = ~D5_L_SIMULACRUM~ RET new_state_ind END
+OUTER_SET lesser_simulacrum_state = %new_state_ind%
+
+//LAF d5_resolve_state STR_VAR new_state_id = ~D5_SIMULACRUM~ RET new_state_ind END
+//OUTER_SET simulacrum_state = %new_state_ind%
+
+ACTION_IF FILE_EXISTS_IN_GAME ~spwi804.spl~ BEGIN
 
 	OUTER_SET spell_ind = 0
 	COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
 	  READ_SHORT 0x1c spell_type
 	  PATCH_IF (spell_type < 3) BEGIN
 		READ_LONG 0x34 spell_level
-		PATCH_IF (spell_level > 1) AND (spell_level < 4) BEGIN
+		PATCH_IF (spell_level > 1) AND (spell_level < 5) BEGIN
+		  SET spell_ind = (%spell_ind% + 1)
+		  TEXT_SPRINT $d5_no_lowspells(~%spell_ind%~) ~%SOURCE_RES%~
+		END
+		PATCH_IF (spell_level > 4) AND (spell_level < 8) BEGIN
 		  SET spell_ind = (%spell_ind% + 1)
 		  TEXT_SPRINT $d5_no_midspells(~%spell_ind%~) ~%SOURCE_RES%~
 		END
-		PATCH_IF (spell_level > 3) BEGIN
+		PATCH_IF (spell_level > 7) BEGIN
 		  SET spell_ind = (%spell_ind% + 1)
 		  TEXT_SPRINT $d5_no_highspells(~%spell_ind%~) ~%SOURCE_RES%~
 		END
 	  END
 	BUT_ONLY
 
-//...spell removal for clones: 2nd-3rd = "mid" and 4th+ = "high"
-//
-	COPY ~TomeAndBlood/data/spell_tweaks/d5clonm.spl~ ~override~
-	  PHP_EACH d5_no_midspells AS ind => spell BEGIN
-		LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~%spell%~ END 	//	remove level 3-4 spells
-	  END
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src3.spl~ END 		//	for spontaneous casters
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src-3.spl~ END 	//		"
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src4.spl~ END 		//		"
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src-4.spl~ END 	//		"
-	COPY ~TomeAndBlood/data/spell_tweaks/d5clonh.spl~ ~override~
-	  PHP_EACH d5_no_highspells AS ind => spell BEGIN
-		LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~%spell%~ END 	//	remove level 5+ spells
-	  END
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src5.spl~ END 		//	for spontaneous casters
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src-5.spl~ END 	//		"
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src6.spl~ END 		//		"
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src-6.spl~ END 	//		"
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src7.spl~ END 		//		"
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src-7.spl~ END 	//		"
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src8.spl~ END 		//		"
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src-8.spl~ END 	//		"
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src9.spl~ END 		//		"
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src-9.spl~ END 	//		"
-
-//...apply spell removal to simulacra
+//...apply penalties to simulacra
 //
 	COPY ~TomeAndBlood/data/spell_tweaks/simulacr.spl~ ~override~
 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 337 target = 1 parameter1 = ~-1~ parameter2 = 237	END
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~D5CLONM~ END 	//	remove level 3-4 spells
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~D5CLONH~ END 	//	remove level 5+ spells
 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 144 target = 1 parameter2 = 9 timing = 1 END 	//	no item use
 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 144 target = 1 parameter2 = 11 timing = 1 END 	//	no item use
 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 144 target = 1 parameter2 = 12 timing = 1 END 	//	no item use
-//	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 101 target = 1 parameter2 = 261 timing = 0 duration = 90 STR_VAR resource = ~~ END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %mislead_clone_state% parameter2 = 110 timing = 1 STR_VAR resource = ~d5simul6~ END // and make d5simul6 318 immune if stat = 3
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %lesser_simulacrum_state% parameter2 = 110 timing = 1 STR_VAR resource = ~d5simul7~ END // and make d5simul7 318 immune if stat = 3
+//	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %simulacrum_state% parameter2 = 110 timing = 1 STR_VAR resource = ~d5simul8~ END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5simul8~ END
+
+	COPY ~TomeAndBlood/data/core/d5_base.spl~ ~override/d5simul6.spl~
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 278 target = 1 parameter1 = (0 - 7) parameter2 = 0 timing = 9 END 	//	-7 thac0
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 191 target = 1 parameter1 = (0 - 7) parameter2 = 0 timing = 9 END 	//	-7 arcane caster level
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 40 parameter2 = 2 timing = 9 END 		//	-60% hp
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 145 target = 1 parameter2 = 1 timing = 1 END 	//	no divine spellcasting
+	  PHP_EACH d5_no_lowspells AS ind => spell BEGIN
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~%spell%~ END 	//	remove level 2-3 spells
+	  END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src2.spl~ END 		//	for spontaneous casters
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src-2.spl~ END 	
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src3.spl~ END 
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src-3.spl~ END 
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src4.spl~ END 
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src-4.spl~ END 
+	  PHP_EACH d5_no_midspells AS ind => spell BEGIN
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~%spell%~ END 	//	remove level 4-6 spells
+	  END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src5.spl~ END 		//	for spontaneous casters
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src-5.spl~ END 
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src6.spl~ END 
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src-6.spl~ END 
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src7.spl~ END 
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src-7.spl~ END 
+	  PHP_EACH d5_no_highspells AS ind => spell BEGIN
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~%spell%~ END 	//	remove level 7+ spells
+	  END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src8.spl~ END 		//	for spontaneous casters
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src-8.spl~ END 
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src9.spl~ END 
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src-9.spl~ END 
+//	  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = (3 << 24) parameter2 = %clone_stat% timing = 9 STR_VAR resource = ~d5simul6~ END
+
+	COPY ~TomeAndBlood/data/core/d5_base.spl~ ~override/d5simul7.spl~
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 278 target = 1 parameter1 = (0 - 5) parameter2 = 0 timing = 9 END 	//	-5 thac0
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 191 target = 1 parameter1 = (0 - 5) parameter2 = 0 timing = 9 END 	//	-5 arcane caster level
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 60 parameter2 = 2 timing = 9 END 		//	-40% hp
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 145 target = 1 parameter2 = 1 timing = 1 END 	//	no divine spellcasting
+	  PHP_EACH d5_no_midspells AS ind => spell BEGIN
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~%spell%~ END 	//	remove level 4-6 spells
+	  END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src5.spl~ END 		//	for spontaneous casters
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src-5.spl~ END 
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src6.spl~ END 
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src-6.spl~ END 
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src7.spl~ END 
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src-7.spl~ END 
+	  PHP_EACH d5_no_highspells AS ind => spell BEGIN
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~%spell%~ END 	//	remove level 7+ spells
+	  END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src8.spl~ END 		//	for spontaneous casters
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src-8.spl~ END 
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src9.spl~ END 
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src-9.spl~ END 
+//	  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = (3 << 24) parameter2 = %clone_stat% timing = 9 STR_VAR resource = ~d5simul7~ END
+
+	COPY ~TomeAndBlood/data/core/d5_base.spl~ ~override/d5simul8.spl~
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 278 target = 1 parameter1 = (0 - 3) parameter2 = 0 timing = 9 END 	//	-3 thac0
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 191 target = 1 parameter1 = (0 - 3) parameter2 = 0 timing = 9 END 	//	-3 arcane caster level
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 75 parameter2 = 2 timing = 9 END 		//	-25% hp
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = ~spwi505~ END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = ~spwi607~ END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = ~spwi703~ END
+	  PHP_EACH d5_no_highspells AS ind => spell BEGIN
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~%spell%~ END 	//	remove level 7+ spells
+	  END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src8.spl~ END 		//	for spontaneous casters
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src-8.spl~ END 
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src9.spl~ END 
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src-9.spl~ END 
+//	  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = (3 << 24) parameter2 = %clone_stat% timing = 9 STR_VAR resource = ~d5simul8~ END
+	  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = %mislead_clone_state% parameter2 = 110 timing = 9 STR_VAR resource = ~d5simul8~ END
+	  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = %lesser_simulacrum_state% parameter2 = 110 timing = 9 STR_VAR resource = ~d5simul8~ END
 
 //...custom simulacrum summon
 //
-	COPY ~TomeAndBlood/data/spell_tweaks/d5wi804.spl~ ~override~
+	COPY ~TomeAndBlood/data/spell_tweaks/d5si804.spl~ ~override~
+	  SAY NAME1 ~ ~
+	  SAY UNIDENTIFIED_DESC ~ ~
 
 //...5th level: nerfed mislead (imp. invisibility, no super invisibility. and 50% hp)
 //
-	COPY_EXISTING ~spwi505.spl~ ~override~
-	  READ_LONG 0x08 name
-	  READ_LONG 0x50 desc
+	COPY_EXISTING ~spwi607.spl~ ~override~
+	  READ_LONG 0x08 mislead_name
+	  READ_LONG 0x50 mislead_desc
+	BUT_ONLY
 	COPY ~TomeAndBlood/data/spell_tweaks/spwi607.spl~ ~override/spwi505.spl~
-	  WRITE_LONG 0x08 %name%
-	  WRITE_LONG 0x50 %desc%
-	COPY ~TomeAndBlood/data/spell_tweaks/spwi505a.spl~ ~override~
-	COPY ~TomeAndBlood/data/spell_tweaks/spwi505a.eff~ ~override~
-	COPY ~TomeAndBlood/data/spell_tweaks/spwi505b.spl~ ~override~
+	  WRITE_LONG 0x08 %mislead_name%
+	  WRITE_LONG 0x50 %mislead_desc%
+	  WRITE_LONG 0x34 5
+	  WRITE_ASCII 0x3a ~spwi505c~ #8
+	  LPF ALTER_SPELL_HEADER INT_VAR speed = 5 STR_VAR icon = ~spwi505b~ END
+	COPY ~TomeAndBlood/data/spell_tweaks/d5si505a.spl~ ~override~
+	COPY ~TomeAndBlood/data/spell_tweaks/d5si505a.eff~ ~override~
+	COPY ~TomeAndBlood/data/spell_tweaks/d5si505b.spl~ ~override~
 	COPY ~TomeAndBlood/data/spell_tweaks/mislead.spl~ ~override~
 
 //...6th level: shadow clone
@@ -84,13 +152,13 @@
 	  SAY NAME1 @6271
 	  SAY UNIDENTIFIED_DESC @6272
 	  WRITE_LONG 0x34 6
-	  LPF DELETE_EFFECT INT_VAR match_target = 1 END
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 101 target = 1 parameter2 = 224 timing = 9 END
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~D5WI804~ END
+	  LPF DELETE_EFFECT END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 328 target = 1 parameter1 = 0 parameter2 = %mislead_clone_state% timing = 9 special = 1 END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 duration = 0 STR_VAR resource = ~d5si804~ END
 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 4 duration = 2 STR_VAR resource = ~spwi607~ END
-	  WRITE_ASCII 0x3a ~spwi703c~ #8
-	  LPF ALTER_SPELL_HEADER INT_VAR speed = 5 STR_VAR icon = ~spwi703b~ END
-	ACTION_IF FILE_EXISTS_IN_GAME ~scrl7k.itm~ THEN BEGIN
+	  WRITE_ASCII 0x3a ~spwi607c~ #8
+	  LPF ALTER_SPELL_HEADER INT_VAR speed = 5 STR_VAR icon = ~spwi607b~ END
+	ACTION_IF FILE_EXISTS_IN_GAME ~scrl7k.itm~ BEGIN
 	  COPY_EXISTING ~scrl7k.itm~ ~override~
 	  SAY NAME2 @6271
 	  SAY IDENTIFIED_DESC @6272
@@ -103,16 +171,15 @@
 	  SAY NAME1 @6273
 	  SAY UNIDENTIFIED_DESC @6274
 	  WRITE_LONG 0x34 7
-	  LPF DELETE_EFFECT INT_VAR match_target = 1 END
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 101 target = 1 parameter2 = 224 timing = 9 END
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5CLONM~ END
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~D5WI804~ END
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~SPWI206~ END
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 4 duration = 22 STR_VAR resource = ~SPWI703~ END
-	  WRITE_ASCII 0x3a ~spwi607c~ #8
-	  LPF ALTER_SPELL_HEADER INT_VAR speed = 2 STR_VAR icon = ~spwi607b~ END
+	  LPF DELETE_EFFECT END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 328 target = 1 parameter1 = 0 parameter2 = %lesser_simulacrum_state% timing = 9 special = 1 END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 duration = 0 STR_VAR resource = ~d5si804~ END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~spwi206~ END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 4 duration = 22 STR_VAR resource = ~spwi703~ END
+	  WRITE_ASCII 0x3a ~spwi703c~ #8
+	  LPF ALTER_SPELL_HEADER INT_VAR speed = 2 STR_VAR icon = ~spwi703b~ END
 
-	ACTION_IF FILE_EXISTS_IN_GAME ~scrl8f.itm~ THEN BEGIN
+	ACTION_IF FILE_EXISTS_IN_GAME ~scrl8f.itm~ BEGIN
 	  COPY_EXISTING ~scrl8f.itm~ ~override~
 	  SAY NAME2 @6273
 	  SAY IDENTIFIED_DESC @6274
@@ -120,23 +187,23 @@
 	  LPF ALTER_ITEM_HEADER STR_VAR icon = ~spwi607a~ END
 	END 
 
-//...9th level: project image
+//...9th level: projected simulacrum
 //
-	COPY_EXISTING ~spwi804.spl~ ~override/d5wi9il.spl~
+	COPY_EXISTING ~d5si804.spl~ ~override/d5si8049.spl~
+	  LPF ALTER_SPELL_HEADER INT_VAR target = 1 END
+	  LPF ALTER_EFFECT INT_VAR target = 2 END
+	COPY_EXISTING ~spwi804.spl~ ~override/d5si9il.spl~
 	  SAY NAME1 @6277
 	  SAY UNIDENTIFIED_DESC @6278
 	  WRITE_LONG 0x34 9
 	  WRITE_ASCII 0x3a ~d5projic~ #8
-	  LPF ALTER_SPELL_HEADER INT_VAR speed = 5 STR_VAR icon = ~d5projib~ END
-	  LPF DELETE_EFFECT INT_VAR match_target = 1 END
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5CLONM~ END
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5CLONH~ END
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~D5WI804~ END
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~SPWI405~ END
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 4 duration = 2 STR_VAR resource = ~d5wi9il~ END
+	  LPF ALTER_SPELL_HEADER INT_VAR speed = 5 target = 1 STR_VAR icon = ~d5projib~ END
+	  LPF DELETE_EFFECT END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 2 parameter2 = 1 timing = 1 duration = 0 STR_VAR resource = ~d5si8049~ END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 2 timing = 4 duration = 2 STR_VAR resource = ~d5si9il~ END
 	COPY ~TomeAndBlood/data/spell_tweaks/d5projic.bam~ ~override~
 	COPY ~TomeAndBlood/data/spell_tweaks/d5projib.bam~ ~override~
-	ADD_SPELL ~override/d5wi9il.spl~ 2 9 D5_WIZARD_CLONE
+	ADD_SPELL ~override/d5si9il.spl~ 2 9 D5_WIZARD_CLONE
 	LAF RES_NUM_OF_SPELL_NAME
 		STR_VAR spell_name = ~D5_WIZARD_CLONE~
 		RET spell_res
@@ -150,21 +217,18 @@
 	COPY_EXISTING ~spwi804.spl~ ~override~
 	  SAY NAME1 @6275
 	  SAY UNIDENTIFIED_DESC @6276
-	  LPF DELETE_EFFECT INT_VAR match_target = 1 END
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 101 target = 1 parameter2 = 224 timing = 9 END
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5CLONM~ END
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~D5CLONH~ END
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~D5WI804~ END
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~SPWI405~ END
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 4 duration = 2 STR_VAR resource = ~SPWI804~ END
+	  LPF DELETE_EFFECT END
+//	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 328 target = 1 parameter1 = 0 parameter2 = %simulacrum_state% timing = 9 special = 1 END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 duration = 0 STR_VAR resource = ~d5si804~ END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~spwi405~ END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 4 duration = 2 STR_VAR resource = ~spwi804~ END
 	  LPF ALTER_SPELL_HEADER INT_VAR speed = 5 END
-	ACTION_IF FILE_EXISTS_IN_GAME ~scrl8z.itm~ THEN BEGIN
+	ACTION_IF FILE_EXISTS_IN_GAME ~scrl8z.itm~ BEGIN
 	  COPY_EXISTING ~scrl8z.itm~ ~override~
 	  SAY NAME2 @6275
 	  SAY IDENTIFIED_DESC @6276
 	END 
-  END
-
+END
 //__________________________________________________________________________________
 
 
