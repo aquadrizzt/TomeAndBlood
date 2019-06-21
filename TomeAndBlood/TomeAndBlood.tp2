@@ -1,6 +1,6 @@
 BACKUP ~TomeAndBlood/backup~
 AUTHOR ~aquadrizzt@gmail.com~
-VERSION ~0.8.36~ 
+VERSION ~0.8.37~ 
 
 ALWAYS
 
@@ -26,73 +26,91 @@ LANGUAGE ~English~ ~english~ ~TomeAndBlood/lang/english/setup.tra~
 // -----------------------------
 // 5: REBALANCED SPELL SCHOOLS (Subtledoctor)
 // -----------------------------
-BEGIN ~Rebalanced Spell Schools~  
+BEGIN @12  
 DESIGNATED 5
-REQUIRE_PREDICATE (ENGINE_IS ~soa tob iwd bgee bg2ee iwdee eet~) @10 
+REQUIRE_PREDICATE (ENGINE_IS ~soa tob iwd bgee bg2ee iwdee eet~) @1 
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_schools.qd~ //detection for this component 
 
 INCLUDE ~TomeAndBlood/comp/setup_spell_schools.tpa~ 
 
+
 // -----------------------------
 // 10: SPELL TWEAKS: GENERAL CHANGES (Subtledoctor)
 // -----------------------------
-BEGIN ~Spell Tweaks: General Rebalancing~
+BEGIN @15
 DESIGNATED 10
-REQUIRE_PREDICATE (ENGINE_IS ~soa tob iwd bgee bg2ee iwdee eet~) @10 
+REQUIRE_PREDICATE (ENGINE_IS ~soa tob iwd bgee bg2ee iwdee eet~) @1 
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_spelltweaks_gen.qd~ //detection for this component 
 
 INCLUDE ~TomeAndBlood/comp/setup_spell_tweaks_general.tpa~
 
+
 // -----------------------------
 // 11: SPELL TWEAKS: CLONE CHANGES (Subtledoctor)
 // -----------------------------
-BEGIN ~Spell Tweaks: Revised Illusionary Clones~
+BEGIN @16
 DESIGNATED 11
-REQUIRE_PREDICATE (ENGINE_IS ~soa tob iwd bgee bg2ee iwdee eet~) @10 
+REQUIRE_PREDICATE (ENGINE_IS ~soa tob iwd bgee bg2ee iwdee eet~) @1 
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_spelltweaks_clone.qd~ //detection for this component 
 
 INCLUDE ~TomeAndBlood/comp/setup_spell_tweaks_clones.tpa~
 
+
 // -----------------------------
 // 12: SPELL TWEAKS: INVISIBILITY CHANGES (Subtledoctor)
 // -----------------------------
-BEGIN ~Spell Tweaks: Revised Invisibility~
+BEGIN @17
 DESIGNATED 12
-REQUIRE_PREDICATE (ENGINE_IS ~soa tob iwd bgee bg2ee iwdee eet~) @10 
+REQUIRE_PREDICATE (ENGINE_IS ~soa tob iwd bgee bg2ee iwdee eet~) @1 
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_spelltweaks_invis.qd~ //detection for this component 
 
 INCLUDE ~TomeAndBlood/comp/setup_spell_tweaks_invisibility.tpa~
 
+/*
+// -----------------------------
+// 13: SPELL TWEAKS: HASTE CHANGES (Subtledoctor)
+// -----------------------------
+BEGIN @18
+DESIGNATED 13
+REQUIRE_PREDICATE (ENGINE_IS ~bgee bg2ee iwdee eet~) @1 
+
+COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_spelltweaks_haste.qd~ //detection for this component 
+
+INCLUDE ~TomeAndBlood/comp/setup_spell_tweaks_haste.tpa~
+*/
+
 // -----------------------------
 // 20: REVISED DRAGON DISCIPLES
 // -----------------------------
-BEGIN ~Revised Dragon Disciples~  
+BEGIN @20 
 DESIGNATED 20
-REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee iwdee eet~) @11  
+REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee iwdee eet~) @2  
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_dd.qd~ //detection for this component 
 
 INCLUDE ~TomeAndBlood/comp/setup_dd.tpa~ 
 
+
 // -----------------------------
 // 30: SORCERER: MAGUS
 // -----------------------------
-BEGIN ~Sorcerer: Magus~  
+BEGIN @23 
 DESIGNATED 30
-REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee iwdee eet~) @11 
+REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee iwdee eet~) @2 
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_magus.qd~ //detection for this component 
 
 INCLUDE ~TomeAndBlood/comp/setup_magus.tpa~ 
 
+
+/*
 // -----------------------------
 // 40: SORCERER: ARCANIST
 // -----------------------------
-/*
 BEGIN ~Sorcerer: Arcanist~  
 DESIGNATED 40
 
@@ -101,10 +119,10 @@ COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_arcanist.qd~ //detection for this com
 INCLUDE ~TomeAndBlood/comp/setup_arcanist.tpa~ 
 */ 
 
+/*
 // -----------------------------
 // 50: SORCERER: WILD SORCERER
 // -----------------------------
-/*
 BEGIN ~Sorcerer: Wild Sorcerer~  
 DESIGNATED 50
 
@@ -116,79 +134,74 @@ INCLUDE ~TomeAndBlood/comp/setup_wild_sorcerer.tpa~
 // -----------------------------
 // 60: SORCERER: FAVOURED SOUL
 // -----------------------------
-BEGIN ~Sorcerer: Favoured Soul~  
+BEGIN @26
 DESIGNATED 60
-REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee iwdee eet~) @11 
+REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee iwdee eet~) @2 
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_favsoul.qd~ //detection for this component 
 
 INCLUDE ~TomeAndBlood/comp/setup_favoured_soul.tpa~ 
 
+
 // -----------------------------
 // 70: SORCERER: SYLVAN DISCIPLE
 // -----------------------------
-BEGIN ~Sorcerer: Sylvan Disciple~  
+BEGIN @27
 DESIGNATED 70
-REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee iwdee eet~) @11 
+REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee iwdee eet~) @2 
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_sylvan.qd~ //detection for this component 
 
 INCLUDE ~TomeAndBlood/comp/setup_sylvan.tpa~ 
 
+
 // -----------------------------
 // 80: SORCERER: REVENANT DISCIPLE
 // -----------------------------
-BEGIN ~Sorcerer: Revenant Disciple~  
+BEGIN @28 
 DESIGNATED 80
-REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee iwdee eet~) @11 
+REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee iwdee eet~) @2 
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_revenant.qd~ //detection for this component 
 
 INCLUDE ~TomeAndBlood/comp/setup_revenant.tpa~ 
 
+
 // -----------------------------
 // 90: SORCERER: AMORPHOUS DISCIPLE
 // -----------------------------
-BEGIN ~Sorcerer: Amorphous Disciple~  
+BEGIN @29
 DESIGNATED 90
-REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee iwdee eet~) @11 
+REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee iwdee eet~) @2 
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_amorphous.qd~ //detection for this component 
 
 INCLUDE ~TomeAndBlood/comp/setup_amorphous.tpa~ 
 
-// -----------------------------
-// 100: INNATE FIND FAMILIAR
-// -----------------------------
-BEGIN @1
-DESIGNATED 100
-REQUIRE_PREDICATE (ENGINE_IS ~soa tob iwd bgee bg2ee iwdee eet~) @10
-
-COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_familiar.qd~ //detection for this component 
-
-INCLUDE ~TomeAndBlood/comp/setup_familiar.tpa~ 
 
 // -----------------------------
 // 110: ARMORED CASTING FOR BARDS
 // -----------------------------
-BEGIN @2
+BEGIN @32
 DESIGNATED 110
-REQUIRE_PREDICATE (FILE_EXISTS_IN_GAME ~enginest.2da~) @12
+REQUIRE_PREDICATE (FILE_EXISTS_IN_GAME ~enginest.2da~) @3
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_acbards.qd~ //detection for this component 
 
 INCLUDE ~TomeAndBlood/comp/setup_armored_casting_bard.tpa~
 
+
 // -----------------------------
 // 120: ARCANE CRAFTING (grammarsalad)
 // -----------------------------
-BEGIN ~Arcane Crafting~
+BEGIN @35
 DESIGNATED 120
-REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee iwdee eet~) @11 
+REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee iwdee eet~) @2 
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_crafting.qd~ //detection for this component 
 
 INCLUDE ~TomeAndBlood/comp/setup_crafting.tpa~
+
 
 // -----------------------------
 // 130: INNATE METAMAGIC (Subtledoctor)
@@ -199,10 +212,10 @@ INCLUDE ~TomeAndBlood/comp/setup_crafting.tpa~
 // 135: metamagic spells, no cost to fill (compatible with multi sorcerers)
 // -----------------------------
 
-BEGIN ~Innate Metamagic; learned automatically by everyone~
+BEGIN @39
 DESIGNATED 131
-SUBCOMPONENT ~Innate Metamagic~ 
-REQUIRE_PREDICATE (ENGINE_IS ~soa tob iwd bgee bg2ee iwdee eet~) @10 
+SUBCOMPONENT @38
+REQUIRE_PREDICATE (ENGINE_IS ~soa tob iwd bgee bg2ee iwdee eet~) @1 
 FORBID_COMPONENT ~setup-stratagems.tp2~ ~4250~ ~conflict~
 REQUIRE_PREDICATE NOT FILE_EXISTS ~weidu_external/markers/dw#innate_triggers.mrk~ ~conflict~
 
@@ -211,41 +224,50 @@ OUTER_SET sequencer_method = 1
 
 INCLUDE ~TomeAndBlood/comp/setup_metamagic.tpa~
 
-BEGIN ~Innate Metamagic; learned automatically but NOT by sorcerers~
+// -----------------------------
+
+BEGIN @40
 DESIGNATED 132
-SUBCOMPONENT ~Innate Metamagic~ 
+SUBCOMPONENT @38
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_metamagic.qd~ //detection for this component 
 
 OUTER_SET sequencer_method = 2
 INCLUDE ~TomeAndBlood/comp/setup_metamagic.tpa~
 
-BEGIN ~Innate Metamagic; learned from scrolls or character generation~
+// -----------------------------
+
+BEGIN @41
 DESIGNATED 133
-SUBCOMPONENT ~Innate Metamagic~ 
+SUBCOMPONENT @38
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_metamagic.qd~ //detection for this component 
 
 OUTER_SET sequencer_method = 3
 INCLUDE ~TomeAndBlood/comp/setup_metamagic.tpa~
 
-BEGIN ~Innate Metamagic; learned from scrolls ONLY (none for sorcerers)~
+// -----------------------------
+
+BEGIN @42
 DESIGNATED 134
-SUBCOMPONENT ~Innate Metamagic~ 
+SUBCOMPONENT @38
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_metamagic.qd~ //detection for this component 
 
 OUTER_SET sequencer_method = 4
 INCLUDE ~TomeAndBlood/comp/setup_metamagic.tpa~
 
-BEGIN ~Metamagic = Spells; no cost to fill sequencers (compatible with multiclass sorcerers)~
+// -----------------------------
+
+BEGIN @43
 DESIGNATED 135
-SUBCOMPONENT ~Innate Metamagic~  (GAME_IS ~bgee bg2ee eet iwdee~)
+SUBCOMPONENT @38 (GAME_IS ~bgee bg2ee eet iwdee~)
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_metamagic.qd~ //detection for this component 
 
 OUTER_SET sequencer_method = 5
 INCLUDE ~TomeAndBlood/comp/setup_metamagic.tpa~
+
 
 // -----------------------------
 // 140: CANTRIPS (Subtledoctor)
@@ -254,28 +276,32 @@ INCLUDE ~TomeAndBlood/comp/setup_metamagic.tpa~
 // 143: Cantrips via Wand Weapon
 // -----------------------------
 
-BEGIN ~Innate Cantrips~
+BEGIN @47
 DESIGNATED 141
-SUBCOMPONENT ~Cantrips~ 
-REQUIRE_PREDICATE (ENGINE_IS ~soa tob iwd bgee bg2ee iwdee eet~) @10 
+SUBCOMPONENT @46 
+REQUIRE_PREDICATE (ENGINE_IS ~soa tob iwd bgee bg2ee iwdee eet~) @1 
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_cantrips.qd~ //detection for this component 
 
 INCLUDE ~TomeAndBlood/comp/setup_cantrips.tpa~
 
-BEGIN ~First Level Cantrips~
+// -----------------------------
+
+BEGIN @48
 DESIGNATED 142
-SUBCOMPONENT ~Cantrips~ 
-REQUIRE_PREDICATE (ENGINE_IS ~soa tob iwd bgee bg2ee iwdee eet~) @10 
+SUBCOMPONENT @46
+REQUIRE_PREDICATE (ENGINE_IS ~soa tob iwd bgee bg2ee iwdee eet~) @1 
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_l1cantrips.qd~ //detection for this component 
 
 INCLUDE ~TomeAndBlood/comp/setup_lvl_one_cantrips.tpa~
 
-BEGIN ~Cantrip Wands~
+// -----------------------------
+
+BEGIN @49
 DESIGNATED 143
-SUBCOMPONENT ~Cantrips~ 
-REQUIRE_PREDICATE (ENGINE_IS ~soa tob iwd bgee bg2ee iwdee eet~) @10 
+SUBCOMPONENT @46
+REQUIRE_PREDICATE (ENGINE_IS ~soa tob iwd bgee bg2ee iwdee eet~) @1 
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_cantwand.qd~ //detection for this component 
 
@@ -285,9 +311,9 @@ INCLUDE ~TomeAndBlood/comp/setup_cantrip_wands.tpa~
 // -----------------------------
 // 150: REVISED SPECIALISTS
 // -----------------------------
-BEGIN ~Revised Specialists~  
+BEGIN @52  
 DESIGNATED 150
-REQUIRE_PREDICATE (ENGINE_IS ~bgee bg2ee iwdee eet~) @10 
+REQUIRE_PREDICATE (ENGINE_IS ~bgee bg2ee iwdee eet~) @1 
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_specialists.qd~ //detection for this component 
 
@@ -295,11 +321,23 @@ INCLUDE ~TomeAndBlood/comp/setup_specialists.tpa~
 
 
 // -----------------------------
+// 155: INNATE FIND FAMILIAR
+// -----------------------------
+BEGIN @55
+DESIGNATED 155
+REQUIRE_PREDICATE (ENGINE_IS ~soa tob iwd bgee bg2ee iwdee eet~) @1
+
+COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_familiar.qd~ //detection for this component 
+
+INCLUDE ~TomeAndBlood/comp/setup_familiar.tpa~ 
+
+
+// -----------------------------
 // 160: ABILITY SCORE BONUSES
 // -----------------------------
-BEGIN ~Ability Score Bonuses~
+BEGIN @58
 DESIGNATED 160
-REQUIRE_PREDICATE (FILE_EXISTS_IN_GAME ~enginest.2da~) @12
+REQUIRE_PREDICATE (FILE_EXISTS_IN_GAME ~enginest.2da~) @3
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_attrbon.qd~ //detection for this component 
 
@@ -309,9 +347,9 @@ INCLUDE ~TomeAndBlood/comp/setup_ability_bonuses.tpa~
 // -----------------------------
 // 170: SPELL SELECTION DIALOG
 // -----------------------------
-BEGIN ~Spell Select Dialog~ 
+BEGIN @61 
 DESIGNATED 170
-REQUIRE_PREDICATE (FILE_EXISTS_IN_GAME ~enginest.2da~) @12
+REQUIRE_PREDICATE (FILE_EXISTS_IN_GAME ~enginest.2da~) @3
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_sstd.qd~ //detection for this component 
 
@@ -321,9 +359,9 @@ INCLUDE ~TomeAndBlood/comp/setup_spell_select_dlg.tpa~
 // -----------------------------
 // 180: MULTICLASS SORCERERS
 // -----------------------------
-BEGIN ~Multiclass Sorcerers~ 
+BEGIN @64
 DESIGNATED 180
-REQUIRE_PREDICATE (FILE_EXISTS_IN_GAME ~enginest.2da~) @12
+REQUIRE_PREDICATE (FILE_EXISTS_IN_GAME ~enginest.2da~) @3
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_mcsrc.qd~ //detection for this component 
 
