@@ -118,7 +118,7 @@ ACTION_PHP_EACH wizard_spells AS ind => wizard_spell BEGIN
 	COPY_EXISTING ~%wizard_spell%.spl~ ~override~
 	 READ_SHORT 0x1c spell_type
 	 READ_LONG 0x34 spell_level
-	 SET spont_level = (spell_level - 1)
+	 SET spont_level = spell_level
 	 READ_BYTE 0x25 spell_school
 	 READ_SHORT 0x68 abil_number
 	 PATCH_IF (spell_level > 1) BEGIN

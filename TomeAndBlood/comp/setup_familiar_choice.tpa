@@ -1,0 +1,35 @@
+// -----------------------------
+// FAMILIAR CHOICE
+// -----------------------------
+
+// set up spell learning UI w/ list of 8 spells
+
+// patch each one - don't put anything in spellbook
+
+// instead do a 1-second alignment change, and then cast clone of SPCL342
+
+// need to find icons for the spell-learning UI
+
+// icon representing animal, and write description of each animal
+
+// (can get description from game text, no?)
+
+// maybe also slightly modify each animal? to have more distinct utility?
+
+// give all a substantial AC bonus vs. missiles
+
+// pseudodragon: drowse cantrip, ...
+
+// fairy dragon: dazzle cantrip, can turn improved invisible
+
+// ferret: good pick pockets, ...
+
+// rabbit: good find traps ...
+
+// cat: good HiS, give the .CRE a cloak of nondetection
+
+// imp: 
+
+// dust mephit: grease cantrip? (conjures a greasy, silty slurry) ...
+
+// quasit: rigid thinking, Slow melee hit effect

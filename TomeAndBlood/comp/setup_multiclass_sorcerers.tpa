@@ -17,7 +17,15 @@ INCLUDE ~tomeandblood/lib/qd_multiclass.tpa~
 
 //base .2da file
 //
-COPY ~tomeandblood/data/multi_sorcerers/d5sorc.2da~ ~override~
+//COPY ~tomeandblood/data/multi_sorcerers/d5sorc.2da~ ~override~
+
+<<<<<<<< d5/d5sorc.2da
+ABILITY     ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+>>>>>>>>
+COPY ~d5/d5sorc.2da~ ~override/d5sorc.2da~
+
+//__________________________________________________________________________________
+
 
 ADD_KIT ~D5_FIGHTER_SORCERER~
 
@@ -33,7 +41,7 @@ ADD_KIT ~D5_FIGHTER_SORCERER~
 //3     	       		O O B E U K A I D O W A D A W G M L E E N A T B B B A I D S A P R R R R R R R R A A A A A A A A A A A
 //2     	       		R R O A N E X L S R O X S N A E E U A R I C A O O O R N E H P O A A A A A A A A 1 1 1 1 1 1 1 1 1 1 2
 //1     	       		D D W R T D E E W D R E W A K R R B R D N E F W W W T G D I O N 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0
-~D5_FIGHTER_SORCERER  	2 2 2 2 2 2 2 2~
+~D5_FIGHTER_SORCERER  	0 0 0 0 0 0 0 0~
 ~D5_FIGHTER_SORCERER    0 0 0 0 0 0 0 0 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
 
 //MINIMUM KIT STATS_________________________________________________________________
@@ -111,7 +119,7 @@ ADD_KIT ~D5_SORCERER_CLERIC~
 //3     	       		O O B E U K A I D O W A D A W G M L E E N A T B B B A I D S A P R R R R R R R R A A A A A A A A A A A
 //2     	       		R R O A N E X L S R O X S N A E E U A R I C A O O O R N E H P O A A A A A A A A 1 1 1 1 1 1 1 1 1 1 2
 //1     	       		D D W R T D E E W D R E W A K R R B R D N E F W W W T G D I O N 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0
-~D5_SORCERER_CLERIC  	0 0 0 0 1 1 0 1~
+~D5_SORCERER_CLERIC  	0 0 0 0 0 0 0 0~
 ~D5_SORCERER_CLERIC     0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 0 0 1 1 1 0 0 0 0 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
 
 //MINIMUM KIT STATS_________________________________________________________________
@@ -245,7 +253,7 @@ ADD_KIT ~D5_SORCERER_THIEF~
 //3     	       		O O B E U K A I D O W A D A W G M L E E N A T B B B A I D S A P R R R R R R R R A A A A A A A A A A A
 //2     	       		R R O A N E X L S R O X S N A E E U A R I C A O O O R N E H P O A A A A A A A A 1 1 1 1 1 1 1 1 1 1 2
 //1     	       		D D W R T D E E W D R E W A K R R B R D N E F W W W T G D I O N 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0
-~D5_SORCERER_THIEF  	1 1 1 1 1 1 1 1~
+~D5_SORCERER_THIEF  	0 0 0 0 0 0 0 0~
 ~D5_SORCERER_THIEF      0 0 0 0 0 0 0 0 0 1 1 0 0 1 1 1 0 1 0 0 0 0 1 1 0 1 1 1 1 1 1 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
 
 //MINIMUM KIT STATS_________________________________________________________________
@@ -516,84 +524,111 @@ COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5ssplz.spl~
 // level 8 = (108 << 20)
 // level 9 = (108 << 24)
 //
-ACTION_IF !(FILE_EXISTS_IN_GAME ~d5src1a.spl~) BEGIN
-  COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src1a.spl~
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 8) parameter2 = (134 + (0x10000 * 1)) timing = 9 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5src1a~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src1a.spl~ BEGIN
+  ACTION_FOR_EACH let IN ~a~ ~b~ ~c~ ~d~ ~e~ ~f~ ~g~ ~h~ ~i~ ~j~ ~k~ ~l~ ~m~ ~n~ ~o~ ~p~ ~q~ ~r~ ~s~ ~t~ BEGIN
+	COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src1%let%.spl~
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 8) parameter2 = (134 + (0x10000 * 1)) timing = 9 END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5src1%let%~ END
+  END
 END
-ACTION_IF !(FILE_EXISTS_IN_GAME ~d5src2a.spl~) BEGIN
-  COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src2a.spl~
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 12) parameter2 = (134 + (0x10000 * 1)) timing = 9 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5src2a~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src2a.spl~ BEGIN
+  ACTION_FOR_EACH let IN ~a~ ~b~ ~c~ ~d~ ~e~ ~f~ ~g~ ~h~ ~i~ ~j~ ~k~ ~l~ ~m~ ~n~ ~o~ ~p~ ~q~ ~r~ ~s~ ~t~ BEGIN
+	COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src2%let%.spl~
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 12) parameter2 = (134 + (0x10000 * 1)) timing = 9 END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5src2%let%~ END
+  END
 END
-ACTION_IF !(FILE_EXISTS_IN_GAME ~d5src3a.spl~) BEGIN
-  COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src3a.spl~
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 16) parameter2 = (134 + (0x10000 * 1)) timing = 9 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5src3a~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src3a.spl~ BEGIN
+  ACTION_FOR_EACH let IN ~a~ ~b~ ~c~ ~d~ ~e~ ~f~ ~g~ ~h~ ~i~ ~j~ ~k~ ~l~ ~m~ ~n~ ~o~ ~p~ ~q~ ~r~ ~s~ ~t~ BEGIN
+	COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src3%let%.spl~
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 16) parameter2 = (134 + (0x10000 * 1)) timing = 9 END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5src3%let%~ END
+  END
 END
-ACTION_IF !(FILE_EXISTS_IN_GAME ~d5src4a.spl~) BEGIN
-  COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src4a.spl~
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 20) parameter2 = (134 + (0x10000 * 1)) timing = 9 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5src4a~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src4a.spl~ BEGIN
+  ACTION_FOR_EACH let IN ~a~ ~b~ ~c~ ~d~ ~e~ ~f~ ~g~ ~h~ ~i~ ~j~ ~k~ ~l~ ~m~ ~n~ ~o~ ~p~ ~q~ ~r~ ~s~ ~t~ BEGIN
+	COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src4%let%.spl~
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 20) parameter2 = (134 + (0x10000 * 1)) timing = 9 END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5src4%let%~ END
+  END
 END
-ACTION_IF !(FILE_EXISTS_IN_GAME ~d5src5a.spl~) BEGIN
-  COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src5a.spl~
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 8) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5src5a~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src5a.spl~ BEGIN
+  ACTION_FOR_EACH let IN ~a~ ~b~ ~c~ ~d~ ~e~ ~f~ ~g~ ~h~ ~i~ ~j~ ~k~ ~l~ ~m~ ~n~ ~o~ ~p~ ~q~ ~r~ ~s~ ~t~ BEGIN
+	COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src5%let%.spl~
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 8) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5src5%let%~ END
+  END
 END
-ACTION_IF !(FILE_EXISTS_IN_GAME ~d5src6a.spl~) BEGIN
-  COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src6a.spl~
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 12) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5src6a~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src6a.spl~ BEGIN
+  ACTION_FOR_EACH let IN ~a~ ~b~ ~c~ ~d~ ~e~ ~f~ ~g~ ~h~ ~i~ ~j~ ~k~ ~l~ ~m~ ~n~ ~o~ ~p~ ~q~ ~r~ ~s~ ~t~ BEGIN
+	COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src6%let%.spl~
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 12) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5src6%let%~ END
+  END
 END
-ACTION_IF !(FILE_EXISTS_IN_GAME ~d5src7a.spl~) BEGIN
-  COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src7a.spl~
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 16) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5src7a~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src7a.spl~ BEGIN
+  ACTION_FOR_EACH let IN ~a~ ~b~ ~c~ ~d~ ~e~ ~f~ ~g~ ~h~ ~i~ ~j~ ~k~ ~l~ ~m~ ~n~ ~o~ ~p~ ~q~ ~r~ ~s~ ~t~ BEGIN
+	COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src7%let%.spl~
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 16) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5src7%let%~ END
+  END
 END
-ACTION_IF !(FILE_EXISTS_IN_GAME ~d5src8a.spl~) BEGIN
-  COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src8a.spl~
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 20) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5src8a~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src8a.spl~ BEGIN
+  ACTION_FOR_EACH let IN ~a~ ~b~ ~c~ ~d~ ~e~ ~f~ ~g~ ~h~ ~i~ ~j~ ~k~ ~l~ ~m~ ~n~ ~o~ ~p~ ~q~ ~r~ ~s~ ~t~ BEGIN
+	COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src8%let%.spl~
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 20) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5src8%let%~ END
+  END
 END
-ACTION_IF !(FILE_EXISTS_IN_GAME ~d5src9a.spl~) BEGIN
-  COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src9a.spl~
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 24) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5src9a~ END
-END
-ACTION_FOR_EACH lev IN ~1~ ~2~ ~3~ ~4~ ~5~ ~6~ ~7~ ~8~ ~9~ BEGIN
-  ACTION_FOR_EACH let IN ~b~ ~c~ ~d~ ~e~ ~f~ ~g~ ~h~ ~i~ ~j~ ~k~ ~l~ ~m~ ~n~ ~o~ ~p~ ~q~ ~r~ ~s~ ~t~ BEGIN
-	ACTION_IF !(FILE_EXISTS_IN_GAME ~d5src%lev%%let%.spl~) BEGIN
-	  COPY_EXISTING ~d5src%lev%a.spl~ ~override/d5src%lev%%let%.spl~
-		LPF ALTER_EFFECT INT_VAR match_opcode = 206 STR_VAR match_resource = EVAL ~d5src%lev%a.spl~ resource = EVAL ~d5src%lev%%let%~ END
-	  IF_EXISTS
-	END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src9a.spl~ BEGIN
+  ACTION_FOR_EACH let IN ~a~ ~b~ ~c~ ~d~ ~e~ ~f~ ~g~ ~h~ ~i~ ~j~ ~k~ ~l~ ~m~ ~n~ ~o~ ~p~ ~q~ ~r~ ~s~ ~t~ BEGIN
+	COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src9%let%.spl~
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 24) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5src9%let%~ END
   END
 END
 
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src-1.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 8) parameter2 = (134 + (0x10000 * 1)) timing = 1 END
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src-2.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 12) parameter2 = (134 + (0x10000 * 1)) timing = 1 END
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src-3.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 16) parameter2 = (134 + (0x10000 * 1)) timing = 1 END
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src-4.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 20) parameter2 = (134 + (0x10000 * 1)) timing = 1 END
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src-5.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 8) parameter2 = (108 + (0x10000 * 1)) timing = 1 END
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src-6.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 12) parameter2 = (108 + (0x10000 * 1)) timing = 1 END
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src-7.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 16) parameter2 = (108 + (0x10000 * 1)) timing = 1 END
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src-8.spl~
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src-1.spl~ BEGIN
+ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src-1.spl~
+   LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 8) parameter2 = (134 + (0x10000 * 1)) timing = 1 END
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src-2.spl~ BEGIN
+ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src-2.spl~
+   LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 12) parameter2 = (134 + (0x10000 * 1)) timing = 1 END
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src-3.spl~ BEGIN
+ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src-3.spl~
+   LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 16) parameter2 = (134 + (0x10000 * 1)) timing = 1 END
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src-4.spl~ BEGIN
+ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src-4.spl~
+   LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 20) parameter2 = (134 + (0x10000 * 1)) timing = 1 END
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src-5.spl~ BEGIN
+ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src-5.spl~
+   LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 8) parameter2 = (108 + (0x10000 * 1)) timing = 1 END
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src-6.spl~ BEGIN
+ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src-6.spl~
+   LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 12) parameter2 = (108 + (0x10000 * 1)) timing = 1 END
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src-7.spl~ BEGIN
+ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src-7.spl~
+   LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 16) parameter2 = (108 + (0x10000 * 1)) timing = 1 END
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src-8.spl~ BEGIN
+ COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src-8.spl~
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 20) parameter2 = (108 + (0x10000 * 1)) timing = 1 END
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src-9.spl~
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src-9.spl~ BEGIN
+ COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src-9.spl~
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 24) parameter2 = (108 + (0x10000 * 1)) timing = 1 END
+END
 
-APPEND ~d5sorc.2da~ ~SRCSLOTS    AP_D5SRC1A  AP_D5SRC1D  AP_D5SRC1E  AP_D5SRC1F  AP_D5SRC2D  AP_D5SRC2E  AP_D5SRC2F  AP_D5SRC3E  AP_D5SRC3F  AP_D5SRC4E  AP_D5SRC4F  AP_D5SRC5E  AP_D5SRC5F  AP_D5SRC6E  AP_D5SRC6F  AP_D5SRC7E  AP_D5SRC7F  AP_D5SRC8E  AP_D5SRC8F  AP_D5SRC9E  AP_D5SRC9F  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
-SRCSLOTS    AP_D5SRC1B  ****        ****        AP_D5SRC2A  ****        AP_D5SRC3A  AP_D5SRC3D  AP_D5SRC4A  AP_D5SRC4D  AP_D5SRC5A  AP_D5SRC5D  AP_D5SRC6A  AP_D5SRC6D  AP_D5SRC7A  AP_D5SRC7D  AP_D5SRC8A  AP_D5SRC8D  AP_D5SRC9A  AP_D5SRC9D  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+APPEND ~d5sorc.2da~ ~SRCSLOTS    AP_D5SRC1A  AP_D5SRC1D  AP_D5SRC1E  AP_D5SRC1F  AP_D5SRC2D  AP_D5SRC2E  AP_D5SRC2F  AP_D5SRC3E  AP_D5SRC3F  AP_D5SRC4E  AP_D5SRC4F  AP_D5SRC5E  AP_D5SRC5F  AP_D5SRC6E  AP_D5SRC6F  AP_D5SRC7E  AP_D5SRC7F  AP_D5SRC8E  AP_D5SRC8F  AP_D5SRC9E  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+SRCSLOTS    AP_D5SRC1B  ****        ****        AP_D5SRC2A  ****        AP_D5SRC3A  AP_D5SRC3D  AP_D5SRC4A  AP_D5SRC4D  AP_D5SRC5A  AP_D5SRC5D  AP_D5SRC6A  AP_D5SRC6D  AP_D5SRC7A  AP_D5SRC7D  AP_D5SRC8A  AP_D5SRC8D  AP_D5SRC9A  AP_D5SRC9D  AP_D5SRC9F  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
 SRCSLOTS    AP_D5SRC1C  ****        ****        AP_D5SRC2B  ****        AP_D5SRC3B  ****        AP_D5SRC4B  ****        AP_D5SRC5B  ****        AP_D5SRC6B  ****        AP_D5SRC7B  ****        AP_D5SRC8B  ****        AP_D5SRC9B  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
-SRCSLOTS    ****        ****        ****        AP_D5SRC2C  ****        AP_D5SRC3C  ****        AP_D5SRC4C  ****        AP_D5SRC5C  ****        AP_D5SRC6C  ****        AP_D5SRC7C  ****        AP_D5SRC8C  ****        AP_D5SRC9C  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+SRCSLOTS    ****        ****        ****        AP_D5SRC2C  ****        AP_D5SRC3C  ****        AP_D5SRC4C  ****        AP_D5SRC5C  ****        AP_D5SRC6C  ****        AP_D5SRC7C  ****        AP_D5SRC8C  ****        AP_D5SRC9V  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
 ~
 
 
@@ -1000,11 +1035,13 @@ LAF action_replace_hla STR_VAR kit_name = ~D5_SORCERER_THIEF~ remove_ability = ~
 
 //disable quickspell buttons and scroll learning______________________________________
 //
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5srcnq.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 144 target = 1 parameter2 = 3 timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 144 target = 1 parameter2 = 4 timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 144 target = 1 parameter2 = 5 timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 101 target = 1 parameter2 = 147 timing = 9 END
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5srcnq.spl~) BEGIN
+  COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5srcnq.spl~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 144 target = 1 parameter2 = 3 timing = 9 END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 144 target = 1 parameter2 = 4 timing = 9 END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 144 target = 1 parameter2 = 5 timing = 9 END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 101 target = 1 parameter2 = 147 timing = 9 END
+END
 
 APPEND ~d5sorc.2da~ ~NO_QUICK    AP_D5SRCNQ  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
 
@@ -1175,9 +1212,15 @@ END
 
 //make all three clab tables__________________________________________________________
 //
+/*
 COPY_EXISTING ~d5sorc.2da~ ~override/d5fsorc.2da~
 COPY_EXISTING ~d5sorc.2da~ ~override/d5csorc.2da~
 COPY_EXISTING ~d5sorc.2da~ ~override/d5tsorc.2da~
+*/
+COPY_EXISTING ~d5fsorc.2da~ ~override~
+			  ~d5csorc.2da~ ~override~
+			  ~d5tsorc.2da~ ~override~
+  APPEND_FILE ~override/d5sorc.2da~
 
 
 //QD_MULTICLASS_______________________________________________________________________
@@ -1380,7 +1423,9 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src1e.eff~ BEGIN
 	WRITE_SHORT 0x2c 100
 	WRITE_LONG 0x90 1
 	WRITE_EVALUATED_ASCII 0x94 ~D5SRC9F~ #8
+END
 
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d51l1spl.eff~ BEGIN
 // make EFFs to increase traditional mem/cast slots by 1
   CREATE EFF ~d51l1spl~
 	WRITE_LONG 0x10 42

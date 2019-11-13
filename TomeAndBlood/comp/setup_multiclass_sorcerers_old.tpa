@@ -10,8 +10,6 @@ INCLUDE ~tomeandblood/lib/qd_multiclass.tpa~
 
 // TO DO:
 // - what about metamagic? --> looks like it can only be done with no cost to fill... see new innate metamagic subcomponent
-// - ...hmm, it's not working :(
-// - ...even if it does, would still have to use the old way for mages and single-class sorcs :(
 // - what about Identify?  --> looks like in cannot be done by any method
 
 //base .2da file
@@ -515,48 +513,111 @@ COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5ssplz.spl~
 // level 8 = (108 << 20)
 // level 9 = (108 << 24)
 //
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src1.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 8) parameter2 = (134 + (0x10000 * 1)) timing = 9 END
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src2.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 12) parameter2 = (134 + (0x10000 * 1)) timing = 9 END
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src3.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 16) parameter2 = (134 + (0x10000 * 1)) timing = 9 END
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src4.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 20) parameter2 = (134 + (0x10000 * 1)) timing = 9 END
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src5.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 8) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src6.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 12) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src7.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 16) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src8.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 20) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src9.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 24) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src1a.spl~ BEGIN
+  ACTION_FOR_EACH let IN ~a~ ~b~ ~c~ ~d~ ~e~ ~f~ ~g~ ~h~ ~i~ ~j~ ~k~ ~l~ ~m~ ~n~ ~o~ ~p~ ~q~ ~r~ ~s~ ~t~ BEGIN
+	COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src1%let%.spl~
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 8) parameter2 = (134 + (0x10000 * 1)) timing = 9 END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5src1%let%~ END
+  END
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src2a.spl~ BEGIN
+  ACTION_FOR_EACH let IN ~a~ ~b~ ~c~ ~d~ ~e~ ~f~ ~g~ ~h~ ~i~ ~j~ ~k~ ~l~ ~m~ ~n~ ~o~ ~p~ ~q~ ~r~ ~s~ ~t~ BEGIN
+	COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src2%let%.spl~
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 12) parameter2 = (134 + (0x10000 * 1)) timing = 9 END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5src2%let%~ END
+  END
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src3a.spl~ BEGIN
+  ACTION_FOR_EACH let IN ~a~ ~b~ ~c~ ~d~ ~e~ ~f~ ~g~ ~h~ ~i~ ~j~ ~k~ ~l~ ~m~ ~n~ ~o~ ~p~ ~q~ ~r~ ~s~ ~t~ BEGIN
+	COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src3%let%.spl~
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 16) parameter2 = (134 + (0x10000 * 1)) timing = 9 END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5src3%let%~ END
+  END
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src4a.spl~ BEGIN
+  ACTION_FOR_EACH let IN ~a~ ~b~ ~c~ ~d~ ~e~ ~f~ ~g~ ~h~ ~i~ ~j~ ~k~ ~l~ ~m~ ~n~ ~o~ ~p~ ~q~ ~r~ ~s~ ~t~ BEGIN
+	COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src4%let%.spl~
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 20) parameter2 = (134 + (0x10000 * 1)) timing = 9 END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5src4%let%~ END
+  END
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src5a.spl~ BEGIN
+  ACTION_FOR_EACH let IN ~a~ ~b~ ~c~ ~d~ ~e~ ~f~ ~g~ ~h~ ~i~ ~j~ ~k~ ~l~ ~m~ ~n~ ~o~ ~p~ ~q~ ~r~ ~s~ ~t~ BEGIN
+	COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src5%let%.spl~
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 8) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5src5%let%~ END
+  END
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src6a.spl~ BEGIN
+  ACTION_FOR_EACH let IN ~a~ ~b~ ~c~ ~d~ ~e~ ~f~ ~g~ ~h~ ~i~ ~j~ ~k~ ~l~ ~m~ ~n~ ~o~ ~p~ ~q~ ~r~ ~s~ ~t~ BEGIN
+	COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src6%let%.spl~
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 12) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5src6%let%~ END
+  END
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src7a.spl~ BEGIN
+  ACTION_FOR_EACH let IN ~a~ ~b~ ~c~ ~d~ ~e~ ~f~ ~g~ ~h~ ~i~ ~j~ ~k~ ~l~ ~m~ ~n~ ~o~ ~p~ ~q~ ~r~ ~s~ ~t~ BEGIN
+	COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src7%let%.spl~
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 16) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5src7%let%~ END
+  END
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src8a.spl~ BEGIN
+  ACTION_FOR_EACH let IN ~a~ ~b~ ~c~ ~d~ ~e~ ~f~ ~g~ ~h~ ~i~ ~j~ ~k~ ~l~ ~m~ ~n~ ~o~ ~p~ ~q~ ~r~ ~s~ ~t~ BEGIN
+	COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src8%let%.spl~
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 20) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5src8%let%~ END
+  END
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src9a.spl~ BEGIN
+  ACTION_FOR_EACH let IN ~a~ ~b~ ~c~ ~d~ ~e~ ~f~ ~g~ ~h~ ~i~ ~j~ ~k~ ~l~ ~m~ ~n~ ~o~ ~p~ ~q~ ~r~ ~s~ ~t~ BEGIN
+	COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src9%let%.spl~
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 24) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5src9%let%~ END
+  END
+END
 
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src-1.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 8) parameter2 = (134 + (0x10000 * 1)) timing = 1 END
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src-2.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 12) parameter2 = (134 + (0x10000 * 1)) timing = 1 END
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src-3.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 16) parameter2 = (134 + (0x10000 * 1)) timing = 1 END
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src-4.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 20) parameter2 = (134 + (0x10000 * 1)) timing = 1 END
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src-5.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 8) parameter2 = (108 + (0x10000 * 1)) timing = 1 END
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src-6.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 12) parameter2 = (108 + (0x10000 * 1)) timing = 1 END
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src-7.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 16) parameter2 = (108 + (0x10000 * 1)) timing = 1 END
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src-8.spl~
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src-1.spl~ BEGIN
+ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src-1.spl~
+   LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 8) parameter2 = (134 + (0x10000 * 1)) timing = 1 END
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src-2.spl~ BEGIN
+ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src-2.spl~
+   LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 12) parameter2 = (134 + (0x10000 * 1)) timing = 1 END
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src-3.spl~ BEGIN
+ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src-3.spl~
+   LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 16) parameter2 = (134 + (0x10000 * 1)) timing = 1 END
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src-4.spl~ BEGIN
+ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src-4.spl~
+   LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 20) parameter2 = (134 + (0x10000 * 1)) timing = 1 END
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src-5.spl~ BEGIN
+ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src-5.spl~
+   LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 8) parameter2 = (108 + (0x10000 * 1)) timing = 1 END
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src-6.spl~ BEGIN
+ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src-6.spl~
+   LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 12) parameter2 = (108 + (0x10000 * 1)) timing = 1 END
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src-7.spl~ BEGIN
+ COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src-7.spl~
+   LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 16) parameter2 = (108 + (0x10000 * 1)) timing = 1 END
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src-8.spl~ BEGIN
+ COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src-8.spl~
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 20) parameter2 = (108 + (0x10000 * 1)) timing = 1 END
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src-9.spl~
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src-9.spl~ BEGIN
+ COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src-9.spl~
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 24) parameter2 = (108 + (0x10000 * 1)) timing = 1 END
+END
 
-APPEND ~d5sorc.2da~ ~SRCSLOTS    AP_D5SRC1   AP_D5SRC1   AP_D5SRC1   AP_D5SRC1   AP_D5SRC2   AP_D5SRC2   AP_D5SRC2   AP_D5SRC3   AP_D5SRC3   AP_D5SRC4   AP_D5SRC4   AP_D5SRC5   AP_D5SRC5   AP_D5SRC6   AP_D5SRC6   AP_D5SRC7   AP_D5SRC7   AP_D5SRC8   AP_D5SRC8   AP_D5SRC9   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
-SRCSLOTS    AP_D5SRC1   ****        ****        AP_D5SRC2   ****        AP_D5SRC3   AP_D5SRC3   AP_D5SRC4   AP_D5SRC4   AP_D5SRC5   AP_D5SRC5   AP_D5SRC6   AP_D5SRC6   AP_D5SRC7   AP_D5SRC7   AP_D5SRC8   AP_D5SRC8   AP_D5SRC9   AP_D5SRC9   AP_D5SRC9   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
-SRCSLOTS    AP_D5SRC1   ****        ****        AP_D5SRC2   ****        AP_D5SRC3   ****        AP_D5SRC4   ****        AP_D5SRC5   ****        AP_D5SRC6   ****        AP_D5SRC7   ****        AP_D5SRC8   ****        AP_D5SRC9   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
-SRCSLOTS    ****        ****        ****        AP_D5SRC2   ****        AP_D5SRC3   ****        AP_D5SRC4   ****        AP_D5SRC5   ****        AP_D5SRC6   ****        AP_D5SRC7   ****        AP_D5SRC8   ****        AP_D5SRC9   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+APPEND ~d5sorc.2da~ ~SRCSLOTS    AP_D5SRC1A  AP_D5SRC1D  AP_D5SRC1E  AP_D5SRC1F  AP_D5SRC2D  AP_D5SRC2E  AP_D5SRC2F  AP_D5SRC3E  AP_D5SRC3F  AP_D5SRC4E  AP_D5SRC4F  AP_D5SRC5E  AP_D5SRC5F  AP_D5SRC6E  AP_D5SRC6F  AP_D5SRC7E  AP_D5SRC7F  AP_D5SRC8E  AP_D5SRC8F  AP_D5SRC9E  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+SRCSLOTS    AP_D5SRC1B  ****        ****        AP_D5SRC2A  ****        AP_D5SRC3A  AP_D5SRC3D  AP_D5SRC4A  AP_D5SRC4D  AP_D5SRC5A  AP_D5SRC5D  AP_D5SRC6A  AP_D5SRC6D  AP_D5SRC7A  AP_D5SRC7D  AP_D5SRC8A  AP_D5SRC8D  AP_D5SRC9A  AP_D5SRC9D  AP_D5SRC9F  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+SRCSLOTS    AP_D5SRC1C  ****        ****        AP_D5SRC2B  ****        AP_D5SRC3B  ****        AP_D5SRC4B  ****        AP_D5SRC5B  ****        AP_D5SRC6B  ****        AP_D5SRC7B  ****        AP_D5SRC8B  ****        AP_D5SRC9B  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+SRCSLOTS    ****        ****        ****        AP_D5SRC2C  ****        AP_D5SRC3C  ****        AP_D5SRC4C  ****        AP_D5SRC5C  ****        AP_D5SRC6C  ****        AP_D5SRC7C  ****        AP_D5SRC8C  ****        AP_D5SRC9V  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
 ~
 
 
@@ -1000,15 +1061,15 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~qdtnb_attrbon.qd~) BEGIN
 */
 
   APPEND ~d5sorc.2da~  ~STATSLOTS   AP_D5NABSW  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
-STATSLOTS   AP_D5SRC1   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
-STATSLOTS   AP_D5SRC1   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
-STATSLOTS   AP_D5SRC2   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
-STATSLOTS   AP_D5SRC2   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
-STATSLOTS   AP_D5SRC3   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
-STATSLOTS   AP_D5SRC3   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
-STATSLOTS   AP_D5SRC4   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
-STATSLOTS   AP_D5SRC4   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
-STATSLOTS   AP_D5SRC5   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+STATSLOTS   AP_D5SRC1S  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+STATSLOTS   AP_D5SRC1R  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+STATSLOTS   AP_D5SRC2S  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+STATSLOTS   AP_D5SRC2R  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+STATSLOTS   AP_D5SRC3S  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+STATSLOTS   AP_D5SRC3R  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+STATSLOTS   AP_D5SRC4S  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+STATSLOTS   AP_D5SRC4R  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+STATSLOTS   AP_D5SRC5S  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
 ~
 
   ACTION_DEFINE_ASSOCIATIVE_ARRAY cha_nums_lets BEGIN
@@ -1140,7 +1201,6 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5fsorc.2da~ BEGIN
 		kit_name = ~D5_FIGHTER_SORCERER~ 
 		kit_clab = ~d5fsorc~
 		base_class = ~M~
-		mc_dir = ~tomeandblood/lib/qd_mc~
   END
 END 
 
@@ -1150,7 +1210,6 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5csorc.2da~ BEGIN
 		kit_name = ~D5_SORCERER_CLERIC~ 
 		kit_clab = ~d5csorc~
 		base_class = ~M~
-		mc_dir = ~tomeandblood/lib/qd_mc~
   END
 END 
 
@@ -1160,7 +1219,6 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5tsorc.2da~ BEGIN
 		kit_name = ~D5_SORCERER_THIEF~ 
 		kit_clab = ~d5tsorc~
 		base_class = ~M~
-		mc_dir = ~tomeandblood/lib/qd_mc~
   END
 END 
 //__________________________________________________________________________________
