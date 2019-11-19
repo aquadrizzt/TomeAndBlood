@@ -1,6 +1,6 @@
 BACKUP ~TomeAndBlood/backup~
 AUTHOR ~aquadrizzt@gmail.com~
-VERSION ~0.8.40~ 
+VERSION ~0.8.41~ 
 
 ALWAYS
 
@@ -424,7 +424,7 @@ LAF innate_familiars END
 BEGIN @67
 DESIGNATED 67
 REQUIRE_PREDICATE (ENGINE_IS ~bgee bg2ee iwdee eet~) @1
-//GROUP @7
+GROUP @7
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_familiar_choice.qd~ //detection for this component 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_familiar_changes.qd~ //detection for this component 
@@ -441,7 +441,7 @@ LAF familiar_changes END
 BEGIN @68
 DESIGNATED 68
 REQUIRE_PREDICATE (ENGINE_IS ~bgee bg2ee iwdee eet~) @1
-//GROUP @7
+GROUP @7
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_imbue_familiars.qd~ //detection for this component 
 
@@ -456,7 +456,7 @@ LAF imbue_familiars END
 BEGIN @69
 DESIGNATED 69
 REQUIRE_PREDICATE (ENGINE_IS ~soa tob iwd bgee bg2ee iwdee eet~) @1
-//GROUP @7
+GROUP @7
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_indelible_familiars.qd~ //detection for this component 
 
