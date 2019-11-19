@@ -9,6 +9,10 @@
 
 // USE IDS NAMES INSTEAD OF RES??? WHAT IF IWDIFICATION IS INSTALLED??
 
+
+DEFINE_ACTION_FUNCTION spell_schools BEGIN 
+
+
 //re-do the scroll map, with an extra column________________________________________
 //
 <<<<<<<< D5/qdscrlmap.2da
@@ -1196,3 +1200,6 @@ END
 
 CLEAR_ARRAYS 
 
+
+END 	//	end define function
+//____________________________________________________________________________________

@@ -1,7 +1,8 @@
 // -----------------------------
 // REVENANT DISCIPLE
 // -----------------------------
-INCLUDE ~TomeAndBlood/lib/fl#add_kit_ee.tpa~
+
+DEFINE_ACTION_FUNCTION add_revenant_disciple BEGIN 
 
 //revenant sorcerer
 ADD_KIT ~QDREVSR~
@@ -33,3 +34,6 @@ ACTION_IF GAME_IS ~bgee bg2ee iwdee eet~ THEN BEGIN
 END	
 
 COPY ~TomeAndBlood/data/revenant/QDREVS1.spl~ ~override~ //+4 vs. death, imm to sleep+death,-1 spell
+
+END 	//	end define function
+//____________________________________________________________________________________

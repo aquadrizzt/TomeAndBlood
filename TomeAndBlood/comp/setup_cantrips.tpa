@@ -2,8 +2,9 @@
 // CANTRIPS by SUBTLEDOCTOR 
 // -----------------------------
 
-INCLUDE ~TomeAndBlood/data/core/tnb_kit_list.tpa~ 
+DEFINE_ACTION_FUNCTION innate_cantrips BEGIN 
 
+INCLUDE ~TomeAndBlood/data/core/tnb_kit_list.tpa~ 
 
 ADD_PROJECTILE ~TomeAndBlood/data/cantrips/d5_msred.pro~
 ADD_PROJECTILE ~TomeAndBlood/data/cantrips/d5_msblu.pro~
@@ -479,4 +480,5 @@ END
 				END
 			END
 		 	
-	
+END 	//	end define function
+//____________________________________________________________________________________

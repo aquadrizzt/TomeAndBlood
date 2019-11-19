@@ -4,6 +4,7 @@
 
 // This component uses code by Subtledoctor and is used with permission of the original author. 
 
+DEFINE_ACTION_FUNCTION innate_metamagic INT_VAR sequencer_method = 1 BEGIN 
 
 INCLUDE ~TomeAndBlood/lib/hla_actions.tpa~
 
@@ -438,8 +439,8 @@ ACTION_IF %sequencer_method% = 5 BEGIN
 END	//	end option 5
 
 
-// -----------------------------
-
+END 	//	end define function
+//____________________________________________________________________________________
 
 /*
 .

@@ -1,7 +1,8 @@
 // -----------------------------
 // REVISED DRAGON DISCIPLE
 // -----------------------------
-INCLUDE ~TomeAndBlood/lib/fl#add_kit_ee.tpa~
+
+DEFINE_ACTION_FUNCTION add_dragon_disciples BEGIN 
 
 //Remove base DD from the sorcerer table 
 ACTION_FOR_EACH rc_sor IN ~K_S_H~ ~K_S_HE~ ~K_S_E~ ~K_S_G~ ~K_S_D~ ~K_S_HL~ ~K_S_HO~ BEGIN 
@@ -185,3 +186,6 @@ END ELSE BEGIN
 				END
 			END 
 END 
+
+END 	//	end define function
+//____________________________________________________________________________________

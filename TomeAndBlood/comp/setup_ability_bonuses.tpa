@@ -2,6 +2,10 @@
 // ABILITY SCORE BONUSES
 // -----------------------------
 
+
+DEFINE_ACTION_FUNCTION ability_bonuses BEGIN 
+
+
 //Reduce spell slots for mage/bard/sorcerer/dd by 1 at each level to a minimum of 1.
 
 // no, INCREASE the # of slots... then we will reduce them by stat
@@ -462,6 +466,9 @@ COPY_EXISTING ~kitlist.2da~ ~override~
 	END
   END
 BUT_ONLY
+
+END 	//	end define function
+//____________________________________________________________________________________
 
 /*
 .

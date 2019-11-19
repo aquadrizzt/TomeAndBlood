@@ -1,6 +1,6 @@
 # TomeAndBlood
 
-Tome And Blood: More Options for Wizards and Sorcerers v0.8
+Tome And Blood: More Options for Wizards and Sorcerers v0.8.40
 
 ## Overview
 
@@ -8,15 +8,15 @@ Tome and Blood is a mod that revises and expands the class options for Mages and
  
 ##Features
 
-COMPONENT 5: Rebalanced Spell Schools
+COMPONENT 11: Rebalanced Spell Schools
 
 This component changes the school of various spells, to make sure there is at least one spell at each level in each school, and that specialists of different schools are better-balanced against one another.
 
-COMPONENT 10: General Spell Tweaks
+COMPONENT 12: General Spell Tweaks
 
 Buffs to Symbol: Fear, Shapechange, Black Blade of Disaster, and Energy Drain.  More to come, maybe.
 
-COMPONENT 11: Revised Illusionary Clones
+COMPONENT 13: Revised Illusionary Clones
 
 This component makes Mislead and Project Image work just as Simulacrum does, except the clones can use more magic as you go up in level, and the caster gets progressively better invisibility at the same time:
 
@@ -26,7 +26,7 @@ This component makes Mislead and Project Image work just as Simulacrum does, exc
 8th Level: Simulacrum - clone has 75% hit points and -3 to thac0 and caster level, and can cast any spells.
 9th Level: Projected Simulacrum - cast Simulacrum on another creature.
 
-COMPONENT 12: Revised Invisiblity
+COMPONENT 14: Revised Invisiblity
 
 This component merges the effects of Invisibility and Sanctuary (you can now loot chests and open doors while invisible :) ).  The upshot is, if you cast 2nd-level Detect Invisible, the caster will be able to see and target invisible enemies but other party members who cannot see invisible cannot.  It also replaces the 3rd-level arcane spell "Detect Illusions" with the 3rd-level divine spell "Invisibility Purge."
 
@@ -34,63 +34,73 @@ COMPONENT 20: Revised Dragon Disciples
 
 Adds new Dragon Disciple kits to the game, matching different varieties of dragon species.
 
-COMPONENT 30: Magus
+COMPONENT 25: Magus
 
 Adds the Magus sorcerer kit to the game, which can cast spells in heavy armor and use more weapons than a normal sorcerer.
 
-COMPONENT 60: Favored Soul
+COMPONENT 31: Favored Soul
 
 Adds the Favored Soul sorcerer kit to the game.  This kit can choose a sphere of divine spells to cast, in addition to its normal arcane spell selection.
 
-COMPONENT 70: Sylvan Disciple
+COMPONENT 33: Sylvan Disciple
 
 Adds the Sylvan Disciple sorcerer kit to the game.  This kit is born of the fey folk, with immunities to charms and minor divination magic.
 
-COMPONENT 80: Revenant Disciple
+COMPONENT 35: Revenant Disciple
 
 Adds the Revenant Disciple sorcerer kit to the game.  This kit carries the taint of the grave, with immunities to Sleep and death magic.
 
-COMPONENT 90: Amorphous Disciple
+COMPONENT 37: Amorphous Disciple
 
 Adds the Amorphous Disciple sorcerer kit to the game.  This kit is kind to oozes of all sorts, with immunities to poison and disease.
 
-COMPONENT 110: Armored Casting for Bards
-
-Bards can cast spells in leather armor.
-
-COMPONENTS 131, 132, 133, 134, 135: Innate Metamagic
-
-The first four of these components make spell sequencers and contingencies into innate abilities (Chain Contingency becomes an HLA) so they don't cost spell slots; but "filling" them with spells still uses the spell slots associated with those spells.
-
-The 5th version leaves sequencers and contingencies as spells you must memorize, but when you cast them, you "fill" them with spells at no further cost. 
-
-COMPONENTs 141, 142, 143: Cantrips
-
-Component 141 allows mages and sorcerers to use one cantrip as an innate ability with unlimited uses.
-
-Component 142 allows mages and sorcerers and bards to cast an unlimited number of 1st-level spells without needing to rest.  Some spells are slightly rebalanced to account for this.
-
-Component 143 gives you a "wand" that you equip in a weapon slot, which allows you to use one of eight cantrips as item abilities with unlimited uses.
-
-COMPONENT 150: Revised Specialists
+COMPONENT 40: Revised Specialists
 
 This component defines specialists by what they can do, instead of by what they can't.  All specialists can cast all spells - there are no opposition schools.  And each specialist get some active or passive innate abilities that represent their mastery over their particular school of magic.  Finally, specialists gain the ability to spontaneously convert any of their memorized spells into a spell from their specialty school of one level lower.
 
-COMPONENT 155: Innate Find Familiar
+COMPONENT 45: Arcane Crafting
 
-This component makes Find Familiar an innate ability and replaces its scrolls with scrolls of Magic Missile.
+This component allows wizards to create scrolls, wands, and potions, by expending XP and/or gold.
 
-COMPONENT 160: Ability Score-Based Bonus Spells
+COMPONENT 48: Armored Casting for Bards
+
+Bards can cast spells in leather armor.
+
+COMPONENTS 51, 52, 53, 54, 55: Innate Metamagic
+
+The first four of these components make spell sequencers and contingencies into innate abilities (Chain Contingency becomes an HLA) so they don't cost spell slots; but "filling" them with spells still uses the spell slots associated with those spells.  These four components differ according to how you get metamagic (automatically as you level up, or learned from scrolls) and whether or not sorcerers can use metamagic spells.
+
+The 5th version leaves sequencers and contingencies as spells you must memorize, but when you cast them, you "fill" them with any spell you *know,* without expending any memorization slots. 
+
+COMPONENTS 61, 62, 63: Cantrips
+
+Component 61 allows mages and sorcerers to use one cantrip as an innate ability with unlimited uses.
+
+Component 62 allows mages and sorcerers and bards to cast an unlimited number of 1st-level spells without needing to rest.  Some spells are slightly rebalanced to account for this.
+
+Component 63 gives you a "wand" that you equip in a weapon slot, which allows you to use one of eight cantrips as item abilities with unlimited uses.
+
+COMPONENTS 66-69: Revised Familiars
+
+Component 66 makes Find Familiar an innate ability and replaces its scrolls with scrolls of Magic Missile.
+
+Component 67 allows you to choose which familiar you want (from a slightly modified list) instead of being bound by your alignment.  Currently, the available familiars are Pseudodragon, Ferret, Rabbit, Cat, Spider, and Rat.  Each ahs its own special skills and abilities, and each provides a different small passive benefit to the caster.
+
+Component 68 allows you to imbue your familiar with up to five spells (one each from spell levels 1 through 5, from your known spells).  The familiar will be able to cast each spell as an innate ability, once every three turns.
+
+Component 69 eliminates the hp damage and CON loss you take when a familiar dies.  So you can re-summon/revive the familiar without penalty, once per day.  As a consequence, this also eliminates the flat hit point bonus you get from summoning a familiar.  Instead, you will get a 15% boost to your max hit points, whenever your familiar is out of yoru pack and within your general vicinity.
+
+COMPONENT 75: Ability Score-Based Bonus Spells
 
 This component gives bonus spells to wizards for high INT scores, and to bards and sorcerers for high CHA scores.  The bonuses go up to +2 spell slots per spell level, up to 7th-level spells for wizards, up to 6th-level spells for bards, and up to 5th-level spells for sorcerers.
 
 Any mod component that changes the game's spell tables (such as, say, Tweaks Anthology) should be installed BEFORE this component.
 
-COMPONENT 170: Sorcerer Spell Selection by Dialogue
+COMPONENT 79: Sorcerer Spell Selection by Dialogue
 
-This component has sorcerers learn spells by way of a dialogue instead of via the vanilla GUI interface, and (I believe) zeroes out SRCSPLKN.2da.  This enables the creation of custom spell lists for different sorcerer kits.  However, if I understand correctly, as of TnB 0.7, the added kits do not use custom lists.  (I think.)  So I'm not entirely sure what the utility of this is, *at the moment.*  
+This component has sorcerers learn spells by way of a dialogue instead of via the vanilla GUI interface, and (I believe) zeroes out SRCSPLKN.2da.  This enables the creation of custom spell lists for different sorcerer kits.  However, if I understand correctly, as of TnB 0.7, the added kits do not use custom lists.  (I think.)  
 
-COMPONENT 180: Multiclass Sorcerers
+COMPONENT 80: Multiclass Sorcerers
 
 What it says on the tin :O
 

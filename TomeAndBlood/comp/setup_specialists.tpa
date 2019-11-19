@@ -1,7 +1,9 @@
 // -----------------------------
 // REVISED SPECIALISTS
 // -----------------------------
-INCLUDE ~TomeAndBlood/lib/fl#add_kit_ee.tpa~
+
+DEFINE_ACTION_FUNCTION revised_specialists BEGIN 
+
 INCLUDE ~TomeAndBlood/lib/spell_to_innate.tpa~
 INCLUDE ~TomeAndBlood/lib/add_spell_header.tpa~
 // This component uses code by Subtledoctor; all such code is used with permission of the original author. 
@@ -663,6 +665,11 @@ COPY_EXISTING ~clabma03.2da~ ~override~
   REPLACE_TEXTUALLY ~GA_D5NECT2~ ~****      ~
   REPLACE_TEXTUALLY ~GA_D5NECT3~ ~****      ~
 BUT_ONLY
+
+
+END 	//	end define function
+//____________________________________________________________________________________
+
 	
 /*
 .

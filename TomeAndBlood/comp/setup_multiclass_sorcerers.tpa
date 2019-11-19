@@ -7,6 +7,9 @@
 //__________________________________________________________________________________
 
 
+DEFINE_ACTION_FUNCTION multiclass_sorcerers BEGIN 
+
+
 INCLUDE ~tomeandblood/lib/qd_multiclass.tpa~
 
 // TO DO:
@@ -1765,5 +1768,7 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d51l1spl.eff~ BEGIN
  END
 
 END // end if not already done
+
+END 	//	end define function
 //____________________________________________________________________________________
 

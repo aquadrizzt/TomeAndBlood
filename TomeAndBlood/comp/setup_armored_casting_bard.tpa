@@ -2,6 +2,8 @@
 // ARMORED CASTING FOR BARDS
 // -----------------------------
 
+DEFINE_ACTION_FUNCTION armored_bards BEGIN 
+
 INCLUDE ~%MOD_FOLDER%/lib/d5_armored_casting.tpa~
 LAM D5_ARMORED_CASTING
 
@@ -37,3 +39,5 @@ OUTER_PATCH_SAVE bard ~%bard%~ BEGIN
 END 
 STRING_SET_EVALUATE 9562 ~%bard%~
 
+END 	//	end define function
+//____________________________________________________________________________________

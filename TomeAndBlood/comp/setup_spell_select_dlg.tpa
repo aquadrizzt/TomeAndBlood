@@ -2,6 +2,10 @@
 // SPELL SELECT DIALOG 
 // -----------------------------
 
+
+DEFINE_ACTION_FUNCTION spell_select_dialogue BEGIN 
+
+
 //COPY_EXISTING ~SPLSRCKN.2da~ ~override/QD_SPLSRCKN.2da~ //save a copy of the existing sorcerer spell progression 
 
 COPY ~TomeAndBlood/data/spell_select/SPLSRCKN.2da~ ~override~ //set all sorcerer spells known to 0 
@@ -282,3 +286,5 @@ ACTION_PHP_EACH tnb_kit_list AS kitinfo => kitclab BEGIN
 	END 
 END  
 
+END 	//	end define function
+//____________________________________________________________________________________

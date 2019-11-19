@@ -1,7 +1,9 @@
 @1 = ~This component is not available for Baldur's Gate, Icewind Dale or Icewind Dale 2.~ 
 @2 = ~This component is only available for the Enhanced Editions.~ 
 @3 = ~This component requires the Enhanced Engine v2.0 or later.~ 
-
+@5 = ~Arcane Spell Tweaks~
+@6 = ~New and Revised Arcane Kits~
+@7 = ~Mechanics Tweaks (crafting, sequencers, cantrips, familiars, ability bonuses)~
 @10 = ~Core Revisions~
 @11 = ~Rebalanced Spell Schools~
 @12 = ~General Spell Tweaks~
@@ -31,8 +33,8 @@
 @63 = ~Cantrip Wands~
 @66 = ~Innate Find Familiar~
 @67 = ~Choose-Your-Own Familiar~
-@68 = ~Indelible Familiars~
-@69 = ~Mod for Pooky (Imbue Familiars)~
+@68 = ~Pooky's Mod: Imbue Familiars~
+@69 = ~Indelible Familiars~
 @75 = ~Ability Score Spellcasting Bonuses~
 @79 = ~Spell Selection by Dialogue~
 @80 = ~Multiclass Sorcerers~
@@ -1686,8 +1688,251 @@ Saving Throw: None
 
 The caster of this spell gains a temporary insight into the history and nature of magical objects. This translates into a temporary Lore bonus of 20 points, plus an additional 20 points for each five levels of experience the caster has attained. If the resulting score is high enough, the spell can identify the name, nature, and function of any magical items in the caster's possession.
 ~
+@8011  = ~Pseudodragon~
+@8012  = ~Pseudodragon: this is a tiny, distant relative of full dragons. The pseudodragon can cast Cure Light Wounds, and Blur, and use a colorful 'breath weapon' that mimics the Color Spray spell, once every 3 turns. (At high levels, the Blur improves to a full Improved Invisibility effect.) They can attack twice per round and while their claws are small, they deliver a mild intoxicant which can render the target drowsy and clumsy (mimicking the effects of a Slow spell, for two rounds). 
+
+While this familiar is near its master, the summoner regenerates 1 hit point per round.
+
+As pseudodragons can fly, they are impervious to the effects of Grease, Entangle, Web, and similar spells. As with all familiars, their magical connection to the life force of their master renders them immune to petrification and level drain effects.
+~
+@8002  = ~Find Familiar
+(Conjuration/Summoning)
+
+Level: 1
+Range: n/a
+Duration: Special
+Casting Time: 9
+Area of Effect: 1 familiar
+Saving Throw: None
+
+This spell enables the caster to summon a familiar to act as <PRO_HISHER> aide and companion. Familiars are typically small creatures. A creature acting as a familiar can benefit a wizard, conveying its sensory powers to its master, conversing with <PRO_HIMHER>, and serving as a guard, scout, or spy. A wizard can have only one familiar at a time, and <PRO_HESHE> has no control over what sort of creature answers the summoning, if any come at all.
+
+(Note: This spell may only be cast by the protagonist.)
+
+A familiar is more intelligent than others of its type. Its bond with the wizard confers upon it an exceptionally long life, allows it to regenerate 1 hit point per round, and to resist petrification and level drain effects. The caster receives half the familiar's total Hit Points (rounded down) as bonus Hit Points. However, the caster must take care to treat <PRO_HISHER> familiar well, for if the familiar should die, the caster loses the bonus Hit Points and the familiar's Hit Points again as damage. Also when a familiar dies, the caster loses 1 point of Constitution PERMANENTLY.
+
+Here is a list of the familiars that the player may choose:
+
+Pseudo Dragon
+- Armor Class: 2
+- Magic and Damage Resistance: 25%
+- Combat: 2 attacks per round for 1d3 damage; save or be Slowed for 2 rounds
+- Special Abilities: Can cast Blur and Cure Light Wounds, and use a Color Spray breath weapon, once every 3 turns.
+
+Ferret
+- Armor Class: 2
+- Magic and Damage Resistance: 25%
+- Combat: 2 attacks per round for 1d3 damage
+- Special Abilities: Has 80% Pick Pockets score. Can emit a small aura of Nauseating Stench once per turn. Fir five round, enemies near the ferret must save or suffer 2-point penalties to hit and AC and a 30% chance of casting failure.
+
+Rabbit
+- Armor Class: 2
+- Magic and Damage Resistance: 25%
+- Combat: 2 attacks per round for 1d2 damage
+- Special Abilities: Has 80% Detect Traps score. Can burrow into the ground to escape danger - similar to the Shadowstep ability - once per turn.
+
+Cat
+- Armor Class: 2
+- Magic and Damage Resistance: 25%
+- Combat: 2 attacks per round for 1d3 damage
+- Special Abilities: Has 99% in Move Silently/Hide in Shadows, and is Nondetectable (as the spell) to magic divinations.
+
+Spider
+- Armor Class: 2
+- Magic and Damage Resistance: 25%
+- Combat: 2 attacks per round for 1d2 damage; save or take 3 poison damage over 1 round
+- Special Abilities: Can cast a single-target Web, which can tangle the target for 3 rounds, once per 5 rounds.
+
+Rat
+- Armor Class: 2
+- Magic and Damage Resistance: 25%
+- Combat: 2 attacks per round for 1d2 damage; save or be diseased for 3 rounds, with reduced Strength and a 30% chance of casting failure
+- Special Abilities: Can summon a cohort of 1d6 more rats to defend it, once per 3 turns.
+~
+@8003  = ~Find Familiar
+(Conjuration/Summoning)
+
+Level: 1
+Range: n/a
+Duration: Special
+Casting Time: 9
+Area of Effect: 1 familiar
+Saving Throw: None
+
+This spell enables the caster to attempt to summon a familiar to act as <PRO_HISHER> aide and companion. Familiars are typically small creatures. A creature acting as a familiar can benefit a wizard, conveying its sensory powers to its master, conversing with <PRO_HIMHER>, and serving as a guard/scout/spy as well. A wizard can have only one familiar at a time, and <PRO_HESHE> has no control over what sort of creature answers the summoning, if any come at all.
+
+(Note: This spell may only be cast by the protagonist.)
+
+The wizard has an empathic link with the familiar and can issue it mental commands. The creature is always more intelligent than others of its type (typically by 2 or 3 Intelligence points). Its bond with the wizard confers upon it an exceptionally long life and prevents it from truly dying. If the familiar should 'die' in combat the caster may cast Find Familiar again a day later to re-summon it.
+
+Here is a list of the familiars that the player receives according to alignment:
+
+LAWFUL GOOD, NEUTRAL GOOD: Pseudo Dragon
+– Hit Points: 24
+– Armor Class: -2
+– Magic Resistance: 50%
+– Combat: 2 attacks per round at 13 THAC0 for 1d3 damage, save vs. Death or be rendered unconscious for 2 turns
+– Special Abilities: Can cast Blur once per day. Regenerates 1 HP/round. Immune to level drain, sleep, and petrification.
+
+LAWFUL NEUTRAL: Ferret
+– Hit Points: 24
+– Armor Class: 0
+– Magic Resistance: 50%
+– Combat: 2 attacks per round at 13 THAC0 for 1d3 damage
+– Special Abilities: Has 75% in Pick Pockets, 40% in Hide in Shadows/Move Silently, and 20% in Detect Traps. Can cast Blur once per day. Immune to level drain, sleep, and petrification.
+
+LAWFUL EVIL: Imp
+– Hit Points: 18
+– Armor Class: 2
+– Magic Resistance: 25%
+– Combat: 1 attack per round at 15 THAC0 for 1d6 damage
+– Special Abilities: Has 100% resistance to fire, cold, and electricity. Can cast Polymorph Self once per day. Regenerates 1 HP/round.
+
+NEUTRAL: Rabbit
+– Hit Points: 24
+– Armor Class: 1
+– Magic Resistance: 65%
+– Combat: 2 attacks per round at 13 THAC0 for 1d2 damage
+– Special Abilities: Has 50% in Detect Traps and 30% Hide in Shadows/Move Silently. Has 75% resistance to fire, cold, and electricity.
+
+NEUTRAL EVIL: Dust Mephit
+– Hit Points: 24
+– Armor Class: 6
+– Magic Resistance: 10%
+– Combat: 2 attacks per round at 13 THAC0 for 1d2 damage
+– Special Abilities: Has 100% resistance to fire and 50% resistance to slashing, piercing, and missile damage. Can cast Glitterdust once per day and Glass Dust twice per day. Regenerates 1 HP/round. Immune to level drain, sleep, and petrification.
+
+CHAOTIC GOOD: Fairy Dragon
+– Hit Points: 24
+– Armor Class: 4
+– Magic Resistance: 32%
+– Combat: 2 attacks per round at 13 THAC0 for 1d2 damage
+– Special Abilities: Can cast Mirror Image and Invisibility, 10' Radius once per day. Immune to level drain, sleep, and petrification.
+
+CHAOTIC NEUTRAL: Cat
+– Hit Points: 24
+– Armor Class: 0
+– Magic Resistance: 50%
+– Combat: 2 attacks per round at 13 THAC0 for 1d3 damage
+– Special Abilities: Has 30% in Pick Pockets and 99% in Move Silently/Hide in Shadows. Immune to level drain, sleep, and petrification.
+
+CHAOTIC EVIL: Quasit
+– Hit Points: 24
+– Armor Class: 2
+– Magic Resistance: 25%
+– Combat: 3 attacks per round at 13 THAC0 for 1d6 damage
+– Special Abilities: Has 100% resistance to fire, cold, and electricity. Can cast Horror and Blur once per day. Regenerates 1 HP/round.
+~
+@8004  = ~Find Familiar
+(Conjuration/Summoning)
+
+Level: 1
+Range: n/a
+Duration: Special
+Casting Time: 9
+Area of Effect: 1 familiar
+Saving Throw: None
+
+This spell enables the caster to summon a familiar to act as <PRO_HISHER> aide and companion. Familiars are typically small creatures. A creature acting as a familiar can benefit a wizard, conveying its sensory powers to its master, conversing with <PRO_HIMHER>, and serving as a guard, scout, or spy. A wizard can have only one familiar at a time, and <PRO_HESHE> has no control over what sort of creature answers the summoning, if any come at all.
+
+The wizard has an empathic link with the familiar and can issue it mental commands. The creature is always more intelligent than others of its type (typically by 2 or 3 Intelligence points). Its bond with the wizard confers upon it an exceptionally long life and prevents it from truly dying. If the familiar should 'die' in combat the caster may cast Find Familiar again a day later to re-summon it.
+
+Here is a list of the familiars that the player may choose:
+
+Pseudo Dragon
+- Armor Class: 2
+- Magic and Damage Resistance: 25%
+- Combat: 2 attacks per round for 1d3 damage; save or be Slowed for 2 rounds
+- Special Abilities: Can cast Blur and Cure Light Wounds, and use a Color Spray breath weapon, once every 3 turns.
+
+Ferret
+- Armor Class: 2
+- Magic and Damage Resistance: 25%
+- Combat: 2 attacks per round for 1d3 damage
+- Special Abilities: Has 80% Pick Pockets score. Can emit a small aura of Nauseating Stench once per turn. Fir five round, enemies near the ferret must save or suffer 2-point penalties to hit and AC and a 30% chance of casting failure.
+
+Rabbit
+- Armor Class: 2
+- Magic and Damage Resistance: 25%
+- Combat: 2 attacks per round for 1d2 damage
+- Special Abilities: Has 80% Detect Traps score. Can burrow into the ground to escape danger - similar to the Shadowstep ability - once per turn.
+
+Cat
+- Armor Class: 2
+- Magic and Damage Resistance: 25%
+- Combat: 2 attacks per round for 1d3 damage
+- Special Abilities: Has 99% in Move Silently/Hide in Shadows, and is Nondetectable (as the spell) to magic divinations.
+
+Spider
+- Armor Class: 2
+- Magic and Damage Resistance: 25%
+- Combat: 2 attacks per round for 1d2 damage; save or take 3 poison damage over 1 round
+- Special Abilities: Can cast a single-target Web, which can tangle the target for 3 rounds, once per 5 rounds.
+
+Rat
+- Armor Class: 2
+- Magic and Damage Resistance: 25%
+- Combat: 2 attacks per round for 1d2 damage; save or be diseased for 3 rounds, with reduced Strength and a 30% chance of casting failure
+- Special Abilities: Can summon a cohort of 1d6 more rats to defend it, once per 3 turns.
+~
+@8013  = ~Fairy Dragon~
+@8014  = ~Fairy Dragon: ~
+@8015  = ~Dog~
+@8016  = ~Dog: ...~
+@8017  = ~Ferret~
+@8018  = ~Ferret: these animals are clever and mischievous, and while cute, they can occasionally carry a noxious stench. In combat they can attack twice per round, and they can emit a small-range nauseating aura which can cause nearby enemies to gag and retch, resulting in 2-point penalties to hit and armor class, and a 30% chance of spell failure.
+
+Ferrets are also sneaky, and can make effective pickpockets on behalf of their masters.  
+
+While this familiar is near its master, the summoner benefits from a +1 bonus to Constitution.
+
+As with all familiars, its magical connection to the life force of its master renders it immune to petrification and level drain effects.
+~
+@8019  = ~Rabbit~
+@8020  = ~Rabbit: while the rabbit is not an impressive combatant, it is exceedingly skilled at avoiding damage. Rabbits have 25% resistance to elemental attacks, and once per turn they can burrow into the ground and move unheeded to a safe area (in practice this resembles the ShadowStep ability of Shadowdancers). Rabbits also have an acute sense of imending danger, and can quite effectively use their sensitive noses and ears to sniff out nearby traps.
+
+While this familiar is near its master, the summoner is immune to Slow spells and similar effects.
+
+As with all familiars, its magical connection to the life force of its master renders it immune to petrification and level drain effects.
+~
+@8021  = ~Cat~
+@8022  = ~Cat: a black cat is a very traditional familiar for wizards, and is quite useful as a scout. They can move unseen as well as any master thief; and they may escape notice even in the face of spells that expose invisible creatures (though creatures with the natural ability to see all around them can still spot a cat).
+
+While this familiar is near its master, the summoner benefits from a +1 bonus to Dexterity.
+
+As with all familiars, its magical connection to the life force of its master renders it immune to petrification and level drain effects.
+~
+@8023  = ~Imp~
+@8024  = ~Imp: ~
+@8025  = ~Spider~
+@8026  = ~Spider: a spider can make a useful, if somewhat creepy-crawly, familiar for a wizard with no aversion to arachnids. They are effective in combat, especially against spellcasters, as they inject victims with a poison that can inflict 3 extra points of damage over 6 seconds. This particular variety of large spiders has the ability to, once every 5 rounds, spit a sticky mess of webbing at an enemy, who may be held fast in it for 3 rounds on a failed saving throw.
+
+While this familiar is near its master, the summoner has an extra chance to save to avoid spells or effects that cause poison damage.
+
+Spiders cannot be held fast by Web spells or similar effects. As with all familiars, its magical connection to the life force of its master renders it immune to petrification and level drain effects.
+~
+@8027  = ~Mephit~
+@8028  = ~Mephit: ...~
+@8029  = ~Quasit~
+@8030  = ~Quasit: ...~
+@8031  = ~Rat~
+@8032  = ~Rat: rats are unusually intelligent and sociable creatures, especially when enhanced by the magic of this spell. Once per 3 turns, this familiar may call upon 1d6 fellow rats to join it in combat. Rats, even domesticated ones are also no strangers to garbage and disease, and may utilize this against their enemies. Each time they successfully strike an enemy, the victim may become diseased, resulting in a short period of weakness and a 25% chance of spell failure.
+
+While this familiar is near its master, the summoner benefits from a +1 bonus to Intelligence.
+
+As with all familiars, its magical connection to the life force of its master renders it immune to petrification and level drain effects.
+~
+@8111  = ~Nauseating Stench~
+@8113  = ~Web Attack~
+@8115  = ~Swarm of Rats~
+@8201  = ~You can imbue your familiar with one of the following spells.  Please note, this will reduce the number of spells you can cast, and the change is permanent!~
+@8202  = ~Do not transfer any spells to the familiar at this time.~
+@8203  = ~Imbue Familiar~
+@8204  = ~Add this spell to the familiar~
+@8205  = ~Choose a different spell~
 //
 //Grammarsalad TRA strings
+//
 @115003 = ~Scribe Scrolls~
 @115004 = ~You must have a spell memorized in order to scribe a scroll.  Try again when you have memorized at least one spell.~
 @115005 = ~You must have at least 100 gold to scribe a scroll.  Try again when you have 100 gold or more.~

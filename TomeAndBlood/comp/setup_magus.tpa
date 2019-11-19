@@ -1,8 +1,10 @@
 // -----------------------------
 // SORCERER: MAGUS
 // -----------------------------
-INCLUDE ~TomeAndBlood/lib/fl#add_kit_ee.tpa~
+
 //Note: This component uses resources provided by Mike1072. All such resources are used with the permission of the original author. 
+
+DEFINE_ACTION_FUNCTION add_magus BEGIN 
 
 ADD_KIT ~QDMAGUS~
 	~QDMAGUS 2 2 0 2 2 2 2 2~ //clasweap.2da
@@ -44,6 +46,9 @@ ARMCAST     AP_D5ARCA2  ****        ****        ****        ****        ****    
 ARMCAST     AP_D5ARCA3  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
 
 //
+
+END 	//	end define function
+//____________________________________________________________________________________
 
 /*
 .

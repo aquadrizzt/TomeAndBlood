@@ -2,6 +2,8 @@
 // ARCANE CRAFTING (by GRAMMARSALAD)
 // -----------------------------
 
+DEFINE_ACTION_FUNCTION arcane_crafting BEGIN 
+
 //The code below is by Grammarsalad and use with permission.
 ////////////////////////////////////////////////////////////////
 /////////////////         Craft Wand        ////////////////////
@@ -363,3 +365,6 @@ END
 					END
 				END
 			END 
+
+END 	//	end define function
+//____________________________________________________________________________________

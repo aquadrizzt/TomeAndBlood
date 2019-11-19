@@ -2,8 +2,9 @@
 // LEVEL ONE CANTRIPS by SUBTLEDOCTOR 
 // -----------------------------
 
-INCLUDE ~TomeAndBlood/data/core/tnb_kit_list.tpa~ 
+DEFINE_ACTION_FUNCTION level_1_cantrips BEGIN 
 
+INCLUDE ~TomeAndBlood/data/core/tnb_kit_list.tpa~ 
 
 ////////////////////////////////////////////////////////////////////////////////////
 COPY ~TomeAndBlood/data/level_one_cantrips/mxsplbrd.2da~ ~override~
@@ -712,3 +713,6 @@ COPY ~TomeAndBlood/data/level_one_cantrips/QDFVSLB1.spl~ ~override/QDFVSLB.spl~
 	 ~TomeAndBlood/data/level_one_cantrips/QDFVSLL1.spl~ ~override/QDFVSLL.spl~
 	 ~TomeAndBlood/data/level_one_cantrips/QDFVSLN1.spl~ ~override/QDFVSLN.spl~
 	 ~TomeAndBlood/data/level_one_cantrips/QDFVSLP1.spl~ ~override/QDFVSLP.spl~
+	 
+END 	//	end define function
+//____________________________________________________________________________________

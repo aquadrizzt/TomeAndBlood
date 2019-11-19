@@ -2,8 +2,9 @@
 // CANTRIPS VIA WAND by SUBTLEDOCTOR 
 // -----------------------------
 
-INCLUDE ~TomeAndBlood/data/core/tnb_kit_list.tpa~ 
+DEFINE_ACTION_FUNCTION cantrip_wands BEGIN 
 
+INCLUDE ~TomeAndBlood/data/core/tnb_kit_list.tpa~ 
 
 COPY ~TomeAndBlood/data/cantrips/d5cantw.itm~ ~override~
 	SAY NAME2 @6010
@@ -35,5 +36,5 @@ ACTION_PHP_EACH tnb_kit_list AS kitinfo => kitclab BEGIN
 	END 
 END 
 
-
-	
+END 	//	end define function
+//____________________________________________________________________________________

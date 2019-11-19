@@ -1,7 +1,8 @@
 // -----------------------------
 // SORCERER: ARCANIST
 // -----------------------------
-INCLUDE ~TomeAndBlood/lib/fl#add_kit_ee.tpa~
+
+DEFINE_ACTION_FUNCTION add_arcanist BEGIN 
 
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN // version without Spell Revisions
 
@@ -138,3 +139,6 @@ ACTION_PHP_EACH scrollmap AS spell_res2 => scroll_res2 BEGIN
 		END 
 	END 
 COMPILE ~override/QD_ARCANIST.d~ 
+
+END 	//	end define function
+//____________________________________________________________________________________

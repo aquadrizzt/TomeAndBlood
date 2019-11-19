@@ -1,7 +1,8 @@
 // -----------------------------
 // AMORPHOUS DISCIPLE
 // -----------------------------
-INCLUDE ~TomeAndBlood/lib/fl#add_kit_ee.tpa~
+
+DEFINE_ACTION_FUNCTION add_amorphous_disciple BEGIN 
 
 //amorphous sorcerer
 ADD_KIT ~QDOOZSR~
@@ -32,3 +33,6 @@ ACTION_IF GAME_IS ~bgee bg2ee iwdee eet~ THEN BEGIN
 END	
 
 COPY ~TomeAndBlood/data/amorphous/QDOOZS1.spl~ ~override~ //+4 vs. poly, imm to disease/poison, prot: ooze, -1 spell
+
+END 	//	end define function
+//____________________________________________________________________________________
