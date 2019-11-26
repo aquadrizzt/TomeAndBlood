@@ -100,6 +100,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN
 	WRITE_ASCII 0x76 ~d5_rabb~ #8
   COPY ~TomeAndBlood/data/level_one_cantrips/d5_rabb.cre~ ~override~
 	SAY NAME1 @7075
+	WRITE_BYTE 0x275 20
   COPY ~TomeAndBlood/data/level_one_cantrips/d5_rabb.bam~ ~override~
   ACTION_IF FILE_EXISTS_IN_GAME ~scrl72.itm~ THEN BEGIN
 	COPY_EXISTING ~scrl72.itm~ ~override~
@@ -109,11 +110,10 @@ ACTION_IF FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN
   END
 END
 
-//Pro. Petrification: move to 2nd level, but not if SR installed
+//Pro. Petrification: move to 2nd level
 //
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN
-  COPY_EXISTING ~spwi108.spl~ ~override~
-  ADD_SPELL ~override/spwi108.spl~ 2 2 WIZARD_PROTECTION_FROM_PETRIFICATION
+COPY_EXISTING ~spwi108.spl~ ~override~
+ADD_SPELL ~override/spwi108.spl~ 2 2 WIZARD_PROTECTION_FROM_PETRIFICATION
 	WRITE_LONG 0x34 2
 	READ_LONG 0x50 "valid"
 	PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
@@ -123,11 +123,11 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN
 		END
 		SAY_EVALUATED 0x50 ~%new_desc%~
 	END
-  LAF RES_NUM_OF_SPELL_NAME
+LAF RES_NUM_OF_SPELL_NAME
 	STR_VAR spell_name = ~WIZARD_PROTECTION_FROM_PETRIFICATION~
 	RET spell_res
-  END
-  ACTION_IF FILE_EXISTS_IN_GAME ~scrl73.itm~ THEN BEGIN
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~scrl73.itm~ THEN BEGIN
 	COPY_EXISTING ~scrl73.itm~ ~override~
 		WRITE_LONG 0x34 200
 		LPF ALTER_EFFECT INT_VAR match_opcode = 146 STR_VAR resource = EVAL ~%spell_res%~ END
@@ -142,17 +142,17 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN
 			SAY_EVALUATED 0x54 ~%new_desc%~
 		END
 	BUT_ONLY
-  END
-  ACTION_IF FILE_EXISTS_IN_GAME ~hidespl.2da~ BEGIN
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~hidespl.2da~ BEGIN
 	APPEND ~hidespl.2da~ ~spwi108	1		0~
-  END
 END
 
 //SR Dimension Jump: move to 2nd level
 //
 ACTION_IF FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN
+ ACTION_IF (FILE_EXISTS_IN_GAME ~spwi109.spl~) BEGIN
   COPY_EXISTING ~spwi109.spl~ ~override~
-  ADD_SPELL ~override/spwi109.spl~ 2 2 WIZARD_HOLD_PORTAL
+  ADD_SPELL ~override/spwi109.spl~ 2 2 WIZARD_DIMENSION_JUMP
 	WRITE_LONG 0x34 2
 	READ_LONG 0x50 "valid"
 	PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
@@ -163,7 +163,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN
 		SAY_EVALUATED 0x50 ~%new_desc%~
 	END
   LAF RES_NUM_OF_SPELL_NAME
-	STR_VAR spell_name = ~WIZARD_HOLD_PORTAL~
+	STR_VAR spell_name = ~WIZARD_DIMENSION_JUMP~
 	RET spell_res
   END
   ACTION_IF FILE_EXISTS_IN_GAME ~scrl1v.itm~ THEN BEGIN
@@ -185,6 +185,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN
   ACTION_IF FILE_EXISTS_IN_GAME ~hidespl.2da~ BEGIN
 	APPEND ~hidespl.2da~ ~spwi109	1		0~
   END
+ END
 END
 
 //Identify: change to a lore bonus
@@ -302,7 +303,7 @@ COPY_EXISTING ~spwi114.spl~ ~override~
   LPF CLONE_EFFECT INT_VAR match_opcode = 206 multi_match = 1 STR_VAR resource = ~SPWI217~ END
 BUT_ONLY
 
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN
+ACTION_IF !(FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~) BEGIN
   ADD_SPELL ~override/spwi114.spl~ 2 2 WIZARD_SHIELD_TNB
 	WRITE_LONG 0x34 2
 	READ_LONG 0x50 "valid"
@@ -317,7 +318,7 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN
 	STR_VAR spell_name = ~WIZARD_SHIELD_TNB~
 	RET spell_res
   END
-  ACTION_IF FILE_EXISTS_IN_GAME ~scrl79.itm~ THEN BEGIN
+  ACTION_IF (FILE_EXISTS_IN_GAME ~scrl79.itm~) THEN BEGIN
 	COPY_EXISTING ~scrl79.itm~ ~override~
 		WRITE_LONG 0x34 200
 		LPF ALTER_EFFECT INT_VAR match_opcode = 146 STR_VAR resource = EVAL ~%spell_res%~ END
@@ -340,7 +341,7 @@ END
 
 //Shocking Grasp
 //
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN
+ACTION_IF !(FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~) THEN BEGIN
   COPY ~TomeAndBlood/data/level_one_cantrips/spwi115.spl~ ~override~
 	SAY NAME1 @7151
 	SAY UNIDENTIFIED_DESC @7152
@@ -486,7 +487,12 @@ COPY ~TomeAndBlood/data/level_one_cantrips/spwi125.spl~ ~override~
 //Wraithform: remove from menus
 //
 ACTION_IF FILE_EXISTS_IN_GAME ~hidespl.2da~ BEGIN
+  ACTION_IF (GAME_IS ~bgee bg2ee eet~) BEGIN
+	APPEND ~hidespl.2da~ ~spwi315	1		0		0~
+  END
+  ACTION_IF (GAME_IS ~iwdee~) BEGIN
 	APPEND ~hidespl.2da~ ~spwi315	1		0~
+  END
 END
 
 ////////////////////////////////////////////////////////////////////////////////////

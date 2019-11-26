@@ -1,6 +1,6 @@
 BACKUP ~TomeAndBlood/backup~
 AUTHOR ~aquadrizzt@gmail.com~
-VERSION ~0.8.41~ 
+VERSION ~0.8.42~ 
 
 ALWAYS
 
@@ -64,7 +64,7 @@ LAF general_spell_tweaks END
 // -----------------------------
 BEGIN @13
 DESIGNATED 13
-REQUIRE_PREDICATE (ENGINE_IS ~soa tob iwd bgee bg2ee iwdee eet~) @1 
+REQUIRE_PREDICATE (ENGINE_IS ~bgee bg2ee iwdee eet~) @1 
 GROUP @5
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_spelltweaks_clone.qd~ //detection for this component 
@@ -79,7 +79,7 @@ LAF illusion_clone_tweaks END
 // -----------------------------
 BEGIN @14
 DESIGNATED 14
-REQUIRE_PREDICATE (ENGINE_IS ~soa tob iwd bgee bg2ee iwdee eet~) @1 
+REQUIRE_PREDICATE (ENGINE_IS ~bgee bg2ee iwdee eet~) @1 
 GROUP @5
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_spelltweaks_invis.qd~ //detection for this component 
@@ -140,6 +140,7 @@ LAF add_magus END
 // -----------------------------
 BEGIN @27
 DESIGNATED 27
+REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee iwdee eet~) @2 
 GROUP @6
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_arcanist.qd~ //detection for this component 
@@ -155,6 +156,7 @@ LAF add_arcanist END
 // -----------------------------
 BEGIN @29
 DESIGNATED 29
+REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee iwdee eet~) @2 
 GROUP @6
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_wildsor.qd~ //detection for this component 
@@ -259,7 +261,7 @@ LAF arcane_crafting END
 // -----------------------------
 BEGIN @48
 DESIGNATED 48
-REQUIRE_PREDICATE (FILE_EXISTS_IN_GAME ~enginest.2da~) @3
+//REQUIRE_PREDICATE (FILE_EXISTS_IN_GAME ~enginest.2da~) @3
 GROUP @7
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_acbards.qd~ //detection for this component 
@@ -281,7 +283,7 @@ LAF armored_bards END
 BEGIN @51
 DESIGNATED 51
 SUBCOMPONENT @50
-REQUIRE_PREDICATE (ENGINE_IS ~soa tob iwd bgee bg2ee iwdee eet~) @1 
+//REQUIRE_PREDICATE (ENGINE_IS ~soa tob iwd bgee bg2ee iwdee eet~) @1 
 FORBID_COMPONENT ~setup-stratagems.tp2~ ~4250~ ~conflict~
 REQUIRE_PREDICATE NOT FILE_EXISTS ~weidu_external/markers/dw#innate_triggers.mrk~ ~conflict~
 GROUP @7
@@ -365,7 +367,7 @@ LAF innate_metamagic INT_VAR sequencer_method = 5 END
 BEGIN @61
 DESIGNATED 61
 SUBCOMPONENT @60 
-REQUIRE_PREDICATE (ENGINE_IS ~soa tob iwd bgee bg2ee iwdee eet~) @1 
+//REQUIRE_PREDICATE (ENGINE_IS ~soa tob iwd bgee bg2ee iwdee eet~) @1 
 GROUP @7
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_cantrips.qd~ //detection for this component 
@@ -378,8 +380,7 @@ LAF innate_cantrips END
 
 BEGIN @62
 DESIGNATED 62
-SUBCOMPONENT @60
-REQUIRE_PREDICATE (ENGINE_IS ~soa tob iwd bgee bg2ee iwdee eet~) @1 
+SUBCOMPONENT @60 (GAME_IS ~bgee bg2ee eet iwdee~)
 GROUP @7
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_l1cantrips.qd~ //detection for this component 
@@ -393,7 +394,6 @@ LAF level_1_cantrips END
 BEGIN @63
 DESIGNATED 63
 SUBCOMPONENT @60
-REQUIRE_PREDICATE (ENGINE_IS ~soa tob iwd bgee bg2ee iwdee eet~) @1 
 GROUP @7
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_cantwand.qd~ //detection for this component 
@@ -408,7 +408,6 @@ LAF cantrip_wands END
 // -----------------------------
 BEGIN @66
 DESIGNATED 66
-REQUIRE_PREDICATE (ENGINE_IS ~soa tob iwd bgee bg2ee iwdee eet~) @1
 GROUP @7
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_familiar.qd~ //detection for this component 
@@ -423,7 +422,7 @@ LAF innate_familiars END
 // -----------------------------
 BEGIN @67
 DESIGNATED 67
-REQUIRE_PREDICATE (ENGINE_IS ~bgee bg2ee iwdee eet~) @1
+REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee iwdee eet~) @1
 GROUP @7
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_familiar_choice.qd~ //detection for this component 
@@ -440,7 +439,7 @@ LAF familiar_changes END
 // -----------------------------
 BEGIN @68
 DESIGNATED 68
-REQUIRE_PREDICATE (ENGINE_IS ~bgee bg2ee iwdee eet~) @1
+REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee iwdee eet~) @1
 GROUP @7
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_imbue_familiars.qd~ //detection for this component 
@@ -455,7 +454,7 @@ LAF imbue_familiars END
 // -----------------------------
 BEGIN @69
 DESIGNATED 69
-REQUIRE_PREDICATE (ENGINE_IS ~soa tob iwd bgee bg2ee iwdee eet~) @1
+REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee iwdee eet~) @1
 GROUP @7
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_indelible_familiars.qd~ //detection for this component 
@@ -500,7 +499,7 @@ LAF spell_select_dialogue END
 // -----------------------------
 BEGIN @80
 DESIGNATED 80
-REQUIRE_PREDICATE (FILE_EXISTS_IN_GAME ~enginest.2da~) @3
+REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee iwdee eet~) @3
 GROUP @6
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_mcsrc.qd~ //detection for this component 

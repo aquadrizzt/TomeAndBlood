@@ -772,9 +772,16 @@ COPY_EXISTING ~famimp.cre~ ~override~
   ADD_CRE_ITEM ~impclaw~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON1~ EQUIP
 IF_EXISTS
 // change imp.itm to do 1d2 damage, and poison .spl
+ACTION_IF (FILE_EXISTS_IN_GAME ~impclaw.itm~) BEGIN
 COPY_EXISTING ~impclaw.itm~ ~override~
   LPF ALTER_ITEM_HEADER INT_VAR dicesize = 2 END
   LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 25 parameter1 = 2 parameter2 = 3 timing = 0 duration = 6 END
+END
+ACTION_IF !(FILE_EXISTS_IN_GAME ~impclaw.itm~) BEGIN
+COPY ~tomeandblood/data/familiars/impclaw.itm~ ~override~
+  LPF ALTER_ITEM_HEADER INT_VAR dicesize = 2 END
+  LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 25 parameter1 = 2 parameter2 = 3 timing = 0 duration = 6 END
+END
 /* 
 // give imp.itm 146 effect for poison, instead of using op248...?
 COPY_EXISTING ~imp.itm~ ~override~
@@ -985,15 +992,26 @@ COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5famrt1.spl~
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 67 target = 1 parameter2 = 2 timing = 0 duration = 30 probability1 = 40 STR_VAR resource = ~d5ratsu~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 67 target = 1 parameter2 = 2 timing = 0 duration = 30 probability1 = 25 STR_VAR resource = ~d5ratsu~ END
 COPY ~tomeandblood/data/familiars/d5ratsu.cre~ ~override~
-  WRITE_BYTE 0x275 0
+  WRITE_BYTE 0x275 20
 
-COPY_EXISTING ~quasclaw.itm~ ~override~
+ACTION_IF (FILE_EXISTS_IN_GAME ~quasclaw.itm~) BEGIN
+ COPY_EXISTING ~quasclaw.itm~ ~override~
   LPF DELETE_EFFECT INT_VAR silent = 1 match_opcode = 15 END
   LPF ADD_ITEM_EFFECT INT_VAR opcode = 44 target = 2 parameter1 = 5 parameter2 = 1 timing = 0 duration = 18 savingthrow = 4 END
   LPF ADD_ITEM_EFFECT INT_VAR opcode = 60 target = 2 parameter1 = 25 parameter2 = 0 timing = 0 duration = 18 savingthrow = 4 END
   LPF ADD_ITEM_EFFECT INT_VAR opcode = 60 target = 2 parameter1 = 25 parameter2 = 1 timing = 0 duration = 18 savingthrow = 4 END
   LPF ADD_ITEM_EFFECT INT_VAR opcode = 60 target = 2 parameter1 = 25 parameter2 = 2 timing = 0 duration = 18 savingthrow = 4 END
-IF_EXISTS BUT_ONLY
+ BUT_ONLY
+END
+ACTION_IF !(FILE_EXISTS_IN_GAME ~quasclaw.itm~) BEGIN
+ COPY ~tomeandblood/data/familiars/quasclaw.itm~ ~override~
+  LPF DELETE_EFFECT INT_VAR silent = 1 match_opcode = 15 END
+  LPF ADD_ITEM_EFFECT INT_VAR opcode = 44 target = 2 parameter1 = 5 parameter2 = 1 timing = 0 duration = 18 savingthrow = 4 END
+  LPF ADD_ITEM_EFFECT INT_VAR opcode = 60 target = 2 parameter1 = 25 parameter2 = 0 timing = 0 duration = 18 savingthrow = 4 END
+  LPF ADD_ITEM_EFFECT INT_VAR opcode = 60 target = 2 parameter1 = 25 parameter2 = 1 timing = 0 duration = 18 savingthrow = 4 END
+  LPF ADD_ITEM_EFFECT INT_VAR opcode = 60 target = 2 parameter1 = 25 parameter2 = 2 timing = 0 duration = 18 savingthrow = 4 END
+ BUT_ONLY
+END
 
 COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5famrt0.spl~
   LPF ALTER_SPELL_HEADER INT_VAR target = 5 projectile = %party_proj% END

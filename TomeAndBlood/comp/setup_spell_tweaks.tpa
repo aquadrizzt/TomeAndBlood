@@ -28,7 +28,7 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN // version without
 	ACTION_IF FILE_EXISTS_IN_GAME ~spwi209.spl~ THEN BEGIN
 		COPY_EXISTING ~spwi209.spl~ ~override~
 			LPF ALTER_SPELL_HEADER INT_VAR target = 5 range = 30 projectile = 158 END
-			LPF ALTER_EFFECT INT_VAR match_duration = 18 duration = 30 END
+			LPF ALTER_EFFECT INT_VAR silent = 1 match_duration = 18 duration = 30 END
 			SAY UNIDENTIFIED_DESC @6115
 	END 
 
@@ -56,9 +56,9 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN // version without
 		ACTION_IF FILE_EXISTS_IN_GAME ~scrla4.itm~ THEN BEGIN
 			COPY_EXISTING ~scrla4.itm~ ~override~
 				WRITE_LONG 0x34 5000
-				LPF ALTER_EFFECT INT_VAR match_opcode = 146 STR_VAR resource = EVAL ~%spell_res%~ END
-				LPF ALTER_EFFECT INT_VAR match_opcode = 147 STR_VAR resource = EVAL ~%spell_res%~ END
-				LPF ALTER_EFFECT INT_VAR match_opcode = 148 STR_VAR resource = EVAL ~%spell_res%~ END
+				LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 146 STR_VAR resource = EVAL ~%spell_res%~ END
+				LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 147 STR_VAR resource = EVAL ~%spell_res%~ END
+				LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 148 STR_VAR resource = EVAL ~%spell_res%~ END
 				READ_LONG 0x54 "valid"
 				PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
 					READ_STRREF 0x54 "desc"
@@ -109,9 +109,9 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN // version without
 		ACTION_IF FILE_EXISTS_IN_GAME ~scrl9f.itm~ THEN BEGIN
 			COPY_EXISTING ~scrl9f.itm~ ~override~
 				WRITE_LONG 0x34 3000
-				LPF ALTER_EFFECT INT_VAR match_opcode = 146 STR_VAR resource = EVAL ~%spell_res%~ END
-				LPF ALTER_EFFECT INT_VAR match_opcode = 147 STR_VAR resource = EVAL ~%spell_res%~ END
-				LPF ALTER_EFFECT INT_VAR match_opcode = 148 STR_VAR resource = EVAL ~%spell_res%~ END
+				LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 146 STR_VAR resource = EVAL ~%spell_res%~ END
+				LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 147 STR_VAR resource = EVAL ~%spell_res%~ END
+				LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 148 STR_VAR resource = EVAL ~%spell_res%~ END
 				READ_LONG 0x54 "valid"
 				PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
 					READ_STRREF 0x54 "desc"
@@ -161,9 +161,9 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN // version without
 		ACTION_IF FILE_EXISTS_IN_GAME ~scrl9y.itm~ THEN BEGIN
 			COPY_EXISTING ~scrl9y.itm~ ~override~
 				WRITE_LONG 0x34 7500
-				LPF ALTER_EFFECT INT_VAR match_opcode = 146 STR_VAR resource = EVAL ~%spell_res%~ END
-				LPF ALTER_EFFECT INT_VAR match_opcode = 147 STR_VAR resource = EVAL ~%spell_res%~ END
-				LPF ALTER_EFFECT INT_VAR match_opcode = 148 STR_VAR resource = EVAL ~%spell_res%~ END
+				LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 146 STR_VAR resource = EVAL ~%spell_res%~ END
+				LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 147 STR_VAR resource = EVAL ~%spell_res%~ END
+				LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 148 STR_VAR resource = EVAL ~%spell_res%~ END
 				READ_LONG 0x54 "valid"
 				PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
 					READ_STRREF 0x54 "desc"
@@ -207,9 +207,9 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN // version without
 		ACTION_IF FILE_EXISTS_IN_GAME ~scrl9x.itm~ THEN BEGIN
 			COPY_EXISTING ~scrl9x.itm~ ~override~
 				WRITE_LONG 0x34 5000
-				LPF ALTER_EFFECT INT_VAR match_opcode = 146 STR_VAR resource = EVAL ~%spell_res%~ END
-				LPF ALTER_EFFECT INT_VAR match_opcode = 147 STR_VAR resource = EVAL ~%spell_res%~ END
-				LPF ALTER_EFFECT INT_VAR match_opcode = 148 STR_VAR resource = EVAL ~%spell_res%~ END
+				LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 146 STR_VAR resource = EVAL ~%spell_res%~ END
+				LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 147 STR_VAR resource = EVAL ~%spell_res%~ END
+				LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 148 STR_VAR resource = EVAL ~%spell_res%~ END
 				SAY IDENTIFIED_DESC @6121
 			BUT_ONLY
 		END
@@ -272,9 +272,9 @@ ACTION_IF FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN // version for Spell R
 		ACTION_IF FILE_EXISTS_IN_GAME ~scrl67.itm~ THEN BEGIN
 			COPY_EXISTING ~scrl67.itm~ ~override~
 				WRITE_LONG 0x34 200
-				LPF ALTER_EFFECT INT_VAR match_opcode = 146 STR_VAR resource = EVAL ~%spell_res%~ END
-				LPF ALTER_EFFECT INT_VAR match_opcode = 147 STR_VAR resource = EVAL ~%spell_res%~ END					
-				LPF ALTER_EFFECT INT_VAR match_opcode = 148 STR_VAR resource = EVAL ~%spell_res%~ END
+				LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 146 STR_VAR resource = EVAL ~%spell_res%~ END
+				LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 147 STR_VAR resource = EVAL ~%spell_res%~ END					
+				LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 148 STR_VAR resource = EVAL ~%spell_res%~ END
 				READ_LONG 0x54 "valid"
 				PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
 					READ_STRREF 0x54 "desc"
@@ -326,9 +326,9 @@ ACTION_IF FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN // version for Spell R
 			COPY_EXISTING ~scrl96.itm~ ~override~
 				WRITE_LONG 0x34 300
 //				SAY IDENTIFIED_DESC @6130
-				LPF ALTER_EFFECT INT_VAR match_opcode = 146 STR_VAR resource = EVAL ~%spell_res%~ END
-				LPF ALTER_EFFECT INT_VAR match_opcode = 147 STR_VAR resource = EVAL ~%spell_res%~ END					
-				LPF ALTER_EFFECT INT_VAR match_opcode = 148 STR_VAR resource = EVAL ~%spell_res%~ END
+				LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 146 STR_VAR resource = EVAL ~%spell_res%~ END
+				LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 147 STR_VAR resource = EVAL ~%spell_res%~ END					
+				LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 148 STR_VAR resource = EVAL ~%spell_res%~ END
 				READ_LONG 0x54 "valid"
 				PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
 					READ_STRREF 0x54 "desc"
@@ -359,7 +359,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN // version for Spell R
 	ACTION_IF FILE_EXISTS_IN_GAME ~spwi209.spl~ THEN BEGIN
 		COPY_EXISTING ~spwi209.spl~ ~override~
 			LPF ALTER_SPELL_HEADER INT_VAR target = 5 range = 30 projectile = 158 END
-			LPF ALTER_EFFECT INT_VAR match_duration = 18 duration = 30 END
+			LPF ALTER_EFFECT INT_VAR silent = 1 match_duration = 18 duration = 30 END
 			SAY UNIDENTIFIED_DESC @6131
 	END 
 
@@ -386,9 +386,9 @@ ACTION_IF FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN // version for Spell R
 		ACTION_IF FILE_EXISTS_IN_GAME ~scrl9f.itm~ THEN BEGIN
 			COPY_EXISTING ~scrl9f.itm~ ~override~
 				WRITE_LONG 0x34 3000
-				LPF ALTER_EFFECT INT_VAR match_opcode = 146 STR_VAR resource = EVAL ~%spell_res%~ END
-				LPF ALTER_EFFECT INT_VAR match_opcode = 147 STR_VAR resource = EVAL ~%spell_res%~ END					
-				LPF ALTER_EFFECT INT_VAR match_opcode = 148 STR_VAR resource = EVAL ~%spell_res%~ END
+				LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 146 STR_VAR resource = EVAL ~%spell_res%~ END
+				LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 147 STR_VAR resource = EVAL ~%spell_res%~ END					
+				LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 148 STR_VAR resource = EVAL ~%spell_res%~ END
 				READ_LONG 0x54 "valid"
 				PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
 					READ_STRREF 0x54 "desc"
@@ -438,9 +438,9 @@ ACTION_IF FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN // version for Spell R
 		ACTION_IF FILE_EXISTS_IN_GAME ~scrl9y.itm~ THEN BEGIN
 			COPY_EXISTING ~scrl9y.itm~ ~override~
 				WRITE_LONG 0x34 7500
-				LPF ALTER_EFFECT INT_VAR match_opcode = 146 STR_VAR resource = EVAL ~%spell_res%~ END
-				LPF ALTER_EFFECT INT_VAR match_opcode = 147 STR_VAR resource = EVAL ~%spell_res%~ END					
-				LPF ALTER_EFFECT INT_VAR match_opcode = 148 STR_VAR resource = EVAL ~%spell_res%~ END
+				LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 146 STR_VAR resource = EVAL ~%spell_res%~ END
+				LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 147 STR_VAR resource = EVAL ~%spell_res%~ END					
+				LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 148 STR_VAR resource = EVAL ~%spell_res%~ END
 				READ_LONG 0x54 "valid"
 				PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
 					READ_STRREF 0x54 "desc"
@@ -483,9 +483,9 @@ ACTION_IF FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN // version for Spell R
 		ACTION_IF FILE_EXISTS_IN_GAME ~scrl9x.itm~ THEN BEGIN
 			COPY_EXISTING ~scrl9x.itm~ ~override~
 				WRITE_LONG 0x34 5000
-				LPF ALTER_EFFECT INT_VAR match_opcode = 146 STR_VAR resource = EVAL ~%spell_res%~ END
-				LPF ALTER_EFFECT INT_VAR match_opcode = 147 STR_VAR resource = EVAL ~%spell_res%~ END					
-				LPF ALTER_EFFECT INT_VAR match_opcode = 148 STR_VAR resource = EVAL ~%spell_res%~ END
+				LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 146 STR_VAR resource = EVAL ~%spell_res%~ END
+				LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 147 STR_VAR resource = EVAL ~%spell_res%~ END					
+				LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 148 STR_VAR resource = EVAL ~%spell_res%~ END
 				SAY IDENTIFIED_DESC @6139
 			BUT_ONLY
 		END
@@ -522,9 +522,9 @@ ACTION_IF FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN // version for Spell R
 		ACTION_IF FILE_EXISTS_IN_GAME ~scrl9w.itm~ THEN BEGIN
 			COPY_EXISTING ~scrl9w.itm~ ~override~
 				WRITE_LONG 0x34 5000
-				LPF ALTER_EFFECT INT_VAR match_opcode = 146 STR_VAR resource = EVAL ~%spell_res%~ END
-				LPF ALTER_EFFECT INT_VAR match_opcode = 147 STR_VAR resource = EVAL ~%spell_res%~ END					
-				LPF ALTER_EFFECT INT_VAR match_opcode = 148 STR_VAR resource = EVAL ~%spell_res%~ END
+				LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 146 STR_VAR resource = EVAL ~%spell_res%~ END
+				LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 147 STR_VAR resource = EVAL ~%spell_res%~ END					
+				LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 148 STR_VAR resource = EVAL ~%spell_res%~ END
 				SAY NAME1 @6141
 				SAY IDENTIFIED_DESC @6142
 			BUT_ONLY
@@ -753,7 +753,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~spwi804.spl~ BEGIN
 //
 	COPY_EXISTING ~d5si804.spl~ ~override/d5si8049.spl~
 	  LPF ALTER_SPELL_HEADER INT_VAR target = 1 END
-	  LPF ALTER_EFFECT INT_VAR target = 2 END
+	  LPF ALTER_EFFECT INT_VAR silent = 1 target = 2 END
 	COPY_EXISTING ~spwi804.spl~ ~override/d5si9il.spl~
 	  SAY NAME1 @6277
 	  SAY UNIDENTIFIED_DESC @6278

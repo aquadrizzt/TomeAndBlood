@@ -8,6 +8,46 @@ INCLUDE ~TomeAndBlood/lib/spell_to_innate.tpa~
 INCLUDE ~TomeAndBlood/lib/add_spell_header.tpa~
 // This component uses code by Subtledoctor; all such code is used with permission of the original author. 
 
+// SR spells
+ACTION_IF (FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~) BEGIN
+  ACTION_IF (FILE_CONTAINS_EVALUATED (~SPELL.IDS~ ~[ %TAB%]WIZARD_MONSTER_SUMMONING_LEVEL_1[ %TAB%%LNL%%MNL%%WNL%]~)) BEGIN
+    LAF RES_NUM_OF_SPELL_NAME STR_VAR spell_name = ~WIZARD_MONSTER_SUMMONING_LEVEL_1~ RET spell_res END
+    OUTER_SPRINT sr_ms1 ~%spell_res%~
+  END
+  ACTION_IF (FILE_CONTAINS_EVALUATED (~SPELL.IDS~ ~[ %TAB%]WIZARD_MONSTER_SUMMONING_LEVEL_2[ %TAB%%LNL%%MNL%%WNL%]~)) BEGIN
+    LAF RES_NUM_OF_SPELL_NAME STR_VAR spell_name = ~WIZARD_MONSTER_SUMMONING_LEVEL_2~ RET spell_res END
+    OUTER_SPRINT sr_ms2 ~%spell_res%~
+  END
+  ACTION_IF (FILE_CONTAINS_EVALUATED (~SPELL.IDS~ ~[ %TAB%]WIZARD_MONSTER_SUMMONING_LEVEL_3[ %TAB%%LNL%%MNL%%WNL%]~)) BEGIN
+    LAF RES_NUM_OF_SPELL_NAME STR_VAR spell_name = ~WIZARD_MONSTER_SUMMONING_LEVEL_3~ RET spell_res END
+    OUTER_SPRINT sr_ms3 ~%spell_res%~
+  END
+  ACTION_IF (FILE_CONTAINS_EVALUATED (~SPELL.IDS~ ~[ %TAB%]WIZARD_MONSTER_SUMMONING_LEVEL_4[ %TAB%%LNL%%MNL%%WNL%]~)) BEGIN
+    LAF RES_NUM_OF_SPELL_NAME STR_VAR spell_name = ~WIZARD_MONSTER_SUMMONING_LEVEL_4~ RET spell_res END
+    OUTER_SPRINT sr_ms4 ~%spell_res%~
+  END
+  ACTION_IF (FILE_CONTAINS_EVALUATED (~SPELL.IDS~ ~[ %TAB%]WIZARD_MONSTER_SUMMONING_LEVEL_5[ %TAB%%LNL%%MNL%%WNL%]~)) BEGIN
+    LAF RES_NUM_OF_SPELL_NAME STR_VAR spell_name = ~WIZARD_MONSTER_SUMMONING_LEVEL_5~ RET spell_res END
+    OUTER_SPRINT sr_ms5 ~%spell_res%~
+  END
+  ACTION_IF (FILE_CONTAINS_EVALUATED (~SPELL.IDS~ ~[ %TAB%]WIZARD_MONSTER_SUMMONING_LEVEL_6[ %TAB%%LNL%%MNL%%WNL%]~)) BEGIN
+    LAF RES_NUM_OF_SPELL_NAME STR_VAR spell_name = ~WIZARD_MONSTER_SUMMONING_LEVEL_6~ RET spell_res END
+    OUTER_SPRINT sr_ms6 ~%spell_res%~
+  END
+  ACTION_IF (FILE_CONTAINS_EVALUATED (~SPELL.IDS~ ~[ %TAB%]WIZARD_MONSTER_SUMMONING_LEVEL_7[ %TAB%%LNL%%MNL%%WNL%]~)) BEGIN
+    LAF RES_NUM_OF_SPELL_NAME STR_VAR spell_name = ~WIZARD_MONSTER_SUMMONING_LEVEL_7~ RET spell_res END
+    OUTER_SPRINT sr_ms7 ~%spell_res%~
+  END
+  ACTION_IF (FILE_CONTAINS_EVALUATED (~SPELL.IDS~ ~[ %TAB%]WIZARD_MONSTER_SUMMONING_LEVEL_8[ %TAB%%LNL%%MNL%%WNL%]~)) BEGIN
+    LAF RES_NUM_OF_SPELL_NAME STR_VAR spell_name = ~WIZARD_MONSTER_SUMMONING_LEVEL_8~ RET spell_res END
+    OUTER_SPRINT sr_ms8 ~%spell_res%~
+  END
+  ACTION_IF (FILE_CONTAINS_EVALUATED (~SPELL.IDS~ ~[ %TAB%]WIZARD_MONSTER_SUMMONING_LEVEL_9[ %TAB%%LNL%%MNL%%WNL%]~)) BEGIN
+    LAF RES_NUM_OF_SPELL_NAME STR_VAR spell_name = ~WIZARD_MONSTER_SUMMONING_LEVEL_9~ RET spell_res END
+    OUTER_SPRINT sr_ms9 ~%spell_res%~
+  END
+END
+
 // spontaneous casting icons
 COPY ~TomeAndBlood/data/specialists/d5spnt1.bam~ ~override~
 	~TomeAndBlood/data/specialists/d5spnt2.bam~ ~override~
@@ -307,12 +347,15 @@ ACTION_PHP_EACH d5_spell_scroll_school AS spell => school BEGIN
 				   ~%spell%~ STRING_EQUAL_CASE ~SPWI701~ OR //Spell Turning
 				   ~%spell%~ STRING_EQUAL_CASE ~SPWI902~ OR //Spell Trap
 				   (FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ AND  // Spell Revisions
-					   (~%spell%~ STRING_EQUAL_CASE ~SPWI226~ OR //SR: MS 1
-					   ~%spell%~ STRING_EQUAL_CASE ~SPWI309~ OR //SR: MS 2
-					   ~%spell%~ STRING_EQUAL_CASE ~SPWI423~ OR //SR: MS 3
-					   ~%spell%~ STRING_EQUAL_CASE ~SPWI504~ OR //SR: MS 4
-					   ~%spell%~ STRING_EQUAL_CASE ~SPWI619~ OR //SR: MS 5
-					   ~%spell%~ STRING_EQUAL_CASE ~SPWI724~)	   
+					   (~%spell%~ STRING_EQUAL_CASE ~%sr_ms1%~ OR //SR: MS 1
+					   ~%spell%~ STRING_EQUAL_CASE ~%sr_ms2%~ OR //SR: MS 2
+					   ~%spell%~ STRING_EQUAL_CASE ~%sr_ms3%~ OR //SR: MS 3
+					   ~%spell%~ STRING_EQUAL_CASE ~%sr_ms4%~ OR //SR: MS 4
+					   ~%spell%~ STRING_EQUAL_CASE ~%sr_ms5%~ OR //SR: MS 5
+					   ~%spell%~ STRING_EQUAL_CASE ~%sr_ms6%~ OR //SR: MS 6
+					   ~%spell%~ STRING_EQUAL_CASE ~%sr_ms7%~ OR //SR: MS 7
+					   ~%spell%~ STRING_EQUAL_CASE ~%sr_ms8%~ OR //SR: MS 8
+					   ~%spell%~ STRING_EQUAL_CASE ~%sr_ms9%~)	   
 				   ) OR 
 				   ((NOT FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~) AND //No Spell Revisions
 					   (~%spell%~ STRING_EQUAL_CASE ~SPWI309~ OR //Monster Summoning I
@@ -497,18 +540,27 @@ END
 ACTION_IF FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN //SR
 
 	//Reducing Monster Summoning Spells by 1 level 
-	COPY_EXISTING ~spwi226.spl~ ~override/d5_conj1.spl~
+	COPY_EXISTING ~%sr_ms2%.spl~ ~override/d5_conj1.spl~
 		WRITE_LONG 0x34 1
-	COPY_EXISTING ~spwi309.spl~ ~override/d5_conj2.spl~
+	IF_EXISTS
+	COPY_EXISTING ~%sr_ms3%.spl~ ~override/d5_conj2.spl~
 		WRITE_LONG 0x34 2
-	COPY_EXISTING ~spwi423.spl~ ~override/d5_conj3.spl~
+	IF_EXISTS
+	COPY_EXISTING ~%sr_ms4%.spl~ ~override/d5_conj3.spl~
 		WRITE_LONG 0x34 3
-	COPY_EXISTING ~spwi504.spl~ ~override/d5_conj4.spl~
+	IF_EXISTS
+	COPY_EXISTING ~%sr_ms5%.spl~ ~override/d5_conj4.spl~
 		WRITE_LONG 0x34 4
-	COPY_EXISTING ~spwi619.spl~ ~override/d5_conj5.spl~
+	IF_EXISTS
+	COPY_EXISTING ~%sr_ms6%.spl~ ~override/d5_conj5.spl~
 		WRITE_LONG 0x34 5
-	COPY_EXISTING ~spwi724.spl~ ~override/d5_conj6.spl~
+	IF_EXISTS
+	COPY_EXISTING ~%sr_ms7%.spl~ ~override/d5_conj6.spl~
 		WRITE_LONG 0x34 6
+	IF_EXISTS
+	COPY_EXISTING ~%sr_ms8%.spl~ ~override/d5_conj7.spl~
+		WRITE_LONG 0x34 7
+	IF_EXISTS
 		
 	//Add new abilities to Bonus Spells
 	COPY_EXISTING ~QDMG+CON.SPL~ ~override~ 
@@ -518,6 +570,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN //SR
 		LPF ADD_SPELL_EFFECT INT_VAR opcode=171 target=1 timing=9 STR_VAR resource= ~D5_CONJ4~ END 
 		LPF ADD_SPELL_EFFECT INT_VAR opcode=171 target=1 timing=9 STR_VAR resource= ~D5_CONJ5~ END 
 		LPF ADD_SPELL_EFFECT INT_VAR opcode=171 target=1 timing=9 STR_VAR resource= ~D5_CONJ6~ END 
+		LPF ADD_SPELL_EFFECT INT_VAR opcode=171 target=1 timing=9 STR_VAR resource= ~D5_CONJ7~ END 
 	
 	//Updating description
 	ACTION_GET_STRREF str_conjurer conjurer
