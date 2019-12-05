@@ -529,94 +529,94 @@ COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5ssplz.spl~
 //
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src1a.spl~ BEGIN
   ACTION_FOR_EACH let IN ~a~ ~b~ ~c~ ~d~ ~e~ ~f~ ~g~ ~h~ ~i~ ~j~ ~k~ ~l~ ~m~ ~n~ ~o~ ~p~ ~q~ ~r~ ~s~ ~t~ BEGIN
-	COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src1%let%.spl~
+	COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src1%let%.spl~
 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 8) parameter2 = (134 + (0x10000 * 1)) timing = 9 END
 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5src1%let%~ END
   END
 END
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src2a.spl~ BEGIN
   ACTION_FOR_EACH let IN ~a~ ~b~ ~c~ ~d~ ~e~ ~f~ ~g~ ~h~ ~i~ ~j~ ~k~ ~l~ ~m~ ~n~ ~o~ ~p~ ~q~ ~r~ ~s~ ~t~ BEGIN
-	COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src2%let%.spl~
+	COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src2%let%.spl~
 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 12) parameter2 = (134 + (0x10000 * 1)) timing = 9 END
 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5src2%let%~ END
   END
 END
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src3a.spl~ BEGIN
   ACTION_FOR_EACH let IN ~a~ ~b~ ~c~ ~d~ ~e~ ~f~ ~g~ ~h~ ~i~ ~j~ ~k~ ~l~ ~m~ ~n~ ~o~ ~p~ ~q~ ~r~ ~s~ ~t~ BEGIN
-	COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src3%let%.spl~
+	COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src3%let%.spl~
 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 16) parameter2 = (134 + (0x10000 * 1)) timing = 9 END
 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5src3%let%~ END
   END
 END
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src4a.spl~ BEGIN
   ACTION_FOR_EACH let IN ~a~ ~b~ ~c~ ~d~ ~e~ ~f~ ~g~ ~h~ ~i~ ~j~ ~k~ ~l~ ~m~ ~n~ ~o~ ~p~ ~q~ ~r~ ~s~ ~t~ BEGIN
-	COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src4%let%.spl~
+	COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src4%let%.spl~
 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 20) parameter2 = (134 + (0x10000 * 1)) timing = 9 END
 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5src4%let%~ END
   END
 END
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src5a.spl~ BEGIN
   ACTION_FOR_EACH let IN ~a~ ~b~ ~c~ ~d~ ~e~ ~f~ ~g~ ~h~ ~i~ ~j~ ~k~ ~l~ ~m~ ~n~ ~o~ ~p~ ~q~ ~r~ ~s~ ~t~ BEGIN
-	COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src5%let%.spl~
+	COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src5%let%.spl~
 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 8) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5src5%let%~ END
   END
 END
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src6a.spl~ BEGIN
   ACTION_FOR_EACH let IN ~a~ ~b~ ~c~ ~d~ ~e~ ~f~ ~g~ ~h~ ~i~ ~j~ ~k~ ~l~ ~m~ ~n~ ~o~ ~p~ ~q~ ~r~ ~s~ ~t~ BEGIN
-	COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src6%let%.spl~
+	COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src6%let%.spl~
 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 12) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5src6%let%~ END
   END
 END
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src7a.spl~ BEGIN
   ACTION_FOR_EACH let IN ~a~ ~b~ ~c~ ~d~ ~e~ ~f~ ~g~ ~h~ ~i~ ~j~ ~k~ ~l~ ~m~ ~n~ ~o~ ~p~ ~q~ ~r~ ~s~ ~t~ BEGIN
-	COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src7%let%.spl~
+	COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src7%let%.spl~
 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 16) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5src7%let%~ END
   END
 END
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src8a.spl~ BEGIN
   ACTION_FOR_EACH let IN ~a~ ~b~ ~c~ ~d~ ~e~ ~f~ ~g~ ~h~ ~i~ ~j~ ~k~ ~l~ ~m~ ~n~ ~o~ ~p~ ~q~ ~r~ ~s~ ~t~ BEGIN
-	COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src8%let%.spl~
+	COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src8%let%.spl~
 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 20) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5src8%let%~ END
   END
 END
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src9a.spl~ BEGIN
   ACTION_FOR_EACH let IN ~a~ ~b~ ~c~ ~d~ ~e~ ~f~ ~g~ ~h~ ~i~ ~j~ ~k~ ~l~ ~m~ ~n~ ~o~ ~p~ ~q~ ~r~ ~s~ ~t~ BEGIN
-	COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src9%let%.spl~
+	COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src9%let%.spl~
 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 24) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5src9%let%~ END
   END
 END
 
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src-1.spl~ BEGIN
- COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src-1.spl~
+ COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src-1.spl~
    LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 8) parameter2 = (134 + (0x10000 * 1)) timing = 1 END
 END
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src-2.spl~ BEGIN
- COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src-2.spl~
+ COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src-2.spl~
    LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 12) parameter2 = (134 + (0x10000 * 1)) timing = 1 END
 END
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src-3.spl~ BEGIN
- COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src-3.spl~
+ COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src-3.spl~
    LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 16) parameter2 = (134 + (0x10000 * 1)) timing = 1 END
 END
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src-4.spl~ BEGIN
- COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src-4.spl~
+ COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src-4.spl~
    LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 20) parameter2 = (134 + (0x10000 * 1)) timing = 1 END
 END
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src-5.spl~ BEGIN
- COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src-5.spl~
+ COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src-5.spl~
    LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 8) parameter2 = (108 + (0x10000 * 1)) timing = 1 END
 END
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src-6.spl~ BEGIN
- COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src-6.spl~
+ COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src-6.spl~
    LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 12) parameter2 = (108 + (0x10000 * 1)) timing = 1 END
 END
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src-7.spl~ BEGIN
- COPY ~might_and_guile/lib/d5_base.spl~ ~override/d5src-7.spl~
+ COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src-7.spl~
    LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 16) parameter2 = (108 + (0x10000 * 1)) timing = 1 END
 END
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src-8.spl~ BEGIN
@@ -952,16 +952,16 @@ END
 //multisorc no get innate sequencers__________________________________________________
 //
 ACTION_IF FILE_EXISTS_IN_GAME ~d5adsq1m.spl~ BEGIN
-  CREATE SPL ~d5msnseq~
-  COPY_EXISTING ~d5msnseq.spl~ ~override~
+  CREATE SPL ~d5msnsq~
+  COPY_EXISTING ~d5msnsq.spl~ ~override~
 	LPF ADD_SPELL_HEADER INT_VAR target = 1 END 
-  COPY_EXISTING ~d5msnseq.spl~ ~override~
+  COPY_EXISTING ~d5msnsq.spl~ ~override~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5adsq1m~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5adsq2m~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5adsq3m~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5adcntm~ END
 
-  APPEND ~d5sorc.2da~ ~NO_META     AP_D5MSNSEQ ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+  APPEND ~d5sorc.2da~ ~NO_META     AP_D5MSNSQ  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
 END
 
 
