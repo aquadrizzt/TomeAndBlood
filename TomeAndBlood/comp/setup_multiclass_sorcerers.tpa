@@ -2,7 +2,7 @@
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 //
-//							MULTICLASS SORCERERS
+//								MULTICLASS SORCERERS
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 
@@ -424,7 +424,7 @@ COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5w206.spl~
 COPY ~tomeandblood/lib/d5_base.spl~ ~override/d50wspl.spl~
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~SPWI110~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~SPWI908~ END
-  PATCH_IF !(MOD_IS_INSTALLED ~TomeAndBlood.tp2~ ~135~) BEGIN
+  PATCH_IF !(MOD_IS_INSTALLED ~TomeAndBlood.tp2~ ~55~) BEGIN
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~SPWI420~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~SPWI710~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~SPWI809~ END
@@ -639,7 +639,7 @@ SRCSLOTS    ****        ****        ****        AP_D5SRC2C  ****        AP_D5SRC
 COPY_EXISTING ~SPLSRCKN.2da~ ~override/d5splskn.2da~ //save a copy of the existing sorcerer spell progression 
 */
 
-
+/*
 //set up spell learn UI screens_______________________________________________________
 //
 INCLUDE ~tomeandblood/lib/sequencer_menu.tpa~
@@ -660,25 +660,22 @@ LAF CREATE_SEQUENCER_MENU
 	label = ~Select a spell to learn~
 	subspell = ~M~
 END
-
+*/
 
 //clone arcane spells_________________________________________________________________
 //
-//... to innates, with added 146 casting subspells with 233 reducing level 1-9 stats (see below)
-//... and to blank mage spells w/ 146/148 casting innates
-//... and to blank cleric spells w/ nuthin'
-
-// make a little arcane spell that does nothing; cast it from every bard spell
-// ... to trigger cowled wizards
-// COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5swiz.spl~
-
 <<<<<<<< d5/d5wclons.2da
 2DA V1.0 
 SPLRES
 		206		LEARN		EFF		INNATE	DISPLAY
 >>>>>>>> 
-
 COPY ~d5/d5wclons.2da~ ~override/d5wclons.2da~ 
+
+<<<<<<<<  d5/d5msorc.2da
+2DA V1.0
+****
+            	     ResRef   Type>>>>>>>>
+COPY ~d5/d5msorc.2da~ ~override/d5msorc.2da~
 
 COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
  PATCH_IF FILE_EXISTS_IN_GAME ~%SOURCE_RES%.spl~ BEGIN
@@ -690,7 +687,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
 	SNPRINT (0 - 3) spell_num ~%SOURCE_RES%~
 	SET go = 1
 	PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI420~) || (~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI710~) || (~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI809~) || (~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI617~) BEGIN
-	  PATCH_IF NOT (MOD_IS_INSTALLED ~TomeAndBlood.tp2~ ~135~) BEGIN
+	  PATCH_IF NOT (MOD_IS_INSTALLED ~TomeAndBlood.tp2~ ~55~) BEGIN
 		SET go = 0
 	  END
 	END	
@@ -718,17 +715,43 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
 		TEXT_SPRINT real_spell ~%SOURCE_RES%~
 		INNER_ACTION BEGIN
 		  APPEND ~d5wclons.2da~ ~%SOURCE_RES%	%206_spell%	%learn_spell%	%spell_eff%	%innate_spell%	%real_spell% ~
+		  APPEND ~d5msorc.2da~ ~sorcerer	%SOURCE_RES%	3~
 // make innates with cloned spell effects
 		  ACTION_IF NOT FILE_EXISTS_IN_GAME ~%innate_spell%.spl~ BEGIN
 			COPY_EXISTING ~%SOURCE_RES%.spl~ ~override/%innate_spell%.spl~
 			  WRITE_SHORT 0x1c 4
-			  PATCH_IF MOD_IS_INSTALLED ~tomeandblood.tp2~ ~142~ BEGIN
-			   PATCH_IF NOT (%spell_level%) = 1 BEGIN
-				LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~d5src-%spell_level%~ END
-			   END
+			  WRITE_LONG 0x34 spell_level
+			  READ_LONG 0x64 abil_offset
+			  READ_SHORT 0x68 abil_number
+			  READ_BYTE (%abil_offset% + 0x0c) abil_target					
+			  READ_SHORT (%abil_offset% + 0x0e) abil_range
+			  READ_LONG 0x6a eff_offset
+			  WHILE (%abil_number% > 0) BEGIN
+				SET abil_number = (%abil_number% - 1)
+				WRITE_SHORT (%abil_offset% + 0x26 + (0x28 * %abil_number%)) 1
 			  END
-			  PATCH_IF NOT MOD_IS_INSTALLED ~tomeandblood.tp2~ ~142~ BEGIN
+			  LPF DELETE_EFFECT END
+			  PATCH_IF (%abil_target% = 4) BEGIN
+				LPF ADD_SPELL_EFFECT INT_VAR opcode = 148 target = 1 power = %spell_level% parameter1 = 0 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%real_spell%~ END
+				PATCH_IF (%abil_range% < 35) BEGIN
+				  PATCH_IF (%abil_range% > 4) BEGIN
+					LPF ALTER_SPELL_HEADER INT_VAR range = (%abil_range% - 3) END
+				  END
+				  PATCH_IF (%abil_range% < 5) BEGIN
+					LPF ALTER_SPELL_HEADER INT_VAR target = 5 END	
+				  END
+				END
+			  END
+			  ELSE BEGIN
+				LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 2 power = %spell_level% parameter2 = 1 timing = 9 STR_VAR resource = EVAL ~%real_spell%~ END
+			  END
+			  PATCH_IF !(MOD_IS_INSTALLED ~tomeandblood.tp2~ ~62~) BEGIN
 				LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~d5src-%spell_level%~ END
+			  END
+			  PATCH_IF (MOD_IS_INSTALLED ~tomeandblood.tp2~ ~62~) BEGIN
+				PATCH_IF (%spell_level% > 1) BEGIN
+				  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~d5src-%spell_level%~ END
+				END
 			  END
 			  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5ssplz~ END
 		  END
@@ -793,6 +816,26 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
  END
 BUT_ONLY
 
+//set up spell learn UI screens_______________________________________________________
+//
+INCLUDE ~tomeandblood/lib/sequencer_menu.tpa~
+
+LAF CREATE_SEQUENCER_MENU 
+  INT_VAR 
+	name = RESOLVE_STR_REF (~Spell Selection~)
+	tip = RESOLVE_STR_REF (~Spell Selection~)
+	desc = RESOLVE_STR_REF (~This ability allows you to learn new spells~)
+  STR_VAR 
+	resref = ~d5msorc~
+	spelllist = ~d5msorc~
+	spelltable = ~QD_SPLSRCKN~
+	icon = ~spcl919b~
+	title = ~Spell Selection~
+	label = ~Select a spell to learn~
+	subspell = ~M~
+END
+
+COPY_EXISTING ~d5msorc.2da~ ~override/d5msorcX.2da~
 
 COPY ~tomeandblood/data/multi_sorcerers/d5msorc.itm~ ~override~			//	learn spells .itm
   SAY NAME1 @17021
@@ -805,7 +848,7 @@ COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5msor1.spl~
   SAY NAME1 @17050
   SAY UNIDENTIFIED_DESC @17050
   WRITE_SHORT 0x1c 4
-  LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~spcl919b~ END
+  LPF ALTER_SPELL_HEADER INT_VAR target = 5 location = 4 STR_VAR icon = ~spcl919b~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 143 target = 1 parameter1 = 14 timing = 9 STR_VAR resource = ~d5msorc~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5msor1~ END
 
@@ -819,7 +862,7 @@ APPEND ~d5sorc.2da~ ~NO_WSPLS    AP_D50WSPL  ****        ****        ****       
 
 //apply EFF protections_______________________________________________________________
 //
-APPEND ~d5sorc.2da~ ~NO_WSPLS    AP_D5W206  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+APPEND ~d5sorc.2da~ ~NO_WSPLS    AP_D5W206   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
 
 
 //daily spell slot refresh____________________________________________________________
@@ -894,7 +937,7 @@ COPY ~TomeAndBlood/data/metamagic/spwi809.spl~ ~override/d5sseq3.spl~
 
 //make sequencer/contingency scrolls unusable by multi sorcerers_______________________
 //
-ACTION_IF !(MOD_IS_INSTALLED ~TomeAndBlood.tp2~ ~133~) AND !(MOD_IS_INSTALLED ~TomeAndBlood.tp2~ ~134~) BEGIN
+ACTION_IF !(MOD_IS_INSTALLED ~TomeAndBlood.tp2~ ~53~) AND !(MOD_IS_INSTALLED ~TomeAndBlood.tp2~ ~54~) BEGIN
   ACTION_IF FILE_EXISTS_IN_GAME ~scrl9q.itm~ BEGIN
 	COPY_EXISTING ~scrl9q.itm~ ~override~
 	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 319 parameter1 = %fighter_sorcerer_code% parameter2 = 9 power = 0 timing = 2 END
@@ -902,7 +945,7 @@ ACTION_IF !(MOD_IS_INSTALLED ~TomeAndBlood.tp2~ ~133~) AND !(MOD_IS_INSTALLED ~T
 	  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 319 parameter1 = %sorcerer_thief_code% parameter2 = 9 power = 0 timing = 2 END
   END
 END
-ACTION_IF !(MOD_IS_INSTALLED ~TomeAndBlood.tp2~ ~133~) AND !(MOD_IS_INSTALLED ~TomeAndBlood.tp2~ ~134~) AND !(MOD_IS_INSTALLED ~TomeAndBlood.tp2~ ~135~) BEGIN
+ACTION_IF !(MOD_IS_INSTALLED ~TomeAndBlood.tp2~ ~53~) AND !(MOD_IS_INSTALLED ~TomeAndBlood.tp2~ ~54~) AND !(MOD_IS_INSTALLED ~TomeAndBlood.tp2~ ~55~) BEGIN
   ACTION_FOR_EACH meta_scroll IN ~scrl6p~ ~scrl8l~ ~scrl9d~ ~scrl7u~ BEGIN
 	ACTION_IF FILE_EXISTS_IN_GAME ~%meta_scroll%.itm~ BEGIN
 	  COPY_EXISTING ~%meta_scroll%.itm~ ~override~
@@ -913,7 +956,7 @@ ACTION_IF !(MOD_IS_INSTALLED ~TomeAndBlood.tp2~ ~133~) AND !(MOD_IS_INSTALLED ~T
   END
 END
 
-ACTION_IF (MOD_IS_INSTALLED ~TomeAndBlood.tp2~ ~135~) BEGIN
+ACTION_IF (MOD_IS_INSTALLED ~TomeAndBlood.tp2~ ~55~) BEGIN
   ACTION_IF FILE_EXISTS_IN_GAME ~M_d5meta.lua~ BEGIN
   	APPEND ~M_d5meta.lua~ ~mageBookStrings['D5W4420'] = mageBookStrings['SPWI420'] -- Minor Sequencer clone, replace resource, keep quotes
 mageBookStrings['D5W4617'] = mageBookStrings['SPWI710'] -- Spell Sequencer
