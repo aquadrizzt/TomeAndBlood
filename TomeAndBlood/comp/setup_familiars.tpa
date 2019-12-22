@@ -100,8 +100,6 @@ END 	//	end define function
 
 DEFINE_ACTION_FUNCTION familiar_choice BEGIN 
 
-INCLUDE ~tomeandblood/lib/add_spellstate.tpa~
-
 INCLUDE ~tomeandblood/lib/SEQUENCER_MENU.tpa~
  
 ACTION_IF (FILE_CONTAINS_EVALUATED (~projectl.ids~ ~[ %TAB%]INAREAPA[ %TAB%%LNL%%MNL%%WNL%]~)) BEGIN
@@ -340,8 +338,6 @@ lightning:
 */
 
 DEFINE_ACTION_FUNCTION familiar_changes BEGIN 
-
-INCLUDE ~tomeandblood/lib/add_spellstate.tpa~
 
 INCLUDE ~tomeandblood/lib/spell_evasion.tpa~
 
@@ -1134,9 +1130,6 @@ Maybe use an ability, with the spell learning UI, instead.  Choose from known sp
 */
 
 DEFINE_ACTION_FUNCTION imbue_familiars BEGIN
-
-INCLUDE ~tomeandblood/lib/add_item_header.tpa~
-INCLUDE ~tomeandblood/lib/add_spellstate.tpa~
 
 ACTION_IF (FILE_CONTAINS_EVALUATED (~projectl.ids~ ~[ %TAB%]INAREAPA[ %TAB%%LNL%%MNL%%WNL%]~)) BEGIN
   OUTER_SET party_proj = (IDS_OF_SYMBOL (~projectl~ ~INAREAPA~)) + 1

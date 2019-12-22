@@ -1,24 +1,16 @@
 BACKUP ~TomeAndBlood/backup~
 AUTHOR ~aquadrizzt@gmail.com~
-VERSION ~0.8.44~ 
+VERSION ~0.8.45~ 
 
 ALWAYS
 
-	INCLUDE ~TomeAndBlood/lib/add_spell_header.tpa~
-
-	INCLUDE ~TomeAndBlood/lib/add_spellstate.tpa~
+	INCLUDE ~TomeAndBlood/lib/misc_tnb_functions.tpa~
 
 	INCLUDE ~TomeAndBlood/lib/fl#add_kit_ee.tpa~
 
-	INCLUDE ~TomeAndBlood/lib/joinable_npcs.tpa~
-
 	INCLUDE ~TomeAndBlood/lib/hla_actions.tpa~
 
-	INCLUDE ~TomeAndBlood/lib/fix_2da_cols.tpa~
-
-	COPY_EXISTING ~kitlist.2da~ ~override~
-	  LPF 2DA_MISSING_COLS INT_VAR cols = 10 END
-	BUT_ONLY
+	LAF fix_kitlist_missing_ids END
 
 	INCLUDE ~TomeAndBlood/comp/core.tpa~ 
 	
