@@ -1,6 +1,6 @@
 BACKUP ~TomeAndBlood/backup~
 AUTHOR ~aquadrizzt@gmail.com~
-VERSION ~0.8.45~ 
+VERSION ~0.8.46~ 
 
 ALWAYS
 
@@ -95,6 +95,20 @@ INCLUDE ~TomeAndBlood/comp/setup_spell_tweaks.tpa~
 
 LAF  END
 */
+
+// -----------------------------
+// 16: SPELL TWEAKS: REVISED IDENTIFY SPELL
+// -----------------------------
+BEGIN @16
+DESIGNATED 16
+GROUP @5
+
+COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_identify.qd~ //detection for this component 
+
+INCLUDE ~TomeAndBlood/comp/setup_spell_tweaks.tpa~ 
+
+LAF new_identify END
+
 
 // -----------------------------
 // 20: REVISED DRAGON DISCIPLES
@@ -377,7 +391,7 @@ GROUP @7
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_l1cantrips.qd~ //detection for this component 
 
-INCLUDE ~TomeAndBlood/comp/setup_lvl_one_cantrips.tpa~
+INCLUDE ~TomeAndBlood/comp/setup_cantrips.tpa~
 
 LAF level_1_cantrips END
 
@@ -390,7 +404,7 @@ GROUP @7
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_cantwand.qd~ //detection for this component 
 
-INCLUDE ~TomeAndBlood/comp/setup_cantrip_wands.tpa~
+INCLUDE ~TomeAndBlood/comp/setup_cantrips.tpa~
 
 LAF cantrip_wands END
 
@@ -470,20 +484,22 @@ INCLUDE ~TomeAndBlood/comp/setup_ability_bonuses.tpa~
 
 LAF ability_bonuses END
 
- 
+
+/*
 // -----------------------------
-// 79: SPELL SELECTION DIALOG
+// 77: MANA SORCERER
 // -----------------------------
-BEGIN @79 
-DESIGNATED 79
+BEGIN @77
+DESIGNATED 77
 REQUIRE_PREDICATE (FILE_EXISTS_IN_GAME ~enginest.2da~) @3
 GROUP @6
 
-COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_sstd.qd~ //detection for this component 
+COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_mnsrc.qd~ //detection for this component 
 
-INCLUDE ~TomeAndBlood/comp/setup_spell_select_dlg.tpa~
+INCLUDE ~TomeAndBlood/comp/setup_mana_sorcerer.tpa~
 
-LAF spell_select_dialogue END
+LAF mana_sorcerer END
+*/
 
 
 // -----------------------------

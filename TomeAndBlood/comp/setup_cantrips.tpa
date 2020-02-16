@@ -482,3 +482,824 @@ END
 		 	
 END 	//	end define function
 //____________________________________________________________________________________
+
+
+
+//____________________________________________________________________________________
+//____________________________________________________________________________________
+
+
+
+// -----------------------------
+// LEVEL ONE CANTRIPS by SUBTLEDOCTOR 
+// -----------------------------
+
+DEFINE_ACTION_FUNCTION level_1_cantrips BEGIN 
+
+INCLUDE ~TomeAndBlood/data/core/tnb_kit_list.tpa~ 
+
+////////////////////////////////////////////////////////////////////////////////////
+COPY ~TomeAndBlood/data/level_one_cantrips/mxsplbrd.2da~ ~override~
+COPY ~TomeAndBlood/data/level_one_cantrips/mxsplwiz.2da~ ~override~
+COPY ~TomeAndBlood/data/level_one_cantrips/mxsplsrc.2da~ ~override~
+COPY ~TomeAndBlood/data/level_one_cantrips/mxspldd.2da~ ~override~
+////////////////////////////////////////////////////////////////////////////////////
+
+COPY ~TomeAndBlood/data/level_one_cantrips/d5wakeup.spl~ ~override~
+
+//Grease: no stacking with itself
+//
+COPY ~TomeAndBlood/data/level_one_cantrips/spwi101.spl~ ~override~
+  SAY NAME1 @7011
+  SAY UNIDENTIFIED_DESC @7012
+
+//Burning Hands: reduced damage
+//
+COPY ~TomeAndBlood/data/level_one_cantrips/spwi103.spl~ ~override~
+  SAY NAME1 @7031
+  SAY UNIDENTIFIED_DESC @7032
+
+//Charm Person: one try only, victim cannot attack
+//
+COPY ~TomeAndBlood/data/level_one_cantrips/spwi104.spl~ ~override~
+  SAY NAME1 @7041
+  SAY UNIDENTIFIED_DESC @7042
+
+//Color Spray: replace Sleep w/ Slow
+//
+ACTION_IF !(FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~) BEGIN
+  COPY_EXISTING ~spwi105.spl~ ~override~
+	SAY UNIDENTIFIED_DESC @7052
+	LPF ALTER_EFFECT INT_VAR match_opcode = 39 opcode = 40 duration = 12 END
+	LPF ALTER_EFFECT INT_VAR match_dicenumber = 4 dicenumber = 0 END
+	LPF DELETE_EFFECT INT_VAR match_opcode = 139 END
+END
+ACTION_IF (FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~) BEGIN
+  COPY_EXISTING ~spwi105.spl~ ~override~
+	LPF ALTER_EFFECT INT_VAR match_duration = 18 duration = 12 END
+	LPF ALTER_EFFECT INT_VAR match_duration = 30 duration = 18 END
+END
+
+//Blindness: change to Dazzle (very short duration)
+//
+COPY ~TomeAndBlood/data/level_one_cantrips/spwi106.spl~ ~override~
+  SAY NAME1 @7061
+  SAY UNIDENTIFIED_DESC @7062
+
+//Friends / Monster Summoning: move to 2nd level if no SR, change to rabbit if SR
+//
+ACTION_IF !(FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~) BEGIN
+  COPY_EXISTING ~spwi107.spl~ ~override~
+  ADD_SPELL ~override/spwi107.spl~ 2 2 WIZARD_FRIENDS
+	WRITE_LONG 0x34 2
+	READ_LONG 0x50 "valid"
+	PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+		READ_STRREF 0x50 "desc"
+		INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+			REPLACE_TEXTUALLY ~Level: 1~ ~Level: 2~
+		END
+		SAY_EVALUATED 0x50 ~%new_desc%~
+	END
+  LAF RES_NUM_OF_SPELL_NAME
+	STR_VAR spell_name = ~WIZARD_FRIENDS~
+	RET spell_res
+  END
+  ACTION_IF (FILE_EXISTS_IN_GAME ~scrl72.itm~) BEGIN
+	COPY_EXISTING ~scrl72.itm~ ~override~
+		WRITE_LONG 0x34 200
+		LPF ALTER_EFFECT INT_VAR match_opcode = 146 STR_VAR resource = EVAL ~%spell_res%~ END
+		LPF ALTER_EFFECT INT_VAR match_opcode = 147 STR_VAR resource = EVAL ~%spell_res%~ END
+		LPF ALTER_EFFECT INT_VAR match_opcode = 148 STR_VAR resource = EVAL ~%spell_res%~ END
+		READ_LONG 0x54 "valid"
+		PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+			READ_STRREF 0x54 "desc"
+			INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+				REPLACE_TEXTUALLY ~Level: 1~ ~Level: 2~
+			END
+			SAY_EVALUATED 0x54 ~%new_desc%~
+		END
+	BUT_ONLY
+  END
+  ACTION_IF (GAME_IS ~bgee bg2ee eet~) BEGIN
+	APPEND ~hidespl.2da~ ~spwi107	1		0		0~
+  END
+  ACTION_IF (GAME_IS ~iwdee~) BEGIN
+	APPEND ~hidespl.2da~ ~spwi107	1		0~
+  END
+END
+ACTION_IF (FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~) BEGIN
+  COPY ~TomeAndBlood/data/level_one_cantrips/spwi107.spl~ ~override~
+	SAY NAME1 @7073
+	SAY UNIDENTIFIED_DESC @7074
+	WRITE_ASCII 0x3a ~d5_rabb~ #8
+	WRITE_ASCII 0x76 ~d5_rabb~ #8
+  COPY ~TomeAndBlood/data/level_one_cantrips/d5_rabb.cre~ ~override~
+	SAY NAME1 @7075
+	WRITE_BYTE 0x275 20
+  COPY ~TomeAndBlood/data/level_one_cantrips/d5_rabb.bam~ ~override~
+  ACTION_IF (FILE_EXISTS_IN_GAME ~scrl72.itm~) BEGIN
+	COPY_EXISTING ~scrl72.itm~ ~override~
+		SAY NAME2 @7073
+		SAY IDENTIFIED_DESC @7074
+	BUT_ONLY
+  END
+END
+
+//Pro. Petrification: move to 2nd level
+//
+COPY_EXISTING ~spwi108.spl~ ~override~
+ADD_SPELL ~override/spwi108.spl~ 2 2 WIZARD_PROTECTION_FROM_PETRIFICATION
+	WRITE_LONG 0x34 2
+	READ_LONG 0x50 "valid"
+	PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+		READ_STRREF 0x50 "desc"
+		INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+			REPLACE_TEXTUALLY ~Level: 1~ ~Level: 2~
+		END
+		SAY_EVALUATED 0x50 ~%new_desc%~
+	END
+LAF RES_NUM_OF_SPELL_NAME
+	STR_VAR spell_name = ~WIZARD_PROTECTION_FROM_PETRIFICATION~
+	RET spell_res
+END
+ACTION_IF (FILE_EXISTS_IN_GAME ~scrl73.itm~) BEGIN
+	COPY_EXISTING ~scrl73.itm~ ~override~
+		WRITE_LONG 0x34 200
+		LPF ALTER_EFFECT INT_VAR match_opcode = 146 STR_VAR resource = EVAL ~%spell_res%~ END
+		LPF ALTER_EFFECT INT_VAR match_opcode = 147 STR_VAR resource = EVAL ~%spell_res%~ END
+		LPF ALTER_EFFECT INT_VAR match_opcode = 148 STR_VAR resource = EVAL ~%spell_res%~ END
+		READ_LONG 0x54 "valid"
+		PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+			READ_STRREF 0x54 "desc"
+			INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+				REPLACE_TEXTUALLY ~Level: 1~ ~Level: 2~
+			END
+			SAY_EVALUATED 0x54 ~%new_desc%~
+		END
+	BUT_ONLY
+END
+ACTION_IF (GAME_IS ~bgee bg2ee eet~) BEGIN
+	APPEND ~hidespl.2da~ ~spwi108	1		0		0~
+END
+ACTION_IF (GAME_IS ~iwdee~) BEGIN
+	APPEND ~hidespl.2da~ ~spwi108	1		0~
+END
+
+//SR Dimension Jump: move to 2nd level
+//
+ACTION_IF (FILE_CONTAINS_EVALUATED (~SPELL.IDS~ ~[ %TAB%]WIZARD_DIMENSION_JUMP[ %TAB%%LNL%%MNL%%WNL%]~)) BEGIN
+  LAF RES_NUM_OF_SPELL_NAME
+	STR_VAR spell_name = ~WIZARD_DIMENSION_JUMP~
+	RET spell_res
+  END
+  COPY_EXISTING ~%spell_res%.spl~ ~override~
+  ADD_SPELL ~override/%spell_res%.spl~ 2 2 WIZARD_DIMENSION_JUMP
+	WRITE_LONG 0x34 2
+	READ_LONG 0x50 "valid"
+	PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+		READ_STRREF 0x50 "desc"
+		INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+			REPLACE_TEXTUALLY ~Level: 1~ ~Level: 2~
+		END
+		SAY_EVALUATED 0x50 ~%new_desc%~
+	END
+  ACTION_IF (FILE_EXISTS_IN_GAME ~scrl1v.itm~) BEGIN
+	COPY_EXISTING ~scrl1v.itm~ ~override~
+		WRITE_LONG 0x34 200
+		LPF ALTER_EFFECT INT_VAR match_opcode = 146 STR_VAR resource = EVAL ~%spell_res%~ END
+		LPF ALTER_EFFECT INT_VAR match_opcode = 147 STR_VAR resource = EVAL ~%spell_res%~ END
+		LPF ALTER_EFFECT INT_VAR match_opcode = 148 STR_VAR resource = EVAL ~%spell_res%~ END
+		READ_LONG 0x54 "valid"
+		PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+			READ_STRREF 0x54 "desc"
+			INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+				REPLACE_TEXTUALLY ~Level: 1~ ~Level: 2~
+			END
+			SAY_EVALUATED 0x54 ~%new_desc%~
+		END
+	BUT_ONLY
+  END
+  ACTION_IF (GAME_IS ~bgee bg2ee eet~) BEGIN
+	APPEND ~hidespl.2da~ ~spwi109	1		0		0~
+  END
+  ACTION_IF (GAME_IS ~iwdee~) BEGIN
+	APPEND ~hidespl.2da~ ~spwi109	1		0~
+  END
+END
+
+//Identify: make this a 2nd-level spell and use Bubb's new method to scale with levels
+//  (if not already done earlier)
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~qdtnb_identify.qd~) BEGIN
+
+  INCLUDE ~TomeAndBlood/lib/b3identify.tph~
+  LAF B3_IDENTIFY_INSTALL END
+
+  ACTION_IF (GAME_IS ~bgee bg2ee eet~) BEGIN
+	APPEND ~hidespl.2da~ ~spwi110	1		0		0~
+  END
+  ACTION_IF (GAME_IS ~iwdee~) BEGIN
+	APPEND ~hidespl.2da~ ~spwi110	1		0~
+  END
+  COPY_EXISTING ~spell.ids~ ~override~
+	REPLACE_TEXTUALLY ~WIZARD_IDENTIFY~ ~WIZARD_IDENTIFY_OLD~
+
+//COPY ~TomeAndBlood/data/spell_tweaks/d5tb110.spl~ ~override~
+  ADD_SPELL ~TomeAndBlood/data/spell_tweaks/d5tb110.spl~ 2 2 WIZARD_IDENTIFY
+//COPY_EXISTING ~spell.ids~ ~override~
+//	REPLACE_TEXTUALLY ~WIZARD_IDENTIFY_TNB~ ~WIZARD_IDENTIFY~
+  LAF RES_NUM_OF_SPELL_NAME
+	STR_VAR spell_name = ~WIZARD_IDENTIFY~
+	RET spell_res
+  END
+  COPY_EXISTING ~%spell_res%.spl~ ~override~
+	SAY NAME1 @7103
+	SAY UNIDENTIFIED_DESC @7104
+
+  COPY ~TomeAndBlood/data/spell_tweaks/d5tb110a.spl~ ~override~
+  COPY ~TomeAndBlood/data/spell_tweaks/d5tb110b.spl~ ~override~
+  COPY ~TomeAndBlood/data/spell_tweaks/d5tb110c.spl~ ~override~
+  COPY ~TomeAndBlood/data/spell_tweaks/d5tb110d.spl~ ~override~
+
+  LAF B3_IDENTIFY_REGISTER INT_VAR uses = 1 STR_VAR resref = ~d5tb110a~ END
+  LAF B3_IDENTIFY_REGISTER INT_VAR uses = 2 STR_VAR resref = ~d5tb110b~ END
+  LAF B3_IDENTIFY_REGISTER INT_VAR uses = 3 STR_VAR resref = ~d5tb110c~ END
+  LAF B3_IDENTIFY_REGISTER INT_VAR uses = 4 STR_VAR resref = ~d5tb110d~ END
+
+  ACTION_IF FILE_EXISTS_IN_GAME ~scrl75.itm~ THEN BEGIN
+	COPY_EXISTING ~scrl75.itm~ ~override~
+		LPF ALTER_ITEM_HEADER INT_VAR target = 5 END
+		SAY NAME2 @7103
+		SAY IDENTIFIED_DESC @7104
+		LPF ALTER_EFFECT INT_VAR match_opcode = 146 STR_VAR resource = EVAL ~%spell_res%~ END
+		LPF ALTER_EFFECT INT_VAR match_opcode = 147 STR_VAR resource = EVAL ~%spell_res%~ END
+	BUT_ONLY
+  END
+
+END
+
+//Infravision/True Strike: move to 2nd level if SR installed
+//
+// ... or maybe just set casting time = 9?
+//
+/*
+ACTION_IF (FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~) BEGIN
+  COPY_EXISTING ~spwi111.spl~ ~override~
+  ADD_SPELL ~override/spwi111.spl~ 2 2 WIZARD_INFRAVISION
+	WRITE_LONG 0x34 2
+	READ_LONG 0x50 "valid"
+	PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+		READ_STRREF 0x50 "desc"
+		INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+			REPLACE_TEXTUALLY ~Level: 1~ ~Level: 2~
+		END
+		SAY_EVALUATED 0x50 ~%new_desc%~
+	END
+  LAF RES_NUM_OF_SPELL_NAME
+	STR_VAR spell_name = ~WIZARD_INFRAVISION~
+	RET spell_res
+  END
+  ACTION_IF FILE_EXISTS_IN_GAME ~scrl76.itm~ THEN BEGIN
+	COPY_EXISTING ~scrl76.itm~ ~override~
+		WRITE_LONG 0x34 200
+		LPF ALTER_EFFECT INT_VAR match_opcode = 146 STR_VAR resource = EVAL ~%spell_res%~ END
+		LPF ALTER_EFFECT INT_VAR match_opcode = 147 STR_VAR resource = EVAL ~%spell_res%~ END
+		LPF ALTER_EFFECT INT_VAR match_opcode = 148 STR_VAR resource = EVAL ~%spell_res%~ END
+		READ_LONG 0x54 "valid"
+		PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+			READ_STRREF 0x54 "desc"
+			INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+				REPLACE_TEXTUALLY ~Level: 1~ ~Level: 2~
+			END
+			SAY_EVALUATED 0x54 ~%new_desc%~
+		END
+	BUT_ONLY
+  END
+  ACTION_IF (GAME_IS ~bgee bg2ee eet~) BEGIN
+	APPEND ~hidespl.2da~ ~spwi111	1		0		0~
+  END
+  ACTION_IF (GAME_IS ~iwdee~) BEGIN
+	APPEND ~hidespl.2da~ ~spwi111	1		0~
+  END
+END
+*/
+COPY_EXISTING ~spwi111.spl~ ~override~
+  LPF ALTER_SPELL_HEADER INT_VAR speed = 9 END
+
+//Magic Missile: move to 2nd level
+//
+COPY_EXISTING ~spwi217.spl~ ~override~
+ADD_SPELL ~override/spwi217.spl~ 2 2 WIZARD_AGANNAZAR_SCORCHER_TNB
+LAF RES_NUM_OF_SPELL_NAME
+	STR_VAR spell_name = ~WIZARD_AGANNAZAR_SCORCHER_TNB~
+	RET spell_res
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~scrl1b.itm~ THEN BEGIN
+  COPY_EXISTING ~scrl1b.itm~ ~override~
+	LPF ALTER_EFFECT INT_VAR match_opcode = 146 STR_VAR resource = EVAL ~%spell_res%~ END
+	LPF ALTER_EFFECT INT_VAR match_opcode = 147 STR_VAR resource = EVAL ~%spell_res%~ END
+	LPF ALTER_EFFECT INT_VAR match_opcode = 148 STR_VAR resource = EVAL ~%spell_res%~ END
+  BUT_ONLY
+END
+
+COPY ~TomeAndBlood/data/level_one_cantrips/spmagmis.bam~ ~override~
+COPY ~TomeAndBlood/data/level_one_cantrips/spwi112z.spl~ ~override/spwi217.spl~
+	SAY NAME1 @7123
+	SAY UNIDENTIFIED_DESC @7124
+COPY_EXISTING ~scrl77.itm~ ~override~
+	SAY NAME2 @7123
+	SAY IDENTIFIED_DESC @7124	
+	WRITE_LONG 0x34 200
+	LPF ALTER_EFFECT INT_VAR match_opcode = 146 STR_VAR resource = ~SPWI217~ END
+	LPF ALTER_EFFECT INT_VAR match_opcode = 147 STR_VAR resource = ~SPWI217~ END
+	LPF ALTER_EFFECT INT_VAR match_opcode = 148 STR_VAR resource = ~SPWI217~ END
+BUT_ONLY
+
+//Pro. Evil: self-targeting only
+//
+COPY_EXISTING ~spwi113.spl~ ~override~
+  LPF ALTER_SPELL_HEADER INT_VAR target = 5 END
+
+//Shield: move to 2nd level if no SR
+//
+COPY_EXISTING ~spwi114.spl~ ~override~
+  LPF CLONE_EFFECT INT_VAR match_opcode = 206 multi_match = 1 STR_VAR resource = ~SPWI118~ END
+  LPF CLONE_EFFECT INT_VAR match_opcode = 206 multi_match = 1 STR_VAR resource = ~SPWI217~ END
+BUT_ONLY
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~) BEGIN
+  ADD_SPELL ~override/spwi114.spl~ 2 2 WIZARD_SHIELD_TNB
+	WRITE_LONG 0x34 2
+	READ_LONG 0x50 "valid"
+	PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+		READ_STRREF 0x50 "desc"
+		INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+			REPLACE_TEXTUALLY ~Level: 1~ ~Level: 2~
+		END
+		SAY_EVALUATED 0x50 ~%new_desc%~
+	END
+  LAF RES_NUM_OF_SPELL_NAME
+	STR_VAR spell_name = ~WIZARD_SHIELD_TNB~
+	RET spell_res
+  END
+  ACTION_IF (FILE_EXISTS_IN_GAME ~scrl79.itm~) THEN BEGIN
+	COPY_EXISTING ~scrl79.itm~ ~override~
+		WRITE_LONG 0x34 200
+		LPF ALTER_EFFECT INT_VAR match_opcode = 146 STR_VAR resource = EVAL ~%spell_res%~ END
+		LPF ALTER_EFFECT INT_VAR match_opcode = 147 STR_VAR resource = EVAL ~%spell_res%~ END
+		LPF ALTER_EFFECT INT_VAR match_opcode = 148 STR_VAR resource = EVAL ~%spell_res%~ END
+		READ_LONG 0x54 "valid"
+		PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+			READ_STRREF 0x54 "desc"
+			INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+				REPLACE_TEXTUALLY ~Level: 1~ ~Level: 2~
+			END
+			SAY_EVALUATED 0x54 ~%new_desc%~
+		END
+	BUT_ONLY
+  END
+  ACTION_IF (GAME_IS ~bgee bg2ee eet~) BEGIN
+	APPEND ~hidespl.2da~ ~spwi114	1		0		0~
+  END
+  ACTION_IF (GAME_IS ~iwdee~) BEGIN
+	APPEND ~hidespl.2da~ ~spwi114	1		0~
+  END
+END
+
+//Shocking Grasp
+//
+ACTION_IF !(FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~) THEN BEGIN
+  COPY ~TomeAndBlood/data/level_one_cantrips/spwi115.spl~ ~override~
+	SAY NAME1 @7151
+	SAY UNIDENTIFIED_DESC @7152
+  ACTION_IF FILE_EXISTS_IN_GAME ~scrl79.itm~ THEN BEGIN
+	COPY_EXISTING ~scrl79.itm~ ~override~
+	  SAY IDENTIFIED_DESC @7152
+	BUT_ONLY
+  END
+END
+ACTION_IF (FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~) BEGIN
+  COPY_EXISTING ~spwi115.spl~ ~override~
+	SAY UNIDENTIFIED_DESC @7154
+  COPY ~TomeAndBlood/data/level_one_cantrips/spwi115d.spl~ ~override~
+  ACTION_IF (FILE_EXISTS_IN_GAME ~scrl79.itm~) BEGIN
+	COPY_EXISTING ~scrl79.itm~ ~override~
+	  SAY IDENTIFIED_DESC @7154
+	BUT_ONLY
+  END
+END
+
+//Sleep: add Drowse at 1st level, replace PW Sleep with Sleep at 2nd level
+//
+COPY ~TomeAndBlood/data/level_one_cantrips/d5wakeup.spl~ ~override~
+
+ADD_SPELL ~TomeAndBlood/data/level_one_cantrips/d5drowse.spl~ 2 1 WIZARD_DROWSE_TNB
+  SAY NAME1 @7161
+  SAY UNIDENTIFIED_DESC @7162
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~) BEGIN
+  ADD_SPELL ~TomeAndBlood/data/level_one_cantrips/spwi116.spl~ 2 2 WIZARD_SLEEP_TNB
+	WRITE_LONG 0x34 2
+	SAY NAME1 @7163
+	SAY UNIDENTIFIED_DESC @7164
+END
+ACTION_IF (FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~) BEGIN
+  COPY_EXISTING ~spwi116.spl~ ~override~
+  ADD_SPELL ~override/spwi116.spl~ 2 2 WIZARD_SLEEP_TNB
+	WRITE_LONG 0x34 2
+	READ_LONG 0x50 "valid"
+	PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+		READ_STRREF 0x50 "desc"
+		INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+			REPLACE_TEXTUALLY ~Level: 1~ ~Level: 2~
+		END
+		SAY_EVALUATED 0x50 ~%new_desc%~
+	END
+  COPY_EXISTING ~spwi116d.spl~ ~override~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 40 target = 2 timing = 0 duration = 6 resist_dispel = 0 END
+END
+
+LAF RES_NUM_OF_SPELL_NAME
+	STR_VAR spell_name = ~WIZARD_DROWSE_TNB~
+	RET spell_res
+END
+COPY_EXISTING ~%spell_res%.spl~ ~override~
+  LPF CLONE_EFFECT INT_VAR match_opcode = 206 multi_match = 1 STR_VAR resource = EVAL ~%spell_res%~ END
+COPY_EXISTING ~%spell_res%.spl~ ~override/spwi116.spl~
+COPY_EXISTING ~d5wakeup.spl~ ~override~
+	LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~%spell_res%~ END
+	LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 206 STR_VAR resource = EVAL ~%spell_res%~ END
+ACTION_IF (FILE_EXISTS_IN_GAME ~scrl81.itm~) BEGIN
+  COPY_EXISTING ~scrl81.itm~ ~override~
+	LPF ALTER_EFFECT INT_VAR match_opcode = 146 STR_VAR resource = EVAL ~%spell_res%~ END
+	LPF ALTER_EFFECT INT_VAR match_opcode = 147 STR_VAR resource = EVAL ~%spell_res%~ END
+	LPF ALTER_EFFECT INT_VAR match_opcode = 148 STR_VAR resource = EVAL ~%spell_res%~ END
+	SAY NAME2 @7161
+	SAY IDENTIFIED_DESC @7162
+  BUT_ONLY
+END
+
+LAF RES_NUM_OF_SPELL_NAME
+	STR_VAR spell_name = ~WIZARD_SLEEP_TNB~
+	RET spell_res
+END
+COPY_EXISTING ~%spell_res%.spl~ ~override~
+  LPF CLONE_EFFECT INT_VAR match_opcode = 206 multi_match = 1 STR_VAR resource = EVAL ~%spell_res%~ END
+COPY_EXISTING ~%spell_res%.spl~ ~override/spwi220.spl~
+COPY_EXISTING ~d5wakeup.spl~ ~override~
+	LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~%spell_res%~ END
+	LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 206 STR_VAR resource = EVAL ~%spell_res%~ END
+ACTION_IF (FILE_EXISTS_IN_GAME ~scrl6e.itm~) BEGIN
+  COPY_EXISTING ~scrl6e.itm~ ~override~
+	LPF ALTER_EFFECT INT_VAR match_opcode = 146 STR_VAR resource = EVAL ~%spell_res%~ END
+	LPF ALTER_EFFECT INT_VAR match_opcode = 147 STR_VAR resource = EVAL ~%spell_res%~ END
+	LPF ALTER_EFFECT INT_VAR match_opcode = 148 STR_VAR resource = EVAL ~%spell_res%~ END
+	SAY NAME2 @7163
+	SAY IDENTIFIED_DESC @7164
+  BUT_ONLY
+END
+
+ACTION_IF (GAME_IS ~bgee bg2ee eet~) BEGIN
+	APPEND ~hidespl.2da~ ~spwi116	1		0		0~
+	APPEND ~hidespl.2da~ ~spwi220	1		0		0~
+END
+ACTION_IF (GAME_IS ~iwdee~) BEGIN
+	APPEND ~hidespl.2da~ ~spwi116	1		0~
+	APPEND ~hidespl.2da~ ~spwi220	1		0~
+END
+
+/*
+//Chill Touch: replace with Frost Fingers
+//
+ADD_PROJECTILE ~TomeAndBlood/data/level_one_cantrips/b_c103.pro~
+//COPY ~TomeAndBlood/data/level_one_cantrips/b_c103b.bam~ ~override~
+//COPY ~TomeAndBlood/data/level_one_cantrips/b_c103c.bam~ ~override~
+COPY ~TomeAndBlood/data/level_one_cantrips/spwi117.spl~ ~override~
+  SAY NAME1 @7171
+  SAY UNIDENTIFIED_DESC @7172
+  WRITE_SHORT 0x98 ~%b_c103%~
+  WRITE_ASCII 0x3a ~SPWI117C~
+  LPF ALTER_SPELL_HEADER STR_VAR icon = ~SPWI117B~ END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~scrl82.itm~ THEN BEGIN
+  COPY_EXISTING ~scrl82.itm~ ~override~
+	SAY NAME2 @7171
+	SAY IDENTIFIED_DESC @7172
+  BUT_ONLY
+END
+*/
+
+//Chromatic Orb: reduce power, randomize effects, replace MM
+//
+COPY ~TomeAndBlood/data/level_one_cantrips/spwi118.spl~ ~override~
+  SAY NAME1 @7181
+  SAY UNIDENTIFIED_DESC @7182
+
+COPY ~TomeAndBlood/data/level_one_cantrips/spwi118.spl~ ~override/spwi112.spl~
+  SAY NAME1 @7181
+  SAY UNIDENTIFIED_DESC @7182
+
+ACTION_IF (GAME_IS ~bgee bg2ee eet~) BEGIN
+	APPEND ~hidespl.2da~ ~spwi112	1		0		0~
+END
+ACTION_IF (GAME_IS ~iwdee~) BEGIN
+	APPEND ~hidespl.2da~ ~spwi112	1		0~
+END
+
+//LMD: no spamming extra hp
+//
+COPY ~TomeAndBlood/data/level_one_cantrips/spwi119.spl~ ~override~
+  SAY NAME1 @7191
+  SAY UNIDENTIFIED_DESC @7192
+
+//Spook: one try per victim
+//
+COPY ~TomeAndBlood/data/level_one_cantrips/spwi125.spl~ ~override~
+  SAY NAME1 @7251
+  SAY UNIDENTIFIED_DESC @7252
+
+//Wraithform: remove from menus
+//
+ACTION_IF (GAME_IS ~bgee bg2ee eet~) BEGIN
+	APPEND ~hidespl.2da~ ~spwi315	1		0		0~
+END
+ACTION_IF (GAME_IS ~iwdee~) BEGIN
+	APPEND ~hidespl.2da~ ~spwi315	1		0~
+END
+
+////////////////////////////////////////////////////////////////////////////////////
+
+//NRD: move to 2nd level
+//
+ACTION_IF (FILE_EXISTS_IN_GAME ~spwi124.spl~) BEGIN
+  COPY ~TomeAndBlood/data/level_one_cantrips/d5wi124c.bam~ ~override~
+  COPY ~TomeAndBlood/data/level_one_cantrips/d5wi124b.bam~ ~override~
+
+  COPY_EXISTING ~spwi124.spl~ ~override/d5nahal.spl~  
+	WRITE_LONG 0x34 2
+	READ_LONG 0x50 "valid"
+	PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
+		READ_STRREF 0x50 "desc"
+		INNER_PATCH_SAVE new_desc ~%desc%~ BEGIN
+			REPLACE_TEXTUALLY ~Level: 1~ ~Level: 2~
+		END
+		SAY_EVALUATED 0x50 ~%new_desc%~
+	END
+
+  COPY_EXISTING ~spwi124.spl~ ~override~  
+	SAY NAME1 @7241
+	SAY UNIDENTIFIED_DESC @7242
+	WRITE_ASCII 0x3a ~d5wi124c~
+	WRITE_ASCII 0x76 ~d5wi124b~
+//	READ_BYTE 0x19 wild_magic
+//	WRITE_BYTE 0x19 (THIS BOR 01000000)
+	LPF ALTER_EFFECT INT_VAR match_opcode = 214 opcode = 45 timing = 0 duration = 3 END
+
+  ACTION_IF (GAME_IS ~bgee bg2ee eet~) BEGIN
+	APPEND ~hidespl.2da~ ~spwi124	1		0		0~
+  END
+  ACTION_IF (GAME_IS ~iwdee~) BEGIN
+	APPEND ~hidespl.2da~ ~spwi124	1		0~
+  END
+
+  COPY ~TomeAndBlood/data/level_one_cantrips/d5_nahal.spl~ ~override~
+  COPY ~TomeAndBlood/data/level_one_cantrips/d5_nahal.eff~ ~override~
+
+  ACTION_IF !(FILE_EXISTS_IN_GAME ~clabma01.2da~) BEGIN
+	COPY ~TomeAndBlood/data/level_one_cantrips/clabma01.2da~ ~override~
+  END
+  ACTION_IF (FILE_EXISTS_IN_GAME ~clabma01.2da~) BEGIN
+	COPY_EXISTING ~clabma01.2da~ ~override~
+	APPEND_FILE ~TomeAndBlood/data/level_one_cantrips/nahals.txt~
+  END
+END
+	
+////////////////////////////////////////////////////////////////////////////////////
+
+//Wondrous Recall for all
+//
+COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~ 
+  READ_SHORT 0x1c spell_type
+  PATCH_IF (spell_type = 1) BEGIN
+	READ_LONG 0x34 spell_level
+	PATCH_IF (spell_level = 1) BEGIN
+	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 144 target = 1 paramater2 = 2 timing = 0 duration = 1 resist_dispel = 0 insert_point = 0 END
+	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 144 target = 1 paramater2 = 3 timing = 0 duration = 1 resist_dispel = 0 insert_point = 0 END
+	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 144 target = 1 paramater2 = 4 timing = 0 duration = 1 resist_dispel = 0 insert_point = 0 END
+	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 144 target = 1 paramater2 = 5 timing = 0 duration = 1 resist_dispel = 0 insert_point = 0 END
+	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 261 target = 1 parameter1 = 1 paramater2 = 0 timing = 1 resist_dispel = 0 insert_point = 0 END
+//	  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 261 target = 1 parameter1 = 1 paramater2 = 0 timing = 1 resist_dispel = 0 insert_point = 0 END
+	END
+  END
+BUT_ONLY
+
+////////////////////////////////////////////////////////////////////////////////////
+
+/*
+//Find Familiar
+//
+ACTION_IF FILE_EXISTS_IN_GAME ~spwi123.spl~ BEGIN
+  COPY_EXISTING ~spwi123.spl~ ~override~
+	LPF DELETE_EFFECT INT_VAR match_opcode = 261
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 1 resist_dispel = 0 STR_VAR resource = ~spwi123~ END
+END
+*/
+
+////////////////////////////////////////////////////////////////////////////////////
+
+//Ring of Wizardry: replace with Ring of Acuity
+//
+ACTION_IF GAME_IS ~bgee eet~ BEGIN
+  COPY ~TomeAndBlood/data/level_one_cantrips/ring40.itm~ ~override/ring08.itm~
+END
+
+////////////////////////////////////////////////////////////////////////////////////
+
+//Wand of Magic Missiles: fire 2 missiles each charge
+//
+COPY ~TomeAndBlood/data/level_one_cantrips/wand03.itm~ ~override~
+  SAY NAME2 @7125
+  SAY IDENTIFIED_DESC @7126
+
+////////////////////////////////////////////////////////////////////////////////////
+
+//Wand of Sleep: wake on hit
+//
+COPY_EXISTING ~wand08.itm~ ~override~
+  LPF ALTER_EFFECT INT_VAR match_opcode = 39 parameter2 = 0 END  
+  LPF CLONE_EFFECT INT_VAR match_opcode = 39 opcode = 232 parameter1 = 0 parameter2 = 11 STR_VAR resource = ~D5WAKEUP~ END
+
+////////////////////////////////////////////////////////////////////////////////////
+
+//COMPATIBILITY WITH SPECIALISTS REVISIONS 
+
+ACTION_IF (FILE_EXISTS_IN_GAME ~qdtnb_specialists.qd~) BEGIN 
+	ACTION_IF (FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~) BEGIN //SR
+		ACTION_FOR_EACH bonusspl IN ~QDMG+ABJ~ ~QDMG+ALT~ ~QDMG+CON~ ~QDMG+EVO~ ~QDMG+ENC~ ~QDMG+ILL~ ~QDMG+NEC~ ~QDMG+DIV~ BEGIN 
+			COPY_EXISTING ~%bonusspl%.spl~ ~override~ 
+				PATCH_FOR_EACH spl IN ~spwi109~ ~spwi110~ ~spwi111~ ~spwi116~ ~spwi220~ ~spwi118~ ~spwi315~ BEGIN 
+					LPF ADD_SPELL_EFFECT INT_VAR opcode=172 target=1 timing=9 insert_point = 0 STR_VAR resource= EVAL ~%spl%~ END  
+				END 
+		END 
+		ACTION_FOR_EACH newspl IN ~WIZARD_HOLD_PORTAL~ ~WIZARD_IDENTIFY~ ~WIZARD_INFRAVISION~ ~WIZARD_AGANNAZAR_SCORCHER_TNB~ ~WIZARD_DROWSE_TNB~ ~WIZARD_SLEEP_TNB~ BEGIN 
+		  ACTION_IF (FILE_CONTAINS_EVALUATED (~SPELL.IDS~ ~[ %TAB%]%newspl%[ %TAB%%LNL%%MNL%%WNL%]~)) BEGIN
+			LAF RES_NUM_OF_SPELL_NAME
+				STR_VAR spell_name = EVAL ~%newspl%~
+				RET spell_res
+			END
+			ACTION_IF (VARIABLE_IS_SET %spell_res%) BEGIN
+			  COPY_EXISTING ~%spell_res%.spl~ ~override~ 
+				READ_BYTE  0x25 school
+			  ACTION_IF (school = 1) BEGIN //abjuration
+				COPY_EXISTING ~QDMG+ABJ.SPL~ ~override~ 
+				  LPF ADD_SPELL_EFFECT INT_VAR opcode=171 target=1 timing=9 STR_VAR resource= EVAL ~%spell_res%~ END 
+			  END
+			  ACTION_IF (school = 8) BEGIN //alteration
+				COPY_EXISTING ~QDMG+ALT.SPL~ ~override~ 
+				  LPF ADD_SPELL_EFFECT INT_VAR opcode=171 target=1 timing=9 STR_VAR resource= EVAL ~%spell_res%~ END 
+			  END
+			  ACTION_IF (school = 2) BEGIN //conjuration
+				COPY_EXISTING ~QDMG+CON.SPL~ ~override~ 
+				  LPF ADD_SPELL_EFFECT INT_VAR opcode=171 target=1 timing=9 STR_VAR resource= EVAL ~%spell_res%~ END 
+			  END
+			  ACTION_IF (school = 3) BEGIN //divination
+				COPY_EXISTING ~QDMG+DIV.SPL~ ~override~ 
+				  LPF ADD_SPELL_EFFECT INT_VAR opcode=171 target=1 timing=9 STR_VAR resource= EVAL ~%spell_res%~ END 
+			  END
+			  ACTION_IF (school = 4) BEGIN //enchantment
+				COPY_EXISTING ~QDMG+ENC.SPL~ ~override~ 
+				  LPF ADD_SPELL_EFFECT INT_VAR opcode=171 target=1 timing=9 STR_VAR resource= EVAL ~%spell_res%~ END 
+			  END
+			  ACTION_IF (school = 6) BEGIN //evocation
+				COPY_EXISTING ~QDMG+EVO.SPL~ ~override~ 
+				  LPF ADD_SPELL_EFFECT INT_VAR opcode=171 target=1 timing=9 STR_VAR resource= EVAL ~%spell_res%~ END 
+			  END
+			  ACTION_IF (school = 5) BEGIN //illusion
+				COPY_EXISTING ~QDMG+ILL.SPL~ ~override~ 
+				  LPF ADD_SPELL_EFFECT INT_VAR opcode=171 target=1 timing=9 STR_VAR resource= EVAL ~%spell_res%~ END 
+			  END
+			  ACTION_IF (school = 7) BEGIN //necromancy
+				COPY_EXISTING ~QDMG+NEC.SPL~ ~override~ 
+				  LPF ADD_SPELL_EFFECT INT_VAR opcode=171 target=1 timing=9 STR_VAR resource= EVAL ~%spell_res%~ END
+			  END
+			END
+		  END
+		END 
+	END 
+	ELSE BEGIN //no SR
+		ACTION_FOR_EACH bonusspl IN ~QDMG+ABJ~ ~QDMG+ALT~ ~QDMG+CON~ ~QDMG+EVO~ ~QDMG+ENC~ ~QDMG+ILL~ ~QDMG+NEC~ ~QDMG+DIV~ BEGIN 
+			COPY_EXISTING ~%bonusspl%.spl~ ~override~ 
+				PATCH_FOR_EACH spl IN ~spwi107~ ~spwi108~ ~spwi110~ ~spwi114~ ~spwi116~ ~spwi220~ ~spwi118~ ~spwi315~  BEGIN 
+					LPF ADD_SPELL_EFFECT INT_VAR opcode=172 target=1 timing=9 insert_point = 0 STR_VAR resource= EVAL ~%spl%~ END  
+				END 
+ 
+		END
+		ACTION_FOR_EACH newspl IN ~WIZARD_FRIENDS~ ~WIZARD_PROTECTION_FROM_PETRIFICATION~ ~WIZARD_IDENTIFY~  ~WIZARD_AGANNAZAR_SCORCHER_TNB~ ~WIZARD_DROWSE_TNB~ ~WIZARD_SLEEP_TNB~ ~WIZARD_SHIELD_TNB~ BEGIN 
+		  ACTION_IF (FILE_CONTAINS_EVALUATED (~SPELL.IDS~ ~[ %TAB%]%newspl%[ %TAB%%LNL%%MNL%%WNL%]~)) BEGIN
+			LAF RES_NUM_OF_SPELL_NAME
+				STR_VAR spell_name = EVAL ~%newspl%~
+				RET spell_res
+			END
+			ACTION_IF (VARIABLE_IS_SET %spell_res%) BEGIN
+			  COPY_EXISTING ~%spell_res%.spl~ ~override~ 
+				READ_BYTE  0x25 school
+			  ACTION_IF (school = 1) BEGIN //abjuration
+				COPY_EXISTING ~QDMG+ABJ.SPL~ ~override~ 
+				  LPF ADD_SPELL_EFFECT INT_VAR opcode=171 target=1 timing=9 STR_VAR resource= EVAL ~%spell_res%~ END 
+			  END
+			  ACTION_IF (school = 8) BEGIN //alteration
+				COPY_EXISTING ~QDMG+ALT.SPL~ ~override~ 
+				  LPF ADD_SPELL_EFFECT INT_VAR opcode=171 target=1 timing=9 STR_VAR resource= EVAL ~%spell_res%~ END 
+			  END
+			  ACTION_IF (school = 2) BEGIN //conjuration
+				COPY_EXISTING ~QDMG+CON.SPL~ ~override~ 
+				  LPF ADD_SPELL_EFFECT INT_VAR opcode=171 target=1 timing=9 STR_VAR resource= EVAL ~%spell_res%~ END 
+			  END
+			  ACTION_IF (school = 3) BEGIN //divination
+				COPY_EXISTING ~QDMG+DIV.SPL~ ~override~ 
+				  LPF ADD_SPELL_EFFECT INT_VAR opcode=171 target=1 timing=9 STR_VAR resource= EVAL ~%spell_res%~ END 
+			  END
+			  ACTION_IF (school = 4) BEGIN //enchantment
+				COPY_EXISTING ~QDMG+ENC.SPL~ ~override~ 
+				  LPF ADD_SPELL_EFFECT INT_VAR opcode=171 target=1 timing=9 STR_VAR resource= EVAL ~%spell_res%~ END 
+			  END
+			  ACTION_IF (school = 6) BEGIN //evocation
+				COPY_EXISTING ~QDMG+EVO.SPL~ ~override~ 
+				  LPF ADD_SPELL_EFFECT INT_VAR opcode=171 target=1 timing=9 STR_VAR resource= EVAL ~%spell_res%~ END 
+			  END
+			  ACTION_IF (school = 5) BEGIN //illusion
+				COPY_EXISTING ~QDMG+ILL.SPL~ ~override~ 
+				  LPF ADD_SPELL_EFFECT INT_VAR opcode=171 target=1 timing=9 STR_VAR resource= EVAL ~%spell_res%~ END 
+			  END
+			  ACTION_IF (school = 7) BEGIN //necromancy
+				COPY_EXISTING ~QDMG+NEC.SPL~ ~override~ 
+				  LPF ADD_SPELL_EFFECT INT_VAR opcode=171 target=1 timing=9 STR_VAR resource= EVAL ~%spell_res%~ END 
+			  END
+			END
+		  END
+		END
+	END 
+END 
+
+//COMPATIBILITY WITH FAVOURED SOUL 
+COPY ~TomeAndBlood/data/level_one_cantrips/QDFVSLB1.spl~ ~override/QDFVSLB.spl~
+	 ~TomeAndBlood/data/level_one_cantrips/QDFVSLD1.spl~ ~override/QDFVSLD.spl~
+	 ~TomeAndBlood/data/level_one_cantrips/QDFVSLL1.spl~ ~override/QDFVSLL.spl~
+	 ~TomeAndBlood/data/level_one_cantrips/QDFVSLN1.spl~ ~override/QDFVSLN.spl~
+	 ~TomeAndBlood/data/level_one_cantrips/QDFVSLP1.spl~ ~override/QDFVSLP.spl~
+	 
+END 	//	end define function
+//____________________________________________________________________________________
+
+
+
+//____________________________________________________________________________________
+//____________________________________________________________________________________
+
+
+
+// -----------------------------
+// CANTRIPS VIA WAND by SUBTLEDOCTOR 
+// -----------------------------
+
+DEFINE_ACTION_FUNCTION cantrip_wands BEGIN 
+
+INCLUDE ~TomeAndBlood/data/core/tnb_kit_list.tpa~ 
+
+COPY ~TomeAndBlood/data/cantrips/d5cantw.itm~ ~override~
+	SAY NAME1 @6010
+	SAY IDENTIFIED_DESC @6011
+	WRITE_BYTE 0x1e (THIS BOR 0b10000000)
+	WRITE_BYTE 0x1f (THIS BOR 0b01010001)
+	WRITE_BYTE 0x20 (THIS BOR 0b01110010)
+	WRITE_BYTE 0x21 (THIS BOR 0b01100000)
+
+COPY ~TomeAndBlood/data/cantrips/d5cantab.bam~ ~override~
+COPY ~TomeAndBlood/data/cantrips/d5cantco.bam~ ~override~
+COPY ~TomeAndBlood/data/cantrips/d5cantdi.bam~ ~override~
+COPY ~TomeAndBlood/data/cantrips/d5canten.bam~ ~override~
+COPY ~TomeAndBlood/data/cantrips/d5cantil.bam~ ~override~
+COPY ~TomeAndBlood/data/cantrips/d5cantne.bam~ ~override~
+COPY ~TomeAndBlood/data/cantrips/d5canttr.bam~ ~override~
+COPY ~TomeAndBlood/data/cantrips/d5_rabb.cre~ ~override~
+	SAY NAME1 @6018
+	WRITE_BYTE 0x270 5
+
+//shield spell protects against cantrip wand
+COPY_EXISTING ~spwi114.spl~ ~override~
+	LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 206 STR_VAR resource = ~d5cantw~ END
+BUT_ONLY
+
+COPY ~TomeAndBlood/data/core/d5_base.spl~ ~override/d5cantw1.spl~
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 122 target = 1 parameter1 = 1 timing = 9 STR_VAR resource = ~d5cantw~ END
+
+
+//adding cantrips to appropriate mages
+ACTION_PHP_EACH tnb_kit_list AS kitinfo => kitclab BEGIN 
+	ACTION_IF (FILE_EXISTS_IN_GAME ~%kitclab%.2da~) BEGIN 
+		APPEND ~%kitclab%.2da~ ~CANTRIPS	AP_D5CANTW1  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****    ****        ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+	END 
+END 
+
+END 	//	end define function
+//____________________________________________________________________________________

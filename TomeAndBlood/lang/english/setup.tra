@@ -10,6 +10,7 @@
 @13 = ~Revised Illusionary Clones~
 @14 = ~Revised Invisibility and True Seeing~
 @15 = ~Revised Haste and Free Action~
+@16 = ~Revised Identify spell~
 @20 = ~Revised Dragon Disciples~
 @25 = ~Sorcerer: Magus~
 @27 = ~Sorcerer: Arcanist~ 
@@ -36,6 +37,7 @@
 @68 = ~Pooky's Mod: Imbue Familiars~
 @69 = ~Indelible Familiars~
 @75 = ~Ability Score Spellcasting Bonuses~
+@77 = ~Mana Sorcerer~
 @79 = ~Spell Selection by Dialogue~
 @80 = ~Multiclass Sorcerers~
 
@@ -586,6 +588,29 @@ Disadvantages:
 - May not use the Identify spell.
 - May not use Sequencer or Contingency spells.
 ~
+@17081 = ~mana sorcerer~
+@17082 = ~Mana Sorcerer~
+@17083 = ~MANA SORCERER: Sorcerers are practitioners of magic who were born with the innate ability to cast spells. It is thought that the blood of some powerful creature flows through their veins; perhaps they are the spawn of the gods themselves, or even dragons walking in humanoid form. Regardless, the Sorcerer's magic is intuitive rather than logical. They know fewer spells than Mages, and acquire spells more slowly, but they can cast spells more often and have no need to select and prepare spells ahead of time.
+
+Advantages:
+- May cast arcane spells.
+- Sorcerers do not scribe and memorize spells as Mages do. Instead, they learn a small number of spells at each level, and can cast any of those spells without memorization.
+- Mana Sorcerers do not use "spell slots" of different levels. Instead, they have a single pool of Mana Points from which to draw when casting spells. Each spell cast will reduce the pool of Mana Points by an amount equal to the spell's level. Mana Points regenerate when the sorcerer rests.
+
+Disadvantages:
+- May not learn spells from scrolls.
+- May not use the Identify spell.
+- May not use Sequencer or Contingency spells.
+~
+@17085 = ~Change casting method~
+@17091 = ~How would you like to cast spells?~
+@17092 = ~With normal sorcerer spell slots~
+@17093 = ~With mana points~
+@17094 = ~No change - you will have a certain number of spell slots for each spell level.~
+@17095 = ~Choose to stay the same~
+@17096 = ~Make a different choice~
+@17097 = ~Cast by mana points - you will have a store of mana which can be used to cast spells of any level. You will learn spells by using an item ability, instead of through the normal level-up screen.~
+@17098 = ~Choose casting by mana points~
 @6005   = ~Spontaneous Casting~
 @6006   = ~Cancel Spontaneous Conversion~
 //
@@ -1296,64 +1321,6 @@ Area of Effect: 1 creature
 Saving Throw: vs. Death
 
 By means of a Ray of Enfeeblement, a wizard launches a magical attack against the vitality of an opponent, reducing its Strength and thereby the attacks that rely upon it. The victim's Strength score is automatically reduced by 4 points for the duration of the spell. Additionally, if the target fails a saving throw vs. Death, the Strength penalty is doubled to -8, and the victim suffers the effects of a Slow spell (half movement rate and -4 penalties to thac0 and AC). These effects last for 1 turn.~
-@6351 = ~Contingency~
-@6352 = ~Contingency
-
-Upon using this ability, the wizard is allowed to choose a spell from his repertoire of known spells. One spell level every 3 levels of the caster is allowed (rounded up), up to 7th-level spells at 19th level. Once the spell is chosen, the caster can choose a condition of some kind from the list provided. The starting condition can be anything from reaching 10% of Hit Points to an enemy being sighted. Once this starting condition is satisfied, the spell that was chosen will be cast automatically.
-
-For example, a 12th-level wizard could place the spell Stoneskin in a Contingency with the starting condition being "the wizard reaches 50% of his Hit Points." Once the wizard is reduced to 50% max Hit Points or below, Stoneskin would be immediately cast. This requires no action by the wizard, but happens automatically and instantaneously.
-~
-@6353 = ~Chain Contingency~
-@6354 = ~Chain Contingency
-
-Chain Contingency channels some of the magical energy of the wizard and releases it only under certain circumstances. The wizard chooses three spells that will be released under certain conditions, such as being hit by an enemy. When this condition occurs, all three spells are cast immediately. Spells of 8th level or lower may be used in the contingency.
-~
-@6411   = ~Chameleon~
-@6412   = ~Chameleon
-Level: 1
-School: Illusion
-Range: Caster
-Duration: 5 rounds
-Casting Time: 1
-Area of Effect: 1 creature
-Saving Throw: n/a
-
-This spell alters the appearance of the caster, making <PRO_HIMHER> nearly invisible. <PRO_HESHE> cannot be targeted by spells, has a -4 bonus to AC and a +4 onus to saving throws, and has a +25% bonus to the Move Silently, Hide In Shadows, and Pick Pockets skills.  The effect lasts five rounds; however, if the caster casts a spell or strikes an enemy during that time, the spell ends immediately and the caster becomes fully visible.
-~
-@6501   = ~This is Edwin's birthright, inlaid with his family stone.
-
-STATISTICS:
-
-Equipped abilities:
-– Can memorize one extra wizard spell of each level
-
-Weight: 1~
-@6511   = ~Summon Deva~
-@6512   = ~Summon Deva 
-(Conjuration/Summoning) 
-Level: Quest
-Range: 40 yards 
-Duration: 4 rounds + 1 round/level
-Casting Time: 5 
-Area of Effect: Special 
-Saving Throw: None
-
-This spell opens a celestial gate and calls forth an angelic deva to fight at the caster's side until the spell expires or the deva's earthly avatar is slain.
-
-If the summoning priest is 25th level or higher, a powerful planetar is summoned instead.~
-@6513   = ~Summon Fallen Deva~
-@6514   = ~Summon Fallen Deva 
-(Conjuration/Summoning) 
-Level: Quest
-Range: 40 yards 
-Duration: 4 rounds + 1 round/level
-Casting Time: 5 
-Area of Effect: Special 
-Saving Throw: None
-
-This spell opens an abyssal gate and calls forth a demonic deva to fight at the caster's side until the spell expires or the deva's earthly avatar is slain.
-
-If the summoning priest is 25th level or higher, a powerful dark planetar is summoned instead.~
 //
 //
 @6271   = ~Shadow Clone~
@@ -1417,6 +1384,72 @@ For example, a 12th-level wizard could place the spell Stoneskin in a Contingenc
 
 Chain Contingency channels some of the magical energy of the wizard and releases it only under certain circumstances. The wizard chooses three spells that will be released under certain conditions, such as being hit by an enemy. When this condition occurs, all three spells are cast immediately. Spells of 8th level or lower may be used in the contingency.
 ~
+@6353 = ~Chain Contingency~
+@6354 = ~Chain Contingency
+
+Chain Contingency channels some of the magical energy of the wizard and releases it only under certain circumstances. The wizard chooses three spells that will be released under certain conditions, such as being hit by an enemy. When this condition occurs, all three spells are cast immediately. Spells of 8th level or lower may be used in the contingency.
+~
+@6411   = ~Chameleon~
+@6412   = ~Chameleon
+Level: 1
+School: Illusion
+Range: Caster
+Duration: 5 rounds
+Casting Time: 1
+Area of Effect: 1 creature
+Saving Throw: n/a
+
+This spell alters the appearance of the caster, making <PRO_HIMHER> nearly invisible. <PRO_HESHE> cannot be targeted by spells, has a -4 bonus to AC and a +4 onus to saving throws, and has a +25% bonus to the Move Silently, Hide In Shadows, and Pick Pockets skills.  The effect lasts five rounds; however, if the caster casts a spell or strikes an enemy during that time, the spell ends immediately and the caster becomes fully visible.
+~
+@6501   = ~This is Edwin's birthright, inlaid with his family stone.
+
+STATISTICS:
+
+Equipped abilities:
+– Can memorize one extra wizard spell of each level
+
+Weight: 1~
+@6511   = ~Summon Deva~
+@6512   = ~Summon Deva 
+(Conjuration/Summoning) 
+Level: Quest
+Range: 40 yards 
+Duration: 4 rounds + 1 round/level
+Casting Time: 5 
+Area of Effect: Special 
+Saving Throw: None
+
+This spell opens a celestial gate and calls forth an angelic deva to fight at the caster's side until the spell expires or the deva's earthly avatar is slain.
+
+If the summoning priest is 25th level or higher, a powerful planetar is summoned instead.~
+@6513   = ~Summon Fallen Deva~
+@6514   = ~Summon Fallen Deva 
+(Conjuration/Summoning) 
+Level: Quest
+Range: 40 yards 
+Duration: 4 rounds + 1 round/level
+Casting Time: 5 
+Area of Effect: Special 
+Saving Throw: None
+
+This spell opens an abyssal gate and calls forth a demonic deva to fight at the caster's side until the spell expires or the deva's earthly avatar is slain.
+
+If the summoning priest is 25th level or higher, a powerful dark planetar is summoned instead.~
+@6601  = ~Identify~
+@6602  = ~Identify
+(Divination)
+
+Level: 1
+Range: 0
+Duration: 5 turns
+Casting Time: 5
+Area of Effect: Special
+Saving Throw: None
+
+Upon casting this spell, the caster inscribes a mystical glyph upon a piece of paper or parchment. When this parchment is held near an item enchanted by magic, the glyph briefly glows and imparts knowledge about the item - what it does, how it is activated, and whether it is cursed - to anyone present. 
+
+The Glyph is more durable when inscribed by higher-level casters: it can identify two items at 5th level, three items at 10th level, and four items at 15th level. If unused, the glyph loses it power and fades away after about an hour.~
+@6603  = ~Glyph of Identification~
 @7011  = ~Grease~
 @7012  = ~Grease
 (Alteration)
@@ -1533,7 +1566,7 @@ This spell creates between one and five missiles of fiery magical energy that da
 STATISTICS:
 
 Charge abilities:
-Ð 2 magic missiles will strike the target
+  2 magic missiles will strike the target
   Damage: 1d4+1 magic each
   Range: 100 ft.
   Area of Effect: 1 creature
@@ -1687,6 +1720,21 @@ Area of Effect: Special
 Saving Throw: None 
 
 The caster of this spell gains a temporary insight into the history and nature of magical objects. This translates into a temporary Lore bonus of 20 points, plus an additional 20 points for each five levels of experience the caster has attained. If the resulting score is high enough, the spell can identify the name, nature, and function of any magical items in the caster's possession.
+~
+@7103  = ~Identify~
+@7104  = ~Identify
+
+Level: 2
+School: Divination
+Range: Caster
+Duration: instantaneous
+Casting Time: 2
+Area of Effect: Special
+Saving Throw: None 
+
+When this spell is cast, name and enchantments (including curses) of one item subsequently touched by the wizard are revealed without fail. Many unidentified items can still be used, but at great risk.
+
+At 5th, 9th, and 13th level, the number of items that can be identified by this spell increases by 1 (to a maximum of 4 items at 13th level).
 ~
 @8011  = ~Pseudodragon~
 @8012  = ~Pseudodragon: this is a tiny, distant relative of full dragons. The pseudodragon can cast Cure Light Wounds, and Blur, and use a colorful 'breath weapon' that mimics the Color Spray spell, once every 3 turns. (At high levels, the Blur improves to a full Improved Invisibility effect.) They can attack twice per round and while their claws are small, they deliver a mild intoxicant which can render the target drowsy and clumsy (mimicking the effects of a Slow spell, for two rounds). 
@@ -1875,8 +1923,13 @@ Rat
 - Combat: 2 attacks per round for 1d2 damage; save or be diseased for 3 rounds, with reduced Strength and a 30% chance of casting failure
 - Special Abilities: Can summon a cohort of 1d6 more rats to defend it, once per 3 turns.
 ~
-@8013  = ~Fairy Dragon~
-@8014  = ~Fairy Dragon: ~
+@8013  = ~Pseudodragon~
+@8014  = ~Pseudodragon: pseudodragons are quite intelligent. While small, they are  quick and fairly well-armored. They do not do much damage in combat, but their magical claws are able to render some enemies unconscious. It is also quite resistant to magical spells.
+
+While this familiar is near its master, the summoner will slowly regenerate health.
+
+As with all familiars, its magical connection to the life force of its master renders it immune to petrification and level drain effects.
+~
 @8015  = ~Dog~
 @8016  = ~Dog: ...~
 @8017  = ~Ferret~
@@ -1896,7 +1949,7 @@ While this familiar is near its master, the summoner is immune to Slow spells an
 As with all familiars, its magical connection to the life force of its master renders it immune to petrification and level drain effects.
 ~
 @8021  = ~Cat~
-@8022  = ~Cat: a black cat is a very traditional familiar for wizards, and is quite useful as a scout. They can move unseen as well as any master thief; and they may escape notice even in the face of spells that expose invisible creatures (though creatures with the natural ability to see all around them can still spot a cat).
+@8022  = ~Cat: a black cat is a very traditional familiar for wizards, and is quite useful as a scout. They can move unseen as well as any master thief; and they may escape notice even in the face of spells that expose invisible creatures (though creatures with the natural ability to see hidden and invisible beings can still spot a cat).
 
 While this familiar is near its master, the summoner benefits from a +1 bonus to Dexterity.
 

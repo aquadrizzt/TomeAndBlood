@@ -1,4 +1,3 @@
-
 // -----------------------------
 // SPELL TWEAKS: GENERAL
 // -----------------------------
@@ -1123,3 +1122,58 @@ CLEAR_ARRAYS
 
 END 	//	end define function
 //____________________________________________________________________________________
+
+
+// -----------------------------
+// SPELL TWEAKS: IDENTIFY
+// -----------------------------
+
+DEFINE_ACTION_FUNCTION new_identify BEGIN 
+
+INCLUDE ~TomeAndBlood/lib/b3identify.tph~
+LAF B3_IDENTIFY_INSTALL END
+
+ACTION_IF (GAME_IS ~bgee bg2ee eet~) BEGIN
+	APPEND ~hidespl.2da~ ~spwi110	1		0		0~
+END
+ACTION_IF (GAME_IS ~iwdee~) BEGIN
+	APPEND ~hidespl.2da~ ~spwi110	1		0~
+END
+COPY_EXISTING ~spell.ids~ ~override~
+	REPLACE_TEXTUALLY ~WIZARD_IDENTIFY~ ~WIZARD_IDENTIFY_OLD~
+
+//COPY ~TomeAndBlood/data/spell_tweaks/d5tb110.spl~ ~override~
+ADD_SPELL ~TomeAndBlood/data/spell_tweaks/d5tb110.spl~ 2 2 WIZARD_IDENTIFY
+//COPY_EXISTING ~spell.ids~ ~override~
+//	REPLACE_TEXTUALLY ~WIZARD_IDENTIFY_TNB~ ~WIZARD_IDENTIFY~
+LAF RES_NUM_OF_SPELL_NAME
+	STR_VAR spell_name = ~WIZARD_IDENTIFY~
+	RET spell_res
+END
+COPY_EXISTING ~%spell_res%.spl~ ~override~
+	SAY NAME1 @7103
+	SAY UNIDENTIFIED_DESC @7104
+
+COPY ~TomeAndBlood/data/spell_tweaks/d5tb110a.spl~ ~override~
+COPY ~TomeAndBlood/data/spell_tweaks/d5tb110b.spl~ ~override~
+COPY ~TomeAndBlood/data/spell_tweaks/d5tb110c.spl~ ~override~
+COPY ~TomeAndBlood/data/spell_tweaks/d5tb110d.spl~ ~override~
+
+LAF B3_IDENTIFY_REGISTER INT_VAR uses = 1 STR_VAR resref = ~d5tb110a~ END
+LAF B3_IDENTIFY_REGISTER INT_VAR uses = 2 STR_VAR resref = ~d5tb110b~ END
+LAF B3_IDENTIFY_REGISTER INT_VAR uses = 3 STR_VAR resref = ~d5tb110c~ END
+LAF B3_IDENTIFY_REGISTER INT_VAR uses = 4 STR_VAR resref = ~d5tb110d~ END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~scrl75.itm~ THEN BEGIN
+	COPY_EXISTING ~scrl75.itm~ ~override~
+		LPF ALTER_ITEM_HEADER INT_VAR target = 5 END
+		SAY NAME2 @7103
+		SAY IDENTIFIED_DESC @7104
+		LPF ALTER_EFFECT INT_VAR match_opcode = 146 STR_VAR resource = EVAL ~%spell_res%~ END
+		LPF ALTER_EFFECT INT_VAR match_opcode = 147 STR_VAR resource = EVAL ~%spell_res%~ END
+	BUT_ONLY
+END
+
+END 	//	end define function
+//____________________________________________________________________________________
+

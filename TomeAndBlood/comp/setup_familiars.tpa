@@ -1,4 +1,3 @@
-
 // -----------------------------
 // INNATE FAMILIAR
 // -----------------------------
@@ -91,6 +90,7 @@ END 	//	end define function
 
 /- each option 
 / -- sets a 'familiar' spellstate on caster
+ -- sets a local variable to the familiar's value on caster
 / -- makes caster immune to sub1, 
 / -- makes caster immune to 7 of the 8 ff subs, 
 / -- makes caster immune to sub10, 
@@ -168,6 +168,7 @@ COPY_EXISTING ~spcl342.spl~ ~override/d5famch1.spl~
   WRITE_ASCII 0x3a ~d5faml1c~ #8
   LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5faml1c~ END
   LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 57 target = 1 parameter2 = 17 timing = 0 duration = 0 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 309 target = 1 parameter1 = 1 parameter2 = 0 timing = 9 STR_VAR resource = ~d5famlg~ END
 
 COPY ~tomeandblood/data/familiars/d5famdog.bam~ ~override/d5faml2c.bam~
 COPY_EXISTING ~spcl342.spl~ ~override/d5famch2.spl~
@@ -177,6 +178,7 @@ COPY_EXISTING ~spcl342.spl~ ~override/d5famch2.spl~
   WRITE_ASCII 0x3a ~d5faml2c~ #8
   LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5faml2c~ END
   LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 57 target = 1 parameter2 = 49 timing = 0 duration = 0 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 309 target = 1 parameter1 = 1 parameter2 = 0 timing = 9 STR_VAR resource = ~d5famcg~ END
 
 COPY ~tomeandblood/data/familiars/d5famfer.bam~ ~override/d5faml3c.bam~
 COPY_EXISTING ~spcl342.spl~ ~override/d5famch3.spl~
@@ -186,6 +188,7 @@ COPY_EXISTING ~spcl342.spl~ ~override/d5famch3.spl~
   WRITE_ASCII 0x3a ~d5faml3c~ #8
   LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5faml3c~ END
   LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 57 target = 1 parameter2 = 18 timing = 0 duration = 0 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 309 target = 1 parameter1 = 1 parameter2 = 0 timing = 9 STR_VAR resource = ~d5famln~ END
 
 COPY ~tomeandblood/data/familiars/d5famrab.bam~ ~override/d5faml4c.bam~
 COPY_EXISTING ~spcl342.spl~ ~override/d5famch4.spl~
@@ -195,6 +198,7 @@ COPY_EXISTING ~spcl342.spl~ ~override/d5famch4.spl~
   WRITE_ASCII 0x3a ~d5faml4c~ #8
   LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5faml4c~ END
   LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 57 target = 1 parameter2 = 34 timing = 0 duration = 0 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 309 target = 1 parameter1 = 1 parameter2 = 0 timing = 9 STR_VAR resource = ~d5famtn~ END
 
 COPY ~tomeandblood/data/familiars/d5famcat.bam~ ~override/d5faml5c.bam~
 COPY_EXISTING ~spcl342.spl~ ~override/d5famch5.spl~
@@ -204,6 +208,7 @@ COPY_EXISTING ~spcl342.spl~ ~override/d5famch5.spl~
   WRITE_ASCII 0x3a ~d5faml5c~ #8
   LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5faml5c~ END
   LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 57 target = 1 parameter2 = 50 timing = 0 duration = 0 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 309 target = 1 parameter1 = 1 parameter2 = 0 timing = 9 STR_VAR resource = ~d5famcn~ END
 
 COPY ~tomeandblood/data/familiars/d5famspd.bam~ ~override/d5faml6c.bam~
 COPY_EXISTING ~spcl342.spl~ ~override/d5famch6.spl~
@@ -213,6 +218,7 @@ COPY_EXISTING ~spcl342.spl~ ~override/d5famch6.spl~
   WRITE_ASCII 0x3a ~d5faml6c~ #8
   LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5faml6c~ END
   LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 57 target = 1 parameter2 = 19 timing = 0 duration = 0 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 309 target = 1 parameter1 = 1 parameter2 = 0 timing = 9 STR_VAR resource = ~d5famle~ END
 
 COPY_EXISTING ~spcl342.spl~ ~override/d5famch7.spl~
 //COPY_EXISTING ~spcl342.spl~ ~override/d5faml7.spl~
@@ -221,6 +227,7 @@ COPY_EXISTING ~spcl342.spl~ ~override/d5famch7.spl~
   WRITE_ASCII 0x3a ~d5faml7c~ #8
   LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5faml7c~ END
   LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 57 target = 1 parameter2 = 35 timing = 0 duration = 0 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 309 target = 1 parameter1 = 1 parameter2 = 0 timing = 9 STR_VAR resource = ~d5famne~ END
 
 COPY ~tomeandblood/data/familiars/d5famrat.bam~ ~override/d5faml8c.bam~
 COPY_EXISTING ~spcl342.spl~ ~override/d5famch8.spl~
@@ -230,6 +237,7 @@ COPY_EXISTING ~spcl342.spl~ ~override/d5famch8.spl~
   WRITE_ASCII 0x3a ~d5faml8c~ #8
   LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5faml8c~ END
   LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 57 target = 1 parameter2 = 51 timing = 0 duration = 0 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 309 target = 1 parameter1 = 1 parameter2 = 0 timing = 9 STR_VAR resource = ~d5famce~ END
 
 ACTION_FOR_EACH num IN ~1~ ~2~ ~3~ ~4~ ~5~ ~6~ ~7~ ~8~ BEGIN
   COPY_EXISTING ~d5famch%num%.spl~ ~override/d5faml%num%.spl~
@@ -486,6 +494,13 @@ COPY_EXISTING ~spwi405.spl~ ~override/d5fampd4.spl~
   LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 171 target = 1 timing = 4 duration = 180 STR_VAR resource = ~d5famfr1~ END
   LPF ADD_SPELL_CFEFFECT INT_VAR insert_point = 0 opcode = 172 target = 1 timing = 4 duration = 179 STR_VAR resource = ~d5famfr1~ END
 
+COPY_EXISTING ~fampsd.itm~ ~override~
+  SAY UNIDENTIFIED_DESC @8014
+
+COPY_EXISTING ~fampsd25.itm~ ~override~
+  SAY UNIDENTIFIED_DESC @8014
+
+
 //fairy dragon_______________________________________________________________________
 //
 COPY_EXISTING ~famfair.cre~ ~override~
@@ -608,6 +623,13 @@ COPY_EXISTING ~famfer25.cre~ ~override~
   ADD_CRE_ITEM ~reghp1~ #0 #0 #0 ~IDENTIFIED~ ~RRING LRING~
 IF_EXISTS
 
+COPY_EXISTING ~famfer.itm~ ~override~
+  SAY UNIDENTIFIED_DESC @8018
+
+COPY_EXISTING ~famfer25.itm~ ~override~
+  SAY UNIDENTIFIED_DESC @8018
+
+
 // rabbit____________________________________________________________________________
 //
 COPY_EXISTING ~famrab.cre~ ~override~
@@ -679,6 +701,13 @@ COPY_EXISTING ~famrab25.cre~ ~override~
   ADD_CRE_ITEM ~reghp1~ #0 #0 #0 ~IDENTIFIED~ ~RRING LRING~
 IF_EXISTS
 
+COPY_EXISTING ~famrab.itm~ ~override~
+  SAY UNIDENTIFIED_DESC @8020
+
+COPY_EXISTING ~famrab25.itm~ ~override~
+  SAY UNIDENTIFIED_DESC @8020
+
+
 // cat_______________________________________________________________________________
 //
 COPY_EXISTING ~famcat.cre~ ~override~
@@ -735,6 +764,13 @@ COPY_EXISTING ~famcat25.cre~ ~override~
   ADD_CRE_ITEM ~clck06~ #0 #0 #0 ~IDENTIFIED~ ~CLOAK~
 IF_EXISTS
 
+COPY_EXISTING ~famcat.itm~ ~override~
+  SAY UNIDENTIFIED_DESC @8022
+
+COPY_EXISTING ~famcat25.itm~ ~override~
+  SAY UNIDENTIFIED_DESC @8022
+
+
 // imp--> spider_____________________________________________________________________
 //
 COPY_EXISTING ~famimp.cre~ ~override~
@@ -754,6 +790,7 @@ COPY_EXISTING ~famimp.cre~ ~override~
   WRITE_BYTE 0x62 25
   WRITE_BYTE 0x63 25
   WRITE_SHORT 0x46 2
+  WRITE_ASCII 0x2cc ~famil3~ #8
   REMOVE_MEMORIZED_SPELLS
   REMOVE_KNOWN_SPELLS
   LPF ADD_CRE_EFFECT INT_VAR opcode = 22 target = 1 parameter1 = 1 timing = 9 END
@@ -935,6 +972,7 @@ COPY_EXISTING ~famimp25.cre~ ~override~
   WRITE_BYTE 0x62 25
   WRITE_BYTE 0x63 25
   WRITE_SHORT 0x46 2
+  WRITE_ASCII 0x2cc ~famil325~ #8
   REMOVE_MEMORIZED_SPELLS
   REMOVE_KNOWN_SPELLS
   LPF ADD_CRE_EFFECT INT_VAR opcode = 22 target = 1 parameter1 = 1 timing = 9 END
@@ -945,6 +983,19 @@ COPY_EXISTING ~famimp25.cre~ ~override~
   LPF ADD_CRE_EFFECT INT_VAR opcode = 232 target = 1 parameter1 = 0 parameter2 = 20 timing = 9 special = 102 STR_VAR resource = ~d5famsp0~ END
 //  ADD_CRE_ITEM ~impclaw~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON1~ EQUIP
 IF_EXISTS
+
+COPY_EXISTING ~famimp.itm~ ~override~
+  SAY UNIDENTIFIED_DESC @8026
+  WRITE_ASCII 0x3a ~imisc3e~ #8
+  WRITE_ASCII 0x58 ~cmisc3e~ #8
+  LPF ALTER_ITEM_HEADER STR_VAR icon = ~imisc3e~ END
+
+COPY_EXISTING ~famimp25.itm~ ~override~
+  SAY UNIDENTIFIED_DESC @8026
+  WRITE_ASCII 0x3a ~imisc3e~ #8
+  WRITE_ASCII 0x58 ~cmisc3e~ #8
+  LPF ALTER_ITEM_HEADER STR_VAR icon = ~imisc3e~ END
+
 
 // quasit--> rat_____________________________________________________________________
 //
@@ -965,6 +1016,7 @@ COPY_EXISTING ~famquas.cre~ ~override~
   WRITE_BYTE 0x62 25
   WRITE_BYTE 0x63 25
   WRITE_SHORT 0x46 2
+  WRITE_ASCII 0x2cc ~famil3~ #8
   REMOVE_MEMORIZED_SPELLS
   REMOVE_KNOWN_SPELLS
   LPF ADD_CRE_EFFECT INT_VAR opcode = 22 target = 1 parameter1 = 1 timing = 9 END
@@ -1032,6 +1084,7 @@ COPY_EXISTING ~famqua25.cre~ ~override~
   WRITE_BYTE 0x62 25
   WRITE_BYTE 0x63 25
   WRITE_SHORT 0x46 2
+  WRITE_ASCII 0x2cc ~famil325~ #8
   LPF ADD_CRE_EFFECT INT_VAR opcode = 22 target = 1 parameter1 = 1 timing = 9 END
   REMOVE_MEMORIZED_SPELLS
   REMOVE_KNOWN_SPELLS
@@ -1039,6 +1092,18 @@ COPY_EXISTING ~famqua25.cre~ ~override~
   LPF ADD_CRE_EFFECT INT_VAR opcode = 0 target = 1 parameter1 = 4 parameter2 = 2 timing = 9 END 	// missile AC bonus
   LPF ADD_CRE_EFFECT INT_VAR opcode = 232 target = 1 parameter1 = 0 parameter2 = 20 timing = 9 special = 102 STR_VAR resource = ~d5famrt0~ END
 IF_EXISTS
+
+COPY_EXISTING ~famquas.itm~ ~override~
+  SAY UNIDENTIFIED_DESC @8032
+  WRITE_ASCII 0x3a ~famfer~ #8
+  WRITE_ASCII 0x58 ~cfamfer~ #8
+  LPF ALTER_ITEM_HEADER STR_VAR icon = ~famfer~ END
+  
+COPY_EXISTING ~famqua25.itm~ ~override~
+  SAY UNIDENTIFIED_DESC @8032
+  WRITE_ASCII 0x3a ~famfer~ #8
+  WRITE_ASCII 0x58 ~cfamfer~ #8
+  LPF ALTER_ITEM_HEADER STR_VAR icon = ~famfer~ END
 
 // mephits___________________________________________________________________________
 //
@@ -1088,6 +1153,11 @@ COPY_EXISTING ~spwi123.spl~ ~override~
 			  ~spcl342.spl~ ~override~
   SAY UNIDENTIFIED_DESC @8002
 IF_EXISTS
+
+COMPILE ~TomeandBlood/data/familiars/famil1.d~
+COMPILE ~TomeandBlood/data/familiars/famil125.d~
+COMPILE ~TomeandBlood/data/familiars/famil3.d~
+COMPILE ~TomeandBlood/data/familiars/famil325.d~
 
 END 	//	end define function
 //____________________________________________________________________________________
