@@ -101,6 +101,10 @@ END 	//	end define function
 DEFINE_ACTION_FUNCTION familiar_choice BEGIN 
 
 INCLUDE ~tomeandblood/lib/SEQUENCER_MENU.tpa~
+
+ACTION_IF (GAME_IS ~eet~) BEGIN
+  COPY ~tomeandblood/data/familiars/spcl342.spl~ ~override~
+END
  
 ACTION_IF (FILE_CONTAINS_EVALUATED (~projectl.ids~ ~[ %TAB%]INAREAPA[ %TAB%%LNL%%MNL%%WNL%]~)) BEGIN
   OUTER_SET party_proj = (IDS_OF_SYMBOL (~projectl~ ~INAREAPA~)) + 1
@@ -358,9 +362,127 @@ ACTION_IF !(VARIABLE_IS_SET %has_familiar_state%) BEGIN
   OUTER_SET has_familiar_state = %new_state_ind%
 END
 
+// advancement scripts and items_____________________________________________________
+//
+/* just use a helmet, maybe
+COPY ~tomeandblood/core/d5_base.spl~ ~override/d5famv2.spl~
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 18 target = 1 parameter1 = 12 parameter2 = 1 timing = 9 END
+*/
+COMPILE ~TomeandBlood/data/familiars/d5famv0.baf~
+
+COPY ~tomeandblood/data/familiars/d5famv2.itm~ ~override~					//	at 5K xp
+COPY ~tomeandblood/data/familiars/d5famv2.itm~ ~override/d5famv3.itm~		//	at 50K xp
+  LPF ALTER_EFFECT INT_VAR match_opcode = 0 parameter1 = 2 END				//	starts at 3
+  LPF ALTER_EFFECT INT_VAR match_opcode = 278 parameter1 = 2 END			//	starts at 17
+  LPF ALTER_EFFECT INT_VAR match_opcode = 325 parameter1 = 2 END			//	starts at 16
+  LPF ALTER_EFFECT INT_VAR match_opcode = 18 parameter1 = 18 parameter2 = 1 END
+COPY ~tomeandblood/data/familiars/d5famv2.itm~ ~override/d5famv4.itm~		//	at 150K xp
+  LPF ALTER_EFFECT INT_VAR match_opcode = 0 parameter1 = 3 END
+  LPF ALTER_EFFECT INT_VAR match_opcode = 278 parameter1 = 3 END
+  LPF ALTER_EFFECT INT_VAR match_opcode = 325 parameter1 = 3 END
+  LPF ALTER_EFFECT INT_VAR match_opcode = 18 parameter1 = 24 parameter2 = 1 END
+COPY ~tomeandblood/data/familiars/d5famv2.itm~ ~override/d5famv5.itm~		//	at 450K xp
+  LPF ALTER_EFFECT INT_VAR match_opcode = 0 parameter1 = 4 END
+  LPF ALTER_EFFECT INT_VAR match_opcode = 278 parameter1 = 4 END
+  LPF ALTER_EFFECT INT_VAR match_opcode = 325 parameter1 = 4 END
+  LPF ALTER_EFFECT INT_VAR match_opcode = 18 parameter1 = 30 parameter2 = 1 END
+COPY ~tomeandblood/data/familiars/d5famv2.itm~ ~override/d5famv6.itm~		//	at 1.25M xp
+  LPF ALTER_EFFECT INT_VAR match_opcode = 0 parameter1 = 5 END
+  LPF ALTER_EFFECT INT_VAR match_opcode = 278 parameter1 = 6 END
+  LPF ALTER_EFFECT INT_VAR match_opcode = 325 parameter1 = 6 END
+  LPF ALTER_EFFECT INT_VAR match_opcode = 18 parameter1 = 36 parameter2 = 1 END
+COPY ~tomeandblood/data/familiars/d5famv2.itm~ ~override/d5famv7.itm~		//	at 2.5M xp
+  LPF ALTER_EFFECT INT_VAR match_opcode = 0 parameter1 = 6 END
+  LPF ALTER_EFFECT INT_VAR match_opcode = 278 parameter1 = 8 END
+  LPF ALTER_EFFECT INT_VAR match_opcode = 325 parameter1 = 8 END
+  LPF ALTER_EFFECT INT_VAR match_opcode = 18 parameter1 = 42 parameter2 = 1 END
+COPY ~tomeandblood/data/familiars/d5famv2.itm~ ~override/d5famv8.itm~		//	at 4M xp
+  LPF ALTER_EFFECT INT_VAR match_opcode = 0 parameter1 = 8 END
+  LPF ALTER_EFFECT INT_VAR match_opcode = 278 parameter1 = 10 END
+  LPF ALTER_EFFECT INT_VAR match_opcode = 325 parameter1 = 10 END
+  LPF ALTER_EFFECT INT_VAR match_opcode = 18 parameter1 = 48 parameter2 = 1 END
+
+COPY ~tomeandblood/data/familiars/d5famv2.spl~ ~override~
+COPY ~tomeandblood/data/familiars/d5famv2.spl~ ~override/d5famv3.spl~
+  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 112 target = 1 timing = 9 STR_VAR resource = ~d5famv2~ END
+  LPF ALTER_EFFECT INT_VAR match_opcode = 143 STR_VAR resource = ~d5famv3~ END
+  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5famv2~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5famv2~ END  
+COPY ~tomeandblood/data/familiars/d5famv2.spl~ ~override/d5famv4.spl~
+  PATCH_FOR_EACH itm IN ~d5famv2~ ~d5famv3~ BEGIN
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 112 target = 1 timing = 9 STR_VAR resource = EVAL ~%itm%~ END
+  END
+  LPF ALTER_EFFECT INT_VAR match_opcode = 143 STR_VAR resource = ~d5famv4~ END
+  PATCH_FOR_EACH rem IN ~d5famv2~ ~d5famv3~ BEGIN
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = EVAL ~%rem%~ END
+  END
+  PATCH_FOR_EACH prt IN ~d5famv2~ ~d5famv3~ BEGIN
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~%prt%~ END  
+  END
+COPY ~tomeandblood/data/familiars/d5famv2.spl~ ~override/d5famv5.spl~
+  PATCH_FOR_EACH itm IN ~d5famv2~ ~d5famv3~ ~d5famv4~ BEGIN
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 112 target = 1 timing = 9 STR_VAR resource = EVAL ~%itm%~ END
+  END
+  LPF ALTER_EFFECT INT_VAR match_opcode = 143 STR_VAR resource = ~d5famv5~ END
+  PATCH_FOR_EACH rem IN ~d5famv2~ ~d5famv3~ ~d5famv4~ BEGIN
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = EVAL ~%rem%~ END
+  END
+  PATCH_FOR_EACH prt IN ~d5famv2~ ~d5famv3~ ~d5famv4~ BEGIN
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~%prt%~ END  
+  END
+COPY ~tomeandblood/data/familiars/d5famv2.spl~ ~override/d5famv6.spl~
+  PATCH_FOR_EACH itm IN ~d5famv2~ ~d5famv3~ ~d5famv4~ ~d5famv5~ BEGIN
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 112 target = 1 timing = 9 STR_VAR resource = EVAL ~%itm%~ END
+  END
+  LPF ALTER_EFFECT INT_VAR match_opcode = 143 STR_VAR resource = ~d5famv6~ END
+  PATCH_FOR_EACH rem IN ~d5famv2~ ~d5famv3~ ~d5famv4~ ~d5famv5~ BEGIN
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = EVAL ~%rem%~ END
+  END
+  PATCH_FOR_EACH prt IN ~d5famv2~ ~d5famv3~ ~d5famv4~ ~d5famv5~ BEGIN
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~%prt%~ END  
+  END
+COPY ~tomeandblood/data/familiars/d5famv2.spl~ ~override/d5famv7.spl~
+  PATCH_FOR_EACH itm IN ~d5famv2~ ~d5famv3~ ~d5famv4~ ~d5famv5~ ~d5famv6~ BEGIN
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 112 target = 1 timing = 9 STR_VAR resource = EVAL ~%itm%~ END
+  END
+  LPF ALTER_EFFECT INT_VAR match_opcode = 143 STR_VAR resource = ~d5famv7~ END
+  PATCH_FOR_EACH rem IN ~d5famv2~ ~d5famv3~ ~d5famv4~ ~d5famv5~ ~d5famv6~ BEGIN
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = EVAL ~%rem%~ END
+  END
+  PATCH_FOR_EACH prt IN ~d5famv2~ ~d5famv3~ ~d5famv4~ ~d5famv5~ ~d5famv6~ BEGIN
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~%prt%~ END  
+  END
+COPY ~tomeandblood/data/familiars/d5famv2.spl~ ~override/d5famv8.spl~
+  PATCH_FOR_EACH itm IN ~d5famv2~ ~d5famv3~ ~d5famv4~ ~d5famv5~ ~d5famv6~ ~d5famv7~ BEGIN
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 112 target = 1 timing = 9 STR_VAR resource = EVAL ~%itm%~ END
+  END
+  LPF ALTER_EFFECT INT_VAR match_opcode = 143 STR_VAR resource = ~d5famv8~ END
+  PATCH_FOR_EACH rem IN ~d5famv2~ ~d5famv3~ ~d5famv4~ ~d5famv5~ ~d5famv6~ ~d5famv7~ BEGIN
+	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 9 STR_VAR resource = EVAL ~%rem%~ END
+  END
+  PATCH_FOR_EACH prt IN ~d5famv2~ ~d5famv3~ ~d5famv4~ ~d5famv5~ ~d5famv6~ ~d5famv7~ BEGIN
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~%prt%~ END  
+  END
+
+
 // pseudodragon______________________________________________________________________
 //
 COPY_EXISTING ~fampsd.cre~ ~override~
+// set to low level
+  WRITE_SHORT 0x24 9		//	hp
+  WRITE_SHORT 0x26 9
+  WRITE_SHORT 0x46 4		//	AC
+  WRITE_SHORT 0x48 4
+  WRITE_BYTE  0x52 17		//	thac0
+  WRITE_BYTE  0x53 1		//	apr
+  WRITE_BYTE  0x54 16		//	saves
+  WRITE_BYTE  0x55 16
+  WRITE_BYTE  0x56 16
+  WRITE_BYTE  0x57 16
+  WRITE_BYTE  0x58 16
+// set override script
+  WRITE_ASCII 0x248 ~D5FAMV0~ #8
+// set skills & resists
   WRITE_BYTE 0x59 25
   WRITE_BYTE 0x5a 25
   WRITE_BYTE 0x5b 25
@@ -453,6 +575,21 @@ COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5fampd0.spl~
   LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 2 parameter1 = %has_familiar_state% parameter2 = 111 timing = 0 duration = 7 STR_VAR resource = ~d5fampd0~ END
 	
 COPY_EXISTING ~fampsd25.cre~ ~override~
+// set to low level
+  WRITE_SHORT 0x24 9		//	hp
+  WRITE_SHORT 0x26 9
+  WRITE_SHORT 0x46 4		//	AC
+  WRITE_SHORT 0x48 4
+  WRITE_BYTE  0x52 17		//	thac0
+  WRITE_BYTE  0x53 1		//	apr
+  WRITE_BYTE  0x54 16		//	saves
+  WRITE_BYTE  0x55 16
+  WRITE_BYTE  0x56 16
+  WRITE_BYTE  0x57 16
+  WRITE_BYTE  0x58 16
+// set override script
+  WRITE_ASCII 0x248 ~D5FAMV0~ #8
+// set skills & resists
   WRITE_BYTE 0x59 25
   WRITE_BYTE 0x5a 25
   WRITE_BYTE 0x5b 25
@@ -496,14 +633,31 @@ COPY_EXISTING ~spwi405.spl~ ~override/d5fampd4.spl~
 
 COPY_EXISTING ~fampsd.itm~ ~override~
   SAY UNIDENTIFIED_DESC @8014
+  SAY IDENTIFIED_DESC @8014
 
 COPY_EXISTING ~fampsd25.itm~ ~override~
   SAY UNIDENTIFIED_DESC @8014
+  SAY IDENTIFIED_DESC @8014
 
 
 //fairy dragon_______________________________________________________________________
 //
 COPY_EXISTING ~famfair.cre~ ~override~
+// set to low level
+  WRITE_SHORT 0x24 9		//	hp
+  WRITE_SHORT 0x26 9
+  WRITE_SHORT 0x46 4		//	AC
+  WRITE_SHORT 0x48 4
+  WRITE_BYTE  0x52 17		//	thac0
+  WRITE_BYTE  0x53 1		//	apr
+  WRITE_BYTE  0x54 16		//	saves
+  WRITE_BYTE  0x55 16
+  WRITE_BYTE  0x56 16
+  WRITE_BYTE  0x57 16
+  WRITE_BYTE  0x58 16
+// set override script
+  WRITE_ASCII 0x248 ~D5FAMV0~ #8
+// set skills & resists
   WRITE_BYTE 0x59 25
   WRITE_BYTE 0x5a 25
   WRITE_BYTE 0x5b 25
@@ -523,6 +677,21 @@ COPY_EXISTING ~famfair.cre~ ~override~
 IF_EXISTS
 
 COPY_EXISTING ~famfai25.cre~ ~override~
+// set to low level
+  WRITE_SHORT 0x24 9		//	hp
+  WRITE_SHORT 0x26 9
+  WRITE_SHORT 0x46 4		//	AC
+  WRITE_SHORT 0x48 4
+  WRITE_BYTE  0x52 17		//	thac0
+  WRITE_BYTE  0x53 1		//	apr
+  WRITE_BYTE  0x54 16		//	saves
+  WRITE_BYTE  0x55 16
+  WRITE_BYTE  0x56 16
+  WRITE_BYTE  0x57 16
+  WRITE_BYTE  0x58 16
+// set override script
+  WRITE_ASCII 0x248 ~D5FAMV0~ #8
+// set skills & resists
   WRITE_BYTE 0x59 25
   WRITE_BYTE 0x5a 25
   WRITE_BYTE 0x5b 25
@@ -544,6 +713,21 @@ IF_EXISTS
 //ferret_____________________________________________________________________________
 //
 COPY_EXISTING ~famfer.cre~ ~override~
+// set to low level
+  WRITE_SHORT 0x24 9		//	hp
+  WRITE_SHORT 0x26 9
+  WRITE_SHORT 0x46 4		//	AC
+  WRITE_SHORT 0x48 4
+  WRITE_BYTE  0x52 17		//	thac0
+  WRITE_BYTE  0x53 1		//	apr
+  WRITE_BYTE  0x54 16		//	saves
+  WRITE_BYTE  0x55 16
+  WRITE_BYTE  0x56 16
+  WRITE_BYTE  0x57 16
+  WRITE_BYTE  0x58 16
+// set override script
+  WRITE_ASCII 0x248 ~D5FAMV0~ #8
+// set skills & resists
   WRITE_BYTE 0x6a 80																// pick pockets
   WRITE_BYTE 0x59 25
   WRITE_BYTE 0x5a 25
@@ -601,6 +785,21 @@ COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5famfr0.spl~
   LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 2 parameter1 = %has_familiar_state% parameter2 = 111 timing = 0 duration = 7 STR_VAR resource = ~d5famfr0~ END
 
 COPY_EXISTING ~famfer25.cre~ ~override~
+// set to low level
+  WRITE_SHORT 0x24 9		//	hp
+  WRITE_SHORT 0x26 9
+  WRITE_SHORT 0x46 4		//	AC
+  WRITE_SHORT 0x48 4
+  WRITE_BYTE  0x52 17		//	thac0
+  WRITE_BYTE  0x53 1		//	apr
+  WRITE_BYTE  0x54 16		//	saves
+  WRITE_BYTE  0x55 16
+  WRITE_BYTE  0x56 16
+  WRITE_BYTE  0x57 16
+  WRITE_BYTE  0x58 16
+// set override script
+  WRITE_ASCII 0x248 ~D5FAMV0~ #8
+// set skills & resists
   WRITE_BYTE 0x6a 100																// pick pockets
   WRITE_BYTE 0x59 25
   WRITE_BYTE 0x5a 25
@@ -625,14 +824,31 @@ IF_EXISTS
 
 COPY_EXISTING ~famfer.itm~ ~override~
   SAY UNIDENTIFIED_DESC @8018
+  SAY IDENTIFIED_DESC @8018
 
 COPY_EXISTING ~famfer25.itm~ ~override~
   SAY UNIDENTIFIED_DESC @8018
+  SAY IDENTIFIED_DESC @8018
 
 
 // rabbit____________________________________________________________________________
 //
 COPY_EXISTING ~famrab.cre~ ~override~
+// set to low level
+  WRITE_SHORT 0x24 9		//	hp
+  WRITE_SHORT 0x26 9
+  WRITE_SHORT 0x46 4		//	AC
+  WRITE_SHORT 0x48 4
+  WRITE_BYTE  0x52 17		//	thac0
+  WRITE_BYTE  0x53 1		//	apr
+  WRITE_BYTE  0x54 16		//	saves
+  WRITE_BYTE  0x55 16
+  WRITE_BYTE  0x56 16
+  WRITE_BYTE  0x57 16
+  WRITE_BYTE  0x58 16
+// set override script
+  WRITE_ASCII 0x248 ~D5FAMV0~ #8
+// set skills & resists
   WRITE_BYTE 0x69 80																// find traps
   WRITE_BYTE 0x59 25
   WRITE_BYTE 0x5a 25
@@ -673,6 +889,21 @@ COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5famrb0.spl~
   LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 2 parameter1 = %has_familiar_state% parameter2 = 111 timing = 0 duration = 7 STR_VAR resource = ~d5famrb0~ END
    
 COPY_EXISTING ~famrab25.cre~ ~override~
+// set to low level
+  WRITE_SHORT 0x24 9		//	hp
+  WRITE_SHORT 0x26 9
+  WRITE_SHORT 0x46 4		//	AC
+  WRITE_SHORT 0x48 4
+  WRITE_BYTE  0x52 17		//	thac0
+  WRITE_BYTE  0x53 1		//	apr
+  WRITE_BYTE  0x54 16		//	saves
+  WRITE_BYTE  0x55 16
+  WRITE_BYTE  0x56 16
+  WRITE_BYTE  0x57 16
+  WRITE_BYTE  0x58 16
+// set override script
+  WRITE_ASCII 0x248 ~D5FAMV0~ #8
+// set skills & resists
   WRITE_BYTE 0x69 100																// find traps
   WRITE_BYTE 0x59 25
   WRITE_BYTE 0x5a 25
@@ -703,14 +934,33 @@ IF_EXISTS
 
 COPY_EXISTING ~famrab.itm~ ~override~
   SAY UNIDENTIFIED_DESC @8020
+  SAY IDENTIFIED_DESC @8020
 
 COPY_EXISTING ~famrab25.itm~ ~override~
   SAY UNIDENTIFIED_DESC @8020
+  SAY IDENTIFIED_DESC @8020
 
 
 // cat_______________________________________________________________________________
 //
+COPY ~TomeandBlood/data/familiars/d5clck6.itm~ ~override~
+
 COPY_EXISTING ~famcat.cre~ ~override~
+// set to low level
+  WRITE_SHORT 0x24 9		//	hp
+  WRITE_SHORT 0x26 9
+  WRITE_SHORT 0x46 4		//	AC
+  WRITE_SHORT 0x48 4
+  WRITE_BYTE  0x52 17		//	thac0
+  WRITE_BYTE  0x53 1		//	apr
+  WRITE_BYTE  0x54 16		//	saves
+  WRITE_BYTE  0x55 16
+  WRITE_BYTE  0x56 16
+  WRITE_BYTE  0x57 16
+  WRITE_BYTE  0x58 16
+// set override script
+  WRITE_ASCII 0x248 ~D5FAMV0~ #8
+// set skills & resists
   WRITE_BYTE 0x45 90																// hide in shadows
   WRITE_BYTE 0x68 90																// move silently
   WRITE_BYTE 0x59 25
@@ -731,7 +981,7 @@ COPY_EXISTING ~famcat.cre~ ~override~
   LPF ADD_CRE_EFFECT INT_VAR opcode = 0 target = 1 parameter1 = 4 parameter2 = 2 timing = 9 END 	// missile AC bonus
   LPF ADD_CRE_EFFECT INT_VAR opcode = 232 target = 1 parameter1 = 0 parameter2 = 20 timing = 9 special = 102 STR_VAR resource = ~d5famct0~ END
   ADD_CRE_ITEM ~reghp1~ #0 #0 #0 ~IDENTIFIED~ ~RRING LRING~
-  ADD_CRE_ITEM ~clck06~ #0 #0 #0 ~IDENTIFIED~ ~CLOAK~
+  ADD_CRE_ITEM ~d5clck6~ #0 #0 #0 ~IDENTIFIED~ ~CLOAK~
 IF_EXISTS
 
 COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5famct0.spl~
@@ -741,6 +991,21 @@ COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5famct0.spl~
   LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 2 parameter1 = %has_familiar_state% parameter2 = 111 timing = 0 duration = 7 STR_VAR resource = ~d5famct0~ END
    
 COPY_EXISTING ~famcat25.cre~ ~override~
+// set to low level
+  WRITE_SHORT 0x24 9		//	hp
+  WRITE_SHORT 0x26 9
+  WRITE_SHORT 0x46 4		//	AC
+  WRITE_SHORT 0x48 4
+  WRITE_BYTE  0x52 17		//	thac0
+  WRITE_BYTE  0x53 1		//	apr
+  WRITE_BYTE  0x54 16		//	saves
+  WRITE_BYTE  0x55 16
+  WRITE_BYTE  0x56 16
+  WRITE_BYTE  0x57 16
+  WRITE_BYTE  0x58 16
+// set override script
+  WRITE_ASCII 0x248 ~D5FAMV0~ #8
+// set skills & resists
   WRITE_BYTE 0x45 110																// hide in shadows
   WRITE_BYTE 0x68 110																// move silently
   WRITE_BYTE 0x59 25
@@ -761,14 +1026,16 @@ COPY_EXISTING ~famcat25.cre~ ~override~
   LPF ADD_CRE_EFFECT INT_VAR opcode = 0 target = 1 parameter1 = 4 parameter2 = 2 timing = 9 END 	// missile AC bonus
   LPF ADD_CRE_EFFECT INT_VAR opcode = 232 target = 1 parameter1 = 0 parameter2 = 20 timing = 9 special = 102 STR_VAR resource = ~d5famct0~ END
   ADD_CRE_ITEM ~reghp1~ #0 #0 #0 ~IDENTIFIED~ ~RRING LRING~
-  ADD_CRE_ITEM ~clck06~ #0 #0 #0 ~IDENTIFIED~ ~CLOAK~
+  ADD_CRE_ITEM ~d5clck6~ #0 #0 #0 ~IDENTIFIED~ ~CLOAK~
 IF_EXISTS
 
 COPY_EXISTING ~famcat.itm~ ~override~
   SAY UNIDENTIFIED_DESC @8022
+  SAY IDENTIFIED_DESC @8022
 
 COPY_EXISTING ~famcat25.itm~ ~override~
   SAY UNIDENTIFIED_DESC @8022
+  SAY IDENTIFIED_DESC @8022
 
 
 // imp--> spider_____________________________________________________________________
@@ -778,6 +1045,21 @@ COPY_EXISTING ~famimp.cre~ ~override~
   SAY 0x0c @8025
   WRITE_BYTE 0x272 116
   WRITE_LONG 0x28 32559																// spider animation
+// set to low level
+  WRITE_SHORT 0x24 9		//	hp
+  WRITE_SHORT 0x26 9
+  WRITE_SHORT 0x46 4		//	AC
+  WRITE_SHORT 0x48 4
+  WRITE_BYTE  0x52 17		//	thac0
+  WRITE_BYTE  0x53 1		//	apr
+  WRITE_BYTE  0x54 16		//	saves
+  WRITE_BYTE  0x55 16
+  WRITE_BYTE  0x56 16
+  WRITE_BYTE  0x57 16
+  WRITE_BYTE  0x58 16
+// set override script
+  WRITE_ASCII 0x248 ~D5FAMV0~ #8
+// set skills & resists
   WRITE_BYTE 0x59 25
   WRITE_BYTE 0x5a 25
   WRITE_BYTE 0x5b 25
@@ -960,6 +1242,21 @@ COPY_EXISTING ~famimp25.cre~ ~override~
 //  WRITE_LONG 0x0c RESOLVE_STR_REF (@8025)
   WRITE_BYTE 0x272 116
   WRITE_LONG 0x28 32559																// spider animation
+// set to low level
+  WRITE_SHORT 0x24 9		//	hp
+  WRITE_SHORT 0x26 9
+  WRITE_SHORT 0x46 4		//	AC
+  WRITE_SHORT 0x48 4
+  WRITE_BYTE  0x52 17		//	thac0
+  WRITE_BYTE  0x53 1		//	apr
+  WRITE_BYTE  0x54 16		//	saves
+  WRITE_BYTE  0x55 16
+  WRITE_BYTE  0x56 16
+  WRITE_BYTE  0x57 16
+  WRITE_BYTE  0x58 16
+// set override script
+  WRITE_ASCII 0x248 ~D5FAMV0~ #8
+// set skills & resists
   WRITE_BYTE 0x59 25
   WRITE_BYTE 0x5a 25
   WRITE_BYTE 0x5b 25
@@ -986,12 +1283,14 @@ IF_EXISTS
 
 COPY_EXISTING ~famimp.itm~ ~override~
   SAY UNIDENTIFIED_DESC @8026
+  SAY IDENTIFIED_DESC @8026
   WRITE_ASCII 0x3a ~imisc3e~ #8
   WRITE_ASCII 0x58 ~cmisc3e~ #8
   LPF ALTER_ITEM_HEADER STR_VAR icon = ~imisc3e~ END
 
 COPY_EXISTING ~famimp25.itm~ ~override~
   SAY UNIDENTIFIED_DESC @8026
+  SAY IDENTIFIED_DESC @8026
   WRITE_ASCII 0x3a ~imisc3e~ #8
   WRITE_ASCII 0x58 ~cmisc3e~ #8
   LPF ALTER_ITEM_HEADER STR_VAR icon = ~imisc3e~ END
@@ -1004,6 +1303,21 @@ COPY_EXISTING ~famquas.cre~ ~override~
   SAY 0x0c @8031
   WRITE_BYTE 0x272 151
   WRITE_LONG 0x28 49920																// rat animation
+// set to low level
+  WRITE_SHORT 0x24 9		//	hp
+  WRITE_SHORT 0x26 9
+  WRITE_SHORT 0x46 4		//	AC
+  WRITE_SHORT 0x48 4
+  WRITE_BYTE  0x52 17		//	thac0
+  WRITE_BYTE  0x53 1		//	apr
+  WRITE_BYTE  0x54 16		//	saves
+  WRITE_BYTE  0x55 16
+  WRITE_BYTE  0x56 16
+  WRITE_BYTE  0x57 16
+  WRITE_BYTE  0x58 16
+// set override script
+  WRITE_ASCII 0x248 ~D5FAMV0~ #8
+// set skills & resists
   WRITE_BYTE 0x59 25
   WRITE_BYTE 0x5a 25
   WRITE_BYTE 0x5b 25
@@ -1032,6 +1346,8 @@ IF_EXISTS
 // make rat version of wish bunnies, 1d6 summons
 COPY ~tomeandblood/data/familiars/d5famrt1.bam~ ~override~
 COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5famrt1.spl~
+  SAY NAME1 @8115
+  SAY UNIDENTIFIED_DESC @8115
   LPF ALTER_SPELL_HEADER INT_VAR target = 5 STR_VAR icon = ~d5famrt1~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 67 target = 1 parameter2 = 2 timing = 0 duration = 30 probability1 = 100 STR_VAR resource = ~d5ratsu~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 67 target = 1 parameter2 = 2 timing = 0 duration = 30 probability1 = 85 STR_VAR resource = ~d5ratsu~ END
@@ -1072,6 +1388,21 @@ COPY_EXISTING ~famqua25.cre~ ~override~
   SAY 0x0c @8031
   WRITE_BYTE 0x272 151
   WRITE_LONG 0x28 49920																// rat animation
+// set to low level
+  WRITE_SHORT 0x24 9		//	hp
+  WRITE_SHORT 0x26 9
+  WRITE_SHORT 0x46 4		//	AC
+  WRITE_SHORT 0x48 4
+  WRITE_BYTE  0x52 17		//	thac0
+  WRITE_BYTE  0x53 1		//	apr
+  WRITE_BYTE  0x54 16		//	saves
+  WRITE_BYTE  0x55 16
+  WRITE_BYTE  0x56 16
+  WRITE_BYTE  0x57 16
+  WRITE_BYTE  0x58 16
+// set override script
+  WRITE_ASCII 0x248 ~D5FAMV0~ #8
+// set skills & resists
   WRITE_BYTE 0x59 25
   WRITE_BYTE 0x5a 25
   WRITE_BYTE 0x5b 25
@@ -1095,12 +1426,14 @@ IF_EXISTS
 
 COPY_EXISTING ~famquas.itm~ ~override~
   SAY UNIDENTIFIED_DESC @8032
+  SAY IDENTIFIED_DESC @8032
   WRITE_ASCII 0x3a ~famfer~ #8
   WRITE_ASCII 0x58 ~cfamfer~ #8
   LPF ALTER_ITEM_HEADER STR_VAR icon = ~famfer~ END
   
 COPY_EXISTING ~famqua25.itm~ ~override~
   SAY UNIDENTIFIED_DESC @8032
+  SAY IDENTIFIED_DESC @8032
   WRITE_ASCII 0x3a ~famfer~ #8
   WRITE_ASCII 0x58 ~cfamfer~ #8
   LPF ALTER_ITEM_HEADER STR_VAR icon = ~famfer~ END
@@ -1110,6 +1443,21 @@ COPY_EXISTING ~famqua25.itm~ ~override~
 COPY_EXISTING ~famdust.cre~ ~override~
   WRITE_LONG 0x08 RESOLVE_STR_REF (@8027)
   WRITE_LONG 0x0c RESOLVE_STR_REF (@8027)
+// set to low level
+  WRITE_SHORT 0x24 9		//	hp
+  WRITE_SHORT 0x26 9
+  WRITE_SHORT 0x46 4		//	AC
+  WRITE_SHORT 0x48 4
+  WRITE_BYTE  0x52 17		//	thac0
+  WRITE_BYTE  0x53 1		//	apr
+  WRITE_BYTE  0x54 16		//	saves
+  WRITE_BYTE  0x55 16
+  WRITE_BYTE  0x56 16
+  WRITE_BYTE  0x57 16
+  WRITE_BYTE  0x58 16
+// set override script
+  WRITE_ASCII 0x248 ~D5FAMV0~ #8
+// set skills & resists
   WRITE_BYTE 0x59 25
   WRITE_BYTE 0x5a 25
   WRITE_BYTE 0x5b 25
@@ -1132,6 +1480,21 @@ IF_EXISTS
 COPY_EXISTING ~famdus25.cre~ ~override~
   WRITE_LONG 0x08 RESOLVE_STR_REF (@8027)
   WRITE_LONG 0x0c RESOLVE_STR_REF (@8027)
+// set to low level
+  WRITE_SHORT 0x24 9		//	hp
+  WRITE_SHORT 0x26 9
+  WRITE_SHORT 0x46 4		//	AC
+  WRITE_SHORT 0x48 4
+  WRITE_BYTE  0x52 17		//	thac0
+  WRITE_BYTE  0x53 1		//	apr
+  WRITE_BYTE  0x54 16		//	saves
+  WRITE_BYTE  0x55 16
+  WRITE_BYTE  0x56 16
+  WRITE_BYTE  0x57 16
+  WRITE_BYTE  0x58 16
+// set override script
+  WRITE_ASCII 0x248 ~D5FAMV0~ #8
+// set skills & resists
   WRITE_BYTE 0x59 25
   WRITE_BYTE 0x5a 25
   WRITE_BYTE 0x5b 25
@@ -1151,7 +1514,7 @@ IF_EXISTS
 
 COPY_EXISTING ~spwi123.spl~ ~override~
 			  ~spcl342.spl~ ~override~
-  SAY UNIDENTIFIED_DESC @8002
+  SAY UNIDENTIFIED_DESC @8004
 IF_EXISTS
 
 COMPILE ~TomeandBlood/data/familiars/famil1.d~
@@ -1711,13 +2074,9 @@ END 	//	end define function
 // -----------------------------
 
 // figure out how the FF CON loss works, and eliminate it.
-
 // add a 101 effect to FF that blocks opcode 18 for 0 seconds
-
 // remove the 195 effect from the familiar after it is summoned
-
 // OR just give the familiar or the caster (figure out which!) perm 101 vs. op195
-
 // add an aura to familiars increasing summoner's hp by 10% or so...
 // ...IF can get familiar auras working!
 

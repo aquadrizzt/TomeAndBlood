@@ -1,6 +1,6 @@
 BACKUP ~TomeAndBlood/backup~
 AUTHOR ~aquadrizzt@gmail.com~
-VERSION ~0.8.46~ 
+VERSION ~0.8.47~ 
 
 ALWAYS
 
@@ -438,6 +438,7 @@ INCLUDE ~TomeAndBlood/comp/setup_familiars.tpa~
 
 LAF familiar_choice END
 LAF familiar_changes END
+LAF indelible_familiars END
 
 
 // -----------------------------
@@ -461,6 +462,7 @@ LAF imbue_familiars END
 BEGIN @69
 DESIGNATED 69
 REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee iwdee eet~) @1
+FORBID_COMPONENT ~TomeandBlood.tp2~ ~67~ @4
 GROUP @7
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_indelible_familiars.qd~ //detection for this component 

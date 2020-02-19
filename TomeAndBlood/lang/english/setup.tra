@@ -1,6 +1,7 @@
 @1 = ~This component is not available for Baldur's Gate, Icewind Dale or Icewind Dale 2.~ 
 @2 = ~This component is only available for the Enhanced Editions.~ 
 @3 = ~This component requires the Enhanced Engine v2.0 or later.~ 
+@4 = ~skipping, for reasons~
 @5 = ~Arcane Spell Tweaks~
 @6 = ~New and Revised Arcane Kits~
 @7 = ~Mechanics Tweaks (crafting, sequencers, cantrips, familiars, ability bonuses)~
@@ -1736,13 +1737,6 @@ When this spell is cast, name and enchantments (including curses) of one item su
 
 At 5th, 9th, and 13th level, the number of items that can be identified by this spell increases by 1 (to a maximum of 4 items at 13th level).
 ~
-@8011  = ~Pseudodragon~
-@8012  = ~Pseudodragon: this is a tiny, distant relative of full dragons. The pseudodragon can cast Cure Light Wounds, and Blur, and use a colorful 'breath weapon' that mimics the Color Spray spell, once every 3 turns. (At high levels, the Blur improves to a full Improved Invisibility effect.) They can attack twice per round and while their claws are small, they deliver a mild intoxicant which can render the target drowsy and clumsy (mimicking the effects of a Slow spell, for two rounds). 
-
-While this familiar is near its master, the summoner regenerates 1 hit point per round.
-
-As pseudodragons can fly, they are impervious to the effects of Grease, Entangle, Web, and similar spells. As with all familiars, their magical connection to the life force of their master renders them immune to petrification and level drain effects.
-~
 @8002  = ~Find Familiar
 (Conjuration/Summoning)
 
@@ -1759,43 +1753,39 @@ This spell enables the caster to summon a familiar to act as <PRO_HISHER> aide a
 
 A familiar is more intelligent than others of its type. Its bond with the wizard confers upon it an exceptionally long life, allows it to regenerate 1 hit point per round, and to resist petrification and level drain effects. The caster receives half the familiar's total Hit Points (rounded down) as bonus Hit Points. However, the caster must take care to treat <PRO_HISHER> familiar well, for if the familiar should die, the caster loses the bonus Hit Points and the familiar's Hit Points again as damage. Also when a familiar dies, the caster loses 1 point of Constitution PERMANENTLY.
 
+At 1st level, all familiars share the following characteristics: 9 hit points, AC 4, thac0 17, saving throws 16, 25% magic and damage resistance, immunity to level drain and petrification. At certain experience thresholds - 5,000 / 50,000 / 150,000 / 450,000 / 1,250,000 / 2,500,000 / 4,000,000 - the familiar's hit points, AC, thac0 and saving throws will improve.
+
 Here is a list of the familiars that the player may choose:
 
 Pseudo Dragon
-- Armor Class: 2
-- Magic and Damage Resistance: 25%
-- Combat: 2 attacks per round for 1d3 damage; save or be Slowed for 2 rounds
-- Special Abilities: Can cast Blur and Cure Light Wounds, and use a Color Spray breath weapon, once every 3 turns.
+- Combat: 1 attack per round for 1d3 damage; save or be Slowed for 2 rounds
+- Special Abilities: can cast Blur and Cure Light Wounds, and use a Color Spray breath weapon, once every 3 turns.
+- Special Benefit: the pseudodragon's summoner regenerates 1 hit point per round.
 
 Ferret
-- Armor Class: 2
-- Magic and Damage Resistance: 25%
-- Combat: 2 attacks per round for 1d3 damage
-- Special Abilities: Has 80% Pick Pockets score. Can emit a small aura of Nauseating Stench once per turn. Fir five round, enemies near the ferret must save or suffer 2-point penalties to hit and AC and a 30% chance of casting failure.
+- Combat: 1 attack per round for 1d3 damage
+- Special Abilities: has 80% Pick Pockets score. Can emit a small aura of Nauseating Stench once per turn. For five round, enemies near the ferret must save or suffer 2-point penalties to hit and AC and a 30% chance of casting failure.
+- Special Benefit: the ferret's summoner has a +1 bonus to Constitution.
 
 Rabbit
-- Armor Class: 2
-- Magic and Damage Resistance: 25%
-- Combat: 2 attacks per round for 1d2 damage
-- Special Abilities: Has 80% Detect Traps score. Can burrow into the ground to escape danger - similar to the Shadowstep ability - once per turn.
+- Combat: 1 attack per round for 1d2 damage
+- Special Abilities: has 80% Detect Traps score. Can burrow into the ground to escape danger - similar to the Shadowstep ability - once per turn.
+- Special Benefit: the rabbit's summoner is immune to Slow effects.
 
 Cat
-- Armor Class: 2
-- Magic and Damage Resistance: 25%
-- Combat: 2 attacks per round for 1d3 damage
-- Special Abilities: Has 99% in Move Silently/Hide in Shadows, and is Nondetectable (as the spell) to magic divinations.
+- Combat: 1 attack per round for 1d3 damage
+- Special Abilities: has 99% in Move Silently/Hide in Shadows, and is Nondetectable (as the spell) to magic divinations.
+- Special Benefit: the cat's summoner has a +1 bonus to Dexterity.
 
 Spider
-- Armor Class: 2
-- Magic and Damage Resistance: 25%
-- Combat: 2 attacks per round for 1d2 damage; save or take 3 poison damage over 1 round
-- Special Abilities: Can cast a single-target Web, which can tangle the target for 3 rounds, once per 5 rounds.
+- Combat: 1 attack per round for 1d2 damage; save or take 3 poison damage over 1 round
+- Special Abilities: can cast a single-target Web, which can tangle the target for 3 rounds, once per 5 rounds.
+- Special Benefit: the spider's summoner has an extra chance to resist being affected by poisons.
 
 Rat
-- Armor Class: 2
-- Magic and Damage Resistance: 25%
-- Combat: 2 attacks per round for 1d2 damage; save or be diseased for 3 rounds, with reduced Strength and a 30% chance of casting failure
-- Special Abilities: Can summon a cohort of 1d6 more rats to defend it, once per 3 turns.
+- Combat: 1 attack per round for 1d2 damage; save or be diseased for 3 rounds, with reduced Strength and a 30% chance of casting failure
+- Special Abilities: can summon a cohort of 1d6 more rats to defend it, once per 3 turns.
+- Special Benefit: the rat's summoner has a +1 bonus to Intelligence.
 ~
 @8003  = ~Find Familiar
 (Conjuration/Summoning)
@@ -1885,43 +1875,46 @@ This spell enables the caster to summon a familiar to act as <PRO_HISHER> aide a
 
 The wizard has an empathic link with the familiar and can issue it mental commands. The creature is always more intelligent than others of its type (typically by 2 or 3 Intelligence points). Its bond with the wizard confers upon it an exceptionally long life and prevents it from truly dying. If the familiar should 'die' in combat the caster may cast Find Familiar again a day later to re-summon it.
 
+At 1st level, all familiars share the following characteristics: 9 hit points, AC 4, thac0 17, saving throws 16, 25% magic and damage resistance, immunity to level drain and petrification. At certain experience thresholds - 5,000 / 50,000 / 150,000 / 450,000 / 1,250,000 / 2,500,000 / 4,000,000 - the familiar's hit points, AC, thac0 and saving throws will improve.
+
 Here is a list of the familiars that the player may choose:
 
 Pseudo Dragon
-- Armor Class: 2
-- Magic and Damage Resistance: 25%
-- Combat: 2 attacks per round for 1d3 damage; save or be Slowed for 2 rounds
-- Special Abilities: Can cast Blur and Cure Light Wounds, and use a Color Spray breath weapon, once every 3 turns.
+- Combat: 1 attack per round for 1d3 damage; save or be Slowed for 2 rounds
+- Special Abilities: can cast Blur and Cure Light Wounds, and use a Color Spray breath weapon, once every 3 turns.
+- Special Benefit: the pseudodragon's summoner has a 10% higher total hit point total, and regenerates 1 hit point per round.
 
 Ferret
-- Armor Class: 2
-- Magic and Damage Resistance: 25%
-- Combat: 2 attacks per round for 1d3 damage
-- Special Abilities: Has 80% Pick Pockets score. Can emit a small aura of Nauseating Stench once per turn. Fir five round, enemies near the ferret must save or suffer 2-point penalties to hit and AC and a 30% chance of casting failure.
+- Combat: 1 attack per round for 1d3 damage
+- Special Abilities: has 80% Pick Pockets score. Can emit a small aura of Nauseating Stench once per turn. For five round, enemies near the ferret must save or suffer 2-point penalties to hit and AC and a 30% chance of casting failure.
+- Special Benefit: the ferret's summoner has a 10% higher total hit point total, and has a +1 bonus to Constitution.
 
 Rabbit
-- Armor Class: 2
-- Magic and Damage Resistance: 25%
-- Combat: 2 attacks per round for 1d2 damage
-- Special Abilities: Has 80% Detect Traps score. Can burrow into the ground to escape danger - similar to the Shadowstep ability - once per turn.
+- Combat: 1 attack per round for 1d2 damage
+- Special Abilities: has 80% Detect Traps score. Can burrow into the ground to escape danger - similar to the Shadowstep ability - once per turn.
+- Special Benefit: the rabbit's summoner has a 10% higher total hit point total, and is immune to Slow effects.
 
 Cat
-- Armor Class: 2
-- Magic and Damage Resistance: 25%
-- Combat: 2 attacks per round for 1d3 damage
-- Special Abilities: Has 99% in Move Silently/Hide in Shadows, and is Nondetectable (as the spell) to magic divinations.
+- Combat: 1 attack per round for 1d3 damage
+- Special Abilities: has 99% in Move Silently/Hide in Shadows, and is Nondetectable (as the spell) to magic divinations.
+- Special Benefit: the cat's summoner has a 10% higher total hit point total, and has a +1 bonus to Dexterity.
 
 Spider
-- Armor Class: 2
-- Magic and Damage Resistance: 25%
-- Combat: 2 attacks per round for 1d2 damage; save or take 3 poison damage over 1 round
-- Special Abilities: Can cast a single-target Web, which can tangle the target for 3 rounds, once per 5 rounds.
+- Combat: 1 attack per round for 1d2 damage; save or take 3 poison damage over 1 round
+- Special Abilities: can cast a single-target Web, which can tangle the target for 3 rounds, once per 5 rounds.
+- Special Benefit: the spider's summoner has a 10% higher total hit point total, and has an extra chance to resist being affected by poisons.
 
 Rat
-- Armor Class: 2
-- Magic and Damage Resistance: 25%
-- Combat: 2 attacks per round for 1d2 damage; save or be diseased for 3 rounds, with reduced Strength and a 30% chance of casting failure
-- Special Abilities: Can summon a cohort of 1d6 more rats to defend it, once per 3 turns.
+- Combat: 1 attack per round for 1d2 damage; save or be diseased for 3 rounds, with reduced Strength and a 30% chance of casting failure
+- Special Abilities: can summon a cohort of 1d6 more rats to defend it, once per 3 turns.
+- Special Benefit: the rat's summoner has a 10% higher total hit point total, and has a +1 bonus to Intelligence.
+~
+@8011  = ~Pseudodragon~
+@8012  = ~Pseudodragon: this is a tiny, distant relative of full dragons. The pseudodragon can cast Cure Light Wounds, and Blur, and use a colorful 'breath weapon' that mimics the Color Spray spell, once every 3 turns. (At high levels, the Blur improves to a full Improved Invisibility effect.) They can attack twice per round and while their claws are small, they deliver a mild intoxicant which can render the target drowsy and clumsy (mimicking the effects of a Slow spell, for two rounds). 
+
+While this familiar is near its master, the summoner regenerates 1 hit point per round.
+
+As pseudodragons can fly, they are impervious to the effects of Grease, Entangle, Web, and similar spells. As with all familiars, their magical connection to the life force of their master renders them immune to petrification and level drain effects.
 ~
 @8013  = ~Pseudodragon~
 @8014  = ~Pseudodragon: pseudodragons are quite intelligent. While small, they are  quick and fairly well-armored. They do not do much damage in combat, but their magical claws are able to render some enemies unconscious. It is also quite resistant to magical spells.
