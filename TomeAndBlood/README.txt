@@ -1,6 +1,6 @@
 # TomeAndBlood
 
-Tome And Blood: More Options for Wizards and Sorcerers v0.8.45
+Tome And Blood: More Options for Wizards and Sorcerers v0.8.48
 
 ## Overview
 
@@ -11,10 +11,6 @@ Tome and Blood is a mod that revises and expands the class options for Mages and
 COMPONENT 11: Rebalanced Spell Schools
 
 This component changes the school of various spells, to make sure there is at least one spell at each level in each school, and that specialists of different schools are better-balanced against one another.
-
-COMPONENT 12: General Spell Tweaks
-
-Buffs to Symbol: Fear, Shapechange, Black Blade of Disaster, and Energy Drain.  More to come, maybe.
 
 COMPONENT 13: Revised Illusionary Clones
 
@@ -29,6 +25,10 @@ This component makes Mislead and Project Image work just as Simulacrum does, exc
 COMPONENT 14: Revised Invisiblity
 
 This component merges the effects of Invisibility and Sanctuary (you can now loot chests and open doors while invisible :) ).  The upshot is, if you cast 2nd-level Detect Invisible, the caster will be able to see and target invisible enemies but other party members who cannot see invisible cannot.  It also replaces the 3rd-level arcane spell "Detect Illusions" with the 3rd-level divine spell "Invisibility Purge."
+
+COMPONENT 16: Revised Identify Spell
+
+This component changes Identify into a 2nd-level spell, and allows it to scale with level, such that at 15th level the caster can identify 4 items with a single casting of the spell. (NB: this involves modifications to the UI. It may not work with some UI overhauls installed beforehand, and it likely won't work with any UI overhauls installed afterward.)
 
 COMPONENT 20: Revised Dragon Disciples
 
@@ -76,7 +76,7 @@ COMPONENTS 61, 62, 63: Cantrips
 
 Component 61 allows mages and sorcerers to use one cantrip as an innate ability with unlimited uses.
 
-Component 62 allows mages and sorcerers and bards to cast an unlimited number of 1st-level spells without needing to rest.  Some spells are slightly rebalanced to account for this.
+Component 62 allows mages and sorcerers and bards to cast an unlimited number of 1st-level spells without needing to rest. Some spells are slightly rebalanced or moved to 2nd level to account for this.
 
 Component 63 gives you a "wand" that you equip in a weapon slot, which allows you to use one of eight cantrips as item abilities with unlimited uses.
 

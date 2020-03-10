@@ -648,12 +648,14 @@ END
 //SR Dimension Jump: move to 2nd level
 //
 ACTION_IF (FILE_CONTAINS_EVALUATED (~SPELL.IDS~ ~[ %TAB%]WIZARD_DIMENSION_JUMP[ %TAB%%LNL%%MNL%%WNL%]~)) BEGIN
+/*
   LAF RES_NUM_OF_SPELL_NAME
 	STR_VAR spell_name = ~WIZARD_DIMENSION_JUMP~
 	RET spell_res
   END
-  COPY_EXISTING ~%spell_res%.spl~ ~override~
-  ADD_SPELL ~override/%spell_res%.spl~ 2 2 WIZARD_DIMENSION_JUMP
+  ACTION_IF (FILE_EXISTS_IN_GAME ~%spell_res%.spl~) BEGIN
+   COPY_EXISTING ~%spell_res%.spl~ ~override~
+   ADD_SPELL ~override/%spell_res%.spl~ 2 2 WIZARD_DIMENSION_JUMP
 	WRITE_LONG 0x34 2
 	READ_LONG 0x50 "valid"
 	PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
@@ -663,6 +665,7 @@ ACTION_IF (FILE_CONTAINS_EVALUATED (~SPELL.IDS~ ~[ %TAB%]WIZARD_DIMENSION_JUMP[ 
 		END
 		SAY_EVALUATED 0x50 ~%new_desc%~
 	END
+  END
   ACTION_IF (FILE_EXISTS_IN_GAME ~scrl1v.itm~) BEGIN
 	COPY_EXISTING ~scrl1v.itm~ ~override~
 		WRITE_LONG 0x34 200
@@ -679,6 +682,7 @@ ACTION_IF (FILE_CONTAINS_EVALUATED (~SPELL.IDS~ ~[ %TAB%]WIZARD_DIMENSION_JUMP[ 
 		END
 	BUT_ONLY
   END
+*/
   ACTION_IF (GAME_IS ~bgee bg2ee eet~) BEGIN
 	APPEND ~hidespl.2da~ ~spwi109	1		0		0~
   END
@@ -1148,6 +1152,7 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~qdtnb_specialists.qd~) BEGIN
 				RET spell_res
 			END
 			ACTION_IF (VARIABLE_IS_SET %spell_res%) BEGIN
+			 ACTION_IF (FILE_EXISTS_IN_GAME ~%spell_res%.spl~) BEGIN
 			  COPY_EXISTING ~%spell_res%.spl~ ~override~ 
 				READ_BYTE  0x25 school
 			  ACTION_IF (school = 1) BEGIN //abjuration
@@ -1182,6 +1187,7 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~qdtnb_specialists.qd~) BEGIN
 				COPY_EXISTING ~QDMG+NEC.SPL~ ~override~ 
 				  LPF ADD_SPELL_EFFECT INT_VAR opcode=171 target=1 timing=9 STR_VAR resource= EVAL ~%spell_res%~ END
 			  END
+			 END
 			END
 		  END
 		END 
@@ -1201,6 +1207,7 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~qdtnb_specialists.qd~) BEGIN
 				RET spell_res
 			END
 			ACTION_IF (VARIABLE_IS_SET %spell_res%) BEGIN
+			 ACTION_IF (FILE_EXISTS_IN_GAME ~%spell_res%.spl~) BEGIN
 			  COPY_EXISTING ~%spell_res%.spl~ ~override~ 
 				READ_BYTE  0x25 school
 			  ACTION_IF (school = 1) BEGIN //abjuration
@@ -1235,6 +1242,7 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~qdtnb_specialists.qd~) BEGIN
 				COPY_EXISTING ~QDMG+NEC.SPL~ ~override~ 
 				  LPF ADD_SPELL_EFFECT INT_VAR opcode=171 target=1 timing=9 STR_VAR resource= EVAL ~%spell_res%~ END 
 			  END
+			 END
 			END
 		  END
 		END

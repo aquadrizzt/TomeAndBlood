@@ -1,6 +1,6 @@
 BACKUP ~TomeAndBlood/backup~
 AUTHOR ~aquadrizzt@gmail.com~
-VERSION ~0.8.47~ 
+VERSION ~0.8.48~ 
 
 ALWAYS
 
@@ -42,6 +42,7 @@ LAF spell_schools END
 BEGIN @12
 DESIGNATED 12
 REQUIRE_PREDICATE (ENGINE_IS ~soa tob iwd bgee bg2ee iwdee eet~) @1 
+DEPRECATED @4
 GROUP @5
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_spelltweaks_gen.qd~ //detection for this component 

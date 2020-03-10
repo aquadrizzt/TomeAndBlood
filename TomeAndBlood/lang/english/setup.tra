@@ -521,10 +521,10 @@ This ability allows you to select your spells known for each spell level.~
 @17017  = ~7th-level spells~
 @17018  = ~8th-level spells~
 @17019  = ~9th-level spells~
-@17021  = ~Spell Knowledge~
-@17022  = ~Spell Knowledge
+@17021  = ~Arcane Spell Knowledge~
+@17022  = ~Arcane Spell Knowledge
 
-This ability allows you to select your spells known for each spell level.~
+This ability allows you to select your wizard spells known for each spell level.~
 @17023 = ~Learn this spell.~
 @17024 = ~View other spells of the same level.~
 @17025 = ~Select a different spell level.~
@@ -2486,3 +2486,4 @@ You can brew potions if you have the right spell and enough gold.~
 @115255 = ~Craft Item~
 @115256 = ~Craft Item
 You can craft and recharge items, if you have the right spell and enough gold.~
+

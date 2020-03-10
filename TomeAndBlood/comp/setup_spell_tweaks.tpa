@@ -4,7 +4,6 @@
 
 // This component uses code by Subtledoctor and is used with permission of the original author. 
 
-// ***** make color spray *always* have a chance to briefly blind
 
 
 DEFINE_ACTION_FUNCTION general_spell_tweaks BEGIN 
