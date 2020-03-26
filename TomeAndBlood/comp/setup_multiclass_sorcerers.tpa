@@ -845,7 +845,7 @@ END
 
 COPY_EXISTING ~d5msorc.2da~ ~override/d5msorcX.2da~
 
-COPY ~faiths_and_powers/kits/misc/d5lernwi.bam~ ~override~
+COPY ~tomeandblood/data/multi_sorcerers/d5lernwi.bam~ ~override~
 
 COPY ~tomeandblood/data/multi_sorcerers/d5msorc.itm~ ~override~			//	learn spells .itm
   SAY NAME1 @17021
