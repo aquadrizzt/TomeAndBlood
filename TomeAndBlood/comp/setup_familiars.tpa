@@ -164,63 +164,63 @@ COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5famch0.spl~
 
 //COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5famch1.spl~
 
-COPY ~tomeandblood/data/familiars/d5fampsd.bam~ ~override/d5faml1c.bam~
+COPY ~tomeandblood/data/familiars/d5fampsd.bam~ ~override/d5faml1b.bam~
 COPY_EXISTING ~spcl342.spl~ ~override/d5famch1.spl~
 //COPY_EXISTING ~spcl342.spl~ ~override/d5faml1.spl~
   SAY NAME1 @8011
   SAY UNIDENTIFIED_DESC @8012
-  WRITE_ASCII 0x3a ~d5faml1c~ #8
-  LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5faml1c~ END
+  WRITE_ASCII 0x3a ~d5faml1b~ #8
+  LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5faml1b~ END
   LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 57 target = 1 parameter2 = 17 timing = 0 duration = 0 END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 309 target = 1 parameter1 = 1 parameter2 = 0 timing = 9 STR_VAR resource = ~d5famlg~ END
 
-COPY ~tomeandblood/data/familiars/d5famdog.bam~ ~override/d5faml2c.bam~
+COPY ~tomeandblood/data/familiars/d5famdog.bam~ ~override/d5faml2b.bam~
 COPY_EXISTING ~spcl342.spl~ ~override/d5famch2.spl~
 //COPY_EXISTING ~spcl342.spl~ ~override/d5faml2.spl~
   SAY NAME1 @8013
   SAY UNIDENTIFIED_DESC @8014
-  WRITE_ASCII 0x3a ~d5faml2c~ #8
-  LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5faml2c~ END
+  WRITE_ASCII 0x3a ~d5faml2b~ #8
+  LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5faml2b~ END
   LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 57 target = 1 parameter2 = 49 timing = 0 duration = 0 END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 309 target = 1 parameter1 = 1 parameter2 = 0 timing = 9 STR_VAR resource = ~d5famcg~ END
 
-COPY ~tomeandblood/data/familiars/d5famfer.bam~ ~override/d5faml3c.bam~
+COPY ~tomeandblood/data/familiars/d5famfer.bam~ ~override/d5faml3b.bam~
 COPY_EXISTING ~spcl342.spl~ ~override/d5famch3.spl~
 //COPY_EXISTING ~spcl342.spl~ ~override/d5faml3.spl~
   SAY NAME1 @8017
   SAY UNIDENTIFIED_DESC @8018
-  WRITE_ASCII 0x3a ~d5faml3c~ #8
-  LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5faml3c~ END
+  WRITE_ASCII 0x3a ~d5faml3b~ #8
+  LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5faml3b~ END
   LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 57 target = 1 parameter2 = 18 timing = 0 duration = 0 END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 309 target = 1 parameter1 = 1 parameter2 = 0 timing = 9 STR_VAR resource = ~d5famln~ END
 
-COPY ~tomeandblood/data/familiars/d5famrab.bam~ ~override/d5faml4c.bam~
+COPY ~tomeandblood/data/familiars/d5famrab.bam~ ~override/d5faml4b.bam~
 COPY_EXISTING ~spcl342.spl~ ~override/d5famch4.spl~
 //COPY_EXISTING ~spcl342.spl~ ~override/d5faml4.spl~
   SAY NAME1 @8019
   SAY UNIDENTIFIED_DESC @8020
-  WRITE_ASCII 0x3a ~d5faml4c~ #8
-  LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5faml4c~ END
+  WRITE_ASCII 0x3a ~d5faml4b~ #8
+  LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5faml4b~ END
   LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 57 target = 1 parameter2 = 34 timing = 0 duration = 0 END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 309 target = 1 parameter1 = 1 parameter2 = 0 timing = 9 STR_VAR resource = ~d5famtn~ END
 
-COPY ~tomeandblood/data/familiars/d5famcat.bam~ ~override/d5faml5c.bam~
+COPY ~tomeandblood/data/familiars/d5famcat.bam~ ~override/d5faml5b.bam~
 COPY_EXISTING ~spcl342.spl~ ~override/d5famch5.spl~
 //COPY_EXISTING ~spcl342.spl~ ~override/d5faml5.spl~
   SAY NAME1 @8021
   SAY UNIDENTIFIED_DESC @8022
-  WRITE_ASCII 0x3a ~d5faml5c~ #8
-  LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5faml5c~ END
+  WRITE_ASCII 0x3a ~d5faml5b~ #8
+  LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5faml5b~ END
   LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 57 target = 1 parameter2 = 50 timing = 0 duration = 0 END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 309 target = 1 parameter1 = 1 parameter2 = 0 timing = 9 STR_VAR resource = ~d5famcn~ END
 
-COPY ~tomeandblood/data/familiars/d5famspd.bam~ ~override/d5faml6c.bam~
+COPY ~tomeandblood/data/familiars/d5famspd.bam~ ~override/d5faml6b.bam~
 COPY_EXISTING ~spcl342.spl~ ~override/d5famch6.spl~
 //COPY_EXISTING ~spcl342.spl~ ~override/d5faml6.spl~
   SAY NAME1 @8025
   SAY UNIDENTIFIED_DESC @8026
-  WRITE_ASCII 0x3a ~d5faml6c~ #8
-  LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5faml6c~ END
+  WRITE_ASCII 0x3a ~d5faml6b~ #8
+  LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5faml6b~ END
   LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 57 target = 1 parameter2 = 19 timing = 0 duration = 0 END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 309 target = 1 parameter1 = 1 parameter2 = 0 timing = 9 STR_VAR resource = ~d5famle~ END
 
@@ -228,18 +228,18 @@ COPY_EXISTING ~spcl342.spl~ ~override/d5famch7.spl~
 //COPY_EXISTING ~spcl342.spl~ ~override/d5faml7.spl~
   SAY NAME1 @8027
   SAY UNIDENTIFIED_DESC @8028
-  WRITE_ASCII 0x3a ~d5faml7c~ #8
-  LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5faml7c~ END
+  WRITE_ASCII 0x3a ~d5faml7b~ #8
+  LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5faml7b~ END
   LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 57 target = 1 parameter2 = 35 timing = 0 duration = 0 END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 309 target = 1 parameter1 = 1 parameter2 = 0 timing = 9 STR_VAR resource = ~d5famne~ END
 
-COPY ~tomeandblood/data/familiars/d5famrat.bam~ ~override/d5faml8c.bam~
+COPY ~tomeandblood/data/familiars/d5famrat.bam~ ~override/d5faml8b.bam~
 COPY_EXISTING ~spcl342.spl~ ~override/d5famch8.spl~
 //COPY_EXISTING ~spcl342.spl~ ~override/d5faml8.spl~
   SAY NAME1 @8031
   SAY UNIDENTIFIED_DESC @8032
-  WRITE_ASCII 0x3a ~d5faml8c~ #8
-  LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5faml8c~ END
+  WRITE_ASCII 0x3a ~d5faml8b~ #8
+  LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5faml8b~ END
   LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 57 target = 1 parameter2 = 51 timing = 0 duration = 0 END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 309 target = 1 parameter1 = 1 parameter2 = 0 timing = 9 STR_VAR resource = ~d5famce~ END
 
