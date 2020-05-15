@@ -1145,8 +1145,8 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5poisev.2da~) BEGIN
 2DA V1.0 
 RES
 >>>>>>>> 
-COPY ~d5/d5poisev.2da~ ~override/d5poisev.2da~ 
-COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
+ COPY ~d5/d5poisev.2da~ ~override/d5poisev.2da~ 
+ COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
   GET_OFFSET_ARRAY ab_array SPL_V10_HEADERS
   PHP_EACH ab_array AS int => ab_off BEGIN
 	GET_OFFSET_ARRAY2 fx_array ab_off SPL_V10_HEAD_EFFECTS
@@ -1156,7 +1156,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
 		PATCH_IF !(~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPPR722~) && !(~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI714~) BEGIN
 //		  PATCH_PRINT "%SOURCE_RES% is a poison spell"
 		  INNER_ACTION BEGIN
-			APPEND ~d5poisev.2da~ ~%SOURCE_RES% 	1~ UNLESS ~%SOURCE_RES%~
+			APPEND ~d5poisev.2da~ ~%SOURCE_RES% 	SPL~ UNLESS ~%SOURCE_RES%~
 		  END
 		END
 	  END
@@ -1166,7 +1166,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
 		  PATCH_IF !(~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPPR722~) && !(~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI714~) BEGIN
 //			PATCH_PRINT "%SOURCE_RES% is a poison spell"
 			INNER_ACTION BEGIN
-			  APPEND ~d5poisev.2da~ ~%SOURCE_RES% 	1~ UNLESS ~%SOURCE_RES%~
+			  APPEND ~d5poisev.2da~ ~%SOURCE_RES% 	SPL~ UNLESS ~%SOURCE_RES%~
 			END
 		  END
 		END
@@ -1174,13 +1174,13 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
 	  PATCH_IF fx_type = 78 BEGIN 							// disease
 //		  PATCH_PRINT "%SOURCE_RES% is a disease spell"
 		  INNER_ACTION BEGIN
-			APPEND ~d5poisev.2da~ ~%SOURCE_RES% 	1~ UNLESS ~%SOURCE_RES%~
+			APPEND ~d5poisev.2da~ ~%SOURCE_RES% 	SPL~ UNLESS ~%SOURCE_RES%~
 		  END
 	  END
 	END
   END
-BUT_ONLY
-COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
+ BUT_ONLY
+ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
   GET_OFFSET_ARRAY ab_array ITM_V10_HEADERS
   PHP_EACH ab_array AS int => ab_off BEGIN
 	GET_OFFSET_ARRAY2 fx_array ab_off ITM_V10_HEAD_EFFECTS
@@ -1189,7 +1189,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
 	  PATCH_IF fx_type = 25 BEGIN 							// poison
 //		  PATCH_PRINT "%SOURCE_RES% is a poison item"
 		  INNER_ACTION BEGIN
-			APPEND ~d5poisev.2da~ ~%SOURCE_RES% 	1~ UNLESS ~%SOURCE_RES%~
+			APPEND ~d5poisev.2da~ ~%SOURCE_RES% 	ITM~ UNLESS ~%SOURCE_RES%~
 		  END
 	  END
 	  PATCH_IF fx_type = 12 BEGIN 							// damage (poison)
@@ -1197,36 +1197,41 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
 		PATCH_IF damage_type = 32 BEGIN
 //			PATCH_PRINT "%SOURCE_RES% is a poison item"
 			INNER_ACTION BEGIN
-			  APPEND ~d5poisev.2da~ ~%SOURCE_RES% 	1~ UNLESS ~%SOURCE_RES%~
+			  APPEND ~d5poisev.2da~ ~%SOURCE_RES% 	ITM~ UNLESS ~%SOURCE_RES%~
 			END
 		END
 	  END
 	  PATCH_IF fx_type = 78 BEGIN 							// disease
 //		  PATCH_PRINT "%SOURCE_RES% is a disease item"
 		  INNER_ACTION BEGIN
-			APPEND ~d5poisev.2da~ ~%SOURCE_RES% 	1~ UNLESS ~%SOURCE_RES%~
+			APPEND ~d5poisev.2da~ ~%SOURCE_RES% 	ITM~ UNLESS ~%SOURCE_RES%~
 		  END
 	  END
 	END
   END
-BUT_ONLY
-COPY_EXISTING ~d5poisev.2da~ ~override~ 
+ BUT_ONLY
+ COPY_EXISTING ~d5poisev.2da~ ~override~ 
   COUNT_2DA_COLS cols
   COUNT_2DA_ROWS cols rows
   FOR (row = 1; row < rows; ++row) BEGIN
 	READ_2DA_ENTRY row 0 cols poison_evade_res
-	PATCH_IF FILE_EXISTS_IN_GAME ~%poison_evade_res%.spl~ BEGIN
+	READ_2DA_ENTRY row 1 cols poison_evade_type
+	PATCH_IF (~%poison_evade_type%~ STRING_EQUAL_CASE ~spl~) BEGIN 
+	 PATCH_IF FILE_EXISTS_IN_GAME ~%poison_evade_res%.spl~ BEGIN
 	  INNER_ACTION BEGIN
 		LAF add_evade_spell INT_VAR evasion_spellstate = %poison_evasion_state% evasion_save = 1 STR_VAR evade_ext = ~spl~ evade_condition = ~spellstate~ evade_res = EVAL ~%poison_evade_res%~ evade_prefix = ~D5VP~ END
 	  END
+	 END
 	END
-	PATCH_IF FILE_EXISTS_IN_GAME ~%poison_evade_res%.itm~ BEGIN
+	PATCH_IF (~%poison_evade_type%~ STRING_EQUAL_CASE ~itm~) BEGIN 
+	 PATCH_IF FILE_EXISTS_IN_GAME ~%poison_evade_res%.itm~ BEGIN
 	  INNER_ACTION BEGIN
 		LAF add_evade_spell INT_VAR evasion_spellstate = %poison_evasion_state% evasion_save = 1 STR_VAR evade_ext = ~itm~ evade_condition = ~spellstate~ evade_res = EVAL ~%poison_evade_res%~ evade_prefix = ~D5VP~ END
 	  END
+	 END
 	END
   END
-BUT_ONLY
+ BUT_ONLY
 END	// end if not already present
 
 COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5famsp0.spl~
