@@ -871,7 +871,13 @@ COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5msor1.spl~
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (2 << 24) parameter2 = (115 + (0x10000 * 1)) timing = 9 END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5msor1~ END
 
+COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5msor2.spl~
+  SAY NAME1 @17050
+  SAY UNIDENTIFIED_DESC @17050
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5msor1~ END
+
 APPEND ~d5sorc.2da~ ~LEARNSPLS   GA_D5MSOR1  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+APPEND ~d5sorc.2da~ ~LEARNSPLS   AP_D5MSOR2  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
 
 
 //remove known spells right after chargen_____________________________________________
