@@ -164,7 +164,8 @@ COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5famch0.spl~
 
 //COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5famch1.spl~
 
-COPY ~tomeandblood/data/familiars/d5fampsd.bam~ ~override/d5faml1b.bam~
+//COPY ~tomeandblood/data/familiars/d5fampsd.bam~ ~override/d5faml1b.bam~
+COPY_EXISTING ~famimp.bam~ ~override/d5faml1b.bam~ IF_EXISTS
 COPY_EXISTING ~spcl342.spl~ ~override/d5famch1.spl~
 //COPY_EXISTING ~spcl342.spl~ ~override/d5faml1.spl~
   SAY NAME1 @8011
@@ -184,7 +185,8 @@ COPY_EXISTING ~spcl342.spl~ ~override/d5famch2.spl~
   LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 57 target = 1 parameter2 = 49 timing = 0 duration = 0 END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 309 target = 1 parameter1 = 1 parameter2 = 0 timing = 9 STR_VAR resource = ~d5famcg~ END
 
-COPY ~tomeandblood/data/familiars/d5famfer.bam~ ~override/d5faml3b.bam~
+//COPY ~tomeandblood/data/familiars/d5famfer.bam~ ~override/d5faml3b.bam~
+COPY_EXISTING ~famfer.bam~ ~override/d5faml3b.bam~ IF_EXISTS
 COPY_EXISTING ~spcl342.spl~ ~override/d5famch3.spl~
 //COPY_EXISTING ~spcl342.spl~ ~override/d5faml3.spl~
   SAY NAME1 @8017
@@ -194,7 +196,8 @@ COPY_EXISTING ~spcl342.spl~ ~override/d5famch3.spl~
   LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 57 target = 1 parameter2 = 18 timing = 0 duration = 0 END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 309 target = 1 parameter1 = 1 parameter2 = 0 timing = 9 STR_VAR resource = ~d5famln~ END
 
-COPY ~tomeandblood/data/familiars/d5famrab.bam~ ~override/d5faml4b.bam~
+//COPY ~tomeandblood/data/familiars/d5famrab.bam~ ~override/d5faml4b.bam~
+COPY_EXISTING ~famrab.bam~ ~override/d5faml4b.bam~ IF_EXISTS
 COPY_EXISTING ~spcl342.spl~ ~override/d5famch4.spl~
 //COPY_EXISTING ~spcl342.spl~ ~override/d5faml4.spl~
   SAY NAME1 @8019
@@ -204,7 +207,8 @@ COPY_EXISTING ~spcl342.spl~ ~override/d5famch4.spl~
   LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 57 target = 1 parameter2 = 34 timing = 0 duration = 0 END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 309 target = 1 parameter1 = 1 parameter2 = 0 timing = 9 STR_VAR resource = ~d5famtn~ END
 
-COPY ~tomeandblood/data/familiars/d5famcat.bam~ ~override/d5faml5b.bam~
+//COPY ~tomeandblood/data/familiars/d5famcat.bam~ ~override/d5faml5b.bam~
+COPY_EXISTING ~famcat.bam~ ~override/d5faml5b.bam~ IF_EXISTS
 COPY_EXISTING ~spcl342.spl~ ~override/d5famch5.spl~
 //COPY_EXISTING ~spcl342.spl~ ~override/d5faml5.spl~
   SAY NAME1 @8021
@@ -214,7 +218,8 @@ COPY_EXISTING ~spcl342.spl~ ~override/d5famch5.spl~
   LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 57 target = 1 parameter2 = 50 timing = 0 duration = 0 END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 309 target = 1 parameter1 = 1 parameter2 = 0 timing = 9 STR_VAR resource = ~d5famcn~ END
 
-COPY ~tomeandblood/data/familiars/d5famspd.bam~ ~override/d5faml6b.bam~
+//COPY ~tomeandblood/data/familiars/d5famspd.bam~ ~override/d5faml6b.bam~
+COPY_EXISTING ~imisc3e.bam~ ~override/d5faml6b.bam~ IF_EXISTS
 COPY_EXISTING ~spcl342.spl~ ~override/d5famch6.spl~
 //COPY_EXISTING ~spcl342.spl~ ~override/d5faml6.spl~
   SAY NAME1 @8025
@@ -233,7 +238,8 @@ COPY_EXISTING ~spcl342.spl~ ~override/d5famch7.spl~
   LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 57 target = 1 parameter2 = 35 timing = 0 duration = 0 END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 309 target = 1 parameter1 = 1 parameter2 = 0 timing = 9 STR_VAR resource = ~d5famne~ END
 
-COPY ~tomeandblood/data/familiars/d5famrat.bam~ ~override/d5faml8b.bam~
+//COPY ~tomeandblood/data/familiars/d5famrat.bam~ ~override/d5faml8b.bam~
+COPY ~tomeandblood/data/familiars/d5famra2.bam~ ~override/d5faml8b.bam~
 COPY_EXISTING ~spcl342.spl~ ~override/d5famch8.spl~
 //COPY_EXISTING ~spcl342.spl~ ~override/d5faml8.spl~
   SAY NAME1 @8031
@@ -550,8 +556,11 @@ COPY_EXISTING ~sppr103.spl~ ~override/d5fampd1.spl~
   ELSE BEGIN
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 2 power = %lvl% parameter2 = 1 timing = 9 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
   END
-  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 171 target = 1 timing = 4 duration = 180 STR_VAR resource = ~d5famfr1~ END
-  LPF ADD_SPELL_CFEFFECT INT_VAR insert_point = 0 opcode = 172 target = 1 timing = 4 duration = 179 STR_VAR resource = ~d5famfr1~ END
+COPY_EXISTING ~d5fampd1.spl~ ~override~
+			  ~d5fampd2.spl~ ~override~
+			  ~d5fampd3.spl~ ~override~
+  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 171 target = 1 timing = 4 duration = 180 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
+  LPF ADD_SPELL_CFEFFECT INT_VAR insert_point = 0 opcode = 172 target = 1 timing = 4 duration = 179 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
 
 // entangle immunity: 157 Web effect, 154 Entangle overlay, 158 Grease overlay
 OUTER_SET spike_proj = (IDS_OF_SYMBOL (~projectl~ ~idpro300~)) + 1
@@ -628,8 +637,9 @@ IF_EXISTS
 COPY_EXISTING ~spwi405.spl~ ~override/d5fampd4.spl~
   LPF ALTER_SPELL_HEADER INT_VAR target = 5 location = 4 END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 power = 4 parameter2 = 1 timing = 1 STR_VAR resource = ~spwi405~ END
-  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 171 target = 1 timing = 4 duration = 180 STR_VAR resource = ~d5famfr1~ END
-  LPF ADD_SPELL_CFEFFECT INT_VAR insert_point = 0 opcode = 172 target = 1 timing = 4 duration = 179 STR_VAR resource = ~d5famfr1~ END
+COPY_EXISTING ~d5fampd4.spl~ ~override~
+  LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 171 target = 1 timing = 4 duration = 180 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
+  LPF ADD_SPELL_CFEFFECT INT_VAR insert_point = 0 opcode = 172 target = 1 timing = 4 duration = 179 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
 
 COPY_EXISTING ~fampsd.itm~ ~override~
   SAY UNIDENTIFIED_DESC @8014

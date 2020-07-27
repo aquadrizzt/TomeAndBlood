@@ -963,7 +963,38 @@ CREATE EFF ~d5tsill2~
 	WRITE_SHORT 0x2c 100
 //__________________________________________________________________________________
 
-// ***** make sure invis. purge etc. expose sanctuary
+//handle nondetection spells/items__________________________________________________
+//
+COPY_EXISTING ~spwi310.spl~ ~override~ 
+  LPF CLONE_EFFECT INT_VAR match_opcode = 69 opcode = 205 parameter1 = 0 parameter2 = 5 END
+IF_EXISTS BUT_ONLY
+
+COPY_EXISTING ~clck06.itm~ ~override~ 
+  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 205 target = 1 parameter2 = 5 timing = 2 END
+IF_EXISTS BUT_ONLY
+
+// ***** do for all nondetection items
+
+
+//handle SR potions of sight________________________________________________________
+//
+COPY_EXISTING ~potn30.spl~ ~override~ 
+  LPF CLONE_EFFECT INT_VAR match_opcode = 63 opcode = 193 parameter1 = 0 parameter2 = 1 END
+IF_EXISTS BUT_ONLY
+
+COPY_EXISTING ~potn30d.spl~ ~override~ 
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 136 target = 1 timing = 1 END
+  LPF DELETE_EFFECT INT_VAR match_opcode = 116 END
+  LPF DELETE_EFFECT INT_VAR match_opcode = 160 END
+IF_EXISTS BUT_ONLY
+
+
+//make sure invis. purge etc. expose sanctuary______________________________________
+//
+COPY_EXISTING ~sppr309d.spl~ ~override~
+  LPF CLONE_EFFECT INT_VAR match_opcode = 116 opcode = 160 END
+IF_EXISTS BUT_ONLY
+
 
 //break sanctuary appropriately_____________________________________________________
 //
@@ -1117,6 +1148,7 @@ BEGIN
   END
 END
 
+
 CLEAR_ARRAYS 
 
 END 	//	end define function
@@ -1172,6 +1204,17 @@ ACTION_IF FILE_EXISTS_IN_GAME ~scrl75.itm~ THEN BEGIN
 		LPF ALTER_EFFECT INT_VAR match_opcode = 147 STR_VAR resource = EVAL ~%spell_res%~ END
 	BUT_ONLY
 END
+
+COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
+	PATCH_IF (%SOURCE_SIZE% > 0x2d3) BEGIN
+	  READ_BYTE 0x273 class
+	  PATCH_IF (class == 1 || class == 13 || class == 14 || class == 7 || class == 10 || class == 17 || class == 19 || class == 5) BEGIN // wizard casters
+		REMOVE_KNOWN_SPELL ~spwi110~
+		REMOVE_MEMORIZED_SPELL ~spwi110~
+		ADD_KNOWN_SPELL ~%spell_res%~ #1 ~wizard~
+	  END
+	END
+BUT_ONLY
 
 END 	//	end define function
 //____________________________________________________________________________________
