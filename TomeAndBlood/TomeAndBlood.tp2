@@ -1,6 +1,6 @@
 BACKUP ~TomeAndBlood/backup~
 AUTHOR ~aquadrizzt@gmail.com~
-VERSION ~0.8.53~ 
+VERSION ~0.8.54~ 
 
 ALWAYS
 
@@ -104,7 +104,8 @@ BEGIN @16
 DESIGNATED 16
 GROUP @5
 
-COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_identify.qd~ //detection for this component 
+//COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_identify.qd~ //detection for this component 
+// now done inside the function
 
 INCLUDE ~TomeAndBlood/comp/setup_spell_tweaks.tpa~ 
 

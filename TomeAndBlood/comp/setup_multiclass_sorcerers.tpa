@@ -740,7 +740,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
 			  END
 			  LPF DELETE_EFFECT END
 			  PATCH_IF (%abil_target% = 4) BEGIN
-				LPF ADD_SPELL_EFFECT INT_VAR opcode = 148 target = 1 power = %spell_level% parameter1 = 0 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%real_spell%~ END
+				LPF ADD_SPELL_EFFECT INT_VAR opcode = 148 target = 1 power = 0 parameter1 = 0 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%real_spell%~ END
 				PATCH_IF (%abil_range% < 35) BEGIN
 				  PATCH_IF (%abil_range% > 4) BEGIN
 					LPF ALTER_SPELL_HEADER INT_VAR range = (%abil_range% - 3) END
@@ -751,7 +751,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
 				END
 			  END
 			  ELSE BEGIN
-				LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 2 power = %spell_level% parameter2 = 1 timing = 9 STR_VAR resource = EVAL ~%real_spell%~ END
+				LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 2 power = 0 parameter2 = 1 timing = 9 STR_VAR resource = EVAL ~%real_spell%~ END
 			  END
 			  PATCH_IF !(MOD_IS_INSTALLED ~tomeandblood.tp2~ ~62~) BEGIN
 				LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~d5src-%spell_level%~ END

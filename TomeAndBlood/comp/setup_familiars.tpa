@@ -9,6 +9,8 @@ INCLUDE ~TomeAndBlood/data/core/tnb_kit_list.tpa~
 //Add Find Familiar innate to mages
 
 COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5fminn.spl~
+  WRITE_ASCII 0x3a ~spwi123c~ 
+  LPF ALTER_SPELL_HEADER STR_VAR icon = ~spwi123b~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 1 STR_VAR resource = ~spcl342~ END
 
 ACTION_PHP_EACH tnb_kit_list AS kitinfo => kitclab BEGIN 
@@ -16,6 +18,19 @@ ACTION_PHP_EACH tnb_kit_list AS kitinfo => kitclab BEGIN
 		APPEND ~%kitclab%.2da~ ~FAMILIAR 	AP_D5FMINN  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****    ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
 	END 
 END  
+
+COPY_EXISTING ~kitlist.2da~ ~override~
+  COUNT_2DA_ROWS 9 rows
+  FOR (row = 2 ; row < rows ; ++row) BEGIN
+	READ_2DA_ENTRY row 5 9 modclab
+	READ_2DA_ENTRY row 8 9 modclass
+	PATCH_IF (modclass = 1) OR (modclass = 19) BEGIN
+	  INNER_ACTION BEGIN
+		APPEND ~%modclab%.2da~ ~FAMILIAR 	AP_D5FMINN  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****    ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~ UNLESS ~FAMILIAR~
+	  END
+	END
+  END
+BUT_ONLY
 
 //Remove Find Familiar from Spell Selection menu
 APPEND ~HIDESPL.2da~ ~SPWI123	1	0~ 

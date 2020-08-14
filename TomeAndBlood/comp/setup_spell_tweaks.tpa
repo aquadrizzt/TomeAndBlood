@@ -1161,6 +1161,8 @@ END 	//	end define function
 
 DEFINE_ACTION_FUNCTION new_identify BEGIN 
 
+ACTION_IF !(FILE_EXISTS_IN_GAME ~qdtnb_identify.qd~) BEGIN
+
 INCLUDE ~TomeAndBlood/lib/b3identify.tph~
 LAF B3_IDENTIFY_INSTALL END
 
@@ -1215,6 +1217,10 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
 	  END
 	END
 BUT_ONLY
+
+COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_identify.qd~ //detection for this component 
+
+END		//	end not found qdtnb_identify.qd
 
 END 	//	end define function
 //____________________________________________________________________________________

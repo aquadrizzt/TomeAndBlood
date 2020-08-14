@@ -135,7 +135,7 @@ ACTION_PHP_EACH wizard_spells AS ind => wizard_spell BEGIN
 		READ_BYTE (%eff_offset% + (%num_globals% * 0x30) + 0x02) eff_target
 		LPF DELETE_EFFECT END
 		PATCH_IF (%abil_target% = 4) BEGIN
-		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 148 target = 1 power = %spell_level% parameter1 = 0 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%wizard_spell%~ END
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 148 target = 1 power = 0 parameter1 = 0 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%wizard_spell%~ END
 		  PATCH_IF (%abil_range% < 35) BEGIN
 			PATCH_IF (%abil_range% > 4) BEGIN
 			  LPF ALTER_SPELL_HEADER INT_VAR range = (%abil_range% - 3) END
@@ -146,7 +146,7 @@ ACTION_PHP_EACH wizard_spells AS ind => wizard_spell BEGIN
 		  END
 		END
 		PATCH_IF NOT (%abil_target% = 4) BEGIN
-		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 2 power = %spell_level% parameter1 = 0 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%wizard_spell%~ END
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 2 power = 0 parameter1 = 0 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%wizard_spell%~ END
 		END
 	  END
 	  INNER_ACTION BEGIN

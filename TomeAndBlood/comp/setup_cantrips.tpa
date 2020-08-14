@@ -210,9 +210,22 @@ COPY_EXISTING ~spwi114.spl~ ~override~
 //adding cantrips to appropriate mages
 ACTION_PHP_EACH tnb_kit_list AS kitinfo => kitclab BEGIN 
 	ACTION_IF (FILE_EXISTS_IN_GAME ~%kitclab%.2da~) BEGIN 
-		APPEND ~%kitclab%.2da~ ~CANTRIPS	GA_%kitinfo_2%~
+		APPEND ~%kitclab%.2da~ ~CANTRIPS	GA_%kitinfo_2%  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****    ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
 	END 
 END 
+
+COPY_EXISTING ~kitlist.2da~ ~override~
+  COUNT_2DA_ROWS 9 rows
+  FOR (row = 2 ; row < rows ; ++row ) BEGIN
+	READ_2DA_ENTRY row 5 9 modclab
+	READ_2DA_ENTRY row 8 9 modclass
+	PATCH_IF (modclass = 1) OR (modclass = 19) BEGIN
+	  INNER_ACTION BEGIN
+		APPEND ~%modclab%.2da~ ~CANTRIPS 	GA_D5_CANT1 ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****    ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~ UNLESS ~CANTRIPS~
+	  END
+	END
+  END
+BUT_ONLY
 
 //updating descriptions
 	OUTER_SET strref = (0 - 1)
@@ -750,6 +763,8 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~qdtnb_identify.qd~) BEGIN
 	  END
 	END
   BUT_ONLY
+
+  COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_identify.qd~ //detection for this component
 
 END
 
@@ -1319,6 +1334,19 @@ ACTION_PHP_EACH tnb_kit_list AS kitinfo => kitclab BEGIN
 		APPEND ~%kitclab%.2da~ ~CANTRIPS	AP_D5CANTW1  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****    ****        ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
 	END 
 END 
+
+COPY_EXISTING ~kitlist.2da~ ~override~
+  COUNT_2DA_ROWS 9 rows
+  FOR (row = 2 ; row < rows ; ++row ) BEGIN
+	READ_2DA_ENTRY row 5 9 modclab
+	READ_2DA_ENTRY row 8 9 modclass
+	PATCH_IF (modclass = 1) OR (modclass = 19) BEGIN
+	  INNER_ACTION BEGIN
+		APPEND ~%modclab%.2da~ ~CANTRIPS 	AP_D5CANTW1 ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****    ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~ UNLESS ~CANTRIPS~
+	  END
+	END
+  END
+BUT_ONLY
 
 END 	//	end define function
 //____________________________________________________________________________________
