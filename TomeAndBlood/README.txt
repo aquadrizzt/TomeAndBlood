@@ -36,7 +36,7 @@ Adds new Dragon Disciple kits to the game, matching different varieties of drago
 
 COMPONENT 25: Magus
 
-Adds the Magus sorcerer kit to the game, which can cast spells in heavy armor and use more weapons than a normal sorcerer.
+Adds the Magus sorcerer kit to the game, which can cast spells in heavy armor and use more weapons than a normal sorcerer. (NOTE: apparently, in order for this work, all wizards must be able to equip all armor. It won't do much for you, as only the Magus will be able to cast spells in armor, but it is a change from the unmodded game behavior, so in case  that surprises you... you've been told.)
 
 COMPONENT 31: Favored Soul
 

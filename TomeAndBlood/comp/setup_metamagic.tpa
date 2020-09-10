@@ -240,9 +240,12 @@ ACTION_IF (%sequencer_method% = 1) || (%sequencer_method% = 2) BEGIN
  COPY_EXISTING ~kitlist.2da~ ~override~
   COUNT_2DA_ROWS ~9~ "rows"
   FOR ( index = 2 ; index < rows ; index = index + 1 ) BEGIN
+	READ_2DA_ENTRY %index% 1 9 modname
 	READ_2DA_ENTRY %index% 5 9 modclab
 	READ_2DA_ENTRY %index% 8 9 modclass
-	DEFINE_ASSOCIATIVE_ARRAY d5_meta_array BEGIN "%modclab%" => "%modclass%" END
+	PATCH_IF !(%modname% STRING_MATCHES_REGEXP ~C0SA+~ = 0) BEGIN
+	  DEFINE_ASSOCIATIVE_ARRAY d5_meta_array BEGIN "%modclab%" => "%modclass%" END
+	END
   END
  BUT_ONLY
  ACTION_PHP_EACH d5_meta_array AS bi => ko BEGIN
@@ -261,10 +264,6 @@ ACTION_IF (%sequencer_method% = 1) || (%sequencer_method% = 2) BEGIN
 	END
   END
  END
-
-/*
-NOTE: in dialogue component, need to make sure multisorc are immune to these AP_ spells. 
-*/
 
 END	//	end options 1+2
 
@@ -376,8 +375,8 @@ ACTION_IF %sequencer_method% = 5 BEGIN
 // apply UI tweaks
  COPY_EXISTING ~UI.MENU~ ~override~
 //	REPLACE_TEXTUALLY ~function[ %TAB%%WNL%]+filterContingencyMageSpells()~ ~function	filterContingencyMageSpellsDisabled()~
-	REPLACE_TEXTUALLY ~mageScreen:SequenceSpell( bookSpells\[currentBookSpell\].resref, bookSpells\[currentBookSpell\].masterResref )~ ~mageScreen:SequenceSpell( bookSpells[currentBookSpell].resref, 'DEFAULT' )~
-	REPLACE_TEXTUALLY ~mageScreen:UnSequenceSpell( bottomSpells\[currentBottomSpell\].resref, bottomSpells\[currentBottomSpell\].masterResref )~ ~mageScreen:UnSequenceSpell( bottomSpells[currentBottomSpell].resref, 'DEFAULT' )~
+	REPLACE_TEXTUALLY ~mageScreen:SequenceSpell([ %TAB%]*bookSpells\[currentBookSpell\].resref, bookSpells\[currentBookSpell\].masterResref[ %TAB%]*)~ ~mageScreen:SequenceSpell( bookSpells[currentBookSpell].resref, 'DEFAULT' )~
+	REPLACE_TEXTUALLY ~mageScreen:UnSequenceSpell([ %TAB%]*bottomSpells\[currentBottomSpell\].resref, bottomSpells\[currentBottomSpell\].masterResref[ %TAB%]*)~ ~mageScreen:UnSequenceSpell( bottomSpells[currentBottomSpell].resref, 'DEFAULT' )~
 
 	INCLUDE	~TomeAndBlood/lib/SEQUENCER_MENU.TPA~
 

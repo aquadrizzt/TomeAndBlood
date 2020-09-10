@@ -1,0 +1,34 @@
+IF
+	Class(LastSummonerOf(Myself),19)
+	NumTimesTalkedTo(0)
+THEN
+	RESPONSE #100
+	SetNumTimesTalkedTo(1)
+	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("d5zmana",Myself))
+END
+
+IF
+	Class(LastSummonerOf(Myself),19)
+	Global("D5_MNSRC","GLOBAL",1)
+THEN
+	RESPONSE #100
+	ChangeClass(LastSummonerOf(Myself),MAGE)
+	ActionOverride(LastSummonerOf(Myself),MakeUnselectable(1))
+END
+
+IF
+	Class(LastSummonerOf(Myself),1)
+	Global("D5_MNSRC","GLOBAL",1)
+THEN
+	RESPONSE #100
+	Wait(1)
+	ActionOverride(LastSummonerOf(Myself),AddKit(D5_MANA_SORCERER))
+	ActionOverride(LastSummonerOf(Myself),ForceSpellRES("d5mana",Myself))
+	SetGlobal("D5_MNSRC","GLOBAL",0)
+	SetNumTimesTalkedTo(1)
+	DestroySelf()
+END
+
+
+
+	

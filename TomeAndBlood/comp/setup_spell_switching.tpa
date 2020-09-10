@@ -1,0 +1,203 @@
+
+// -----------------------------
+// SORCERERS SWITCH SPELLS
+// -----------------------------
+
+
+DEFINE_ACTION_FUNCTION spell_switching INT_VAR switch_interval = 2 BEGIN
+
+//duplicate splsrckn.2da______________________________________________________________
+//
+ACTION_IF !(FILE_EXISTS_IN_GAME ~QD_SPLSRCKN.2da~) BEGIN
+  COPY_EXISTING ~SPLSRCKN.2da~ ~override/qd_splsrckn.2da~ //save a copy of the existing sorcerer spell progression 
+END
+
+
+//set up spell learning UI____________________________________________________________
+//
+LAF sorcerer_spell_learning END
+
+
+//set up switching  dialogue__________________________________________________________
+//
+<<<<<<<< d5/d5swtch1.txt
+BEGIN ~D5_SWTCH~
+
+IF ~Global("D5_SWTCH","GLOBAL",1)~ THEN BEGIN d5_swtch
+SAY @8301
+>>>>>>>> 
+COPY ~d5/d5swtch1.txt~ ~weidu_external/tomeandblood/d5swtch1.txt~
+
+<<<<<<<< d5/d5swtch2.txt
+IF ~~ THEN REPLY @8302 EXIT
+END
+
+>>>>>>>> 
+COPY ~d5/d5swtch2.txt~ ~weidu_external/tomeandblood/d5swtch2.txt~
+
+OUTER_SPRINT switch_prefix @8301
+OUTER_SET switch_ind = 1
+
+COPY_EXISTING ~d5clonsc.2da~ ~override~
+  COUNT_2DA_ROWS 7 rows
+  FOR (row = 0; row < rows; ++row) BEGIN
+	READ_2DA_ENTRY row 0 8 spell_res
+	READ_2DA_ENTRY row 2 8 learn_spell
+	READ_2DA_ENTRY row 6 8 switch_spell
+	INNER_ACTION BEGIN
+	 ACTION_IF (FILE_EXISTS_IN_GAME ~%spell_res%.spl~) BEGIN
+	  COPY_EXISTING ~%spell_res%.spl~ ~override~
+		READ_STRREF NAME1 spell_name
+//		READ_STRREF UNIDENTIFIED_DESC spell_description
+		READ_ASCII 0x3a spell_icon
+	  BUT_ONLY
+// make learn spell spells
+	  COPY ~tomeandblood/lib/d5_base.spl~ ~override/%learn_spell%.spl~
+		WRITE_EVALUATED_ASCII 0x3a ~%spell_icon%~ #8
+		LPF ALTER_SPELL_HEADER STR_VAR icon = EVAL ~%spell_icon%~ END
+	  	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = EVAL ~%spell_res%~ END
+// make 172 spell
+	  COPY ~tomeandblood/lib/d5_base.spl~ ~override/%switch_spell%.spl~
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 1 STR_VAR resource = EVAL ~%spell_res%~ END
+// set up dialogue
+	  OUTER_SPRINT switch_spell_text ~%switch_prefix%: %spell_name%~
+	  APPEND_OUTER ~weidu_external/tomeandblood/d5swtch1.txt~ ~~~~~IF ~HaveKnownSpellRES("%spell_res%")~ THEN REPLY ~%spell_name%~ GOTO d5_swtch_%switch_ind%~~~~~ KEEP_CRLF
+	  APPEND_OUTER ~weidu_external/tomeandblood/d5swtch2.txt~ ~~~~~IF ~~ THEN BEGIN d5_swtch_%switch_ind% %WNL% SAY ~%switch_spell_text%~ %WNL% IF ~~ THEN REPLY @8303 DO ~ApplySpellRES("%switch_spell%",myself)~ EXIT %WNL% IF ~~ THEN REPLY @8304 GOTO d5_swtch %WNL% IF ~~ THEN REPLY @8302 EXIT %WNL% END %WNL%~~~~~ KEEP_CRLF
+	 END
+	END
+	SET ++switch_ind
+  END
+BUT_ONLY
+
+COPY ~weidu_external/tomeandblood/d5swtch1.txt~ ~weidu_external/tomeandblood/d5swtch.d~
+  APPEND_FILE ~weidu_external/tomeandblood/d5swtch2.txt~
+
+//compile dialogues and scripts_______________________________________________________
+//
+COMPILE ~weidu_external/tomeandblood/d5swtch.d~
+
+<<<<<<<< d5/d5swtch.baf
+IF
+	Global("D5_SWTCH","GLOBAL",0)
+THEN
+	RESPONSE #100
+	SetGlobal("D5_SWTCH","GLOBAL",1)
+	ActionOverride(LastSummonerOf(Myself),StartDialogOverride("d5_swtch",Myself))
+END
+IF
+	Global("D5_SWTCH","GLOBAL",1)
+THEN
+	RESPONSE #100
+	SetGlobal("D5_SWTCH","GLOBAL",0)
+	DestroySelf()
+END
+>>>>>>>> 
+COPY ~d5/d5swtch.baf~ ~weidu_external/tomeandblood/d5swtch.baf~
+
+COMPILE ~weidu_external/tomeandblood/d5swtch.baf~
+
+
+//make .spl, .cre, etc._______________________________________________________________
+//
+COPY ~tomeandblood/data/semi_spont/d5swtch.bam~ ~override~
+
+COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5swtch.spl~
+  SAY NAME1 ~Change known spell~
+  SAY UNIDENTIFIED_DESC ~Change known spell~
+  WRITE_SHORT 0x1c 4
+  WRITE_ASCII 0x3a ~d5swtch~ #8
+  LPF ALTER_SPELL_HEADER INT_VAR location = 4 target = 5 STR_VAR icon = ~d5swtch~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 2 timing = 0 duration = 12 STR_VAR resource = ~d5swtch~ END
+  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 99 opcode = 172 target = 1 STR_VAR resource = ~d5swtch~ END
+
+//COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5swch0.spl~
+//  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = 19 parameter2 = 105 timing = 1 STR_VAR resource = ~d5swch1~ END
+
+COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5swch1.spl~
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5msor1~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~d5swtch~ END
+
+COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5swch2.spl~
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = 19 parameter2 = 105 timing = 1 STR_VAR resource = ~d5swch1~ END
+IF_EXISTS
+
+CREATE EFF ~d5swtch~
+	WRITE_LONG 0x10 67
+	WRITE_LONG 0x14 1
+	WRITE_LONG 0x20 0
+	WRITE_LONG 0x24 0
+	WRITE_LONG 0x28 12
+	WRITE_SHORT 0x2c 100
+	WRITE_ASCII 0x30 ~d5swtch~ #8
+	WRITE_ASCII 0x70 ~d5_null~ #8
+
+COPY ~tomeandblood/data/core/d5swtch.cre~ ~override~
+
+
+//initial spell memorization__________________________________________________________
+//
+COPY ~tomeandblood/data/core/d5spm3mb.bam~ ~override~
+COPY ~tomeandblood/data/core/d5spmem.spl~ ~override~
+	SAY NAME1 @1100
+	SAY UNIDENTIFIED_DESC @1100
+	WRITE_ASCII 0x3a ~d5spm3mb~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5spm3mb~ END
+COPY ~tomeandblood/data/core/d5spm3m.spl~ ~override~
+	SAY NAME1 @1100
+	SAY UNIDENTIFIED_DESC @1100
+	WRITE_ASCII 0x3a ~d5spm3mb~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5spm3mb~ END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5spm3m~ END
+
+
+//add d5swtch.spl every level to all sorcerers________________________________________
+//
+ACTION_IF !(IS_AN_INT %switch_interval%) BEGIN
+  OUTER_SET switch_interval = 3
+END
+ACTION_IF !(switch_interval = 1) BEGIN
+  OUTER_SET switch_interval = 3
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~clabma01.2da~ BEGIN
+  ACTION_IF (switch_interval = 3) BEGIN
+	APPEND ~clabma01.2da~ ~SWITCH_SPL  AP_D5SWCH2  ****        AP_D5SWCH2  ****        ****        AP_D5SWCH2  ****        ****        AP_D5SWCH2  ****        ****        AP_D5SWCH2  ****        ****        AP_D5SWCH2  ****        ****       AP_D5SWCH2  ****        ****        AP_D5SWCH2  ****        ****        AP_D5SWCH2  ****        ****        AP_D5SWCH2  ****        ****        AP_D5SWCH2  ****        ****        AP_D5SWCH2  ****        ****        AP_D5SWCH2  ****        ****        AP_D5SWCH2  ****        ****        AP_D5SWCH2  ****        ****        AP_D5SWCH2  ****        ****        AP_D5SWCH2  ****        ****   ~ UNLESS ~SWITCH_SPL~
+  END
+  ACTION_IF (switch_interval = 1) BEGIN
+	APPEND ~clabma01.2da~ ~SWITCH_SPL  AP_D5SWCH2  AP_D5SWCH2  AP_D5SWCH2  AP_D5SWCH2  AP_D5SWCH2  AP_D5SWCH2  AP_D5SWCH2  AP_D5SWCH2  AP_D5SWCH2  AP_D5SWCH2  AP_D5SWCH2  AP_D5SWCH2  AP_D5SWCH2  AP_D5SWCH2  AP_D5SWCH2  AP_D5SWCH2  AP_D5SWCH2  AP_D5SWCH2  AP_D5SWCH2  AP_D5SWCH2  AP_D5SWCH2  AP_D5SWCH2  AP_D5SWCH2  AP_D5SWCH2  AP_D5SWCH2  AP_D5SWCH2  AP_D5SWCH2 AP_D5SWCH2  AP_D5SWCH2  AP_D5SWCH2  AP_D5SWCH2  AP_D5SWCH2  AP_D5SWCH2  AP_D5SWCH2  AP_D5SWCH2  AP_D5SWCH2  AP_D5SWCH2  AP_D5SWCH2  AP_D5SWCH2  AP_D5SWCH2  AP_D5SWCH2  AP_D5SWCH2  AP_D5SWCH2  AP_D5SWCH2  AP_D5SWCH2  AP_D5SWCH2  AP_D5SWCH2  AP_D5SWCH2  AP_D5SWCH2  AP_D5SWCH2  ~ UNLESS ~SWITCH_SPL~
+  END
+END
+COPY_EXISTING ~kitlist.2da~ ~override~
+//  COUNT_2DA_COLS cols
+  COUNT_2DA_ROWS 9 rows
+  FOR (row = 3 ; row < rows ; ++row) BEGIN
+	READ_2DA_ENTRY %row% 1 9 modname
+	READ_2DA_ENTRY %row% 5 9 modclab
+	READ_2DA_ENTRY %row% 8 9 modclass
+	PATCH_IF (%modclass% = 19) AND !(%modname% STRING_MATCHES_REGEXP ~C0SA+~ = 0) BEGIN
+	  INNER_ACTION BEGIN
+		ACTION_IF (switch_interval = 3) BEGIN
+		  APPEND ~%modclab%.2da~ ~SWITCH_SPL  GA_D5SWTCH  ****        GA_D5SWTCH  ****        ****        GA_D5SWTCH  ****        ****        GA_D5SWTCH  ****        ****        GA_D5SWTCH  ****        ****        GA_D5SWTCH  ****        ****       GA_D5SWTCH  ****        ****        GA_D5SWTCH  ****        ****        GA_D5SWTCH  ****        ****        GA_D5SWTCH  ****        ****        GA_D5SWTCH  ****        ****        GA_D5SWTCH  ****        ****        GA_D5SWTCH  ****        ****        GA_D5SWTCH  ****        ****        GA_D5SWTCH  ****        ****        GA_D5SWTCH  ****        ****        GA_D5SWTCH  ****        ****  
+LEARNSPLS   GA_D5MSOR1  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+LEARNSPLS   AP_D5MSOR2  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+SPL_REST    GA_D5SPM3M  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~ UNLESS ~SWITCH_SPL~
+		END
+		ACTION_IF (switch_interval = 1) BEGIN
+		  APPEND ~%modclab%.2da~ ~SWITCH_SPL  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  
+LEARNSPLS   GA_D5MSOR1  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+LEARNSPLS   AP_D5MSOR2  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+SPL_REST    GA_D5SPM3M  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~ UNLESS ~SWITCH_SPL~
+		END
+	  END
+	END
+  END
+BUT_ONLY
+
+
+//zero out splsrckn.2da_______________________________________________________________
+//
+COPY ~tomeandblood/data/core/splsrckn_0.2da~ ~override/splsrckn.2da~
+
+
+END	//	end define function
+
+// ...is that it???

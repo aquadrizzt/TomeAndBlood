@@ -11,7 +11,7 @@
 @13 = ~Revised Illusionary Clones~
 @14 = ~Revised Invisibility and True Seeing~
 @15 = ~Revised Haste and Free Action~
-@16 = ~Revised Identify spell~
+@16 = ~Revised Identify spell (usable by Arcanist/Multi Sorcerers)~
 @20 = ~Revised Dragon Disciples~
 @25 = ~Sorcerer: Magus~
 @27 = ~Sorcerer: Arcanist~ 
@@ -28,7 +28,7 @@
 @52 = ~Innate metamagic, learned automatically but NOT by sorcerers~
 @53 = ~Innate metamagic, learned from scrolls or character generation~
 @54 = ~Innate metamagic, learned from scrolls ONLY (none for sorcerers)~
-@55 = ~Metamagic spells, fill sequencers free (compatible with multiclass sorcerers)~
+@55 = ~Metamagic spells, fill sequencers free (usable by Arcanist/Multi Sorcerers)~
 @60 = ~Cantrips~
 @61 = ~Innate Cantrips~
 @62 = ~Level One Cantrips~
@@ -37,10 +37,14 @@
 @67 = ~Choose-Your-Own Familiar~
 @68 = ~Pooky's Mod: Imbue Familiars~
 @69 = ~Indelible Familiars~
-@75 = ~Ability Score Spellcasting Bonuses~
-@77 = ~Mana Sorcerer~
+@70 = ~Sorcerer Spell Switching~
+@71 = ~Change spells every level~
+@72 = ~Change spells once every three levels~
 @79 = ~Spell Selection by Dialogue~
 @80 = ~Multiclass Sorcerers~
+@82 = ~Mage Kit: Arcanist~
+@85 = ~Mana Sorcerer(s)~
+@95 = ~Ability Score Spellcasting Bonuses (install AFTER any mod that changes spell tables!)~
 
 @100 = ~~ 
 @101 = ~ABJURER: A Mage who specializes in protective magic and metamagic disciplines. These mages can erect powerful wards and barriers, and are also trained to break those wards and effects that are created by other spellcasters.
@@ -372,9 +376,6 @@ This allows the Favoured Soul to select a sphere of divine magic, granting them 
 	 7: Shield of the Archons
 	~ 
 
-
-
-
 @700 = ~~
 @701 = ~sylvan disciple~ 
 @702 = ~Sylvan Disciple~ 
@@ -416,16 +417,19 @@ Advantages:
 
 Disadvantages:
 – May cast one fewer spell per level per day. 
-
 ~ 
-
 @1001 = ~May cast arcane spells.~
 @1002 = ~May cast arcane spells.
 – May summon a Familiar.~
-
+//
+@1006  = ~Advantages:~
+@1007  = ~Abilities:~
+@1008  = ~Disadvantages:~
+@1009  = ~Restrictions:~
+//
+@1100  = ~Memorize spells~
 @1101 = ~(Spells cannot be cast while wearing armor.)~
 @1102 = ~(Spells cannot be cast while wearing armor heavier than studded leather.)~
-
 @1201 = ~May cast arcane spells.~ 
 @1202 = ~May cast arcane spells.
 – May use the Scribe Scrolls ability.
@@ -437,7 +441,6 @@ Disadvantages:
 – 5th level: May use the Brew Potions ability.
 – 10th level: May use the Craft Wands ability.
 – 15th level: May use the Recharge Wands ability.~
-
 @1501 = ~May cast arcane spells.~
 @1502 = ~May cast arcane spells.
 – May select one cantrip.~
@@ -477,7 +480,6 @@ Disadvantages:
 – May use the Stiffen Bones cantrip.~
 @1521 = ~Advantages:
 – May use the Earthen Grasp cantrip.~
-
 @1701 = ~Spell Knowledge~ 
 @1702 = ~Spell Knowledge
 
@@ -506,7 +508,6 @@ This ability allows you to select your spells known for each spell level.~
 @1727 = ~You can select new 7th level spells from the following list.~
 @1728 = ~You can select new 8th level spells from the following list.~
 @1729 = ~You can select new 9th level spells from the following list.~
-
 
 //Subtledoctor TRA strings
 //
@@ -600,10 +601,10 @@ Advantages:
 
 Disadvantages:
 - May not learn spells from scrolls.
-- May not use the Identify spell.
-- May not use Sequencer or Contingency spells.
 ~
 @17085 = ~Change casting method~
+@17087 = ~Restorative Meditation~
+@17088 = ~Restorative Meditation: this ability allows a sorcerer to rest and meditate between combat encounters, recovering a portion of <PRO_HISHER> mana points.~
 @17091 = ~How would you like to cast spells?~
 @17092 = ~With normal sorcerer spell slots~
 @17093 = ~With mana points~
@@ -1542,14 +1543,14 @@ This spell allows a caster to summon forth a medium-sized rabbit, seemingly out 
 Level: 1
 Range: Visual range of the caster
 Duration: Instant
-Casting Time: 2
+Casting Time: 1
 Area of Effect: 1 creature
 Saving Throw: None 
 
-Use of the Magic Missile spell, popular among wizards, creates a missile of pure magical energy that darts forth from the wizard's fingertip and unerringly strikes a target (which must be a creature of some sort). The missile inflicts 1d6 points of magic damage.
+Use of the Magic Missile spell, one of the most popular low-level spells, creates glowing missiles of magical energy that dart forth from the wizard's fingertip and unerringly strike their target, which must be a creature of some sort. Each missile inflicts 1d4+1 points of damage. The spell produces one missile at 1st level, two missiles at 3rd level, and three missiles at 9th level.
 ~
-@7123  = ~Magic Missile~
-@7124  = ~Magic Missile
+@7123  = ~Melf's Fiery Missiles~
+@7124  = ~Melf's Fiery Missiles
 (Evocation)
 
 Level: 2
@@ -1559,10 +1560,12 @@ Casting Time: 1
 Area of Effect: 1 creature
 Saving Throw: Breath Weapon
 
-This spell creates between one and five missiles of fiery magical energy that dart forth from the wizard's fingertips and unerringly strike their target, which must be a creature of some sort. Each missile inflicts 1d4 points of damage, plus 1d4 points of fire damage (the victim may save vs. Breath to avoid the fire damage). For every 3 extra levels of experience after 1st level, the wizard gains an additional missile - 2 at 4th level, 3 at 7th level, 4 at 10th level, and a maximum of 5 at 13th level.
+Similar to Mordenkainen's 'Force Missiles' variant, this is an attempt to improve on the basic Magic Missile spell. This version creates between one and five missiles of sizzling magical energy that dart forth and unerringly strike their target, which must be a creature of some sort. Each missile inflicts 1d4 points of damage plus 1d4 points of fire damage (the victim may save vs. Breath to avoid the fire damage). For every 3 extra levels of experience after 1st level, the wizard gains an additional missile - 2 at 4th level, 3 at 7th level, 4 at 10th level, and a maximum of 5 at 13th level.
+
+The Shield spell will block this, just as it blocks the lesser Magic Missile spell.
 ~
 @7125  = ~Wand of Magic Missiles~
-@7126  = ~When activated, the wand will eject two missiles of magical energy that dart forth and unerringly strike the target. This includes enemy creatures in a melee. The target creature must be seen or otherwise detected to be hit, however, so near-total concealment, such as that offered by arrow slits, can render the wand ineffective. Each missile will inflict 1d4+1 points of damage.
+@7126  = ~When activated, the wand will fire two missiles of magical energy that dart forth and unerringly strike the target. This includes enemy creatures in a melee. The target creature must be seen or otherwise detected to be hit, however, so near-total concealment, such as that offered by arrow slits, can render the wand ineffective. Each missile will inflict 1d4+1 points of damage.
 
 STATISTICS:
 
@@ -1976,6 +1979,54 @@ As with all familiars, its magical connection to the life force of its master re
 @8203  = ~Imbue Familiar~
 @8204  = ~Add this spell to the familiar~
 @8205  = ~Choose a different spell~
+@8206  = ~Imbue Familiar
+
+This ability can be used to imbue a familiar with the ability to cast spells. The spells are chosen from those known by the caster.  A 1st-level spell may be imbued when the caster is level 1; a 2nd-level or lower spell at level 3; a 3rd-level or lower spell at level 6; a 4th-level or lower spell at level 10, and a 5th-level or lower spell at level 15. 
+
+Once a familiar is imbued with the ability to cast a spell, it will be able to cast the spell once per combat encounter. Each time a familier is so imbued, the choice is permanent and cannot be undone.
+~
+//
+// spell-switching TRA strings
+//
+@8301  = ~Change known spell~
+@8302  = ~Do not change any spells~
+@8303  = ~Change this spell~
+@8304  = ~Change a different spell~
+//
+// Arcanist-related TRA strings
+//
+@21901  = ~arcanist~
+@21902  = ~Arcanist~
+@21903  = ~ARCANIST: Some spellcasters seek the secrets of magic through intense study; others are born with magic in their blood. Arcanists seek to meld the science of wizardly scholars with the natural might of innate casters. An arcanist must prepare <PRO_HISHER> spells ahead of time, but unlike a wizard, <PRO_HISHER> spells are not expended when they are cast. Instead, <PRO_HESHE> can cast any spell that <PRO_HESHE> has prepared, consuming a spell slot of the appropriate level.
+
+Advantages:
+- May learn any arcane spell from scrolls, as wizards do.
+- After preparing spells and resting, may cast spells spontaneously, just as a sorcerer does.
+
+Disadvantages: 
+- May not specialize in a school of magic, as traditional wizards can.
+- Items that increase spell slots, like a Ring of Wizardry, can only increase an Arcanist's casting slots by one at each spell level.
+~
+@21981 = ~Initialize Arcanist Spellcasting~
+@21982 = ~Change Memorized Spells~
+@21983 = ~Spell Preparation
+
+This ability allows the Arcanist to change which spells are prepared for the next day. Upon using the ability, memorization slots will become available in the Arcanist's spellbook, and spellcasting will be disabled. After deciding which spells to memorize, the Arcanist must rest for 8 hours. Upon waking, spellcasting will be re-enabled, and the Arcanist will be unable to modify the contents of his memorization slots until the next time this ability is used. 
+~
+@21984 = ~Memorized spells may be now changed. Spellcasting is disabled until the next full rest.~
+@21985 = ~Restrictions:
+- Cannot use Spell Sequencers and similar magic~
+@21986 = ~Restrictions:
+- May not cast the Identify spell~
+@21989 = ~Extra eighth level spell slot~
+@21990 = ~Extra ninth level spell slot~
+@21991 = ~Extra first level spell slot~
+@21992 = ~Extra second level spell slot~
+@21993 = ~Extra third level spell slot~
+@21994 = ~Extra fourth level spell slot~
+@21995 = ~Extra fifth level spell slot~
+@21996 = ~Extra sixth level spell slot~
+@21997 = ~Extra seventh level spell slot~
 //
 //Grammarsalad TRA strings
 //

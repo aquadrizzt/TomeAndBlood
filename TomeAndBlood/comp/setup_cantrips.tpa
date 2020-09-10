@@ -57,6 +57,7 @@ COPY ~TomeAndBlood/data/cantrips/d5_wico.spl~ ~override~
 	SAY UNIDENTIFIED_DESC @6017
 COPY ~TomeAndBlood/data/cantrips/d5_rabb.cre~ ~override~
 	SAY NAME1 @6018
+	SAY NAME2 @6018
 	WRITE_BYTE 0x270 5
 //diviner cantrip: anticipation
 COPY ~TomeAndBlood/data/cantrips/d5_madi.spl~ ~override~
@@ -217,11 +218,14 @@ END
 COPY_EXISTING ~kitlist.2da~ ~override~
   COUNT_2DA_ROWS 9 rows
   FOR (row = 2 ; row < rows ; ++row ) BEGIN
+	READ_2DA_ENTRY row 1 9 modname
 	READ_2DA_ENTRY row 5 9 modclab
 	READ_2DA_ENTRY row 8 9 modclass
 	PATCH_IF (modclass = 1) OR (modclass = 19) BEGIN
-	  INNER_ACTION BEGIN
-		APPEND ~%modclab%.2da~ ~CANTRIPS 	GA_D5_CANT1 ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****    ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~ UNLESS ~CANTRIPS~
+	  PATCH_IF !(%modname% STRING_MATCHES_REGEXP ~C0SA+~ = 0) BEGIN
+		INNER_ACTION BEGIN
+		  APPEND ~%modclab%.2da~ ~CANTRIPS 	GA_D5_CANT1 ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****    ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~ UNLESS ~CANTRIPS~
+		END
 	  END
 	END
   END
@@ -543,14 +547,14 @@ COPY ~TomeAndBlood/data/level_one_cantrips/spwi104.spl~ ~override~
 ACTION_IF !(FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~) BEGIN
   COPY_EXISTING ~spwi105.spl~ ~override~
 	SAY UNIDENTIFIED_DESC @7052
-	LPF ALTER_EFFECT INT_VAR match_opcode = 39 opcode = 40 duration = 12 END
-	LPF ALTER_EFFECT INT_VAR match_dicenumber = 4 dicenumber = 0 END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 39 opcode = 40 duration = 12 END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_dicenumber = 4 dicenumber = 0 END
 	LPF DELETE_EFFECT INT_VAR match_opcode = 139 END
 END
 ACTION_IF (FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~) BEGIN
   COPY_EXISTING ~spwi105.spl~ ~override~
-	LPF ALTER_EFFECT INT_VAR match_duration = 18 duration = 12 END
-	LPF ALTER_EFFECT INT_VAR match_duration = 30 duration = 18 END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_duration = 18 duration = 12 END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_duration = 30 duration = 18 END
 END
 
 //Blindness: change to Dazzle (very short duration)
@@ -580,9 +584,9 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~) BEGIN
   ACTION_IF (FILE_EXISTS_IN_GAME ~scrl72.itm~) BEGIN
 	COPY_EXISTING ~scrl72.itm~ ~override~
 		WRITE_LONG 0x34 200
-		LPF ALTER_EFFECT INT_VAR match_opcode = 146 STR_VAR resource = EVAL ~%spell_res%~ END
-		LPF ALTER_EFFECT INT_VAR match_opcode = 147 STR_VAR resource = EVAL ~%spell_res%~ END
-		LPF ALTER_EFFECT INT_VAR match_opcode = 148 STR_VAR resource = EVAL ~%spell_res%~ END
+		LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 146 STR_VAR resource = EVAL ~%spell_res%~ END
+		LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 147 STR_VAR resource = EVAL ~%spell_res%~ END
+		LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 148 STR_VAR resource = EVAL ~%spell_res%~ END
 		READ_LONG 0x54 "valid"
 		PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
 			READ_STRREF 0x54 "desc"
@@ -638,9 +642,9 @@ END
 ACTION_IF (FILE_EXISTS_IN_GAME ~scrl73.itm~) BEGIN
 	COPY_EXISTING ~scrl73.itm~ ~override~
 		WRITE_LONG 0x34 200
-		LPF ALTER_EFFECT INT_VAR match_opcode = 146 STR_VAR resource = EVAL ~%spell_res%~ END
-		LPF ALTER_EFFECT INT_VAR match_opcode = 147 STR_VAR resource = EVAL ~%spell_res%~ END
-		LPF ALTER_EFFECT INT_VAR match_opcode = 148 STR_VAR resource = EVAL ~%spell_res%~ END
+		LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 146 STR_VAR resource = EVAL ~%spell_res%~ END
+		LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 147 STR_VAR resource = EVAL ~%spell_res%~ END
+		LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 148 STR_VAR resource = EVAL ~%spell_res%~ END
 		READ_LONG 0x54 "valid"
 		PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
 			READ_STRREF 0x54 "desc"
@@ -682,9 +686,9 @@ ACTION_IF (FILE_CONTAINS_EVALUATED (~SPELL.IDS~ ~[ %TAB%]WIZARD_DIMENSION_JUMP[ 
   ACTION_IF (FILE_EXISTS_IN_GAME ~scrl1v.itm~) BEGIN
 	COPY_EXISTING ~scrl1v.itm~ ~override~
 		WRITE_LONG 0x34 200
-		LPF ALTER_EFFECT INT_VAR match_opcode = 146 STR_VAR resource = EVAL ~%spell_res%~ END
-		LPF ALTER_EFFECT INT_VAR match_opcode = 147 STR_VAR resource = EVAL ~%spell_res%~ END
-		LPF ALTER_EFFECT INT_VAR match_opcode = 148 STR_VAR resource = EVAL ~%spell_res%~ END
+		LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 146 STR_VAR resource = EVAL ~%spell_res%~ END
+		LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 147 STR_VAR resource = EVAL ~%spell_res%~ END
+		LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 148 STR_VAR resource = EVAL ~%spell_res%~ END
 		READ_LONG 0x54 "valid"
 		PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
 			READ_STRREF 0x54 "desc"
@@ -748,8 +752,8 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~qdtnb_identify.qd~) BEGIN
 		LPF ALTER_ITEM_HEADER INT_VAR target = 5 END
 		SAY NAME2 @7103
 		SAY IDENTIFIED_DESC @7104
-		LPF ALTER_EFFECT INT_VAR match_opcode = 146 STR_VAR resource = EVAL ~%spell_res%~ END
-		LPF ALTER_EFFECT INT_VAR match_opcode = 147 STR_VAR resource = EVAL ~%spell_res%~ END
+		LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 146 STR_VAR resource = EVAL ~%spell_res%~ END
+		LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 147 STR_VAR resource = EVAL ~%spell_res%~ END
 	BUT_ONLY
   END
 
@@ -792,9 +796,9 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~) BEGIN
   ACTION_IF FILE_EXISTS_IN_GAME ~scrl76.itm~ THEN BEGIN
 	COPY_EXISTING ~scrl76.itm~ ~override~
 		WRITE_LONG 0x34 200
-		LPF ALTER_EFFECT INT_VAR match_opcode = 146 STR_VAR resource = EVAL ~%spell_res%~ END
-		LPF ALTER_EFFECT INT_VAR match_opcode = 147 STR_VAR resource = EVAL ~%spell_res%~ END
-		LPF ALTER_EFFECT INT_VAR match_opcode = 148 STR_VAR resource = EVAL ~%spell_res%~ END
+		LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 146 STR_VAR resource = EVAL ~%spell_res%~ END
+		LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 147 STR_VAR resource = EVAL ~%spell_res%~ END
+		LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 148 STR_VAR resource = EVAL ~%spell_res%~ END
 		READ_LONG 0x54 "valid"
 		PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
 			READ_STRREF 0x54 "desc"
@@ -816,7 +820,7 @@ END
 COPY_EXISTING ~spwi111.spl~ ~override~
   LPF ALTER_SPELL_HEADER INT_VAR speed = 9 END
 
-//Magic Missile: move to 2nd level
+//Magic Missile: improved MM at 2nd level; reduced version at 1st
 //
 COPY_EXISTING ~spwi217.spl~ ~override~
 ADD_SPELL ~override/spwi217.spl~ 2 2 WIZARD_AGANNAZAR_SCORCHER_TNB
@@ -826,24 +830,49 @@ LAF RES_NUM_OF_SPELL_NAME
 END
 ACTION_IF FILE_EXISTS_IN_GAME ~scrl1b.itm~ THEN BEGIN
   COPY_EXISTING ~scrl1b.itm~ ~override~
-	LPF ALTER_EFFECT INT_VAR match_opcode = 146 STR_VAR resource = EVAL ~%spell_res%~ END
-	LPF ALTER_EFFECT INT_VAR match_opcode = 147 STR_VAR resource = EVAL ~%spell_res%~ END
-	LPF ALTER_EFFECT INT_VAR match_opcode = 148 STR_VAR resource = EVAL ~%spell_res%~ END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 146 STR_VAR resource = EVAL ~%spell_res%~ END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 147 STR_VAR resource = EVAL ~%spell_res%~ END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 148 STR_VAR resource = EVAL ~%spell_res%~ END
   BUT_ONLY
 END
 
 COPY ~TomeAndBlood/data/level_one_cantrips/spmagmis.bam~ ~override~
+//COPY ~TomeAndBlood/data/level_one_cantrips/d5wi217a.bam~ ~override~
+COPY ~TomeAndBlood/data/level_one_cantrips/d5wi217b.bam~ ~override~
+COPY ~TomeAndBlood/data/level_one_cantrips/d5wi217c.bam~ ~override~
+COPY ~TomeAndBlood/data/level_one_cantrips/d5wi217a.bam~ ~override/iscrl77.bam~
 COPY ~TomeAndBlood/data/level_one_cantrips/spwi112z.spl~ ~override/spwi217.spl~
 	SAY NAME1 @7123
 	SAY UNIDENTIFIED_DESC @7124
+	WRITE_ASCII 0x3a ~d5wi217c~ #8
+	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5wi217b~ END
 COPY_EXISTING ~scrl77.itm~ ~override~
 	SAY NAME2 @7123
 	SAY IDENTIFIED_DESC @7124	
 	WRITE_LONG 0x34 200
-	LPF ALTER_EFFECT INT_VAR match_opcode = 146 STR_VAR resource = ~SPWI217~ END
-	LPF ALTER_EFFECT INT_VAR match_opcode = 147 STR_VAR resource = ~SPWI217~ END
-	LPF ALTER_EFFECT INT_VAR match_opcode = 148 STR_VAR resource = ~SPWI217~ END
+	LPF ALTER_ITEM_HEADER STR_VAR icon = ~d5wi217b~ END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 146 STR_VAR resource = ~SPWI217~ END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 147 STR_VAR resource = ~SPWI217~ END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 148 STR_VAR resource = ~SPWI217~ END
 BUT_ONLY
+
+COPY_EXISTING ~spwi112.spl~ ~override~
+	SAY NAME1 @7121
+	SAY UNIDENTIFIED_DESC @7122
+	LPF DELETE_SPELL_HEADER INT_VAR header_type = 2 min_level = 7 END
+	LPF DELETE_SPELL_HEADER INT_VAR header_type = 2 min_level = 9 END
+	LPF ALTER_SPELL_HEADER INT_VAR header = 3 min_level = 9 END
+IF_EXISTS BUT_ONLY
+
+COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
+	PATCH_IF (%SOURCE_SIZE% > 0x2d3) BEGIN
+	  READ_BYTE 0x273 class
+	  PATCH_IF (class == 1 || class == 13 || class == 14 || class == 7 || class == 10 || class == 17 || class == 19 || class == 5) BEGIN // wizard casters
+		ADD_KNOWN_SPELL ~spwi112~ #0 ~wizard~
+	  END
+	END
+BUT_ONLY
+
 
 //Pro. Evil: self-targeting only
 //
@@ -853,8 +882,8 @@ COPY_EXISTING ~spwi113.spl~ ~override~
 //Shield: move to 2nd level if no SR
 //
 COPY_EXISTING ~spwi114.spl~ ~override~
-  LPF CLONE_EFFECT INT_VAR match_opcode = 206 multi_match = 1 STR_VAR resource = ~SPWI118~ END
-  LPF CLONE_EFFECT INT_VAR match_opcode = 206 multi_match = 1 STR_VAR resource = ~SPWI217~ END
+//  LPF CLONE_EFFECT INT_VAR silent = 1 match_opcode = 206 multi_match = 1 STR_VAR resource = ~SPWI118~ END
+  LPF CLONE_EFFECT INT_VAR silent = 1 match_opcode = 206 multi_match = 1 STR_VAR resource = ~SPWI217~ END
 BUT_ONLY
 
 ACTION_IF !(FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~) BEGIN
@@ -875,9 +904,9 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~) BEGIN
   ACTION_IF (FILE_EXISTS_IN_GAME ~scrl79.itm~) THEN BEGIN
 	COPY_EXISTING ~scrl79.itm~ ~override~
 		WRITE_LONG 0x34 200
-		LPF ALTER_EFFECT INT_VAR match_opcode = 146 STR_VAR resource = EVAL ~%spell_res%~ END
-		LPF ALTER_EFFECT INT_VAR match_opcode = 147 STR_VAR resource = EVAL ~%spell_res%~ END
-		LPF ALTER_EFFECT INT_VAR match_opcode = 148 STR_VAR resource = EVAL ~%spell_res%~ END
+		LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 146 STR_VAR resource = EVAL ~%spell_res%~ END
+		LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 147 STR_VAR resource = EVAL ~%spell_res%~ END
+		LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 148 STR_VAR resource = EVAL ~%spell_res%~ END
 		READ_LONG 0x54 "valid"
 		PATCH_IF (%valid% >= 0) BEGIN // verify name is valid
 			READ_STRREF 0x54 "desc"
@@ -954,16 +983,16 @@ LAF RES_NUM_OF_SPELL_NAME
 	RET spell_res
 END
 COPY_EXISTING ~%spell_res%.spl~ ~override~
-  LPF CLONE_EFFECT INT_VAR match_opcode = 206 multi_match = 1 STR_VAR resource = EVAL ~%spell_res%~ END
+  LPF CLONE_EFFECT INT_VAR silent = 1 match_opcode = 206 multi_match = 1 STR_VAR resource = EVAL ~%spell_res%~ END
 COPY_EXISTING ~%spell_res%.spl~ ~override/spwi116.spl~
 COPY_EXISTING ~d5wakeup.spl~ ~override~
-	LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~%spell_res%~ END
-	LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 206 STR_VAR resource = EVAL ~%spell_res%~ END
+	LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~%spell_res%~ END
+	LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 206 STR_VAR resource = EVAL ~%spell_res%~ END
 ACTION_IF (FILE_EXISTS_IN_GAME ~scrl81.itm~) BEGIN
   COPY_EXISTING ~scrl81.itm~ ~override~
-	LPF ALTER_EFFECT INT_VAR match_opcode = 146 STR_VAR resource = EVAL ~%spell_res%~ END
-	LPF ALTER_EFFECT INT_VAR match_opcode = 147 STR_VAR resource = EVAL ~%spell_res%~ END
-	LPF ALTER_EFFECT INT_VAR match_opcode = 148 STR_VAR resource = EVAL ~%spell_res%~ END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 146 STR_VAR resource = EVAL ~%spell_res%~ END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 147 STR_VAR resource = EVAL ~%spell_res%~ END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 148 STR_VAR resource = EVAL ~%spell_res%~ END
 	SAY NAME2 @7161
 	SAY IDENTIFIED_DESC @7162
   BUT_ONLY
@@ -974,16 +1003,16 @@ LAF RES_NUM_OF_SPELL_NAME
 	RET spell_res
 END
 COPY_EXISTING ~%spell_res%.spl~ ~override~
-  LPF CLONE_EFFECT INT_VAR match_opcode = 206 multi_match = 1 STR_VAR resource = EVAL ~%spell_res%~ END
+  LPF CLONE_EFFECT INT_VAR silent = 1 match_opcode = 206 multi_match = 1 STR_VAR resource = EVAL ~%spell_res%~ END
 COPY_EXISTING ~%spell_res%.spl~ ~override/spwi220.spl~
 COPY_EXISTING ~d5wakeup.spl~ ~override~
-	LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~%spell_res%~ END
-	LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 206 STR_VAR resource = EVAL ~%spell_res%~ END
+	LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 321 STR_VAR resource = EVAL ~%spell_res%~ END
+	LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 206 STR_VAR resource = EVAL ~%spell_res%~ END
 ACTION_IF (FILE_EXISTS_IN_GAME ~scrl6e.itm~) BEGIN
   COPY_EXISTING ~scrl6e.itm~ ~override~
-	LPF ALTER_EFFECT INT_VAR match_opcode = 146 STR_VAR resource = EVAL ~%spell_res%~ END
-	LPF ALTER_EFFECT INT_VAR match_opcode = 147 STR_VAR resource = EVAL ~%spell_res%~ END
-	LPF ALTER_EFFECT INT_VAR match_opcode = 148 STR_VAR resource = EVAL ~%spell_res%~ END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 146 STR_VAR resource = EVAL ~%spell_res%~ END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 147 STR_VAR resource = EVAL ~%spell_res%~ END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 148 STR_VAR resource = EVAL ~%spell_res%~ END
 	SAY NAME2 @7163
 	SAY IDENTIFIED_DESC @7164
   BUT_ONLY
@@ -1019,12 +1048,13 @@ ACTION_IF FILE_EXISTS_IN_GAME ~scrl82.itm~ THEN BEGIN
 END
 */
 
-//Chromatic Orb: reduce power, randomize effects, replace MM
+//Chromatic Orb: reduce power, randomize effects, /*replace MM*/
 //
 COPY ~TomeAndBlood/data/level_one_cantrips/spwi118.spl~ ~override~
   SAY NAME1 @7181
   SAY UNIDENTIFIED_DESC @7182
 
+/*
 COPY ~TomeAndBlood/data/level_one_cantrips/spwi118.spl~ ~override/spwi112.spl~
   SAY NAME1 @7181
   SAY UNIDENTIFIED_DESC @7182
@@ -1035,6 +1065,7 @@ END
 ACTION_IF (GAME_IS ~iwdee~) BEGIN
 	APPEND ~hidespl.2da~ ~spwi112	1		0~
 END
+*/
 
 //LMD: no spamming extra hp
 //
@@ -1083,7 +1114,7 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~spwi124.spl~) BEGIN
 	WRITE_ASCII 0x76 ~d5wi124b~
 //	READ_BYTE 0x19 wild_magic
 //	WRITE_BYTE 0x19 (THIS BOR 01000000)
-	LPF ALTER_EFFECT INT_VAR match_opcode = 214 opcode = 45 timing = 0 duration = 3 END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 214 opcode = 45 timing = 0 duration = 3 END
 
   ACTION_IF (GAME_IS ~bgee bg2ee eet~) BEGIN
 	APPEND ~hidespl.2da~ ~spwi124	1		0		0~
@@ -1156,8 +1187,8 @@ COPY ~TomeAndBlood/data/level_one_cantrips/wand03.itm~ ~override~
 //Wand of Sleep: wake on hit
 //
 COPY_EXISTING ~wand08.itm~ ~override~
-  LPF ALTER_EFFECT INT_VAR match_opcode = 39 parameter2 = 0 END  
-  LPF CLONE_EFFECT INT_VAR match_opcode = 39 opcode = 232 parameter1 = 0 parameter2 = 11 STR_VAR resource = ~D5WAKEUP~ END
+  LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 39 parameter2 = 0 END  
+  LPF CLONE_EFFECT INT_VAR silent = 1 match_opcode = 39 opcode = 232 parameter1 = 0 parameter2 = 11 STR_VAR resource = ~D5WAKEUP~ END
 
 ////////////////////////////////////////////////////////////////////////////////////
 
@@ -1338,11 +1369,14 @@ END
 COPY_EXISTING ~kitlist.2da~ ~override~
   COUNT_2DA_ROWS 9 rows
   FOR (row = 2 ; row < rows ; ++row ) BEGIN
+	READ_2DA_ENTRY row 1 9 modname
 	READ_2DA_ENTRY row 5 9 modclab
 	READ_2DA_ENTRY row 8 9 modclass
 	PATCH_IF (modclass = 1) OR (modclass = 19) BEGIN
-	  INNER_ACTION BEGIN
-		APPEND ~%modclab%.2da~ ~CANTRIPS 	AP_D5CANTW1 ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****    ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~ UNLESS ~CANTRIPS~
+	  PATCH_IF !(%modname% STRING_MATCHES_REGEXP ~C0SA+~ = 0) BEGIN
+		INNER_ACTION BEGIN
+		  APPEND ~%modclab%.2da~ ~CANTRIPS 	AP_D5CANTW1 ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****    ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~ UNLESS ~CANTRIPS~
+		END
 	  END
 	END
   END

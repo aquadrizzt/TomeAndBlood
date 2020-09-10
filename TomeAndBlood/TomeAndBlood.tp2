@@ -1,16 +1,20 @@
 BACKUP ~TomeAndBlood/backup~
-AUTHOR ~aquadrizzt@gmail.com~
-VERSION ~0.8.54~ 
+AUTHOR ~aquadrizzt~
+VERSION ~0.9~ 
 
 ALWAYS
 
 	INCLUDE ~TomeAndBlood/lib/misc_tnb_functions.tpa~
+
+	INCLUDE ~TomeAndBlood/lib/semi_spontaneous.tpa~
 
 	INCLUDE ~TomeAndBlood/lib/fl#add_kit_ee.tpa~
 
 	INCLUDE ~TomeAndBlood/lib/hla_actions.tpa~
 
 	LAF fix_kitlist_missing_ids END
+
+	INCLUDE ~TomeAndBlood/lib/extra_kit.tpa~
 
 	INCLUDE ~TomeAndBlood/comp/core.tpa~ 
 	
@@ -27,7 +31,7 @@ LANGUAGE ~English~ ~english~ ~TomeAndBlood/lang/english/setup.tra~
 BEGIN @11
 DESIGNATED 11
 REQUIRE_PREDICATE (ENGINE_IS ~soa tob iwd bgee bg2ee iwdee eet~) @1 
-GROUP @5
+//GROUP @5
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_schools.qd~ //detection for this component 
 
@@ -43,7 +47,7 @@ BEGIN @12
 DESIGNATED 12
 REQUIRE_PREDICATE (ENGINE_IS ~soa tob iwd bgee bg2ee iwdee eet~) @1 
 DEPRECATED @4
-GROUP @5
+//GROUP @5
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_spelltweaks_gen.qd~ //detection for this component 
 
@@ -58,7 +62,7 @@ LAF general_spell_tweaks END
 BEGIN @13
 DESIGNATED 13
 REQUIRE_PREDICATE (ENGINE_IS ~bgee bg2ee iwdee eet~) @1 
-GROUP @5
+//GROUP @5
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_spelltweaks_clone.qd~ //detection for this component 
 
@@ -73,7 +77,7 @@ LAF illusion_clone_tweaks END
 BEGIN @14
 DESIGNATED 14
 REQUIRE_PREDICATE (ENGINE_IS ~bgee bg2ee iwdee eet~) @1 
-GROUP @5
+//GROUP @5
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_spelltweaks_invis.qd~ //detection for this component 
 
@@ -88,7 +92,7 @@ LAF invisibility_tweaks END
 BEGIN @15
 DESIGNATED 15
 REQUIRE_PREDICATE (ENGINE_IS ~bgee bg2ee iwdee eet~) @1 
-GROUP @5
+//GROUP @5
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_spelltweaks_haste.qd~ //detection for this component 
 
@@ -102,7 +106,7 @@ LAF  END
 // -----------------------------
 BEGIN @16
 DESIGNATED 16
-GROUP @5
+//GROUP @5
 
 //COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_identify.qd~ //detection for this component 
 // now done inside the function
@@ -118,7 +122,7 @@ LAF new_identify END
 BEGIN @20
 DESIGNATED 20
 REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee iwdee eet~) @2  
-GROUP @6
+//GROUP @6
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_dd.qd~ //detection for this component 
 
@@ -133,7 +137,7 @@ LAF add_dragon_disciples END
 BEGIN @25
 DESIGNATED 25
 REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee iwdee eet~) @2 
-GROUP @6
+//GROUP @6
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_magus.qd~ //detection for this component 
 
@@ -144,28 +148,12 @@ LAF add_magus END
 
 /*
 // -----------------------------
-// 27: SORCERER: ARCANIST
-// -----------------------------
-BEGIN @27
-DESIGNATED 27
-REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee iwdee eet~) @2 
-GROUP @6
-
-COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_arcanist.qd~ //detection for this component 
-
-INCLUDE ~TomeAndBlood/comp/setup_arcanist.tpa~ 
-
-LAF add_arcanist END
-*/ 
-
-/*
-// -----------------------------
 // 29: SORCERER: WILD SORCERER
 // -----------------------------
 BEGIN @29
 DESIGNATED 29
 REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee iwdee eet~) @2 
-GROUP @6
+//GROUP @6
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_wildsor.qd~ //detection for this component 
 
@@ -179,7 +167,7 @@ LAF add_wild_sorcerer END
 // -----------------------------
 BEGIN @31
 DESIGNATED 31
-GROUP @6
+//GROUP @6
 REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee iwdee eet~) @2 
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_favsoul.qd~ //detection for this component 
@@ -195,7 +183,7 @@ LAF add_favoured_soul END
 BEGIN @33
 DESIGNATED 33
 REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee iwdee eet~) @2 
-GROUP @6
+//GROUP @6
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_sylvan.qd~ //detection for this component 
 
@@ -210,7 +198,7 @@ LAF add_sylvan_disciple END
 BEGIN @35
 DESIGNATED 35
 REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee iwdee eet~) @2 
-GROUP @6
+//GROUP @6
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_revenant.qd~ //detection for this component 
 
@@ -225,7 +213,7 @@ LAF add_revenant_disciple END
 BEGIN @37
 DESIGNATED 37
 REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee iwdee eet~) @2 
-GROUP @6
+//GROUP @6
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_amorphous.qd~ //detection for this component 
 
@@ -240,7 +228,7 @@ LAF add_amorphous_disciple END
 BEGIN @40
 DESIGNATED 40
 REQUIRE_PREDICATE (ENGINE_IS ~bgee bg2ee iwdee eet~) @1 
-GROUP @6
+//GROUP @6
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_specialists.qd~ //detection for this component 
 
@@ -255,7 +243,7 @@ LAF revised_specialists END
 BEGIN @45
 DESIGNATED 45
 REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee iwdee eet~) @2 
-GROUP @7
+//GROUP @7
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_crafting.qd~ //detection for this component 
 
@@ -270,7 +258,7 @@ LAF arcane_crafting END
 BEGIN @48
 DESIGNATED 48
 //REQUIRE_PREDICATE (FILE_EXISTS_IN_GAME ~enginest.2da~) @3
-GROUP @7
+//GROUP @7
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_acbards.qd~ //detection for this component 
 
@@ -294,7 +282,7 @@ SUBCOMPONENT @50
 //REQUIRE_PREDICATE (ENGINE_IS ~soa tob iwd bgee bg2ee iwdee eet~) @1 
 FORBID_COMPONENT ~setup-stratagems.tp2~ ~4250~ ~conflict~
 REQUIRE_PREDICATE NOT FILE_EXISTS ~weidu_external/markers/dw#innate_triggers.mrk~ ~conflict~
-GROUP @7
+//GROUP @7
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_metamagic.qd~ //detection for this component 
 
@@ -309,7 +297,7 @@ LAF innate_metamagic INT_VAR sequencer_method = 1 END
 BEGIN @52
 DESIGNATED 52
 SUBCOMPONENT @50
-GROUP @7
+//GROUP @7
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_metamagic.qd~ //detection for this component 
 
@@ -324,7 +312,7 @@ LAF innate_metamagic INT_VAR sequencer_method = 2 END
 BEGIN @53
 DESIGNATED 53
 SUBCOMPONENT @50
-GROUP @7
+//GROUP @7
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_metamagic.qd~ //detection for this component 
 
@@ -339,7 +327,7 @@ LAF innate_metamagic INT_VAR sequencer_method = 3 END
 BEGIN @54
 DESIGNATED 54
 SUBCOMPONENT @50
-GROUP @7
+//GROUP @7
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_metamagic.qd~ //detection for this component 
 
@@ -354,7 +342,7 @@ LAF innate_metamagic INT_VAR sequencer_method = 4 END
 BEGIN @55
 DESIGNATED 55
 SUBCOMPONENT @50 (GAME_IS ~bgee bg2ee eet iwdee~)
-GROUP @7
+//GROUP @7
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_metamagic.qd~ //detection for this component 
 
@@ -376,7 +364,7 @@ BEGIN @61
 DESIGNATED 61
 SUBCOMPONENT @60 
 //REQUIRE_PREDICATE (ENGINE_IS ~soa tob iwd bgee bg2ee iwdee eet~) @1 
-GROUP @7
+//GROUP @7
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_cantrips.qd~ //detection for this component 
 
@@ -389,7 +377,7 @@ LAF innate_cantrips END
 BEGIN @62
 DESIGNATED 62
 SUBCOMPONENT @60 (GAME_IS ~bgee bg2ee eet iwdee~)
-GROUP @7
+//GROUP @7
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_l1cantrips.qd~ //detection for this component 
 
@@ -402,7 +390,7 @@ LAF level_1_cantrips END
 BEGIN @63
 DESIGNATED 63
 SUBCOMPONENT @60
-GROUP @7
+//GROUP @7
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_cantwand.qd~ //detection for this component 
 
@@ -416,7 +404,7 @@ LAF cantrip_wands END
 // -----------------------------
 BEGIN @66
 DESIGNATED 66
-GROUP @7
+//GROUP @7
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_familiar.qd~ //detection for this component 
 
@@ -431,7 +419,7 @@ LAF innate_familiars END
 BEGIN @67
 DESIGNATED 67
 REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee iwdee eet~) @1
-GROUP @7
+//GROUP @7
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_familiar_choice.qd~ //detection for this component 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_familiar_changes.qd~ //detection for this component 
@@ -449,7 +437,7 @@ LAF indelible_familiars END
 BEGIN @68
 DESIGNATED 68
 REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee iwdee eet~) @1
-GROUP @7
+//GROUP @7
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_imbue_familiars.qd~ //detection for this component 
 
@@ -465,7 +453,7 @@ BEGIN @69
 DESIGNATED 69
 REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee iwdee eet~) @1
 FORBID_COMPONENT ~TomeandBlood.tp2~ ~67~ @4
-GROUP @7
+//GROUP @7
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_indelible_familiars.qd~ //detection for this component 
 
@@ -475,35 +463,35 @@ LAF indelible_familiars END
 
 
 // -----------------------------
-// 75: ABILITY SCORE BONUSES
+// 71: SORCERER SPELL SWITCHING
 // -----------------------------
-BEGIN @75
-DESIGNATED 75
+BEGIN @71
+DESIGNATED 71
+SUBCOMPONENT @70 
 REQUIRE_PREDICATE (FILE_EXISTS_IN_GAME ~enginest.2da~) @3
-GROUP @7
+//GROUP @7
 
-COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_attrbon.qd~ //detection for this component 
+COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_switch1.qd~ //detection for this component 
 
-INCLUDE ~TomeAndBlood/comp/setup_ability_bonuses.tpa~
+INCLUDE ~TomeAndBlood/comp/setup_spell_switching.tpa~
 
-LAF ability_bonuses END
+LAF spell_switching INT_VAR switch_interval = 1 END
 
 
-/*
 // -----------------------------
-// 77: MANA SORCERER
+// 72: SORCERER SPELL SWITCHING
 // -----------------------------
-BEGIN @77
-DESIGNATED 77
+BEGIN @72
+DESIGNATED 72
+SUBCOMPONENT @70 
 REQUIRE_PREDICATE (FILE_EXISTS_IN_GAME ~enginest.2da~) @3
-GROUP @6
+//GROUP @7
 
-COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_mnsrc.qd~ //detection for this component 
+COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_switch3.qd~ //detection for this component 
 
-INCLUDE ~TomeAndBlood/comp/setup_mana_sorcerer.tpa~
+INCLUDE ~TomeAndBlood/comp/setup_spell_switching.tpa~
 
-LAF mana_sorcerer END
-*/
+LAF spell_switching INT_VAR switch_interval = 3 END
 
 
 // -----------------------------
@@ -512,7 +500,7 @@ LAF mana_sorcerer END
 BEGIN @80
 DESIGNATED 80
 REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee iwdee eet~) @3
-GROUP @6
+//GROUP @6
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_mcsrc.qd~ //detection for this component 
 
@@ -521,19 +509,65 @@ INCLUDE ~TomeAndBlood/comp/setup_multiclass_sorcerers.tpa~
 LAF multiclass_sorcerers END
 
 
+// -----------------------------
+// 82: ARCANIST
+// -----------------------------
+BEGIN @82
+DESIGNATED 82
+REQUIRE_PREDICATE (FILE_EXISTS_IN_GAME ~enginest.2da~) @3
+//GROUP @6
+
+COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_arcanist.qd~ //detection for this component 
+
+INCLUDE ~TomeAndBlood/comp/setup_arcanist.tpa~
+
+LAF add_arcanist END
+
+
+// -----------------------------
+// 85: MANA SORCERER(S)
+// -----------------------------
+BEGIN @85
+DESIGNATED 85
+REQUIRE_PREDICATE (FILE_EXISTS_IN_GAME ~enginest.2da~) @3
+//GROUP @6
+
+COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_manasrc.qd~ //detection for this component 
+
+INCLUDE ~TomeAndBlood/comp/setup_mana_sorcerer.tpa~
+
+LAF mana_sorcerer END
+
+
+// -----------------------------
+// 95: ABILITY SCORE BONUSES
+// -----------------------------
+BEGIN @95
+DESIGNATED 95
+REQUIRE_PREDICATE (FILE_EXISTS_IN_GAME ~enginest.2da~) @3
+REQUIRE_PREDICATE !(MOD_IS_INSTALLED ~scales_of_balance.tp2~ ~201~) @1
+//GROUP @7
+
+COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_attrbon.qd~ //detection for this component 
+
+INCLUDE ~TomeAndBlood/comp/setup_ability_bonuses.tpa~
+
+LAF ability_bonuses END
+
+
 ////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
 
-
+/*
 BEGIN ~dummy GROUP component~
-DEPRECATED ~ima dummy~
+DEPRECATED ~spell tweaks~
 GROUP @5
 
 BEGIN ~dummy GROUP component~
-DEPRECATED ~ima dummy~
+DEPRECATED ~ new kits~
 GROUP @6
 
 BEGIN ~dummy GROUP component~
-DEPRECATED ~ima dummy~
+DEPRECATED ~systems tweaks~
 GROUP @7
-
+*/

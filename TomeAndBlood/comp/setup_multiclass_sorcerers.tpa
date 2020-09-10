@@ -29,6 +29,8 @@ COPY ~d5/d5sorc.2da~ ~override/d5sorc.2da~
 //__________________________________________________________________________________
 
 
+LAF check_kit_conflict END
+
 ADD_KIT ~D5_FIGHTER_SORCERER~
 
 //WEAPON PROFICIENCIES________________________________________________________________
@@ -106,6 +108,8 @@ ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
 			clsrcreq = ~1 1 1 0 0 1 0~
 	END
 END
+
+LAF check_kit_conflict END
 
 ADD_KIT ~D5_SORCERER_CLERIC~
 
@@ -240,6 +244,8 @@ ACTION_INCLUDE ~%MOD_FOLDER%/lib/fnp_compat.tpa~
 	s_Magic 		= ~minor~
 	s_Perdition     = ~x~
  END
+
+LAF check_kit_conflict END
 
 ADD_KIT ~D5_SORCERER_THIEF~
 
@@ -420,17 +426,6 @@ NOSLOTS     AP_D50WSLT  ****        ****        ****        ****        ****    
 //create advance copies of some spells________________________________________________
 //
 COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5w206.spl~
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d50wspl.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~SPWI908~ END
-  PATCH_IF !(MOD_IS_INSTALLED ~TomeAndBlood.tp2~ ~16~) BEGIN
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = ~SPWI110~ END
-  END
-  PATCH_IF !(MOD_IS_INSTALLED ~TomeAndBlood.tp2~ ~55~) BEGIN
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~SPWI420~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~SPWI710~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~SPWI809~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~SPWI617~ END
-  END
 
 COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5slot1a.spl~
 COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5slot1b.spl~
@@ -636,245 +631,137 @@ SRCSLOTS    ****        ****        ****        AP_D5SRC2C  ****        AP_D5SRC
 ~
 
 
-/* no need to do this, use Aquadrizzt's
-COPY_EXISTING ~SPLSRCKN.2da~ ~override/d5splskn.2da~ //save a copy of the existing sorcerer spell progression 
-*/
-
-/*
-//set up spell learn UI screens_______________________________________________________
+//set up spell learning UI____________________________________________________________
 //
-INCLUDE ~tomeandblood/lib/sequencer_menu.tpa~
+LAF sorcerer_spell_learning END
 
-LAF CREATE_SEQUENCER_MENU 
-  INT_VAR 
-	name = RESOLVE_STR_REF (~Spell Selection~)
-	tip = RESOLVE_STR_REF (~Spell Selection~)
-	desc = RESOLVE_STR_REF (~This ability allows you to learn new spells~)
-	class = 1
-	maxlevel = 9
-	exclude = 0x00004000 
-  STR_VAR 
-	spelltable = ~QD_SPLSRCKN~
-	resref = ~d5msorc~
-	icon = ~spcl919b~
-	title = ~Spell Selection~
-	label = ~Select a spell to learn~
-	subspell = ~M~
-END
-*/
 
-//clone arcane spells_________________________________________________________________
+//make sorc clone spells______________________________________________________________
 //
-<<<<<<<< d5/d5wclons.2da
-2DA V1.0 
-SPLRES
-		206		LEARN		EFF		INNATE	DISPLAY
->>>>>>>> 
-COPY ~d5/d5wclons.2da~ ~override/d5wclons.2da~ 
-
-<<<<<<<<  d5/d5msorc.2da
-2DA V1.0
-****
-            	     ResRef   Type>>>>>>>>
-COPY ~d5/d5msorc.2da~ ~override/d5msorc.2da~
-
-COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
- PATCH_IF FILE_EXISTS_IN_GAME ~%SOURCE_RES%.spl~ BEGIN
-//  SNPRINT 4 spell_prefix ~%SOURCE_RES%~
-  READ_SHORT 0x1c spell_type 
-  READ_BYTE 0x25 spell_school
-  READ_LONG 0x34 spell_level
-  PATCH_IF (~%SOURCE_RES%~ STRING_MATCHES_REGEXP ~[Ss][Pp][Ww][Ii][1-9][0-5][0-9]~ = 0) && (spell_type = 1) && !(spell_school = 10) && !(~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI908~) && !(~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI124~) BEGIN
-	SNPRINT (0 - 3) spell_num ~%SOURCE_RES%~
-	SET go = 1
-	PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI420~) || (~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI710~) || (~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI809~) || (~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI617~) BEGIN
-	  PATCH_IF NOT (MOD_IS_INSTALLED ~TomeAndBlood.tp2~ ~55~) BEGIN
-		SET go = 0
-	  END
-	END	
-/*
-	PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI110~) || (~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI710~) || (~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI809~) || (~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI617~) BEGIN
-	  PATCH_IF NOT (MOD_IS_INSTALLED ~TomeAndBlood.tp2~ ~16~) BEGIN
-		SET go = 0
-	  END
-	END	
-*/
-	PATCH_IF (go = 1) && !(FILE_CONTAINS_EVALUATED (~hidespl.2da~ ~%SOURCE_RES%~)) BEGIN
-	  SPRINT ~spell_res~ ~%SOURCE_RES%~
-	  READ_STRREF NAME1 spell_name
-	  READ_STRREF UNIDENTIFIED_DESC spell_description
-	  READ_ASCII 0x3a spell_icon
-//	  LPF NAME_NUM_OF_SPELL_RES STR_VAR spell_res = EVAL ~%SOURCE_RES%~ RET spell_name spell_num END
-	  PATCH_IF (FILE_CONTAINS_EVALUATED (~spell.ids~ ~2%spell_num%~)) BEGIN
-		INNER_PATCH_SAVE 206_spell ~%SOURCE_RES%~ BEGIN
-		  REPLACE_TEXTUALLY ~^[Ss][Pp][Ww][Ii]~ ~d5w6~
-		END
-		INNER_PATCH_SAVE learn_spell ~%SOURCE_RES%~ BEGIN
-//		  REPLACE_TEXTUALLY ~^[Ss][Pp][Ww][Ii]~ ~d5wx~
-		  REPLACE_TEXTUALLY ~%spell_res%~ ~%spell_res%M~
-		END
-		INNER_PATCH_SAVE spell_eff ~%SOURCE_RES%~ BEGIN
-		  REPLACE_TEXTUALLY ~^[Ss][Pp][Ww][Ii]~ ~D5WV~
-		END
-//		TO_UPPER ~%spell_eff%~
-		INNER_PATCH_SAVE innate_spell ~%SOURCE_RES%~ BEGIN
-		  REPLACE_TEXTUALLY ~^[Ss][Pp][Ww][Ii]~ ~d5w4~
-		END
-		TEXT_SPRINT real_spell ~%SOURCE_RES%~
-		INNER_ACTION BEGIN
-		  APPEND ~d5wclons.2da~ ~%SOURCE_RES%	%206_spell%	%learn_spell%	%spell_eff%	%innate_spell%	%real_spell% ~
-		  APPEND ~d5msorc.2da~ ~sorcerer	%SOURCE_RES%	3~
+COPY_EXISTING ~d5clonsc.2da~ ~override~
+  COUNT_2DA_ROWS 8 rows
+  FOR (row = 0; row < rows; ++row) BEGIN
+	READ_2DA_ENTRY row 0 8 spell_res
+	READ_2DA_ENTRY row 1 8 206_spell
+	READ_2DA_ENTRY row 2 8 learn_spell
+	READ_2DA_ENTRY row 3 8 spell_eff
+	READ_2DA_ENTRY row 4 8 innate_spell
+	READ_2DA_ENTRY row 5 8 real_spell
+	READ_2DA_ENTRY row 6 8 switch_spell
+	READ_2DA_ENTRY row 7 8 switch_subspell
+	INNER_ACTION BEGIN
+	 ACTION_IF (FILE_EXISTS_IN_GAME ~%spell_res%.spl~) BEGIN
+	  COPY_EXISTING ~%spell_res%.spl~ ~override~
+		READ_STRREF NAME1 spell_name
+		READ_STRREF UNIDENTIFIED_DESC spell_description
+		READ_LONG 0x34 spell_level
+		READ_ASCII 0x3a spell_icon
+	  BUT_ONLY
 // make innates with cloned spell effects
-		  ACTION_IF NOT FILE_EXISTS_IN_GAME ~%innate_spell%.spl~ BEGIN
-			COPY_EXISTING ~%SOURCE_RES%.spl~ ~override/%innate_spell%.spl~
-			  WRITE_SHORT 0x1c 4
-			  WRITE_LONG 0x34 spell_level
-			  READ_LONG 0x64 abil_offset
-			  READ_SHORT 0x68 abil_number
-			  READ_BYTE (%abil_offset% + 0x0c) abil_target					
-			  READ_SHORT (%abil_offset% + 0x0e) abil_range
-			  READ_LONG 0x6a eff_offset
-			  WHILE (%abil_number% > 0) BEGIN
-				SET abil_number = (%abil_number% - 1)
-				WRITE_SHORT (%abil_offset% + 0x26 + (0x28 * %abil_number%)) 1
-			  END
-			  LPF DELETE_EFFECT END
-			  PATCH_IF (%abil_target% = 4) BEGIN
-				LPF ADD_SPELL_EFFECT INT_VAR opcode = 148 target = 1 power = 0 parameter1 = 0 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%real_spell%~ END
-				PATCH_IF (%abil_range% < 35) BEGIN
-				  PATCH_IF (%abil_range% > 4) BEGIN
-					LPF ALTER_SPELL_HEADER INT_VAR range = (%abil_range% - 3) END
-				  END
-				  PATCH_IF (%abil_range% < 5) BEGIN
-					LPF ALTER_SPELL_HEADER INT_VAR target = 5 END	
-				  END
-				END
-			  END
-			  ELSE BEGIN
-				LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 2 power = 0 parameter2 = 1 timing = 9 STR_VAR resource = EVAL ~%real_spell%~ END
-			  END
-			  PATCH_IF !(MOD_IS_INSTALLED ~tomeandblood.tp2~ ~62~) BEGIN
-				LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~d5src-%spell_level%~ END
-			  END
-			  PATCH_IF (MOD_IS_INSTALLED ~tomeandblood.tp2~ ~62~) BEGIN
-				PATCH_IF (%spell_level% > 1) BEGIN
-				  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~d5src-%spell_level%~ END
-				END
-			  END
-			  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5ssplz~ END
+	  ACTION_IF NOT FILE_EXISTS_IN_GAME ~%innate_spell%.spl~ BEGIN
+		COPY_EXISTING ~%spell_res%.spl~ ~override/%innate_spell%.spl~
+		  WRITE_SHORT 0x1c 4
+		  WRITE_LONG 0x34 spell_level
+		  READ_LONG 0x64 abil_offset
+		  READ_SHORT 0x68 abil_number
+		  READ_BYTE (%abil_offset% + 0x0c) abil_target					
+		  READ_SHORT (%abil_offset% + 0x0e) abil_range
+		  READ_LONG 0x6a eff_offset
+		  WHILE (%abil_number% > 0) BEGIN
+			SET abil_number = (%abil_number% - 1)
+			WRITE_SHORT (%abil_offset% + 0x26 + (0x28 * %abil_number%)) 1
 		  END
-// make .EFFs adding the arcane clone
-		  CREATE EFF ~%spell_eff%~
-			WRITE_LONG 0x10 171
-			WRITE_LONG 0x14 1
-			WRITE_LONG 0x24 0
-			WRITE_LONG 0x28 1
-			WRITE_SHORT 0x2c 100
-			WRITE_EVALUATED_ASCII 0x30 ~%innate_spell%~ #8
-			WRITE_LONG 0x90 1
-			WRITE_EVALUATED_ASCII 0x94 ~%spell_eff%~ #8
-// make 206 spells preventing the .EFF
-		  COPY ~tomeandblood/lib/d5_base.spl~ ~override/%206_spell%.spl~
-			WRITE_SHORT 0x1c 4
-		  	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~%spell_eff%~ END
-// add 206 spells to CLAB spell
-// why isn't d5w206 working with qd_multi??
-		  COPY_EXISTING ~d5w206.spl~ ~override~
-			LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = EVAL ~%206_spell%~ END
-// make learn spells canceling the 206
-		  COPY ~tomeandblood/lib/d5_base.spl~ ~override/%learn_spell%.spl~
-			WRITE_EVALUATED_ASCII 0x3a ~%spell_icon%~ #8
-		  	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = EVAL ~%206_spell%~ END
-			LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~%206_spell%~ END
-		  	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = EVAL ~%real_spell%~ END
-//		  	LPF ADD_SPELL_EFFECT INT_VAR opcode = 309 target = 1 parameter1 = 1 parameter2 = 0 timing = 9 STR_VAR resource = EVAL ~%real_spell%~ END
-		  	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5ssplz~ END
-// make copy of learn spell for kjeron's UI system (eventually, just rename the learn spell to this name)
-//		  COPY_EXISTING ~%learn_spell%.spl~ ~override/%spell_res%M.spl~
-// add 172 to d5ssplz#
-		  COPY_EXISTING ~d5ssplz.spl~ ~override~
-			LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~%innate_spell%~ END
-// generate slot#x spells
-		  COPY_EXISTING ~d5slot%spell_level%a.spl~ ~override~
-			LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~%spell_eff%~ END
-		  COPY_EXISTING ~d5slot%spell_level%b.spl~ ~override~
-			LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~%spell_eff%~ END
-			LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~%spell_eff%~ END
-		  COPY_EXISTING ~d5slot%spell_level%c.spl~ ~override~
-			LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~%spell_eff%~ END
-			LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~%spell_eff%~ END
-			LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~%spell_eff%~ END
-			LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~%spell_eff%~ END
-		  COPY_EXISTING ~d5slot%spell_level%d.spl~ ~override~
-			LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~%spell_eff%~ END
-			LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~%spell_eff%~ END
-			LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~%spell_eff%~ END
-			LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~%spell_eff%~ END
-			LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~%spell_eff%~ END
-			LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~%spell_eff%~ END
-			LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~%spell_eff%~ END
-			LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~%spell_eff%~ END
-// remove all known spells after chargen
-		  COPY_EXISTING ~d50wspl.spl~ ~override~
-			LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~%real_spell%~ END
-		END // end inner_action
+		  LPF DELETE_EFFECT END
+		  PATCH_IF (%abil_target% = 4) BEGIN
+			LPF ADD_SPELL_EFFECT INT_VAR opcode = 148 target = 1 power = 0 parameter1 = 0 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%real_spell%~ END
+			PATCH_IF (%abil_range% < 35) BEGIN
+			  PATCH_IF (%abil_range% > 4) BEGIN
+				LPF ALTER_SPELL_HEADER INT_VAR range = (%abil_range% - 3) END
+			  END
+			  PATCH_IF (%abil_range% < 5) BEGIN
+				LPF ALTER_SPELL_HEADER INT_VAR target = 5 END	
+			  END
+			END
+		  END
+		  ELSE BEGIN
+			LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 2 power = 0 parameter2 = 1 timing = 9 STR_VAR resource = EVAL ~%real_spell%~ END
+		  END
+		  PATCH_IF !(MOD_IS_INSTALLED ~tomeandblood.tp2~ ~62~) BEGIN
+			LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~d5src-%spell_level%~ END
+		  END
+		  PATCH_IF (MOD_IS_INSTALLED ~tomeandblood.tp2~ ~62~) BEGIN
+			PATCH_IF (%spell_level% > 1) BEGIN
+			  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~d5src-%spell_level%~ END
+			END
+		  END
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5ssplz~ END
 	  END
-	END
-  END
- END
+// make .EFFs adding the arcane clone
+	  CREATE EFF ~%spell_eff%~
+		WRITE_LONG 0x10 171
+		WRITE_LONG 0x14 1
+		WRITE_LONG 0x24 0
+		WRITE_LONG 0x28 1
+		WRITE_SHORT 0x2c 100
+		WRITE_EVALUATED_ASCII 0x30 ~%innate_spell%~ #8
+		WRITE_LONG 0x90 1
+		WRITE_EVALUATED_ASCII 0x94 ~%spell_eff%~ #8
+// make 206 spells preventing the .EFF
+	  COPY ~tomeandblood/lib/d5_base.spl~ ~override/%206_spell%.spl~
+		WRITE_SHORT 0x1c 4
+	  	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~%spell_eff%~ END
+// add 206 spells to CLAB spell
+	  COPY_EXISTING ~d5w206.spl~ ~override~
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = EVAL ~%206_spell%~ END
+// make learn spells canceling the 206
+	  COPY ~tomeandblood/lib/d5_base.spl~ ~override/%learn_spell%.spl~
+		WRITE_EVALUATED_ASCII 0x3a ~%spell_icon%~ #8
+	  	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = EVAL ~%206_spell%~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5w206~ END
+	  	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5ssplz~ END
+	  	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 19 parameter2 = 105 timing = 0 duration = 0 STR_VAR resource = EVAL ~%learn_spell%~ END
+	  	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 171 target = 1 timing = 9 STR_VAR resource = EVAL ~%real_spell%~ END
+// make copy of learn spell for kjeron's UI system (eventually, just rename the learn spell to this name)
+// overwrite the existing ones
+//	  COPY_EXISTING ~%learn_spell%.spl~ ~override/%spell_res%M.spl~
+// add subspell to switch spell
+	  ACTION_IF (FILE_EXISTS_IN_GAME ~%switch_spell%.spl~) BEGIN
+		COPY ~tomeandblood/lib/d5_base.spl~ ~override/%switch_subspell%.spl~
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 1 STR_VAR resource = EVAL ~%learn_spell%~ END 
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%206_spell%~ END
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5ssplz~ END
+//	  	  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 19 parameter2 = 105 timing = 0 duration = 0 STR_VAR resource = EVAL ~%switch_subspell%~ END
+		COPY_EXISTING ~%switch_spell%.spl~ ~override~
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%switch_subspell%~ END
+		BUT_ONLY
+	  END
+// add 172 to d5ssplz#
+	  COPY_EXISTING ~d5ssplz.spl~ ~override~
+		LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~%innate_spell%~ END
+// generate slot#x spells
+	  COPY_EXISTING ~d5slot%spell_level%a.spl~ ~override~
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~%spell_eff%~ END
+	  COPY_EXISTING ~d5slot%spell_level%b.spl~ ~override~
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~%spell_eff%~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~%spell_eff%~ END
+	  COPY_EXISTING ~d5slot%spell_level%c.spl~ ~override~
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~%spell_eff%~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~%spell_eff%~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~%spell_eff%~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~%spell_eff%~ END
+	  COPY_EXISTING ~d5slot%spell_level%d.spl~ ~override~
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~%spell_eff%~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~%spell_eff%~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~%spell_eff%~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~%spell_eff%~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~%spell_eff%~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~%spell_eff%~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~%spell_eff%~ END
+		LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~%spell_eff%~ END
+	 END
+	END	// end inner_action
+  END	// end for each row
 BUT_ONLY
-
-//set up spell learn UI screens_______________________________________________________
-//
-INCLUDE ~tomeandblood/lib/sequencer_menu.tpa~
-
-LAF CREATE_SEQUENCER_MENU 
-  INT_VAR 
-	name = RESOLVE_STR_REF (~Spell Selection~)
-	tip = RESOLVE_STR_REF (~Spell Selection~)
-	desc = RESOLVE_STR_REF (~This ability allows you to learn new spells~)
-  STR_VAR 
-	resref = ~d5msorc~
-	spelllist = ~d5msorc~
-	spelltable = ~QD_SPLSRCKN~
-	icon = ~spcl919b~
-	title = ~Spell Selection~
-	label = ~Select a spell to learn~
-	subspell = ~M~
-END
-
-COPY_EXISTING ~d5msorc.2da~ ~override/d5msorcX.2da~
-
-COPY ~tomeandblood/data/multi_sorcerers/d5lernwi.bam~ ~override~
-
-COPY ~tomeandblood/data/multi_sorcerers/d5msorc.itm~ ~override~			//	learn spells .itm
-  SAY NAME1 @17021
-  SAY NAME2 @17021
-  SAY UNIDENTIFIED_DESC @17022
-  SAY IDENTIFIED_DESC @17022
-  LPF ALTER_ITEM_HEADER INT_VAR target = 7 speed = 0 STR_VAR icon = ~d5lernwi~ END
-
-OUTER_INNER_PATCH ~1~ BEGIN
-  WRITE_BYTE 0 0x09
-  READ_ASCII 0 tab (1)  // 0x09, tab
-  WRITE_BYTE 0 0x0d
-  READ_ASCII 0 mnl (1)  // 0x0d, Mac
-END
-LAF ~ADD_ITEM_TOOLTIPS~ STR_VAR item = EVAL ~%learn_res%~ tooltips = ~@17021~ END
-
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5msor1.spl~
-  SAY NAME1 @17050
-  SAY UNIDENTIFIED_DESC @17050
-  WRITE_SHORT 0x1c 4
-  LPF ALTER_SPELL_HEADER INT_VAR target = 5 location = 4 STR_VAR icon = ~d5lernwi~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 143 target = 1 parameter1 = 14 timing = 9 STR_VAR resource = ~d5msorc~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (2 << 24) parameter2 = (115 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5msor1~ END
-
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5msor2.spl~
-  SAY NAME1 @17050
-  SAY UNIDENTIFIED_DESC @17050
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5msor1~ END
 
 APPEND ~d5sorc.2da~ ~LEARNSPLS   GA_D5MSOR1  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
 APPEND ~d5sorc.2da~ ~LEARNSPLS   AP_D5MSOR2  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
@@ -1117,177 +1004,19 @@ END
 APPEND ~d5sorc.2da~ ~NO_QUICK    AP_D5SRCNQ  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
 
 
-//stat-based bonus spells_____________________________________________________________
+//add spell switching_________________________________________________________________
 //
-ACTION_IF (FILE_EXISTS_IN_GAME ~qdtnb_attrbon.qd~) BEGIN
-
-  COPY_EXISTING ~splprot.2da~ ~override~
-	COUNT_2DA_COLS cols 
-	READ_2DA_ENTRIES_NOW rows cols   
-	FOR (row = 1; row < rows; ++row) BEGIN 
-	  READ_2DA_ENTRY_FORMER rows row 0 ~stat~ 
-	  PATCH_IF ~%stat%~ STRING_EQUAL_CASE ~D5_CHR_SLOTS~ BEGIN
-	    SET chr_slots = %row%
-	  END
-	END
-  BUT_ONLY
-
-  ACTION_IF !(FILE_EXISTS_IN_GAME ~d5nabsw.spl~) BEGIN
-	COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5nabsw.spl~
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5absp1~ END
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5absp1~ END
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5abspw~ END
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5abspw~ END
-  END
-
-/*
-  COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5absp4.spl~
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter1 = %fighter_sorcerer_code% parameter2 = 9 timing = 9 STR_VAR resource = ~d5abspm~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter1 = %sorcerer_cleric_code% parameter2 = 9 timing = 9 STR_VAR resource = ~d5abspm~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter1 = %sorcerer_thief_code% parameter2 = 9 timing = 9 STR_VAR resource = ~d5abspm~ END
-
-  COPY ~TomeAndBlood/data/ability_bonuses/d5_slots.eff~ ~override/d5abspm.eff~
-	WRITE_ASCII 0x30 ~d5abspm~ #8
-
-  COPY_EXISTING ~d5absps.spl~ ~override/d5abspm.spl~
-	PATCH_FOR_EACH let IN ~l~ ~m~ ~n~ ~o~ ~p~ ~q~ ~r~ ~s~ ~t~ ~u~ ~v~ ~w~ ~x~ ~y~ BEGIN
-	  LPF ALTER_EFFECT INT_VAR match_opcode = 326 STR_VAR match_resource = EVAL ~d5chrs%let%~ resource = EVAL ~d5chrm%let%~ END
-	END
-*/
-
-  APPEND ~d5sorc.2da~  ~STATSLOTS   AP_D5NABSW  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
-STATSLOTS   AP_D5SRC1   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
-STATSLOTS   AP_D5SRC1   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
-STATSLOTS   AP_D5SRC2   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
-STATSLOTS   AP_D5SRC2   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
-STATSLOTS   AP_D5SRC3   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
-STATSLOTS   AP_D5SRC3   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
-STATSLOTS   AP_D5SRC4   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
-STATSLOTS   AP_D5SRC4   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
-STATSLOTS   AP_D5SRC5   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
-~
-
-  ACTION_DEFINE_ASSOCIATIVE_ARRAY cha_nums_lets BEGIN
-	13	=> m
-	14	=> n
-	15	=> o
-	16	=> p
-	17	=> q
-	18	=> r
-	19	=> s
-	20	=> t
-	21	=> u
-	22	=> v
-	23	=> w
-	24	=> x
-	25	=> y
-  END
-
-  COPY_EXISTING  ~d5sslot.spl~ ~override~
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = 13 parameter2 = 133 timing = 1 STR_VAR resource = ~d5chrml~ END
-	PHP_EACH cha_nums_lets AS num => let BEGIN
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %num% parameter2 = %chr_slots% timing = 1 STR_VAR resource = EVAL ~d5chrm%let%~ END
-	END
-
- ACTION_IF !(FILE_EXISTS_IN_GAME ~d5chrml.spl~) BEGIN
-  COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5chrml.spl~
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5chrml~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 4) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 7 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 4) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 7 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 8) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 7 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 8) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 7 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 12) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 7 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 12) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 7 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 16) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 7 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 16) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 7 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 20) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 7 END
-  COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5chrmm.spl~
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5chrmm~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 4) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 7 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 8) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 7 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 8) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 7 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 12) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 7 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 12) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 7 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 16) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 7 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 16) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 7 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 20) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 7 END
-  COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5chrmn.spl~
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5chrmn~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 8) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 7 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 8) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 7 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 12) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 7 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 12) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 7 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 16) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 7 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 16) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 7 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 20) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 7 END
-  COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5chrmo.spl~
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5chrmo~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 8) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 7 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 12) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 7 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 12) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 7 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 16) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 7 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 16) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 7 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 20) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 7 END
-  COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5chrmp.spl~
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5chrmp~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 8) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 7 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 12) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 7 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 12) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 7 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 16) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 7 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 16) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 7 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 20) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 7 END
-  COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5chrmq.spl~
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5chrmq~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 12) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 7 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 12) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 7 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 16) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 7 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 16) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 7 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 20) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 7 END
-  COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5chrmr.spl~
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5chrmr~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 12) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 7 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 16) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 7 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 16) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 7 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 20) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 7 END
-  COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5chrms.spl~
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5chrms~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 12) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 7 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 16) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 7 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 16) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 7 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 20) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 7 END
-  COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5chrmt.spl~
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5chrmt~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 16) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 7 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 16) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 7 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 20) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 7 END
-  COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5chrmu.spl~
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5chrmu~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 16) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 7 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 20) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 7 END
-  COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5chrmv.spl~
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5chrmv~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 16) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 7 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 20) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 7 END
-  COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5chrmw.spl~
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5chrmw~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 20) parameter2 = (108 + (0x10000 * 1)) timing = 0 duration = 7 END
-  COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5chrmx.spl~
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5chrmx~ END
-  COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5chrmy.spl~
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5chrmy~ END
- END
- 
+ACTION_IF (FILE_EXISTS_IN_GAME ~qdtnb_switch3.qd~) BEGIN
+  APPEND ~d5sorc.2da~ ~SWITCH_SPL  GA_D5SWTCH  ****        GA_D5SWTCH  ****        ****        GA_D5SWTCH  ****        ****        GA_D5SWTCH  ****        ****        GA_D5SWTCH  ****        ****        GA_D5SWTCH  ****        ****       GA_D5SWTCH  ****        ****        GA_D5SWTCH  ****        ****        GA_D5SWTCH  ****        ****        GA_D5SWTCH  ****        ****        GA_D5SWTCH  ****        ****        GA_D5SWTCH  ****        ****        GA_D5SWTCH  ****        ****        GA_D5SWTCH  ****        ****        GA_D5SWTCH  ****        ****        GA_D5SWTCH  ****        ****        GA_D5SWTCH  ****        ****  ~ UNLESS ~GA_D5SWTCH~
 END
-//____________________________________________________________________________________
+
+ACTION_IF (FILE_EXISTS_IN_GAME ~qdtnb_switch1.qd~) BEGIN
+  APPEND ~d5sorc.2da~ ~SWITCH_SPL  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  GA_D5SWTCH  ~ UNLESS ~GA_D5SWTCH~
+END
 
 
 //make all three clab tables__________________________________________________________
 //
-/*
-COPY_EXISTING ~d5sorc.2da~ ~override/d5fsorc.2da~
-COPY_EXISTING ~d5sorc.2da~ ~override/d5csorc.2da~
-COPY_EXISTING ~d5sorc.2da~ ~override/d5tsorc.2da~
-*/
 COPY_EXISTING ~d5fsorc.2da~ ~override~
 			  ~d5csorc.2da~ ~override~
 			  ~d5tsorc.2da~ ~override~
@@ -1325,7 +1054,11 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5tsorc.2da~ BEGIN
 		mc_dir = ~tomeandblood/lib/qd_mc~
   END
 END 
-//__________________________________________________________________________________
+
+
+// bonus spell slot items_____________________________________________________________
+//
+LAF arcane_spont_items END
 
 
 //fix burning hands targeting_______________________________________________________
@@ -1357,508 +1090,8 @@ ACTION_IF (IS_AN_INT %burning_hands_strref%) BEGIN
 	END
   BUT_ONLY
 END
-//__________________________________________________________________________________
 
 
-//MAKE +SPELL SLOT ITEMS WORK________________________________________________________
-//
-// make EFFs to increase spontaneous casting slots
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5slc1e.eff~ BEGIN
-  CREATE EFF ~d5slc1e~
-	WRITE_LONG 0x10 233
-	WRITE_LONG 0x14 1
-	WRITE_LONG 0x1c (1 << 4)
-	WRITE_LONG 0x20 (108 + (0x10000 * 1))
-	WRITE_LONG 0x24 2
-	WRITE_SHORT 0x2c 100
-	WRITE_LONG 0x90 1
-	WRITE_EVALUATED_ASCII 0x94 ~D5SLC1E~ #8
-  CREATE EFF ~d5slc2e~
-	WRITE_LONG 0x10 233
-	WRITE_LONG 0x14 1
-	WRITE_LONG 0x1c (1 << 8)
-	WRITE_LONG 0x20 (108 + (0x10000 * 1))
-	WRITE_LONG 0x24 2
-	WRITE_SHORT 0x2c 100
-	WRITE_LONG 0x90 1
-	WRITE_EVALUATED_ASCII 0x94 ~D5SLC2E~ #8
-  CREATE EFF ~d5slc3e~
-	WRITE_LONG 0x10 233
-	WRITE_LONG 0x14 1
-	WRITE_LONG 0x1c (1 << 12)
-	WRITE_LONG 0x20 (108 + (0x10000 * 1))
-	WRITE_LONG 0x24 2
-	WRITE_SHORT 0x2c 100
-	WRITE_LONG 0x90 1
-	WRITE_EVALUATED_ASCII 0x94 ~D5SLC3E~ #8
-  CREATE EFF ~d5slc4e~
-	WRITE_LONG 0x10 233
-	WRITE_LONG 0x14 1
-	WRITE_LONG 0x1c (1 << 16)
-	WRITE_LONG 0x20 (108 + (0x10000 * 1))
-	WRITE_LONG 0x24 2
-	WRITE_SHORT 0x2c 100
-	WRITE_LONG 0x90 1
-	WRITE_EVALUATED_ASCII 0x94 ~D5SLC4E~ #8
-  CREATE EFF ~d5slc5e~
-	WRITE_LONG 0x10 233
-	WRITE_LONG 0x14 1
-	WRITE_LONG 0x1c (1 << 20)
-	WRITE_LONG 0x20 (108 + (0x10000 * 1))
-	WRITE_LONG 0x24 2
-	WRITE_SHORT 0x2c 100
-	WRITE_LONG 0x90 1
-	WRITE_EVALUATED_ASCII 0x94 ~D5SLC5E~ #8
-  CREATE EFF ~d5slc6e~
-	WRITE_LONG 0x10 233
-	WRITE_LONG 0x14 1
-	WRITE_LONG 0x1c (1 << 24)
-	WRITE_LONG 0x20 (108 + (0x10000 * 1))
-	WRITE_LONG 0x24 2
-	WRITE_SHORT 0x2c 100
-	WRITE_LONG 0x90 1
-	WRITE_EVALUATED_ASCII 0x94 ~D5SLC6E~ #8
-  CREATE EFF ~d5slc7e~
-	WRITE_LONG 0x10 233
-	WRITE_LONG 0x14 1
-	WRITE_LONG 0x1c (1 << 28)
-	WRITE_LONG 0x20 (108 + (0x10000 * 1))
-	WRITE_LONG 0x24 2
-	WRITE_SHORT 0x2c 100
-	WRITE_LONG 0x90 1
-	WRITE_EVALUATED_ASCII 0x94 ~D5SLC7E~ #8
-  CREATE EFF ~d5slc8e~
-	WRITE_LONG 0x10 233
-	WRITE_LONG 0x14 1
-	WRITE_LONG 0x1c (1 << 24)
-	WRITE_LONG 0x20 (109 + (0x10000 * 1))
-	WRITE_LONG 0x24 2
-	WRITE_SHORT 0x2c 100
-	WRITE_LONG 0x90 1
-	WRITE_EVALUATED_ASCII 0x94 ~D5SLC8E~ #8
-  CREATE EFF ~d5slc9e~
-	WRITE_LONG 0x10 233
-	WRITE_LONG 0x14 1
-	WRITE_LONG 0x1c (1 << 28)
-	WRITE_LONG 0x20 (109 + (0x10000 * 1))
-	WRITE_LONG 0x24 2
-	WRITE_SHORT 0x2c 100
-	WRITE_LONG 0x90 1
-	WRITE_EVALUATED_ASCII 0x94 ~D5SLC9E~ #8
-  CREATE EFF ~d5slc1f~
-	WRITE_LONG 0x10 233
-	WRITE_LONG 0x14 1
-	WRITE_LONG 0x1c (2 << 4)
-	WRITE_LONG 0x20 (108 + (0x10000 * 1))
-	WRITE_LONG 0x24 2
-	WRITE_SHORT 0x2c 100
-	WRITE_LONG 0x90 1
-	WRITE_EVALUATED_ASCII 0x94 ~D5SLC1F~ #8
-  CREATE EFF ~d5slc2f~
-	WRITE_LONG 0x10 233
-	WRITE_LONG 0x14 1
-	WRITE_LONG 0x1c (2 << 8)
-	WRITE_LONG 0x20 (108 + (0x10000 * 1))
-	WRITE_LONG 0x24 2
-	WRITE_SHORT 0x2c 100
-	WRITE_LONG 0x90 1
-	WRITE_EVALUATED_ASCII 0x94 ~D5SLC2F~ #8
-  CREATE EFF ~d5slc3f~
-	WRITE_LONG 0x10 233
-	WRITE_LONG 0x14 1
-	WRITE_LONG 0x1c (2 << 12)
-	WRITE_LONG 0x20 (108 + (0x10000 * 1))
-	WRITE_LONG 0x24 2
-	WRITE_SHORT 0x2c 100
-	WRITE_LONG 0x90 1
-	WRITE_EVALUATED_ASCII 0x94 ~D5SLC3F~ #8
-  CREATE EFF ~d5slc4f~
-	WRITE_LONG 0x10 233
-	WRITE_LONG 0x14 1
-	WRITE_LONG 0x1c (2 << 16)
-	WRITE_LONG 0x20 (108 + (0x10000 * 1))
-	WRITE_LONG 0x24 2
-	WRITE_SHORT 0x2c 100
-	WRITE_LONG 0x90 1
-	WRITE_EVALUATED_ASCII 0x94 ~D5SLC4F~ #8
-  CREATE EFF ~d5slc5f~
-	WRITE_LONG 0x10 233
-	WRITE_LONG 0x14 1
-	WRITE_LONG 0x1c (2 << 20)
-	WRITE_LONG 0x20 (108 + (0x10000 * 1))
-	WRITE_LONG 0x24 2
-	WRITE_SHORT 0x2c 100
-	WRITE_LONG 0x90 1
-	WRITE_EVALUATED_ASCII 0x94 ~D5SLC5F~ #8
-  CREATE EFF ~d5slc6f~
-	WRITE_LONG 0x10 233
-	WRITE_LONG 0x14 1
-	WRITE_LONG 0x1c (2 << 24)
-	WRITE_LONG 0x20 (108 + (0x10000 * 1))
-	WRITE_LONG 0x24 2
-	WRITE_SHORT 0x2c 100
-	WRITE_LONG 0x90 1
-	WRITE_EVALUATED_ASCII 0x94 ~D5SLC6F~ #8
-  CREATE EFF ~d5slc7f~
-	WRITE_LONG 0x10 233
-	WRITE_LONG 0x14 1
-	WRITE_LONG 0x1c (2 << 28)
-	WRITE_LONG 0x20 (108 + (0x10000 * 1))
-	WRITE_LONG 0x24 2
-	WRITE_SHORT 0x2c 100
-	WRITE_LONG 0x90 1
-	WRITE_EVALUATED_ASCII 0x94 ~D5SLC7F~ #8
-  CREATE EFF ~d5slc8f~
-	WRITE_LONG 0x10 233
-	WRITE_LONG 0x14 1
-	WRITE_LONG 0x1c (2 << 24)
-	WRITE_LONG 0x20 (109 + (0x10000 * 1))
-	WRITE_LONG 0x24 2
-	WRITE_SHORT 0x2c 100
-	WRITE_LONG 0x90 1
-	WRITE_EVALUATED_ASCII 0x94 ~D5SLC8F~ #8
-  CREATE EFF ~d5slc9f~
-	WRITE_LONG 0x10 233
-	WRITE_LONG 0x14 1
-	WRITE_LONG 0x1c (2 << 28)
-	WRITE_LONG 0x20 (109 + (0x10000 * 1))
-	WRITE_LONG 0x24 2
-	WRITE_SHORT 0x2c 100
-	WRITE_LONG 0x90 1
-	WRITE_EVALUATED_ASCII 0x94 ~D5SLC9F~ #8
-END
-
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~d51l1spl.eff~ BEGIN
-// make EFFs to increase traditional mem/cast slots by 1
-  CREATE EFF ~d51l1spl~
-	WRITE_LONG 0x10 42
-	WRITE_LONG 0x14 1
-	WRITE_LONG 0x1c 1
-	WRITE_LONG 0x20 1
-	WRITE_LONG 0x24 2
-	WRITE_SHORT 0x2c 100
-	WRITE_LONG 0x90 1
-	WRITE_EVALUATED_ASCII 0x94 ~D51L1SPL~ #8
-  CREATE EFF ~d51l2spl~
-	WRITE_LONG 0x10 42
-	WRITE_LONG 0x14 1
-	WRITE_LONG 0x1c 1
-	WRITE_LONG 0x20 2
-	WRITE_LONG 0x24 2
-	WRITE_SHORT 0x2c 100
-	WRITE_LONG 0x90 1
-	WRITE_EVALUATED_ASCII 0x94 ~D51L2SPL~ #8
-  CREATE EFF ~d51l3spl~
-	WRITE_LONG 0x10 42
-	WRITE_LONG 0x14 1
-	WRITE_LONG 0x1c 1
-	WRITE_LONG 0x20 4
-	WRITE_LONG 0x24 2
-	WRITE_SHORT 0x2c 100
-	WRITE_LONG 0x90 1
-	WRITE_EVALUATED_ASCII 0x94 ~D51L3SPL~ #8
-  CREATE EFF ~d51l4spl~
-	WRITE_LONG 0x10 42
-	WRITE_LONG 0x14 1
-	WRITE_LONG 0x1c 1
-	WRITE_LONG 0x20 8
-	WRITE_LONG 0x24 2
-	WRITE_SHORT 0x2c 100
-	WRITE_LONG 0x90 1
-	WRITE_EVALUATED_ASCII 0x94 ~D51L4SPL~ #8
-  CREATE EFF ~d51l5spl~
-	WRITE_LONG 0x10 42
-	WRITE_LONG 0x14 1
-	WRITE_LONG 0x1c 1
-	WRITE_LONG 0x20 16
-	WRITE_LONG 0x24 2
-	WRITE_SHORT 0x2c 100
-	WRITE_LONG 0x90 1
-	WRITE_EVALUATED_ASCII 0x94 ~D51L5SPL~ #8
-  CREATE EFF ~d51l6spl~
-	WRITE_LONG 0x10 42
-	WRITE_LONG 0x14 1
-	WRITE_LONG 0x1c 1
-	WRITE_LONG 0x20 32
-	WRITE_LONG 0x24 2
-	WRITE_SHORT 0x2c 100
-	WRITE_LONG 0x90 1
-	WRITE_EVALUATED_ASCII 0x94 ~D51L6SPL~ #8
-  CREATE EFF ~d51l7spl~
-	WRITE_LONG 0x10 42
-	WRITE_LONG 0x14 1
-	WRITE_LONG 0x1c 1
-	WRITE_LONG 0x20 64
-	WRITE_LONG 0x24 2
-	WRITE_SHORT 0x2c 100
-	WRITE_LONG 0x90 1
-	WRITE_EVALUATED_ASCII 0x94 ~D51L7SPL~ #8
-  CREATE EFF ~d51l8spl~
-	WRITE_LONG 0x10 42
-	WRITE_LONG 0x14 1
-	WRITE_LONG 0x1c 1
-	WRITE_LONG 0x20 128
-	WRITE_LONG 0x24 2
-	WRITE_SHORT 0x2c 100
-	WRITE_LONG 0x90 1
-	WRITE_EVALUATED_ASCII 0x94 ~D51L8SPL~ #8
-  CREATE EFF ~d51l9spl~
-	WRITE_LONG 0x10 42
-	WRITE_LONG 0x14 1
-	WRITE_LONG 0x1c 1
-	WRITE_LONG 0x20 256
-	WRITE_LONG 0x24 2
-	WRITE_SHORT 0x2c 100
-	WRITE_LONG 0x90 1
-	WRITE_EVALUATED_ASCII 0x94 ~D51L9SPL~ #8
-
-// make EFFs to increase traditional mem/cast slots by 2
-  CREATE EFF ~D52L1spl~
-	WRITE_LONG 0x10 42
-	WRITE_LONG 0x14 1
-	WRITE_LONG 0x1c 1
-	WRITE_LONG 0x20 1
-	WRITE_LONG 0x24 2
-	WRITE_SHORT 0x2c 100
-	WRITE_LONG 0x90 1
-	WRITE_EVALUATED_ASCII 0x94 ~D52L1SPL~ #8
-  CREATE EFF ~D52L2spl~
-	WRITE_LONG 0x10 42
-	WRITE_LONG 0x14 1
-	WRITE_LONG 0x1c 1
-	WRITE_LONG 0x20 2
-	WRITE_LONG 0x24 2
-	WRITE_SHORT 0x2c 100
-	WRITE_LONG 0x90 1
-	WRITE_EVALUATED_ASCII 0x94 ~D52L2SPL~ #8
-  CREATE EFF ~D52L3spl~
-	WRITE_LONG 0x10 42
-	WRITE_LONG 0x14 1
-	WRITE_LONG 0x1c 1
-	WRITE_LONG 0x20 4
-	WRITE_LONG 0x24 2
-	WRITE_SHORT 0x2c 100
-	WRITE_LONG 0x90 1
-	WRITE_EVALUATED_ASCII 0x94 ~D52L3SPL~ #8
-  CREATE EFF ~D52L4spl~
-	WRITE_LONG 0x10 42
-	WRITE_LONG 0x14 1
-	WRITE_LONG 0x1c 1
-	WRITE_LONG 0x20 8
-	WRITE_LONG 0x24 2
-	WRITE_SHORT 0x2c 100
-	WRITE_LONG 0x90 1
-	WRITE_EVALUATED_ASCII 0x94 ~D52L4SPL~ #8
-  CREATE EFF ~D52L5spl~
-	WRITE_LONG 0x10 42
-	WRITE_LONG 0x14 1
-	WRITE_LONG 0x1c 1
-	WRITE_LONG 0x20 16
-	WRITE_LONG 0x24 2
-	WRITE_SHORT 0x2c 100
-	WRITE_LONG 0x90 1
-	WRITE_EVALUATED_ASCII 0x94 ~D52L5SPL~ #8
-  CREATE EFF ~D52L6spl~
-	WRITE_LONG 0x10 42
-	WRITE_LONG 0x14 1
-	WRITE_LONG 0x1c 1
-	WRITE_LONG 0x20 32
-	WRITE_LONG 0x24 2
-	WRITE_SHORT 0x2c 100
-	WRITE_LONG 0x90 1
-	WRITE_EVALUATED_ASCII 0x94 ~D52L6SPL~ #8
-  CREATE EFF ~D52L7spl~
-	WRITE_LONG 0x10 42
-	WRITE_LONG 0x14 1
-	WRITE_LONG 0x1c 1
-	WRITE_LONG 0x20 64
-	WRITE_LONG 0x24 2
-	WRITE_SHORT 0x2c 100
-	WRITE_LONG 0x90 1
-	WRITE_EVALUATED_ASCII 0x94 ~D52L7SPL~ #8
-  CREATE EFF ~D52L8spl~
-	WRITE_LONG 0x10 42
-	WRITE_LONG 0x14 1
-	WRITE_LONG 0x1c 1
-	WRITE_LONG 0x20 128
-	WRITE_LONG 0x24 2
-	WRITE_SHORT 0x2c 100
-	WRITE_LONG 0x90 1
-	WRITE_EVALUATED_ASCII 0x94 ~D52L8SPL~ #8
-  CREATE EFF ~D52L9spl~
-	WRITE_LONG 0x10 42
-	WRITE_LONG 0x14 1
-	WRITE_LONG 0x1c 1
-	WRITE_LONG 0x20 256
-	WRITE_LONG 0x24 2
-	WRITE_SHORT 0x2c 100
-	WRITE_LONG 0x90 1
-	WRITE_EVALUATED_ASCII 0x94 ~D52L9SPL~ #8
-
-// make EFFs to double traditional mem/cast slots
-  CREATE EFF ~D5XL1spl~
-	WRITE_LONG 0x10 42
-	WRITE_LONG 0x14 1
-	WRITE_LONG 0x1c 1
-	WRITE_LONG 0x20 0
-	WRITE_LONG 0x24 2
-	WRITE_SHORT 0x2c 100
-	WRITE_LONG 0x90 1
-	WRITE_EVALUATED_ASCII 0x94 ~D5XL1SPL~ #8
-  CREATE EFF ~D5XL2spl~
-	WRITE_LONG 0x10 42
-	WRITE_LONG 0x14 1
-	WRITE_LONG 0x1c 2
-	WRITE_LONG 0x20 0
-	WRITE_LONG 0x24 2
-	WRITE_SHORT 0x2c 100
-	WRITE_LONG 0x90 1
-	WRITE_EVALUATED_ASCII 0x94 ~D5XL2SPL~ #8
-  CREATE EFF ~D5XL3spl~
-	WRITE_LONG 0x10 42
-	WRITE_LONG 0x14 1
-	WRITE_LONG 0x1c 3
-	WRITE_LONG 0x20 0
-	WRITE_LONG 0x24 2
-	WRITE_SHORT 0x2c 100
-	WRITE_LONG 0x90 1
-	WRITE_EVALUATED_ASCII 0x94 ~D5XL3SPL~ #8
-  CREATE EFF ~D5XL4spl~
-	WRITE_LONG 0x10 42
-	WRITE_LONG 0x14 1
-	WRITE_LONG 0x1c 4
-	WRITE_LONG 0x20 0
-	WRITE_LONG 0x24 2
-	WRITE_SHORT 0x2c 100
-	WRITE_LONG 0x90 1
-	WRITE_EVALUATED_ASCII 0x94 ~D5XL4SPL~ #8
-  CREATE EFF ~D5XL5spl~
-	WRITE_LONG 0x10 42
-	WRITE_LONG 0x14 1
-	WRITE_LONG 0x1c 5
-	WRITE_LONG 0x20 0
-	WRITE_LONG 0x24 2
-	WRITE_SHORT 0x2c 100
-	WRITE_LONG 0x90 1
-	WRITE_EVALUATED_ASCII 0x94 ~D5XL5SPL~ #8
-  CREATE EFF ~D5XL6spl~
-	WRITE_LONG 0x10 42
-	WRITE_LONG 0x14 1
-	WRITE_LONG 0x1c 6
-	WRITE_LONG 0x20 0
-	WRITE_LONG 0x24 2
-	WRITE_SHORT 0x2c 100
-	WRITE_LONG 0x90 1
-	WRITE_EVALUATED_ASCII 0x94 ~D5XL6SPL~ #8
-  CREATE EFF ~D5XL7spl~
-	WRITE_LONG 0x10 42
-	WRITE_LONG 0x14 1
-	WRITE_LONG 0x1c 7
-	WRITE_LONG 0x20 0
-	WRITE_LONG 0x24 2
-	WRITE_SHORT 0x2c 100
-	WRITE_LONG 0x90 1
-	WRITE_EVALUATED_ASCII 0x94 ~D5XL7SPL~ #8
-  CREATE EFF ~D5XL8spl~
-	WRITE_LONG 0x10 42
-	WRITE_LONG 0x14 1
-	WRITE_LONG 0x1c 8
-	WRITE_LONG 0x20 0
-	WRITE_LONG 0x24 2
-	WRITE_SHORT 0x2c 100
-	WRITE_LONG 0x90 1
-	WRITE_EVALUATED_ASCII 0x94 ~D5XL8SPL~ #8
-  CREATE EFF ~D5XL9spl~
-	WRITE_LONG 0x10 42
-	WRITE_LONG 0x14 1
-	WRITE_LONG 0x1c 9
-	WRITE_LONG 0x20 0
-	WRITE_LONG 0x24 2
-	WRITE_SHORT 0x2c 100
-	WRITE_LONG 0x90 1
-	WRITE_EVALUATED_ASCII 0x94 ~D5XL9SPL~ #8
-
- OUTER_SET mageslot_item_ind = 0
- OUTER_SPRINT $mage_slot_items(~%mageslot_item_ind%~) ~mage_slot_item~
- COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
-  PATCH_IF (%SOURCE_SIZE% > 0x72) BEGIN
-  	SET plus_slots = 0
-	READ_LONG 0x6a effectsoffset ELSE 0
-	READ_SHORT 0x70 effectscount ELSE 0
-	FOR (effcyc = 0; effcyc < effectscount; effcyc = effcyc + 1) BEGIN
-	  READ_SHORT (effectsoffset + (effcyc * 0x30)) opcode ELSE 0
-	  PATCH_IF (opcode = 42) BEGIN
-		SET plus_slots = 1
-	  END
-	END
-	PATCH_IF (plus_slots = 1) BEGIN
-	  SPRINT $mage_slot_items(~%mageslot_item_ind%~) ~%SOURCE_RES%~
-	  SET ++mageslot_item_ind
-	END
-  END
- BUT_ONLY
-	  
- ACTION_PHP_EACH mage_slot_items AS ind => slot_item BEGIN
-  COPY_EXISTING ~%slot_item%.itm~ ~override~
-	LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 42 match_parameter1 = 1 match_parameter2 = 1   opcode = 177 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d5slc1e~ insert = ~first~ END
-	LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 42 match_parameter1 = 1 match_parameter2 = 2   opcode = 177 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d5slc2e~ insert = ~first~ END
-	LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 42 match_parameter1 = 1 match_parameter2 = 4   opcode = 177 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d5slc3e~ insert = ~first~ END
-	LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 42 match_parameter1 = 1 match_parameter2 = 8   opcode = 177 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d5slc4e~ insert = ~first~ END
-	LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 42 match_parameter1 = 1 match_parameter2 = 16  opcode = 177 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d5slc5e~ insert = ~first~ END
-	LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 42 match_parameter1 = 1 match_parameter2 = 32  opcode = 177 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d5slc6e~ insert = ~first~ END
-	LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 42 match_parameter1 = 1 match_parameter2 = 64  opcode = 177 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d5slc7e~ insert = ~first~ END
-	LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 42 match_parameter1 = 1 match_parameter2 = 128 opcode = 177 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d5slc8e~ insert = ~first~ END
-	LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 42 match_parameter1 = 1 match_parameter2 = 256 opcode = 177 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d5slc9e~ insert = ~first~ END
-	LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 42 match_parameter1 = 2 match_parameter2 = 1   opcode = 177 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d5slc1f~ insert = ~first~ END
-	LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 42 match_parameter1 = 2 match_parameter2 = 2   opcode = 177 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d5slc2f~ insert = ~first~ END
-	LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 42 match_parameter1 = 2 match_parameter2 = 4   opcode = 177 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d5slc3f~ insert = ~first~ END
-	LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 42 match_parameter1 = 2 match_parameter2 = 8   opcode = 177 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d5slc4f~ insert = ~first~ END
-	LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 42 match_parameter1 = 2 match_parameter2 = 16  opcode = 177 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d5slc5f~ insert = ~first~ END
-	LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 42 match_parameter1 = 2 match_parameter2 = 32  opcode = 177 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d5slc6f~ insert = ~first~ END
-	LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 42 match_parameter1 = 2 match_parameter2 = 64  opcode = 177 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d5slc7f~ insert = ~first~ END
-	LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 42 match_parameter1 = 2 match_parameter2 = 128 opcode = 177 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d5slc8f~ insert = ~first~ END
-	LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 42 match_parameter1 = 2 match_parameter2 = 256 opcode = 177 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d5slc9f~ insert = ~first~ END
-	LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 42 match_parameter1 = 1 match_parameter2 = 0   opcode = 177 parameter1 = 1 parameter2 = 0 timing = 2 STR_VAR resource = ~d5slc1f~ insert = ~first~ END
-	LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 42 match_parameter1 = 2 match_parameter2 = 0   opcode = 177 parameter1 = 2 parameter2 = 0 timing = 2 STR_VAR resource = ~d5slc2f~ insert = ~first~ END
-	LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 42 match_parameter1 = 3 match_parameter2 = 0   opcode = 177 parameter1 = 3 parameter2 = 0 timing = 2 STR_VAR resource = ~d5slc3f~ insert = ~first~ END
-	LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 42 match_parameter1 = 4 match_parameter2 = 0   opcode = 177 parameter1 = 4 parameter2 = 0 timing = 2 STR_VAR resource = ~d5slc4f~ insert = ~first~ END
-	LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 42 match_parameter1 = 5 match_parameter2 = 0   opcode = 177 parameter1 = 5 parameter2 = 0 timing = 2 STR_VAR resource = ~d5slc5f~ insert = ~first~ END
-	LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 42 match_parameter1 = 6 match_parameter2 = 0   opcode = 177 parameter1 = 6 parameter2 = 0 timing = 2 STR_VAR resource = ~d5slc6f~ insert = ~first~ END
-	LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 42 match_parameter1 = 7 match_parameter2 = 0   opcode = 177 parameter1 = 7 parameter2 = 0 timing = 2 STR_VAR resource = ~d5slc7f~ insert = ~first~ END
-	LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 42 match_parameter1 = 8 match_parameter2 = 0   opcode = 177 parameter1 = 8 parameter2 = 0 timing = 2 STR_VAR resource = ~d5slc8f~ insert = ~first~ END
-	LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 42 match_parameter1 = 9 match_parameter2 = 0   opcode = 177 parameter1 = 9 parameter2 = 0 timing = 2 STR_VAR resource = ~d5slc9f~ insert = ~first~ END
-	LPF ALTER_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 42 match_parameter1 = 1 match_parameter2 = 1   opcode = 177 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d51l1spl~ END
-	LPF ALTER_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 42 match_parameter1 = 1 match_parameter2 = 2   opcode = 177 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d51l2spl~ END
-	LPF ALTER_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 42 match_parameter1 = 1 match_parameter2 = 4   opcode = 177 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d51l3spl~ END
-	LPF ALTER_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 42 match_parameter1 = 1 match_parameter2 = 8   opcode = 177 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d51l4spl~ END
-	LPF ALTER_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 42 match_parameter1 = 1 match_parameter2 = 16  opcode = 177 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d51l5spl~ END
-	LPF ALTER_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 42 match_parameter1 = 1 match_parameter2 = 32  opcode = 177 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d51l6spl~ END
-	LPF ALTER_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 42 match_parameter1 = 1 match_parameter2 = 64  opcode = 177 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d51l7spl~ END
-	LPF ALTER_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 42 match_parameter1 = 1 match_parameter2 = 128 opcode = 177 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d51l8spl~ END
-	LPF ALTER_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 42 match_parameter1 = 1 match_parameter2 = 256 opcode = 177 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d51l9spl~ END
-	LPF ALTER_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 42 match_parameter1 = 2 match_parameter2 = 1   opcode = 177 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d52l1spl~ END
-	LPF ALTER_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 42 match_parameter1 = 2 match_parameter2 = 2   opcode = 177 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d52l2spl~ END
-	LPF ALTER_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 42 match_parameter1 = 2 match_parameter2 = 4   opcode = 177 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d52l3spl~ END
-	LPF ALTER_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 42 match_parameter1 = 2 match_parameter2 = 8   opcode = 177 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d52l4spl~ END
-	LPF ALTER_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 42 match_parameter1 = 2 match_parameter2 = 16  opcode = 177 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d52l5spl~ END
-	LPF ALTER_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 42 match_parameter1 = 2 match_parameter2 = 32  opcode = 177 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d52l6spl~ END
-	LPF ALTER_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 42 match_parameter1 = 2 match_parameter2 = 64  opcode = 177 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d52l7spl~ END
-	LPF ALTER_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 42 match_parameter1 = 2 match_parameter2 = 128 opcode = 177 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d52l8spl~ END
-	LPF ALTER_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 42 match_parameter1 = 2 match_parameter2 = 256 opcode = 177 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d52l9spl~ END
-	LPF ALTER_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 42 match_parameter1 = 1 match_parameter2 = 0   opcode = 177 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d5xl1spl~ END
-	LPF ALTER_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 42 match_parameter1 = 2 match_parameter2 = 0   opcode = 177 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d5xl2spl~ END
-	LPF ALTER_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 42 match_parameter1 = 3 match_parameter2 = 0   opcode = 177 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d5xl3spl~ END
-	LPF ALTER_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 42 match_parameter1 = 4 match_parameter2 = 0   opcode = 177 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d5xl4spl~ END
-	LPF ALTER_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 42 match_parameter1 = 5 match_parameter2 = 0   opcode = 177 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d5xl5spl~ END
-	LPF ALTER_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 42 match_parameter1 = 6 match_parameter2 = 0   opcode = 177 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d5xl6spl~ END
-	LPF ALTER_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 42 match_parameter1 = 7 match_parameter2 = 0   opcode = 177 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d5xl7spl~ END
-	LPF ALTER_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 42 match_parameter1 = 8 match_parameter2 = 0   opcode = 177 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d5xl8spl~ END
-	LPF ALTER_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 42 match_parameter1 = 9 match_parameter2 = 0   opcode = 177 parameter1 = 0 parameter2 = 2 timing = 2 STR_VAR resource = ~d5xl9spl~ END
-	LPF ADD_ITEM_EQEFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 202 parameter2 = 115 timing = 2 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
-  IF_EXISTS BUT_ONLY
- END
-
-END // end if not already done
 
 END 	//	end define function
 //____________________________________________________________________________________

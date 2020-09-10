@@ -22,11 +22,14 @@ END
 COPY_EXISTING ~kitlist.2da~ ~override~
   COUNT_2DA_ROWS 9 rows
   FOR (row = 2 ; row < rows ; ++row) BEGIN
+	READ_2DA_ENTRY row 1 9 modname
 	READ_2DA_ENTRY row 5 9 modclab
 	READ_2DA_ENTRY row 8 9 modclass
 	PATCH_IF (modclass = 1) OR (modclass = 19) BEGIN
-	  INNER_ACTION BEGIN
-		APPEND ~%modclab%.2da~ ~FAMILIAR 	AP_D5FMINN  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****    ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~ UNLESS ~FAMILIAR~
+	  PATCH_IF !(%modname% STRING_MATCHES_REGEXP ~C0SA+~ = 0) BEGIN
+		INNER_ACTION BEGIN
+		  APPEND ~%modclab%.2da~ ~FAMILIAR 	AP_D5FMINN  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****    ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~ UNLESS ~FAMILIAR~
+		END
 	  END
 	END
   END
@@ -1386,6 +1389,7 @@ COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5famrt1.spl~
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 67 target = 1 parameter2 = 2 timing = 0 duration = 30 probability1 = 40 STR_VAR resource = ~d5ratsu~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 67 target = 1 parameter2 = 2 timing = 0 duration = 30 probability1 = 25 STR_VAR resource = ~d5ratsu~ END
 COPY ~tomeandblood/data/familiars/d5ratsu.cre~ ~override~
+  WRITE_LONG 0x28 49920																// rat animation
   WRITE_BYTE 0x275 20
 
 ACTION_IF (FILE_EXISTS_IN_GAME ~quasclaw.itm~) BEGIN
@@ -1653,14 +1657,14 @@ BEGIN ~D5_IMBUE~
 IF ~Global("D5_IMBUE","GLOBAL",1)~ THEN BEGIN d5_imbue
 SAY @8201
 >>>>>>>> 
-COPY ~d5/d5fmimb1.txt~ ~weidu_external/workspace/d5fmimb1.txt~
+COPY ~d5/d5fmimb1.txt~ ~weidu_external/tomeandblood/d5fmimb1.txt~
 
 <<<<<<<< d5/d5fmimb2.txt
 IF ~~ THEN REPLY @8202 EXIT
 END
 
 >>>>>>>> 
-COPY ~d5/d5fmimb2.txt~ ~weidu_external/workspace/d5fmimb2.txt~
+COPY ~d5/d5fmimb2.txt~ ~weidu_external/tomeandblood/d5fmimb2.txt~
 
 ACTION_IF !(FILE_EXISTS_IN_GAME ~qdtnb_familiar_choice.qd~) BEGIN
   ACTION_IF !(VARIABLE_IS_SET %has_familiar_state%) BEGIN
@@ -1835,8 +1839,8 @@ ACTION_PHP_EACH d5_imbue_spell_list AS ind => spell BEGIN
 			OUTER_SPRINT imbue_prefix @8203
 			OUTER_SPRINT imbue_text ~%imbue_prefix%: %spell_name%~
 			OUTER_SET imbue_string = RESOLVE_STR_REF (~%imbue_text%~)
-			APPEND_OUTER ~weidu_external/workspace/d5fmimb1.txt~ ~~~~~IF ~GlobalGT("D5_IMBUD","GLOBAL",%imb_level%) GlobalGT("D5_IMLVL","GLOBAL",%dlg_level%) GlobalLT("%imbue_spell%","GLOBAL",1) HaveKnownSpellRES("%spell%")~ THEN REPLY ~%spell_name%~ GOTO d5_imbue_%ind%~~~~~ KEEP_CRLF
-			APPEND_OUTER ~weidu_external/workspace/d5fmimb2.txt~ ~~~~~IF ~~ THEN BEGIN d5_imbue_%ind% %WNL% SAY ~%imbue_text%~ %WNL% IF ~~ THEN REPLY @8204 DO ~IncrementGlobal("%imbue_spell%","GLOBAL",1)~ DO ~IncrementGlobal("D5_IMBUD","GLOBAL",1)~ DO ~ApplySpellRES("%imbue_spell%",myself)~ EXIT %WNL% IF ~~ THEN REPLY @8205 GOTO d5_imbue %WNL% END %WNL%~~~~~ KEEP_CRLF
+			APPEND_OUTER ~weidu_external/tomeandblood/d5fmimb1.txt~ ~~~~~IF ~GlobalGT("D5_IMBUD","GLOBAL",%imb_level%) GlobalGT("D5_IMLVL","GLOBAL",%dlg_level%) GlobalLT("%imbue_spell%","GLOBAL",1) HaveKnownSpellRES("%spell%")~ THEN REPLY ~%spell_name%~ GOTO d5_imbue_%ind%~~~~~ KEEP_CRLF
+			APPEND_OUTER ~weidu_external/tomeandblood/d5fmimb2.txt~ ~~~~~IF ~~ THEN BEGIN d5_imbue_%ind% %WNL% SAY ~%imbue_text%~ %WNL% IF ~~ THEN REPLY @8204 DO ~IncrementGlobal("%imbue_spell%","GLOBAL",1)~ DO ~IncrementGlobal("D5_IMBUD","GLOBAL",1)~ DO ~ApplySpellRES("%imbue_spell%",myself)~ EXIT %WNL% IF ~~ THEN REPLY @8205 GOTO d5_imbue %WNL% END %WNL%~~~~~ KEEP_CRLF
 		  END
 		END
 	  BUT_ONLY
@@ -1844,15 +1848,15 @@ ACTION_PHP_EACH d5_imbue_spell_list AS ind => spell BEGIN
 //  END
 END
 
-COPY ~weidu_external/workspace/d5fmimb1.txt~ ~weidu_external/workspace/d5fmimb.d~
-	APPEND_FILE ~weidu_external/workspace/d5fmimb2.txt~
+COPY ~weidu_external/tomeandblood/d5fmimb1.txt~ ~weidu_external/tomeandblood/d5fmimb.d~
+	APPEND_FILE ~weidu_external/tomeandblood/d5fmimb2.txt~
 
-COMPILE ~weidu_external/workspace/d5fmimb.d~
+COMPILE ~weidu_external/tomeandblood/d5fmimb.d~
 
 COPY ~tomeandblood/data/familiars/d5fmimb.bam~ ~override~
 COPY ~tomeandblood/data/familiars/d5fmimb.spl~ ~override~
   SAY NAME1 @8203
-  SAY UNIDENTIFIED_DESC @8203
+  SAY UNIDENTIFIED_DESC @8206
   WRITE_SHORT 0x1c 4
   LPF ALTER_SPELL_HEADER INT_VAR location = 4 STR_VAR icon = ~d5fmimb~ END
   LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 171 target = 1 timing = 1 STR_VAR resource = ~d5fmimb~ END
@@ -1949,9 +1953,9 @@ THEN
 	DestroySelf()
 END
 >>>>>>>> 
-COPY ~d5/d5fmimb.baf~ ~weidu_external/workspace/d5fmimb.baf~
+COPY ~d5/d5fmimb.baf~ ~weidu_external/tomeandblood/d5fmimb.baf~
 
-COMPILE ~weidu_external/workspace/d5fmimb.baf~
+COMPILE ~weidu_external/tomeandblood/d5fmimb.baf~
 
 COPY_EXISTING ~d5famch.spl~ ~override~
 			  ~spwi123.spl~ ~override~

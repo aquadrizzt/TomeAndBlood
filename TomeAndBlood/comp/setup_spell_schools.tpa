@@ -730,8 +730,8 @@ ACTION_PHP_EACH d5_spell_scroll_school AS spell => school BEGIN
 		ACTION_IF (FILE_EXISTS_IN_GAME ~%spell_1%.itm~) BEGIN 
 			COPY_EXISTING ~%spell_1%.itm~ ~override~
 				PATCH_IF NOT GAME_IS ~iwdee~ BEGIN
-					WRITE_BYTE 0x2d ("0x00") //blocked: 
-					WRITE_BYTE 0x2f ("0x02") //blocked: enchanters
+					WRITE_BYTE 0x2f ("0x00") //blocked: 
+					WRITE_BYTE 0x2d ("0x02") //blocked: enchanters
 				END
 				PATCH_IF GAME_IS ~iwdee~ BEGIN
 					WRITE_BYTE 0x2f ("0x80") //blocked: con
@@ -828,8 +828,8 @@ ACTION_PHP_EACH d5_spell_scroll_school AS spell => school BEGIN
 		ACTION_IF (FILE_EXISTS_IN_GAME ~%spell_1%.itm~) BEGIN 
 			COPY_EXISTING ~%spell_1%.itm~ ~override~
 				PATCH_IF NOT GAME_IS ~iwdee~ BEGIN
-					WRITE_BYTE 0x2d ("0x00") //blocked: 
-					WRITE_BYTE 0x2f ("0x10") //blocked: necromancers
+					WRITE_BYTE 0x2f ("0x00") //blocked: 
+					WRITE_BYTE 0x2d ("0x10") //blocked: necromancers
 				END
 				PATCH_IF GAME_IS ~iwdee~ BEGIN
 					WRITE_BYTE 0x2f ("0x40") //blocked: abj
@@ -926,8 +926,8 @@ ACTION_PHP_EACH d5_spell_scroll_school AS spell => school BEGIN
 		ACTION_IF (FILE_EXISTS_IN_GAME ~%spell_1%.itm~) BEGIN 
 			COPY_EXISTING ~%spell_1%.itm~ ~override~
 				PATCH_IF NOT GAME_IS ~iwdee~ BEGIN
-					WRITE_BYTE 0x2d ("0x00") //blocked:
-					WRITE_BYTE 0x2f ("0x04") //blocked: illusionists
+					WRITE_BYTE 0x2f ("0x00") //blocked:
+					WRITE_BYTE 0x2d ("0x04") //blocked: illusionists
 				END
 				PATCH_IF GAME_IS ~iwdee~ BEGIN
 					WRITE_BYTE 0x2f ("0x00") //blocked: 
