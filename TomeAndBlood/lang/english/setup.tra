@@ -43,7 +43,8 @@
 @79 = ~Spell Selection by Dialogue~
 @80 = ~Multiclass Sorcerers~
 @82 = ~Mage Kit: Arcanist~
-@85 = ~Mana Sorcerer(s)~
+@85 = ~Sorcerer Kit: Mana Sorcerer~
+@93 = ~Make +Spell Slot Items work with MultiSorcerers and Arcanists~
 @95 = ~Ability Score Spellcasting Bonuses (install AFTER any mod that changes spell tables!)~
 
 @100 = ~~ 

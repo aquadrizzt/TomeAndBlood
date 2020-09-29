@@ -394,6 +394,33 @@ COPY_EXISTING ~splprot.2da~ ~override~
 BUT_ONLY
 
 
+//multi sorc spellstate_______________________________________________________________
+//
+ACTION_IF (FILE_CONTAINS_EVALUATED (~splstate.ids~ ~D5_MULTI_SORC~)) BEGIN
+  COPY_EXISTING ~splstate.ids~ ~override~
+	COUNT_2DA_COLS cols
+	READ_2DA_ENTRIES_NOW rows cols
+	FOR (row = 1; row < rows; ++row) BEGIN
+	  READ_2DA_ENTRY_FORMER rows row 1 ~state_name~
+	  READ_2DA_ENTRY_FORMER rows row 0 ~state_ind~
+	  PATCH_IF (~%state_name%~ STRING_EQUAL_CASE ~D5_MULTI_SORC~) BEGIN
+		SET multi_sorc_state = %state_ind%
+	  END
+	END
+  BUT_ONLY
+END
+/*
+ACTION_IF !(FILE FILE_CONTAINS_EVALUATED (~splstate.ids~ ~D5_MULTI_SORC~)) BEGIN
+  LAF d5_resolve_state STR_VAR new_state_id = ~D5_MULTI_SORC~ RET new_state_ind END
+  OUTER_SET multi_sorc_state = %new_state_ind%
+END
+*/
+ACTION_IF !(VARIABLE_IS_SET %multi_sorc_state%) BEGIN
+  LAF d5_resolve_state STR_VAR new_state_id = ~D5_MULTI_SORC~ RET new_state_ind END
+  OUTER_SET multi_sorc_state = %new_state_ind%
+END
+
+
 //remove all mage spell slots_________________________________________________________
 //
 /* 
@@ -717,7 +744,6 @@ COPY_EXISTING ~d5clonsc.2da~ ~override~
 	  COPY ~tomeandblood/lib/d5_base.spl~ ~override/%learn_spell%.spl~
 		WRITE_EVALUATED_ASCII 0x3a ~%spell_icon%~ #8
 	  	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = EVAL ~%206_spell%~ END
-		LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5w206~ END
 	  	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5ssplz~ END
 	  	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 19 parameter2 = 105 timing = 0 duration = 0 STR_VAR resource = EVAL ~%learn_spell%~ END
 	  	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 171 target = 1 timing = 9 STR_VAR resource = EVAL ~%real_spell%~ END
@@ -780,6 +806,22 @@ APPEND ~d5sorc.2da~ ~NO_WSPLS    AP_D5W206   ****        ****        ****       
 //daily spell slot refresh____________________________________________________________
 //
 COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5slotz.spl~
+  PATCH_IF (FILE_CONTAINS_EVALUATED (~splstate.ids~ ~D5_MULTI_SORC~)) BEGIN
+	INNER_ACTION BEGIN
+	  COPY_EXISTING ~splstate.ids~ ~override~
+		COUNT_2DA_COLS cols
+		READ_2DA_ENTRIES_NOW rows cols
+		FOR (row = 1; row < rows; ++row) BEGIN
+		  READ_2DA_ENTRY_FORMER rows row 1 ~state_name~
+		  READ_2DA_ENTRY_FORMER rows row 0 ~state_ind~
+		  PATCH_IF (~%state_name%~ STRING_EQUAL_CASE ~D5_MULTI_SORC~) BEGIN
+			SET multi_sorc_state = %state_ind%
+		  END
+		END
+	  BUT_ONLY
+	END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 328 target = 1 special = 1 parameter2 = %multi_sorc_state% timing = 9 END
+  END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = ~d5slots~ END
 
 APPEND ~d5sorc.2da~ ~SPLSLOTS    AP_D5SLOTZ  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
@@ -795,6 +837,7 @@ CREATE EFF ~d5slots~
   WRITE_LONG 0x48 102
 
 COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5sslot.spl~
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 0 duration = 7 STR_VAR resource = ~d5w206~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = 0 parameter2 = %fatigue_value% timing = 1 STR_VAR resource = ~d5srfrsh~ END
 
 
@@ -1056,10 +1099,11 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5tsorc.2da~ BEGIN
 END 
 
 
+/* separate component because needs to work for both multisorc and arcanists
 // bonus spell slot items_____________________________________________________________
 //
 LAF arcane_spont_items END
-
+*/
 
 //fix burning hands targeting_______________________________________________________
 //

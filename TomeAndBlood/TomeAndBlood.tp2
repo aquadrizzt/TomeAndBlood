@@ -1,6 +1,6 @@
 BACKUP ~TomeAndBlood/backup~
 AUTHOR ~aquadrizzt~
-VERSION ~0.9.2~ 
+VERSION ~0.9.3~ 
 
 ALWAYS
 
@@ -540,6 +540,21 @@ LAF mana_sorcerer END
 
 
 // -----------------------------
+// 93: BONUS SLOT ITEMS
+// -----------------------------
+BEGIN @93
+DESIGNATED 93
+REQUIRE_PREDICATE (FILE_EXISTS_IN_GAME ~enginest.2da~) @3
+//GROUP @7
+
+COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_slotitm.qd~ //detection for this component 
+
+INCLUDE ~TomeAndBlood/lib/semi_spontaneous.tpa~
+
+LAF arcane_spont_items END
+
+
+// -----------------------------
 // 95: ABILITY SCORE BONUSES
 // -----------------------------
 BEGIN @95
@@ -552,7 +567,7 @@ COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_attrbon.qd~ //detection for this comp
 
 INCLUDE ~TomeAndBlood/comp/setup_ability_bonuses.tpa~
 
-LAF ability_bonuses END
+LAF ability_bonus_spells END
 
 
 ////////////////////////////////////////////////////////////////////////////////////////

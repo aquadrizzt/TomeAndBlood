@@ -252,6 +252,34 @@ COPY_EXISTING ~splprot.2da~ ~override~
 BUT_ONLY
 
 
+/*
+//mana caster spellstate______________________________________________________________
+//
+ACTION_IF (FILE_CONTAINS_EVALUATED (~splstate.ids~ ~D5_MANA_ARCANE~)) BEGIN
+  COPY_EXISTING ~splstate.ids~ ~override~
+	COUNT_2DA_COLS cols
+	READ_2DA_ENTRIES_NOW rows cols
+	FOR (row = 1; row < rows; ++row) BEGIN
+	  READ_2DA_ENTRY_FORMER rows row 1 ~state_name~
+	  READ_2DA_ENTRY_FORMER rows row 0 ~state_ind~
+	  PATCH_IF (~%state_name%~ STRING_EQUAL_CASE ~D5_MANA_ARCANE~) BEGIN
+		SET mana_caster_arcane = %state_ind%
+	  END
+	END
+  BUT_ONLY
+END
+/*
+ACTION_IF !(FILE FILE_CONTAINS_EVALUATED (~splstate.ids~ ~D5_MANA_ARCANE~)) BEGIN
+  LAF d5_resolve_state STR_VAR new_state_id = ~D5_MANA_ARCANE~ RET new_state_ind END
+  OUTER_SET mana_caster_arcane = %new_state_ind%
+END
+*/
+ACTION_IF !(VARIABLE_IS_SET %mana_caster_arcane%) BEGIN
+  LAF d5_resolve_state STR_VAR new_state_id = ~D5_MANA_ARCANE~ RET new_state_ind END
+  OUTER_SET mana_caster_arcane = %new_state_ind%
+END
+*/
+
 //remove all mage spell slots_________________________________________________________
 //
 COPY ~tomeandblood/lib/d5_base.spl~ ~override/d50wslt.spl~
@@ -328,29 +356,43 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5mana1.spl~ BEGIN
   ACTION_FOR_EACH num IN ~1~ ~2~ ~3~ ~4~ ~6~ ~7~ ~8~ ~9~ BEGIN
 	COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5mana%num%.spl~
 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 95 target = 1 parameter1 = %num% parameter2 = 0 timing = 9 END
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5src1%let%~ END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5mana%let%~ END
   END
 END
 */
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5man4a.spl~ BEGIN
-  ACTION_FOR_EACH let IN ~a~ ~b~ ~c~ ~d~ ~e~ ~f~ ~g~ ~h~ ~i~ ~j~ /*~k~ ~l~ ~m~ ~n~ ~o~ ~p~ ~q~ ~r~ ~s~ ~t~*/ BEGIN
-	COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5man4%let%.spl~
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 95 target = 1 parameter1 = 4 parameter2 = 0 timing = 9 END
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5man4%let%~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5man2a.spl~ BEGIN
+  ACTION_FOR_EACH let IN ~a~ ~b~ ~c~ ~d~ ~e~ /*~f~ ~g~ ~h~ ~i~ ~j~ ~k~ ~l~ ~m~ ~n~ ~o~ ~p~ ~q~ ~r~ ~s~ ~t~*/ BEGIN
+	COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5man2%let%.spl~
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 95 target = 1 parameter1 = 2 parameter2 = 0 timing = 9 END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5man2%let%~ END
   END
 END
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5man3a.spl~ BEGIN
-  ACTION_FOR_EACH let IN ~a~ ~b~ ~c~ ~d~ ~e~ ~f~ ~g~ ~h~ ~i~ ~j~ ~k~ ~l~ ~m~ ~n~ ~o~ ~p~ ~q~ ~r~ ~s~ ~t~ BEGIN
+  ACTION_FOR_EACH let IN ~a~ ~b~ ~c~ ~d~ ~e~ /*~f~ ~g~ ~h~ ~i~ ~j~ ~k~ ~l~ ~m~ ~n~ ~o~ ~p~ ~q~ ~r~ ~s~ ~t~*/ BEGIN
 	COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5man3%let%.spl~
 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 95 target = 1 parameter1 = 3 parameter2 = 0 timing = 9 END
 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5man3%let%~ END
   END
 END
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5man2a.spl~ BEGIN
-  ACTION_FOR_EACH let IN ~a~ /*~b~ ~c~ ~d~ ~e~ ~f~ ~g~ ~h~ ~i~ ~j~ ~k~ ~l~ ~m~ ~n~ ~o~ ~p~ ~q~ ~r~ ~s~ ~t~*/ BEGIN
-	COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5man2%let%.spl~
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 95 target = 1 parameter1 = 2 parameter2 = 0 timing = 9 END
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5man2%let%~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5man4a.spl~ BEGIN
+  ACTION_FOR_EACH let IN ~a~ ~b~ ~c~ ~d~ ~e~ /*~f~ ~g~ ~h~ ~i~ ~j~ ~k~ ~l~ ~m~ ~n~ ~o~ ~p~ ~q~ ~r~ ~s~ ~t~*/ BEGIN
+	COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5man4%let%.spl~
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 95 target = 1 parameter1 = 4 parameter2 = 0 timing = 9 END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5man4%let%~ END
+  END
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5man6a.spl~ BEGIN
+  ACTION_FOR_EACH let IN ~a~ ~b~ ~c~ ~d~ ~e~ /*~f~ ~g~ ~h~ ~i~ ~j~ ~k~ ~l~ ~m~ ~n~ ~o~ ~p~ ~q~ ~r~ ~s~ ~t~*/ BEGIN
+	COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5man6%let%.spl~
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 95 target = 1 parameter1 = 6 parameter2 = 0 timing = 9 END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5man6%let%~ END
+  END
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5man8a.spl~ BEGIN
+  ACTION_FOR_EACH let IN ~a~ ~b~ ~c~ ~d~ ~e~ /*~f~ ~g~ ~h~ ~i~ ~j~ ~k~ ~l~ ~m~ ~n~ ~o~ ~p~ ~q~ ~r~ ~s~ ~t~*/ BEGIN
+	COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5man8%let%.spl~
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 95 target = 1 parameter1 = 8 parameter2 = 0 timing = 9 END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5man8%let%~ END
   END
 END
 
@@ -399,7 +441,7 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5man-9.spl~ BEGIN
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 95 target = 1 parameter1 = (0 - 9) parameter2 = 0 timing = 0 duration = 126144000 END
 END
 
-APPEND ~d5_zmana.2da~ ~MANA_PTS    AP_D5MAN3A  AP_D5MAN3B  AP_D5MAN3C  AP_D5MAN3D  AP_D5MAN3E  AP_D5MAN3F  AP_D5MAN3G  AP_D5MAN3H  AP_D5MAN3I  AP_D5MAN3J  AP_D5MAN4A  AP_D5MAN4B  AP_D5MAN4C  AP_D5MAN4D  AP_D5MAN4E  AP_D5MAN4F  AP_D5MAN4G  AP_D5MAN4H  AP_D5MAN4I  AP_D5MAN4J  AP_D5MAN3K  AP_D5MAN3L  AP_D5MAN3M  AP_D5MAN3N  AP_D5MAN3O  AP_D5MAN3P  AP_D5MAN3Q  AP_D5MAN3R  AP_D5MAN3S  AP_D5MAN2A  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+APPEND ~d5_zmana.2da~ ~MANA_PTS    AP_D5MAN2A  AP_D5MAN2B  AP_D5MAN2C  AP_D5MAN2D  AP_D5MAN2E  AP_D5MAN4A  AP_D5MAN4B  AP_D5MAN4C  AP_D5MAN4D  AP_D5MAN4E  AP_D5MAN6A  AP_D5MAN6B  AP_D5MAN6C  AP_D5MAN6D  AP_D5MAN6E  AP_D5MAN8A  AP_D5MAN8B  AP_D5MAN8C  AP_D5MAN8D  AP_D5MAN8E  AP_D5MAN3A  AP_D5MAN3B  AP_D5MAN3C  AP_D5MAN3D  AP_D5MAN3E  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
 
 
 //initialize ability and learn item___________________________________________________

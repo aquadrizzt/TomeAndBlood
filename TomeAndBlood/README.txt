@@ -1,6 +1,6 @@
 # TomeAndBlood
 
-Tome And Blood: More Options for Wizards and Sorcerers v0.8.48
+Tome And Blood: More Options for Wizards and Sorcerers v0.9.3
 
 ## Overview
 
@@ -20,7 +20,7 @@ This component makes Mislead and Project Image work just as Simulacrum does, exc
 6th Level: Shadow Clone - clone has 40% hit points and -7 to thac0 and caster level, can cast only 1st-level arcane spells, cannot cast divine spells.
 7th Level: Lesser Simulacrum - clone has 60% hit points and -5 to thac0 and caster level, can cast up to 4th-level arcane spells, cannot cast divine spells.
 8th Level: Simulacrum - clone has 75% hit points and -3 to thac0 and caster level, and can cast any spells.
-9th Level: Projected Simulacrum - cast Simulacrum on another creature.
+9th Level: Projected Simulacrum - cast Simulacrum on another creature. (Illusionists only)
 
 COMPONENT 14: Revised Invisiblity
 
@@ -36,7 +36,7 @@ Adds new Dragon Disciple kits to the game, matching different varieties of drago
 
 COMPONENT 25: Magus
 
-Adds the Magus sorcerer kit to the game, which can cast spells in heavy armor and use more weapons than a normal sorcerer. (NOTE: apparently, in order for this work, all wizards must be able to equip all armor. It won't do much for you, as only the Magus will be able to cast spells in armor, but it is a change from the unmodded game behavior, so in case  that surprises you... you've been told.)
+Adds the Magus sorcerer kit to the game, which can cast spells in heavy armor and use more weapons than a normal sorcerer.
 
 COMPONENT 31: Favored Soul
 
@@ -56,7 +56,15 @@ Adds the Amorphous Disciple sorcerer kit to the game.  This kit is kind to oozes
 
 COMPONENT 40: Revised Specialists
 
-This component defines specialists by what they can do, instead of by what they can't.  All specialists can cast all spells - there are no opposition schools.  And each specialist get some active or passive innate abilities that represent their mastery over their particular school of magic.  Finally, specialists gain the ability to spontaneously convert any of their memorized spells into a spell from their specialty school of one level lower.
+This component defines specialists by what they can do, instead of by what they can't.  All specialists can cast all spells - there are no opposition schools.  And each specialist get some active or passive innate abilities that represent their mastery over their particular school of magic.  Finally, specialists gain the ability to spontaneously convert any of their memorized spells into a spell from their specialty school of one level lower.  The special abilities are:
+- Abjurer: when you cast a spell protection, it automatically creates a Spell Shield for free.
+- Conjurer: if SR is installed, you can cast Monster Summoning spells as if they are one level lower.
+- Diviner: IIRC, you get innate (and early) access to Contingency. Might also be able to insert one extra spell into contingencies (two spells in Contingency, three in Chain Contingency).
+- Enchanter: the enchanter and all nearby allies get a +1 bonus to saves vs. spells.
+- Illusionist: you can use the Shadow Step ability, and have permanent Non-Detection.
+- Invoker: your spells do 20% more fire, cold, electric and magic damage.
+- Necromancer: you can innately use a modal ability to slow or control nearby undead. Also, the Chill Touch, Ghoul Touch, and Vampiric Touch spells are improved to have special effects against undead, and they are changed into innate abilities only learnable by necromancers.
+- Transmuter: you get the innate ability to temporarily create and control a golem.
 
 COMPONENT 45: Arcane Crafting
 
@@ -90,19 +98,33 @@ Component 68 allows you to imbue your familiar with up to five spells (one each 
 
 Component 69 eliminates the hp damage and CON loss you take when a familiar dies.  So you can re-summon/revive the familiar without penalty, once per day.  As a consequence, this also eliminates the flat hit point bonus you get from summoning a familiar.  Instead, you will get a 15% boost to your max hit points, whenever your familiar is out of yoru pack and within your general vicinity.
 
-COMPONENT 75: Ability Score-Based Bonus Spells
+COMPONENTS 71, 72: Spell Switching for Sorcerers
+
+This gives you an innate ability to switch out one of your known spells.  You can choose whether to get the ability once every level, or once every three levels.  In order for this to work, you will have to choose known spells from an item ability, like multiclass sorcerers, rather then in the traditional level-up screens.  Make sure you install this component after any other sorcerer kit mods!
+
+COMPONENT 80: Multiclass Sorcerers
+
+What it says on the tin :O
+
+COMPONENT 82: Arcanist
+
+This is a mage kit which can learn spells from scrolls, like other wizards; but after using an innate ability to prepare spells for the next day, can cast their memorized spells spontaneously, like a sorcerer.  Whereas traditional wizards have a certain amount of known spells, and an identical set of memorization slots and casting slots; and whereas sorcerers have an identical set of known/memorized spells and a distinct number of casting slots; with the Arcanist known spells, memorization slots, and casting slots are all different.  The number of memorization slots equals those of a non-specialist wizard; the number of casting slots equals those of a Dragon Disciple.
+
+COMPONENT 80: Mana Sorcerer
+
+This component gives sorcerers (only unkitted sorcerers, for now) an innate ability to use mana points to cast spells instead of spell-level-based casting slots.  Your known spells will be the same (you must choose them manually from an item ability) but you will have a pool of mana points instead of spell slots.  Casting a spell costs as many points as its spell level; you will start with ~2 mana points and can progress to as many as 120, at level 25.  While more flexible, this is generally less firepower than a normal sorcerer has if you tally up their spell slots; so the Mana Sorcerer has a Restorative Meditation innate ability that can be used between fights, which will restore one half of the points you recently spent, rounded down.
+
+COMPONENT 93: Bonus Spell Slot Items Work With Arcanists and Multiclass Sorcerers
+
+What it sounds like.
+
+COMPONENT 95: Ability Score-Based Bonus Spells
 
 This component gives bonus spells to wizards for high INT scores, and to bards and sorcerers for high CHA scores.  The bonuses go up to +2 spell slots per spell level, up to 7th-level spells for wizards, up to 6th-level spells for bards, and up to 5th-level spells for sorcerers.
 
 Any mod component that changes the game's spell tables (such as, say, Tweaks Anthology) should be installed BEFORE this component.
 
-COMPONENT 79: Sorcerer Spell Selection by Dialogue
-
-This component has sorcerers learn spells by way of a dialogue instead of via the vanilla GUI interface, and (I believe) zeroes out SRCSPLKN.2da.  This enables the creation of custom spell lists for different sorcerer kits.  However, if I understand correctly, as of TnB 0.7, the added kits do not use custom lists.  (I think.)  
-
-COMPONENT 80: Multiclass Sorcerers
-
-What it says on the tin :O
+The Scales of Balance mod now has a component which matches this exactly; if it is easier, you can skip the one here and install it via SoB after any spell table-altering mods.
 
 ##Bugs 
 

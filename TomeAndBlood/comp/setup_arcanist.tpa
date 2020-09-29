@@ -171,6 +171,22 @@ COPY ~%MOD_FOLDER%/lib/d5_base.spl~ ~override/d5ac000.spl~	//		initialization
 //  SAY UNIDENTIFIED_DESC @6 								// ~~
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 93 target = 1 parameter1 = 1 parameter2 = 1 timing = 1 END
 //  LPF ADD_SPELL_EFFECT INT_VAR opcode = 244 target = 1 parameter1 = 9 timing = 1 END
+  PATCH_IF (FILE_CONTAINS_EVALUATED (~splstate.ids~ ~D5_SEMI_ARCANE~)) BEGIN
+	INNER_ACTION BEGIN
+	  COPY_EXISTING ~splstate.ids~ ~override~
+		COUNT_2DA_COLS cols
+		READ_2DA_ENTRIES_NOW rows cols
+		FOR (row = 1; row < rows; ++row) BEGIN
+		  READ_2DA_ENTRY_FORMER rows row 1 ~state_name~
+		  READ_2DA_ENTRY_FORMER rows row 0 ~state_ind~
+		  PATCH_IF (~%state_name%~ STRING_EQUAL_CASE ~D5_SEMI_ARCANE~) BEGIN
+			SET semi_spont_arcane = %state_ind%
+		  END
+		END
+	  BUT_ONLY
+	END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 328 target = 1 special = 1 parameter2 = %semi_spont_arcane% timing = 9 END
+  END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5b206~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~d5acast~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5blotr~ END
@@ -185,6 +201,22 @@ COPY ~%MOD_FOLDER%/lib/d5_base.spl~ ~override/d5acast.spl~
   SAY UNIDENTIFIED_DESC @21981 								// ~initialize arcanist spellcasting~
   LPF ALTER_SPELL_HEADER INT_VAR target = 7 STR_VAR icon = ~d5bcast~ END
 //  LPF ADD_SPELL_EFFECT INT_VAR opcode = 328 target = 1 special = 1 parameter2 = %prepared_spells_state% timing = 9 END
+  PATCH_IF (FILE_CONTAINS_EVALUATED (~splstate.ids~ ~D5_SEMI_ARCANE~)) BEGIN
+	INNER_ACTION BEGIN
+	  COPY_EXISTING ~splstate.ids~ ~override~
+		COUNT_2DA_COLS cols
+		READ_2DA_ENTRIES_NOW rows cols
+		FOR (row = 1; row < rows; ++row) BEGIN
+		  READ_2DA_ENTRY_FORMER rows row 1 ~state_name~
+		  READ_2DA_ENTRY_FORMER rows row 0 ~state_ind~
+		  PATCH_IF (~%state_name%~ STRING_EQUAL_CASE ~D5_SEMI_ARCANE~) BEGIN
+			SET semi_spont_arcane = %state_ind%
+		  END
+		END
+	  BUT_ONLY
+	END
+	LPF ADD_SPELL_EFFECT INT_VAR opcode = 328 target = 1 special = 1 parameter2 = %semi_spont_arcane% timing = 9 END
+  END
 //  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~D5BLOTZ~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~d5prepb~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5acast~ END
@@ -265,9 +297,11 @@ APPEND ~d5acnst.2da~ ~SPELL_INIT  AP_D5ACNIT  ****        ****        ****      
 */
 
 
+/* separate component because needs to work for both multisorc and arcanists
 // bonus spell slot items_____________________________________________________________
 //
 LAF arcane_spont_items END
+*/
 
 /*
 COPY_EXISTING ~d5ac000.spl~ ~override~
