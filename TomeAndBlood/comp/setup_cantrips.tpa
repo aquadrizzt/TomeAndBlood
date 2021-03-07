@@ -822,6 +822,8 @@ COPY_EXISTING ~spwi111.spl~ ~override~
 
 //Magic Missile: improved MM at 2nd level; reduced version at 1st
 //
+// EDIT - forget the fiery missiles thing, just nerf MM a bit.
+/*
 COPY_EXISTING ~spwi217.spl~ ~override~
 ADD_SPELL ~override/spwi217.spl~ 2 2 WIZARD_AGANNAZAR_SCORCHER_TNB
 LAF RES_NUM_OF_SPELL_NAME
@@ -855,6 +857,7 @@ COPY_EXISTING ~scrl77.itm~ ~override~
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 147 STR_VAR resource = ~SPWI217~ END
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 148 STR_VAR resource = ~SPWI217~ END
 BUT_ONLY
+*/
 
 COPY_EXISTING ~spwi112.spl~ ~override~
 	SAY NAME1 @7121

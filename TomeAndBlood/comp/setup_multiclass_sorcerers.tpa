@@ -9,13 +9,15 @@
 DEFINE_ACTION_FUNCTION multiclass_sorcerers BEGIN 
 
 
+ACTION_IF (FILE_EXISTS_IN_GAME ~5E_casting_settings.ini~) BEGIN
+  	INCLUDE ~override/5E_casting_settings.ini~
+END
+ACTION_IF !(FILE_EXISTS_IN_GAME ~5E_casting_settings.ini~) BEGIN
+  	INCLUDE ~%MOD_FOLDER%/lib/semi_spont/5E_casting_settings.ini~
+END
+
 INCLUDE ~tomeandblood/lib/qd_multiclass.tpa~
 
-// TO DO:
-// - what about metamagic? --> looks like it can only be done with no cost to fill... see new innate metamagic subcomponent
-// - ...hmm, it's not working :(
-// - ...even if it does, would still have to use the old way for mages and single-class sorcs :(
-// - what about Identify?  --> looks like in cannot be done by any method
 
 //base .2da file
 //
@@ -26,8 +28,8 @@ ABILITY     ****        ****        ****        ****        ****        ****    
 >>>>>>>>
 COPY ~d5/d5sorc.2da~ ~override/d5sorc.2da~
 
-//__________________________________________________________________________________
 
+//__________________________________________________________________________________
 
 LAF check_kit_conflict END
 
@@ -651,12 +653,164 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src-9.spl~ BEGIN
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 28) parameter2 = (109 + (0x10000 * 1)) timing = 1 END
 END
 
+COPY ~tomeandblood/data/semi_spont/d5__slt.spl~ ~override/d5srslt.spl~
+  LPF ADD_SPELL_EFFECT INT_VAR header = 1 opcode = 233 target = 1 parameter1 = (3 << 4) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 2 opcode = 233 target = 1 parameter1 = (4 << 4) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 3 opcode = 233 target = 1 parameter1 = (5 << 4) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 4 opcode = 233 target = 1 parameter1 = (6 << 4) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 4 opcode = 233 target = 1 parameter1 = (3 << 8) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 5 opcode = 233 target = 1 parameter1 = (6 << 4) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 5 opcode = 233 target = 1 parameter1 = (4 << 8) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 6 opcode = 233 target = 1 parameter1 = (6 << 4) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 6 opcode = 233 target = 1 parameter1 = (5 << 8) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 6 opcode = 233 target = 1 parameter1 = (3 << 12) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 7 opcode = 233 target = 1 parameter1 = (6 << 4) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 7 opcode = 233 target = 1 parameter1 = (6 << 8) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 7 opcode = 233 target = 1 parameter1 = (4 << 12) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 8 opcode = 233 target = 1 parameter1 = (6 << 4) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 8 opcode = 233 target = 1 parameter1 = (6 << 8) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 8 opcode = 233 target = 1 parameter1 = (5 << 12) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 8 opcode = 233 target = 1 parameter1 = (3 << 16) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 9 opcode = 233 target = 1 parameter1 = (6 << 4) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 9 opcode = 233 target = 1 parameter1 = (6 << 8) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 9 opcode = 233 target = 1 parameter1 = (6 << 12) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 9 opcode = 233 target = 1 parameter1 = (4 << 16) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 10 opcode = 233 target = 1 parameter1 = (6 << 4) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 10 opcode = 233 target = 1 parameter1 = (6 << 8) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 10 opcode = 233 target = 1 parameter1 = (6 << 12) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 10 opcode = 233 target = 1 parameter1 = (5 << 16) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 10 opcode = 233 target = 1 parameter1 = (3 << 20) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 11 opcode = 233 target = 1 parameter1 = (6 << 4) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 11 opcode = 233 target = 1 parameter1 = (6 << 8) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 11 opcode = 233 target = 1 parameter1 = (6 << 12) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 11 opcode = 233 target = 1 parameter1 = (6 << 16) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 11 opcode = 233 target = 1 parameter1 = (4 << 20) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 12 opcode = 233 target = 1 parameter1 = (6 << 4) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 12 opcode = 233 target = 1 parameter1 = (6 << 8) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 12 opcode = 233 target = 1 parameter1 = (6 << 12) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 12 opcode = 233 target = 1 parameter1 = (6 << 16) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 12 opcode = 233 target = 1 parameter1 = (5 << 20) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 12 opcode = 233 target = 1 parameter1 = (3 << 24) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 13 opcode = 233 target = 1 parameter1 = (6 << 4) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 13 opcode = 233 target = 1 parameter1 = (6 << 8) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 13 opcode = 233 target = 1 parameter1 = (6 << 12) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 13 opcode = 233 target = 1 parameter1 = (6 << 16) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 13 opcode = 233 target = 1 parameter1 = (6 << 20) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 13 opcode = 233 target = 1 parameter1 = (4 << 24) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 14 opcode = 233 target = 1 parameter1 = (6 << 4) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 14 opcode = 233 target = 1 parameter1 = (6 << 8) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 14 opcode = 233 target = 1 parameter1 = (6 << 12) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 14 opcode = 233 target = 1 parameter1 = (6 << 16) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 14 opcode = 233 target = 1 parameter1 = (6 << 20) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 14 opcode = 233 target = 1 parameter1 = (5 << 24) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 14 opcode = 233 target = 1 parameter1 = (3 << 28) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 15 opcode = 233 target = 1 parameter1 = (6 << 4) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 15 opcode = 233 target = 1 parameter1 = (6 << 8) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 15 opcode = 233 target = 1 parameter1 = (6 << 12) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 15 opcode = 233 target = 1 parameter1 = (6 << 16) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 15 opcode = 233 target = 1 parameter1 = (6 << 20) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 15 opcode = 233 target = 1 parameter1 = (6 << 24) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 15 opcode = 233 target = 1 parameter1 = (4 << 28) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 16 opcode = 233 target = 1 parameter1 = (6 << 4) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 16 opcode = 233 target = 1 parameter1 = (6 << 8) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 16 opcode = 233 target = 1 parameter1 = (6 << 12) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 16 opcode = 233 target = 1 parameter1 = (6 << 16) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 16 opcode = 233 target = 1 parameter1 = (6 << 20) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 16 opcode = 233 target = 1 parameter1 = (6 << 24) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 16 opcode = 233 target = 1 parameter1 = (5 << 28) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 16 opcode = 233 target = 1 parameter1 = (3 << 24) parameter2 = (109 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 17 opcode = 233 target = 1 parameter1 = (6 << 4) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 17 opcode = 233 target = 1 parameter1 = (6 << 8) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 17 opcode = 233 target = 1 parameter1 = (6 << 12) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 17 opcode = 233 target = 1 parameter1 = (6 << 16) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 17 opcode = 233 target = 1 parameter1 = (6 << 20) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 17 opcode = 233 target = 1 parameter1 = (6 << 24) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 17 opcode = 233 target = 1 parameter1 = (6 << 28) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 17 opcode = 233 target = 1 parameter1 = (4 << 24) parameter2 = (109 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 18 opcode = 233 target = 1 parameter1 = (6 << 4) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 18 opcode = 233 target = 1 parameter1 = (6 << 8) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 18 opcode = 233 target = 1 parameter1 = (6 << 12) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 18 opcode = 233 target = 1 parameter1 = (6 << 16) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 18 opcode = 233 target = 1 parameter1 = (6 << 20) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 18 opcode = 233 target = 1 parameter1 = (6 << 24) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 18 opcode = 233 target = 1 parameter1 = (6 << 28) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 18 opcode = 233 target = 1 parameter1 = (5 << 24) parameter2 = (109 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 18 opcode = 233 target = 1 parameter1 = (3 << 28) parameter2 = (109 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 19 opcode = 233 target = 1 parameter1 = (6 << 4) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 19 opcode = 233 target = 1 parameter1 = (6 << 8) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 19 opcode = 233 target = 1 parameter1 = (6 << 12) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 19 opcode = 233 target = 1 parameter1 = (6 << 16) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 19 opcode = 233 target = 1 parameter1 = (6 << 20) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 19 opcode = 233 target = 1 parameter1 = (6 << 24) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 19 opcode = 233 target = 1 parameter1 = (6 << 28) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 19 opcode = 233 target = 1 parameter1 = (6 << 24) parameter2 = (109 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 19 opcode = 233 target = 1 parameter1 = (4 << 28) parameter2 = (109 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 20 opcode = 233 target = 1 parameter1 = (6 << 4) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 20 opcode = 233 target = 1 parameter1 = (6 << 8) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 20 opcode = 233 target = 1 parameter1 = (6 << 12) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 20 opcode = 233 target = 1 parameter1 = (6 << 16) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 20 opcode = 233 target = 1 parameter1 = (6 << 20) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 20 opcode = 233 target = 1 parameter1 = (6 << 24) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 20 opcode = 233 target = 1 parameter1 = (6 << 28) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 20 opcode = 233 target = 1 parameter1 = (6 << 24) parameter2 = (109 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 20 opcode = 233 target = 1 parameter1 = (6 << 28) parameter2 = (109 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 21 opcode = 233 target = 1 parameter1 = (6 << 4) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 21 opcode = 233 target = 1 parameter1 = (6 << 8) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 21 opcode = 233 target = 1 parameter1 = (6 << 12) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 21 opcode = 233 target = 1 parameter1 = (6 << 16) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 21 opcode = 233 target = 1 parameter1 = (6 << 20) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 21 opcode = 233 target = 1 parameter1 = (6 << 24) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 21 opcode = 233 target = 1 parameter1 = (6 << 28) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 21 opcode = 233 target = 1 parameter1 = (6 << 24) parameter2 = (109 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 21 opcode = 233 target = 1 parameter1 = (6 << 28) parameter2 = (109 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 22 opcode = 233 target = 1 parameter1 = (6 << 4) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 22 opcode = 233 target = 1 parameter1 = (6 << 8) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 22 opcode = 233 target = 1 parameter1 = (6 << 12) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 22 opcode = 233 target = 1 parameter1 = (6 << 16) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 22 opcode = 233 target = 1 parameter1 = (6 << 20) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 22 opcode = 233 target = 1 parameter1 = (6 << 24) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 22 opcode = 233 target = 1 parameter1 = (6 << 28) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 22 opcode = 233 target = 1 parameter1 = (6 << 24) parameter2 = (109 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 22 opcode = 233 target = 1 parameter1 = (6 << 28) parameter2 = (109 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 23 opcode = 233 target = 1 parameter1 = (6 << 4) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 23 opcode = 233 target = 1 parameter1 = (6 << 8) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 23 opcode = 233 target = 1 parameter1 = (6 << 12) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 23 opcode = 233 target = 1 parameter1 = (6 << 16) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 23 opcode = 233 target = 1 parameter1 = (6 << 20) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 23 opcode = 233 target = 1 parameter1 = (6 << 24) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 23 opcode = 233 target = 1 parameter1 = (6 << 28) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 23 opcode = 233 target = 1 parameter1 = (6 << 24) parameter2 = (109 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 23 opcode = 233 target = 1 parameter1 = (6 << 28) parameter2 = (109 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 24 opcode = 233 target = 1 parameter1 = (6 << 4) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 24 opcode = 233 target = 1 parameter1 = (6 << 8) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 24 opcode = 233 target = 1 parameter1 = (6 << 12) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 24 opcode = 233 target = 1 parameter1 = (6 << 16) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 24 opcode = 233 target = 1 parameter1 = (6 << 20) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 24 opcode = 233 target = 1 parameter1 = (6 << 24) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 24 opcode = 233 target = 1 parameter1 = (6 << 28) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 24 opcode = 233 target = 1 parameter1 = (6 << 24) parameter2 = (109 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 24 opcode = 233 target = 1 parameter1 = (6 << 28) parameter2 = (109 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 25 opcode = 233 target = 1 parameter1 = (6 << 4) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 25 opcode = 233 target = 1 parameter1 = (6 << 8) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 25 opcode = 233 target = 1 parameter1 = (6 << 12) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 25 opcode = 233 target = 1 parameter1 = (6 << 16) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 25 opcode = 233 target = 1 parameter1 = (6 << 20) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 25 opcode = 233 target = 1 parameter1 = (6 << 24) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 25 opcode = 233 target = 1 parameter1 = (6 << 28) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 25 opcode = 233 target = 1 parameter1 = (6 << 24) parameter2 = (109 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR header = 25 opcode = 233 target = 1 parameter1 = (6 << 28) parameter2 = (109 + (0x10000 * 1)) timing = 9 END
+  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 1 STR_VAR resource = ~d5srslt~ END
+
+APPEND ~d5sorc.2da~ 
+~SRCSLOTS    AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+
+/*
 APPEND ~d5sorc.2da~ ~SRCSLOTS    AP_D5SRC1A  AP_D5SRC1D  AP_D5SRC1E  AP_D5SRC1F  AP_D5SRC2D  AP_D5SRC2E  AP_D5SRC2F  AP_D5SRC3E  AP_D5SRC3F  AP_D5SRC4E  AP_D5SRC4F  AP_D5SRC5E  AP_D5SRC5F  AP_D5SRC6E  AP_D5SRC6F  AP_D5SRC7E  AP_D5SRC7F  AP_D5SRC8E  AP_D5SRC8F  AP_D5SRC9E  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
 SRCSLOTS    AP_D5SRC1B  ****        ****        AP_D5SRC2A  ****        AP_D5SRC3A  AP_D5SRC3D  AP_D5SRC4A  AP_D5SRC4D  AP_D5SRC5A  AP_D5SRC5D  AP_D5SRC6A  AP_D5SRC6D  AP_D5SRC7A  AP_D5SRC7D  AP_D5SRC8A  AP_D5SRC8D  AP_D5SRC9A  AP_D5SRC9D  AP_D5SRC9F  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
 SRCSLOTS    AP_D5SRC1C  ****        ****        AP_D5SRC2B  ****        AP_D5SRC3B  ****        AP_D5SRC4B  ****        AP_D5SRC5B  ****        AP_D5SRC6B  ****        AP_D5SRC7B  ****        AP_D5SRC8B  ****        AP_D5SRC9B  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
 SRCSLOTS    ****        ****        ****        AP_D5SRC2C  ****        AP_D5SRC3C  ****        AP_D5SRC4C  ****        AP_D5SRC5C  ****        AP_D5SRC6C  ****        AP_D5SRC7C  ****        AP_D5SRC8C  ****        AP_D5SRC9C  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
 ~
-
+*/
 
 //set up spell learning UI____________________________________________________________
 //
@@ -721,7 +875,12 @@ COPY_EXISTING ~d5clonsc.2da~ ~override~
 			  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~d5src-%spell_level%~ END
 			END
 		  END
-		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5ssplz~ END
+		  PATCH_IF (lose_spell_on_interrupt = 0) BEGIN
+		    LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5ssplz~ END
+		  END
+		  PATCH_IF (lose_spell_on_interrupt = 1) BEGIN
+		    LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5ssplz~ END
+		  END
 	  END
 // make .EFFs adding the arcane clone
 	  CREATE EFF ~%spell_eff%~

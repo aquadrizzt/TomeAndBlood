@@ -97,6 +97,7 @@ ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
 END
 
 //KIT ABILITIES______________________________________________________________________
+
 COPY ~tomeandblood/data/arcanist/d5acnst.2da~ ~override~
 
 ACTION_IF MOD_IS_INSTALLED ~tomeandblood.tp2~ ~51~ BEGIN	//	innate sequencers
@@ -112,210 +113,30 @@ ACTION_IF MOD_IS_INSTALLED ~tomeandblood.tp2~ ~66~ BEGIN	//	innate familiars
   APPEND ~d5acnst.2da~ ~FAMILIAR 	AP_D5FMINN  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~ UNLESS ~FAMILIAR~
 END
 
+COPY ~tomeandblood/data/arcanist/d5cstarc.2da~ ~override~
+  LPF arcane_casting_slots STR_VAR table_spl = ~d5zltac~ END
+BUT_ONLY
 
-// create semi-spontaneous system_____________________________________________________
-//
-LAF semi_spontaneous_arcane END
-
-
-// remove spells quickslots___________________________________________________________
-//
-APPEND ~d5acnst.2da~ ~NO_QUICK    AP_D5BRDNQ  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
-
-
-// add spell slots____________________________________________________________________
-//
-APPEND ~d5acnst.2da~ 
-~SRCSLOTS    AP_D5SRC1A  AP_D5SRC1C  AP_D5SRC1D  AP_D5SRC1E  AP_D5SRC2C  AP_D5SRC2D  AP_D5SRC2E  AP_D5SRC3D  AP_D5SRC3E  AP_D5SRC4D  AP_D5SRC4E  ****       AP_D5SRC5E  AP_D5SRC6D  AP_D5SRC6E  AP_D5SRC7D  AP_D5SRC7E  AP_D5SRC8D  AP_D5SRC8E  AP_D5SRC9D  AP_D5SRC9E  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
-SRCSLOTS    ****        ****        AP_D5SRC2A  ****        AP_D5SRC3A  AP_D5SRC3C  AP_D5SRC4A  AP_D5SRC4C  AP_D5SRC5A  AP_D5SRC5C  AP_D5SRC5D  AP_D5SRC6A  AP_D5SRC6C  AP_D5SRC7A  AP_D5SRC7C  AP_D5SRC8A  AP_D5SRC8C  AP_D5SRC9A  AP_D5SRC9C  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
-SRCSLOTS    AP_D5SRC1B  ****        AP_D5SRC2B  ****        AP_D5SRC3B  ****        AP_D5SRC4B  ****        AP_D5SRC5B  ****        ****        AP_D5SRC6B  ****        AP_D5SRC7B  ****        AP_D5SRC8B  ****        AP_D5SRC9B  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
-~
-//SRCSLOTS    AP_D5SRC1T  ****        ****        AP_D5SRC2T  ****        AP_D5SRC3T  ****        AP_D5SRC4T  ****        AP_D5SRC5T  ****        AP_D5SRC6T  ****        AP_D5SRC7T  ****        AP_D5SRC8T  ****        AP_D5SRC9T  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
-
-APPEND ~d5acnst.2da~ ~LESSPREP    AP_D500SLT  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+APPEND ~d5acnst.2da~ ~SPELL_INIT  AP_D5ZZ000  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+LESSPREP    AP_D5Z0SLT  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+NO_ASPLS    AP_D5Z0SPL  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+CST_SLTS    AP_D5ZLTAC  AP_D5ZLTAC  AP_D5ZLTAC  AP_D5ZLTAC  AP_D5ZLTAC  AP_D5ZLTAC  AP_D5ZLTAC  AP_D5ZLTAC  AP_D5ZLTAC  AP_D5ZLTAC  AP_D5ZLTAC  AP_D5ZLTAC  AP_D5ZLTAC  AP_D5ZLTAC  AP_D5ZLTAC  AP_D5ZLTAC  AP_D5ZLTAC  AP_D5ZLTAC  AP_D5ZLTAC  AP_D5ZLTAC  AP_D5ZLTAC  AP_D5ZLTAC  AP_D5ZLTAC  AP_D5ZLTAC  AP_D5ZLTAC  AP_D5ZLTAC  AP_D5ZLTAC  AP_D5ZLTAC  AP_D5ZLTAC  AP_D5ZLTAC  AP_D5ZLTAC  AP_D5ZLTAC  AP_D5ZLTAC  AP_D5ZLTAC  AP_D5ZLTAC  AP_D5ZLTAC  AP_D5ZLTAC  AP_D5ZLTAC  AP_D5ZLTAC  AP_D5ZLTAC  AP_D5ZLTAC  AP_D5ZLTAC  AP_D5ZLTAC  AP_D5ZLTAC  AP_D5ZLTAC  AP_D5ZLTAC  AP_D5ZLTAC  AP_D5ZLTAC  AP_D5ZLTAC  AP_D5ZLTAC ~ UNLESS ~AP_D5ZZ000~
 
 ACTION_IF (MOD_IS_INSTALLED ~tomeandblood.tp2~ ~62~) BEGIN	//	L1 cantrips
-  APPEND ~d5acnst.2da~ 
-~SRCSLOTS    ****        AP_D5SRC2C  ****        AP_D5SRC2G  ****        ****        AP_D502SLT  ****        ****        ****        ****        ****        ****        ****        ****        ****        AP_D502SLT  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
-
-  COPY_EXISTING ~d5acnst.2da~ ~override~
-	REPLACE_TEXTUALLY ~AP_D5SRC1B~ ~****      ~
-	REPLACE_TEXTUALLY ~AP_D5SRC1C~ ~****      ~
-	REPLACE_TEXTUALLY ~AP_D5SRC1D~ ~****      ~
-	REPLACE_TEXTUALLY ~AP_D5SRC1E~ ~****      ~
-	REPLACE_TEXTUALLY ~AP_D5SRC1F~ ~****      ~
-
-APPEND ~d5acnst.2da~ ~LESSSLOTS   AP_D502SLT  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
-APPEND ~d5acnst.2da~ ~LESSSLOTS   AP_D502SLT  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+  COPY_EXISTING ~d5zltac.spl~ ~override~
+    LPF ALTER_EFFECT INT_VAR match_opcode = 233 match_parameter1 = (2 << 4) paramater1 = (1 << 4) END
+    LPF ALTER_EFFECT INT_VAR match_opcode = 233 match_parameter1 = (3 << 4) paramater1 = (1 << 4) END
+    LPF ALTER_EFFECT INT_VAR match_opcode = 233 match_parameter1 = (4 << 4) paramater1 = (1 << 4) END
+    LPF ALTER_EFFECT INT_VAR match_opcode = 233 match_parameter1 = (5 << 4) paramater1 = (1 << 4) END
+    LPF ALTER_EFFECT INT_VAR match_opcode = 233 match_parameter1 = (6 << 8) paramater1 = (7 << 8) END
+    LPF ALTER_EFFECT INT_VAR match_opcode = 233 match_parameter1 = (5 << 8) paramater1 = (6 << 8) END
+    LPF ALTER_EFFECT INT_VAR match_opcode = 233 match_parameter1 = (4 << 8) paramater1 = (5 << 8) END
+    LPF ALTER_EFFECT INT_VAR match_opcode = 233 match_parameter1 = (3 << 8) paramater1 = (4 << 8) END
+    LPF ALTER_EFFECT INT_VAR match_opcode = 233 match_parameter1 = (2 << 8) paramater1 = (3 << 8) END
+    LPF ALTER_EFFECT INT_VAR match_opcode = 233 match_parameter1 = (1 << 8) paramater1 = (2 << 8) END
+    LPF ADD_SPELL_EFFECT INT_VAR header = 2 opcode = 233 target = 1 parameter1 = (1 << 8) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+  IF_EXISTS BUT_ONLY
 END
-
-// copy spell table___________________________________________________________________
-//
-COPY_EXISTING ~mxsplsrc.2da~ ~override/mxcstarc.2da~ // just a visual table of bard casting slots, not actually used
-
-
-//remove some spells right after chargen______________________________________________
-//
-APPEND ~d5acnst.2da~  ~NO_ASPLS    AP_D50ASPL  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
-
-
-// initialize spontaneous casting_____________________________________________________
-//
-COPY ~%MOD_FOLDER%/lib/d5_base.spl~ ~override/d5ac144.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 144 target = 1 parameter2 = 2 timing = 9 END
-//  LPF ADD_SPELL_EFFECT INT_VAR opcode = 145 target = 1 parameter2 = 0 timing = 9 END
-//  LPF ADD_SPELL_EFFECT INT_VAR opcode = 101 target = 1 parameter2 = 145 timing = 9 END
-
-COPY ~%MOD_FOLDER%/lib/d5_base.spl~ ~override/d5ac000.spl~	//		initialization
-//  SAY NAME1 @6  											// ~~
-//  SAY UNIDENTIFIED_DESC @6 								// ~~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 93 target = 1 parameter1 = 1 parameter2 = 1 timing = 1 END
-//  LPF ADD_SPELL_EFFECT INT_VAR opcode = 244 target = 1 parameter1 = 9 timing = 1 END
-  PATCH_IF (FILE_CONTAINS_EVALUATED (~splstate.ids~ ~D5_SEMI_ARCANE~)) BEGIN
-	INNER_ACTION BEGIN
-	  COPY_EXISTING ~splstate.ids~ ~override~
-		COUNT_2DA_COLS cols
-		READ_2DA_ENTRIES_NOW rows cols
-		FOR (row = 1; row < rows; ++row) BEGIN
-		  READ_2DA_ENTRY_FORMER rows row 1 ~state_name~
-		  READ_2DA_ENTRY_FORMER rows row 0 ~state_ind~
-		  PATCH_IF (~%state_name%~ STRING_EQUAL_CASE ~D5_SEMI_ARCANE~) BEGIN
-			SET semi_spont_arcane = %state_ind%
-		  END
-		END
-	  BUT_ONLY
-	END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 328 target = 1 special = 1 parameter2 = %semi_spont_arcane% timing = 9 END
-  END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5b206~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~d5acast~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5blotr~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = ~d5blots~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~d5prepb~ END
-//  LPF ADD_SPELL_EFFECT INT_VAR opcode = 112 target = 1 timing = 9 STR_VAR resource = ~d5acnit~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5ac000~ END
-
-COPY ~tomeandblood/data/semi_spont/d5bcast.bam~ ~override~
-COPY ~%MOD_FOLDER%/lib/d5_base.spl~ ~override/d5acast.spl~
-  SAY NAME1 @21981 											// ~initialize arcanist spellcasting~
-  SAY UNIDENTIFIED_DESC @21981 								// ~initialize arcanist spellcasting~
-  LPF ALTER_SPELL_HEADER INT_VAR target = 7 STR_VAR icon = ~d5bcast~ END
-//  LPF ADD_SPELL_EFFECT INT_VAR opcode = 328 target = 1 special = 1 parameter2 = %prepared_spells_state% timing = 9 END
-  PATCH_IF (FILE_CONTAINS_EVALUATED (~splstate.ids~ ~D5_SEMI_ARCANE~)) BEGIN
-	INNER_ACTION BEGIN
-	  COPY_EXISTING ~splstate.ids~ ~override~
-		COUNT_2DA_COLS cols
-		READ_2DA_ENTRIES_NOW rows cols
-		FOR (row = 1; row < rows; ++row) BEGIN
-		  READ_2DA_ENTRY_FORMER rows row 1 ~state_name~
-		  READ_2DA_ENTRY_FORMER rows row 0 ~state_ind~
-		  PATCH_IF (~%state_name%~ STRING_EQUAL_CASE ~D5_SEMI_ARCANE~) BEGIN
-			SET semi_spont_arcane = %state_ind%
-		  END
-		END
-	  BUT_ONLY
-	END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 328 target = 1 special = 1 parameter2 = %semi_spont_arcane% timing = 9 END
-  END
-//  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~D5BLOTZ~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~d5prepb~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5acast~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5ac144~ END
-//  LPF ADD_SPELL_EFFECT INT_VAR opcode = 279 target = 1 parameter2 = 2 timing = 9 END
-//  LPF ADD_SPELL_EFFECT INT_VAR opcode = 112 target = 1 timing = 9 STR_VAR resource = ~d5acnit~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5ac000~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 316 target = 1 timing = 1 END
-/*
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d517slt~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d517slt~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d517slt~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d517slt~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d517slt~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d517slt~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d517slt~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d517slt~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d517slt~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d517slt~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d517slt~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d517slt~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d589slt~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d589slt~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d589slt~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d589slt~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d589slt~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d589slt~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d589slt~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d589slt~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = ~d589slt~ END
-*/
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5perpb~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5blotr~ END
-/*
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5bsplz~ END
-  PATCH_IF (FILE_EXISTS_IN_GAME ~qdtnb_attrbon.qd~) BEGIN
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 42 target = 1 parameter1 = (0 - 1) parameter2 = 127 timing = 9 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 42 target = 1 parameter1 = (0 - 1) parameter2 = 127 timing = 9 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (2 << 4) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (2 << 8) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (2 << 12) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (2 << 16) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 20) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5absp1~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5absp1~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5abspw~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5abspw~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter1 = 0 parameter2 = 2 timing = 9 STR_VAR resource = ~d5abspm~ END
-  END
-*/
-
-COPY_EXISTING ~d5prepd.spl~ ~override~
-  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 1 opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5acast~ END
-IF_EXISTS BUT_ONLY
-
-APPEND ~d5acnst.2da~ ~SPELL_INIT  AP_D5AC000  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****  ~
-APPEND ~d5acnst.2da~ ~REFRESH     AP_D5BSPLZ  AP_D5BSPLZ  AP_D5BSPLZ  AP_D5BSPLZ  AP_D5BSPLZ  AP_D5BSPLZ  AP_D5BSPLZ  AP_D5BSPLZ  AP_D5BSPLZ  AP_D5BSPLZ  AP_D5BSPLZ  AP_D5BSPLZ  AP_D5BSPLZ  AP_D5BSPLZ  AP_D5BSPLZ  AP_D5BSPLZ  AP_D5BSPLZ  AP_D5BSPLZ  AP_D5BSPLZ  AP_D5BSPLZ  AP_D5BSPLZ  AP_D5BSPLZ  AP_D5BSPLZ  AP_D5BSPLZ  AP_D5BSPLZ  AP_D5BSPLZ  AP_D5BSPLZ  AP_D5BSPLZ  AP_D5BSPLZ  AP_D5BSPLZ  AP_D5BSPLZ  AP_D5BSPLZ  AP_D5BSPLZ  AP_D5BSPLZ  AP_D5BSPLZ  AP_D5BSPLZ  AP_D5BSPLZ  AP_D5BSPLZ  AP_D5BSPLZ  AP_D5BSPLZ  AP_D5BSPLZ  AP_D5BSPLZ  AP_D5BSPLZ  AP_D5BSPLZ  AP_D5BSPLZ  AP_D5BSPLZ  AP_D5BSPLZ  AP_D5BSPLZ  AP_D5BSPLZ  AP_D5BSPLZ ~
-
-/* this didn't work...
-COPY ~tomeandblood/data/arcanist/d5acnit.itm~ ~override~			//	initialize .itm
-  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 177 target = 1 parameter2 = 2 timing = 2 STR_VAR resource = ~arcnit~ END
-
-CREATE EFF ~d5acnit~
-  WRITE_LONG 0x10 232
-  WRITE_LONG 0x14 1
-  WRITE_LONG 0x1c 0
-  WRITE_LONG 0x20 20
-  WRITE_LONG 0x24 9
-  WRITE_SHORT 0x2c 100
-  WRITE_ASCII 0x30 ~d5ac000~ #8
-  WRITE_LONG 0x48 102
-
-COPY ~%MOD_FOLDER%/lib/d5_base.spl~ ~override/d5acnit.spl~			//	initialize .spl
-  LPF ALTER_SPELL_HEADER INT_VAR target = 5 END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 143 target = 1 parameter1 = 14 timing = 9 STR_VAR resource = ~d5acnit~ END
-
-APPEND ~d5acnst.2da~ ~SPELL_INIT  AP_D5ACNIT  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****  ~
-*/
-
-
-/* separate component because needs to work for both multisorc and arcanists
-// bonus spell slot items_____________________________________________________________
-//
-LAF arcane_spont_items END
-*/
-
-/*
-COPY_EXISTING ~d5ac000.spl~ ~override~
-  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 146 target = 1 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5b_000~ END
-IF_EXISTS BUT_ONLY
-COPY_EXISTING ~d5acast.spl~ ~override~
-  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 146 target = 1 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5b_000~ END
-IF_EXISTS BUT_ONLY
-*/
-
-
-// need to cast bsplz when b# is canceled
-// BUT! don't want every cancel spell to cast bsplz constantly
-// hmmm...
 
 
 //KIT DESCRIPTION PATCHES_____________________________________________________________
@@ -359,50 +180,6 @@ COPY_EXISTING ~kitlist.2da~ ~override~
 	END
   END
 BUT_ONLY
-
-
-//fix burning hands targeting_______________________________________________________
-//
-COPY_EXISTING ~spwi103.spl~ ~override~
-  READ_LONG 0x08 burning_hands_strref
-BUT_ONLY
-
-ACTION_IF (IS_AN_INT %burning_hands_strref%) BEGIN
-  COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
-	PATCH_IF (%SOURCE_SIZE% > 0x71) BEGIN
-	  SET burning_change = 0
-	  READ_LONG 0x08 name
-	  PATCH_IF (name = burning_hands_strref) BEGIN
-		GET_OFFSET_ARRAY ab_array SPL_V10_HEADERS
-		PHP_EACH ab_array AS int => ab_off BEGIN
-		  PATCH_IF (burning_change = 0) BEGIN
-			READ_BYTE (ab_off + 0x0c) target
-			PATCH_IF target = 5 BEGIN
-			  SET burning_change = 1
-			END
-		  END
-		END
-		PATCH_IF (burning_change = 1) BEGIN
-		  LPF ALTER_SPELL_HEADER INT_VAR target = 1 END
-		  LPF ALTER_EFFECT INT_VAR match_opcode = 148 opcode = 146 target = 2 STR_VAR match_resource = ~spwi103~ END
-		END
-	  END
-	END
-  BUT_ONLY
-END
-
-
-//fix black pits 2___________________________________________________________________
-//
-COPY_EXISTING ~ohbantim.spl~ override
-  LPF ALTER_EFFECT INT_VAR match_opcode = 144 match_parameter2 = 13 opcode = 145 parameter2 = 3 END
-IF_EXISTS BUT_ONLY
-
-// change BP1 to allow innates too
-// EDIT - don't need to!
-
-//____________________________________________________________________________________
-
 
 
 END	//	end function

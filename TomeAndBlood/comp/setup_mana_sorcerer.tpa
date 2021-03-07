@@ -5,22 +5,26 @@
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 
-// to expand to every sorcerer:
-// ...clone kit to a mage kit
+
+// to expand this to every sorcerer:
+// ...ADD_KIT_EX to clone all sorcerer kits to a mage kits
 // ...append mana.2da
+// - ...give each sorcerer kit the 'change method' ability
+// - ...have the script change each kit to its mana clone
 // ...figure out multisorc later
 
 
 DEFINE_ACTION_FUNCTION mana_sorcerer BEGIN
 
 
+ACTION_IF (FILE_EXISTS_IN_GAME ~5E_casting_settings.ini~) BEGIN
+  	INCLUDE ~override/5E_casting_settings.ini~
+END
+ACTION_IF !(FILE_EXISTS_IN_GAME ~5E_casting_settings.ini~) BEGIN
+  	INCLUDE ~%MOD_FOLDER%/lib/semi_spont/5E_casting_settings.ini~
+END
+
 //INCLUDE ~tomeandblood/lib/qd_multiclass.tpa~
-
-// TO DO:
-
-// - clone all sorcerer kits via ADD_KIT_EX
-// - ...give each sorcerer kit the 'change method' ability
-// - ...have the script change each kit to its mana clone
 
 
 //go________________________________________________________________________________
@@ -39,7 +43,6 @@ ABILITY     ****        ****        ****        ****        ****        ****    
 COPY ~d5/d5_zmana.2da~ ~override/d5_zmana.2da~
 
 //__________________________________________________________________________________
-
 
 LAF check_kit_conflict END
 
@@ -563,7 +566,12 @@ COPY_EXISTING ~d5clonmn.2da~ ~override~
 			  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~d5man-%four_levels_less%~ END
 			END
 		  END
-		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5msplz~ END
+		  PATCH_IF (lose_spell_on_interrupt = 0) BEGIN
+		    LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5msplz~ END
+		  END
+		  PATCH_IF (lose_spell_on_interrupt = 1) BEGIN
+		    LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5msplz~ END
+		  END
 	  END
 // make .EFFs adding the arcane clone
 	  CREATE EFF ~%spell_eff%~

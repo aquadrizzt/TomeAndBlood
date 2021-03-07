@@ -1,6 +1,6 @@
 BACKUP ~TomeAndBlood/backup~
 AUTHOR ~aquadrizzt~
-VERSION ~0.9.4~ 
+VERSION ~0.9.6~ 
 
 ALWAYS
 
@@ -25,6 +25,7 @@ AUTO_TRA ~TomeAndBlood/lang/%s~
 LANGUAGE ~English~ ~english~ ~TomeAndBlood/lang/english/setup.tra~ 
 
 
+/*
 // -----------------------------
 // 11: REBALANCED SPELL SCHOOLS (Subtledoctor)
 // -----------------------------
@@ -507,6 +508,7 @@ COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_mcsrc.qd~ //detection for this compon
 INCLUDE ~TomeAndBlood/comp/setup_multiclass_sorcerers.tpa~
 
 LAF multiclass_sorcerers END
+*/
 
 
 // -----------------------------
@@ -519,11 +521,76 @@ REQUIRE_PREDICATE (FILE_EXISTS_IN_GAME ~enginest.2da~) @3
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_arcanist.qd~ //detection for this component 
 
+LAF semi_spontaneous_casting INT_VAR include_arcane = 1 END
+
 INCLUDE ~TomeAndBlood/comp/setup_arcanist.tpa~
 
 LAF add_arcanist END
 
 
+/*
+BEGIN ~add free spells~
+
+// *****
+
+// Command:
+ACTION_IF FILE_EXISTS_IN_GAME ~sppr102.spl~ BEGIN
+  COPY_EXISTING ~sppr102.spl~ ~override/d5bp102.spl~
+	WRITE_SHORT 0x1c 1
+  LAF add_semi_spells STR_VAR new_spell = ~d5bp102~ cast_spell = ~sppr102~ spell_type = ~arcane~ END
+  OUTER_SPRINT $bard_free_spells(~d5bp102~)~1~
+END
+
+// Vocalize - lvl 1:
+ACTION_IF FILE_EXISTS_IN_GAME ~spwi219.spl~ BEGIN
+  COPY_EXISTING ~spwi219.spl~ ~override/d5bw219.spl~
+	WRITE_SHORT 0x1c 1
+	WRITE_LONG 0x34 1
+  LAF add_semi_spells STR_VAR new_spell = ~d5bw219~ cast_spell = ~spwi219~ spell_type = ~arcane~ END
+  OUTER_SPRINT $bard_free_spells(~d5bw219~)~1~
+END
+
+// Silence:
+ACTION_IF FILE_EXISTS_IN_GAME ~sppr211.spl~ BEGIN
+  COPY_EXISTING ~sppr211.spl~ ~override/d5bp211.spl~
+	WRITE_SHORT 0x1c 1
+  LAF add_semi_spells STR_VAR new_spell = ~d5bp211~ cast_spell = ~sppr211~ spell_type = ~arcane~ END
+  OUTER_SPRINT $bard_free_spells(~d5bp211~) ~1~
+END
+
+LAF process_semi_spells END
+
+ACTION_PHP_EACH bard_free_spells AS spl => ind BEGIN
+  LAF free_cast_spells STR_VAR free_spell = EVAL ~%spl%~ list_spell = ~d5zbardc~ END
+END
+
+ACTION_PHP_EACH bard_free_spells AS spl => ind BEGIN
+  LAF free_known_spells STR_VAR free_spell = EVAL ~%spl%~ list_spell = ~d5zbardk~ END
+END
+
+/*
+// make a spell with 171 for the mem spells and 206 for the block spells
+
+COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5zbard.spl~
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~d5bp102~ END
+  LPF find_zclons_spell STR_VAR spell_to_find = ~d5bp102~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5zb%this_spell_ind%~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~d5bw219~ END
+  LPF find_zclons_spell STR_VAR spell_to_find = ~d5bw219~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5zb%this_spell_ind%~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = ~d5bp211~ END
+  LPF find_zclons_spell STR_VAR spell_to_find = ~d5bp211~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5zb%this_spell_ind%~ END
+*/
+
+APPEND ~d5acnst.2da~ ~BASE_SPLS   AP_D5ZBARDC ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+APPEND ~d5acnst.2da~ ~BASE_SPLS   AP_D5ZBARDK ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+
+*/
+
+// *****
+ 
+/*
 // -----------------------------
 // 85: MANA SORCERER(S)
 // -----------------------------
@@ -568,6 +635,7 @@ COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_attrbon.qd~ //detection for this comp
 INCLUDE ~TomeAndBlood/comp/setup_ability_bonuses.tpa~
 
 LAF ability_bonus_spells END
+*/
 
 
 ////////////////////////////////////////////////////////////////////////////////////////

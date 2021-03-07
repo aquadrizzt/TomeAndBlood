@@ -182,13 +182,20 @@ COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5famch0.spl~
 
 //COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5famch1.spl~
 
+COPY ~tomeandblood/data/familiars/d5faml1c.bam~ ~override~
+COPY ~tomeandblood/data/familiars/d5faml3c.bam~ ~override~
+COPY ~tomeandblood/data/familiars/d5faml4c.bam~ ~override~
+COPY ~tomeandblood/data/familiars/d5faml5c.bam~ ~override~
+COPY ~tomeandblood/data/familiars/d5faml6c.bam~ ~override~
+COPY ~tomeandblood/data/familiars/d5faml8c.bam~ ~override~
+
 //COPY ~tomeandblood/data/familiars/d5fampsd.bam~ ~override/d5faml1b.bam~
 COPY_EXISTING ~famimp.bam~ ~override/d5faml1b.bam~ IF_EXISTS
 COPY_EXISTING ~spcl342.spl~ ~override/d5famch1.spl~
 //COPY_EXISTING ~spcl342.spl~ ~override/d5faml1.spl~
   SAY NAME1 @8011
   SAY UNIDENTIFIED_DESC @8012
-  WRITE_ASCII 0x3a ~d5faml1b~ #8
+  WRITE_ASCII 0x3a ~d5faml1c~ #8
   LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5faml1b~ END
   LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 57 target = 1 parameter2 = 17 timing = 0 duration = 0 END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 309 target = 1 parameter1 = 1 parameter2 = 0 timing = 9 STR_VAR resource = ~d5famlg~ END
@@ -198,7 +205,7 @@ COPY_EXISTING ~spcl342.spl~ ~override/d5famch2.spl~
 //COPY_EXISTING ~spcl342.spl~ ~override/d5faml2.spl~
   SAY NAME1 @8013
   SAY UNIDENTIFIED_DESC @8014
-  WRITE_ASCII 0x3a ~d5faml2b~ #8
+  WRITE_ASCII 0x3a ~d5faml2c~ #8
   LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5faml2b~ END
   LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 57 target = 1 parameter2 = 49 timing = 0 duration = 0 END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 309 target = 1 parameter1 = 1 parameter2 = 0 timing = 9 STR_VAR resource = ~d5famcg~ END
@@ -209,7 +216,7 @@ COPY_EXISTING ~spcl342.spl~ ~override/d5famch3.spl~
 //COPY_EXISTING ~spcl342.spl~ ~override/d5faml3.spl~
   SAY NAME1 @8017
   SAY UNIDENTIFIED_DESC @8018
-  WRITE_ASCII 0x3a ~d5faml3b~ #8
+  WRITE_ASCII 0x3a ~d5faml3c~ #8
   LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5faml3b~ END
   LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 57 target = 1 parameter2 = 18 timing = 0 duration = 0 END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 309 target = 1 parameter1 = 1 parameter2 = 0 timing = 9 STR_VAR resource = ~d5famln~ END
@@ -220,7 +227,7 @@ COPY_EXISTING ~spcl342.spl~ ~override/d5famch4.spl~
 //COPY_EXISTING ~spcl342.spl~ ~override/d5faml4.spl~
   SAY NAME1 @8019
   SAY UNIDENTIFIED_DESC @8020
-  WRITE_ASCII 0x3a ~d5faml4b~ #8
+  WRITE_ASCII 0x3a ~d5faml4c~ #8
   LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5faml4b~ END
   LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 57 target = 1 parameter2 = 34 timing = 0 duration = 0 END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 309 target = 1 parameter1 = 1 parameter2 = 0 timing = 9 STR_VAR resource = ~d5famtn~ END
@@ -231,7 +238,7 @@ COPY_EXISTING ~spcl342.spl~ ~override/d5famch5.spl~
 //COPY_EXISTING ~spcl342.spl~ ~override/d5faml5.spl~
   SAY NAME1 @8021
   SAY UNIDENTIFIED_DESC @8022
-  WRITE_ASCII 0x3a ~d5faml5b~ #8
+  WRITE_ASCII 0x3a ~d5faml5c~ #8
   LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5faml5b~ END
   LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 57 target = 1 parameter2 = 50 timing = 0 duration = 0 END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 309 target = 1 parameter1 = 1 parameter2 = 0 timing = 9 STR_VAR resource = ~d5famcn~ END
@@ -242,7 +249,7 @@ COPY_EXISTING ~spcl342.spl~ ~override/d5famch6.spl~
 //COPY_EXISTING ~spcl342.spl~ ~override/d5faml6.spl~
   SAY NAME1 @8025
   SAY UNIDENTIFIED_DESC @8026
-  WRITE_ASCII 0x3a ~d5faml6b~ #8
+  WRITE_ASCII 0x3a ~d5faml6c~ #8
   LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5faml6b~ END
   LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 57 target = 1 parameter2 = 19 timing = 0 duration = 0 END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 309 target = 1 parameter1 = 1 parameter2 = 0 timing = 9 STR_VAR resource = ~d5famle~ END
@@ -262,7 +269,7 @@ COPY_EXISTING ~spcl342.spl~ ~override/d5famch8.spl~
 //COPY_EXISTING ~spcl342.spl~ ~override/d5faml8.spl~
   SAY NAME1 @8031
   SAY UNIDENTIFIED_DESC @8032
-  WRITE_ASCII 0x3a ~d5faml8b~ #8
+  WRITE_ASCII 0x3a ~d5faml8c~ #8
   LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5faml8b~ END
   LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 57 target = 1 parameter2 = 51 timing = 0 duration = 0 END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 309 target = 1 parameter1 = 1 parameter2 = 0 timing = 9 STR_VAR resource = ~d5famce~ END
@@ -344,10 +351,24 @@ END 	//	end define function
 //____________________________________________________________________________________
 
 
+/*
+***** IDEAS
+
+- make a general mephit creature as NE/famch7
+ -- but give various mephit choices in the choice screen
+ -- they all set alignment to NE, but then apply different spells to the summoned mephit
+ -- ...setting permanent characteristics according to the chosen element
+
+- make an animal companion choice for NG
+ -- only available to beastmasters
+ -- similarly, give different animal choices: bear, wolf, lion, moose, etc.
+ -- ...do permanent polymorph to the summoned animal to set it appropriately
+ -- give cool bonuses for a warrior: +STR, +AC, +HP or DR, fire/cold resistance, etc.
+*/
+
 
 ////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
-
 
 
 // -----------------------------
@@ -357,19 +378,21 @@ END 	//	end define function
 // ***** make this independent of the familiar choice component...?
 
 /*
-pseudodragon:	done 	//  passive caster bonus not working
+pseudodragon:	done 	
 dog:					// needs everything
-ferret:			done 	//  passive caster bonus not working
-rabbit:			done 	//  passive caster bonus not working
-cat:			done 	//  passive caster bonus not working
-spider:			done 	//  passive caster bonus not working
-rat:			done 	//  passive caster bonus not working
+ferret:			done 	
+rabbit:			done 	
+cat:			done 	
+spider:			done 	
+rat:			done 	
 mephits- 				// need to do them all, plus come up with the system for choosing them
 air:			
 ooze:			
 fire:			
 ice:			
-lightning:		
+earth: 			
+radiant:		
+dust: 			
 ... 	
 */
 

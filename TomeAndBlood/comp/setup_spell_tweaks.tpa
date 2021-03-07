@@ -290,8 +290,9 @@ END
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ BEGIN 	// no need to patch 203 if SR installed
   COPY_EXISTING ~spwi203.spl~ ~override~
 	LPF CLONE_EFFECT INT_VAR silent = 1 match_opcode = 116 opcode = 193 target = 1 STR_VAR resource = ~~ END
-	PATCH_FOR_EACH round IN ~6~ ~12~ ~18~ ~24~ ~30~ BEGIN
-	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 116 opcode = 136 timing = 4 duration = %round% END
+//	PATCH_FOR_EACH second IN ~6~ ~12~ ~18~ ~24~ ~30~ BEGIN 	//	do this more often
+	PATCH_FOR_EACH second IN ~2~ ~4~ ~6~ ~8~ ~10~ ~12~ ~14~ ~16~ ~18~ ~20~ ~22~ ~24~ ~26~ ~28~ ~30~ BEGIN
+	  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 116 opcode = 136 timing = 4 duration = %second% END
 	END
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 116 opcode = 136 duration = 1 END
   ACTION_FOR_EACH invisisword IN ~sw1h32.itm~ ~sw1h34.itm~ BEGIN
@@ -313,7 +314,16 @@ END
 
 //change Dispel Illusion to Invisibility Purge______________________________________
 //
+COPY_EXISTING ~sppr309.spl~ ~override~
+  PATCH_FOR_EACH second IN ~6~ ~12~ ~18~ ~24~ ~30~ BEGIN 	//	do this more often
+	LPF CLONE_EFFECT INT_VAR match_opcode = 146 match duration = %second% duration = (%second% - 2) STR_VAR match_resource = sppr309d~ END
+	LPF CLONE_EFFECT INT_VAR match_opcode = 146 match duration = %second% duration = (%second% - 4) STR_VAR match_resource = sppr309d~ END
+  END
+IF_EXISTS
+
 COPY_EXISTING ~sppr309.spl~ ~override/spwi322.spl~
+	READ_LONG 0x08 spell_name
+	READ_LONG 0x50 spell_desc
   	WRITE_SHORT 0x1c 1
   	WRITE_SHORT 0x22 16
   	WRITE_BYTE 0x25 3
@@ -321,6 +331,15 @@ COPY_EXISTING ~sppr309.spl~ ~override/spwi322.spl~
   	WRITE_LONG 0x34 3
   	WRITE_BYTE 0x1e (THIS BOR 0b10000000)
 IF_EXISTS
+
+// ***** need to modify scrolls too
+
+COPY_EXISTING ~scrl6k.itm~ ~override~
+	WRITE_LONG 0x1c %spell_name%
+	WRITE_LONG 0x54 %spell_desc%
+	WRITE_ASCII 0x3a ~sppr309a~ #8
+IF_EXISTS BUT_ONLY
+
 //__________________________________________________________________________________
 
 
