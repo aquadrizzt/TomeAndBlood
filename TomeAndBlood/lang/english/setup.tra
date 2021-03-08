@@ -11,7 +11,7 @@
 @13 = ~Revised Illusionary Clones~
 @14 = ~Revised Invisibility and True Seeing~
 @15 = ~Revised Haste and Free Action~
-@16 = ~Revised Identify spell (usable by Arcanist/Multi Sorcerers)~
+@16 = ~Improved Identify spell (usable by Arcanist/Multi Sorcerers)~
 @20 = ~Revised Dragon Disciples~
 @25 = ~Sorcerer: Magus~
 @27 = ~Sorcerer: Arcanist~ 
@@ -1741,7 +1741,7 @@ The caster of this spell gains a temporary insight into the history and nature o
 @7103  = ~Identify~
 @7104  = ~Identify
 
-Level: 2
+Level: 1
 School: Divination
 Range: Caster
 Duration: instantaneous

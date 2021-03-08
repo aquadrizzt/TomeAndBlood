@@ -17,6 +17,14 @@ ALWAYS
 	INCLUDE ~TomeAndBlood/lib/extra_kit.tpa~
 
 	INCLUDE ~TomeAndBlood/comp/core.tpa~ 
+
+	ACTION_IF (FILE_EXISTS_IN_GAME ~qd_tnb_settings.ini~) BEGIN
+  	  INCLUDE ~override/qd_tnb_settings.ini~
+  	END
+
+	ACTION_IF !(FILE_EXISTS_IN_GAME ~qd_tnb_settings.ini~) BEGIN
+  	  INCLUDE ~TomeAndBlood/qd_tnb_settings.ini~
+	END
 	
 END
 

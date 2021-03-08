@@ -16,6 +16,8 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~5E_casting_settings.ini~) BEGIN
   	INCLUDE ~%MOD_FOLDER%/lib/semi_spont/5E_casting_settings.ini~
 END
 
+LAM 5E_casting_settings
+
 INCLUDE ~tomeandblood/lib/qd_multiclass.tpa~
 
 
@@ -653,7 +655,16 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src-9.spl~ BEGIN
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 28) parameter2 = (109 + (0x10000 * 1)) timing = 1 END
 END
 
-COPY ~tomeandblood/data/semi_spont/d5__slt.spl~ ~override/d5srslt.spl~
+COPY ~tomeandblood/data/arcanist/d5cstarc.2da~ ~override~
+  LPF arcane_casting_slots STR_VAR table_spl = ~d5zltac~ END
+BUT_ONLY
+
+COPY_EXISTING ~mxsplsrc.2da~ ~override~
+  LPF arcane_casting_slots STR_VAR table_spl = ~d5srslt~ END
+BUT_ONLY
+
+/*
+COPY ~tomeandblood/lib/semi_spont/d5__slt.spl~ ~override/d5srslt.spl~
   LPF ADD_SPELL_EFFECT INT_VAR header = 1 opcode = 233 target = 1 parameter1 = (3 << 4) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
   LPF ADD_SPELL_EFFECT INT_VAR header = 2 opcode = 233 target = 1 parameter1 = (4 << 4) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
   LPF ADD_SPELL_EFFECT INT_VAR header = 3 opcode = 233 target = 1 parameter1 = (5 << 4) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
@@ -800,6 +811,7 @@ COPY ~tomeandblood/data/semi_spont/d5__slt.spl~ ~override/d5srslt.spl~
   LPF ADD_SPELL_EFFECT INT_VAR header = 25 opcode = 233 target = 1 parameter1 = (6 << 24) parameter2 = (109 + (0x10000 * 1)) timing = 9 END
   LPF ADD_SPELL_EFFECT INT_VAR header = 25 opcode = 233 target = 1 parameter1 = (6 << 28) parameter2 = (109 + (0x10000 * 1)) timing = 9 END
   LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 1 STR_VAR resource = ~d5srslt~ END
+*/
 
 APPEND ~d5sorc.2da~ 
 ~SRCSLOTS    AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~

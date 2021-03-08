@@ -24,6 +24,8 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~5E_casting_settings.ini~) BEGIN
   	INCLUDE ~%MOD_FOLDER%/lib/semi_spont/5E_casting_settings.ini~
 END
 
+LAM 5E_casting_settings
+
 //INCLUDE ~tomeandblood/lib/qd_multiclass.tpa~
 
 

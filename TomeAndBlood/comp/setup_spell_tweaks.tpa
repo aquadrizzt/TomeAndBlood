@@ -316,8 +316,8 @@ END
 //
 COPY_EXISTING ~sppr309.spl~ ~override~
   PATCH_FOR_EACH second IN ~6~ ~12~ ~18~ ~24~ ~30~ BEGIN 	//	do this more often
-	LPF CLONE_EFFECT INT_VAR match_opcode = 146 match duration = %second% duration = (%second% - 2) STR_VAR match_resource = sppr309d~ END
-	LPF CLONE_EFFECT INT_VAR match_opcode = 146 match duration = %second% duration = (%second% - 4) STR_VAR match_resource = sppr309d~ END
+	LPF CLONE_EFFECT INT_VAR match_opcode = 146 match_duration = %second% duration = (%second% - 2) STR_VAR match_resource = ~sppr309d~ END
+	LPF CLONE_EFFECT INT_VAR match_opcode = 146 match_duration = %second% duration = (%second% - 4) STR_VAR match_resource = ~sppr309d~ END
   END
 IF_EXISTS
 
@@ -331,8 +331,6 @@ COPY_EXISTING ~sppr309.spl~ ~override/spwi322.spl~
   	WRITE_LONG 0x34 3
   	WRITE_BYTE 0x1e (THIS BOR 0b10000000)
 IF_EXISTS
-
-// ***** need to modify scrolls too
 
 COPY_EXISTING ~scrl6k.itm~ ~override~
 	WRITE_LONG 0x1c %spell_name%
@@ -450,6 +448,7 @@ CREATE EFF ~d5tsill2~
 	WRITE_LONG 0x28 7
 	WRITE_SHORT 0x2c 100
 //__________________________________________________________________________________
+
 
 //handle nondetection spells/items__________________________________________________
 //
@@ -666,26 +665,44 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~qdtnb_identify.qd~) BEGIN
 INCLUDE ~TomeAndBlood/lib/b3identify.tph~
 LAF B3_IDENTIFY_INSTALL END
 
-ACTION_IF (GAME_IS ~bgee bg2ee eet~) BEGIN
+LAM identify_spell_level
+
+ACTION_IF (identify_level = 1) BEGIN
+  OUTER_SPRINT spell_res ~spwi110~
+  OUTER_SPRINT new_identify_desc @7104
+  COPY ~TomeAndBlood/data/spell_tweaks/d5tb110.spl~ ~override~
+    WRITE_LONG 0x34 1
+	SAY NAME1 @7103
+	SAY UNIDENTIFIED_DESC ~%new_identify_desc%~
+  IF_EXISTS BUT_ONLY
+END
+
+ACTION_IF (identify_level > 1) BEGIN
+  OUTER_SPRINT identify_desc @7104
+  OUTER_INNER_PATCH_SAVE new_identify_desc ~%identify_desc%~ BEGIN
+    REPLACE_TEXTUALLY ~Level: 1~ ~Level: %identify_level%~
+  END
+
+  ACTION_IF (GAME_IS ~bgee bg2ee eet~) BEGIN
 	APPEND ~hidespl.2da~ ~spwi110	1		0		0~
-END
-ACTION_IF (GAME_IS ~iwdee~) BEGIN
+  END
+  ACTION_IF (GAME_IS ~iwdee~) BEGIN
 	APPEND ~hidespl.2da~ ~spwi110	1		0~
-END
-COPY_EXISTING ~spell.ids~ ~override~
+  END
+  COPY_EXISTING ~spell.ids~ ~override~
 	REPLACE_TEXTUALLY ~WIZARD_IDENTIFY~ ~WIZARD_IDENTIFY_OLD~
 
-//COPY ~TomeAndBlood/data/spell_tweaks/d5tb110.spl~ ~override~
-ADD_SPELL ~TomeAndBlood/data/spell_tweaks/d5tb110.spl~ 2 2 WIZARD_IDENTIFY
-//COPY_EXISTING ~spell.ids~ ~override~
-//	REPLACE_TEXTUALLY ~WIZARD_IDENTIFY_TNB~ ~WIZARD_IDENTIFY~
-LAF RES_NUM_OF_SPELL_NAME
+//  COPY ~TomeAndBlood/data/spell_tweaks/d5tb110.spl~ ~override~
+  ADD_SPELL ~TomeAndBlood/data/spell_tweaks/d5tb110.spl~ 2 %identify_level% WIZARD_IDENTIFY
+  LAF RES_NUM_OF_SPELL_NAME
 	STR_VAR spell_name = ~WIZARD_IDENTIFY~
 	RET spell_res
-END
-COPY_EXISTING ~%spell_res%.spl~ ~override~
+  END
+  COPY_EXISTING ~%spell_res%.spl~ ~override~
+    WRITE_LONG 0x34 %identify_level%
 	SAY NAME1 @7103
-	SAY UNIDENTIFIED_DESC @7104
+	SAY_EVALUATED UNIDENTIFIED_DESC ~%new_identify_desc%~
+END
 
 COPY ~TomeAndBlood/data/spell_tweaks/d5tb110a.spl~ ~override~
 COPY ~TomeAndBlood/data/spell_tweaks/d5tb110b.spl~ ~override~
@@ -701,7 +718,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~scrl75.itm~ THEN BEGIN
 	COPY_EXISTING ~scrl75.itm~ ~override~
 		LPF ALTER_ITEM_HEADER INT_VAR target = 5 END
 		SAY NAME2 @7103
-		SAY IDENTIFIED_DESC @7104
+		SAY IDENTIFIED_DESC ~%new_identify_desc%~
 		LPF ALTER_EFFECT INT_VAR match_opcode = 146 STR_VAR resource = EVAL ~%spell_res%~ END
 		LPF ALTER_EFFECT INT_VAR match_opcode = 147 STR_VAR resource = EVAL ~%spell_res%~ END
 	BUT_ONLY

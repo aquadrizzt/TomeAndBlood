@@ -444,6 +444,8 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~d5zzini.spl~) BEGIN
 	
   LAM semi_int_slots
   
+END
+
 // since zlotf gets cast at the beginning of the game now, maybe none of this is necessary?
 
 /*
