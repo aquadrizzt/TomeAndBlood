@@ -454,17 +454,22 @@ CREATE EFF ~d5tsill2~
 //handle nondetection spells/items__________________________________________________
 //
 COPY_EXISTING ~spwi310.spl~ ~override~ 
-  LPF CLONE_EFFECT INT_VAR match_opcode = 69 opcode = 205 parameter1 = 0 parameter2 = 5 END
+  SAY NAME1 @6413
+  SAY UNIDENTIFIED_DESC @6414
+  WRITE_BYTE 0x27 2
+  LPF ALTER_EFFECT INT_VAR match_opcode = 69 opcode = 205 parameter1 = 0 parameter2 = 5 END
 IF_EXISTS BUT_ONLY
 
 COPY_EXISTING ~clck06.itm~ ~override~ 
   LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 205 target = 1 parameter2 = 5 timing = 2 END
+  LPF DELETE_EFFECT INT_VAR match_opcode = 69 END
 IF_EXISTS BUT_ONLY
 
 ACTION_IF (MOD_IS_INSTALLED ~item_rev.tp2~ ~0~) BEGIN
   COPY_EXISTING ~helm29.itm~ ~override~ 
 			  ~helm39.itm~ ~override~ 
 	LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 205 target = 1 parameter2 = 5 timing = 2 END
+  LPF DELETE_EFFECT INT_VAR match_opcode = 69 END
   IF_EXISTS BUT_ONLY
 END
 
