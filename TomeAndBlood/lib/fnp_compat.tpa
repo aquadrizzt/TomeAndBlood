@@ -480,7 +480,7 @@ DEFINE_ACTION_MACRO apply_fnp_spheres BEGIN
   END
  BUT_ONLY
  ACTION_IF (%kit_class% = 3) BEGIN
-  ACTION_IF (FILE_EXISTS_IN_GAME ~d5_cleric_umd.d5~) && !(FILE_CONTAINS_EVALUATED (~%mod_clab%.2da~ ~AP_D5_UMD~)) BEGIN
+  ACTION_IF (FILE_EXISTS_IN_GAME ~d5__cleric_umd.d5~) && !(FILE_CONTAINS_EVALUATED (~%mod_clab%.2da~ ~AP_D5_UMD~)) BEGIN
 	APPEND ~%mod_clab%.2da~ ~UMD         AP_D5_NUMD  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****    ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
 	  UNLESS ~AP_D5_NUMD~
   END

@@ -1,6 +1,6 @@
 BACKUP ~TomeAndBlood/backup~
 AUTHOR ~aquadrizzt~
-VERSION ~0.9.6~ 
+VERSION ~0.9.7~ 
 
 ALWAYS
 
@@ -47,7 +47,7 @@ INCLUDE ~TomeAndBlood/comp/setup_spell_schools.tpa~
 
 LAF spell_schools END
 
-
+/*
 // -----------------------------
 // 12: SPELL TWEAKS: GENERAL CHANGES (Subtledoctor)
 // -----------------------------
@@ -62,7 +62,7 @@ COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_spelltweaks_gen.qd~ //detection for t
 INCLUDE ~TomeAndBlood/comp/setup_spell_tweaks.tpa~
 
 LAF general_spell_tweaks END
-
+*/
 
 // -----------------------------
 // 13: SPELL TWEAKS: CLONE CHANGES (Subtledoctor)
@@ -531,6 +531,8 @@ LAF semi_spontaneous_casting INT_VAR include_arcane = 1 END
 INCLUDE ~TomeAndBlood/comp/setup_arcanist.tpa~
 
 LAF add_arcanist END
+
+COPY ~%MOD_FOLDER%/lib/semi_spont/d5_marker.d5~ ~override/d5__5E_casting_arcane.d5~
 
 
 // -----------------------------

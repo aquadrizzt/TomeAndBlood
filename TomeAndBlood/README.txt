@@ -111,7 +111,7 @@ This component defines specialists by what they can do, instead of by what they 
 - Necromancer: you can innately use a modal ability to slow or control nearby undead. Also, the Chill Touch, Ghoul Touch, and Vampiric Touch spells are improved to have special effects against undead, and they are changed into innate abilities only learnable by necromancers.
 - Transmuter: you get the innate ability to temporarily create and control a golem.
 
-DO NOT install this component if you are going to use the 5E Spellcasting mod.
+*DO NOT* install this component if you are going to use the broader 5E Spellcasting mod.
 
 COMPONENT 45: Arcane Crafting
 
@@ -169,6 +169,8 @@ COMPONENT 82: Arcanist
 This is a wizard kit that prepares and casts spells according to the D&D 5E rules. If you are not familiar, it achieves a hybrid status between the BG2 mage and sorcerer by differentiating "spell preparation slots" from "spallcasting slots." The Arcanist learns spells from scrolls, like any wizard, and has spell preparation slots according to the standard wizard spell table (MXSPLWIZ.2da). In order to actually prepare spells, the Arcanist must use a "Prepare Spells" innate ability before resting. Upon waking, they will be able to use spellcasting slots to cast their prepared spells spontaneously, like a sorcerer.  If you want to cast the same spells the next day, then no action is needed; after resting your spellcasting slots will be restored. If you want to cast different spells the next day, you must again use the the "Prepare Spells" ability just before resting, which will give you access to your preparation slots and allow you to fill them with a different set of spells.
 
 The Arcanist's preparation slots are governed by MXSPLWIZ.2da; any changes you make to the standard wizard spell table will affect how many spells an Arcanist can prepare. The Arcanist's spellcasting slots are set to match the unmodded spell slots of a Dragon Disciple. If you want to change this, you can modify "TomeandBlood/data/arcanist/D5CSTARC.2da" BEFORE installing the mod.
+
+*DO NOT* install this component if you are going to use the broader 5E Spellcasting mod.
 
 COMPONENT 80: Mana Sorcerer
 

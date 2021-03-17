@@ -36,7 +36,12 @@ COPY_EXISTING ~kitlist.2da~ ~override~
 BUT_ONLY
 
 //Remove Find Familiar from Spell Selection menu
-APPEND ~HIDESPL.2da~ ~SPWI123	1	0~ 
+ACTION_IF (FILE_EXISTS_IN_GAME ~hidespl.2da~) AND (GAME_IS ~iwdee~) BEGIN
+	APPEND ~hidespl.2da~ ~SPWI123	1		0~
+END
+ACTION_IF (FILE_EXISTS_IN_GAME ~hidespl.2da~) AND !(GAME_IS ~iwdee~) BEGIN
+	APPEND ~hidespl.2da~ ~SPWI123	1		0		0~
+END
 
 //Replace Scrolls of Find Familiar with Scrolls of Magic Missile. 
 COPY_EXISTING ~scrl77.itm~ ~override/scrl6d.itm~ 

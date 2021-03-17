@@ -99,7 +99,8 @@ COMPILE ~weidu_external/tomeandblood/d5swtch.baf~
 
 //make .spl, .cre, etc._______________________________________________________________
 //
-COPY ~tomeandblood/lib/semi_spont/d5zgren.bam~ ~override/d5swtch.bam~
+//COPY ~tomeandblood/lib/semi_spont/d5zgren.bam~ ~override/d5swtch.bam~
+COPY ~%MOD_FOLDER%/lib/semi_spont/d5zpurp.bam~ ~override/d5swtch.bam~
 
 COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5swtch.spl~
   SAY NAME1 ~Change known spell~

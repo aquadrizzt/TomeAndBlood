@@ -602,7 +602,7 @@ END
 //
 DEFINE_ACTION_FUNCTION sorcerer_spell_learning BEGIN
 
-ACTION_IF !(FILE_EXISTS_IN_GAME ~d5_wiz_learn.d5~) BEGIN
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__wiz_learn.d5~) BEGIN
 
 COPY ~tomeandblood/lib/d5_base.spl~ ~override/d50wspl.spl~
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~SPWI908~ END
@@ -770,7 +770,7 @@ COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5msor2.spl~
   SAY UNIDENTIFIED_DESC @17050
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5msor1~ END
 
-COPY ~tomeandblood/lib/d5_marker.d5~ ~override/d5_wiz_learn.d5~
+COPY ~tomeandblood/lib/d5_marker.d5~ ~override/d5__wiz_learn.d5~
 
 END
 
