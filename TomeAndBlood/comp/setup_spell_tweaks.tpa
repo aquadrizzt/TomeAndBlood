@@ -671,14 +671,23 @@ LAF B3_IDENTIFY_INSTALL END
 
 LAM identify_spell_level
 
+ACTION_IF (GAME_IS ~bgee bg2ee eet~) BEGIN
+	APPEND ~hidespl.2da~ ~spwi110	1		0		0~
+END
+ACTION_IF (GAME_IS ~iwdee~) BEGIN
+	APPEND ~hidespl.2da~ ~spwi110	1		0~
+END
+COPY_EXISTING ~spell.ids~ ~override~
+	REPLACE_TEXTUALLY ~WIZARD_IDENTIFY~ ~WIZARD_IDENTIFY_OLD~
+
+ADD_SPELL ~TomeAndBlood/data/spell_tweaks/d5tb110.spl~ 2 %identify_level% WIZARD_IDENTIFY
+LAF RES_NUM_OF_SPELL_NAME
+	STR_VAR spell_name = ~WIZARD_IDENTIFY~
+	RET spell_res
+END
+
 ACTION_IF (identify_level = 1) BEGIN
-  OUTER_SPRINT spell_res ~spwi110~
   OUTER_SPRINT new_identify_desc @7104
-  COPY ~TomeAndBlood/data/spell_tweaks/d5tb110.spl~ ~override~
-    WRITE_LONG 0x34 1
-	SAY NAME1 @7103
-	SAY UNIDENTIFIED_DESC ~%new_identify_desc%~
-  IF_EXISTS BUT_ONLY
 END
 
 ACTION_IF (identify_level > 1) BEGIN
@@ -686,27 +695,13 @@ ACTION_IF (identify_level > 1) BEGIN
   OUTER_INNER_PATCH_SAVE new_identify_desc ~%identify_desc%~ BEGIN
     REPLACE_TEXTUALLY ~Level: 1~ ~Level: %identify_level%~
   END
-
-  ACTION_IF (GAME_IS ~bgee bg2ee eet~) BEGIN
-	APPEND ~hidespl.2da~ ~spwi110	1		0		0~
-  END
-  ACTION_IF (GAME_IS ~iwdee~) BEGIN
-	APPEND ~hidespl.2da~ ~spwi110	1		0~
-  END
-  COPY_EXISTING ~spell.ids~ ~override~
-	REPLACE_TEXTUALLY ~WIZARD_IDENTIFY~ ~WIZARD_IDENTIFY_OLD~
+END
 
 //  COPY ~TomeAndBlood/data/spell_tweaks/d5tb110.spl~ ~override~
-  ADD_SPELL ~TomeAndBlood/data/spell_tweaks/d5tb110.spl~ 2 %identify_level% WIZARD_IDENTIFY
-  LAF RES_NUM_OF_SPELL_NAME
-	STR_VAR spell_name = ~WIZARD_IDENTIFY~
-	RET spell_res
-  END
-  COPY_EXISTING ~%spell_res%.spl~ ~override~
+COPY_EXISTING ~%spell_res%.spl~ ~override~
     WRITE_LONG 0x34 %identify_level%
 	SAY NAME1 @7103
 	SAY_EVALUATED UNIDENTIFIED_DESC ~%new_identify_desc%~
-END
 
 COPY ~TomeAndBlood/data/spell_tweaks/d5tb110a.spl~ ~override~
 COPY ~TomeAndBlood/data/spell_tweaks/d5tb110b.spl~ ~override~
