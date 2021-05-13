@@ -680,7 +680,8 @@ END
 COPY_EXISTING ~spell.ids~ ~override~
 	REPLACE_TEXTUALLY ~WIZARD_IDENTIFY~ ~WIZARD_IDENTIFY_OLD~
 
-ADD_SPELL ~TomeAndBlood/data/spell_tweaks/d5tb110.spl~ 2 %identify_level% WIZARD_IDENTIFY
+ADD_SPELL ~TomeAndBlood/data/spell_tweaks/d5tb110.spl~ 2 %identify_level% ~WIZARD_IDENTIFY~
+
 LAF RES_NUM_OF_SPELL_NAME
 	STR_VAR spell_name = ~WIZARD_IDENTIFY~
 	RET spell_res
