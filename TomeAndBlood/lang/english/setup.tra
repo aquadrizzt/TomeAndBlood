@@ -1456,9 +1456,9 @@ If the summoning priest is 25th level or higher, a powerful dark planetar is sum
 
 Level: 1
 Range: 0
-Duration: 5 turns
+Duration: instantaneous
 Casting Time: 5
-Area of Effect: Special
+Area of Effect: caster
 Saving Throw: None
 
 Upon casting this spell, the caster inscribes a mystical glyph upon a piece of paper or parchment. When this parchment is held near an item enchanted by magic, the glyph briefly glows and imparts knowledge about the item - what it does, how it is activated, and whether it is cursed - to anyone present. 
@@ -1743,13 +1743,13 @@ The caster of this spell gains a temporary insight into the history and nature o
 
 Level: 1
 School: Divination
-Range: Caster
+Range: 0
 Duration: instantaneous
 Casting Time: 2
-Area of Effect: Special
+Area of Effect: caster
 Saving Throw: None 
 
-When this spell is cast, name and enchantments (including curses) of one item subsequently touched by the wizard are revealed without fail. Many unidentified items can still be used, but at great risk.
+When this spell is cast, name and enchantments (including curses) of one item or weapon subsequently touched by the caster are revealed without fail. This gives the caster insight into the history, nature, enchantments, and use of the item. Many unidentified items can still be used, but at great risk.
 
 At 5th, 9th, and 13th level, the number of items that can be identified by this spell increases by 1 (to a maximum of 4 items at 13th level).
 ~

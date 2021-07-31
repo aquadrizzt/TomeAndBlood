@@ -671,50 +671,48 @@ LAF B3_IDENTIFY_INSTALL END
 
 LAM identify_spell_level
 
-ACTION_IF (GAME_IS ~bgee bg2ee eet~) BEGIN
-	APPEND ~hidespl.2da~ ~spwi110	1		0		0~
-END
-ACTION_IF (GAME_IS ~iwdee~) BEGIN
-	APPEND ~hidespl.2da~ ~spwi110	1		0~
-END
 COPY_EXISTING ~spell.ids~ ~override~
-	REPLACE_TEXTUALLY ~WIZARD_IDENTIFY~ ~WIZARD_IDENTIFY_OLD~
+	REPLACE_TEXTUALLY ~WIZARD_IDENTIFY~ ~D5_IDENTIFY_OLD~
 
-ADD_SPELL ~TomeAndBlood/data/spell_tweaks/d5tb110.spl~ 2 %identify_level% ~WIZARD_IDENTIFY~
+ADD_SPELL ~TomeAndBlood/data/spell_tweaks/d5tb110.spl~ 2 1 ~D5_NEW_IDENTIFY~
 
-LAF RES_NUM_OF_SPELL_NAME
+COPY_EXISTING ~spell.ids~ ~override~
+	REPLACE_TEXTUALLY ~D5_NEW_IDENTIFY~ ~WIZARD_IDENTIFY~
+	
+ACTION_IF FILE_CONTAINS_EVALUATED (~SPELL.IDS~ ~WIZARD_IDENTIFY~)	BEGIN
+  LAF RES_NUM_OF_SPELL_NAME
 	STR_VAR spell_name = ~WIZARD_IDENTIFY~
 	RET spell_res
-END
+  END
 
-ACTION_IF (identify_level = 1) BEGIN
+ ACTION_IF (identify_level = 1) BEGIN
   OUTER_SPRINT new_identify_desc @7104
-END
+ END
 
-ACTION_IF (identify_level > 1) BEGIN
+ ACTION_IF (identify_level > 1) BEGIN
   OUTER_SPRINT identify_desc @7104
   OUTER_INNER_PATCH_SAVE new_identify_desc ~%identify_desc%~ BEGIN
     REPLACE_TEXTUALLY ~Level: 1~ ~Level: %identify_level%~
   END
-END
+ END
 
 //  COPY ~TomeAndBlood/data/spell_tweaks/d5tb110.spl~ ~override~
-COPY_EXISTING ~%spell_res%.spl~ ~override~
+ COPY_EXISTING ~%spell_res%.spl~ ~override~
     WRITE_LONG 0x34 %identify_level%
 	SAY NAME1 @7103
 	SAY_EVALUATED UNIDENTIFIED_DESC ~%new_identify_desc%~
 
-COPY ~TomeAndBlood/data/spell_tweaks/d5tb110a.spl~ ~override~
-COPY ~TomeAndBlood/data/spell_tweaks/d5tb110b.spl~ ~override~
-COPY ~TomeAndBlood/data/spell_tweaks/d5tb110c.spl~ ~override~
-COPY ~TomeAndBlood/data/spell_tweaks/d5tb110d.spl~ ~override~
+ COPY ~TomeAndBlood/data/spell_tweaks/d5tb110a.spl~ ~override~
+ COPY ~TomeAndBlood/data/spell_tweaks/d5tb110b.spl~ ~override~
+ COPY ~TomeAndBlood/data/spell_tweaks/d5tb110c.spl~ ~override~
+ COPY ~TomeAndBlood/data/spell_tweaks/d5tb110d.spl~ ~override~
 
-LAF B3_IDENTIFY_REGISTER INT_VAR uses = 1 STR_VAR resref = ~d5tb110a~ END
-LAF B3_IDENTIFY_REGISTER INT_VAR uses = 2 STR_VAR resref = ~d5tb110b~ END
-LAF B3_IDENTIFY_REGISTER INT_VAR uses = 3 STR_VAR resref = ~d5tb110c~ END
-LAF B3_IDENTIFY_REGISTER INT_VAR uses = 4 STR_VAR resref = ~d5tb110d~ END
+ LAF B3_IDENTIFY_REGISTER INT_VAR uses = 1 STR_VAR resref = ~d5tb110a~ END
+ LAF B3_IDENTIFY_REGISTER INT_VAR uses = 2 STR_VAR resref = ~d5tb110b~ END
+ LAF B3_IDENTIFY_REGISTER INT_VAR uses = 3 STR_VAR resref = ~d5tb110c~ END
+ LAF B3_IDENTIFY_REGISTER INT_VAR uses = 4 STR_VAR resref = ~d5tb110d~ END
 
-ACTION_IF FILE_EXISTS_IN_GAME ~scrl75.itm~ THEN BEGIN
+ ACTION_IF FILE_EXISTS_IN_GAME ~scrl75.itm~ THEN BEGIN
 	COPY_EXISTING ~scrl75.itm~ ~override~
 		LPF ALTER_ITEM_HEADER INT_VAR target = 5 END
 		SAY NAME2 @7103
@@ -722,9 +720,9 @@ ACTION_IF FILE_EXISTS_IN_GAME ~scrl75.itm~ THEN BEGIN
 		LPF ALTER_EFFECT INT_VAR match_opcode = 146 STR_VAR resource = EVAL ~%spell_res%~ END
 		LPF ALTER_EFFECT INT_VAR match_opcode = 147 STR_VAR resource = EVAL ~%spell_res%~ END
 	BUT_ONLY
-END
+ END
 
-COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
+ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
 	PATCH_IF (%SOURCE_SIZE% > 0x2d3) BEGIN
 	  READ_BYTE 0x273 class
 	  PATCH_IF (class == 1 || class == 13 || class == 14 || class == 7 || class == 10 || class == 17 || class == 19 || class == 5) BEGIN // wizard casters
@@ -733,9 +731,19 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
 		ADD_KNOWN_SPELL ~%spell_res%~ #1 ~wizard~
 	  END
 	END
-BUT_ONLY
+ BUT_ONLY
 
-COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_identify.qd~ //detection for this component 
+ COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_identify.qd~ //detection for this component 
+
+
+ ACTION_IF (GAME_IS ~bgee bg2ee eet~) BEGIN
+	APPEND ~hidespl.2da~ ~spwi110	1		0		0~
+ END
+ ACTION_IF (GAME_IS ~iwdee~) BEGIN
+	APPEND ~hidespl.2da~ ~spwi110	1		0~
+ END
+
+END
 
 END		//	end not found qdtnb_identify.qd
 
