@@ -150,7 +150,7 @@ ADD_KIT ~D5_SORCERER_CLERIC~
 
 //ALIGNMENT RESTRICTIONS____________________________________________________________
 //                 	  LG LN LE NG TN NE CG CN CE
-~D5_SORCERER_CLERIC   1  0  0  1  0  0  1  0  0~
+~D5_SORCERER_CLERIC   1  1  1  1  1  1  1  1  1~
 
 //DUAL CLASS OPTIONS________________________________________________________________
 //      	           	FT CL MA TH DR RA
@@ -286,7 +286,7 @@ ADD_KIT ~D5_SORCERER_THIEF~
 
 //ALIGNMENT RESTRICTIONS____________________________________________________________
 //                 	  LG LN LE NG TN NE CG CN CE
-~D5_SORCERER_THIEF    0  1  1  1  1  0  1  1  1~
+~D5_SORCERER_THIEF    0  1  1  1  1  1  1  1  1~
 
 //DUAL CLASS OPTIONS________________________________________________________________
 //      	           	FT CL MA TH DR RA
@@ -329,31 +329,12 @@ ACTION_IF GAME_IS ~bgee bg2ee eet iwdee~ THEN BEGIN
 	END
 END
 
-/*
-plan:
-- d5ssplz# does 172 (borrow & combine from srci#), and 326 for d5slot#x
-- d5slot#x triggers all EFFs according to stat values (borrow & combine from srci#)
-- EFFs 171 innate clones
-- innate clones cast real wiz spells???  <--- DECISION (I think, no for now)
-- innate clones reduce appropriate stat
-- innate clones cast d5ssplz# on 1-sec delay, where # = level
-
-- 206 against all EFFs at chargen
-- learn_spell = 321 206_spell, and 171 real_spell
-
-- 232 from chargen
-- just does 326 for refresh
-- refresh does 321 on stat reductions, then casts d5ssplz on 1-sec delay
-*/
-
 //get kit identifiers_________________________________________________________________
 //
 OUTER_SET fighter_sorcerer_code = (0x4000 + %D5_FIGHTER_SORCERER%)
 OUTER_SET sorcerer_cleric_code = (0x4000 + %D5_SORCERER_CLERIC%)
 OUTER_SET sorcerer_thief_code = (0x4000 + %D5_SORCERER_THIEF%)
 
-//5E CASTING COMPAT___________________________________________________________________
-// add 318 effects to exempt multisorc from 5E casting
 APPEND ~splprot.2da~ ~D5_KIT_IS%TAB%152%TAB%-1%TAB%1~ UNLESS ~D5_KIT_IS~
 COPY_EXISTING ~splprot.2da~ ~override~
 	COUNT_2DA_COLS cols
@@ -365,6 +346,9 @@ COPY_EXISTING ~splprot.2da~ ~override~
 	  END
 	END
 BUT_ONLY
+
+//5E CASTING COMPAT___________________________________________________________________
+// add 318 effects to exempt multisorc from 5E casting
 ACTION_FOR_EACH 5e_spl IN ~d5zz000~ ~d5zzini~ /*~d5zlots~*/ ~d5zltwz~ BEGIN
   ACTION_IF (FILE_EXISTS_IN_GAME ~%5e_spl%.spl~) BEGIN
     COPY_EXISTING ~%5e_spl%.spl~ ~override~ 
@@ -375,687 +359,57 @@ ACTION_FOR_EACH 5e_spl IN ~d5zz000~ ~d5zzini~ /*~d5zlots~*/ ~d5zltwz~ BEGIN
   END
 END
 
-/*
-COPY_EXISTING ~kit.ids~ ~override~
-  COUNT_2DA_COLS cols 
-  READ_2DA_ENTRIES_NOW rows cols 
-  FOR (row = 1; row < rows; ++row) BEGIN 
-    READ_2DA_ENTRY_FORMER rows row 1 ~kit_name~ 
-    PATCH_IF ~%kit_name%~ STRING_EQUAL_CASE ~D5_FIGHTER_SORCERER~ BEGIN
-      SET fighter_sorcerer_row = %row%
-      READ_2DA_ENTRY_FORMER rows fighter_sorcerer_row 0 fighter_sorcerer_code
-    END
-    PATCH_IF ~%kit_name%~ STRING_EQUAL_CASE ~D5_SORCERER_CLERIC~ BEGIN
-      SET sorcerer_cleric_row = %row%
-      READ_2DA_ENTRY_FORMER rows sorcerer_cleric_row 0 sorcerer_cleric_code
-    END
-    PATCH_IF ~%kit_name%~ STRING_EQUAL_CASE ~D5_SORCERER_THIEF~ BEGIN
-      SET sorcerer_thief_row = %row%
-      READ_2DA_ENTRY_FORMER rows sorcerer_thief_row 0 sorcerer_thief_code
-    END
-  END
-BUT_ONLY
-*/
+LAM sorcerer_learning_suffix
 
-//add spell slot stat checks to SPLPROT_______________________________________________
-//
-APPEND ~splprot.2da~ ~D5_SLOTS_1_7%TAB%108%TAB%-1%TAB%7~ UNLESS ~D5_SLOTS_1_7~
-APPEND ~splprot.2da~ ~D5_SLOTS_8_9%TAB%109%TAB%-1%TAB%7~ UNLESS ~D5_SLOTS_8_9~
-APPEND ~splprot.2da~ ~D5_FATIGUE_IS%TAB%30%TAB%-1%TAB%1~ UNLESS ~D5_FATIGUE_IS~
-
-COPY_EXISTING ~splprot.2da~ ~override~
-  COUNT_2DA_COLS cols
-  READ_2DA_ENTRIES_NOW rows cols
-  FOR (row = 1; row < rows; ++row) BEGIN
-	READ_2DA_ENTRY_FORMER rows row 0 ~stat~
-	PATCH_IF ~%stat%~ STRING_EQUAL_CASE ~D5_SLOTS_1_7~ BEGIN
-	  SET fake_sorc_slots_1_7 = %row%
-	END
-	PATCH_IF ~%stat%~ STRING_EQUAL_CASE ~D5_SLOTS_8_9~ BEGIN
-	  SET fake_sorc_slots_8_9 = %row%
-	END
-	PATCH_IF ~%stat%~ STRING_EQUAL_CASE ~D5_FATIGUE_IS~ BEGIN
-	  SET fatigue_value = %row%
-	END
-  END
-BUT_ONLY
+LAF sorcerer_spell_learning STR_VAR menu_suffix = EVAL ~%sorcerer_learn_suffix%~ END
 
 
-//multi sorc spellstate_______________________________________________________________
-//
-ACTION_IF (FILE_CONTAINS_EVALUATED (~splstate.ids~ ~D5_MULTI_SORC~)) BEGIN
-  COPY_EXISTING ~splstate.ids~ ~override~
-	COUNT_2DA_COLS cols
-	READ_2DA_ENTRIES_NOW rows cols
-	FOR (row = 1; row < rows; ++row) BEGIN
-	  READ_2DA_ENTRY_FORMER rows row 1 ~state_name~
-	  READ_2DA_ENTRY_FORMER rows row 0 ~state_ind~
-	  PATCH_IF (~%state_name%~ STRING_EQUAL_CASE ~D5_MULTI_SORC~) BEGIN
-		SET multi_sorc_state = %state_ind%
-	  END
-	END
-  BUT_ONLY
-END
-/*
-ACTION_IF !(FILE FILE_CONTAINS_EVALUATED (~splstate.ids~ ~D5_MULTI_SORC~)) BEGIN
-  LAF d5_resolve_state STR_VAR new_state_id = ~D5_MULTI_SORC~ RET new_state_ind END
-  OUTER_SET multi_sorc_state = %new_state_ind%
-END
-*/
-ACTION_IF !(VARIABLE_IS_SET %multi_sorc_state%) BEGIN
-  LAF d5_resolve_state STR_VAR new_state_id = ~D5_MULTI_SORC~ RET new_state_ind END
-  OUTER_SET multi_sorc_state = %new_state_ind%
-END
-
-
-//remove all mage spell slots_________________________________________________________
-//
-/* 
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d50wcst.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 145 target = 1 parameter2 = 0 timing = 9 END
-BUT_ONLY
-
-APPEND ~d5sorc.2da~ ~NO_CAST     AP_D50WCST  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
-*/
-
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d50wslt.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 42 target = 1 parameter1 = (0 - 1) parameter2 = 511 timing = 9 END
-BUT_ONLY
-
-APPEND ~d5sorc.2da~ ~NOSLOTS     AP_D50WSLT  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
-NOSLOTS     AP_D50WSLT  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
-NOSLOTS     AP_D50WSLT  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
-NOSLOTS     AP_D50WSLT  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
-NOSLOTS     AP_D50WSLT  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
-NOSLOTS     AP_D50WSLT  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
-NOSLOTS     AP_D50WSLT  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
-NOSLOTS     AP_D50WSLT  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
-NOSLOTS     AP_D50WSLT  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
-NOSLOTS     AP_D50WSLT  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
-NOSLOTS     AP_D50WSLT  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
-NOSLOTS     AP_D50WSLT  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
-~
-
-
-//create advance copies of some spells________________________________________________
-//
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5w206.spl~
-
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5slot1a.spl~
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5slot1b.spl~
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5slot1c.spl~
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5slot1d.spl~
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5slot2a.spl~
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5slot2b.spl~
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5slot2c.spl~
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5slot2d.spl~
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5slot3a.spl~
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5slot3b.spl~
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5slot3c.spl~
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5slot3d.spl~
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5slot4a.spl~
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5slot4b.spl~
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5slot4c.spl~
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5slot4d.spl~
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5slot5a.spl~
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5slot5b.spl~
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5slot5c.spl~
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5slot5d.spl~
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5slot6a.spl~
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5slot6b.spl~
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5slot6c.spl~
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5slot6d.spl~
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5slot7a.spl~
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5slot7b.spl~
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5slot7c.spl~
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5slot7d.spl~
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5slot8a.spl~
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5slot8b.spl~
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5slot8c.spl~
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5slot8d.spl~
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5slot9a.spl~
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5slot9b.spl~
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5slot9c.spl~
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5slot9d.spl~
-
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5ssplz.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (1 << 4) parameter2 = %fake_sorc_slots_1_7% timing = 1 STR_VAR resource = ~d5slot1a~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (2 << 4) parameter2 = %fake_sorc_slots_1_7% timing = 1 STR_VAR resource = ~d5slot1b~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (4 << 4) parameter2 = %fake_sorc_slots_1_7% timing = 1 STR_VAR resource = ~d5slot1c~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (8 << 4) parameter2 = %fake_sorc_slots_1_7% timing = 1 STR_VAR resource = ~d5slot1d~ END
-//COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5ssplz2.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (1 << 8) parameter2 = %fake_sorc_slots_1_7% timing = 1 STR_VAR resource = ~d5slot2a~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (2 << 8) parameter2 = %fake_sorc_slots_1_7% timing = 1 STR_VAR resource = ~d5slot2b~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (4 << 8) parameter2 = %fake_sorc_slots_1_7% timing = 1 STR_VAR resource = ~d5slot2c~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (8 << 8) parameter2 = %fake_sorc_slots_1_7% timing = 1 STR_VAR resource = ~d5slot2d~ END
-//COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5ssplz3.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (1 << 12) parameter2 = %fake_sorc_slots_1_7% timing = 1 STR_VAR resource = ~d5slot3a~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (2 << 12) parameter2 = %fake_sorc_slots_1_7% timing = 1 STR_VAR resource = ~d5slot3b~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (4 << 12) parameter2 = %fake_sorc_slots_1_7% timing = 1 STR_VAR resource = ~d5slot3c~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (8 << 12) parameter2 = %fake_sorc_slots_1_7% timing = 1 STR_VAR resource = ~d5slot3d~ END
-//COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5ssplz4.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (1 << 16) parameter2 = %fake_sorc_slots_1_7% timing = 1 STR_VAR resource = ~d5slot4a~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (2 << 16) parameter2 = %fake_sorc_slots_1_7% timing = 1 STR_VAR resource = ~d5slot4b~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (4 << 16) parameter2 = %fake_sorc_slots_1_7% timing = 1 STR_VAR resource = ~d5slot4c~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (8 << 16) parameter2 = %fake_sorc_slots_1_7% timing = 1 STR_VAR resource = ~d5slot4d~ END
-//COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5ssplz5.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (1 << 20) parameter2 = %fake_sorc_slots_8_9% timing = 1 STR_VAR resource = ~d5slot5a~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (2 << 20) parameter2 = %fake_sorc_slots_8_9% timing = 1 STR_VAR resource = ~d5slot5b~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (4 << 20) parameter2 = %fake_sorc_slots_8_9% timing = 1 STR_VAR resource = ~d5slot5c~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (8 << 20) parameter2 = %fake_sorc_slots_8_9% timing = 1 STR_VAR resource = ~d5slot5d~ END
-//COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5ssplz6.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (1 << 24) parameter2 = %fake_sorc_slots_8_9% timing = 1 STR_VAR resource = ~d5slot6a~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (2 << 24) parameter2 = %fake_sorc_slots_8_9% timing = 1 STR_VAR resource = ~d5slot6b~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (4 << 24) parameter2 = %fake_sorc_slots_8_9% timing = 1 STR_VAR resource = ~d5slot6c~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (8 << 24) parameter2 = %fake_sorc_slots_8_9% timing = 1 STR_VAR resource = ~d5slot6d~ END
-//COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5ssplz7.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (1 << 28) parameter2 = %fake_sorc_slots_8_9% timing = 1 STR_VAR resource = ~d5slot7a~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (2 << 28) parameter2 = %fake_sorc_slots_8_9% timing = 1 STR_VAR resource = ~d5slot7b~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (4 << 28) parameter2 = %fake_sorc_slots_8_9% timing = 1 STR_VAR resource = ~d5slot7c~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (8 << 28) parameter2 = %fake_sorc_slots_8_9% timing = 1 STR_VAR resource = ~d5slot7d~ END
-//COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5ssplz8.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (1 << 24) parameter2 = %fake_sorc_slots_8_9% timing = 1 STR_VAR resource = ~d5slot8a~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (2 << 24) parameter2 = %fake_sorc_slots_8_9% timing = 1 STR_VAR resource = ~d5slot8b~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (4 << 24) parameter2 = %fake_sorc_slots_8_9% timing = 1 STR_VAR resource = ~d5slot8c~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (8 << 24) parameter2 = %fake_sorc_slots_8_9% timing = 1 STR_VAR resource = ~d5slot8d~ END
-//COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5ssplz9.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (1 << 28) parameter2 = %fake_sorc_slots_8_9% timing = 1 STR_VAR resource = ~d5slot9a~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (2 << 28) parameter2 = %fake_sorc_slots_8_9% timing = 1 STR_VAR resource = ~d5slot9b~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (4 << 28) parameter2 = %fake_sorc_slots_8_9% timing = 1 STR_VAR resource = ~d5slot9c~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = (8 << 28) parameter2 = %fake_sorc_slots_8_9% timing = 1 STR_VAR resource = ~d5slot9d~ END
-
-
-//assign stats for spell slots to each spell level____________________________________
-//
-// level 1 = (134 << 8) 	//	OR: 108 << 4
-// level 2 = (134 << 12)	//	    108 << 8
-// level 3 = (134 << 16)	//	    108 << 12
-// level 4 = (134 << 20)	//	    108 << 16
-// level 5 = (108 << 8) 	//	    108 << 20
-// level 6 = (108 << 12)	//	    108 << 24
-// level 7 = (108 << 16)	//	    108 << 28
-// level 8 = (108 << 20)	//	    109 << 24
-// level 9 = (108 << 24)	//	    109 << 28
-//
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src1a.spl~ BEGIN
-  ACTION_FOR_EACH let IN ~a~ ~b~ ~c~ /*~d~ ~e~ ~f~ ~g~ ~h~ ~i~ ~j~ ~k~ ~l~ ~m~ ~n~ ~o~ ~p~ ~q~ ~r~ ~s~ ~t~*/ BEGIN
-	COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src1%let%.spl~
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 4) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5src1%let%~ END
-  END
-END
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src2a.spl~ BEGIN
-  ACTION_FOR_EACH let IN ~a~ ~b~ ~c~ /*~d~ ~e~ ~f~ ~g~ ~h~ ~i~ ~j~ ~k~ ~l~ ~m~ ~n~ ~o~ ~p~ ~q~ ~r~ ~s~ ~t~*/ BEGIN
-	COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src2%let%.spl~
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 8) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5src2%let%~ END
-  END
-END
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src3a.spl~ BEGIN
-  ACTION_FOR_EACH let IN ~a~ ~b~ ~c~ /*~d~ ~e~ ~f~ ~g~ ~h~ ~i~ ~j~ ~k~ ~l~ ~m~ ~n~ ~o~ ~p~ ~q~ ~r~ ~s~ ~t~*/ BEGIN
-	COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src3%let%.spl~
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 12) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5src3%let%~ END
-  END
-END
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src4a.spl~ BEGIN
-  ACTION_FOR_EACH let IN ~a~ ~b~ ~c~ /*~d~ ~e~ ~f~ ~g~ ~h~ ~i~ ~j~ ~k~ ~l~ ~m~ ~n~ ~o~ ~p~ ~q~ ~r~ ~s~ ~t~*/ BEGIN
-	COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src4%let%.spl~
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 16) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5src4%let%~ END
-  END
-END
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src5a.spl~ BEGIN
-  ACTION_FOR_EACH let IN ~a~ ~b~ ~c~ /*~d~ ~e~ ~f~ ~g~ ~h~ ~i~ ~j~ ~k~ ~l~ ~m~ ~n~ ~o~ ~p~ ~q~ ~r~ ~s~ ~t~*/ BEGIN
-	COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src5%let%.spl~
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 20) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5src5%let%~ END
-  END
-END
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src6a.spl~ BEGIN
-  ACTION_FOR_EACH let IN ~a~ ~b~ ~c~ /*~d~ ~e~ ~f~ ~g~ ~h~ ~i~ ~j~ ~k~ ~l~ ~m~ ~n~ ~o~ ~p~ ~q~ ~r~ ~s~ ~t~*/ BEGIN
-	COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src6%let%.spl~
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 24) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5src6%let%~ END
-  END
-END
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src7a.spl~ BEGIN
-  ACTION_FOR_EACH let IN ~a~ ~b~ ~c~ /*~d~ ~e~ ~f~ ~g~ ~h~ ~i~ ~j~ ~k~ ~l~ ~m~ ~n~ ~o~ ~p~ ~q~ ~r~ ~s~ ~t~*/ BEGIN
-	COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src7%let%.spl~
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 28) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5src7%let%~ END
-  END
-END
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src8a.spl~ BEGIN
-  ACTION_FOR_EACH let IN ~a~ ~b~ ~c~ /*~d~ ~e~ ~f~ ~g~ ~h~ ~i~ ~j~ ~k~ ~l~ ~m~ ~n~ ~o~ ~p~ ~q~ ~r~ ~s~ ~t~*/ BEGIN
-	COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src8%let%.spl~
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 24) parameter2 = (109 + (0x10000 * 1)) timing = 9 END
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5src8%let%~ END
-  END
-END
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src9a.spl~ BEGIN
-  ACTION_FOR_EACH let IN ~a~ ~b~ ~c~ /*~d~ ~e~ ~f~ ~g~ ~h~ ~i~ ~j~ ~k~ ~l~ ~m~ ~n~ ~o~ ~p~ ~q~ ~r~ ~s~ ~t~*/ BEGIN
-	COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src9%let%.spl~
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (1 << 28) parameter2 = (109 + (0x10000 * 1)) timing = 9 END
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~d5src9%let%~ END
-  END
-END
-
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src-1.spl~ BEGIN
- COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src-1.spl~
-   LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 4) parameter2 = (108 + (0x10000 * 1)) timing = 1 END
-END
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src-2.spl~ BEGIN
- COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src-2.spl~
-   LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 8) parameter2 = (108 + (0x10000 * 1)) timing = 1 END
-END
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src-3.spl~ BEGIN
- COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src-3.spl~
-   LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 12) parameter2 = (108 + (0x10000 * 1)) timing = 1 END
-END
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src-4.spl~ BEGIN
- COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src-4.spl~
-   LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 16) parameter2 = (108 + (0x10000 * 1)) timing = 1 END
-END
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src-5.spl~ BEGIN
- COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src-5.spl~
-   LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 20) parameter2 = (108 + (0x10000 * 1)) timing = 1 END
-END
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src-6.spl~ BEGIN
- COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src-6.spl~
-   LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 24) parameter2 = (108 + (0x10000 * 1)) timing = 1 END
-END
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src-7.spl~ BEGIN
- COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src-7.spl~
-   LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 28) parameter2 = (108 + (0x10000 * 1)) timing = 1 END
-END
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src-8.spl~ BEGIN
- COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src-8.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 24) parameter2 = (109 + (0x10000 * 1)) timing = 1 END
-END
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5src-9.spl~ BEGIN
- COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5src-9.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = ((0 - 1) << 28) parameter2 = (109 + (0x10000 * 1)) timing = 1 END
-END
-
-COPY_EXISTING ~mxsplsrc.2da~ ~override~
-  LPF arcane_casting_slots STR_VAR table_spl = ~d5srslt~ END
-BUT_ONLY
-
-/*
-COPY ~tomeandblood/lib/semi_spont/d5__slt.spl~ ~override/d5srslt.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR header = 1 opcode = 233 target = 1 parameter1 = (3 << 4) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 2 opcode = 233 target = 1 parameter1 = (4 << 4) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 3 opcode = 233 target = 1 parameter1 = (5 << 4) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 4 opcode = 233 target = 1 parameter1 = (6 << 4) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 4 opcode = 233 target = 1 parameter1 = (3 << 8) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 5 opcode = 233 target = 1 parameter1 = (6 << 4) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 5 opcode = 233 target = 1 parameter1 = (4 << 8) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 6 opcode = 233 target = 1 parameter1 = (6 << 4) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 6 opcode = 233 target = 1 parameter1 = (5 << 8) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 6 opcode = 233 target = 1 parameter1 = (3 << 12) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 7 opcode = 233 target = 1 parameter1 = (6 << 4) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 7 opcode = 233 target = 1 parameter1 = (6 << 8) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 7 opcode = 233 target = 1 parameter1 = (4 << 12) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 8 opcode = 233 target = 1 parameter1 = (6 << 4) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 8 opcode = 233 target = 1 parameter1 = (6 << 8) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 8 opcode = 233 target = 1 parameter1 = (5 << 12) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 8 opcode = 233 target = 1 parameter1 = (3 << 16) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 9 opcode = 233 target = 1 parameter1 = (6 << 4) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 9 opcode = 233 target = 1 parameter1 = (6 << 8) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 9 opcode = 233 target = 1 parameter1 = (6 << 12) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 9 opcode = 233 target = 1 parameter1 = (4 << 16) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 10 opcode = 233 target = 1 parameter1 = (6 << 4) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 10 opcode = 233 target = 1 parameter1 = (6 << 8) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 10 opcode = 233 target = 1 parameter1 = (6 << 12) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 10 opcode = 233 target = 1 parameter1 = (5 << 16) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 10 opcode = 233 target = 1 parameter1 = (3 << 20) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 11 opcode = 233 target = 1 parameter1 = (6 << 4) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 11 opcode = 233 target = 1 parameter1 = (6 << 8) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 11 opcode = 233 target = 1 parameter1 = (6 << 12) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 11 opcode = 233 target = 1 parameter1 = (6 << 16) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 11 opcode = 233 target = 1 parameter1 = (4 << 20) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 12 opcode = 233 target = 1 parameter1 = (6 << 4) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 12 opcode = 233 target = 1 parameter1 = (6 << 8) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 12 opcode = 233 target = 1 parameter1 = (6 << 12) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 12 opcode = 233 target = 1 parameter1 = (6 << 16) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 12 opcode = 233 target = 1 parameter1 = (5 << 20) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 12 opcode = 233 target = 1 parameter1 = (3 << 24) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 13 opcode = 233 target = 1 parameter1 = (6 << 4) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 13 opcode = 233 target = 1 parameter1 = (6 << 8) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 13 opcode = 233 target = 1 parameter1 = (6 << 12) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 13 opcode = 233 target = 1 parameter1 = (6 << 16) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 13 opcode = 233 target = 1 parameter1 = (6 << 20) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 13 opcode = 233 target = 1 parameter1 = (4 << 24) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 14 opcode = 233 target = 1 parameter1 = (6 << 4) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 14 opcode = 233 target = 1 parameter1 = (6 << 8) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 14 opcode = 233 target = 1 parameter1 = (6 << 12) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 14 opcode = 233 target = 1 parameter1 = (6 << 16) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 14 opcode = 233 target = 1 parameter1 = (6 << 20) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 14 opcode = 233 target = 1 parameter1 = (5 << 24) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 14 opcode = 233 target = 1 parameter1 = (3 << 28) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 15 opcode = 233 target = 1 parameter1 = (6 << 4) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 15 opcode = 233 target = 1 parameter1 = (6 << 8) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 15 opcode = 233 target = 1 parameter1 = (6 << 12) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 15 opcode = 233 target = 1 parameter1 = (6 << 16) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 15 opcode = 233 target = 1 parameter1 = (6 << 20) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 15 opcode = 233 target = 1 parameter1 = (6 << 24) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 15 opcode = 233 target = 1 parameter1 = (4 << 28) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 16 opcode = 233 target = 1 parameter1 = (6 << 4) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 16 opcode = 233 target = 1 parameter1 = (6 << 8) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 16 opcode = 233 target = 1 parameter1 = (6 << 12) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 16 opcode = 233 target = 1 parameter1 = (6 << 16) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 16 opcode = 233 target = 1 parameter1 = (6 << 20) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 16 opcode = 233 target = 1 parameter1 = (6 << 24) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 16 opcode = 233 target = 1 parameter1 = (5 << 28) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 16 opcode = 233 target = 1 parameter1 = (3 << 24) parameter2 = (109 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 17 opcode = 233 target = 1 parameter1 = (6 << 4) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 17 opcode = 233 target = 1 parameter1 = (6 << 8) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 17 opcode = 233 target = 1 parameter1 = (6 << 12) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 17 opcode = 233 target = 1 parameter1 = (6 << 16) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 17 opcode = 233 target = 1 parameter1 = (6 << 20) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 17 opcode = 233 target = 1 parameter1 = (6 << 24) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 17 opcode = 233 target = 1 parameter1 = (6 << 28) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 17 opcode = 233 target = 1 parameter1 = (4 << 24) parameter2 = (109 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 18 opcode = 233 target = 1 parameter1 = (6 << 4) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 18 opcode = 233 target = 1 parameter1 = (6 << 8) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 18 opcode = 233 target = 1 parameter1 = (6 << 12) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 18 opcode = 233 target = 1 parameter1 = (6 << 16) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 18 opcode = 233 target = 1 parameter1 = (6 << 20) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 18 opcode = 233 target = 1 parameter1 = (6 << 24) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 18 opcode = 233 target = 1 parameter1 = (6 << 28) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 18 opcode = 233 target = 1 parameter1 = (5 << 24) parameter2 = (109 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 18 opcode = 233 target = 1 parameter1 = (3 << 28) parameter2 = (109 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 19 opcode = 233 target = 1 parameter1 = (6 << 4) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 19 opcode = 233 target = 1 parameter1 = (6 << 8) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 19 opcode = 233 target = 1 parameter1 = (6 << 12) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 19 opcode = 233 target = 1 parameter1 = (6 << 16) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 19 opcode = 233 target = 1 parameter1 = (6 << 20) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 19 opcode = 233 target = 1 parameter1 = (6 << 24) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 19 opcode = 233 target = 1 parameter1 = (6 << 28) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 19 opcode = 233 target = 1 parameter1 = (6 << 24) parameter2 = (109 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 19 opcode = 233 target = 1 parameter1 = (4 << 28) parameter2 = (109 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 20 opcode = 233 target = 1 parameter1 = (6 << 4) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 20 opcode = 233 target = 1 parameter1 = (6 << 8) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 20 opcode = 233 target = 1 parameter1 = (6 << 12) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 20 opcode = 233 target = 1 parameter1 = (6 << 16) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 20 opcode = 233 target = 1 parameter1 = (6 << 20) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 20 opcode = 233 target = 1 parameter1 = (6 << 24) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 20 opcode = 233 target = 1 parameter1 = (6 << 28) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 20 opcode = 233 target = 1 parameter1 = (6 << 24) parameter2 = (109 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 20 opcode = 233 target = 1 parameter1 = (6 << 28) parameter2 = (109 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 21 opcode = 233 target = 1 parameter1 = (6 << 4) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 21 opcode = 233 target = 1 parameter1 = (6 << 8) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 21 opcode = 233 target = 1 parameter1 = (6 << 12) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 21 opcode = 233 target = 1 parameter1 = (6 << 16) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 21 opcode = 233 target = 1 parameter1 = (6 << 20) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 21 opcode = 233 target = 1 parameter1 = (6 << 24) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 21 opcode = 233 target = 1 parameter1 = (6 << 28) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 21 opcode = 233 target = 1 parameter1 = (6 << 24) parameter2 = (109 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 21 opcode = 233 target = 1 parameter1 = (6 << 28) parameter2 = (109 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 22 opcode = 233 target = 1 parameter1 = (6 << 4) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 22 opcode = 233 target = 1 parameter1 = (6 << 8) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 22 opcode = 233 target = 1 parameter1 = (6 << 12) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 22 opcode = 233 target = 1 parameter1 = (6 << 16) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 22 opcode = 233 target = 1 parameter1 = (6 << 20) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 22 opcode = 233 target = 1 parameter1 = (6 << 24) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 22 opcode = 233 target = 1 parameter1 = (6 << 28) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 22 opcode = 233 target = 1 parameter1 = (6 << 24) parameter2 = (109 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 22 opcode = 233 target = 1 parameter1 = (6 << 28) parameter2 = (109 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 23 opcode = 233 target = 1 parameter1 = (6 << 4) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 23 opcode = 233 target = 1 parameter1 = (6 << 8) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 23 opcode = 233 target = 1 parameter1 = (6 << 12) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 23 opcode = 233 target = 1 parameter1 = (6 << 16) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 23 opcode = 233 target = 1 parameter1 = (6 << 20) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 23 opcode = 233 target = 1 parameter1 = (6 << 24) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 23 opcode = 233 target = 1 parameter1 = (6 << 28) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 23 opcode = 233 target = 1 parameter1 = (6 << 24) parameter2 = (109 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 23 opcode = 233 target = 1 parameter1 = (6 << 28) parameter2 = (109 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 24 opcode = 233 target = 1 parameter1 = (6 << 4) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 24 opcode = 233 target = 1 parameter1 = (6 << 8) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 24 opcode = 233 target = 1 parameter1 = (6 << 12) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 24 opcode = 233 target = 1 parameter1 = (6 << 16) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 24 opcode = 233 target = 1 parameter1 = (6 << 20) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 24 opcode = 233 target = 1 parameter1 = (6 << 24) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 24 opcode = 233 target = 1 parameter1 = (6 << 28) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 24 opcode = 233 target = 1 parameter1 = (6 << 24) parameter2 = (109 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 24 opcode = 233 target = 1 parameter1 = (6 << 28) parameter2 = (109 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 25 opcode = 233 target = 1 parameter1 = (6 << 4) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 25 opcode = 233 target = 1 parameter1 = (6 << 8) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 25 opcode = 233 target = 1 parameter1 = (6 << 12) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 25 opcode = 233 target = 1 parameter1 = (6 << 16) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 25 opcode = 233 target = 1 parameter1 = (6 << 20) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 25 opcode = 233 target = 1 parameter1 = (6 << 24) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 25 opcode = 233 target = 1 parameter1 = (6 << 28) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 25 opcode = 233 target = 1 parameter1 = (6 << 24) parameter2 = (109 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR header = 25 opcode = 233 target = 1 parameter1 = (6 << 28) parameter2 = (109 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 1 STR_VAR resource = ~d5srslt~ END
-*/
-
-APPEND ~d5sorc.2da~ 
-~SRCSLOTS    AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  AP_D5SRSLT  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
-
-/*
-APPEND ~d5sorc.2da~ ~SRCSLOTS    AP_D5SRC1A  AP_D5SRC1D  AP_D5SRC1E  AP_D5SRC1F  AP_D5SRC2D  AP_D5SRC2E  AP_D5SRC2F  AP_D5SRC3E  AP_D5SRC3F  AP_D5SRC4E  AP_D5SRC4F  AP_D5SRC5E  AP_D5SRC5F  AP_D5SRC6E  AP_D5SRC6F  AP_D5SRC7E  AP_D5SRC7F  AP_D5SRC8E  AP_D5SRC8F  AP_D5SRC9E  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
-SRCSLOTS    AP_D5SRC1B  ****        ****        AP_D5SRC2A  ****        AP_D5SRC3A  AP_D5SRC3D  AP_D5SRC4A  AP_D5SRC4D  AP_D5SRC5A  AP_D5SRC5D  AP_D5SRC6A  AP_D5SRC6D  AP_D5SRC7A  AP_D5SRC7D  AP_D5SRC8A  AP_D5SRC8D  AP_D5SRC9A  AP_D5SRC9D  AP_D5SRC9F  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
-SRCSLOTS    AP_D5SRC1C  ****        ****        AP_D5SRC2B  ****        AP_D5SRC3B  ****        AP_D5SRC4B  ****        AP_D5SRC5B  ****        AP_D5SRC6B  ****        AP_D5SRC7B  ****        AP_D5SRC8B  ****        AP_D5SRC9B  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
-SRCSLOTS    ****        ****        ****        AP_D5SRC2C  ****        AP_D5SRC3C  ****        AP_D5SRC4C  ****        AP_D5SRC5C  ****        AP_D5SRC6C  ****        AP_D5SRC7C  ****        AP_D5SRC8C  ****        AP_D5SRC9C  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
-~
-*/
-
-//set up spell learning UI____________________________________________________________
-//
-LAF sorcerer_spell_learning END
-
-
-//make sorc clone spells______________________________________________________________
-//
-COPY_EXISTING ~d5clonsc.2da~ ~override~
-  COUNT_2DA_ROWS 8 rows
-  FOR (row = 0; row < rows; ++row) BEGIN
-	READ_2DA_ENTRY row 0 8 spell_res
-	READ_2DA_ENTRY row 1 8 206_spell
-	READ_2DA_ENTRY row 2 8 learn_spell
-	READ_2DA_ENTRY row 3 8 spell_eff
-	READ_2DA_ENTRY row 4 8 innate_spell
-	READ_2DA_ENTRY row 5 8 real_spell
-	READ_2DA_ENTRY row 6 8 switch_spell
-	READ_2DA_ENTRY row 7 8 switch_subspell
-	INNER_ACTION BEGIN
-	 ACTION_IF (FILE_EXISTS_IN_GAME ~%spell_res%.spl~) BEGIN
-	  COPY_EXISTING ~%spell_res%.spl~ ~override~
-		READ_STRREF NAME1 spell_name
-		READ_STRREF UNIDENTIFIED_DESC spell_description
-		READ_LONG 0x34 spell_level
-		READ_ASCII 0x3a spell_icon
-	  BUT_ONLY
-// make innates with cloned spell effects
-	  ACTION_IF NOT FILE_EXISTS_IN_GAME ~%innate_spell%.spl~ BEGIN
-		COPY_EXISTING ~%spell_res%.spl~ ~override/%innate_spell%.spl~
-		  WRITE_SHORT 0x1c 4
-		  WRITE_LONG 0x34 spell_level
-		  READ_LONG 0x64 abil_offset
-		  READ_SHORT 0x68 abil_number
-		  READ_BYTE (%abil_offset% + 0x0c) abil_target					
-		  READ_SHORT (%abil_offset% + 0x0e) abil_range
-		  READ_LONG 0x6a eff_offset
-		  WHILE (%abil_number% > 0) BEGIN
-			SET abil_number = (%abil_number% - 1)
-			WRITE_SHORT (%abil_offset% + 0x26 + (0x28 * %abil_number%)) 1
-		  END
-		  LPF DELETE_EFFECT END
-		  PATCH_IF (%abil_target% = 4) BEGIN
-			LPF ADD_SPELL_EFFECT INT_VAR opcode = 148 target = 1 power = 0 parameter1 = 0 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%real_spell%~ END
-			PATCH_IF (%abil_range% < 35) BEGIN
-			  PATCH_IF (%abil_range% > 4) BEGIN
-				LPF ALTER_SPELL_HEADER INT_VAR range = (%abil_range% - 3) END
-			  END
-			  PATCH_IF (%abil_range% < 5) BEGIN
-				LPF ALTER_SPELL_HEADER INT_VAR target = 5 END	
-			  END
-			END
-		  END
-		  ELSE BEGIN
-			LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 2 power = 0 parameter2 = 1 timing = 9 STR_VAR resource = EVAL ~%real_spell%~ END
-		  END
-		  PATCH_IF !(MOD_IS_INSTALLED ~tomeandblood.tp2~ ~62~) BEGIN
-			LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~d5src-%spell_level%~ END
-		  END
-		  PATCH_IF (MOD_IS_INSTALLED ~tomeandblood.tp2~ ~62~) BEGIN
-			PATCH_IF (%spell_level% > 1) BEGIN
-			  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~d5src-%spell_level%~ END
-			END
-		  END
-		  PATCH_IF (lose_spell_on_interrupt = 0) BEGIN
-		    LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5ssplz~ END
-		  END
-		  PATCH_IF (lose_spell_on_interrupt = 1) BEGIN
-		    LPF ADD_SPELL_CFEFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5ssplz~ END
-		  END
-	  END
-// make .EFFs adding the arcane clone
-	  CREATE EFF ~%spell_eff%~
-		WRITE_LONG 0x10 171
-		WRITE_LONG 0x14 1
-		WRITE_LONG 0x24 0
-		WRITE_LONG 0x28 1
-		WRITE_SHORT 0x2c 100
-		WRITE_EVALUATED_ASCII 0x30 ~%innate_spell%~ #8
-		WRITE_LONG 0x90 1
-		WRITE_EVALUATED_ASCII 0x94 ~%spell_eff%~ #8
-// make 206 spells preventing the .EFF
-	  COPY ~tomeandblood/lib/d5_base.spl~ ~override/%206_spell%.spl~
-		WRITE_SHORT 0x1c 4
-	  	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~%spell_eff%~ END
-// add 206 spells to CLAB spell
-	  COPY_EXISTING ~d5w206.spl~ ~override~
-		LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 9 STR_VAR resource = EVAL ~%206_spell%~ END
-// make learn spells canceling the 206
-	  COPY ~tomeandblood/lib/d5_base.spl~ ~override/%learn_spell%.spl~
-		WRITE_EVALUATED_ASCII 0x3a ~%spell_icon%~ #8
-	  	LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = EVAL ~%206_spell%~ END
-	  	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5ssplz~ END
-	  	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 19 parameter2 = 105 timing = 0 duration = 0 STR_VAR resource = EVAL ~%learn_spell%~ END
-	  	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 171 target = 1 timing = 9 STR_VAR resource = EVAL ~%real_spell%~ END
-// make copy of learn spell for kjeron's UI system (eventually, just rename the learn spell to this name)
-// overwrite the existing ones
-//	  COPY_EXISTING ~%learn_spell%.spl~ ~override/%spell_res%M.spl~
-// add subspell to switch spell
-	  ACTION_IF (FILE_EXISTS_IN_GAME ~%switch_spell%.spl~) BEGIN
-		COPY ~tomeandblood/lib/d5_base.spl~ ~override/%switch_subspell%.spl~
-		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 1 STR_VAR resource = EVAL ~%learn_spell%~ END 
-		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%206_spell%~ END
-		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5ssplz~ END
-//	  	  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 19 parameter2 = 105 timing = 0 duration = 0 STR_VAR resource = EVAL ~%switch_subspell%~ END
-		COPY_EXISTING ~%switch_spell%.spl~ ~override~
-		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%switch_subspell%~ END
-		BUT_ONLY
-	  END
-// add 172 to d5ssplz#
-	  COPY_EXISTING ~d5ssplz.spl~ ~override~
-		LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~%innate_spell%~ END
-// generate slot#x spells
-	  COPY_EXISTING ~d5slot%spell_level%a.spl~ ~override~
-		LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~%spell_eff%~ END
-	  COPY_EXISTING ~d5slot%spell_level%b.spl~ ~override~
-		LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~%spell_eff%~ END
-		LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~%spell_eff%~ END
-	  COPY_EXISTING ~d5slot%spell_level%c.spl~ ~override~
-		LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~%spell_eff%~ END
-		LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~%spell_eff%~ END
-		LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~%spell_eff%~ END
-		LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~%spell_eff%~ END
-	  COPY_EXISTING ~d5slot%spell_level%d.spl~ ~override~
-		LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~%spell_eff%~ END
-		LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~%spell_eff%~ END
-		LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~%spell_eff%~ END
-		LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~%spell_eff%~ END
-		LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~%spell_eff%~ END
-		LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~%spell_eff%~ END
-		LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~%spell_eff%~ END
-		LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = EVAL ~%spell_eff%~ END
-	 END
-	END	// end inner_action
-  END	// end for each row
-BUT_ONLY
-
+/* do this in d5xxini
 APPEND ~d5sorc.2da~ ~LEARNSPLS   GA_D5MSOR1  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
 APPEND ~d5sorc.2da~ ~LEARNSPLS   AP_D5MSOR2  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+*/
+
+LAF semi_armor_casting END
+
+LAF semi_sorcerer_casting STR_VAR menu_suffix = EVAL ~%sorcerer_learn_suffix%~ END
 
 
-//remove known spells right after chargen_____________________________________________
+APPEND ~d5sorc.2da~ ~SORC_INIT   AP_D5XX000  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+
+
+/* do this in d5xxini
+APPEND ~d5sorc.2da~ ~NOSLOTS     AP_D5X0SLT  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+NOSLOTS     AP_D5X0SLT  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+NOSLOTS     AP_D5X0SLT  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+NOSLOTS     AP_D5X0SLT  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+NOSLOTS     AP_D5X0SLT  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+NOSLOTS     AP_D5X0SLT  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+NOSLOTS     AP_D5X0SLT  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+NOSLOTS     AP_D5X0SLT  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+NOSLOTS     AP_D5X0SLT  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+NOSLOTS     AP_D5X0SLT  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+NOSLOTS     AP_D5X0SLT  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+NOSLOTS     AP_D5X0SLT  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+~
+*/
+
+//set up casting slots________________________________________________________________
 //
-APPEND ~d5sorc.2da~ ~NO_WSPLS    AP_D50WSPL  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
-                                
+LAF arcane_casting_slots STR_VAR slot_table = ~mxsplsrc~ table_spl = ~d5xltsr~ END
 
-//apply EFF protections_______________________________________________________________
-//
-APPEND ~d5sorc.2da~ ~NO_WSPLS    AP_D5W206   ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
-
-
-//daily spell slot refresh____________________________________________________________
-//
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5slotz.spl~
-  PATCH_IF (FILE_CONTAINS_EVALUATED (~splstate.ids~ ~D5_MULTI_SORC~)) BEGIN
-	INNER_ACTION BEGIN
-	  COPY_EXISTING ~splstate.ids~ ~override~
-		COUNT_2DA_COLS cols
-		READ_2DA_ENTRIES_NOW rows cols
-		FOR (row = 1; row < rows; ++row) BEGIN
-		  READ_2DA_ENTRY_FORMER rows row 1 ~state_name~
-		  READ_2DA_ENTRY_FORMER rows row 0 ~state_ind~
-		  PATCH_IF (~%state_name%~ STRING_EQUAL_CASE ~D5_MULTI_SORC~) BEGIN
-			SET multi_sorc_state = %state_ind%
-		  END
-		END
-	  BUT_ONLY
-	END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 328 target = 1 special = 1 parameter2 = %multi_sorc_state% timing = 9 END
-  END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = ~d5slots~ END
-
-APPEND ~d5sorc.2da~ ~SPLSLOTS    AP_D5SLOTZ  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
-
-CREATE EFF ~d5slots~
-  WRITE_LONG 0x10 232
-  WRITE_LONG 0x14 1
-  WRITE_LONG 0x1c 0
-  WRITE_LONG 0x20 20
-  WRITE_LONG 0x24 9
-  WRITE_SHORT 0x2c 100
-  WRITE_ASCII 0x30 ~d5sslot~ #8
-  WRITE_LONG 0x48 102
-
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5sslot.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 0 duration = 7 STR_VAR resource = ~d5w206~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = 0 parameter2 = %fatigue_value% timing = 1 STR_VAR resource = ~d5srfrsh~ END
-
-
-// spell to refresh spell slots_______________________________________________________
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5srfrsh.spl~ BEGIN
- COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5srfrsh.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 93 target = 1 parameter1 = 1 parameter2 = 1 timing = 1 END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src-1~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src-2~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src-3~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src-4~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src-5~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src-6~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src-7~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src-8~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 timing = 9 STR_VAR resource = ~d5src-9~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5ssplz~ END
-END
-
+COPY_EXISTING ~d5xrfsh.spl~ ~override~
+			  ~d5xx000.spl~ ~override~
+  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 326 target = 1 parameter1 = %fighter_sorcerer_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5xltsr~ END
+  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 326 target = 1 parameter1 = %sorcerer_cleric_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5xltsr~ END
+  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 326 target = 1 parameter1 = %sorcerer_thief_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5xltsr~ END
 
 /*
 //make sure sequencer/contingency works if possible___________________________________
 //
 ACTION_IF FILE_EXISTS_IN_GAME ~M_d5meta.lua~ BEGIN
-	// umm... actually, maybe the metamagic component will take care of this entirely...h
+	// umm... actually, maybe the metamagic component will take care of this entirely...
 END
 */
-
 
 /*
 //manually create versions of sequencer/contingency___________________________________
@@ -1136,7 +490,6 @@ ACTION_IF FILE_EXISTS_IN_GAME ~spwi809p.spl~ BEGIN
 	LPF ALTER_EFFECT INT_VAR silent = 1 STR_VAR resource = ~d5w4809~ END
 END
 
-
 //multisorc no get innate sequencers__________________________________________________
 //
 ACTION_IF FILE_EXISTS_IN_GAME ~d5adsq1m.spl~ BEGIN
@@ -1149,7 +502,13 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5adsq1m.spl~ BEGIN
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5adsq3m~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = ~d5adcntm~ END
 
-  APPEND ~d5sorc.2da~ ~NO_META     AP_D5MSNSQ  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+//  APPEND ~d5sorc.2da~ ~NO_META     AP_D5MSNSQ  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+
+  ACTION_IF (FILE_EXISTS_IN_GAME ~d5xxini.spl~) BEGIN
+    COPY_EXISTING ~d5xxini.spl~ ~override~
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5msnsq~ END
+  END      
+
 END
 
 
@@ -1224,19 +583,6 @@ LAF action_replace_hla STR_VAR kit_name = ~D5_SORCERER_THIEF~ remove_ability = ~
 LAF action_replace_hla STR_VAR kit_name = ~D5_SORCERER_THIEF~ remove_ability = ~AP_SPWI930~ ability = ~AP_D5HL930~ END
 
 
-//disable quickspell buttons and scroll learning______________________________________
-//
-ACTION_IF !(FILE_EXISTS_IN_GAME ~d5srcnq.spl~) BEGIN
-  COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5srcnq.spl~
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 144 target = 1 parameter2 = 3 timing = 9 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 144 target = 1 parameter2 = 4 timing = 9 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 144 target = 1 parameter2 = 5 timing = 9 END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 101 target = 1 parameter2 = 147 timing = 9 END
-END
-
-APPEND ~d5sorc.2da~ ~NO_QUICK    AP_D5SRCNQ  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
-
-
 //add spell switching_________________________________________________________________
 //
 ACTION_IF (FILE_EXISTS_IN_GAME ~qdtnb_switch3.qd~) BEGIN
@@ -1287,44 +633,6 @@ ACTION_IF FILE_EXISTS_IN_GAME ~d5tsorc.2da~ BEGIN
 		mc_dir = ~tomeandblood/lib/qd_mc~
   END
 END 
-
-
-/* separate component because needs to work for both multisorc and arcanists
-// bonus spell slot items_____________________________________________________________
-//
-LAF arcane_spont_items END
-*/
-
-//fix burning hands targeting_______________________________________________________
-//
-COPY_EXISTING ~spwi103.spl~ ~override~
-  READ_LONG 0x08 burning_hands_strref
-BUT_ONLY
-
-ACTION_IF (IS_AN_INT %burning_hands_strref%) BEGIN
-  COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
-	PATCH_IF (%SOURCE_SIZE% > 0x71) BEGIN
-	  SET burning_change = 0
-	  READ_LONG 0x08 name
-	  PATCH_IF (name = burning_hands_strref) BEGIN
-		GET_OFFSET_ARRAY ab_array SPL_V10_HEADERS
-		PHP_EACH ab_array AS int => ab_off BEGIN
-		  PATCH_IF (burning_change = 0) BEGIN
-			READ_BYTE (ab_off + 0x0c) target
-			PATCH_IF target = 5 BEGIN
-			  SET burning_change = 1
-			END
-		  END
-		END
-		PATCH_IF (burning_change = 1) BEGIN
-		  LPF ALTER_SPELL_HEADER INT_VAR target = 1 END
-		  LPF ALTER_EFFECT INT_VAR match_opcode = 148 opcode = 146 target = 2 STR_VAR match_resource = ~spwi103~ END
-		END
-	  END
-	END
-  BUT_ONLY
-END
-
 
 
 END 	//	end define function

@@ -4,7 +4,7 @@
 // -----------------------------
 
 
-DEFINE_ACTION_FUNCTION spell_switching INT_VAR switch_interval = 2 BEGIN
+DEFINE_ACTION_FUNCTION spell_switching INT_VAR switch_interval = 1 BEGIN
 
 //duplicate splsrckn.2da______________________________________________________________
 //
@@ -13,9 +13,11 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~QD_SPLSRCKN.2da~) BEGIN
 END
 
 
-//set up spell learning UI____________________________________________________________
+//set up spell learning_______________________________________________________________
 //
-LAF sorcerer_spell_learning END
+LAM sorcerer_learning_suffix
+
+LAF sorcerer_spell_learning STR_VAR menu_suffix = EVAL ~%sorcerer_learn_suffix%~ END
 
 
 //set up switching  dialogue__________________________________________________________
@@ -38,32 +40,29 @@ COPY ~d5/d5swtch2.txt~ ~weidu_external/tomeandblood/d5swtch2.txt~
 OUTER_SPRINT switch_prefix @8301
 OUTER_SET switch_ind = 1
 
-COPY_EXISTING ~d5clonsc.2da~ ~override~
-  COUNT_2DA_ROWS 7 rows
+COPY_EXISTING ~d5xclons.2da~ ~override~
+  COUNT_2DA_COLS cols
+  COUNT_2DA_ROWS cols rows
   FOR (row = 0; row < rows; ++row) BEGIN
-	READ_2DA_ENTRY row 0 8 spell_res
-	READ_2DA_ENTRY row 2 8 learn_spell
-	READ_2DA_ENTRY row 6 8 switch_spell
+	READ_2DA_ENTRY row 0 cols spell_ind
+	READ_2DA_ENTRY row 2 cols spell_res
+	SPRINT learn_spell ~%spell_res%%sorcerer_learn_suffix%~
+	SPRINT switch_spell ~d5x%spell_ind%h~
 	INNER_ACTION BEGIN
-	 ACTION_IF (FILE_EXISTS_IN_GAME ~%spell_res%.spl~) BEGIN
-	  COPY_EXISTING ~%spell_res%.spl~ ~override~
-		READ_STRREF NAME1 spell_name
-//		READ_STRREF UNIDENTIFIED_DESC spell_description
-		READ_ASCII 0x3a spell_icon
-	  BUT_ONLY
-// make learn spell spells
-	  COPY ~tomeandblood/lib/d5_base.spl~ ~override/%learn_spell%.spl~
-		WRITE_EVALUATED_ASCII 0x3a ~%spell_icon%~ #8
-		LPF ALTER_SPELL_HEADER STR_VAR icon = EVAL ~%spell_icon%~ END
-	  	LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 9 STR_VAR resource = EVAL ~%spell_res%~ END
+	  ACTION_IF (FILE_EXISTS_IN_GAME ~%spell_res%.spl~) BEGIN
+	    COPY_EXISTING ~%spell_res%.spl~ ~override~
+		  READ_STRREF NAME1 spell_name
+//		  READ_STRREF UNIDENTIFIED_DESC spell_description
+		  READ_ASCII 0x3a spell_icon
+	    BUT_ONLY
 // make 172 spell
-	  COPY ~tomeandblood/lib/d5_base.spl~ ~override/%switch_spell%.spl~
-		LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 1 STR_VAR resource = EVAL ~%spell_res%~ END
+	    COPY ~tomeandblood/lib/d5_base.spl~ ~override/%switch_spell%.spl~
+		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 1 STR_VAR resource = EVAL ~%spell_res%~ END
 // set up dialogue
-	  OUTER_SPRINT switch_spell_text ~%switch_prefix%: %spell_name%~
-	  APPEND_OUTER ~weidu_external/tomeandblood/d5swtch1.txt~ ~~~~~IF ~HaveKnownSpellRES("%spell_res%")~ THEN REPLY ~%spell_name%~ GOTO d5_swtch_%switch_ind%~~~~~ KEEP_CRLF
-	  APPEND_OUTER ~weidu_external/tomeandblood/d5swtch2.txt~ ~~~~~IF ~~ THEN BEGIN d5_swtch_%switch_ind% %WNL% SAY ~%switch_spell_text%~ %WNL% IF ~~ THEN REPLY @8303 DO ~ApplySpellRES("%switch_spell%",myself)~ EXIT %WNL% IF ~~ THEN REPLY @8304 GOTO d5_swtch %WNL% IF ~~ THEN REPLY @8302 EXIT %WNL% END %WNL%~~~~~ KEEP_CRLF
-	 END
+	    OUTER_SPRINT switch_spell_text ~%switch_prefix%: %spell_name%~
+	    APPEND_OUTER ~weidu_external/tomeandblood/d5swtch1.txt~ ~~~~~IF ~HaveKnownSpellRES("%spell_res%")~ THEN REPLY ~%spell_name%~ GOTO d5_swtch_%switch_ind%~~~~~ KEEP_CRLF
+	    APPEND_OUTER ~weidu_external/tomeandblood/d5swtch2.txt~ ~~~~~IF ~~ THEN BEGIN d5_swtch_%switch_ind% %WNL% SAY ~%switch_spell_text%~ %WNL% IF ~~ THEN REPLY @8303 DO ~ApplySpellRES("%switch_spell%",myself)~ EXIT %WNL% IF ~~ THEN REPLY @8304 GOTO d5_swtch %WNL% IF ~~ THEN REPLY @8302 EXIT %WNL% END %WNL%~~~~~ KEEP_CRLF
+	  END
 	END
 	SET ++switch_ind
   END
@@ -147,7 +146,7 @@ COPY ~tomeandblood/data/core/d5spm3m.spl~ ~override~
 	SAY NAME1 @1100
 	SAY UNIDENTIFIED_DESC @1100
 	WRITE_ASCII 0x3a ~d5spm3mb~ #8
-	LPF ALTER_SPELL_HEADER STR_VAR icon = ~d5spm3mb~ END
+	LPF ALTER_SPELL_HEADER INT_VAR speed = 0 target = 7 STR_VAR icon = ~d5spm3mb~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5spm3m~ END
 
 

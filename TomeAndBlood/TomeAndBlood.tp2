@@ -1,6 +1,6 @@
 BACKUP ~TomeAndBlood/backup~
 AUTHOR ~aquadrizzt~
-VERSION ~0.9.12~ 
+VERSION ~0.9.13~ 
 
 ALWAYS
 
@@ -250,6 +250,7 @@ LAF revised_specialists END
 BEGIN @45
 DESIGNATED 45
 REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee iwdee eet~) @2 
+DEPRECATED @4
 //GROUP @7
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_crafting.qd~ //detection for this component 
@@ -556,7 +557,7 @@ LAF mana_sorcerer END
 BEGIN @93
 DESIGNATED 93
 REQUIRE_PREDICATE (FILE_EXISTS_IN_GAME ~enginest.2da~) @3
-REQUIRE_PREDICATE (MOD_IS_INSTALLED ~tomeandblood.tp2~ ~80~) OR (MOD_IS_INSTALLED ~tomeandblood.tp2~ ~82~) @1
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~tomeandblood.tp2~ ~80~) OR (MOD_IS_INSTALLED ~tomeandblood.tp2~ ~82~) @4
 //GROUP @7
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_slotitm.qd~ //detection for this component 

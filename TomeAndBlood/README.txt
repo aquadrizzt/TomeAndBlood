@@ -1,6 +1,6 @@
 # TomeAndBlood
 
-Tome And Blood: More Options for Wizards and Sorcerers v0.9.6
+Tome And Blood: More Options for Wizards and Sorcerers v0.9.13
 
 ## Overview
 
@@ -121,13 +121,13 @@ COMPONENT 48: Armored Casting for Bards
 
 Bards can cast spells in leather armor.
 
-COMPONENTS 51, 52, 53, 54, 55: Innate Metamagic
+COMPONENTS 51-55: Innate Metamagic
 
 The first four of these components make spell sequencers and contingencies into innate abilities (Chain Contingency becomes an HLA) so they don't cost spell slots; but "filling" them with spells still uses the spell slots associated with those spells.  These four components differ according to how you get metamagic (automatically as you level up, or learned from scrolls) and whether or not sorcerers can use metamagic spells.
 
 The 5th version leaves sequencers and contingencies as spells you must memorize, but when you cast them, you "fill" them with any spell you *know,* without expending any memorization slots. 
 
-COMPONENTS 61, 62, 63: Cantrips
+COMPONENTS 61-63: Cantrips
 
 Component 61 allows mages and sorcerers to use one cantrip as an innate ability with unlimited uses.
 
@@ -172,7 +172,7 @@ The Arcanist's preparation slots are governed by MXSPLWIZ.2da; any changes you m
 
 *DO NOT* install this component if you are going to use the broader 5E Spellcasting mod.
 
-COMPONENT 80: Mana Sorcerer
+COMPONENT 85: Mana Sorcerer
 
 This component gives sorcerers (only unkitted sorcerers, for now) an innate ability to use mana points to cast spells instead of spell-level-based casting slots.  Your known spells will be the same (you must choose them manually from an item ability) but you will have a pool of mana points instead of spell slots.  Casting a spell costs as many points as its spell level; you will start with ~2 mana points and can progress to as many as 120, at level 25.  While more flexible, this is generally less firepower than a normal sorcerer has if you tally up their spell slots; so the Mana Sorcerer has a Restorative Meditation innate ability that can be used between fights, which will restore one half of the points you recently spent, rounded down.
 

@@ -598,183 +598,73 @@ END
 ////////////////////////////////////////////////////////////////////////
 
 
-//set up spell learn UI screens_______________________________________________________
-//
-DEFINE_ACTION_FUNCTION sorcerer_spell_learning BEGIN
+// Add new ability header to current spell resource
 
-ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__wiz_learn.d5~) BEGIN
+DEFINE_PATCH_FUNCTION D5_ADD_ONE_SPELL_HEADER
 
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d50wspl.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~SPWI908~ END
-  PATCH_IF !(MOD_IS_INSTALLED ~TomeAndBlood.tp2~ ~16~) BEGIN
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = ~SPWI110~ END
+INT_VAR
+  type            = 1
+  location        = 4
+  target          = 1
+  target_count    = 0
+  range           = 0
+  required_level  = 1
+  speed           = 0
+  projectile      = 1
+  copy_header     = 0
+  insert_point    = ~-1~
+STR_VAR
+  icon            = ~~
+RET
+  insert_point
+BEGIN
+  SET hs = 0x28
+  READ_LONG 0x64 ho
+  READ_SHORT 0x68 hc
+  READ_LONG 0x6a eo
+  SET insert_point = (insert_point > hc || insert_point < 0) ? hc : insert_point
+  SET copy_header = (copy_header < 0) ? 0 : copy_header
+  PATCH_IF (copy_header > hc) BEGIN
+    PATCH_WARN ~WARNING: Unable to copy %copy_header%th header, %SOURCE_FILE% contains only %hc% headers!~
+  END ELSE BEGIN
+    INSERT_BYTES (ho + insert_point * hs) hs
+    SET hc += 1
+    SET eo += hs
+    PATCH_IF (copy_header) BEGIN
+      READ_SHORT (ho + (copy_header - 1) * hs + 0x1e) ec
+      READ_SHORT (ho + (copy_header - 1) * hs + 0x20) ei
+      READ_ASCII (eo + ei * 0x30) effs (ec * 0x30)
+      READ_ASCII (ho + (copy_header - 1) * hs) copy (hs)
+      WRITE_ASCIIE (ho + insert_point * hs) ~%copy%~ (hs)
+    END
+    WRITE_SHORT 0x68 hc
+    WRITE_LONG 0x6a eo
+    READ_SHORT 0x70 ei // technically, it is a counter
+    FOR (i = ho; i < ho + hc * hs; i += hs) BEGIN
+      READ_SHORT (i + 0x1e) ec
+      WRITE_SHORT (i + 0x20) ei
+      SET ei += ec
+    END
+    PATCH_IF (copy_header) BEGIN
+      READ_SHORT (ho + insert_point * hs + 0x1e) ec
+      READ_SHORT (ho + insert_point * hs + 0x20) ei
+      INSERT_BYTES (eo + ei * 0x30) (ec * 0x30)
+      WRITE_ASCIIE (eo + ei * 0x30) ~%effs%~ (ec * 0x30)
+    END ELSE BEGIN
+      SET off = ho + insert_point * hs
+      WRITE_BYTE off type
+      WRITE_BYTE (off + 0x2) location
+      WRITE_ASCIIE (off + 0x4) ~%icon%~ (8)
+      WRITE_BYTE (off + 0xc) target
+      WRITE_BYTE (off + 0xd) target_count
+      WRITE_SHORT (off + 0xe) range
+      WRITE_SHORT (off + 0x10) required_level
+      WRITE_LONG (off + 0x12) speed
+      WRITE_SHORT (off + 0x26) projectile
+    END
   END
-  PATCH_IF !(MOD_IS_INSTALLED ~TomeAndBlood.tp2~ ~55~) BEGIN
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~SPWI420~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~SPWI710~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~SPWI809~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~SPWI617~ END
-  END
-
-// basic sorcerer spell-choice list
-<<<<<<<<  d5/d5msorc.2da
-2DA V1.0
-****
-            	     ResRef   Type>>>>>>>>
-COPY ~d5/d5msorc.2da~ ~override/d5msorc.2da~
-
-// identical, but for mana sorcerers
-<<<<<<<<  d5/d5mnsrc.2da
-2DA V1.0
-****
-            	     ResRef   Type>>>>>>>>
-COPY ~d5/d5mnsrc.2da~ ~override/d5mnsrc.2da~
-
-// multisorcerer spell system legend
-<<<<<<<< d5/d5clonsc.2da
-2DA V1.0 
-SPLRES
-		206		LEARN		EFF		INNATE	DISPLAY	SWITCH	SWITCH2
->>>>>>>> 
-COPY ~d5/d5clonsc.2da~ ~override/d5clonsc.2da~ 
-
-// mana sorcerer spell system legend
-<<<<<<<< d5/d5clonmn.2da
-2DA V1.0 
-SPLRES
-		206		LEARN		EFF		INNATE	DISPLAY	SWITCH	SWITCH2
->>>>>>>> 
-COPY ~d5/d5clonmn.2da~ ~override/d5clonmn.2da~ 
-
-COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
- PATCH_IF (%SOURCE_SIZE% > 0x71) BEGIN
-//  SNPRINT 4 spell_prefix ~%SOURCE_RES%~
-  READ_SHORT 0x1c spell_type 
-  READ_BYTE 0x25 spell_school
-  READ_LONG 0x34 spell_level
-  PATCH_IF (~%SOURCE_RES%~ STRING_MATCHES_REGEXP ~[Ss][Pp][Ww][Ii][1-9][0-5][0-9]~ = 0) && (spell_type = 1) && !(spell_school = 10) && !(~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI908~) && !(~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI124~) BEGIN
-	SNPRINT (0 - 3) spell_num ~%SOURCE_RES%~
-	SET go = 1
-	PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI420~) || (~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI710~) || (~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI809~) || (~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI617~) BEGIN
-	  PATCH_IF NOT (MOD_IS_INSTALLED ~TomeAndBlood.tp2~ ~55~) BEGIN
-		SET go = 0
-	  END
-	END	
-	PATCH_IF (go = 1) && !(FILE_CONTAINS_EVALUATED (~hidespl.2da~ ~%SOURCE_RES%~)) BEGIN
-	  SPRINT ~this_spell~ ~%SOURCE_RES%~
-	  READ_STRREF NAME1 spell_name
-	  READ_STRREF UNIDENTIFIED_DESC spell_description
-	  READ_ASCII 0x3a spell_icon
-	  PATCH_IF (FILE_CONTAINS_EVALUATED (~spell.ids~ ~2%spell_num%~)) BEGIN
-		INNER_PATCH_SAVE sorc_206_spell ~%SOURCE_RES%~ BEGIN
-		  REPLACE_TEXTUALLY ~^[Ss][Pp][Ww][Ii]~ ~d5w6~
-		END
-		INNER_PATCH_SAVE mana_206_spell ~%SOURCE_RES%~ BEGIN
-		  REPLACE_TEXTUALLY ~^[Ss][Pp][Ww][Ii]~ ~d5m6~
-		END
-		INNER_PATCH_SAVE sorc_learn_spell ~%SOURCE_RES%~ BEGIN
-//		  REPLACE_TEXTUALLY ~^[Ss][Pp][Ww][Ii]~ ~d5wx~
-		  REPLACE_TEXTUALLY ~%SOURCE_RES%~ ~%SOURCE_RES%W~
-		END
-		INNER_PATCH_SAVE mana_learn_spell ~%SOURCE_RES%~ BEGIN
-//		  REPLACE_TEXTUALLY ~^[Ss][Pp][Ww][Ii]~ ~d5mx~
-		  REPLACE_TEXTUALLY ~%SOURCE_RES%~ ~%SOURCE_RES%M~
-		END
-		INNER_PATCH_SAVE sorc_innate_spell ~%SOURCE_RES%~ BEGIN
-		  REPLACE_TEXTUALLY ~^[Ss][Pp][Ww][Ii]~ ~d5w4~
-		END
-		INNER_PATCH_SAVE mana_innate_spell ~%SOURCE_RES%~ BEGIN
-		  REPLACE_TEXTUALLY ~^[Ss][Pp][Ww][Ii]~ ~d5m4~
-		END
-		INNER_PATCH_SAVE sorc_spell_eff ~%SOURCE_RES%~ BEGIN
-		  REPLACE_TEXTUALLY ~^[Ss][Pp][Ww][Ii]~ ~D5WV~
-		END
-		INNER_PATCH_SAVE mana_spell_eff ~%SOURCE_RES%~ BEGIN
-		  REPLACE_TEXTUALLY ~^[Ss][Pp][Ww][Ii]~ ~D5MV~
-		END
-		INNER_PATCH_SAVE 172_spell ~%SOURCE_RES%~ BEGIN
-		  REPLACE_TEXTUALLY ~^[Ss][Pp][Ww][Ii]~ ~d5sz~
-		END
-		INNER_PATCH_SAVE multi_172_subspell ~%SOURCE_RES%~ BEGIN
-		  REPLACE_TEXTUALLY ~^[Ss][Pp][Ww][Ii]~ ~d5wz~
-		END
-		INNER_PATCH_SAVE mana_172_subspell ~%SOURCE_RES%~ BEGIN
-		  REPLACE_TEXTUALLY ~^[Ss][Pp][Ww][Ii]~ ~d5mz~
-		END
-		INNER_ACTION BEGIN
-		  APPEND ~d5msorc.2da~ ~sorcerer	%this_spell%	3~
-		  APPEND ~d5mnsrc.2da~ ~manasorc	%this_spell%	3~
-		  APPEND ~d5clonsc.2da~ ~%this_spell%	%sorc_206_spell%	%sorc_learn_spell%	%sorc_spell_eff%	%sorc_innate_spell%	%this_spell%	%172_spell%	%multi_172_subspell% ~
-		  APPEND ~d5clonmn.2da~ ~%this_spell%	%mana_206_spell%	%mana_learn_spell%	%mana_spell_eff%	%mana_innate_spell%	%this_spell%	%172_spell%	%mana_172_subspell% ~
-// make learn spells canceling the 206
-		  COPY ~tomeandblood/lib/d5_base.spl~ ~override/%this_spell%M.spl~
-			WRITE_EVALUATED_ASCII 0x3a ~%spell_icon%~ #8
-		  	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 171 target = 1 timing = 9 STR_VAR resource = EVAL ~%this_spell%~ END
-// remove all known spells after chargen
-		  COPY_EXISTING ~d50wspl.spl~ ~override~
-			LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~%this_spell%~ END
-		END
-	  END
-	END
-  END
- END
-BUT_ONLY
-
-INCLUDE ~tomeandblood/lib/sequencer_menu.tpa~
-
-LAF CREATE_SEQUENCER_MENU 
-  INT_VAR 
-	name = RESOLVE_STR_REF (~Spell Selection~)
-	tip = RESOLVE_STR_REF (~Spell Selection~)
-	desc = RESOLVE_STR_REF (~This ability allows you to learn new spells~)
-  STR_VAR 
-	resref = ~d5msorc~
-	spelllist = ~d5msorc~
-	spelltable = ~QD_SPLSRCKN~
-	icon = ~spcl919b~
-	title = ~Spell Selection~
-	label = ~Select a spell to learn~
-	subspell = ~W~
 END
 
-COPY_EXISTING ~d5msorc.2da~ ~override/d5msorcX.2da~
-
-COPY ~tomeandblood/data/multi_sorcerers/d5lernwi.bam~ ~override~
-
-COPY ~tomeandblood/data/multi_sorcerers/d5msorc.itm~ ~override~			//	learn spells .itm
-  SAY NAME1 @17021
-  SAY NAME2 @17021
-  SAY UNIDENTIFIED_DESC @17022
-  SAY IDENTIFIED_DESC @17022
-  LPF ALTER_ITEM_HEADER INT_VAR target = 7 speed = 0 STR_VAR icon = ~d5lernwi~ END
-
-OUTER_INNER_PATCH ~1~ BEGIN
-  WRITE_BYTE 0 0x09
-  READ_ASCII 0 tab (1)  // 0x09, tab
-  WRITE_BYTE 0 0x0d
-  READ_ASCII 0 mnl (1)  // 0x0d, Mac
-END
-LAF ~ADD_ITEM_TOOLTIPS~ STR_VAR item = EVAL ~%learn_res%~ tooltips = ~@17021~ END
-
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5msor1.spl~
-  SAY NAME1 @17050
-  SAY UNIDENTIFIED_DESC @17050
-  WRITE_SHORT 0x1c 4
-  LPF ALTER_SPELL_HEADER INT_VAR target = 5 location = 4 STR_VAR icon = ~d5lernwi~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 143 target = 1 parameter1 = 14 timing = 9 STR_VAR resource = ~d5msorc~ END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (2 << 24) parameter2 = (115 + (0x10000 * 1)) timing = 9 END
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = ~d5msor1~ END
-
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5msor2.spl~
-  SAY NAME1 @17050
-  SAY UNIDENTIFIED_DESC @17050
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5msor1~ END
-
-COPY ~tomeandblood/lib/d5_marker.d5~ ~override/d5__wiz_learn.d5~
-
-END
-
-END	//	end define function
 
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////

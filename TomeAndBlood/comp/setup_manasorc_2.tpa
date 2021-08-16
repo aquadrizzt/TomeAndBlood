@@ -462,89 +462,11 @@ APPEND ~d5_zmana.2da~ ~MANA_PTS    AP_D5MAN2A  AP_D5MAN2B  AP_D5MAN2C  AP_D5MAN2
 
 //set up spell learn UI screens_______________________________________________________
 //
-COPY ~tomeandblood/lib/d5_base.spl~ ~override/d50wspl.spl~
-  LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~SPWI908~ END
-  PATCH_IF !(MOD_IS_INSTALLED ~TomeAndBlood.tp2~ ~16~) BEGIN
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = ~SPWI110~ END
-  END
-  PATCH_IF !(MOD_IS_INSTALLED ~TomeAndBlood.tp2~ ~55~) BEGIN
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~SPWI420~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~SPWI710~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~SPWI809~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~SPWI617~ END
-  END
+LAF sorcerer_spell_learning END
 
-// mana sorcerer spell-choice list
-<<<<<<<<  d5/d5mnsrc.2da
-2DA V1.0
-****
-            	     ResRef   Type>>>>>>>>
-COPY ~d5/d5mnsrc.2da~ ~override/d5mnsrc.2da~
 
-// mana sorcerer spell system legend
-<<<<<<<< d5/d5clonmn.2da
-2DA V1.0 
-SPLRES
-		206		LEARN		EFF		INNATE	DISPLAY	SWITCH	SWITCH2
->>>>>>>> 
-COPY ~d5/d5clonmn.2da~ ~override/d5clonmn.2da~ 
-
-COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
- PATCH_IF (%SOURCE_SIZE% > 0x71) BEGIN
-//  SNPRINT 4 spell_prefix ~%SOURCE_RES%~
-  READ_SHORT 0x1c spell_type 
-  READ_BYTE 0x25 spell_school
-  READ_LONG 0x34 spell_level
-  PATCH_IF (~%SOURCE_RES%~ STRING_MATCHES_REGEXP ~[Ss][Pp][Ww][Ii][1-9][0-5][0-9]$~ = 0) && (spell_type = 1) && !(spell_school = 10) && !(~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI908~) && !(~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI124~) BEGIN
-	SNPRINT (0 - 3) spell_num ~%SOURCE_RES%~
-	SET go = 1
-	PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI420~) || (~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI710~) || (~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI809~) || (~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI617~) BEGIN
-	  PATCH_IF NOT (MOD_IS_INSTALLED ~TomeAndBlood.tp2~ ~55~) BEGIN
-		SET go = 0
-	  END
-	END	
-	PATCH_IF (go = 1) && !(FILE_CONTAINS_EVALUATED (~hidespl.2da~ ~%SOURCE_RES%~)) BEGIN
-	  SPRINT ~this_spell~ ~%SOURCE_RES%~
-	  READ_STRREF NAME1 spell_name
-	  READ_STRREF UNIDENTIFIED_DESC spell_description
-	  READ_ASCII 0x3a spell_icon
-	  PATCH_IF (FILE_CONTAINS_EVALUATED (~spell.ids~ ~2%spell_num%~)) BEGIN
-		INNER_PATCH_SAVE mana_206_spell ~%SOURCE_RES%~ BEGIN
-		  REPLACE_TEXTUALLY ~^[Ss][Pp][Ww][Ii]~ ~d5m6~
-		END
-		INNER_PATCH_SAVE mana_learn_spell ~%SOURCE_RES%~ BEGIN
-//		  REPLACE_TEXTUALLY ~^[Ss][Pp][Ww][Ii]~ ~d5mx~
-		  REPLACE_TEXTUALLY ~%SOURCE_RES%~ ~%SOURCE_RES%M~
-		END
-		INNER_PATCH_SAVE mana_innate_spell ~%SOURCE_RES%~ BEGIN
-		  REPLACE_TEXTUALLY ~^[Ss][Pp][Ww][Ii]~ ~d5m4~
-		END
-		INNER_PATCH_SAVE mana_spell_eff ~%SOURCE_RES%~ BEGIN
-		  REPLACE_TEXTUALLY ~^[Ss][Pp][Ww][Ii]~ ~D5MV~
-		END
-		INNER_PATCH_SAVE 172_spell ~%SOURCE_RES%~ BEGIN
-		  REPLACE_TEXTUALLY ~^[Ss][Pp][Ww][Ii]~ ~d5sz~
-		END
-		INNER_PATCH_SAVE mana_172_subspell ~%SOURCE_RES%~ BEGIN
-		  REPLACE_TEXTUALLY ~^[Ss][Pp][Ww][Ii]~ ~d5mz~
-		END
-		INNER_ACTION BEGIN
-		  APPEND ~d5mnsrc.2da~ ~manasorc	%this_spell%	3~
-		  APPEND ~d5clonmn.2da~ ~%this_spell%	%mana_206_spell%	%mana_learn_spell%	%mana_spell_eff%	%mana_innate_spell%	%this_spell%	%172_spell%	%mana_172_subspell% ~
-// make learn spells
-		  COPY ~tomeandblood/lib/d5_base.spl~ ~override/%this_spell%M.spl~
-			WRITE_EVALUATED_ASCII 0x3a ~%spell_icon%~ #8
-		  	LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 171 target = 1 timing = 9 STR_VAR resource = EVAL ~%this_spell%~ END
-// remove all known spells after chargen
-		  COPY_EXISTING ~d50wspl.spl~ ~override~
-			LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~%this_spell%~ END
-		END
-	  END
-	END
-  END
- END
-BUT_ONLY
-
+//set up spell learn UI screens_______________________________________________________
+//
 //ACTION_IF !(FILE_EXISTS_IN_GAME ~d5mnsrcX.2da~) BEGIN
 
  COPY_EXISTING ~d5msorc.2da~ ~override/d5mnsrc.2da~
@@ -775,7 +697,6 @@ COPY_EXISTING ~d5clonmn.2da~ ~override~
 	  	LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5msplz~ END
 // make copy of learn spell for kjeron's UI system (eventually, just rename the learn spell to this name)
 //		  COPY_EXISTING ~%learn_spell%.spl~ ~override/%spell_res%N.spl~
-/* exempt from spell switching, until incorporated with the new multisorc system
 // add subspell to switch spell
 	  ACTION_IF (FILE_EXISTS_IN_GAME ~%switch_spell%.spl~) BEGIN
 		COPY ~tomeandblood/lib/d5_base.spl~ ~override/%switch_subspell%.spl~
@@ -787,7 +708,6 @@ COPY_EXISTING ~d5clonmn.2da~ ~override~
 		  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = EVAL ~%switch_subspell%~ END
 		BUT_ONLY
 	  END
-*/
 // add 172 to d5msplz#
 	  COPY_EXISTING ~d5msplz.spl~ ~override~
 		LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 172 target = 1 timing = 9 STR_VAR resource = EVAL ~%innate_spell%~ END
