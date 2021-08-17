@@ -547,7 +547,7 @@ BUT_ONLY
 
 //ACTION_IF !(FILE_EXISTS_IN_GAME ~d5mnsrcX.2da~) BEGIN
 
- COPY_EXISTING ~d5msorc.2da~ ~override/d5mnsrc.2da~
+// COPY_EXISTING ~d5xsorc.2da~ ~override/d5mnsrc.2da~
 
  INCLUDE ~tomeandblood/lib/sequencer_menu.tpa~
 
