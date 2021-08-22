@@ -278,6 +278,10 @@ END 	//	end define function
 
 // This component uses code by Subtledoctor and is used with permission of the original author. 
 
+// ***** change the way insanctibility works
+// ...make a single subspell, and a single 232 .EFF
+// ...cast the subspell from all invis spells on a 1-second delay
+// ...make a single secondary spell cast by 232, with 172 effects for all spells in the system
 
 DEFINE_ACTION_FUNCTION invisibility_tweaks BEGIN 
 
