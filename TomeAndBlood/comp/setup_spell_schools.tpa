@@ -1,6 +1,10 @@
-// -----------------------------
-// SPELL SCHOOL CHANGES
-// -----------------------------
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
+//								SET SPELL SCHOOLS
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
 
 // This component uses code by Subtledoctor and is used with permission of the original author. 
 
@@ -78,19 +82,19 @@ COPY_EXISTING ~qdscrlmap.2da~ ~override~
         READ_2DA_ENTRY_FORMER ~r2en_schools~ row 0 the_spell
         READ_2DA_ENTRY_FORMER ~r2en_schools~ row 1 the_scroll
         READ_2DA_ENTRY_FORMER ~r2en_schools~ row 2 the_school
-		TEXT_SPRINT $d5_spell_scroll_school(~%the_spell%~ ~%the_scroll%~) ~%the_school%~
+		TEXT_SPRINT $d5_scroll_spell_school(~%the_scroll%~ ~%the_spell%~) ~%the_school%~
 	END
 BUT_ONLY
 
-ACTION_PHP_EACH d5_spell_scroll_school AS spell => school BEGIN 
+ACTION_PHP_EACH d5_scroll_spell_school AS scroll => school BEGIN 
 
-	PRINT ~%spell% - %spell_1% - %school%~
+	PRINT ~%spell_1% - %spell% - %school%~
 
-//	OUTER_TEXT_SPRINT ~scroll~ = ~%spell_1%~
+//	OUTER_TEXT_SPRINT ~scroll~ = ~%spell%~
 
 	ACTION_IF (~%school%~ STRING_EQUAL_CASE ~none~) BEGIN // no school
-		ACTION_IF (FILE_EXISTS_IN_GAME ~%spell%.spl~) BEGIN 
-			COPY_EXISTING ~%spell%.spl~ ~override~
+		ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll_1%.spl~) BEGIN 
+			COPY_EXISTING ~%scroll_1%.spl~ ~override~
 				WRITE_BYTE 0x25 0 // change to unaffiliated 
 				PATCH_IF NOT GAME_IS ~iwdee~ BEGIN
 					WRITE_BYTE 0x1e ("0x00") //blocked: none
@@ -138,8 +142,8 @@ ACTION_PHP_EACH d5_spell_scroll_school AS spell => school BEGIN
 				END
 			BUT_ONLY
 		END
-		ACTION_IF (FILE_EXISTS_IN_GAME ~%spell_1%.itm~) BEGIN 
-			COPY_EXISTING ~%spell_1%.itm~ ~override~
+		ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll%.itm~) BEGIN 
+			COPY_EXISTING ~%scroll%.itm~ ~override~
 				PATCH_IF NOT GAME_IS ~iwdee~ BEGIN
 					WRITE_BYTE 0x2d ("0x00") //blocked: none
 					WRITE_BYTE 0x2f ("0x00") //blocked: none
@@ -190,8 +194,8 @@ ACTION_PHP_EACH d5_spell_scroll_school AS spell => school BEGIN
 //__________________________________________________________________________________
 //
 	ACTION_IF (~%school%~ STRING_EQUAL_CASE ~abjuration~) BEGIN // abjuration
-		ACTION_IF (FILE_EXISTS_IN_GAME ~%spell%.spl~) BEGIN 
-			COPY_EXISTING ~%spell%.spl~ ~override~
+		ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll_1%.spl~) BEGIN 
+			COPY_EXISTING ~%scroll_1%.spl~ ~override~
 				WRITE_SHORT 0x22 12 //update casting graphic
 				WRITE_BYTE 0x25 1 //change to abjuration 
 				PATCH_IF NOT GAME_IS ~iwdee~ BEGIN
@@ -238,8 +242,8 @@ ACTION_PHP_EACH d5_spell_scroll_school AS spell => school BEGIN
 				END
 			BUT_ONLY
 		END
-		ACTION_IF (FILE_EXISTS_IN_GAME ~%spell_1%.itm~) BEGIN 
-			COPY_EXISTING ~%spell_1%.itm~ ~override~
+		ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll%.itm~) BEGIN 
+			COPY_EXISTING ~%scroll%.itm~ ~override~
 				PATCH_IF NOT GAME_IS ~iwdee~ BEGIN
 					WRITE_BYTE 0x2f ("0x00") //blocked: 
 					WRITE_BYTE 0x2d ("0x20") //blocked: transmuters
@@ -288,8 +292,8 @@ ACTION_PHP_EACH d5_spell_scroll_school AS spell => school BEGIN
 //__________________________________________________________________________________
 //
 	ACTION_IF (~%school%~ STRING_EQUAL_CASE ~alteration~) BEGIN // alteration
-		ACTION_IF (FILE_EXISTS_IN_GAME ~%spell%.spl~) BEGIN 
-			COPY_EXISTING ~%spell%.spl~ ~override~
+		ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll_1%.spl~) BEGIN 
+			COPY_EXISTING ~%scroll_1%.spl~ ~override~
 				WRITE_SHORT 0x22 10 //update casting graphic
 				WRITE_BYTE 0x25 8 //change to alteration 
 				PATCH_IF NOT GAME_IS ~iwdee~ BEGIN
@@ -336,8 +340,8 @@ ACTION_PHP_EACH d5_spell_scroll_school AS spell => school BEGIN
 				END
 			BUT_ONLY
 		END
-		ACTION_IF (FILE_EXISTS_IN_GAME ~%spell_1%.itm~) BEGIN 
-			COPY_EXISTING ~%spell_1%.itm~ ~override~
+		ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll%.itm~) BEGIN 
+			COPY_EXISTING ~%scroll%.itm~ ~override~
 				PATCH_IF NOT GAME_IS ~iwdee~ BEGIN
 					WRITE_BYTE 0x2f ("0x40") //blocked: abjurers
 					WRITE_BYTE 0x2d ("0x00") //blocked: 
@@ -386,8 +390,8 @@ ACTION_PHP_EACH d5_spell_scroll_school AS spell => school BEGIN
 //__________________________________________________________________________________
 //
 	ACTION_IF (~%school%~ STRING_EQUAL_CASE ~conjuration~) BEGIN // conjuration
-		ACTION_IF (FILE_EXISTS_IN_GAME ~%spell%.spl~) BEGIN 
-			COPY_EXISTING ~%spell%.spl~ ~override~
+		ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll_1%.spl~) BEGIN 
+			COPY_EXISTING ~%scroll_1%.spl~ ~override~
 				WRITE_SHORT 0x22 14 //update casting graphic
 				WRITE_BYTE 0x25 2 //change to conjuration 
 				PATCH_IF NOT GAME_IS ~iwdee~ BEGIN
@@ -433,8 +437,8 @@ ACTION_PHP_EACH d5_spell_scroll_school AS spell => school BEGIN
 				END
 			BUT_ONLY
 		END
-		ACTION_IF (FILE_EXISTS_IN_GAME ~%spell_1%.itm~) BEGIN 
-			COPY_EXISTING ~%spell_1%.itm~ ~override~
+		ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll%.itm~) BEGIN 
+			COPY_EXISTING ~%scroll%.itm~ ~override~
 				PATCH_IF NOT GAME_IS ~iwdee~ BEGIN
 					WRITE_BYTE 0x2f ("0x00") //blocked: 
 					WRITE_BYTE 0x2d ("0x01") //blocked: diviners
@@ -483,8 +487,8 @@ ACTION_PHP_EACH d5_spell_scroll_school AS spell => school BEGIN
 //__________________________________________________________________________________
 //
 	ACTION_IF (~%school%~ STRING_EQUAL_CASE ~divination~) BEGIN // divination
-		ACTION_IF (FILE_EXISTS_IN_GAME ~%spell%.spl~) BEGIN 
-			COPY_EXISTING ~%spell%.spl~ ~override~
+		ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll_1%.spl~) BEGIN 
+			COPY_EXISTING ~%scroll_1%.spl~ ~override~
 				WRITE_SHORT 0x22 16 //update casting graphic
 				WRITE_BYTE 0x25 3 //change to divination 
 				PATCH_IF NOT GAME_IS ~iwdee~ BEGIN
@@ -531,8 +535,8 @@ ACTION_PHP_EACH d5_spell_scroll_school AS spell => school BEGIN
 				END
 			BUT_ONLY
 		END
-		ACTION_IF (FILE_EXISTS_IN_GAME ~%spell_1%.itm~) BEGIN 
-			COPY_EXISTING ~%spell_1%.itm~ ~override~
+		ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll%.itm~) BEGIN 
+			COPY_EXISTING ~%scroll%.itm~ ~override~
 				PATCH_IF NOT GAME_IS ~iwdee~ BEGIN
 					WRITE_BYTE 0x2f ("0x80") //blocked: conjurers
 					WRITE_BYTE 0x2d ("0x00") //blocked: 
@@ -581,8 +585,8 @@ ACTION_PHP_EACH d5_spell_scroll_school AS spell => school BEGIN
 //__________________________________________________________________________________
 //
 	ACTION_IF (~%school%~ STRING_EQUAL_CASE ~enchantment~) BEGIN // enchantment
-		ACTION_IF (FILE_EXISTS_IN_GAME ~%spell%.spl~) BEGIN 
-			COPY_EXISTING ~%spell%.spl~ ~override~
+		ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll_1%.spl~) BEGIN 
+			COPY_EXISTING ~%scroll_1%.spl~ ~override~
 				WRITE_SHORT 0x22 11 //update casting graphic
 				WRITE_BYTE 0x25 4 //change to enchantment 
 				PATCH_IF NOT GAME_IS ~iwdee~ BEGIN
@@ -629,8 +633,8 @@ ACTION_PHP_EACH d5_spell_scroll_school AS spell => school BEGIN
 				END
 			BUT_ONLY
 		END
-		ACTION_IF (FILE_EXISTS_IN_GAME ~%spell_1%.itm~) BEGIN 
-			COPY_EXISTING ~%spell_1%.itm~ ~override~
+		ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll%.itm~) BEGIN 
+			COPY_EXISTING ~%scroll%.itm~ ~override~
 				PATCH_IF NOT GAME_IS ~iwdee~ BEGIN
 					WRITE_BYTE 0x2f ("0x00") //blocked: 
 					WRITE_BYTE 0x2d ("0x08") //blocked: invokers
@@ -679,8 +683,8 @@ ACTION_PHP_EACH d5_spell_scroll_school AS spell => school BEGIN
 //__________________________________________________________________________________
 //
 	ACTION_IF (~%school%~ STRING_EQUAL_CASE ~evocation~) BEGIN // evocation
-		ACTION_IF (FILE_EXISTS_IN_GAME ~%spell%.spl~) BEGIN 
-			COPY_EXISTING ~%spell%.spl~ ~override~
+		ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll_1%.spl~) BEGIN 
+			COPY_EXISTING ~%scroll_1%.spl~ ~override~
 				WRITE_SHORT 0x22 15 //update casting graphic
 				WRITE_BYTE 0x25 6 //change to evocation 
 				PATCH_IF NOT GAME_IS ~iwdee~ BEGIN
@@ -727,8 +731,8 @@ ACTION_PHP_EACH d5_spell_scroll_school AS spell => school BEGIN
 				END
 			BUT_ONLY
 		END
-		ACTION_IF (FILE_EXISTS_IN_GAME ~%spell_1%.itm~) BEGIN 
-			COPY_EXISTING ~%spell_1%.itm~ ~override~
+		ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll%.itm~) BEGIN 
+			COPY_EXISTING ~%scroll%.itm~ ~override~
 				PATCH_IF NOT GAME_IS ~iwdee~ BEGIN
 					WRITE_BYTE 0x2f ("0x00") //blocked: 
 					WRITE_BYTE 0x2d ("0x02") //blocked: enchanters
@@ -777,8 +781,8 @@ ACTION_PHP_EACH d5_spell_scroll_school AS spell => school BEGIN
 //__________________________________________________________________________________
 //
 	ACTION_IF (~%school%~ STRING_EQUAL_CASE ~illusion~) BEGIN // illusion
-		ACTION_IF (FILE_EXISTS_IN_GAME ~%spell%.spl~) BEGIN 
-			COPY_EXISTING ~%spell%.spl~ ~override~
+		ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll_1%.spl~) BEGIN 
+			COPY_EXISTING ~%scroll_1%.spl~ ~override~
 				WRITE_SHORT 0x22 13 //update casting graphic
 				WRITE_BYTE 0x25 5 //change to illusion 
 				PATCH_IF NOT GAME_IS ~iwdee~ BEGIN
@@ -825,8 +829,8 @@ ACTION_PHP_EACH d5_spell_scroll_school AS spell => school BEGIN
 				END
 			BUT_ONLY
 		END
-		ACTION_IF (FILE_EXISTS_IN_GAME ~%spell_1%.itm~) BEGIN 
-			COPY_EXISTING ~%spell_1%.itm~ ~override~
+		ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll%.itm~) BEGIN 
+			COPY_EXISTING ~%scroll%.itm~ ~override~
 				PATCH_IF NOT GAME_IS ~iwdee~ BEGIN
 					WRITE_BYTE 0x2f ("0x00") //blocked: 
 					WRITE_BYTE 0x2d ("0x10") //blocked: necromancers
@@ -875,8 +879,8 @@ ACTION_PHP_EACH d5_spell_scroll_school AS spell => school BEGIN
 //__________________________________________________________________________________
 //
 	ACTION_IF (~%school%~ STRING_EQUAL_CASE ~necromancy~) BEGIN // necromancy
-		ACTION_IF (FILE_EXISTS_IN_GAME ~%spell%.spl~) BEGIN 
-			COPY_EXISTING ~%spell%.spl~ ~override~
+		ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll_1%.spl~) BEGIN 
+			COPY_EXISTING ~%scroll_1%.spl~ ~override~
 				WRITE_SHORT 0x22 9 //update casting graphic
 				WRITE_BYTE 0x25 7 //change to necromancy 
 				PATCH_IF NOT GAME_IS ~iwdee~ BEGIN
@@ -923,8 +927,8 @@ ACTION_PHP_EACH d5_spell_scroll_school AS spell => school BEGIN
 				END
 			BUT_ONLY
 		END
-		ACTION_IF (FILE_EXISTS_IN_GAME ~%spell_1%.itm~) BEGIN 
-			COPY_EXISTING ~%spell_1%.itm~ ~override~
+		ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll%.itm~) BEGIN 
+			COPY_EXISTING ~%scroll%.itm~ ~override~
 				PATCH_IF NOT GAME_IS ~iwdee~ BEGIN
 					WRITE_BYTE 0x2f ("0x00") //blocked:
 					WRITE_BYTE 0x2d ("0x04") //blocked: illusionists
@@ -1201,4 +1205,242 @@ CLEAR_ARRAYS
 
 
 END 	//	end define function
-//____________________________________________________________________________________
+
+
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
+//							CHANGE OPPOSITION SCHOOLS
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+
+
+DEFINE_ACTION_FUNCTION change_opposition_schools STR_VAR mode = ~none~ BEGIN
+
+//no opposition
+// 
+ACTION_IF (~%mode%~ STRING_EQUAL_CASE ~none~) BEGIN
+  OUTER_SET abj_opp_1 = 0x00
+  OUTER_SET abj_opp_2 = 0x00
+  OUTER_SET alt_opp_1 = 0x00
+  OUTER_SET alt_opp_2 = 0x00
+  OUTER_SET con_opp_1 = 0x00
+  OUTER_SET con_opp_2 = 0x00
+  OUTER_SET div_opp_1 = 0x00
+  OUTER_SET div_opp_2 = 0x00
+  OUTER_SET enc_opp_1 = 0x00
+  OUTER_SET enc_opp_2 = 0x00
+  OUTER_SET evo_opp_1 = 0x00
+  OUTER_SET evo_opp_2 = 0x00
+  OUTER_SET ill_opp_1 = 0x00
+  OUTER_SET ill_opp_2 = 0x00
+  OUTER_SET nec_opp_1 = 0x00
+  OUTER_SET nec_opp_2 = 0x00
+END
+
+//iwd opposition
+//
+ACTION_IF (~%mode%~ STRING_EQUAL_CASE ~iwd~) BEGIN
+  OUTER_SET abj_opp_1 = 0x00
+  OUTER_SET abj_opp_2 = 0x24	//	alteration + illusion
+  OUTER_SET alt_opp_1 = 0x40	//	abjuration
+  OUTER_SET alt_opp_2 = 0x00
+  OUTER_SET con_opp_1 = 0x00
+  OUTER_SET con_opp_2 = 0x01	//	divination
+  OUTER_SET div_opp_1 = 0x00
+  OUTER_SET div_opp_2 = 0x08	//	evocation
+  OUTER_SET enc_opp_1 = 0x00
+  OUTER_SET enc_opp_2 = 0x10	//	necromancy...?
+  OUTER_SET evo_opp_1 = 0x80	//	conjuration
+  OUTER_SET evo_opp_2 = 0x02	//	enchantment
+  OUTER_SET ill_opp_1 = 0x40	//	abjuration
+  OUTER_SET ill_opp_2 = 0x10	//	necromancy
+  OUTER_SET nec_opp_1 = 0x00
+  OUTER_SET nec_opp_2 = 0x24	//	alteration + illusion
+END
+
+//bg2 opposition
+//
+ACTION_IF (~%mode%~ STRING_EQUAL_CASE ~bg2~) BEGIN
+  OUTER_SET abj_opp_1 = 0x00
+  OUTER_SET abj_opp_2 = 0x20	//	alteration
+  OUTER_SET alt_opp_1 = 0x40	//	abjuration
+  OUTER_SET alt_opp_2 = 0x00
+  OUTER_SET con_opp_1 = 0x00
+  OUTER_SET con_opp_2 = 0x09	//	divination + evocation
+  OUTER_SET div_opp_1 = 0x80	//	conjuration
+  OUTER_SET div_opp_2 = 0x00
+  OUTER_SET enc_opp_1 = 0x00
+  OUTER_SET enc_opp_2 = 0x08	//	evocation
+  OUTER_SET evo_opp_1 = 0x00
+  OUTER_SET evo_opp_2 = 0x02	//	enchantment
+  OUTER_SET ill_opp_1 = 0x00
+  OUTER_SET ill_opp_2 = 0x10	//	necromancy
+  OUTER_SET nec_opp_1 = 0x00
+  OUTER_SET nec_opp_2 = 0x04	//	illusion
+END
+
+PRINT ~%abj_opp_1%~
+PRINT ~%abj_opp_2%~
+PRINT ~%alt_opp_1%~
+PRINT ~%alt_opp_2%~
+PRINT ~%con_opp_1%~
+PRINT ~%con_opp_2%~
+PRINT ~%div_opp_1%~
+PRINT ~%div_opp_2%~
+PRINT ~%enc_opp_1%~
+PRINT ~%enc_opp_2%~
+PRINT ~%evo_opp_1%~
+PRINT ~%evo_opp_2%~
+PRINT ~%ill_opp_1%~
+PRINT ~%ill_opp_2%~
+PRINT ~%nec_opp_1%~
+PRINT ~%nec_opp_2%~
+
+COPY_EXISTING ~qdscrlmap.2da~ ~override~
+	COUNT_2DA_COLS cols
+	READ_2DA_ENTRIES_NOW ~r2en_schools~ cols
+      FOR (row = 1; row < r2en_schools; row += 1) BEGIN
+        READ_2DA_ENTRY_FORMER ~r2en_schools~ row 0 the_spell
+        READ_2DA_ENTRY_FORMER ~r2en_schools~ row 1 the_scroll
+        READ_2DA_ENTRY_FORMER ~r2en_schools~ row 2 the_school
+		TEXT_SPRINT $d5_scroll_spell_school(~%the_scroll%~ ~%the_spell%~)~%the_school%~
+	END
+BUT_ONLY
+
+ACTION_PHP_EACH d5_scroll_spell_school AS scroll => school BEGIN 
+
+  PRINT ~%scroll_1%.spl = %scroll%.itm = %school%~
+
+	ACTION_IF (~%school%~ STRING_EQUAL_CASE ~abjuration~) BEGIN // abjuration
+		ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll_1%.spl~) BEGIN 
+			COPY_EXISTING ~%scroll_1%.spl~ ~override~
+					WRITE_BYTE 0x1e ~%abj_opp_1%~
+					WRITE_BYTE 0x1f ~%abj_opp_2%~
+			BUT_ONLY
+		END
+		ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll%.itm~) BEGIN 
+			COPY_EXISTING ~%scroll%.itm~ ~override~
+					WRITE_BYTE 0x2f ~%abj_opp_1%~
+					WRITE_BYTE 0x2d ~%abj_opp_2%~
+			BUT_ONLY
+		END
+	END
+//__________________________________________________________________________________
+//
+	ACTION_IF (~%school%~ STRING_EQUAL_CASE ~alteration~) BEGIN // alteration
+		ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll_1%.spl~) BEGIN 
+			COPY_EXISTING ~%scroll_1%.spl~ ~override~
+					WRITE_BYTE 0x1e ~%alt_opp_1%~
+					WRITE_BYTE 0x1f ~%alt_opp_2%~
+			BUT_ONLY
+		END
+		ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll%.itm~) BEGIN 
+			COPY_EXISTING ~%scroll%.itm~ ~override~
+					WRITE_BYTE 0x2f ~%alt_opp_1%~
+					WRITE_BYTE 0x2d ~%alt_opp_2%~
+			BUT_ONLY
+		END
+	END
+//__________________________________________________________________________________
+//
+	ACTION_IF (~%school%~ STRING_EQUAL_CASE ~conjuration~) BEGIN // conjuration
+		ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll_1%.spl~) BEGIN 
+			COPY_EXISTING ~%scroll_1%.spl~ ~override~
+					WRITE_BYTE 0x1e ~%con_opp_1%~
+					WRITE_BYTE 0x1f ~%con_opp_2%~
+			BUT_ONLY
+		END
+		ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll%.itm~) BEGIN 
+			COPY_EXISTING ~%scroll%.itm~ ~override~
+					WRITE_BYTE 0x2f ~%con_opp_1%~
+					WRITE_BYTE 0x2d ~%con_opp_2%~
+			BUT_ONLY
+		END
+	END
+//__________________________________________________________________________________
+//
+	ACTION_IF (~%school%~ STRING_EQUAL_CASE ~divination~) BEGIN // divination
+		ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll_1%.spl~) BEGIN 
+			COPY_EXISTING ~%scroll_1%.spl~ ~override~
+					WRITE_BYTE 0x1e ~%div_opp_1%~
+					WRITE_BYTE 0x1f ~%div_opp_2%~
+			BUT_ONLY
+		END
+		ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll%.itm~) BEGIN 
+			COPY_EXISTING ~%scroll%.itm~ ~override~
+					WRITE_BYTE 0x2f ~%div_opp_1%~
+					WRITE_BYTE 0x2d ~%div_opp_2%~
+			BUT_ONLY
+		END
+	END
+//__________________________________________________________________________________
+//
+	ACTION_IF (~%school%~ STRING_EQUAL_CASE ~enchantment~) BEGIN // enchantment
+		ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll_1%.spl~) BEGIN 
+			COPY_EXISTING ~%scroll_1%.spl~ ~override~
+					WRITE_BYTE 0x1e ~%enc_opp_1%~
+					WRITE_BYTE 0x1f ~%enc_opp_2%~
+			BUT_ONLY
+		END
+		ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll%.itm~) BEGIN 
+			COPY_EXISTING ~%scroll%.itm~ ~override~
+					WRITE_BYTE 0x2f ~%enc_opp_1%~
+					WRITE_BYTE 0x2d ~%enc_opp_2%~
+			BUT_ONLY
+		END
+	END
+//__________________________________________________________________________________
+//
+	ACTION_IF (~%school%~ STRING_EQUAL_CASE ~evocation~) BEGIN // evocation
+		ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll_1%.spl~) BEGIN 
+			COPY_EXISTING ~%scroll_1%.spl~ ~override~
+					WRITE_BYTE 0x1e ~%evo_opp_1%~
+					WRITE_BYTE 0x1f ~%evo_opp_2%~
+			BUT_ONLY
+		END
+		ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll%.itm~) BEGIN 
+			COPY_EXISTING ~%scroll%.itm~ ~override~
+					WRITE_BYTE 0x2f ~%evo_opp_1%~
+					WRITE_BYTE 0x2d ~%evo_opp_2%~
+			BUT_ONLY
+		END
+	END
+//__________________________________________________________________________________
+//
+	ACTION_IF (~%school%~ STRING_EQUAL_CASE ~illusion~) BEGIN // illusion
+		ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll_1%.spl~) BEGIN 
+			COPY_EXISTING ~%scroll_1%.spl~ ~override~
+					WRITE_BYTE 0x1e ~%ill_opp_1%~
+					WRITE_BYTE 0x1f ~%ill_opp_2%~
+			BUT_ONLY
+		END
+		ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll%.itm~) BEGIN 
+			COPY_EXISTING ~%scroll%.itm~ ~override~
+					WRITE_BYTE 0x2f ~%ill_opp_1%~
+					WRITE_BYTE 0x2d ~%ill_opp_2%~
+			BUT_ONLY
+		END
+	END
+//__________________________________________________________________________________
+//
+	ACTION_IF (~%school%~ STRING_EQUAL_CASE ~necromancy~) BEGIN // necromancy
+		ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll_1%.spl~) BEGIN 
+			COPY_EXISTING ~%scroll_1%.spl~ ~override~
+					WRITE_BYTE 0x1e ~%nec_opp_1%~
+					WRITE_BYTE 0x1f ~%nec_opp_2%~
+			BUT_ONLY
+		END
+		ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll%.itm~) BEGIN 
+			COPY_EXISTING ~%scroll%.itm~ ~override~
+					WRITE_BYTE 0x2f ~%nec_opp_1%~
+					WRITE_BYTE 0x2d ~%nec_opp_2%~
+			BUT_ONLY
+		END
+	END	
+END
+
+
+END 	//	end define function

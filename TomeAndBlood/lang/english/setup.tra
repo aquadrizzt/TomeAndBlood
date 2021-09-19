@@ -7,7 +7,10 @@
 @7 = ~Mechanics Tweaks (crafting, sequencers, cantrips, familiars, ability bonuses)~
 @10 = ~Core Revisions~
 @11 = ~Rebalanced Spell Schools~
-@12 = ~General Spell Tweaks~
+@12 = ~Rebalanced Arcane Opposition Schools~
+@1201 = ~No Opposition Schools~
+@1202 = ~IWD-style Opposition Schools~
+@1203 = ~BG2-style Opposition Schools~
 @13 = ~Revised Illusionary Clones~
 @14 = ~Revised Invisibility and True Seeing~
 @15 = ~Revised Haste and Free Action~
@@ -431,14 +434,14 @@ Disadvantages:
 @1100  = ~Memorize spells~
 @1101 = ~(Spells cannot be cast while wearing armor.)~
 @1102 = ~(Spells cannot be cast while wearing armor heavier than studded leather.)~
-@1201 = ~May cast arcane spells.~ 
-@1202 = ~May cast arcane spells.
+@1401 = ~May cast arcane spells.~ 
+@1402 = ~May cast arcane spells.
 – May use the Scribe Scrolls ability.
 - 5th level: May use the Brew Potions ability.
 - 10th level: May use the Craft Wands ability.
 - 15th level: May use the Recharge Wands ability.~
-@1203 = ~May cast arcane spells.~
-@1204 = ~May cast arcane spells.
+@1403 = ~May cast arcane spells.~
+@1404 = ~May cast arcane spells.
 – 5th level: May use the Brew Potions ability.
 – 10th level: May use the Craft Wands ability.
 – 15th level: May use the Recharge Wands ability.~

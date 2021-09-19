@@ -1,6 +1,6 @@
 BACKUP ~TomeAndBlood/backup~
 AUTHOR ~aquadrizzt~
-VERSION ~0.9.16~ 
+VERSION ~0.9.17~ 
 
 ALWAYS
 
@@ -33,6 +33,7 @@ AUTO_TRA ~TomeAndBlood/lang/%s~
 LANGUAGE ~English~ ~english~ ~TomeAndBlood/lang/english/setup.tra~ 
 
 
+
 // -----------------------------
 // 11: REBALANCED SPELL SCHOOLS (Subtledoctor)
 // -----------------------------
@@ -47,22 +48,53 @@ INCLUDE ~TomeAndBlood/comp/setup_spell_schools.tpa~
 
 LAF spell_schools END
 
-/*
+
 // -----------------------------
-// 12: SPELL TWEAKS: GENERAL CHANGES (Subtledoctor)
+// 12: CHANGE ARCANE OPPOSITION SCHOOLS (Subtledoctor)
+// 1201: no opposition schools
+// 1202: iwd opposition schools
+// 1203: bg2 opposition schools
 // -----------------------------
-BEGIN @12
-DESIGNATED 12
-REQUIRE_PREDICATE (ENGINE_IS ~soa tob iwd bgee bg2ee iwdee eet~) @1 
-DEPRECATED @4
+
+//no wizard opposition schools______________________________________________________
+//
+BEGIN @1201
+DESIGNATED 1201
+SUBCOMPONENT @12
 //GROUP @5
 
-COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_spelltweaks_gen.qd~ //detection for this component 
+COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_opp_schools.qd~ //detection for this component 
 
-INCLUDE ~TomeAndBlood/comp/setup_spell_tweaks.tpa~
+INCLUDE ~TomeAndBlood/comp/setup_spell_schools.tpa~ 
 
-LAF general_spell_tweaks END
-*/
+LAF change_opposition_schools STR_VAR mode = ~none~ END
+
+//iwd opposition schools____________________________________________________________
+//
+BEGIN @1202
+DESIGNATED 1202
+SUBCOMPONENT @12 (NOT GAME_IS ~iwd iwdee~)
+//GROUP @5
+
+COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_opp_schools.qd~ //detection for this component 
+
+INCLUDE ~TomeAndBlood/comp/setup_spell_schools.tpa~ 
+
+LAF change_opposition_schools STR_VAR mode = ~iwd~ END
+
+//bg2 opposition schools____________________________________________________________
+//
+BEGIN @1203
+DESIGNATED 1203
+SUBCOMPONENT @12 (GAME_IS ~iwd iwdee~)
+//GROUP @5
+
+COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_opp_schools.qd~ //detection for this component 
+
+INCLUDE ~TomeAndBlood/comp/setup_spell_schools.tpa~ 
+
+LAF change_opposition_schools STR_VAR mode = ~bg2~ END
+
 
 // -----------------------------
 // 13: SPELL TWEAKS: CLONE CHANGES (Subtledoctor)
@@ -250,6 +282,7 @@ LAF revised_specialists END
 BEGIN @45
 DESIGNATED 45
 REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee iwdee eet~) @2 
+FORBID_COMPONENT ~5E_spellcasting.tp2~ ~100~ @4
 DEPRECATED @4
 //GROUP @7
 

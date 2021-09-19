@@ -298,20 +298,20 @@ COPY_EXISTING ~qdscrlmap.2da~ ~override~
         READ_2DA_ENTRY_FORMER ~r2en_schools~ row 0 the_spell
         READ_2DA_ENTRY_FORMER ~r2en_schools~ row 1 the_scroll
         READ_2DA_ENTRY_FORMER ~r2en_schools~ row 2 the_school
-		TEXT_SPRINT $d5_spell_scroll_school(~%the_spell%~ ~%the_scroll%~) ~%the_school%~
+		TEXT_SPRINT $d5_scroll_spell_school(~%the_scroll%~ ~%the_spell%~) ~%the_school%~
 	END
 BUT_ONLY
 
 //Updating Spells and Scrolls 
-ACTION_PHP_EACH d5_spell_scroll_school AS spell => school BEGIN 
-	ACTION_IF (FILE_EXISTS_IN_GAME ~%spell%.spl~) BEGIN 
-		COPY_EXISTING ~%spell%.spl~ ~override~ 	
+ACTION_PHP_EACH d5_scroll_spell_school AS scroll => school BEGIN 
+	ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll_1%.spl~) BEGIN 
+		COPY_EXISTING ~%scroll_1%.spl~ ~override~ 	
 			WRITE_LONG 0x1e ("0x00000000") //blocked to: none
 //		ACTION_IF (~%school%~ STRING_EQUAL_CASE ~necromancy~) BEGIN
 //			APPEND ~HIDESPL.2da~ ~%spell%	1	0	0~ //add necromancy to hidespl
 //		END
-		ACTION_IF (FILE_EXISTS_IN_GAME ~%spell_1%.itm~) BEGIN 
-			COPY_EXISTING ~%spell_1%.itm~ ~override~ 	
+		ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll%.itm~) BEGIN 
+			COPY_EXISTING ~%scroll%.itm~ ~override~ 	
 				WRITE_BYTE 0x2d ("0x00") //blocked to: none
 				WRITE_BYTE 0x2f ("0x00") //blocked to: none
 		END
@@ -329,8 +329,8 @@ COPY ~TomeAndBlood/data/specialists/QDMG+SCH.SPL~ ~override/QDMG+ABJ.SPL~ //maki
 	 ~TomeAndBlood/data/specialists/QDMG+SCH.SPL~ ~override/QDMG+DIV.SPL~ //making the new divination spell 
 	 
 	 
-ACTION_PHP_EACH d5_spell_scroll_school AS spell => school BEGIN 
-	ACTION_IF (FILE_EXISTS_IN_GAME ~%spell%.spl~) BEGIN 
+ACTION_PHP_EACH d5_scroll_spell_school AS scroll => school BEGIN 
+	ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll_1%.spl~) BEGIN 
 		ACTION_IF (~%spell%~ STRING_EQUAL_CASE ~SPWI123~ OR //Find Familiar
 				   ~%spell%~ STRING_EQUAL_CASE ~SPWI117~ OR //Chill Touch
 				   ~%spell%~ STRING_EQUAL_CASE ~SPWI218~ OR //Ghoul Touch
@@ -367,7 +367,7 @@ ACTION_PHP_EACH d5_spell_scroll_school AS spell => school BEGIN
 			//do nothing
 		END 	
 		ELSE BEGIN 
-			COPY_EXISTING ~%spell%.spl~ ~override~		
+			COPY_EXISTING ~%scroll_1%.spl~ ~override~		
 				READ_BYTE 0x25 school
 			ACTION_IF (school = 1) BEGIN //abjuration
 				COPY_EXISTING ~QDMG+ABJ.SPL~ ~override~ 

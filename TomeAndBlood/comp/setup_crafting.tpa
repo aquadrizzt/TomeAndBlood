@@ -342,8 +342,8 @@ END
 					INNER_ACTION  BEGIN 
 						ACTION_IF (desc >= 0) BEGIN
 							ACTION_GET_STRREF desc oldstring
-							OUTER_SPRINT old @1201
-							OUTER_SPRINT new @1202
+							OUTER_SPRINT old @1401
+							OUTER_SPRINT new @1402
 							OUTER_PATCH_SAVE oldstring ~%oldstring%~ BEGIN
 								REPLACE_TEXTUALLY ~%old%~ ~%new%~
 							END
@@ -355,8 +355,8 @@ END
 					INNER_ACTION  BEGIN 
 						ACTION_IF (desc >= 0) BEGIN
 							ACTION_GET_STRREF desc oldstring
-							OUTER_SPRINT old @1203
-							OUTER_SPRINT new @1204
+							OUTER_SPRINT old @1403
+							OUTER_SPRINT new @1404
 							OUTER_PATCH_SAVE oldstring ~%oldstring%~ BEGIN
 								REPLACE_TEXTUALLY ~%old%~ ~%new%~
 							END

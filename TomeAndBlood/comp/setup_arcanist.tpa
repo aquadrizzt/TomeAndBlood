@@ -134,6 +134,7 @@ COPY ~tomeandblood/data/arcanist/d5cstarc.2da~ ~override~
 BUT_ONLY
 
 COPY_EXISTING ~d5zprpd.spl~ ~override~
+			  ~d5zrfsh.spl~ ~override~
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %arcanist_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5zltacz~ END
 
 APPEND ~d5acnst.2da~ ~SPELL_INIT  AP_D5ZZ000  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****       ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
