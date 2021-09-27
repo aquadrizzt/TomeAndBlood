@@ -218,8 +218,12 @@ ACTION_IF FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ BEGIN // version for Spell Revisi
 END
 
 //Hiding NRD 
-APPEND ~HIDESPL.2da~ ~SPWI124	1	0	0~ //add NRD to hidespl
-	BUT_ONLY 
+ACTION_IF (FILE_EXISTS_IN_GAME ~hidespl.2da~) AND (GAME_IS ~iwdee~) BEGIN
+	APPEND ~hidespl.2da~ ~SPWI124	1		0~
+END
+ACTION_IF (FILE_EXISTS_IN_GAME ~hidespl.2da~) AND !(GAME_IS ~iwdee~) BEGIN
+	APPEND ~hidespl.2da~ ~SPWI124	1		0		0~
+END
 	
 //New Descriptions 
 COPY_EXISTING - ~kitlist.2da~ ~override~
@@ -308,7 +312,7 @@ ACTION_PHP_EACH d5_scroll_spell_school AS scroll => school BEGIN
 		COPY_EXISTING ~%scroll_1%.spl~ ~override~ 	
 			WRITE_LONG 0x1e ("0x00000000") //blocked to: none
 //		ACTION_IF (~%school%~ STRING_EQUAL_CASE ~necromancy~) BEGIN
-//			APPEND ~HIDESPL.2da~ ~%spell%	1	0	0~ //add necromancy to hidespl
+//			APPEND ~HIDESPL.2da~ ~%scroll_1%	1	0	0~ //add necromancy to hidespl
 //		END
 		ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll%.itm~) BEGIN 
 			COPY_EXISTING ~%scroll%.itm~ ~override~ 	
@@ -331,38 +335,38 @@ COPY ~TomeAndBlood/data/specialists/QDMG+SCH.SPL~ ~override/QDMG+ABJ.SPL~ //maki
 	 
 ACTION_PHP_EACH d5_scroll_spell_school AS scroll => school BEGIN 
 	ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll_1%.spl~) BEGIN 
-		ACTION_IF (~%spell%~ STRING_EQUAL_CASE ~SPWI123~ OR //Find Familiar
-				   ~%spell%~ STRING_EQUAL_CASE ~SPWI117~ OR //Chill Touch
-				   ~%spell%~ STRING_EQUAL_CASE ~SPWI218~ OR //Ghoul Touch
-				   ~%spell%~ STRING_EQUAL_CASE ~SPWI314~ OR //Vampiric Touch
-				   ~%spell%~ STRING_EQUAL_CASE ~SPWI124~ OR //NRD
-				   ~%spell%~ STRING_EQUAL_CASE ~SPWI222~ OR //Chaos Shield
-				   ~%spell%~ STRING_EQUAL_CASE ~SPWI723~ OR //Improved Chaos Shield
-				   ~%spell%~ STRING_EQUAL_CASE ~SPWI406~ OR //Minor Globe of Invulnerability
-				   ~%spell%~ STRING_EQUAL_CASE ~SPWI522~ OR //Minor Spell Turning
-				   ~%spell%~ STRING_EQUAL_CASE ~SPWI602~ OR //Globe of Invulnerability
-				   ~%spell%~ STRING_EQUAL_CASE ~SPWI618~ OR //Spell Deflection
-				   ~%spell%~ STRING_EQUAL_CASE ~SPWI701~ OR //Spell Turning
-				   ~%spell%~ STRING_EQUAL_CASE ~SPWI902~ OR //Spell Trap
+		ACTION_IF (~%scroll_1%~ STRING_EQUAL_CASE ~SPWI123~ OR //Find Familiar
+				   ~%scroll_1%~ STRING_EQUAL_CASE ~SPWI117~ OR //Chill Touch
+				   ~%scroll_1%~ STRING_EQUAL_CASE ~SPWI218~ OR //Ghoul Touch
+				   ~%scroll_1%~ STRING_EQUAL_CASE ~SPWI314~ OR //Vampiric Touch
+				   ~%scroll_1%~ STRING_EQUAL_CASE ~SPWI124~ OR //NRD
+				   ~%scroll_1%~ STRING_EQUAL_CASE ~SPWI222~ OR //Chaos Shield
+				   ~%scroll_1%~ STRING_EQUAL_CASE ~SPWI723~ OR //Improved Chaos Shield
+				   ~%scroll_1%~ STRING_EQUAL_CASE ~SPWI406~ OR //Minor Globe of Invulnerability
+				   ~%scroll_1%~ STRING_EQUAL_CASE ~SPWI522~ OR //Minor Spell Turning
+				   ~%scroll_1%~ STRING_EQUAL_CASE ~SPWI602~ OR //Globe of Invulnerability
+				   ~%scroll_1%~ STRING_EQUAL_CASE ~SPWI618~ OR //Spell Deflection
+				   ~%scroll_1%~ STRING_EQUAL_CASE ~SPWI701~ OR //Spell Turning
+				   ~%scroll_1%~ STRING_EQUAL_CASE ~SPWI902~ OR //Spell Trap
 				   (FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ AND  // Spell Revisions
-					   (~%spell%~ STRING_EQUAL_CASE ~%sr_ms1%~ OR //SR: MS 1
-					   ~%spell%~ STRING_EQUAL_CASE ~%sr_ms2%~ OR //SR: MS 2
-					   ~%spell%~ STRING_EQUAL_CASE ~%sr_ms3%~ OR //SR: MS 3
-					   ~%spell%~ STRING_EQUAL_CASE ~%sr_ms4%~ OR //SR: MS 4
-					   ~%spell%~ STRING_EQUAL_CASE ~%sr_ms5%~ OR //SR: MS 5
-					   ~%spell%~ STRING_EQUAL_CASE ~%sr_ms6%~ OR //SR: MS 6
-					   ~%spell%~ STRING_EQUAL_CASE ~%sr_ms7%~ OR //SR: MS 7
-					   ~%spell%~ STRING_EQUAL_CASE ~%sr_ms8%~ OR //SR: MS 8
-					   ~%spell%~ STRING_EQUAL_CASE ~%sr_ms9%~)	   
+					   (~%scroll_1%~ STRING_EQUAL_CASE ~%sr_ms1%~ OR //SR: MS 1
+					   ~%scroll_1%~ STRING_EQUAL_CASE ~%sr_ms2%~ OR //SR: MS 2
+					   ~%scroll_1%~ STRING_EQUAL_CASE ~%sr_ms3%~ OR //SR: MS 3
+					   ~%scroll_1%~ STRING_EQUAL_CASE ~%sr_ms4%~ OR //SR: MS 4
+					   ~%scroll_1%~ STRING_EQUAL_CASE ~%sr_ms5%~ OR //SR: MS 5
+					   ~%scroll_1%~ STRING_EQUAL_CASE ~%sr_ms6%~ OR //SR: MS 6
+					   ~%scroll_1%~ STRING_EQUAL_CASE ~%sr_ms7%~ OR //SR: MS 7
+					   ~%scroll_1%~ STRING_EQUAL_CASE ~%sr_ms8%~ OR //SR: MS 8
+					   ~%scroll_1%~ STRING_EQUAL_CASE ~%sr_ms9%~)	   
 				   ) OR 
 				   ((NOT FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~) AND //No Spell Revisions
-					   (~%spell%~ STRING_EQUAL_CASE ~SPWI309~ OR //Monster Summoning I
-					   ~%spell%~ STRING_EQUAL_CASE ~SPWI407~ OR //Monster Summoning II
-					   ~%spell%~ STRING_EQUAL_CASE ~SPWI504~) //Monster Summoning III
+					   (~%scroll_1%~ STRING_EQUAL_CASE ~SPWI309~ OR //Monster Summoning I
+					   ~%scroll_1%~ STRING_EQUAL_CASE ~SPWI407~ OR //Monster Summoning II
+					   ~%scroll_1%~ STRING_EQUAL_CASE ~SPWI504~) //Monster Summoning III
 				   ) 
 				   OR //Spell Trap
 				   (GAME_IS ~bgee~ AND  // Dancing Lights in BGEE
-					   (~%spell%~ STRING_EQUAL_CASE ~SPWI126~))
+					   (~%scroll_1%~ STRING_EQUAL_CASE ~SPWI126~))
 				   ) BEGIN //exclusion list here 
 			//do nothing
 		END 	
@@ -371,42 +375,42 @@ ACTION_PHP_EACH d5_scroll_spell_school AS scroll => school BEGIN
 				READ_BYTE 0x25 school
 			ACTION_IF (school = 1) BEGIN //abjuration
 				COPY_EXISTING ~QDMG+ABJ.SPL~ ~override~ 
-				LPF ADD_SPELL_EFFECT INT_VAR opcode=171 target=1 timing=9 STR_VAR resource= EVAL ~%spell%~ END 
+				LPF ADD_SPELL_EFFECT INT_VAR opcode=171 target=1 timing=9 STR_VAR resource= EVAL ~%scroll_1%~ END 
 			END
 			
 			ACTION_IF (school = 8) BEGIN //alteration
 				COPY_EXISTING ~QDMG+ALT.SPL~ ~override~ 
-				LPF ADD_SPELL_EFFECT INT_VAR opcode=171 target=1 timing=9 STR_VAR resource= EVAL ~%spell%~ END 
+				LPF ADD_SPELL_EFFECT INT_VAR opcode=171 target=1 timing=9 STR_VAR resource= EVAL ~%scroll_1%~ END 
 			END
 			
 			ACTION_IF (school = 2) BEGIN //conjuration
 				COPY_EXISTING ~QDMG+CON.SPL~ ~override~ 
-				LPF ADD_SPELL_EFFECT INT_VAR opcode=171 target=1 timing=9 STR_VAR resource= EVAL ~%spell%~ END 
+				LPF ADD_SPELL_EFFECT INT_VAR opcode=171 target=1 timing=9 STR_VAR resource= EVAL ~%scroll_1%~ END 
 			END
 			
 			ACTION_IF (school = 3) BEGIN //divination
 				COPY_EXISTING ~QDMG+DIV.SPL~ ~override~ 
-				LPF ADD_SPELL_EFFECT INT_VAR opcode=171 target=1 timing=9 STR_VAR resource= EVAL ~%spell%~ END 
+				LPF ADD_SPELL_EFFECT INT_VAR opcode=171 target=1 timing=9 STR_VAR resource= EVAL ~%scroll_1%~ END 
 			END
 			
 			ACTION_IF (school = 4) BEGIN //enchantment
 				COPY_EXISTING ~QDMG+ENC.SPL~ ~override~ 
-				LPF ADD_SPELL_EFFECT INT_VAR opcode=171 target=1 timing=9 STR_VAR resource= EVAL ~%spell%~ END 
+				LPF ADD_SPELL_EFFECT INT_VAR opcode=171 target=1 timing=9 STR_VAR resource= EVAL ~%scroll_1%~ END 
 			END
 			
 			ACTION_IF (school = 6) BEGIN //evocation
 				COPY_EXISTING ~QDMG+EVO.SPL~ ~override~ 
-				LPF ADD_SPELL_EFFECT INT_VAR opcode=171 target=1 timing=9 STR_VAR resource= EVAL ~%spell%~ END 
+				LPF ADD_SPELL_EFFECT INT_VAR opcode=171 target=1 timing=9 STR_VAR resource= EVAL ~%scroll_1%~ END 
 			END
 			
 			ACTION_IF (school = 5) BEGIN //illusion
 				COPY_EXISTING ~QDMG+ILL.SPL~ ~override~ 
-				LPF ADD_SPELL_EFFECT INT_VAR opcode=171 target=1 timing=9 STR_VAR resource= EVAL ~%spell%~ END 
+				LPF ADD_SPELL_EFFECT INT_VAR opcode=171 target=1 timing=9 STR_VAR resource= EVAL ~%scroll_1%~ END 
 			END
 			
 			ACTION_IF (school = 7) BEGIN //necromancy
 				COPY_EXISTING ~QDMG+NEC.SPL~ ~override~ 
-				LPF ADD_SPELL_EFFECT INT_VAR opcode=171 target=1 timing=9 STR_VAR resource= EVAL ~%spell%~ END 
+				LPF ADD_SPELL_EFFECT INT_VAR opcode=171 target=1 timing=9 STR_VAR resource= EVAL ~%scroll_1%~ END 
 			END	
 		END 
 	END 
