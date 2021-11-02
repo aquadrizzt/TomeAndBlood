@@ -4,8 +4,6 @@ ACTION_DEFINE_ASSOCIATIVE_ARRAY arcanespell BEGIN
 
 	// vanilla spells 
 
-WIZARD_ARMOR 					 	=> abjuration   	// Mage Armor 
-WIZARD_ARMOR_TNB				 	=> abjuration   	// Mage Armor 
 WIZARD_SHIELD 					 	=> abjuration   	// Shield 
 WIZARD_RESIST_FEAR				 	=> abjuration   	// Resist Fear 
 WIZARD_PROTECTION_FROM_PETRIFICATION => abjuration   	// IWD Protection from Petrification
@@ -75,6 +73,8 @@ WIZARD_TIME_STOP				 	=> alteration   	// Time Stop
 WIZARD_SHAPECHANGE				 	=> alteration   	// Shapechange 
 WIZARD_SHAPECHANGE_TNB			 	=> alteration   	// TnB Shapechange 
 
+WIZARD_ARMOR 					 	=> conjuration   	// Mage Armor 
+WIZARD_ARMOR_TNB				 	=> conjuration   	// Mage Armor 
 WIZARD_GREASE					 	=> conjuration  	// Grease 
 WIZARD_MONSTER_SUMMONING_LEVEL_1 	=> conjuration  	// SR MS I 
 WIZARD_DIMENSION_JUMP			 	=> conjuration  	// SR Dimension Jump 

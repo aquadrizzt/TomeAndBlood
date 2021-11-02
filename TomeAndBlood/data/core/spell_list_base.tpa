@@ -4,25 +4,24 @@ ACTION_DEFINE_ASSOCIATIVE_ARRAY arcanespell BEGIN
 
 	// vanilla spells 
 
-WIZARD_ARMOR			 		 => abjuration  	// Armor 
-WIZARD_SHIELD			 		 => abjuration  	// Shield 
-WIZARD_RESIST_FEAR		 		 => abjuration  	// Resist Fear 
+WIZARD_SHIELD			 		=> abjuration  	// Shield 
+WIZARD_RESIST_FEAR		 		=> abjuration  	// Resist Fear 
 WIZARD_PROTECTION_FROM_PETRIFICATION => abjuration  // IWD Protection from Petrification
-WIZARD_DISPEL_MAGIC				 => abjuration  	// Remove Magic 
-WIZARD_MINOR_SPELL_DEFLECTION	 => abjuration  	// Minor Spell Deflection 
-WIZARD_SPELL_THRUST		 		 => abjuration  	// Spell Thrust 
-WIZARD_TRUE_DISPEL_MAGIC 		 => abjuration  	// Dispel Magic [iwd]
+WIZARD_DISPEL_MAGIC				=> abjuration  	// Remove Magic 
+WIZARD_MINOR_SPELL_DEFLECTION	=> abjuration  	// Minor Spell Deflection 
+WIZARD_SPELL_THRUST		 		=> abjuration  	// Spell Thrust 
+WIZARD_TRUE_DISPEL_MAGIC 		=> abjuration  	// Dispel Magic [iwd]
 WIZARD_MINOR_GLOBE_OF_INVULNERABILITY => abjuration 	// Minor Globe of Invulnerability 
-WIZARD_REMOVE_CURSE 			 => abjuration  	// Remove Curse 
+WIZARD_REMOVE_CURSE 			=> abjuration  	// Remove Curse 
 WIZARD_OTILUKES_RESILIENT_SPHERE => abjuration  	// Otiluke's Resilient Sphere 
-WIZARD_SECRET_WORD		 		 => abjuration  	// Secret Word 
-WIZARD_SPELL_IMMUNITY	 		 => abjuration  	// Spell Immunity 
-WIZARD_BREACH			 		 => abjuration  	// Breach 
-WIZARD_SPELL_SHIELD		 		 => abjuration  	// Spell Shield 
-WIZARD_MINOR_SPELL_TURNING 		 => abjuration  	// Minor Spell Turning 
-WIZARD_GLOBE_OF_INVULNERABILITY  => abjuration  	// Globe of Invulnerability 
-WIZARD_PIERCE_MAGIC		 		 => abjuration  	// Pierce Magic 
-WIZARD_ANTIMAGIC_SHELL	 		 => abjuration  	// IWD Antimagic Shell 
+WIZARD_SECRET_WORD		 		=> abjuration  	// Secret Word 
+WIZARD_SPELL_IMMUNITY	 		=> abjuration  	// Spell Immunity 
+WIZARD_BREACH			 		=> abjuration  	// Breach 
+WIZARD_SPELL_SHIELD		 		=> abjuration  	// Spell Shield 
+WIZARD_MINOR_SPELL_TURNING 		=> abjuration  	// Minor Spell Turning 
+WIZARD_GLOBE_OF_INVULNERABILITY => abjuration  	// Globe of Invulnerability 
+WIZARD_PIERCE_MAGIC		 		=> abjuration  	// Pierce Magic 
+WIZARD_ANTIMAGIC_SHELL	 		=> abjuration  	// IWD Antimagic Shell 
 WIZARD_PROTECTION_FROM_MAGIC_WEAPONS => abjuration  	// Protection from Magical Weapons 
 WIZARD_SPELL_DEFLECTION			=> abjuration  		// Spell Deflection 
 WIZARD_SPELL_TURNING	 		=> abjuration  		// Spell Turning 
@@ -72,6 +71,7 @@ WIZARD_MALAVONS_CORROSIVE_FOG	=> alteration  	// Corrosive Fog/Death Fog
 WIZARD_TIME_STOP				=> alteration  	// Time Stop 
 WIZARD_SHAPECHANGE				=> alteration  	// Shapechange 
 
+WIZARD_ARMOR			 		=> conjuration  	// Armor 
 WIZARD_CHROMATIC_ORB	 		=> conjuration  	// Chromatic Orb 
 WIZARD_MELF_ACID_ARROW	 		=> conjuration  	// Melf's Acid Arrow 
 WIZARD_WEB				 		=> conjuration  	// Web 
