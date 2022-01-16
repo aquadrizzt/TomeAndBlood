@@ -652,11 +652,13 @@ COPY ~TomeAndBlood/data/specialists/d5_illus.spl~ ~override/d5_illu1.spl~
 
 //Necromancer "Rebuke Undead" ability
 COPY ~TomeAndBlood/data/specialists/d5nctua.spl~ ~override~
+  SAY NAME1 @125
 COPY ~TomeAndBlood/data/specialists/d5nctub.eff~ ~override~
 COPY ~TomeAndBlood/data/specialists/d5nctub.spl~ ~override~
 COPY ~TomeAndBlood/data/specialists/d5nctuc.spl~ ~override~
 COPY ~TomeAndBlood/data/specialists/d5nctuc.eff~ ~override~
 COPY ~TomeAndBlood/data/specialists/d5nctux.spl~ ~override~
+  SAY NAME1 @126
 COPY ~TomeAndBlood/data/specialists/d5nctu.bam~ ~override~
 COPY ~TomeAndBlood/data/specialists/d5nctux.bam~ ~override~
 
@@ -700,17 +702,29 @@ APPEND ~hidespl.2da~ ~SPWI314	1	0	0~ //add vampiric touch to hidespl
 // "_____ Touch" scrolls
 ACTION_IF FILE_EXISTS_IN_GAME ~scrl82.itm~ BEGIN
   COPY_EXISTING ~scrl82.itm~ ~override~
-	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 147 opcode = 171 STR_VAR resource = ~d5nect1~ END
+    WRITE_BYTE 0x1e (THIS BOR 0b01000000)
+    WRITE_BYTE 0x29 (THIS BOR 0b10000000)
+    WRITE_BYTE 0x2d (THIS BOR 0b01101111)
+    WRITE_BYTE 0x2f (THIS BOR 0b11000000)
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 147 /*opcode = 171*/ STR_VAR resource = ~d5nect1~ END
   BUT_ONLY
 END
 ACTION_IF FILE_EXISTS_IN_GAME ~scrl1c.itm~ BEGIN
   COPY_EXISTING ~scrl1c.itm~ ~override~
-	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 147 opcode = 171 STR_VAR resource = ~d5nect2~ END
+    WRITE_BYTE 0x1e (THIS BOR 0b01000000)
+    WRITE_BYTE 0x29 (THIS BOR 0b10000000)
+    WRITE_BYTE 0x2d (THIS BOR 0b01101111)
+    WRITE_BYTE 0x2f (THIS BOR 0b11000000)
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 147 /*opcode = 171*/ STR_VAR resource = ~d5nect2~ END
   BUT_ONLY
 END
 ACTION_IF FILE_EXISTS_IN_GAME ~scrl1q.itm~ BEGIN
   COPY_EXISTING ~scrl1q.itm~ ~override~
-	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 147 opcode = 171 STR_VAR resource = ~d5nect3~ END
+    WRITE_BYTE 0x1e (THIS BOR 0b01000000)
+    WRITE_BYTE 0x29 (THIS BOR 0b10000000)
+    WRITE_BYTE 0x2d (THIS BOR 0b01101111)
+    WRITE_BYTE 0x2f (THIS BOR 0b11000000)
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 147 /*opcode = 171*/ STR_VAR resource = ~d5nect3~ END
   BUT_ONLY
 END
 

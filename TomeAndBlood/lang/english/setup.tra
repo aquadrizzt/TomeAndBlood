@@ -189,6 +189,8 @@ NOTE: Due to an engine limitation, Wild Mages are required to select this spell 
 @122 = ~Necromancy VII~ 
 @123 = ~Necromancy VIII~ 
 @124 = ~Necromancy IX~ 
+@125 = ~Rebuke Undead~
+@126 = ~Cancel Rebuke Undead~
 
 //DRAGON DISCIPLES 
 @200 = ~~
