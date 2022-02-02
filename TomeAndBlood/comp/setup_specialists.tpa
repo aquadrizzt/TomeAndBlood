@@ -649,6 +649,9 @@ ELSE BEGIN
 END 
 */
 COPY ~TomeAndBlood/data/specialists/d5_illus.spl~ ~override/d5_illu1.spl~
+//	SAY NAME1 @
+//	SAY UNIDENTIFIED_DESC @
+
 
 //Necromancer "Rebuke Undead" ability
 COPY ~TomeAndBlood/data/specialists/d5nctua.spl~ ~override~
