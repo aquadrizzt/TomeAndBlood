@@ -1,5 +1,5 @@
 
-// v8.2 - 
+// v8.3 - fixed and more flexible sorcerer spell-learning function
 
 
 DEFINE_PATCH_FUNCTION ~TRA2STR~ // given tra reference, returns string
@@ -2684,7 +2684,7 @@ END		//	end function
 //__________________________________________________________________________________
 
 
-DEFINE_ACTION_FUNCTION sorcerer_spell_learning STR_VAR menu_suffix = ~W~ BEGIN
+DEFINE_ACTION_FUNCTION sorcerer_spell_learning STR_VAR menu_suffix = ~W~ spl_list = ~d5xsorc~ spl_clon_list = ~d5xclons~ itm_name = ~d5xsorc~ itm_ga_spl = ~d5xsor1~ spl_ap_spl = ~d5xsor2~ spl_tbl = ~SPLSRCKN~ BEGIN
 
 
 //find game install language__________________________________________________________
@@ -2694,7 +2694,7 @@ LAF set_lang RET game_lang END
 WITH_TRA ~%MOD_FOLDER%/lib/semi_spont/%game_lang%/semi_spont.tra~ BEGIN
 
 
-ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__sorc_learning.d5~) BEGIN
+  ACTION_IF !(FILE_EXISTS_IN_GAME ~%spl_list%.2da~) BEGIN
 
 // sorcerer spell system legend
 //
@@ -2702,22 +2702,21 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__sorc_learning.d5~) BEGIN
 2DA V1.0
 ****
             	     ResRef   Type>>>>>>>>
-  COPY ~d5/d5xsorc.2da~ ~override/d5xsorc.2da~
+   COPY ~d5/d5xsorc.2da~ ~override/%spl_list%.2da~
+  END
 
- ACTION_IF !(FILE_EXISTS_IN_GAME ~d5xclons.2da~) BEGIN
+  ACTION_IF !(FILE_EXISTS_IN_GAME ~%spl_clon_list%.2da~) BEGIN
 <<<<<<<< d5/d5xclons.2da
 2DA V1.0 
 IND
 		MEM 		CAST 		TYPE	PROCESSED
 100		#			#			#		#
 >>>>>>>> 
-  COPY ~d5/d5xclons.2da~ ~override/d5xclons.2da~ 
-END
-
-//ACTION_IF (FILE_EXISTS_IN_GAME ~d5xclons.2da~) BEGIN
+   COPY ~d5/d5xclons.2da~ ~override/%spl_clon_list%.2da~ 
+  END
 
   OUTER_SET high_ind = 99
-  COPY_EXISTING ~d5xclons.2da~ ~override~
+  COPY_EXISTING ~%spl_clon_list%.2da~ ~override~
     COUNT_2DA_COLS cols
     READ_2DA_ENTRIES_NOW ~r2en_xclons~ cols
     FOR (row = 0; row < r2en_xclons; ++row) BEGIN
@@ -2728,7 +2727,7 @@ END
     END
   BUT_ONLY
 
-  COPY_EXISTING ~d5xclons.2da~ ~override~
+  COPY_EXISTING ~%spl_clon_list%.2da~ ~override~
     COUNT_2DA_COLS cols
     COUNT_2DA_ROWS cols rows
     READ_2DA_ENTRY (rows - 1) 0 cols last_ind
@@ -2758,7 +2757,7 @@ END
   ACTION_PHP_EACH sorcerer_spells AS sorc_spell => ind BEGIN
     ACTION_IF (%ind% > 0) BEGIN
       OUTER_SET spl_ind = 0
-	  ACTION_IF (FILE_CONTAINS_EVALUATED (~d5xclons.2da~ ~%sorc_spell%~)) BEGIN
+	  ACTION_IF (FILE_CONTAINS_EVALUATED (~%spl_clon_list%.2da~ ~%sorc_spell%~)) BEGIN
 		COPY_EXISTING ~d5xclons.2da~ ~override~
 		  COUNT_2DA_COLS cols
 	      READ_2DA_ENTRIES_NOW ~r2en_xclons~ cols
@@ -2775,12 +2774,12 @@ END
         OUTER_SET high_ind = high_ind + 1
 	    OUTER_SET spl_ind = high_ind
 	  END
-	  APPEND ~d5xsorc.2da~ ~sorcerer	%sorc_spell%	3~
-      APPEND ~d5xclons.2da~ ~%spl_ind% 	%sorc_spell% 	%sorc_spell% 	arcane 	no ~ UNLESS ~%sorc_spell% 	%sorc_spell%~
+	  APPEND ~%spl_list%.2da~ ~sorcerer	%sorc_spell%	3~ UNLESS ~sorcerer	%sorc_spell%~
+      APPEND ~%spl_clon_list%.2da~ ~%spl_ind% 	%sorc_spell% 	%sorc_spell% 	arcane 	no ~ UNLESS ~%sorc_spell% 	%sorc_spell%~
     END
   END
 
-  COPY_EXISTING ~d5xclons.2da~ ~override~
+  COPY_EXISTING ~%spl_clon_list%.2da~ ~override~
     COUNT_2DA_COLS cols
     READ_2DA_ENTRIES_NOW ~r2en_xclons~ cols
     FOR (row = 0; row < r2en_xclons; ++row) BEGIN
@@ -2815,26 +2814,26 @@ END
 	 tip = RESOLVE_STR_REF (~Spell Selection~)
 	 desc = RESOLVE_STR_REF (~This ability allows you to learn new spells~)
     STR_VAR 
-	 resref = ~d5xsorc~
-	 spelllist = ~d5xsorc~
-	 spelltable = ~QD_SPLSRCKN~
+	 resref = EVAL ~%itm_name%~
+	 spelllist = EVAL ~%spl_list%~
+	 spelltable = EVAL ~%spl_tbl%~
 	 icon = ~spcl919b~
 	 title = ~Spell Selection~
 	 label = ~Select a spell to learn~
 	 subspell = EVAL ~%menu_suffix%~
   END
 
-  COPY_EXISTING ~d5xsorc.2da~ ~override/d5xsorcX.2da~
+  COPY_EXISTING ~%spl_list%.2da~ ~override/%spl_list%X.2da~
 
   COPY ~%MOD_FOLDER%/lib/semi_spont/d5lernwi.bam~ ~override~
 
-  COPY ~%MOD_FOLDER%/lib/semi_spont/d5xsorc.itm~ ~override~			//	learn spells .itm
+  COPY ~%MOD_FOLDER%/lib/semi_spont/%itm_name%.itm~ ~override~			//	learn spells .itm
     SAY NAME1 @301
     SAY NAME2 @301
     SAY UNIDENTIFIED_DESC @301
     SAY IDENTIFIED_DESC @301
     LPF ALTER_ITEM_HEADER INT_VAR target = 7 speed = 0 STR_VAR icon = ~d5lernwi~ END
-    LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 146 STR_VAR match_resource = ~d5msorc~ resource = ~d5xsorc~ END
+    LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 146 STR_VAR match_resource = ~d5xsorc~ resource = EVAL ~%itm_name%~ END
 
 //  OUTER_SET strng = RESOLVE_STR_REF (@301)
 
@@ -2844,26 +2843,25 @@ END
     WRITE_BYTE 0 0x0d
     READ_ASCII 0 mnl (1)  // 0x0d, Mac
   END
-  LAF ~ADD_ITEM_TOOLTIPS~ STR_VAR item = ~d5xsorc~ tooltips = ~@301~ /*EVAL ~%strng%~*/ END
+  LAF ~ADD_ITEM_TOOLTIPS~ STR_VAR item = EVAL ~%itm_name%~ tooltips = ~@301~ /*EVAL ~%strng%~*/ END
 
-  COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5xsor1.spl~
+  COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/%itm_ga_spl%.spl~
     SAY NAME1 @300
     SAY UNIDENTIFIED_DESC ~~
     WRITE_SHORT 0x1c 4
     LPF ALTER_SPELL_HEADER INT_VAR target = 5 location = 4 STR_VAR icon = ~d5lernwi~ END
-//    LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (2 << 24) parameter2 = (115 + (0x10000 * 1)) timing = 9 END
-//    LPF ADD_SPELL_EFFECT INT_VAR opcode = 143 target = 1 parameter1 = 14 timing = 9 STR_VAR resource = ~d5xsorc~ END
-    LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 1 STR_VAR resource = ~d5xsor1~ END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (2 << 24) parameter2 = (115 + (0x10000 * 1)) timing = 9 END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 143 target = 1 parameter1 = 14 timing = 9 STR_VAR resource = EVAL ~%itm_name%~ END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 1 STR_VAR resource = EVAL ~%itm_ga_spl%~ END
 
-  COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5xsor2.spl~
+  COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/%spl_ap_spl%.spl~
     SAY NAME1 @300
     SAY UNIDENTIFIED_DESC ~~
-    LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5xsor1~ END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = EVAL ~%itm_ga_spl%~ END
 
 
   COPY ~%MOD_FOLDER%/lib/semi_spont/d5_marker.d5~ ~override/d5__sorc_learning.d5~
 
-END		//	end marker file check
 
 END		//	end with_tra
 
@@ -3227,7 +3225,7 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5xlots.spl~) BEGIN
   COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5xlots.spl~
     LPF ALTER_SPELL_HEADER INT_VAR target = 5 END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_sorc_state% parameter2 = 111 timing = 1 STR_VAR resource = ~d5xxini~ END
-	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_sorc_state% parameter2 = 111 timing = 1 STR_VAR resource = ~d5xstts~ END
+//	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_sorc_state% parameter2 = 111 timing = 1 STR_VAR resource = ~d5xstts~ END
 //	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_sorc_state% parameter2 = 111 timing = 1 STR_VAR resource = ~d5xx001~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = 0 parameter2 = %fatigue_zero% timing = 1 STR_VAR resource = ~d5xlotf~ END
 END
@@ -3241,7 +3239,8 @@ END
 
 ACTION_IF !(FILE_EXISTS_IN_GAME ~d5xstts.spl~) BEGIN
   COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5xstts.spl~
-    LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (2 << 24) parameter2 = (115 + (0x10000 * 1)) timing = 9 END
+//    LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (2 << 24) parameter2 = (115 + (0x10000 * 1)) timing = 9 END
+// do that ^ in xsor1.spl in spell learning function, so regular sorcerers get it too
     LPF ADD_SPELL_EFFECT INT_VAR opcode = 143 target = 1 parameter1 = 14 timing = 9 STR_VAR resource = ~d5xsorc~ END
     LPF ADD_SPELL_EFFECT INT_VAR opcode = 328 target = 1 special = 1 parameter2 = %semi_sorc_state% timing = 9 END
     LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = %semi_sorc_state% parameter2 = 110 timing = 0 duration = 1 STR_VAR resource = ~d5xstts~ END
@@ -3286,7 +3285,7 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5xx000.spl~) BEGIN
     LPF ADD_SPELL_EFFECT INT_VAR opcode = 93 target = 1 parameter1 = 1 parameter2 = 1 timing = 1 END
 //  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5xlotz~ END
     LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter2 = 2 timing = 9 STR_VAR resource = ~d5xlots~ END
-    LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 0 duration = 1 STR_VAR resource = ~d5zzini~ END
+//  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 0 duration = 1 STR_VAR resource = ~d5zzini~ END
 //  LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 0 duration = 1 STR_VAR resource = ~d5xx000~ END
     LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 19 parameter2 = 105 timing = 9 STR_VAR resource = ~d5xx000~ END
     LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 318 target = 1 parameter1 = 2 parameter2 = 112 timing = 9 STR_VAR resource = ~d5xx000~ END
@@ -3310,6 +3309,7 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5xxini.spl~) BEGIN
     LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5x0slt~ END
     LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5x0slt~ END
     LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5x0slt~ END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5xstts~ END
 //    PATCH_IF (FILE_EXISTS_IN_GAME ~d5xsor1.spl~) BEGIN
 //      LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5xsor1~ END
 //    END

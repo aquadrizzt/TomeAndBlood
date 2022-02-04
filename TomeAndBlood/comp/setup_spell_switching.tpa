@@ -17,7 +17,7 @@ END
 //
 LAM sorcerer_learning_suffix
 
-LAF sorcerer_spell_learning STR_VAR menu_suffix = EVAL ~%sorcerer_learn_suffix%~ END
+LAF sorcerer_spell_learning STR_VAR menu_suffix = EVAL ~%sorcerer_learn_suffix%~ spl_list = ~d5xsorc~ spl_clon_list = ~d5xclons~ itm_name = ~d5xsorc~ itm_ga_spl = ~d5xsor1~ spl_ap_spl = ~d5xsor2~ spl_tbl = ~QD_SPLSRCKN~ END
 
 
 //set up switching  dialogue__________________________________________________________
