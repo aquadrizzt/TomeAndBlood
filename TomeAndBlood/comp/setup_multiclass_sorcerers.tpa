@@ -365,7 +365,7 @@ LAF sorcerer_spell_learning STR_VAR menu_suffix = EVAL ~%sorcerer_learn_suffix%~
 
 LAF semi_armor_casting END
 
-LAF semi_sorcerer_casting STR_VAR menu_suffix = EVAL ~%sorcerer_learn_suffix%~ END
+LAF semi_sorcerer_casting STR_VAR menu_suffix = EVAL ~%sorcerer_learn_suffix%~ spl_clon_list = ~d5xclons~ END
 
 APPEND ~d5sorc.2da~ ~SORC_INIT   AP_D5XX000  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
 

@@ -2860,7 +2860,7 @@ IND
     LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = EVAL ~%itm_ga_spl%~ END
 
 
-  COPY ~%MOD_FOLDER%/lib/semi_spont/d5_marker.d5~ ~override/d5__sorc_learning.d5~
+//  COPY ~%MOD_FOLDER%/lib/semi_spont/d5_marker.d5~ ~override/d5__sorc_learning.d5~
 
 
 END		//	end with_tra
@@ -2873,7 +2873,7 @@ END		//	end define function
 //__________________________________________________________________________________
 
 
-DEFINE_ACTION_FUNCTION semi_sorcerer_casting STR_VAR sorc_suffix = ~w~ BEGIN
+DEFINE_ACTION_FUNCTION semi_sorcerer_casting STR_VAR sorc_suffix = ~w~ spl_clon_list = ~d5xclons~ BEGIN
 // suffix must match the one in the menu function
 
 
@@ -3371,7 +3371,7 @@ END		//	end marker file check
 
 // casting system______________________________________________________________________
 //
-COPY_EXISTING ~d5xclons.2da~ ~override~
+COPY_EXISTING ~%spl_clon_list%.2da~ ~override~
   COUNT_2DA_COLS cols
   READ_2DA_ENTRIES_NOW ~r2en_xclons~ cols
   FOR (row = 0; row < r2en_xclons; ++row) BEGIN
