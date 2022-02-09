@@ -101,7 +101,7 @@ The foul ichor of oozes runs through your veins, granting you magical control ov
 
 COMPONENT 40: Revised Specialists
 
-This component defines specialists by what they can do, instead of by what they can't.  All specialists can cast all spells - there are no opposition schools.  And each specialist get some active or passive innate abilities that represent their mastery over their particular school of magic.  Finally, specialists gain the ability to spontaneously convert any of their memorized spells into a spell from their specialty school of one level lower.  The special abilities are:
+This component gives each specialist kit some active or passive innate abilities that represent their mastery over their particular school of magic.  Additionally, specialists gain the ability to spontaneously convert any of their memorized spells into a spell from their specialty school of one level lower.  The special abilities are:
 - Abjurer: when you cast a spell protection, it automatically creates a Spell Shield for free.
 - Conjurer: if SR is installed, you can cast Monster Summoning spells as if they are one level lower.
 - Diviner: IIRC, you get innate (and early) access to Contingency. Might also be able to insert one extra spell into contingencies (two spells in Contingency, three in Chain Contingency).
@@ -110,8 +110,6 @@ This component defines specialists by what they can do, instead of by what they 
 - Invoker: your spells do 20% more fire, cold, electric and magic damage.
 - Necromancer: you can innately use a modal ability to slow or control nearby undead. Also, the Chill Touch, Ghoul Touch, and Vampiric Touch spells are improved to have special effects against undead, and they are changed into innate abilities only learnable by necromancers.
 - Transmuter: you get the innate ability to temporarily create and control a golem.
-
-DO NOT install this component if you are going to use the 5E Spellcasting mod.
 
 COMPONENT 45: Arcane Crafting
 
