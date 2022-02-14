@@ -2090,7 +2090,7 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~d5zclons.2da~) BEGIN
 END
 
 // then just re-run the 'process spells' function
-// wait no better to do that manually
+// wait no, better to do that manually
 
 //LAF process_semi_spells END
 
@@ -2736,7 +2736,7 @@ END		//	end function
 //__________________________________________________________________________________
 
 
-DEFINE_ACTION_FUNCTION sorcerer_spell_learning STR_VAR menu_suffix = ~W~ spl_list = ~d5xsorc~ spl_clon_list = ~d5xclons~ itm_name = ~d5xsorc~ itm_ga_spl = ~d5xsor1~ spl_ap_spl = ~d5xsor2~ spl_tbl = ~SPLSRCKN~ BEGIN
+DEFINE_ACTION_FUNCTION sorcerer_spell_learning STR_VAR menu_suffix = ~W~ spl_list = ~d5xsorc~ itm_name = ~d5xsorc~ itm_ga_spl = ~d5xsor1~ spl_ap_spl = ~d5xsor2~ spl_tbl = ~SPLSRCKN~ BEGIN
 
 
 //find game install language__________________________________________________________
@@ -2746,117 +2746,40 @@ LAF set_lang RET game_lang END
 WITH_TRA ~%MOD_FOLDER%/lib/semi_spont/%game_lang%/semi_spont.tra~ BEGIN
 
 
+ ACTION_IF !(FILE_EXISTS_IN_GAME ~%itm_name%.spl~) BEGIN
+
   ACTION_IF !(FILE_EXISTS_IN_GAME ~%spl_list%.2da~) BEGIN
 
-// sorcerer spell system legend
-//
 <<<<<<<<  d5/d5xsorc.2da
 2DA V1.0
 ****
             	     ResRef   Type>>>>>>>>
    COPY ~d5/d5xsorc.2da~ ~override/%spl_list%.2da~
-  END
 
-  ACTION_IF !(FILE_EXISTS_IN_GAME ~%spl_clon_list%.2da~) BEGIN
-<<<<<<<< d5/d5xclons.2da
-2DA V1.0 
-IND
-		MEM 		CAST 		TYPE	PROCESSED
-100		#			#			#		#
->>>>>>>> 
-   COPY ~d5/d5xclons.2da~ ~override/%spl_clon_list%.2da~ 
-  END
+   OUTER_SPRINT $exclude_spls(~spwi000~)~0~
 
-  OUTER_SET high_ind = 99
-  COPY_EXISTING ~%spl_clon_list%.2da~ ~override~
-    COUNT_2DA_COLS cols
-    READ_2DA_ENTRIES_NOW ~r2en_xclons~ cols
-    FOR (row = 0; row < r2en_xclons; ++row) BEGIN
-      READ_2DA_ENTRY_FORMER ~r2en_xclons~ row 0 this_ind
-      PATCH_IF (this_ind > high_ind) BEGIN
-        SET high_ind = this_ind
-      END
-    END
-  BUT_ONLY
-
-  COPY_EXISTING ~%spl_clon_list%.2da~ ~override~
-    COUNT_2DA_COLS cols
-    COUNT_2DA_ROWS cols rows
-    READ_2DA_ENTRY (rows - 1) 0 cols last_ind
-  BUT_ONLY
-
-  COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
+   COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
     PATCH_IF (%SOURCE_SIZE% > 0x71) BEGIN
-//    SNPRINT 4 spell_prefix ~%SOURCE_RES%~
       READ_SHORT 0x1c spell_type 
       READ_BYTE 0x25 spell_school
       READ_LONG 0x34 spell_level
-      PATCH_IF (~%SOURCE_RES%~ STRING_MATCHES_REGEXP ~[Ss][Pp][Ww][Ii][1-9][0-5][0-9]$~ = 0) && (spell_type = 1) && !(spell_school = 10) && !(~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI908~) && !(~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI124~) BEGIN
-	    SNPRINT (0 - 3) spell_num ~%SOURCE_RES%~
-	    SET go = 1
-	    PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI420~) || (~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI710~) || (~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI809~) || (~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI617~) BEGIN
-	      PATCH_IF NOT (MOD_IS_INSTALLED ~TomeAndBlood.tp2~ ~55~) BEGIN
-		    SET go = 0
-	      END
-	    END	
-	    PATCH_IF (go = 1) && !(FILE_CONTAINS_EVALUATED (~hidespl.2da~ ~%SOURCE_RES%~)) BEGIN
+      PATCH_IF (~%SOURCE_RES%~ STRING_MATCHES_REGEXP ~[Ss][Pp][Ww][Ii][1-9][0-5][0-9]$~ = 0) AND (spell_type = 1) AND !(spell_school = 10) AND !(~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI908~) AND !(~%SOURCE_RES%~ STRING_EQUAL_CASE ~SPWI124~) BEGIN
+	    PATCH_IF !(FILE_CONTAINS_EVALUATED (~hidespl.2da~ ~%SOURCE_RES%~)) BEGIN
           SPRINT $sorcerer_spells(~%SOURCE_RES%~) ~1~
         END
       END
     END
-  BUT_ONLY
+   BUT_ONLY
   
-  ACTION_PHP_EACH sorcerer_spells AS sorc_spell => ind BEGIN
-    ACTION_IF (%ind% > 0) BEGIN
-      OUTER_SET spl_ind = 0
-	  ACTION_IF (FILE_CONTAINS_EVALUATED (~%spl_clon_list%.2da~ ~%sorc_spell%~)) BEGIN
-		COPY_EXISTING ~d5xclons.2da~ ~override~
-		  COUNT_2DA_COLS cols
-	      READ_2DA_ENTRIES_NOW ~r2en_xclons~ cols
-	      FOR (row = 0; row < r2en_xclons; ++row) BEGIN
-	        READ_2DA_ENTRY_FORMER ~r2en_xclons~ row 0 prev_ind
-	        READ_2DA_ENTRY_FORMER ~r2en_xclons~ row 2 cast_spell
-	        PATCH_IF (~%sorc_spell%~ STRING_EQUAL_CASE ~%cast_spell%~) BEGIN
-	          SET spl_ind = prev_ind
-	        END 
-	      END
-	    BUT_ONLY
-      END
-      ACTION_IF (spl_ind = 0) BEGIN
-        OUTER_SET high_ind = high_ind + 1
-	    OUTER_SET spl_ind = high_ind
+   ACTION_PHP_EACH sorcerer_spells AS sorc_spell => ind BEGIN
+    ACTION_PHP_EACH exclude_spls AS nogo => ind BEGIN
+      ACTION_IF !(~%sorc_spell%~ STRING_EQUAL_CASE ~%nogo%~) BEGIN
+	    APPEND ~%spl_list%.2da~ ~sorcerer	%sorc_spell%	3~ UNLESS ~sorcerer	%sorc_spell%~
 	  END
-	  APPEND ~%spl_list%.2da~ ~sorcerer	%sorc_spell%	3~ UNLESS ~sorcerer	%sorc_spell%~
-      APPEND ~%spl_clon_list%.2da~ ~%spl_ind% 	%sorc_spell% 	%sorc_spell% 	arcane 	no ~ UNLESS ~%sorc_spell% 	%sorc_spell%~
     END
-  END
+   END
 
-  COPY_EXISTING ~%spl_clon_list%.2da~ ~override~
-    COUNT_2DA_COLS cols
-    READ_2DA_ENTRIES_NOW ~r2en_xclons~ cols
-    FOR (row = 0; row < r2en_xclons; ++row) BEGIN
-      READ_2DA_ENTRY_FORMER ~r2en_xclons~ row 0 x_ind
-      READ_2DA_ENTRY_FORMER ~r2en_xclons~ row 1 mem_spell
-      INNER_ACTION BEGIN
-	    ACTION_IF (FILE_EXISTS_IN_GAME ~%mem_spell%.spl~) BEGIN
-          COPY_EXISTING ~%mem_spell%.spl~ ~override~
-		    READ_STRREF NAME1 spell_name
-		    READ_STRREF UNIDENTIFIED_DESC spell_description
-		    READ_LONG 0x34 spell_level
-		    READ_ASCII 0x3a spell_icon
-		  BUT_ONLY
-		  ACTION_IF !(FILE_EXISTS_IN_GAME ~%mem_spell%%menu_suffix%.spl~) BEGIN
-		    COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/%mem_spell%%menu_suffix%.spl~
-              SAY NAME1 ~%spell_name%~
-              SAY UNIDENTIFIED_DESC ~%spell_description%~
-			  WRITE_EVALUATED_ASCII 0x3a ~%spell_icon%~ #8
-			  LPF ALTER_SPELL_HEADER STR_VAR icon = EVAL ~%spell_icon%~ END
-		  	  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 171 target = 1 timing = 9 STR_VAR resource = EVAL ~%mem_spell%~ END
-		  END
-		END
-	  END
-	END
-  BUT_ONLY
+  END	//	end spell list doesn't exist
 
   INCLUDE ~%MOD_FOLDER%/lib/semi_spont/sequencer_menu.tpa~
 
@@ -2914,9 +2837,9 @@ IND
 
 //  COPY ~%MOD_FOLDER%/lib/semi_spont/d5_marker.d5~ ~override/d5__sorc_learning.d5~
 
+ END	//	end learning spell doesn't exist
 
 END		//	end with_tra
-
 
 END		//	end define function
 
@@ -2925,7 +2848,70 @@ END		//	end define function
 //__________________________________________________________________________________
 
 
-DEFINE_ACTION_FUNCTION semi_sorcerer_casting STR_VAR sorc_suffix = ~w~ spl_clon_list = ~d5xclons~ BEGIN
+DEFINE_ACTION_FUNCTION add_sorcerer_spells STR_VAR menu_suffix = ~W~ new_list = ~array~ spl_list = ~d5xsorc~ itm_name = ~d5xsorc~ spl_tbl = ~SPLSRCKN~ BEGIN
+
+
+//find game install language__________________________________________________________
+//
+LAF set_lang RET game_lang END
+
+WITH_TRA ~%MOD_FOLDER%/lib/semi_spont/%game_lang%/semi_spont.tra~ BEGIN
+
+ ACTION_IF (FILE_EXISTS_IN_GAME ~%itm_name%.spl~) AND (FILE_EXISTS_IN_GAME ~%spl_list%.2da~) BEGIN
+
+  ACTION_PHP_EACH ~%new_list%~ AS new_spl => ind BEGIN
+    APPEND ~%spl_list%.2da~ ~sorcerer	%new_spl%	3~ UNLESS ~sorcerer	%new_spl%~
+  END
+
+  INCLUDE ~%MOD_FOLDER%/lib/semi_spont/sequencer_menu.tpa~
+
+  LAF CREATE_SEQUENCER_MENU 
+    INT_VAR 
+	 name = RESOLVE_STR_REF (~Spell Selection~)
+	 tip = RESOLVE_STR_REF (~Spell Selection~)
+	 desc = RESOLVE_STR_REF (~This ability allows you to learn new spells~)
+    STR_VAR 
+	 resref = EVAL ~%itm_name%~
+	 spelllist = EVAL ~%spl_list%~
+	 spelltable = EVAL ~%spl_tbl%~
+	 icon = ~spcl919b~
+	 title = ~Spell Selection~
+	 label = ~Select a spell to learn~
+	 subspell = EVAL ~%menu_suffix%~
+  END
+
+  COPY_EXISTING ~%spl_list%.2da~ ~override/%spl_list%X.2da~
+
+  COPY ~%MOD_FOLDER%/lib/semi_spont/d5lernwi.bam~ ~override~
+
+  COPY ~%MOD_FOLDER%/lib/semi_spont/d5xsorc.itm~ ~override/%itm_name%.itm~			//	learn spells .itm
+    SAY NAME1 @301
+    SAY NAME2 @301
+    SAY UNIDENTIFIED_DESC @301
+    SAY IDENTIFIED_DESC @301
+    LPF ALTER_ITEM_HEADER INT_VAR target = 7 speed = 0 STR_VAR icon = ~d5lernwi~ END
+    LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 146 STR_VAR match_resource = ~d5xsorc~ resource = EVAL ~%itm_name%~ END
+
+  OUTER_INNER_PATCH ~1~ BEGIN
+    WRITE_BYTE 0 0x09
+    READ_ASCII 0 tab (1)  // 0x09, tab
+    WRITE_BYTE 0 0x0d
+    READ_ASCII 0 mnl (1)  // 0x0d, Mac
+  END
+  LAF ~ADD_ITEM_TOOLTIPS~ STR_VAR item = EVAL ~%itm_name%~ tooltips = ~@301~ /*EVAL ~%strng%~*/ END
+
+ END	//	end learning spell exists
+
+END		//	end with_tra
+
+END		//	end define function
+
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+
+DEFINE_ACTION_FUNCTION semi_sorcerer_casting STR_VAR sorc_suffix = ~w~ spl_list = ~d5xsorc~ spl_clon_list = ~d5xclons~ BEGIN
 // suffix must match the one in the menu function
 
 
@@ -2934,6 +2920,100 @@ DEFINE_ACTION_FUNCTION semi_sorcerer_casting STR_VAR sorc_suffix = ~w~ spl_clon_
 LAF set_lang RET game_lang END
 
 WITH_TRA ~%MOD_FOLDER%/lib/semi_spont/%game_lang%/semi_spont.tra~ BEGIN
+
+
+//prep spell indeex___________________________________________________________________
+//
+  ACTION_IF !(FILE_EXISTS_IN_GAME ~%spl_clon_list%.2da~) BEGIN
+<<<<<<<< d5/d5xclons.2da
+2DA V1.0 
+IND
+		MEM 		CAST 		TYPE	PROCESSED
+100		#			#			#		#
+>>>>>>>> 
+   COPY ~d5/d5xclons.2da~ ~override/%spl_clon_list%.2da~ 
+  END
+
+  OUTER_SET high_ind = 99
+  COPY_EXISTING ~%spl_clon_list%.2da~ ~override~
+    COUNT_2DA_COLS cols
+    READ_2DA_ENTRIES_NOW ~r2en_xclons~ cols
+    FOR (row = 0; row < r2en_xclons; ++row) BEGIN
+      READ_2DA_ENTRY_FORMER ~r2en_xclons~ row 0 this_ind
+      PATCH_IF (this_ind > high_ind) BEGIN
+        SET high_ind = this_ind
+      END
+    END
+  BUT_ONLY
+
+  COPY_EXISTING ~%spl_list%.2da~ ~override~
+    COUNT_2DA_COLS cols
+    READ_2DA_ENTRIES_NOW ~r2en_xsorc~ cols
+    FOR (row = 0; row < r2en_xsorc; ++row) BEGIN
+      READ_2DA_ENTRY_FORMER ~r2en_xsorc~ row 1 this_spell
+      PATCH_IF (FILE_EXISTS_IN_GAME ~%this_spell%.spl~) BEGIN
+        SPRINT $sorcerer_valid_spells(~%this_spell%~) ~1~
+      END
+    END
+  BUT_ONLY
+
+  COPY_EXISTING ~%spl_clon_list%.2da~ ~override~
+    COUNT_2DA_COLS cols
+    COUNT_2DA_ROWS cols rows
+    READ_2DA_ENTRY (rows - 1) 0 cols last_ind
+  BUT_ONLY
+
+  ACTION_PHP_EACH sorcerer_valid_spells AS sorc_spell => ind BEGIN
+    ACTION_IF (%ind% > 0) BEGIN
+      OUTER_SET spl_ind = 0
+	  ACTION_IF (FILE_CONTAINS_EVALUATED (~%spl_clon_list%.2da~ ~%sorc_spell%~)) BEGIN
+		COPY_EXISTING ~d5xclons.2da~ ~override~
+		  COUNT_2DA_COLS cols
+	      READ_2DA_ENTRIES_NOW ~r2en_xclons~ cols
+	      FOR (row = 0; row < r2en_xclons; ++row) BEGIN
+	        READ_2DA_ENTRY_FORMER ~r2en_xclons~ row 0 prev_ind
+	        READ_2DA_ENTRY_FORMER ~r2en_xclons~ row 2 cast_spell
+	        PATCH_IF (~%sorc_spell%~ STRING_EQUAL_CASE ~%cast_spell%~) BEGIN
+	          SET spl_ind = prev_ind
+	        END 
+	      END
+	    BUT_ONLY
+      END
+      ACTION_IF (spl_ind = 0) BEGIN
+        OUTER_SET high_ind = high_ind + 1
+	    OUTER_SET spl_ind = high_ind
+	  END
+	  APPEND ~%spl_list%.2da~ ~sorcerer	%sorc_spell%	3~ UNLESS ~sorcerer	%sorc_spell%~
+      APPEND ~%spl_clon_list%.2da~ ~%spl_ind% 	%sorc_spell% 	%sorc_spell% 	arcane 	no ~ UNLESS ~%sorc_spell% 	%sorc_spell%~
+    END
+  END
+
+  COPY_EXISTING ~%spl_clon_list%.2da~ ~override~
+    COUNT_2DA_COLS cols
+    READ_2DA_ENTRIES_NOW ~r2en_xclons~ cols
+    FOR (row = 0; row < r2en_xclons; ++row) BEGIN
+      READ_2DA_ENTRY_FORMER ~r2en_xclons~ row 0 x_ind
+      READ_2DA_ENTRY_FORMER ~r2en_xclons~ row 1 mem_spell
+      INNER_ACTION BEGIN
+	    ACTION_IF (FILE_EXISTS_IN_GAME ~%mem_spell%.spl~) BEGIN
+          COPY_EXISTING ~%mem_spell%.spl~ ~override~
+		    READ_STRREF NAME1 spell_name
+		    READ_STRREF UNIDENTIFIED_DESC spell_description
+		    READ_LONG 0x34 spell_level
+		    READ_ASCII 0x3a spell_icon
+		  BUT_ONLY
+		  ACTION_IF !(FILE_EXISTS_IN_GAME ~%mem_spell%%menu_suffix%.spl~) BEGIN
+		    COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/%mem_spell%%menu_suffix%.spl~
+              SAY NAME1 ~%spell_name%~
+              SAY UNIDENTIFIED_DESC ~%spell_description%~
+			  WRITE_EVALUATED_ASCII 0x3a ~%spell_icon%~ #8
+			  LPF ALTER_SPELL_HEADER STR_VAR icon = EVAL ~%spell_icon%~ END
+		  	  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 171 target = 1 timing = 9 STR_VAR resource = EVAL ~%mem_spell%~ END
+		  END
+		END
+	  END
+	END
+  BUT_ONLY
 
 
 //add spell slot stat checks to SPLPROT______________________________________________
