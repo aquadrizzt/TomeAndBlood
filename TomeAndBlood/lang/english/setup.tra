@@ -47,7 +47,9 @@
 @80 = ~Multiclass Sorcerers~
 @82 = ~Mage Kit: Arcanist~
 @85 = ~Sorcerer Kit: Mana Sorcerer~
-@93 = ~Make +Spell Slot Items work with MultiSorcerers and Arcanists~
+@91 = ~Make +Spell Slot Items work with MultiSorcerers/Arcanists~
+@92 = ~Bonuses for both memorization and casting slots~
+@93 = ~Bonuses for casting slots only~
 @95 = ~Ability Score Spellcasting Bonuses (install AFTER any mod that changes spell tables!)~
 
 @100 = ~~ 
@@ -436,6 +438,7 @@ Disadvantages:
 @1100  = ~Memorize spells~
 @1101 = ~(Spells cannot be cast while wearing armor.)~
 @1102 = ~(Spells cannot be cast while wearing armor heavier than studded leather.)~
+@1105 = ~Initialize sorcerer-style spell learning~
 @1401 = ~May cast arcane spells.~ 
 @1402 = ~May cast arcane spells.
 – May use the Scribe Scrolls ability.

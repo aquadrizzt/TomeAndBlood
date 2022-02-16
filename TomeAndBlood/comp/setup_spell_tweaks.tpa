@@ -78,8 +78,8 @@ ACTION_IF FILE_EXISTS_IN_GAME ~spwi804.spl~ BEGIN
 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %lesser_simulacrum_state% parameter2 = 110 timing = 1 STR_VAR resource = ~d5simul7~ END // and make d5simul7 318 immune if stat = 3
 //	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %simulacrum_state% parameter2 = 110 timing = 1 STR_VAR resource = ~d5simul8~ END
 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 STR_VAR resource = ~d5simul8~ END
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 72 target = 2 parameter1 = 4 parameter2 = 0 timing = 1 END 
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 241 target = 2 parameter1 = 0 parameter2 = 1002 duration = 1 END 
+//	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 72 target = 2 parameter1 = 4 parameter2 = 0 timing = 1 END 
+//	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 241 target = 2 parameter1 = 0 parameter2 = 1002 duration = 1 END 
 
 //...custom simulacrum summon
 //
@@ -178,6 +178,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~spwi804.spl~ BEGIN
 	COPY ~TomeAndBlood/lib/d5_base.spl~ ~override/d5si9ilb.spl~
 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 72 target = 2 parameter1 = 4 parameter2 = 0 timing = 1 END 
 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 241 target = 2 parameter1 = 0 parameter2 = 1002 duration = 1 END 
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 2 timing = 4 duration = 2 STR_VAR resource = ~d5si8049~ END
 
 	LAF RES_NUM_OF_SPELL_NAME
 		STR_VAR spell_name = ~D5_WIZARD_CLONE~
@@ -294,7 +295,7 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~d5__insanctibility.d5~ BEGIN
   LAM D5_INSANCTIBILITY
 END
 
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ BEGIN 	// no need to patch 203 if SR installed
+ACTION_IF !(FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~) BEGIN 	// no need to patch 203 if SR installed
   COPY_EXISTING ~spwi203.spl~ ~override~
 	LPF CLONE_EFFECT INT_VAR silent = 1 match_opcode = 116 opcode = 193 target = 1 STR_VAR resource = ~~ END
 //	PATCH_FOR_EACH second IN ~6~ ~12~ ~18~ ~24~ ~30~ BEGIN 	//	do this more often
@@ -310,6 +311,26 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ BEGIN 	// no need to patch 20
 	  BUT_ONLY
 	END
   END
+END
+
+ACTION_IF (FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~) BEGIN 	// no need to patch 203 if SR installed
+  COPY_EXISTING ~spwi203.spl~ ~override~
+    LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 174 match_duration = 30 duration = 60 END
+	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 193 match_duration = 30 duration = 60 END
+    PATCH_FOR_EACH dur IN ~6~ ~12~ ~18~ ~24~ ~30~ BEGIN
+      LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 146 match_duration = %dur% duration = (%dur% - 3) STR_VAR match_resource = ~spwi203d~ END
+    END
+    PATCH_FOR_EACH new_dur IN ~33~ ~36~ ~39~ ~42~ ~45~ ~48~ ~51~ ~54~ ~57~ ~60~ BEGIN
+      LPF ADD_SPELL_EFFECT INT_VAR target = 2 opcode = 146 parameter1 = 1 parameter2 = 1 timing = 4 duration = %new_dur% STR_VAR resource = ~spwi203d~ END 
+    END
+	READ_STRREF 0x54 ~description~
+	PATCH_IF (~%description%~ STRING_CONTAINS_REGEXP ~5 rounds~) = 0 BEGIN
+	  INNER_PATCH_SAVE new_desc ~%description%~ BEGIN
+		REPLACE_TEXTUALLY ~5 rounds~ ~10 rounds~
+	  END
+	  SAY_EVALUATED 0x54 ~%new_desc%~
+	END
+  IF_EXISTS BUT_ONLY
 END
 
 /*
@@ -412,6 +433,15 @@ END 													// end sr is installed
 //__________________________________________________________________________________
 */
 
+//oracle dispels illusionary creatures_______________________________________________
+//
+ACTION_IF !FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ BEGIN 	// not needed for Spell Revisions
+  COPY_EXISTING ~spwi515.spl~ ~override~
+    LPF ADD_SPELL_EFFECT INT_VAR target = 2 opcode = 177 parameter1 = 7 parameter2 = 7 timing = 1 STR_VAR resource = ~destself~ END
+  IF_EXISTS BUT_ONLY
+END
+//__________________________________________________________________________________
+
 
 //true sight = illusionary creature immunity________________________________________
 //
@@ -428,6 +458,9 @@ IF_EXISTS BUT_ONLY
 COPY_EXISTING ~spcl232.spl~ ~override~
 	LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 193 opcode = 100 parameter2 = 7 parameter1 = 7 END
 IF_EXISTS BUT_ONLY
+COPY_EXISTING ~spcl732.spl~ ~override~
+	LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 193 opcode = 100 parameter2 = 7 parameter1 = 7 END
+IF_EXISTS BUT_ONLY
 COPY_EXISTING ~sppr505d.spl~ ~override~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 2 parameter1 = 7 parameter2 = 7 timing = 0 duration = 7 STR_VAR resource = ~d5tsill1~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 2 parameter1 = 7 parameter2 = 7 timing = 0 duration = 7 STR_VAR resource = ~d5tsill2~ END
@@ -439,6 +472,12 @@ IF_EXISTS BUT_ONLY
 COPY_EXISTING ~spcl232d.spl~ ~override~
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 2 parameter1 = 7 parameter2 = 7 timing = 0 duration = 7 STR_VAR resource = ~d5tsill1~ END
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 2 parameter1 = 7 parameter2 = 7 timing = 0 duration = 7 STR_VAR resource = ~d5tsill2~ END
+IF_EXISTS BUT_ONLY
+COPY_EXISTING ~d5tsnewe.spl~ ~override~
+	LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 193 opcode = 100 parameter2 = 7 parameter1 = 7 END
+IF_EXISTS BUT_ONLY
+COPY_EXISTING ~d5tsnewf.spl~ ~override~
+    WRITE_BYTE 0x27 0
 IF_EXISTS BUT_ONLY
 CREATE EFF ~d5tsill1~
 	WRITE_LONG 0x10 22
@@ -483,7 +522,7 @@ END
 // ***** do for all nondetection items
 
 
-//handle SR potions of sight________________________________________________________
+//handle IR potions of sight________________________________________________________
 //
 COPY_EXISTING ~potn30.spl~ ~override~ 
   LPF CLONE_EFFECT INT_VAR match_opcode = 63 opcode = 193 parameter1 = 0 parameter2 = 1 END

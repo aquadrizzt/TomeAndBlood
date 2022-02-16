@@ -1,6 +1,6 @@
 # TomeAndBlood
 
-Tome And Blood: More Options for Wizards and Sorcerers v0.9.13
+Tome And Blood: More Options for Wizards and Sorcerers v0.9.26
 
 ## Overview
 
@@ -18,6 +18,14 @@ COMPONENT 11: Rebalanced Spell Schools
 -- A couple other little changes
 
 These changes are determined by a list that resides in /tomeandblood/data/core/spell_list_base.tpa.  That file is human readable and you can change it as you like, so you have complete control over the school of every spell, before installing the mod. 
+
+COMPONENT 12: Rebalanced Specialist Opposition Schools
+
+This component allows changes to which spells are in an "opposition school" and thus unavailable to specialists. There are currently three options, two of which will be available for install depending on which game is being played:
+
+-- Baldur's Gate Opposition Schools (matches BG/BG2)
+-- Icewind Dale Opposition Schools (matches IWD)
+-- No Opposition Schools (all specialists can cast all spells)
 
 COMPONENT 13: Revised Illusionary Clones
 
@@ -38,6 +46,10 @@ This component merges the effects of Invisibility and Sanctuary (you can now loo
 -- If you cast 2nd-level Detect Invisible, the caster will be able to see and target invisible enemies but other party members who cannot see invisible cannot. 
 -- The Nondetection spell is renamed "Protection from Divination" and improved to actually block any DIVINATIONATTACK effects - including, I think, thieves' Detect Illusion skill. But, a caster of Detect Invisible or True Sight to spot and target enemies who are protected by Non-detection. 
 -- The rather useless 3rd-level arcane spell "Detect Illusions" is replaced with a clone of the 3rd-level divine spell "Invisibility Purge."
+
+Additionally, the 5th-level Oracle spell is empowered to destroy nearby illusionary creatures, including Shadow Monsters, Projected Images and the like.
+
+Finally, SR's Faerie Fire and Glitterdust will be able to counter Reflected Image and Mirror Image, since the insubstantial images will not be affected by the spells.
 
 COMPONENT 16: Revised Identify Spell
 
@@ -101,33 +113,29 @@ The foul ichor of oozes runs through your veins, granting you magical control ov
 
 COMPONENT 40: Revised Specialists
 
-This component defines specialists by what they can do, instead of by what they can't.  All specialists can cast all spells - there are no opposition schools.  And each specialist get some active or passive innate abilities that represent their mastery over their particular school of magic.  Finally, specialists gain the ability to spontaneously convert any of their memorized spells into a spell from their specialty school of one level lower.  The special abilities are:
+This component gives each specialist kit some active or passive innate abilities that represent their mastery over their particular school of magic.  Additionally, specialists gain the ability to spontaneously convert any of their memorized spells into a spell from their specialty school of one level lower.  The special abilities are:
 - Abjurer: when you cast a spell protection, it automatically creates a Spell Shield for free.
-- Conjurer: if SR is installed, you can cast Monster Summoning spells as if they are one level lower.
+- Conjurer: if SR is installed, you can cast Monster Summoning spells as if they are one level lower. In the absence of SR, you get bonus innate versions of the vanilla Monster Summoning spells.
 - Diviner: IIRC, you get innate (and early) access to Contingency. Might also be able to insert one extra spell into contingencies (two spells in Contingency, three in Chain Contingency).
 - Enchanter: the enchanter and all nearby allies get a +1 bonus to saves vs. spells.
 - Illusionist: you can use the Shadow Step ability, and have permanent Non-Detection.
 - Invoker: your spells do 20% more fire, cold, electric and magic damage.
 - Necromancer: you can innately use a modal ability to slow or control nearby undead. Also, the Chill Touch, Ghoul Touch, and Vampiric Touch spells are improved to have special effects against undead, and they are changed into innate abilities only learnable by necromancers.
-- Transmuter: you get the innate ability to temporarily create and control a golem.
-
-*DO NOT* install this component if you are going to use the broader 5E Spellcasting mod.
-
-COMPONENT 45: Arcane Crafting
-
-This component allows wizards to create scrolls, wands, and potions, by expending XP and/or gold.
+- Transmuter: you get an innate ability to temporarily create and control a golem.
 
 COMPONENT 48: Armored Casting for Bards
 
 Bards can cast spells in leather armor.
 
-COMPONENTS 51-55: Innate Metamagic
+COMPONENTS 51, 52, 53, 54: Innate Metamagic
 
-The first four of these components make spell sequencers and contingencies into innate abilities (Chain Contingency becomes an HLA) so they don't cost spell slots; but "filling" them with spells still uses the spell slots associated with those spells.  These four components differ according to how you get metamagic (automatically as you level up, or learned from scrolls) and whether or not sorcerers can use metamagic spells.
+These components make spell sequencers and contingencies into innate abilities (Chain Contingency becomes an HLA) so they don't cost spell slots; but "filling" them with spells still uses the spell slots associated with those spells.  These four components differ according to how you get metamagic:
+-- 51: all arcane casters get sequencer and contingency abilities automatically
+-- 52: only mages and bards (not sorcerers) get sequencer and contingency abilities automatically
+-- 53: sequencer and contingency abilities are learned from scrolls, and can also be learned during character generation and by sorcerers
+-- 54: sequencer and contingency abilities can only be learned from scrolls
 
-The 5th version leaves sequencers and contingencies as spells you must memorize, but when you cast them, you "fill" them with any spell you *know,* without expending any memorization slots. 
-
-COMPONENTS 61-63: Cantrips
+COMPONENTS 61, 62, 63: Cantrips
 
 Component 61 allows mages and sorcerers to use one cantrip as an innate ability with unlimited uses.
 
@@ -164,15 +172,19 @@ What it says on the tin :O
 
 Multiclass sorcerers' casting slots are governed by MXSPLSRC.2da, just like the regular sorcerer. However, any changes to that file must be made BEFORE you install multiclass sorcerers. So if you like to change spell tables with Tweaks Anthology or something like that, make sure you do the spell-table-changing portion of that mod before installing Tome & Blood.
 
+Installation of this component will also automatically install the Revised Idenitfy spell and convert spell sequencers and contingencies to pick from any known spell, instead of from any memorized spell (changes which are necessary to work with these casters).
+
 COMPONENT 82: Arcanist
 
-This is a wizard kit that prepares and casts spells according to the D&D 5E rules. If you are not familiar, it achieves a hybrid status between the BG2 mage and sorcerer by differentiating "spell preparation slots" from "spallcasting slots." The Arcanist learns spells from scrolls, like any wizard, and has spell preparation slots according to the standard wizard spell table (MXSPLWIZ.2da). In order to actually prepare spells, the Arcanist must use a "Prepare Spells" innate ability before resting. Upon waking, they will be able to use spellcasting slots to cast their prepared spells spontaneously, like a sorcerer.  If you want to cast the same spells the next day, then no action is needed; after resting your spellcasting slots will be restored. If you want to cast different spells the next day, you must again use the the "Prepare Spells" ability just before resting, which will give you access to your preparation slots and allow you to fill them with a different set of spells.
+This is a wizard kit that prepares and casts spells according to the D&D 5E rules. If you are not familiar, it achieves a hybrid status between the BG2 mage and sorcerer by differentiating "spell preparation slots" from "spellcasting slots." The Arcanist learns spells from scrolls, like any wizard, and has spell preparation slots according to the standard wizard spell table (MXSPLWIZ.2da). In order to actually prepare spells, the Arcanist must use a "Prepare Spells" innate ability before resting. Upon waking, they will be able to use spellcasting slots to cast their prepared spells spontaneously, like a sorcerer.  If you want to cast the same spells the next day, then no action is needed; after resting your spellcasting slots will be restored. If you want to cast different spells the next day, you must again use the the "Prepare Spells" ability just before resting, which will give you access to your preparation slots and allow you to fill them with a different set of spells.
 
-The Arcanist's preparation slots are governed by MXSPLWIZ.2da; any changes you make to the standard wizard spell table will affect how many spells an Arcanist can prepare. The Arcanist's spellcasting slots are set to match the unmodded spell slots of a Dragon Disciple. If you want to change this, you can modify "TomeandBlood/data/arcanist/D5CSTARC.2da" BEFORE installing the mod.
+The Arcanist's preparation slots are governed by MXSPLWIZ.2da; any changes you make to the standard wizard spell table will affect how many spells an Arcanist can prepare. The Arcanist's spellcasting slots are set to roughly match the unmodded spell slots of a Dragon Disciple. If you want to change this, you can modify "TomeandBlood/data/arcanist/D5CSTARC.2da" before installing the mod.
 
-*DO NOT* install this component if you are going to use the broader 5E Spellcasting mod.
+Installation of this component will also automatically install the Revised Identify spell and convert spell sequencers and contingencies to pick from any known spell, instead of from any memorized spell (changes which are necessary to work with these casters).
 
-COMPONENT 85: Mana Sorcerer
+**DO NOT INSTALL THIS COMPONENT** if you plan to install the "5E-Style Spellcasting" mod. That mod basically applies the Arcanist spellcasting style to every spellcaster (except sorcerers and shamans). This would make the Arcanist entirely moot as a kit, and installing both on top of each other might cause technical problems.
+
+COMPONENT 80: Mana Sorcerer
 
 This component gives sorcerers (only unkitted sorcerers, for now) an innate ability to use mana points to cast spells instead of spell-level-based casting slots.  Your known spells will be the same (you must choose them manually from an item ability) but you will have a pool of mana points instead of spell slots.  Casting a spell costs as many points as its spell level; you will start with ~2 mana points and can progress to as many as 120, at level 25.  While more flexible, this is generally less firepower than a normal sorcerer has if you tally up their spell slots; so the Mana Sorcerer has a Restorative Meditation innate ability that can be used between fights, which will restore one half of the points you recently spent, rounded down.
 
@@ -180,19 +192,10 @@ COMPONENT 93: Bonus Spell Slot Items Work With Arcanists and Multiclass Sorcerer
 
 Items like the Ring of Wizardry work by giving bonus spell slots to mages and bonus casting slots to sorcerers. Since Arcanists, multi-sorcerers, and other 5E-style casters are, as a technical matter, a species of wizard, this means tose items will increase your memorization slots but not your casting slots. This component will change such items to give casting slot bonuses to Arcanists, multi-sorcerers, and other 5E casters. 
 
-Due to certain limitations, this can only allow each item to grant a +1 bonus at any given spell level. So for the sake of balance, all bonus-slot items will be modified to give a +1 bonus at their respective spell levels. This will notably change Edwin's Amulet in bg2 to give +1 spell per level instead of +2. Also BG2's Ring of Acuity, which usually grants +2 2nd-level spell slots, will instead grant +1 2nd-level slot. It may similarly change aa few items in IWDEE.
+Due to certain limitations, this can only allow each item to grant a +1 bonus at any given spell level. So for the sake of balance, all bonus-slot items will be modified to give a +1 bonus at their respective spell levels. This will notably change Edwin's Amulet in bg2 to give +1 spell per level instead of +2. Also BG2's Ring of Acuity, which usually grants +2 2nd-level spell slots, will instead grant +1 2nd-level slot. It may similarly change a few items in IWDEE.
 
-The "double spell slots" items, specifically the "Evermemory" Ring of Wizardry in BG1 and Kontik's Ring of Wizardry in IWDEE, will get a once-per-day item ability to refresh all 1st-level slots or all 1st- and 2nd-level slots, respectively. This way they can achieve their original design, doubling your spellcasting slots, even with these new technical limitations.
+The "double spell slots" items, specifically the "Evermemory" Ring of Wizardry in BG1 and Kontik's& Edion's Rings of Wizardry in IWDEE, will work as normal for normal spellcasters and sorcerers; and for 5E-style casters and multiclass sorcerers they will get a once-per-day item ability to refresh all casting slots of the relevant levels. This way they can achieve their original design, doubling your spellcasting slots, even with these new technical limitations.
 
-COMPONENT 95: Ability Score-Based Bonus Spells
-
-This component gives bonus spells to wizards for high INT scores, and to bards and sorcerers for high CHA scores. The bonuses go up to +2 spell slots per spell level, up to 7th-level spells for wizards, up to 6th-level spells for bards, and up to 5th-level spells for sorcerers.
-
-Any mod component that changes the game's spell tables (such as, say, Tweaks Anthology) should be installed BEFORE this component.
-
-The Scales of Balance mod now has a component which matches this exactly; if it is easier, you can skip the one here and install it via SoB after any spell table-altering mods.
-
-DO NOT install this component if you are going to use the 5E Spellcasting mod - install it later from Scales of Balance, instead.
 
 ##Bugs 
 

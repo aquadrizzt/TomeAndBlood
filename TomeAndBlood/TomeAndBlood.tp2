@@ -1,6 +1,6 @@
 BACKUP ~TomeAndBlood/backup~
 AUTHOR ~aquadrizzt~
-VERSION ~0.9.25.2~ 
+VERSION ~0.9.26~ 
 
 ALWAYS
 
@@ -146,14 +146,11 @@ LAF  END
 // -----------------------------
 BEGIN @16
 DESIGNATED 16
+REQUIRE_PREDICATE !(FILE_EXISTS_IN_GAME ~qdtnb_identify.qd~) @1
+REQUIRE_PREDICATE !(FILE_EXISTS_IN_GAME ~d5_new_identify.d5~) @1
 //GROUP @5
 
-//COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_identify.qd~ //detection for this component 
-// now done inside the function
-
-INCLUDE ~TomeAndBlood/comp/setup_spell_tweaks.tpa~ 
-
-LAF new_identify END
+LAF semi_spont_identify END
 
 
 // -----------------------------
@@ -380,6 +377,7 @@ LAF innate_metamagic INT_VAR sequencer_method = 4 END
 
 // -----------------------------
 
+/*
 BEGIN @55
 DESIGNATED 55
 SUBCOMPONENT @50 (GAME_IS ~bgee bg2ee eet iwdee~)
@@ -389,10 +387,8 @@ COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_metamagic.qd~ //detection for this co
 
 //OUTER_SET sequencer_method = 5
 
-INCLUDE ~TomeAndBlood/comp/setup_metamagic.tpa~
-
-LAF innate_metamagic INT_VAR sequencer_method = 5 END
-
+LAF semi_spont_sequencers END
+*/
 
 // -----------------------------
 // 60: CANTRIPS (Subtledoctor)
@@ -549,6 +545,14 @@ INCLUDE ~TomeAndBlood/comp/setup_multiclass_sorcerers.tpa~
 
 LAF multiclass_sorcerers END
 
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__semi_spont_sequencers.d5~) BEGIN
+  LAF semi_spont_sequencers END
+END
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5_new_identify.d5~) BEGIN
+  LAF semi_spont_identify END
+END
+
 
 // -----------------------------
 // 82: ARCANIST
@@ -567,6 +571,14 @@ INCLUDE ~TomeAndBlood/comp/setup_arcanist.tpa~
 LAF add_arcanist END
 
 COPY ~%MOD_FOLDER%/lib/semi_spont/d5_marker.d5~ ~override/d5__5E_casting_arcane.d5~
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__semi_spont_sequencers.d5~) BEGIN
+  LAF semi_spont_sequencers END
+END
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5_new_identify.d5~) BEGIN
+  LAF semi_spont_identify END
+END
 
 
 // -----------------------------
@@ -587,19 +599,33 @@ LAF mana_sorcerer END
 // -----------------------------
 // 93: BONUS SLOT ITEMS
 // -----------------------------
-BEGIN @93
-DESIGNATED 93
+
+//bonus casting slots from items - with mem slots___________________________________
+//
+BEGIN @92
+DESIGNATED 92
+SUBCOMPONENT @91
 REQUIRE_PREDICATE (FILE_EXISTS_IN_GAME ~enginest.2da~) @3
 REQUIRE_PREDICATE (MOD_IS_INSTALLED ~tomeandblood.tp2~ ~80~) OR (MOD_IS_INSTALLED ~tomeandblood.tp2~ ~82~) @4
-//GROUP @7
 
-COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_slotitm.qd~ //detection for this component 
+COPY ~%MOD_FOLDER%/lib/semi_spont/d5_marker.d5~ ~override/d5__spont_items_mem.d5~
 
-INCLUDE ~TomeAndBlood/lib/semi_spontaneous.tpa~
+LAF arcane_spont_items INT_VAR 5e_plus_mem = 1 END
+//LAF divine_spont_items INT_VAR 5e_plus_mem = 1 END
 
-LAF arcane_spont_items END
+//bonus casting slots from items - no mem slots_____________________________________
+//
+BEGIN @93
+DESIGNATED 93
+SUBCOMPONENT @91
+
+COPY ~%MOD_FOLDER%/lib/semi_spont/d5_marker.d5~ ~override/d5__spont_items_no_mem.d5~
+
+LAF arcane_spont_items INT_VAR 5e_plus_mem = 0 END
+//LAF divine_spont_items INT_VAR 5e_plus_mem = 0 END
 
 
+/*
 // -----------------------------
 // 95: ABILITY SCORE BONUSES
 // -----------------------------
@@ -615,6 +641,7 @@ COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_attrbon.qd~ //detection for this comp
 INCLUDE ~TomeAndBlood/comp/setup_ability_bonuses.tpa~
 
 LAF ability_bonus_spells END
+*/
 
 
 ////////////////////////////////////////////////////////////////////////////////////////

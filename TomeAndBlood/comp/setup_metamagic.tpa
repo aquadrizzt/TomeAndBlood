@@ -59,6 +59,7 @@ COPY ~TomeAndBlood/data/metamagic/d5conti.spl~ ~override~
 COPY ~TomeAndBlood/data/metamagic/spwi617.spl~ ~override~ 
 	SAY NAME1 @6351
 	SAY UNIDENTIFIED_DESC @6352
+	WRITE_SHORT 0x1c 4
 /*
 COPY ~TomeAndBlood/data/metamagic/d5wi617.spl~ ~override~
 	SAY NAME1 @6351
@@ -72,7 +73,7 @@ COPY ~TomeAndBlood/data/metamagic/d5_ccont.spl~ ~override/spwi908.spl~
 	SAY UNIDENTIFIED_DESC @6354
 
 ACTION_IF FILE_EXISTS_IN_GAME ~scrl9a.itm~ THEN BEGIN
-	COPY_EXISTING ~scrl9a.itm~ ~override/scrl9q.itm~ 	// replace CC scrolls with Pierce Shield
+	COPY_EXISTING ~scrl9l.itm~ ~override/scrl9q.itm~ 	// replace CC scrolls with Spell Trap
 END
 
 LAF action_add_hla STR_VAR kit_name = ~MAGE~ ability = ~GA_SPWI908~ num_allowed = ~1~ END
@@ -206,21 +207,29 @@ ACTION_IF (%sequencer_method% = 1) || (%sequencer_method% = 2) BEGIN
 	LPF CLONE_EFFECT INT_VAR silent = 1 match_opcode = 177 match_parameter1 = 1 parameter1 = 7 END
 	LPF CLONE_EFFECT INT_VAR silent = 1 match_opcode = 177 match_parameter1 = 1 parameter1 = 13 END
 	LPF CLONE_EFFECT INT_VAR silent = 1 match_opcode = 177 match_parameter1 = 1 parameter1 = 14 END
+	LPF CLONE_EFFECT INT_VAR silent = 1 match_opcode = 177 match_parameter1 = 1 parameter1 = 10 END
+	LPF CLONE_EFFECT INT_VAR silent = 1 match_opcode = 177 match_parameter1 = 1 parameter1 = 17 END
   COPY_EXISTING ~d5adsq2b.spl~ ~override/d5adsq2m.spl~ 
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 177 parameter1 = 1 END
 	LPF CLONE_EFFECT INT_VAR silent = 1 match_opcode = 177 match_parameter1 = 1 parameter1 = 7 END
 	LPF CLONE_EFFECT INT_VAR silent = 1 match_opcode = 177 match_parameter1 = 1 parameter1 = 13 END
 	LPF CLONE_EFFECT INT_VAR silent = 1 match_opcode = 177 match_parameter1 = 1 parameter1 = 14 END
+	LPF CLONE_EFFECT INT_VAR silent = 1 match_opcode = 177 match_parameter1 = 1 parameter1 = 10 END
+	LPF CLONE_EFFECT INT_VAR silent = 1 match_opcode = 177 match_parameter1 = 1 parameter1 = 17 END
   COPY_EXISTING ~d5adsq3b.spl~ ~override/d5adsq3m.spl~ 
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 177 parameter1 = 1 END
 	LPF CLONE_EFFECT INT_VAR silent = 1 match_opcode = 177 match_parameter1 = 1 parameter1 = 7 END
 	LPF CLONE_EFFECT INT_VAR silent = 1 match_opcode = 177 match_parameter1 = 1 parameter1 = 13 END
 	LPF CLONE_EFFECT INT_VAR silent = 1 match_opcode = 177 match_parameter1 = 1 parameter1 = 14 END
+	LPF CLONE_EFFECT INT_VAR silent = 1 match_opcode = 177 match_parameter1 = 1 parameter1 = 10 END
+	LPF CLONE_EFFECT INT_VAR silent = 1 match_opcode = 177 match_parameter1 = 1 parameter1 = 17 END
   COPY_EXISTING ~d5adcntb.spl~ ~override/d5adcntm.spl~ 
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 177 parameter1 = 1 END
 	LPF CLONE_EFFECT INT_VAR silent = 1 match_opcode = 177 match_parameter1 = 1 parameter1 = 7 END
 	LPF CLONE_EFFECT INT_VAR silent = 1 match_opcode = 177 match_parameter1 = 1 parameter1 = 13 END
 	LPF CLONE_EFFECT INT_VAR silent = 1 match_opcode = 177 match_parameter1 = 1 parameter1 = 14 END
+	LPF CLONE_EFFECT INT_VAR silent = 1 match_opcode = 177 match_parameter1 = 1 parameter1 = 10 END
+	LPF CLONE_EFFECT INT_VAR silent = 1 match_opcode = 177 match_parameter1 = 1 parameter1 = 17 END
 
   COPY_EXISTING ~d5adsq1b.spl~ ~override/d5adsq1s.spl~ 
 	LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 177 parameter1 = 19 END

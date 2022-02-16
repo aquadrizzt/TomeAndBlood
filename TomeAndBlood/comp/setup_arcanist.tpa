@@ -116,7 +116,7 @@ BUT_ONLY
 
 COPY ~tomeandblood/data/arcanist/d5acnst.2da~ ~override~
 
-ACTION_IF MOD_IS_INSTALLED ~tomeandblood.tp2~ ~51~ BEGIN	//	innate sequencers
+ACTION_IF (MOD_IS_INSTALLED ~tomeandblood.tp2~ ~51~) OR (MOD_IS_INSTALLED ~tomeandblood.tp2~ ~51~) BEGIN	//	innate sequencers
   APPEND ~d5acnst.2da~ ~METAMAGIC   ****        ****        ****        ****        ****        ****        AP_D5ADSQ1M ****        ****        AP_D5ADCNTM ****        ****        AP_D5ADSQ2M ****        ****        AP_D5ADSQ3M ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~ UNLESS ~METAMAGIC~
 END
 ACTION_IF MOD_IS_INSTALLED ~tomeandblood.tp2~ ~61~ BEGIN	//	innate cantrips

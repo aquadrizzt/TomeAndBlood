@@ -361,7 +361,25 @@ END
 
 LAM sorcerer_learning_suffix
 
-LAF sorcerer_spell_learning STR_VAR menu_suffix = EVAL ~%sorcerer_learn_suffix%~ spl_list = ~d5xsorc~ itm_name = ~d5xsorc~ itm_ga_spl = ~d5xsor1~ spl_ap_spl = ~d5xsor2~ spl_tbl = ~QD_SPLSRCKN~ END
+LAF sorcerer_spell_learning STR_VAR menu_suffix = EVAL ~%sorcerer_learn_suffix%~ spl_list = ~d5xsorc~ itm_name = ~d5xsorc~ spl_tbl = ~QD_SPLSRCKN~ spl_clon_list = ~d5xclons~ END
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5xsor1.spl~) BEGIN
+  COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5xsor1.spl~
+    SAY NAME1 @1105
+    SAY UNIDENTIFIED_DESC ~~
+    WRITE_SHORT 0x1c 4
+    LPF ALTER_SPELL_HEADER INT_VAR target = 5 location = 4 STR_VAR icon = ~d5lernwi~ END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (2 << 24) parameter2 = (115 + (0x10000 * 1)) timing = 9 END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 143 target = 1 parameter1 = 14 timing = 9 STR_VAR resource = ~d5xsorc~ END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 1 STR_VAR resource = ~d5xsor1~ END
+END
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5xsor2.spl~) BEGIN
+  COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5xsor2.spl~
+    SAY NAME1 @1105
+    SAY UNIDENTIFIED_DESC ~~
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5xsor1~ END
+END
 
 LAF semi_armor_casting END
 
