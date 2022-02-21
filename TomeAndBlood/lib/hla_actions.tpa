@@ -163,7 +163,12 @@ BEGIN
 	        i = file // skip iterating over the rest of the rows
 	      END
 	    END  
-	    INSERT_2DA_ROW ("%first_empty_row%") %cols% ~%2da_row% %ability% %icon% %strref% %min_lev% %max_level% %num_allowed% %prerequisite% %excluded_by% %alignment_restrict%~
+	    PATCH_IF (VARIABLE_IS_SET %first_empty_row%) BEGIN
+	      INSERT_2DA_ROW ("%first_empty_row%") %cols% ~%2da_row% %ability% %icon% %strref% %min_lev% %max_level% %num_allowed% %prerequisite% %excluded_by% %alignment_restrict%~
+	    END 
+	    ELSE BEGIN
+	      INSERT_2DA_ROW (%rows%) %cols% ~%2da_row% %ability% %icon% %strref% %min_lev% %max_level% %num_allowed% %prerequisite% %excluded_by% %alignment_restrict%~
+	    END
 	    PRETTY_PRINT_2DA
     ACTION_IF NOT (~%l_table%~ STRING_EQUAL_CASE ~d5_%lu_row%~) BEGIN
       COPY_EXISTING ~LUABBR.2DA~ ~override~
@@ -262,7 +267,12 @@ BEGIN
 	        i = file // skip iterating over the rest of the rows
 	      END
 	    END  
-	    INSERT_2DA_ROW ("%first_empty_row%" - 1) %cols% ~%2da_row% %ability% %icon% %strref% %min_lev% %max_level% %num_allowed% %prerequisite% %excluded_by% %alignment_restrict%~
+	    PATCH_IF (VARIABLE_IS_SET %first_empty_row%) BEGIN
+	      INSERT_2DA_ROW ("%first_empty_row%" - 1) %cols% ~%2da_row% %ability% %icon% %strref% %min_lev% %max_level% %num_allowed% %prerequisite% %excluded_by% %alignment_restrict%~
+	    END 
+	    ELSE BEGIN
+	      INSERT_2DA_ROW (rows - 1) %cols% ~%2da_row% %ability% %icon% %strref% %min_lev% %max_level% %num_allowed% %prerequisite% %excluded_by% %alignment_restrict%~
+	    END
 	  END
 	  PRETTY_PRINT_2DA
     ACTION_IF NOT (~%l_table%~ STRING_EQUAL_CASE ~d5_%lu_row%~) BEGIN

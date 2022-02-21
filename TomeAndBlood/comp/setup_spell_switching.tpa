@@ -171,7 +171,7 @@ COPY ~tomeandblood/data/core/d5spm3m.spl~ ~override~
 //spell learning for trueclass sorc___________________________________________________
 //
 COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5xsor0.spl~
-    SAY NAME1 ~Initialize sorcerer spell-learning~
+    SAY NAME1 ~~
     SAY UNIDENTIFIED_DESC ~~
     LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 target = 1 parameter1 = 19 parameter2 = 5 timing = 1 duration = 0 STR_VAR resource = ~d5xsor1~ END
     LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = 19 parameter2 = 105 timing = 1 duration = 0 STR_VAR resource = ~d5xsor2~ END

@@ -713,7 +713,7 @@ END
 
 ACTION_IF !(FILE_EXISTS_IN_GAME ~qdtnb_identify.qd~) BEGIN
 
-  INCLUDE ~TomeAndBlood/lib/b3identify.tph~
+  INCLUDE ~TomeAndBlood/lib/semi_spont/b3identify.tph~
   LAF B3_IDENTIFY_INSTALL END
 
   ACTION_IF (GAME_IS ~bgee bg2ee eet~) BEGIN

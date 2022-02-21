@@ -1,6 +1,6 @@
 BACKUP ~TomeAndBlood/backup~
 AUTHOR ~aquadrizzt~
-VERSION ~0.9.26~ 
+VERSION ~0.9.26.1~ 
 
 ALWAYS
 
@@ -606,12 +606,14 @@ BEGIN @92
 DESIGNATED 92
 SUBCOMPONENT @91
 REQUIRE_PREDICATE (FILE_EXISTS_IN_GAME ~enginest.2da~) @3
-REQUIRE_PREDICATE (MOD_IS_INSTALLED ~tomeandblood.tp2~ ~80~) OR (MOD_IS_INSTALLED ~tomeandblood.tp2~ ~82~) @4
+//REQUIRE_PREDICATE (MOD_IS_INSTALLED ~tomeandblood.tp2~ ~80~) OR (MOD_IS_INSTALLED ~tomeandblood.tp2~ ~82~) @4
 
-COPY ~%MOD_FOLDER%/lib/semi_spont/d5_marker.d5~ ~override/d5__spont_items_mem.d5~
+ACTION_IF (MOD_IS_INSTALLED ~tomeandblood.tp2~ ~80~) OR (MOD_IS_INSTALLED ~tomeandblood.tp2~ ~82~) BEGIN
+ COPY ~%MOD_FOLDER%/lib/semi_spont/d5_marker.d5~ ~override/d5__spont_items_mem.d5~
 
-LAF arcane_spont_items INT_VAR 5e_plus_mem = 1 END
-//LAF divine_spont_items INT_VAR 5e_plus_mem = 1 END
+ LAF arcane_spont_items INT_VAR 5e_plus_mem = 1 END
+// LAF divine_spont_items INT_VAR 5e_plus_mem = 1 END
+END
 
 //bonus casting slots from items - no mem slots_____________________________________
 //
@@ -619,10 +621,12 @@ BEGIN @93
 DESIGNATED 93
 SUBCOMPONENT @91
 
-COPY ~%MOD_FOLDER%/lib/semi_spont/d5_marker.d5~ ~override/d5__spont_items_no_mem.d5~
+ACTION_IF (MOD_IS_INSTALLED ~tomeandblood.tp2~ ~80~) OR (MOD_IS_INSTALLED ~tomeandblood.tp2~ ~82~) BEGIN
+ COPY ~%MOD_FOLDER%/lib/semi_spont/d5_marker.d5~ ~override/d5__spont_items_no_mem.d5~
 
-LAF arcane_spont_items INT_VAR 5e_plus_mem = 0 END
-//LAF divine_spont_items INT_VAR 5e_plus_mem = 0 END
+ LAF arcane_spont_items INT_VAR 5e_plus_mem = 0 END
+// LAF divine_spont_items INT_VAR 5e_plus_mem = 0 END
+END
 
 
 /*
