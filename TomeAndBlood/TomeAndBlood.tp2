@@ -1,6 +1,6 @@
 BACKUP ~TomeAndBlood/backup~
 AUTHOR ~aquadrizzt~
-VERSION ~0.9.26.1~ 
+VERSION ~0.9.26.2~ 
 
 ALWAYS
 
@@ -500,7 +500,7 @@ LAF indelible_familiars END
 
 
 // -----------------------------
-// 71: SORCERER SPELL SWITCHING
+// 71-72: SORCERER SPELL SWITCHING
 // -----------------------------
 BEGIN @71
 DESIGNATED 71
@@ -514,10 +514,8 @@ INCLUDE ~TomeAndBlood/comp/setup_spell_switching.tpa~
 
 LAF spell_switching INT_VAR switch_interval = 1 END
 
+// -----------------------------
 
-// -----------------------------
-// 72: SORCERER SPELL SWITCHING
-// -----------------------------
 BEGIN @72
 DESIGNATED 72
 SUBCOMPONENT @70 
@@ -564,7 +562,9 @@ REQUIRE_PREDICATE (FILE_EXISTS_IN_GAME ~enginest.2da~) @3
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_arcanist.qd~ //detection for this component 
 
-LAF semi_spontaneous_casting INT_VAR include_arcane = 1 END
+LAF semi_spontaneous_casting END
+LAF semi_arcane_spells END
+LAF process_semi_spells END
 
 INCLUDE ~TomeAndBlood/comp/setup_arcanist.tpa~
 
