@@ -1,0 +1,484 @@
+//
+//
+//Grammarsalad TRA strings
+//
+
+
+// Actually, all of this is probably unused...
+
+@115003 = ~Écriture de parchemins~
+@115004 = ~Vous devez avoir un sort mémorisé pour écrire un parchemin. Essayez à nouveau une fois que vous aurez mémorisé au moins un sort.~
+@115005 = ~Vous devez posséder au moins 100 pièces d'or pour écrire un parchemin. Essayez à nouveau quand vous posséderez 100 pièces d'or ou plus.~
+@115006 = ~Sorts de niveau 1 (100 pièces d'or)~
+@115007 = ~Sorts de niveau 2 (200 pièces d'or)~
+@115008 = ~Sorts de niveau 3 (300 pièces d'or)~
+@115009 = ~Sorts de niveau 4 (400 pièces d'or)~
+@115010 = ~Sorts de niveau 5 (500 pièces d'or)~
+@115011 = ~Sorts de niveau 6 (1,000 pièces d'or)~
+@115012 = ~Sorts de niveau 7 (1,500 pièces d'or)~
+@115013 = ~Sorts de niveau 8 (2,500 pièces d'or)~
+@115014 = ~Sorts de niveau 9 (5,000 pièces d'or)~
+@115015 = ~Quitter~
+@115016 = ~Choisir un autre niveau de sort~
+@115017 = ~Écriture de parchemin
+Cette compétence vous permet d'écrire un parchemin pour un sort que vous avez mémorisé en ce moment, à condition de disposer de l'or nécessaire.~
+@115018 = ~Vous devez avoir au moins 100 points d'expérience pour écrire un parchemin. Essayez à nouveau quand vous posséderez l'expérience nécessaire.~
+@115019 = ~Choisir le niveau de sort~
+@115020 = ~Création de baguette~
+@115021 = ~Création de baguette
+Cette compétence vous permet de créer une baguette pour un sort que vous avez mémorisé en ce moment, à condition de disposer de l'or nécessaire. Notez que tous les sorts ne peuvent être liés à une baguette. En général, seuls les sorts offensifs peuvent l'être.~
+@115022 = ~Vous devez posséder au moins 900 pièces d'or pour créer une baguette. Essayez à nouveau quand vous posséderez 900 pièces d'or ou plus.~
+@115023 = ~Création de baguette~
+@115024 = ~Vous devez posséder au moins 75 pièces d'or pour créer une potion. Essayez à nouveau quand vous posséderez 75 pièces d'or ou plus.~
+@115025 = ~Création de potion~
+@115026 = ~Sorts bonus~
+
+// start unused (component 45 arcane crafting is deprecated)
+@115027 = ~Rupture hasardeuse de Nahal~
+// only changes casting time
+@115028 = ~Rupture hasardeuse de Nahal
+(Invocation/Évocation)
+
+Niveau : 1
+Portée : spéciale
+Durée : spéciale
+Temps d'incantation : 5
+Zone d'effet : spéciale
+Jet de sauvegarde : spéciale
+
+
+Ce sort est le dernier recours du mage entropiste. Lorsqu'il le lance, il libère une bouffée d'énergie chaotique dans l'espoir de l'attraper au vol et de la façonner pour obtenir l'effet désiré. C'est en général un échec, mais il se produit toujours quelque chose.
+
+Le mage spécifie le sort qu'il va essayer de simuler avant de commencer son incantation. Le sort simulé doit pouvoir être lancé par le magicien (c'est-à-dire, figurer dans son livre de sort), mais il n'a pas besoin de l'avoir en mémoire. Après tous les préparatifs nécessaires (désignation de la cible et spécification de tous les paramètres requis par le sort simulé), le magicien lance la rupture hasardeuse de Nahal. Une sphère d'énergie magique est créée et il essaye de la modeler. L'effet réel du sort est déterminé aléatoirement.
+
+Comme le mage essaie néanmoins de diriger l'énergie magique, son niveau est additionné au jet qui sert à déterminer l'effet réel du sort. Cela signifie qu'il a de bonnes chances d'obtenir un résultat positif. Malheureusement, la plupart du temps, l'effet obtenu est complètement imprévu et peut varier de positif à complètement catastrophique : pas de réussite sans prise de risques !~
+
+@115029 = ~Bouclier du chaos~
+// removes: it does not stack with improved chaos shield
+@115030 = ~Bouclier du chaos
+(Abjuration)
+
+Niveau : 2
+Portée : personnelle
+Durée : 5 rounds + 1 tour par 5 niveaux
+Temps d'incantation : 2
+Zone d'effet : le lanceur
+Jet de sauvegarde : aucun
+
+Ce sort augmente les probabilités d'obtenir un résultat favorable en cas de hiatus entropique. À chaque fois qu'un jet est fait sur la table, un bonus de 15 est ajouté. Lorsque la rupture hasardeuse est lancée, ce bonus s'ajoute au niveau du mage entropiste.~
+
+@115031 = ~Bouclier majeur du chaos~
+// changes duration (but not in french?), removes "does not stack..."
+@115032 = ~Bouclier majeur du chaos
+(Abjuration)
+
+Niveau : 7
+Portée : personnelle
+Durée : 2 tours
+Temps d'incantation : 7
+Zone d'effet : le lanceur
+Jet de sauvegarde : aucun
+
+Ce sort augmente les probabilités d'obtenir un résultat favorable en cas de hiatus entropique. À chaque fois qu'un jet est fait sur la table, un bonus de 25 est ajouté. Lorsque la rupture hasardeuse est lancée, ce bonus s'ajoute au niveau du mage entropiste. ~
+// end unused
+
+@115033 = ~Baguette de catégorie 1 (900 po)~
+@115034 = ~Baguette de catégorie 2 (1 900 po)~
+@115035 = ~Baguette de catégorie 3 (5 000 po)~
+@115036 = ~Baguette de catégorie 4 (10 000 po)~
+@115037 = ~Baguette de catégorie 5 (15 000 po)~
+
+@115038 = ~Rechargement de baguettes~
+
+@115039 = ~Rechargement de baguettes
+Cette compétence vous permet de recharger des baguettes si vous possédez le sort ou le parchemin nécessaire et l'or requis pour acheter les matériaux spéciaux. Les conditions sur les sorts et parchemins requis pour recharger une baguette sont moins strictes que pour créer une baguette (c'est à dire qu'il est possible de recharger une baguette avec des sorts de niveau moins élevés que ceux pour créer cette baguette).
+Vous ne pouvez pas recharger de baguette si vous en avez plusieurs en votre possession immédiate parce que le conflit dissiperait les énergies magiques.~
+
+@115040 = ~Vous devez posséder au moins 225 pièces d'or pour recharger une baguette. Essayez à nouveau quand vous posséderez 225 pièces d'or ou plus.~
+
+@115041 = ~Choisir une baguette à recharger~
+@115042 = ~Recharger la baguette de projectiles magiques~
+@115043 = ~Choisir quel sort ou parchemin utiliser pour recharger votre baguette~
+@115044 = ~Utiliser un parchemin de Projectile magique~
+@115045 = ~Utiliser un sort de Projectile magique~
+@115046 = ~Recharger une autre baguette~
+// unused @115047 = ~Baguette de sommeil~
+@115048 = ~Baguette d'effroi~
+// unused @115049 = ~Utiliser un parchemin de Hantise~
+// unused @115050 = ~Utiliser un sort de Hantise~
+@115051 = ~Utiliser un parchemin d'Horreur~
+@115052 = ~Utiliser un sort d'Horreur~
+// unused @115053 = ~Utiliser un parchemin de Symbole, terreur~
+// unused @115054 = ~Utiliser un sort de Symbole, terreur~
+@115055 = ~Baguette de convocation de monstres	~
+@115056 = ~Baguette de feu~
+@115057 = ~Baguette de paralysie~
+@115058 = ~Baguette de foudre~
+// unused @115059 = ~Baguette de mort gelée~
+@115060 = ~Utiliser un parchemin de Convocation de monstres I~
+@115061 = ~Utiliser un sort de Convocation de monstres I~
+// unused @115062 -115071
+@115072 = ~Baguette de projectiles magiques : Vous ne pouvez recharger une baguette si vous disposez de plusieurs exemplaires du même type de baguette dans votre inventaire. Annulez puis essayez à nouveau quand vous n’aurez qu’une seule baguette de projectiles magiques dans votre inventaire.~
+@115073 = ~*Recharge la baguette de projectiles magiques*~
+@115074 = ~Recharger la baguette de sommeil~
+@115076 = ~Utiliser un parchemin de Sommeil~
+@115077 = ~Utiliser un sort de Sommeil~
+@115080 = ~*Recharge la baguette de sommeil*~
+@115082 = ~Baguette de projectiles magiques~
+@115083 = ~Choisir la baguette que vous souhaitez créer~
+@115084 = ~Choisir quel parchemin ou sort vous souhaitez utiliser pour créer votre baguette~
+@115085 = ~Utiliser un parchemin de projectiles magiques~
+@115086 = ~Utiliser un sort de projectiles magiques~
+@115087 = ~Choisir une autre catégorie~
+@115088 = ~Choisir une autre baguette de catégorie 1~
+@115089 = ~Baguette de sommeil~
+@115090 = ~Choisir une autre baguette de catégorie 2~
+@115091 = ~Utiliser un sort de Boule de feu~
+@115092 = ~Choisir une autre baguette de catégorie 3~
+@115095 = ~Utiliser un sort de Feu solaire~
+@115096 = ~Utiliser un sort de Linceul de flammes~
+@115097 = ~Utiliser un sort de Convocation d’un élémentaire de feu~
+@115098 = ~Utiliser un sort de Boule de feu à retardement~
+@115099 = ~Utiliser un sort de Nuage incendiaire~
+@115100 = ~Utiliser un sort de Nuée de météores~
+@115101 = ~Utiliser un parchemin de Boule de feu~
+@115102 = ~Utiliser un parchemin de Flèche enflammée~
+@115103 = ~Utiliser un parchemin de Convocation d’un élémentaire de feu mineur~
+@115104 = ~Choisir la catégorie que vous souhaitez recharger.~
+@115105 = ~Baguette de catégorie 1 (225 po)~
+@115106 = ~Baguette de catégorie 2 (475 po)~
+@115107 = ~Baguette de catégorie 3 (1 250 po)~
+@115108 = ~Baguette de catégorie 4 (2 500 po)~
+@115109 = ~Baguette de catégorie 5 (3 750 po)~
+@115110 = ~Vous devez posséder au moins 475 pièces d'or pour recharger une baguette de catégorie 2. Essayez à nouveau quand vous posséderez 475 pièces d'or ou plus.~
+@115111 = ~Vous devez posséder au moins 1 250 pièces d'or pour recharger une baguette de catégorie 3. Essayez à nouveau quand vous posséderez 1 250 pièces d'or ou plus.~
+@115112 = ~Vous devez posséder au moins 2 500 pièces d'or pour recharger une baguette de catégorie 4. Essayez à nouveau quand vous posséderez 2 500 pièces d'or ou plus.~
+@115113 = ~Vous devez posséder au moins 3 750 pièces d'or pour recharger une baguette de catégorie 5. Essayez à nouveau quand vous posséderez 3 750 pièces d'or ou plus.~
+@115114 = ~Utiliser un parchemin d’Éclair~
+@115115 = ~Utiliser un sort d’Éclair~
+@115116 = ~Utiliser un sort de Convocation de monstres I~
+@115117 = ~Utiliser un parchemin de Convocation de monstres I~
+@115118 = ~Cette baguette mortelle peut lancer un certain nombre de sorts de froid.
+
+PARAMÈTRES :
+
+Capacités de charge :
+- Lance de glace
+  Dégâts : 5d6 dégâts de froid
+  Étourdit la cible pendant 3 rounds ; jet de sauvegarde contre les sorts pour annuler
+  Portée : 30 mètres
+  Zone d'effet : 1 créature
+
+- Nuée de boules de neige de Snilloc
+  Dégâts : 4d3 dégâts de froid ; jet de sauvegarde contre les sorts pour demi-dégâts
+  Portée : 12 mètres
+  Zone d'effet : rayon de 4,50 mètres
+
+- Tempête de glace
+  Dégâts : 3d10 dégâts de froid
+  Portée : 12 mètres
+  Zone d'effet : rayon de 4,50 mètres
+
+Nécessite : 9 en intelligence
+
+Poids : 1~
+
+@115119 =  ~Cette puissante baguette a été créée par le magicien Hegthen, qui souhaitait se protéger des créatures de feu de son pire ennemi. Il s'en servit souvent au cours du long conflit qui l'opposa à son rival. Après avoir été traqué dix années durant par les séides de son ennemi, Hegthen décida de l'attaquer de front. Il le terrassa au cours de l'un des duels les plus spectaculaires de toute l'histoire de Suzail. Victorieux, il imposa à son rival que le nom de celui-ci soit effacé par magie de l'esprit de tous ceux qui le connaissaient. L'autre accepta, et on ne le connaît plus désormais que sous le nom de Flamme Masquée. Dangereux terroriste, il fut tué par les Dragons Pourpres et Mages de Guerre du Cormyr en 1212 CV.
+
+PARAMÈTRES :
+
+Capacités de charge :
+- Lance de glace
+  Dégâts : 5d6 dégâts de froid
+  Étourdit la cible pendant 3 rounds ; jet de sauvegarde contre les sorts pour annuler
+  Portée : 30 mètres
+  Zone d'effet : 1 créature
+
+- Nuée de boules de neige de Snilloc
+  Dégâts : 4d3 dégâts de froid ; jet de sauvegarde contre les sorts pour demi-dégâts
+  Portée : 12 mètres
+  Zone d'effet : rayon de 4,50 mètres
+
+- Tempête de glace
+  Dégâts : 3d10 dégâts de froid
+  Portée : 12 mètres
+  Zone d'effet : rayon de 4,50 mètres
+
+Nécessite : 9 en intelligence
+
+Poids : 1~
+@115120 =  ~Baguette de mort gelée~
+
+~Cette baguette mortelle permet de lancer Tempête de glace.
+
+PARAMÈTRES :
+
+Capacités de charge :
+
+Tempête de glace
+  Dégâts : 3d10 de froid
+  Portée : 12 m
+  Zone d’effet : rayon de 9 m
+
+Nécessite : 9 en intelligence
+
+Poids : 1~
+@115121 = ~Baguette de mort gelée~
+@115122 = ~Utiliser un sort de Tempête de glace~
+@115123 = ~Utiliser un parchemin de Tempête de glace~
+@115124 = ~Choisir une autre baguette de catégorie 4~
+@115125 = ~Baguette d’armure~
+@115126 = ~Cette baguette, que l'on confond souvent avec une autre portant le même nom, protège son utilisateur à l'aide de sorts. Malheureusement pour son créateur, les trolls sont particulièrement résistants...
+
+PARAMÈTRES :
+
+Capacités de charge :
+- Bouclier : classe d'armure de 4 (2 contre les projectiles) et immunité aux Projectiles magiques
+  Durée : 15 rounds
+  Zone d'effet : l'utilisateur
+
+- Armure fantomatique : classe d'armure de 3
+  Durée : 7 rounds
+  Zone d'effet : l'utilisateur
+
+Nécessite : 9 en intelligence
+
+Poids : 1~
+@115127 = ~Utiliser un sort d’Armure spirituelle~
+@115128 = ~Utiliser un parchemin d’Armure spirituelle~
+
+@115129 = ~Utiliser un sort d’Immobilisation des monstres~
+@115130 = ~Utiliser un parchemin d’Immobilisation des monstres~
+
+@115131 = ~Choisir une autre baguette de catégorie 5~
+@115132 = ~Baguette de givre~
+
+@115133 = ~Baguettes de catégorie 6 (25 000 po)~
+@115134 = ~Baguette de Contrecoup~
+@115135 = ~Choisir une autre baguette de catégorie 6~
+@115136 = ~Baguette de métamorphose~
+@115137 = ~Baguette de Métamorphose
+La baguette émet un rayon vert qui porte au maximum à 18 mètres. Une créature touchée par ce rayon doit réussir un jet de sauvegarde contre les baguettes, sous peine d'être métamorphosée en écureuil.
+
+PARAMÈTRES :
+
+Capacités de charge :
+- métamorphose la cible en écureuil (jet de sauvegarde contre les baguettes pour annuler)
+  Portée : 30 mètres
+  Zone d'effet : 1 créature
+  Durée : permanente jusqu'à dissipation
+
+Nécessite : 9 en Intelligence
+
+Poids : 1~
+
+@115138 = ~Utiliser un sort de Cône de froid~
+@115139 = ~Utiliser un parchemin de Cône de froid~
+
+@115140 = ~Utiliser un sort de Perce-magie~
+@115141 = ~Utiliser un parchemin de Perce-magie~
+
+@115142 = ~Utiliser un sort de Métamorphose d'autrui~
+@115143 = ~Utiliser un parchemin de Métamorphose d'autrui ~
+@115144 = ~Baguette de Malédiction~
+
+@115145 = ~Cette baguette rend instantanément aveugles, sourds et muets les adversaires... mais le réel danger de cet objet vient du fait que tout le monde peut l'utiliser !
+
+PARAMÈTRES :
+
+Capacités de charge :
+- lance Cécité, Surdité et Silence sur la cible (jet de sauvegarde contre les sorts pour annuler tous les effets)
+  Durée : 1 tour
+  Zone d'effet : 1 créature
+
+Poids : 1~
+
+@115146 = ~Baguette de corrosion~
+
+@115147 = ~Trois magiciens ont fabriqué cette baguette à partir de matériaux qu'ils avaient en leur possession et d'ingrédients faciles à se procurer. Otterly le Rotond, Mabdek de la Septième Étoile et Yrgon le Crétin ont créé cette baguette dans le seul but de la vendre. Leur objectif à long terme était la construction d'un grand centre de recherches basé sur les plans de la Guilde de la Nature de Myth Drannor. Leur baguette connut davantage de succès que leur centre...
+
+PARAMÈTRES :
+
+Capacités de charge :
+- Brume mortelle
+  Dégâts : inflige 4 points d'acide le premier round, 8 points le deuxième et 16 points le troisième
+  Spécial : le mouvement est ralenti de 50 % à l'intérieur de la zone et les cibles doivent réussir un jet de sauvegarde à chaque round contre les sorts ou recevoir un malus de -2 à la force et la dextérité pendant le round
+  Portée : champ visuel de l'utilisateur
+  Durée : 15 rounds
+  Zone d'effet : rayon de 3,60 mètres
+
+- Tempête acide
+  Dégâts : 1d4 points d'acide pendant 3 rounds, 1d6 points d'acide pendant les 3 rounds suivants et 1d8 points d'acide pendant les rounds restants ; jet de sauvegarde contre les sorts pour demi-dégâts
+  Portée : champ visuel de l'utilisateur
+  Durée : 30 rounds
+  Zone d'effet : rayon de 3,60 mètres
+
+Nécessite : 9 en intelligence
+
+Poids : 1~
+
+@115148 = ~Quand elle est activée, cette baguette lance soit Brume mortelle soit Tempête acide.
+
+PARAMÈTRES :
+
+Capacités de charge :
+- Brume mortelle
+  Dégâts : inflige 4 points d'acide le premier round, 8 points le deuxième et 16 points le troisième
+  Spécial : le mouvement est ralenti de 50 % à l'intérieur de la zone et les cibles doivent réussir un jet de sauvegarde à chaque round contre les sorts ou recevoir un malus de -2 à la force et la dextérité pendant le round
+  Portée : champ visuel de l'utilisateur
+  Durée : 15 rounds
+  Zone d'effet : rayon de 3,60 mètres
+
+- Tempête acide
+  Dégâts : 1d4 points d'acide pendant 3 rounds, 1d6 points d'acide pendant les 3 rounds suivants et 1d8 points d'acide pendant les rounds restants ; jet de sauvegarde contre les sorts pour demi-dégâts
+  Portée : champ visuel de l'utilisateur
+  Durée : 30 rounds
+  Zone d'effet : rayon de 3,60 mètres
+
+Nécessite : 9 en intelligence
+
+Poids : 1~
+
+@115149 = ~Quand elle est activée, cette baguette lance Brume mortelle .
+
+PARAMÈTRES :
+
+Capacités de charge :
+- Brume mortelle
+  Dégâts : inflige 4 points d'acide le premier round, 8 points le deuxième et 16 points le troisième
+  Spécial : le mouvement est ralenti de 50 % à l'intérieur de la zone et les cibles doivent réussir un jet de sauvegarde à chaque round contre les sorts ou recevoir un malus de -2 à la force et la dextérité pendant le round
+  Portée : champ visuel de l'utilisateur
+  Durée : 15 rounds
+  Zone d'effet : rayon de 3,60 mètres
+
+Nécessite : 9 en intelligence
+
+Poids : 1~
+
+@115150 = ~Baguettes de catégorie 7 (50 000 po)~
+
+@115151 = ~Utiliser un sort de Tempête acide~
+@115152 = ~Utiliser un parchemin de Tempête acide~
+@115153 = ~Choisir une autre baguette de catégorie 7~
+@115154 = ~Baguette de Nuage Mortel~
+// changes save and radius
+@115155 = ~Baguette de Nuage Mortel
+Cette baguette émet une bulle de vapeur qui file vers sa cible et explose en un nuage de gaz mortel qui remplit une zone de 4,50 mètres de rayon environ. Ce nuage tue instantanément toute créature de 4 DV ou moins sans jet de sauvegarde. Toute créature de 5 ou 6 DV a droit à un jet de sauvegarde pour ne pas mourir. Les créatures de plus de 6 DV prennent 1-10 de dégâts à chaque round dans le nuage. Il se dissipe au bout d'environ un tour.
+
+PARAMÈTRES :
+
+Capacités de charge :
+- Nuage mortel
+  Dégâts : 1d10 du poison par round
+  Spécial : les créatures de 1 à 4 dés de vie meurent instantanément (pas de jet de sauvegarde), celles qui ont 5 ou 6 dés de vie doivent réussir un jet de sauvegarde contre les sorts sous peine de mourir instantanément.
+  Portée : 18 mètres
+  Zone d'effet : 4,50 mètres de rayon
+  Durée : 1d4 tours
+
+Nécessite : 9 en Intelligence
+
+Poids : 1~
+
+@115156 = ~Utiliser un sort de Nuage mortel~
+@115157 = ~Utiliser un parchemin de Nuage mortel~
+@115158 = ~Baguettes de catégorie 6 (6 250 po)~
+@115159 = ~Baguettes de catégorie 7 (12 500 po)~
+@115160 = ~Vous devez posséder au moins 6 250 pièces d'or pour recharger une baguette de catégorie 6. Essayez à nouveau quand vous posséderez 6 250 pièces d'or ou plus.~
+@115161 = ~Vous devez posséder au moins 12 500 pièces d'or pour recharger une baguette de catégorie 7. Essayez à nouveau quand vous posséderez 12 500 pièces d'or ou plus.~
+@115162 = ~Baguette d’effroi : Vous ne pouvez recharger une baguette si vous disposez de plusieurs exemplaires du même type de baguette dans votre inventaire. Annulez puis essayez à nouveau quand vous n’aurez qu’une seule baguette d’effroi dans votre inventaire.~
+@115163 = ~Recharger la baguette d’effroi~
+@115164 = ~*Recharge la baguette d’effroi*~
+@115165 = ~Baguette de feu : Vous ne pouvez recharger une baguette si vous disposez de plusieurs exemplaires du même type de baguette dans votre inventaire. Annulez puis essayez à nouveau quand vous n’aurez qu’une seule baguette de feu dans votre inventaire.~
+@115166 = ~Recharger la baguette de feu~
+@115167 = ~*Recharge la baguette de feu*~
+@115168 = ~Recharger la baguette de foudre~
+@115169 = ~Baguette de foudre : Vous ne pouvez recharger une baguette si vous disposez de plusieurs exemplaires du même type de baguette dans votre inventaire. Annulez puis essayez à nouveau quand vous n’aurez qu’une seule baguette de foudre dans votre inventaire.~
+@115170 = ~Recharger la baguette de convocation de monstres~
+@115171 = ~Baguette de convocation de monstres : Vous ne pouvez recharger une baguette si vous disposez de plusieurs exemplaires du même type de baguette dans votre inventaire. Annulez puis essayez à nouveau quand vous n’aurez qu’une seule baguette de convocation de monstres dans votre inventaire.~
+@115172 = ~Utiliser un parchemin de Boule de feu~
+@115173 = ~Utiliser un parchemin d’Éclair~
+@115174 = ~Utiliser un sort d’Éclair~
+@115175 = ~*Recharge la baguette de foudre*~
+@115176 = ~*Recharge la baguette de convocation de monstres*~
+@115177 = ~Baguette de mort gelée : Vous ne pouvez recharger une baguette si vous disposez de plusieurs exemplaires du même type de baguette dans votre inventaire. Annulez puis essayez à nouveau quand vous n’aurez qu’une seule baguette de mort gelée dans votre inventaire.~
+@115178 = ~Recharger la baguette de mort gelée~
+@115179 = ~*Recharge la baguette de mort gelée*~
+@115180 = ~Recharger la baguette de mort gelée~
+@115181 = ~Baguette d’armure : Vous ne pouvez recharger une baguette si vous disposez de plusieurs exemplaires du même type de baguette dans votre inventaire. Annulez puis essayez à nouveau quand vous n’aurez qu’une seule baguette d’armure dans votre inventaire.~
+@115182 = ~Utiliser un parchemin d’Armure spirituelle~
+@115183 = ~Utiliser un sort d’Armure spirituelle~
+@115184 = ~*Recharge la baguette d’armure*~
+@115185 = ~Recharger la baguette de métamorphose~
+@115186 = ~Baguette de métamorphose : Vous ne pouvez recharger une baguette si vous disposez de plusieurs exemplaires du même type de baguette dans votre inventaire. Annulez puis essayez à nouveau quand vous n’aurez qu’une seule baguette de métamorphose dans votre inventaire.~
+@115187 = ~Utiliser un parchemin de Métamorphose d’autrui~
+@115188 = ~Utiliser un sort de Métamorphose d’autrui~
+@115189 = ~*Recharge la baguette de métamorphose*~
+@115190 = ~Recharger la baguette de paralysie~
+@115191 = ~Baguette de paralysie : Vous ne pouvez recharger une baguette si vous disposez de plusieurs exemplaires du même type de baguette dans votre inventaire. Annulez puis essayez à nouveau quand vous n’aurez qu’une seule baguette de paralysie dans votre inventaire.~
+@115192 = ~Utiliser un sort d’Immobilisation des monstres~
+@115193 = ~Utiliser un parchemin d’Immobilisation des monstres~
+@115194 = ~Recharger la baguette de givre~
+@115195 = ~Baguette de givre : Vous ne pouvez recharger une baguette si vous disposez de plusieurs exemplaires du même type de baguette dans votre inventaire. Annulez puis essayez à nouveau quand vous n’aurez qu’une seule baguette de givre dans votre inventaire.~
+@115196 = ~Utiliser un parchemin de Cône de froid~
+@115197 = ~Utiliser un sort de Cône de froid~
+@115198 = ~Recharger la baguette de nuage mortel~
+@115199 = ~Baguette de nuage mortel : Vous ne pouvez recharger une baguette si vous disposez de plusieurs exemplaires du même type de baguette dans votre inventaire. Annulez puis essayez à nouveau quand vous n’aurez qu’une seule baguette de nuage mortel dans votre inventaire.~
+@115200 = ~Utiliser un parchemin de Nuage mortel~
+@115201 = ~Utiliser un sort de Nuage mortel~
+@115202 = ~*Recharge la baguette de givre*~
+@115203 = ~*Recharge la baguette de paralysie*~
+@115204 = ~*Recharge la baguette de nuage mortel*~
+@115205 = ~*Recharge la baguette de mort gelée*~
+@115206 = ~Recharger la baguette de contrecoup~
+@115207 = ~Baguette de contrecoup : Vous ne pouvez recharger une baguette si vous disposez de plusieurs exemplaires du même type de baguette dans votre inventaire. Annulez puis essayez à nouveau quand vous n’aurez qu’une seule baguette de contrecoup dans votre inventaire.~
+@115208 = ~Utiliser un parchemin de Perce-magie~
+@115209 = ~Utiliser un sort de Perce-magie~
+@115210 = ~*Recharge la baguette de contrecoup*~
+@115211 = ~Recharger la baguette de malédiction~
+@115212 = ~Baguette de malédiction : Vous ne pouvez recharger une baguette si vous disposez de plusieurs exemplaires du même type de baguette dans votre inventaire. Annulez puis essayez à nouveau quand vous n’aurez qu’une seule baguette de malédiction dans votre inventaire.~
+@115213 = ~ Utiliser un parchemin de Mot de pouvoir : silence~
+@115214 = ~Utiliser un sort de Mot de pouvoir : silence~
+@115215 = ~*Recharge la baguette de malédiction*~
+@115216 = ~Recharger la baguette de corrosion~
+@115217 = ~Baguette de corrosion : Vous ne pouvez recharger une baguette si vous disposez de plusieurs exemplaires du même type de baguette dans votre inventaire. Annulez puis essayez à nouveau quand vous n’aurez qu’une seule baguette de corrosion dans votre inventaire.~
+@115218 = ~Utiliser un parchemin de Tempête acide~
+@115219 = ~Utiliser un sort de Tempête acide~
+@115220 = ~*Recharge la baguette de corrosion*~
+
+@115224 = ~Utiliser un parchemin de Brume mortelle~
+@115225 = ~Utiliser un sort de Brume mortelle~
+@115226 = ~Vous devez posséder au moins 50 pièces d'or pour écrire un parchemin. Essayez à nouveau quand vous posséderez 50 pièces d'or ou plus.~
+@115227 = ~Écriture de parchemin efficiente~
+@115228 = ~Vous devez posséder au moins 450 pièces d'or pour créer une baguette. Essayez à nouveau quand vous posséderez 450 pièces d'or ou plus.~
+@115229 = ~Vous devez posséder au moins 115 pièces d'or pour recharger une baguette. Essayez à nouveau quand vous posséderez 115 pièces d'or ou plus.~
+@115230 = ~Création de baguette efficiente~
+@115231 = ~Rechargement de baguette efficient~
+
+@115232 = ~Potions de catégorie 1 (75 po)~
+@115233 = ~Potion d’infravision~
+@115234 = ~Potion de force~
+@115235 = ~Potion de résistance au feu~
+@115236 = ~Potion d’invisibilité~
+@115237 = ~Huile de feux ardents~
+@115238 = ~Potion d'agilité~
+@115239 = ~Potion de résistance au froid~
+@115240 = ~Huile de rapidité~
+@115241 = ~Potion de blocage de magie~
+@115242 = ~Potion de résistance à la magie~
+@115243 = ~Potion of Potion de défens~
+@115244 = ~Potion d'isolation~
+@115245 = ~Potion d'invulnérabilité~
+@115246 = ~Potion d'haleine ardente~
+@115247 = ~Potion de rétrovision~
+@115248 = ~Potions de catégorie 2 (300 po)~
+@115249 = ~Potions de catégorie 3 (400 po)~
+
+@115250 = ~Potions de catégorie 4 (500 po)~
+@115251 = ~Potions de catégorie 5 (1 000 po)~
+@115252 = ~Potions de catégorie 6 (1 500 po)~
+@115253 = ~Choisir une autre catégorie~
+@115254 = ~Création de Potion
+Vous pouvez créer des potions, à condition de disposer du bon sort et d’assez d’or.~
+@115255 = ~Création d’objet~
+@115256 = ~Création d’objet
+Vous pouvez créer et recharger des objets, à condition de disposer du bon sort et d’assez d’or.~

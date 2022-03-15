@@ -353,7 +353,9 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~) BEGIN 	// no need to patch 203 
 	READ_STRREF 0x54 ~description~
 	PATCH_IF (~%description%~ STRING_CONTAINS_REGEXP ~5 rounds~) = 0 BEGIN
 	  INNER_PATCH_SAVE new_desc ~%description%~ BEGIN
-		REPLACE_TEXTUALLY ~5 rounds~ ~10 rounds~
+		  SPRINT old_duration @150003
+		  SPRINT new_duration @150004
+		REPLACE_TEXTUALLY ~%old_duration%~ ~%new_duration%~
 	  END
 	  SAY_EVALUATED 0x54 ~%new_desc%~
 	END
@@ -761,8 +763,10 @@ ACTION_IF FILE_CONTAINS_EVALUATED (~SPELL.IDS~ ~WIZARD_IDENTIFY~)	BEGIN
 
  ACTION_IF (identify_level > 1) BEGIN
   OUTER_SPRINT identify_desc @7104
+  OUTER_SPRINT level1_regex @150000
+  OUTER_SPRINT new_level @150002
   OUTER_INNER_PATCH_SAVE new_identify_desc ~%identify_desc%~ BEGIN
-    REPLACE_TEXTUALLY ~Level: 1~ ~Level: %identify_level%~
+    REPLACE_TEXTUALLY ~%level1_regex%~ ~%new_level%%identify_level%~
   END
  END
 

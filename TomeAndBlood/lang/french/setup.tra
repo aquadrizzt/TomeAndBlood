@@ -1,0 +1,704 @@
+@1 = ~Ce composant n'est pas disponible pour Baldur's Gate, Icewind Dale ou Icewind Dale 2.~
+@2 = ~Ce composant n'est disponible que pour les jeux Enhanced Edition.~
+@3 = ~Ce composant necessite le moteur ameliore (Enhanced) v2.0 ou ulterieur.~
+//arcane crafting ignored when 5E is installed
+@4 = ~ignore, parce que~
+//unused
+@5 = ~Ajustement de sorts profanes~
+//unused
+@6 = ~Kits profanes, nouveaux et revises~
+//unused
+@7 = ~Mechanics Tweaks (crafting, sequencers, cantrips, familiars, ability bonuses)~
+//unused
+@10 = ~Core Revisions~
+@11 = ~Re-equilibrage des ecoles de magie~
+@12 = ~Re-equilibrage des ecoles profanes opposees~
+@1201 = ~Pas d'ecoles opposees~
+@1202 = ~ecoles opposees de style IWD~
+@1203 = ~ecoles opposees de style BG2~
+@1204 = ~ecoles opposees papier (PnP)~
+@13 = ~Revision des clones illusoires~
+@14 = ~Revision d'Invisibilite et de Vision veritable~
+@15 = ~Revision de Hate et d'Action libre~
+@16 = ~Sort Identification ameliore (utilisable par les Arcanistes et les Ensorceleurs multiclasses)~
+@20 = ~Revision des Disciples du Dragon~
+@25 = ~Kit d'ensorceleur : Magus~
+//unused
+@27 = ~Sorcerer: Arcanist~
+//unused
+@29 = ~Sorcerer: Wild Sorcerer~
+@31 = ~Kit d'ensorceleur : Ame favorite~
+@33 = ~Kit d'ensorceleur : Disciple sylvain~
+@35 = ~Kit d'ensorceleur : Disciple revenant~
+@37 = ~Kit d'ensorceleur : Disciple amorphe~
+@40 = ~Revision des specialistes~
+@45 = ~Artisanat profane~
+@48 = ~Lancer de sort en armure pour les bardes~
+@50 = ~Revision de la  Metamagie~
+@51 = ~Metamagie innee, apprise automatiquement par tout le monde~
+@52 = ~Metamagie innee, apprise automatiquement, mais pas par les ensorceleurs~
+@53 = ~Metamagie innee, apprise depuis les parchemins ou a la generation de personnage~
+@54 = ~Metamagie innee, apprise depuis les parchemins SEULEMENT (pas pour les ensorceleurs)~
+@55 = ~Sorts de metamagie, remplissage gratuit des sequenceurs (utilisable pat les arcanistes et les ensorceleurs multiclasses)~
+@60 = ~Tours de magie~
+@61 = ~Tours de magie innes~
+@62 = ~Tours de magie de niveau 1~
+@63 = ~Baguette de tour de magie~
+@66 = ~Sort de Familier inne~
+@67 = ~Choisir son familier~
+@68 = ~Le mod de Pooky : Infuser les familiers~
+@69 = ~Familier indelebile~
+@70 = ~Changement de sorts pour les ensorceleurs~
+@71 = ~Changer les sorts a tous les niveaux~
+@72 = ~Changer les sorts tous les 3 niveaux~
+//unused
+@79 = ~Selection de sorts par dialogue~
+@80 = ~Ensorceleurs multiclasses~
+@82 = ~Kit de mage : Arcaniste (Ne pas installer si vous prevoyez d'utiliser le lancer de sorts 5E pour tout le monde)~
+@85 = ~Kit d'ensorceleur : ensorceleur a mana~
+@91 = ~Rendre les objets a emplacement de sorts bonus compatibles avec les ensorceleurs multi et les arcanistes~
+@92 = ~Bonus pour la memorisation ET les emplacements de preparation~
+@93 = ~Bonus seulement pour les emplacements de preparation~
+@95 = ~Bonus de lancer pour les scores de caracteristiques (installer APRES tout mod qui modifie les tables de sorts !)~
+
+@100 = ~~
+@101 = ~ABJURATEUR : mage spécialisé dans la magie protectrice et les disciplines métamagiques. Ces mages peuvent ériger de puissantes protections et barrières et ont aussi l'entraînement nécessaire pour les détruire quand elles sont créées par d'autres lanceurs de sorts.
+
+Avantages :
+- Un sort supplémentaire par niveau.
+– Apprend tous les sorts de l'école de l'Abjuration comme sorts bonus.
+- Bénéficie d'un bonus de 2 points pour les jets de sauvegarde contre les sorts de l'école de l'Abjuration.
+- Les cibles souffrent d'un malus de 2 points pour les jets de sauvegarde contre les sorts de l'école de l'Abjuration.
+- Peut lancer spontanément n'importe quel sort de l'école de l'Abjuration en sacrifiant un sort mémorisé.
+- Gagne un Bouclier de sort quand il lance un sort de protection (comme Globe d'invulnérabilité) de l'école de l'Abjuration.
+
+Inconvénients :
+- Souffre d'un malus de 15 % pour apprendre des parchemins des autres écoles.~
+
+@102 = ~CONJURATEUR : mage spécialisé dans la création de créatures et d'objets qui lui sont utiles en les déplaçant dans l'espace. À terme, ces mages maîtrisent la magie de téléportation et peuvent bannir leurs ennemis et convoquer de l'aide depuis divers plans.
+
+Avantages :
+- Un sort supplémentaire par niveau.
+– Apprend tous les sorts de l'école de la Conjuration comme sorts bonus.
+- Bénéficie d'un bonus de 2 points pour les jets de sauvegarde contre les sorts de l'école de la Conjuration.
+- Les cibles souffrent d'un malus de 2 points pour les jets de sauvegarde contre les sorts de l'école de la Conjuration.
+- Peut lancer spontanément n'importe quel sort de l'école de la Conjuration en sacrifiant un sort mémorisé.
+
+Inconvénients :
+- Souffre d'un malus de 15 % pour apprendre des parchemins des autres écoles.~
+
+@103 = ~DEVIN : mage spécialisé dans la magie de détection et de divination. Ces mages développent une faculté instinctive de percevoir le futur. Même si ces visions sont rarement claires, elles suffisent pour améliorer légèrement les réflexes des devins et leur donner accès à des magies capables d'altérer subtilement les résultats des événements aléatoires.
+
+Avantages :
+- Un sort supplémentaire par niveau.
+– Apprend tous les sorts de l'école de la Divination comme sorts bonus.
+- Bénéficie d'un bonus de 2 points pour les jets de sauvegarde contre les sorts de l'école de la Divination.
+- Les cibles souffrent d'un malus de 2 points pour les jets de sauvegarde contre les sorts de l'école de la Divination.
+- Peut lancer spontanément n'importe quel sort de l'école de la Divination en sacrifiant un sort mémorisé.
+- Immunisé contre les attaques sournoises.
+
+Inconvénients :
+- Souffre d'un malus de 15 % pour apprendre des parchemins des autres écoles.~
+
+@104 = ~ENCHANTEUR : mage spécialisé dans la manipulation de l'esprit des êtres sensibles.
+
+Avantages :
+- Un sort supplémentaire par niveau.
+– Apprend tous les sorts de l'école de l’Enchantement comme sorts bonus.
+- Bénéficie d'un bonus de 2 points pour les jets de sauvegarde contre les sorts de l'école de l’Enchantement.
+- Les cibles souffrent d'un malus de 2 points pour les jets de sauvegarde contre les sorts de l'école de l’Enchantement.
+- Peut lancer spontanément n'importe quel sort de l'école de l’Enchantement en sacrifiant un sort mémorisé.
+- Immunisé contre le charme et le sommeil.
+- Les membres du groupe bénéficient d'un bonus de 1 point aux jets de sauvegarde contre les sorts.
+
+Inconvénients :
+- Souffre d'un malus de 15 % pour apprendre des parchemins des autres écoles.~
+
+@105 = ~ILLUSIONNISTE : mage spécialisé dans la création d'illusions pour embrouiller et induire en erreur les autres. Ces mages rusés sont capables de distordre la lumière et de manipuler les sens de bien des manières. Ils peuvent disparaître hors de vue au premier danger et, avec l'expérience, créer des illusions d'un réalisme étonnants.
+
+Avantages :
+- Un sort supplémentaire par niveau.
+– Apprend tous les sorts de l'école de l'Illusion comme sorts bonus.
+- Bénéficie d'un bonus de 2 points pour les jets de sauvegarde contre les sorts de l'école de l'Illusion.
+- Les cibles souffrent d'un malus de 2 points pour les jets de sauvegarde contre les sorts de l'école de l'Illusion.
+- Peut lancer spontanément n'importe quel sort de l'école de l'Illusion en sacrifiant un sort mémorisé.
+- Sous l'effet de Non détection de façon permanente.
+- Peut utiliser la faculté Pas de l'ombre une fois par jour. Des utilisations supplémentaires sont obtenues tous les 5 niveaux.
+
+PAS DE L'OMBRE : permet d'entrer dans le Plan des Ombres et de s'y déplacer pendant 7 secondes, tandis que le temps est figé pour tous les autres. Dans cet état, l'illusionniste ne peut ni attaquer ni lancer de sorts.
+
+Inconvénients :
+- Souffre d'un malus de 15 % pour apprendre des parchemins des autres écoles.~
+
+@106 = ~INVOCATEUR : mage spécialisé dans la manipulation des énergies brutes et élémentaires. Ces mages utilisent la magie pour manipuler les énergies de base du multivers. Ils sont particulièrement doués pour libérer cette énergie en explosions de feu ou d'éclairs, ou la dévier pour projeter du givre.
+
+Avantages :
+- Un sort supplémentaire par niveau.
+– Apprend tous les sorts de l'école de l'Invocation comme sorts bonus.
+- Bénéficie d'un bonus de 2 points pour les jets de sauvegarde contre les sorts de l'école de l'Invocation.
+- Les cibles souffrent d'un malus de 2 points pour les jets de sauvegarde contre les sorts de l'école de l'Invocation.
+- Peut lancer spontanément n'importe quel sort de l'école de l'Invocation en sacrifiant un sort mémorisé.
+
+Inconvénients :
+- Souffre d'un malus de 15 % pour apprendre des parchemins des autres écoles.~
+
+@107 = ~NÉCROMANCIEN : mage spécialisé dans la magie liée à la mort, la non-vie et l'énergie provenant du plan matériel négatif. La nécromancie est un art perturbant, méprisé par la plupart des pratiquants civilisés et les académies de magie. Les nécromanciens expérimentent sur les vivants et les morts et créent des abominations mortes-vivantes à cheval entre les deux.
+
+Avantages :
+- Un sort supplémentaire par niveau.
+– Apprend tous les sorts de l'école de la Nécromancie comme sorts bonus.
+- Bénéficie d'un bonus de 2 points pour les jets de sauvegarde contre les sorts de l'école de la Nécromancie.
+- Les cibles souffrent d'un malus de 2 points pour les jets de sauvegarde contre les sorts de l'école de la Nécromancie.
+- Peut lancer spontanément n'importe quel sort de l'école de la Nécromancie en sacrifiant un sort mémorisé.
+- Peut émettre une aura qui Intimide les morts-vivants à proximité.
+- Peut utiliser Toucher glacial à volonté.
+- Niveau 3 : peut utiliser Toucher de la goule à volonté.
+- Niveau 5 : peut utiliser Toucher vampirique à volonté.
+
+INTIMIDATION DES MORTS-VIVANTS : Les morts-vivants jusqu'à 5 niveaux de plus que le nécromancien doivent réussir un jet de sauvegarde contre la pétrification à chaque round sous peine d'être ralentis. Ceux de niveau compris entre le niveau du nécromancien et cinq niveaux en dessous qui échouent le jet sont immobilisés. Ceux qui sont inférieurs d'au moins 6 niveaux qui échouent sont contrôlés.
+
+Inconvénients :
+- Souffre d'un malus de 15 % pour apprendre des parchemins des autres écoles.~
+
+@108 = ~TRANSMUTATEUR : mage spécialisé dans la magie qui altère la réalité physique. Ces mages contrôlent la matière et la transforment de toutes les façons que leur permettent leurs connaissances en magie. Ils peuvent transformer l'air en brume toxique, changer leur propre forme pour prendre celle d'un monstre puissant et même arrêter le temps. Les transmutateurs sont aussi des alchimistes qui créent les diverses potions magiques sur lesquelles les aventuriers se reposent.
+
+Avantages :
+- Un sort supplémentaire par niveau.
+– Apprend tous les sorts de l'école de la Transmutation comme sorts bonus.
+- Bénéficie d'un bonus de 2 points pour les jets de sauvegarde contre les sorts de l'école de la Transmutation.
+- Les cibles souffrent d'un malus de 2 points pour les jets de sauvegarde contre les sorts de l'école de la Transmutation.
+- Peut lancer spontanément n'importe quel sort de l'école de la Transmutation en sacrifiant un sort mémorisé.
+- Immunisé contre la pétrification, le polymorphisme et la désintégration.
+
+Inconvénients :
+- Souffre d'un malus de 15 % pour apprendre des parchemins des autres écoles.~
+
+@110 = ~- Les cibles souffrent d'un malus de 2 points pour les jets de sauvegarde contre les sorts de l'école de la Conjuration.~
+@111 = ~– Les cibles souffrent d'un malus de 2 points pour les jets de sauvegarde contre les sorts de l'école de la Conjuration.
+– niveau 2 : Peut lancer Convocation de Monstres I une fois par jour. Une utilisation supplémentaire est obtenue au niveau 4.
+– niveau 6 : Peut lancer Convocation de Monstres II une fois par jour. Une utilisation supplémentaire est obtenue au niveau 8.
+– niveau 10 : Peut lancer Convocation de Monstres III une fois par jour.~
+@112 = ~– Les cibles souffrent d'un malus de 2 points pour les jets de sauvegarde contre les sorts de l'école de la Conjuration.
+– Peut lancer les sorts de Convocation de Monstres comme s'ils étaient d'un niveau inférieur de 1.~
+
+@113 = ~- Les cibles souffrent d'un malus de 2 points pour les jets de sauvegarde contre les sorts de l'école de l'Invocation.~
+@114 = ~- Les cibles souffrent d'un malus de 2 points pour les jets de sauvegarde contre les sorts de l'école de l'Invocation.
+- Inflige +20 % de dégâts avec les sorts qui provoquent des dégâts de froid, de feu, d'électricité ou de magie.~
+
+@125 = ~Intimidation des morts-vivants~
+@126 = ~Annule intimidation des morts-vivants~
+
+//DRAGON DISCIPLES
+@200 = ~~
+@201 = ~disciple du dragon acide~
+@202 = ~Disciple du dragon acide~
+@203 = ~DISCIPLE DU DRAGON ACIDE : Les disciples du dragon sont de puissants ensorceleurs ayant du sang de dragon quelque part dans leur lignée. Leur talent naturel pour la magie fait rejaillir leur héritage draconique et leur permet de lancer des sorts puissants et de manifester des facultés similaires aux dragons. Les disciples du dragon acides héritent soit d'un cruel dragon noir, soit d'un dragon vert traître, soit d'un astucieux dragon de cuivre.
+
+Avantages :
+- Peut soustraire son modificateur de charisme de sa classe d'armure de base.
+- gagne une résistance à l'acide innée de 50 %.
+- Inflige +25 % de dégâts avec les sorts qui provoquent des dégâts d'acide.
+– Dé de vie : d6
+
+Inconvénients :
+- Peut lancer un sort de moins part jour.~
+
+@204 = ~disciple du dragon électrique~
+@205 = ~Disciple du dragon électrique~
+@206 = ~DISCIPLE DU DRAGON ÉLECTRIQUE : Les disciples du dragon sont de puissants ensorceleurs ayant du sang de dragon quelque part dans leur lignée. Leur talent naturel pour la magie fait rejaillir leur héritage draconique et leur permet de lancer des sorts puissants et de manifester des facultés similaires aux dragons. Les disciples du dragon électriques héritent soit d'un dragon bleu manipulateur, soit d'un honorable dragon de bronze.
+
+Avantages :
+- Peut soustraire son modificateur de charisme de sa classe d'armure de base.
+- gagne une résistance à l'électricité innée de 50 %.
+- Inflige +25 % de dégâts avec les sorts qui provoquent des dégâts d'électricité.
+– Dé de vie : d6
+
+Inconvénients :
+- Peut lancer un sort de moins part jour.~
+
+@207 = ~disciple du dragon du froid~
+@208 = ~Disciple du dragon du froid~
+@209 = ~DISCIPLE DU DRAGON DU FROID : Les disciples du dragon sont de puissants ensorceleurs ayant du sang de dragon quelque part dans leur lignée. Leur talent naturel pour la magie fait rejaillir leur héritage draconique et leur permet de lancer des sorts puissants et de manifester des facultés similaires aux dragons. Les disciples du dragon du froid héritent soit d'un robuste dragon blanc, soit d'un dragon d'agent élégant.
+
+Avantages :
+- Peut soustraire son modificateur de charisme de sa classe d'armure de base.
+- gagne une résistance innée au froid de 50 %.
+- Inflige +25 % de dégâts avec les sorts qui provoquent des dégâts de froid.
+– Dé de vie : d6
+
+Inconvénients :
+- Peut lancer un sort de moins part jour.~
+
+@210 = ~disciple du dragon du feu~
+@211 = ~Disciple du dragon du feu~
+@212 = ~DISCIPLE DU DRAGON DU FEU : Les disciples du dragon sont de puissants ensorceleurs ayant du sang de dragon quelque part dans leur lignée. Leur talent naturel pour la magie fait rejaillir leur héritage draconique et leur permet de lancer des sorts puissants et de manifester des facultés similaires aux dragons. Les disciples du dragon du feu héritent soit d'un dragon rouge cupide, soit d'un dragon d'airain curieux, ou encore d'un puissant dragon d'or.
+
+Avantages :
+- Peut soustraire son modificateur de charisme de sa classe d'armure de base.
+- gagne une résistance innée au feu de 50 %.
+- Inflige +25 % de dégâts avec les sorts qui provoquent des dégâts de feu.
+– Dé de vie : d6
+
+Inconvénients :
+- Peut lancer un sort de moins part jour.~
+
+//unused
+@213 = ~Peut soustraire son modificateur de charisme de sa classe d'armure de base.~
+//unused
+@214 =  ~A une classe d'armure de base de 7.~
+
+@300 = ~~
+@301 = ~magus~
+@302 = ~Magus~
+@303 = ~MAGUS : Étudiant à la fois les connaissances profanes et le combat martial, le magus allie les sorts et l'acier avec des résultats dévastateurs. La caractéristique la plus marquante d'un magus est sa capacité à lancer les sorts profanes les plus compliqués en portant les armures les plus encombrantes, qui leur a permis de surprendre bien des ennemis, qui s'attendaient à un combat purement physique. Les magus sont des perfectionnistes et apprécient toute opportunité de perfectionner leurs aptitudes.
+
+Avantages :
+- Peut se spécialiser (2 étoiles) dans toutes les armes de corps à corps.
+- Peut se spécialiser (2 étoiles) dans les styles de combat Arme à deux mains et Arme à une main.
+- Peut lancer des sorts en armure.
+– Dé de vie : d8
+
+Inconvénients :
+- Ne peut pas utiliser de boucliers.
+- Peut lancer un sort de moins chaque jour.
+- Pénalité permanente au Temps d'incantation de 2 points.
+~
+
+@400 = ~~
+//unused
+@401 = ~arcaniste~ 
+@402 = ~Arcaniste~ 
+@403 = ~ARCANISTE : L'arcaniste combine la polyvalence du mage avec la puissance brute de l'ensorceleur. Alors que de nombreux ensorceleurs se révèlent incapables d'apprendre la magie de façon scolaire, les arcanistes peuvent adapter leur propre magie innée par l'étude attentive de tomes de magie profane et la méditation sur la nature de la magie.
+
+Avantages :
+- Peut changer de sorts connus en consommant des parchemins profanes avec la faculté Polyvalence profane.
+
+Inconvénients :
+- Peut lancer un sort de moins chaque jour.
+- Pénalité permanente de 1 point au temps d'incantation.~
+
+@404 = ~Polyvalence profane~
+@405 = ~Polyvalence profane
+
+Cette faculté vous permet de changer vos sorts connus. Pour apprendre un nouveau sort, vous devrez sacrifier un sort déjà connu du même niveau et fournir un parchemin du nouveau sort.~
+
+
+@600 = ~~
+@601 = ~âme favorite~
+@602 = ~Âme favorite~
+@603 = ~ÂME FAVORITE : les âmes favorites voient leurs pouvoirs magiques comme la bénédiction d'une divinité. Cette bénédiction leur accorde de puissantes protections magiques et des sorts normalement hors de portée des ensorceleurs.
+
+Avantages :
+- Apprend tous les sorts d'une sphère divine comme sorts bonus.
+- Sous l'effet du sort Protection contre le mal de façon permanente.
+- Bonus de 2 points à tous les jets de sauvegarde.
+
+Inconvénients :
+- Peut lancer un sort de moins chaque jour.
+~
+
+@604 = ~Sélection de Sphère~
+@605 = ~Sélection de Sphère
+
+Permet à l'âme favorite de choisir une sphère de magie divine, ce qui leur donne accès à un jeu de sorts divins.~
+@606 = ~Choisir une des sphères suivantes.~
+@607 = ~Combat~
+@608 = ~Mort~
+@609 = ~Guérison~
+@610 = ~Nature~
+@611 = ~Protection~
+@612 = ~Sphère du Combat
+
+  1 : Pierre magique
+  1 : Apaisement
+  2 : Puiser dans la puissance divine
+  2 : Lame enflammée
+  3 : Force d'un seul
+  4 : Manteau de terreur
+  5 : Force de Champion
+  6 : Barrière de lames
+  7 : Portail
+~ 
+@613 = ~Choisir cette sphère.~
+@614 = ~Examiner d'autres sphères.~
+@615 = ~Quitter~
+@616 = ~Sphère de la Mort
+
+  1 : Injonction
+  1 : Imprécation
+  2 : Immobilisation de Personne
+  2 : Marteau spirituel
+  3 : Animation des morts-vivants
+  4 : Protection contre la mort
+  5 : Mise à mort
+  6 : Rayon divin
+  7 : Parole infernale
+~
+@617 = ~Sphère de la Guérison
+
+  1 : Bénédiction
+  1 : Soin des blessures légères
+  2 : Aide
+  2 : Ralentissement du poison
+  3 : Soin des blessures moyennes
+  4 : Restauration mineure
+  5 : Guérison de masse
+  6 : Guérison
+  7 : Résurrection
+~
+@618 = ~Sphère de la Nature
+
+  1 : Enchevêtrement
+  1 : Gourdin magique
+  2 : Peau d'écorce
+  2 : Baies magiques
+  3 : Convocation d'insectes
+  4 : Appel des créatures des bois
+  5 : Poussière de fée
+  6 : Semences de feu
+  7 : Beauté de la Nature
+~
+@619 = ~Sphère de la  Protection
+
+  1 : Armure de la foi
+  1 : Sanctuaire
+  2 : Cantique
+  2 : Silence sur 5 mètres
+  3 : Glyphe de garde
+  4 : Harmonie défensive
+  5 : Résistance à la magie
+  6 : Miroir physique
+  7 : Bouclier des archontes
+~
+
+@700 = ~~
+@701 = ~disciple sylvain~
+@702 = ~Disciple sylvain~
+@703 = ~DISCIPLE SYLVAIN : Le naturel capricieux des fées coule dans les veines des ensorceleurs sylvains à cause d'un métissage depuis longtemps oublié. Ces ensorceleurs sont plus émotifs que les autres, sujets à des poussées de joie ou de rage.
+
+Avantages :
+- Sous l'effet permanent du Sort Non-détection.
+- Bonus de 4 point aux jets de sauvegarde contre les sorts.
+- Immunisé contre les charmes.
+- Les créatures qui attaquent le disciple sylvain en mêlée doivent réussir un jet de sauvegarde contre les sorts sous peine de subir une pénalité de 2 points à l'attaque pendant 1 round.
+
+Inconvénients :
+- Peut lancer un sort de moins chaque jour.
+~
+
+@800 = ~~
+@801 = ~disciple revenant ~
+@802 = ~Disciple revenant ~
+@803 = ~DISCIPLE REVENANT : la souillure de la tombe se transmet dans les familles des disciples revenants. Peut-être un de leurs ancêtres est devenu une puissante liche ou un vampire, ou peut-être même sont ils morts-nés avant de revenir brutalement à la vie. Quoi qu’il en soit, les forces de la mort se meuvent avec eux et ternissent toutes leurs actions.
+
+Avantages :
+- Bonus de 4 points aux jets de sauvegarde contre la mort.
+- Immunisé contre la magie de sommeil et de mort.
+– Dés de vie : d6
+
+Inconvénients :
+- Peut lancer un sort de moins chaque jour.
+~
+
+@900 = ~~
+@901 = ~disciple amorphe~
+@902 = ~Disciple amorphe~
+@903 = ~DISCIPLE AMORPHE : L'ichor infâme des vases coulent dans leurs veines et leur accorde un contrôle magique des produits toxiques et des vases, mais aussi un don pour changer de forme à sa guise.
+
+Avantages :
+- Bonus de 4 points aux jets de sauvegarde contre la métamorphose.
+- Immunisé contre la maladie et le poison.
+- Protégé contre les vases.
+
+Inconvénients :
+- Peut lancer un sort de moins chaque jour.
+~
+  // in description of wizard/sorc. to be replaced by @1002
+@1001 = ~Peut lancer des sorts profanes.~
+@1002 = ~Peut lancer des sorts profanes.
+– Peut convoquer un familier.~
+//
+@1006  = ~Avantages :~
+@1007  = ~Capacités :~
+@1008  = ~Inconvénients :~
+@1009  = ~Restrictions :~
+//
+@1100  = ~Mémoriser des sorts~
+// @1101 to be replaced with @1102 when bard armored casting is chosen
+@1101 = ~(les sorts ne peuvent être lancés en armure)~
+@1102 = ~(les sorts ne peuvent être lancés en armure plus lourde que les besantines)~
+@1105 = ~Initialisation de l'apprentissage des sorts à la manière des ensorceleurs~ // using same translation as semi-spont @300
+// 1401 to be replaced by @1402 - mage: add crafting in description
+@1401 = ~Peut lancer des sorts profanes.~
+@1402 = ~Peut lancer des sorts profanes.
+– Peut utiliser Écriture de parchemins.
+- niveau 5 : peut utiliser Création de potions.
+- niveau 10 : peut utiliser Création de baguettes.
+- niveau 15 : peut utiliser Rechargement de baguettes.~
+// 1403 to be replaced by @1404 -sorcerer: add crafting in description
+@1403 = ~Peut lancer des sorts profanes.~
+@1404 = ~Peut lancer des sorts profanes.
+- niveau 5 : peut utiliser Création de potions.
+- niveau 10 : peut utiliser Création de baguettes.
+- niveau 15 : peut utiliser Rechargement de baguettes.~
+// 1501 to be replaced by @1502 - mage or sorcerer: add cantrip in description
+@1501 = ~Peut lancer des sorts profanes.~
+@1502 = ~Peut lancer des sorts profanes.
+– Peut choisir un tour de magie.~
+// 1503 to be replaced by one of @1504-@1511 - specialist: add cantrip in description
+@1503 = ~Un sort supplémentaire par niveau.~
+@1504 = ~Un sort supplémentaire par niveau.
+- Peut utiliser le tour de magie Coquille protectrice.~
+@1505 = ~Un sort supplémentaire par niveau.
+- Peut utiliser le tour de magie Convocation de lapin.~
+@1506 = ~Un sort supplémentaire par niveau.
+- Peut utiliser le tour de magie Anticipation.~
+@1507 = ~Un sort supplémentaire par niveau.
+- Peut utiliser le tour de magie Somnolence.~
+@1508 = ~Un sort supplémentaire par niveau.
+- Peut utiliser le tour de magie Égarement.~
+@1509 = ~Un sort supplémentaire par niveau.
+- Peut utiliser le tour de magie Carreau magique.~
+@1510 = ~Un sort supplémentaire par niveau.
+- Peut utiliser le tour de magie Raidissement des os.~
+@1511 = ~Un sort supplémentaire par niveau.
+- Peut utiliser le tour de magie Poigne terreuse.~
+// 1512 to be replaced by one of @1513-@1521 - sorcerers kits: add cantrip in description
+@1512 = ~Avantages :~
+@1513 = ~Avantages :
+- Peut utiliser le tour de magie Carreau de feu.~
+@1514 = ~Avantages :
+- Peut utiliser le tour de magie Coquille protectrice.~
+@1515 = ~Avantages :
+- Peut utiliser le tour de magie Carreau acide.~
+@1516 = ~Avantages :
+- Peut utiliser le tour de magie Carreau glacé.~
+@1517 = ~Avantages :
+- Peut utiliser le tour de magie Carreau électrique.~
+@1518 = ~Avantages :
+- Peut utiliser le tour de magie Anticipation.~
+@1519 = ~Avantages :
+- Peut utiliser le tour de magie Somnolence.~
+@1520 = ~Avantages :
+- Peut utiliser le tour de magie Raidissement des os.~
+@1521 = ~Avantages :
+- Peut utiliser le tour de magie Poigne terreuse.~
+
+@1701 = ~Connaissance de sort~
+@1702 = ~Connaissance de sort
+
+Permet de choisir vos sorts connus pour chaque niveau de sorts.~
+@1703 = ~Apprendre ce sort.~
+@1704 = ~Examiner d'autres sorts du même niveau.~
+@1705 = ~Choisir un autre niveau de sorts.~
+@1706 = ~Terminer.~
+@1707 = ~Retourner à la sélection de niveau.~
+@1708 = ~Vous pouvez apprendre plus de sorts des niveaux suivants.~
+@1711 = ~Premier~
+@1712 = ~Second~
+@1713 = ~Troisième~
+@1714 = ~Quatrième~
+@1715 = ~Cinquième~
+@1716 = ~Sixième~
+@1717 = ~Septième~
+@1718 = ~Huitième~
+@1719 = ~Neuvième~
+@1721 = ~Vous pouvez choisir de nouveaux sorts de niveau 1 dans la liste suivante.~
+@1722 = ~Vous pouvez choisir de nouveaux sorts de niveau 2 dans la liste suivante.~
+@1723 = ~Vous pouvez choisir de nouveaux sorts de niveau 3 dans la liste suivante.~
+@1724 = ~Vous pouvez choisir de nouveaux sorts de niveau 4 dans la liste suivante.~
+@1725 = ~Vous pouvez choisir de nouveaux sorts de niveau 5 dans la liste suivante.~
+@1726 = ~Vous pouvez choisir de nouveaux sorts de niveau 6 dans la liste suivante.~
+@1727 = ~Vous pouvez choisir de nouveaux sorts de niveau 7 dans la liste suivante.~
+@1728 = ~Vous pouvez choisir de nouveaux sorts de niveau 8 dans la liste suivante.~
+@1729 = ~Vous pouvez choisir de nouveaux sorts de niveau 9 dans la liste suivante.~
+
+//Subtledoctor TRA strings
+//
+// ... multiclass sorcerers 
+//
+@17011  = ~Sorts de niveau 1~
+@17012  = ~Sorts de niveau 2~
+@17013  = ~Sorts de niveau 3~
+@17014  = ~Sorts de niveau 4~
+@17015  = ~Sorts de niveau 5~
+@17016  = ~Sorts de niveau 6~
+@17017  = ~Sorts de niveau 7~
+@17018  = ~Sorts de niveau 8~
+@17019  = ~Sorts de niveau 9~
+@17021  = ~Connaissance de sorts profanes~
+@17022  = ~Connaissance de sorts profanes
+
+Permet de choisir vos sorts de mage pour chaque niveau de sorts.~
+@17023 = ~Apprendre ce sort.~
+@17024 = ~Examiner d'autres sorts du même niveau.~
+@17025 = ~Choisir un autre niveau de sorts.~
+@17026 = ~Terminer.~
+@17027 = ~Retourner à la sélection de niveau.~
+@17028 = ~Vous pouvez apprendre plus de sorts des niveaux suivants.~
+@17031 = ~Sorts du premier niveau~
+@17032 = ~Sorts du second niveau~
+@17033 = ~Sorts du troisième niveau~
+@17034 = ~Sorts du quatrième niveau~
+@17035 = ~Sorts du cinquième niveau~
+@17036 = ~Sorts du sixième niveau~
+@17037 = ~Sorts du septième niveau~
+@17038 = ~Sorts du huitième niveau~
+@17039 = ~Sorts du neuvième niveau~
+@17041 = ~Vous pouvez choisir de nouveaux sorts de niveau 1 dans la liste suivante.~
+@17042 = ~Vous pouvez choisir de nouveaux sorts de niveau 2 dans la liste suivante.~
+@17043 = ~Vous pouvez choisir de nouveaux sorts de niveau 3 dans la liste suivante.~
+@17044 = ~Vous pouvez choisir de nouveaux sorts de niveau 4 dans la liste suivante.~
+@17045 = ~Vous pouvez choisir de nouveaux sorts de niveau 5 dans la liste suivante.~
+@17046 = ~Vous pouvez choisir de nouveaux sorts de niveau 6 dans la liste suivante.~
+@17047 = ~Vous pouvez choisir de nouveaux sorts de niveau 7 dans la liste suivante.~
+@17048 = ~Vous pouvez choisir de nouveaux sorts de niveau 8 dans la liste suivante.~
+@17049 = ~Vous pouvez choisir de nouveaux sorts de niveau 9 dans la liste suivante.~
+
+@17050 = ~Initialisation de l'apprentissage des sorts à la manière des ensorceleurs~//mana sorc.
+@17051 = ~guerrier/ensorceleur~
+@17052 = ~Guerrier/Ensorceleur~
+@17053 = ~GUERRIER/ENSORCELEUR : Les ensorceleurs sont des pratiquants de la magie nés avec le don de lancer des sorts. On pense que le sang d'une puissante créature coule dans leurs veines. Ils sont peut-être des rejetons des dieux eux-mêmes, voire des dragons ayant pris forme humaine. Néanmoins, la magie des ensorceleurs est plus intuitive que logique. Ils connaissent moins de sorts que les mages et les apprennent plus lentement, mais ils peuvent en lancer plus souvent et n'ont pas besoin de sélectionner et de préparer des sorts à l'avance.
+
+Avantages :
+- Peut lancer des sorts profanes.
+- Les ensorceleurs ne retranscrivent pas leurs sorts dans un livre de sorts comme le font les mages. À la place, ils apprennent un petit nombre de sorts à chaque niveau qu'ils peuvent lancer sans avoir besoin de les mémoriser.
+
+Inconvénients :
+- Ne peut apprendre de sorts depuis un parchemin.
+- Ne peut lancer le sort Identification.
+- Ne peut utiliser les séquenceurs de sorts ou les sorts de contingence.
+~
+@17061 = ~ensorceleur/clerc~
+@17062 = ~Ensorceleur/Clerc~
+@17063 = ~ENSORCELEUR/CLERC : Les ensorceleurs sont des pratiquants de la magie nés avec le don de lancer des sorts. On pense que le sang d'une puissante créature coule dans leurs veines. Ils sont peut-être des rejetons des dieux eux-mêmes, voire des dragons ayant pris forme humaine. Néanmoins, la magie des ensorceleurs est plus intuitive que logique. Ils connaissent moins de sorts que les mages et les apprennent plus lentement, mais ils peuvent en lancer plus souvent et n'ont pas besoin de sélectionner et de préparer des sorts à l'avance.
+
+Avantages :
+- Peut lancer des sorts profanes.
+- Les ensorceleurs ne retranscrivent pas leurs sorts dans un livre de sorts comme le font les mages. À la place, ils apprennent un petit nombre de sorts à chaque niveau qu'ils peuvent lancer sans avoir besoin de les mémoriser.
+
+Inconvénients :
+- Ne peut apprendre de sorts depuis un parchemin.
+- Ne peut lancer le sort Identification.
+- Ne peut utiliser les séquenceurs de sorts ou les sorts de contingence.
+~
+@17071 = ~ensorceleur/voleur~
+@17072 = ~Ensorceleur/voleur~
+@17073 = ~ENSORCELEUR/VOLEUR : Les ensorceleurs sont des pratiquants de la magie nés avec le don de lancer des sorts. On pense que le sang d'une puissante créature coule dans leurs veines. Ils sont peut-être des rejetons des dieux eux-mêmes, voire des dragons ayant pris forme humaine. Néanmoins, la magie des ensorceleurs est plus intuitive que logique. Ils connaissent moins de sorts que les mages et les apprennent plus lentement, mais ils peuvent en lancer plus souvent et n'ont pas besoin de sélectionner et de préparer des sorts à l'avance.
+
+Avantages :
+- Peut lancer des sorts profanes.
+- Les ensorceleurs ne retranscrivent pas leurs sorts dans un livre de sorts comme le font les mages. À la place, ils apprennent un petit nombre de sorts à chaque niveau qu'ils peuvent lancer sans avoir besoin de les mémoriser.
+
+Inconvénients :
+- Ne peut apprendre de sorts depuis un parchemin.
+- Ne peut lancer le sort Identification.
+- Ne peut utiliser les séquenceurs de sorts ou les sorts de contingence.
+~
+@17081 = ~ensorceleur à mana~
+@17082 = ~Ensorceleur à mana~
+@17083 = ~ENSORCELEUR À MANA : Les ensorceleurs sont des pratiquants de la magie nés avec le don de lancer des sorts. On pense que le sang d'une puissante créature coule dans leurs veines. Ils sont peut-être des rejetons des dieux eux-mêmes, voire des dragons ayant pris forme humaine. Néanmoins, la magie des ensorceleurs est plus intuitive que logique. Ils connaissent moins de sorts que les mages et les apprennent plus lentement, mais ils peuvent en lancer plus souvent et n'ont pas besoin de sélectionner et de préparer des sorts à l'avance.
+
+Avantages :
+- Peut lancer des sorts profanes.
+- Les ensorceleurs ne retranscrivent pas leurs sorts dans un livre de sorts comme le font les mages. À la place, ils apprennent un petit nombre de sorts à chaque niveau qu'ils peuvent lancer sans avoir besoin de les mémoriser.
+- Les ensorceleurs à mana n'utilisent pas d'"emplacements de sorts" de niveaux différents. Au lieu de cela, ils disposent d'un nombre de points de mana qu'ils utilisent en lançant des sorts. Chaque sort lancé réduit le nombre de points de mana d'un nombre égal au niveau du sort. les points de mana sont récupérés quand l'ensorceleur se repose.
+
+Inconvénients :
+- Ne peut apprendre de sorts depuis un parchemin.
+~
+@17085 = ~Changer la méthode de lancer de sorts~
+@17087 = ~Méditation reconstituante~
+@17088 = ~Méditation reconstituante : cette faculté permet à un ensorceleur de se reposer et de méditer entre des combats et de récupérer une partie de ses points de mana.~
+@17091 = ~Comment voulez-vous lancer vos sorts ?~
+@17092 = ~Avec des emplacements de sorts comme un ensorceleur normal.~
+@17093 = ~Avec des points de mana.~
+@17094 = ~Pas de changement ; vous aurez un certain nombre d'emplacement de sorts pour chaque niveau de sort.~
+@17095 = ~Choisir de ne pas changer.~
+@17096 = ~Faire un autre choix.~
+@17097 = ~Lancer de sorts par points de mana ; vous disposerez d'un nombre de points de mana que vous dépenserez pour lancer des sorts de tout niveau. Vous apprendrez des sorts en utilisant un objet plutôt que par l'écran de montée de niveau.~
+@17098 = ~Choisir de lancer les sorts avec des points de mana.~
+@6005   = ~Lancer de sort spontané~
+@6006   = ~Annuler la conversion spontanée de sort~
+
+// abjurer - no SR
+@6201   = ~Globe d'invulnérabilité mineur+~
+@6202   = ~Renvoi des sorts mineur+~
+@6203   = ~Déviation des sorts+~
+@6204   = ~Globe d'invulnérabilité+~
+@6205   = ~Renvoi des sorts+~
+@6206   = ~Piège à Sorts+~
+//abjurer - SR
+@6211   = ~Globe d'invulnérabilité mineur+~
+@6212   = ~Déviation des sorts+~
+@6213   = ~Déviation des sorts+~
+@6214   = ~Globe d'invulnérabilité+~
+@6215   = ~Déviation de Sorts Majeure+~
+@6216   = ~Piège à Sorts+~
+
+@6251   = ~Toucher glacial~
+@6252   = ~Toucher glacial
+
+Grâce à ce sort, une lueur bleue entoure la main du nécromancien. Cette énergie attaque la force vitale de toute créature vivante sur laquelle le magicien réussit une attaque de corps-à-corps.
+
+La créature touchée subit 1d4+1 points de dégâts de froid et doit réussir un jet de sauvegarde contre la mort sous peine d'être ralentie et perdre 3 points de force pendant 3 rounds.
+
+Les créatures mortes-vivantes touchées par cette énergie sont immobilisées pendant deux rounds. Elles n'ont pas droit à un jet de sauvegarde pour éviter cet effet.~
+@6253   = ~Toucher de la goule~
+@6254   = ~Toucher de la goule
+
+Lorsque ce sort est lancé, une lueur rougeâtre entoure la main du jeteur de sorts. Lorsque le nécromancien réussit une attaque de mêlée contre une créature, cette dernière subit 1d4+1 points de dégâts magiques. Si la victime échoue à un jet de sauvegarde contre la mort, le sort continue à infliger 1d4 points de dégâts au deuxième round puis 1d3 point s de dégâts au troisième round. De plus la victime est paralysée pendant 1 round et infectée par une maladie qui diminue sa force, sa dextérité et sa constitution de deux points chacune tous les 5 rounds.~
+@6255   = ~Toucher vampirique~
+@6256   = ~Toucher vampirique
+
+Lorsque ce sort est lancé, une lueur bleu pâle entoure la main du nécromancien. Lorsque le nécromancien réussit une attaque de mêlée contre une créature, cette dernière subit 1d6+1 points de dégâts, tandis que le nécromancien gagne 1d6+1 points de vie (tous les points de vie au-dessus du total maximal de points de vie du lanceur est considéré comme des points de vie temporaires, qui restent 4 tours). Si la victime échoue à un jet de sauvegarde contre la mort avec une pénalité de 2 points, elle perd 1d6 points de vie supplémentaires et subit une perte de 3 points de constitution pendant 1 tour.
+
+Les créatures mortes-vivantes touchées pendant que cette faculté est active sont placées sous le contrôle du nécromancien.~
+@6257   = ~Désactiver Toucher glacial~
+@6258   = ~Désactiver Toucher de la goule~
+@6259   = ~Désactiver Toucher vampirique~
+
+
+//
+// spell-switching TRA strings
+//
+@8301  = ~Changer un sort connu~
+@8302  = ~Ne changer aucun sort~
+@8303  = ~Changer ce sort~
+@8304  = ~Changer un autre sort~
+//
+// Arcanist-related TRA strings
+//
+@21901  = ~arcaniste~
+@21902  = ~Arcaniste~
+@21903  = ~ARCANISTE : Certains lanceurs de sorts recherchent les secrets de la magie par l'étude acharnée ; d'autres naissent avec la magie dans le sang. Les arcanistes essaient de fusionner la science académique des mages avec la puissance naturelle des lanceurs innés. Un arcaniste doit préparer ses sorts en avance mais, à la différence des mages, ses sorts ne disparaissent pas quand ils sont lancés. Il peut lancer n'importe quel sort qu'il a préparé et consomme un emplacement de lancer du niveau correspondant.
+
+Avantages :
+- Peut apprendre les sorts profanes à l'aide de parchemins, comme le font les mages.
+- Après avoir préparé ses sorts et s'être reposé, peut lancer ses sorts spontanément, comme les font les ensorceleurs.
+
+Inconvénients :
+- Ne peut se spécialiser dans une école de magie, comme les mages traditionnels.
+- Les objets qui augmentent le nombre d'emplacements de sorts, comme l'anneau des arcanes, ne peut augmenter le nombre d'emplacements de lancer d'un arcaniste que de 1 pour chaque niveau de sorts.
+~
+@21981 = ~Initialisation du lancer de style arcaniste~
+@21982 = ~Changer les sorts mémorisés~
+@21983 = ~Préparation de sorts
+
+Cette compétence permet à l'arcaniste de préparer une nouvelle collection de sorts pour le jour à venir. Quand cette compétence est utilisée, les emplacements de sorts deviennent accessibles dans le livre de sorts de l'arcaniste et le lancer de sorts est désactivé. Une fois les emplacements de sorts remplis, l'arcaniste doit se reposer pendant 8 heures. Quand il se réveillera, le lancer de sorts sera réactivé et l'arcaniste ne pourra plus modifier le contenu de ses emplacements de sorts jusqu'à ce que cette compétence soit utilisée à nouveau.
+~
+@21984 = ~Les sorts mémorisés peuvent maintenant être changés. Le lancer de sorts est désactivé jusqu'au prochain repos complet.~
+//inserted in class description
+@21985 = ~Restrictions :
+- Ne peut utiliser les séquenceurs de sorts ou les sorts de contingence.~
+@21986 = ~Restrictions :
+- Ne peut lancer le sort Identification.~
+@21989 = ~Emplacement de sort de niveau 8 additionnel~
+@21990 = ~Emplacement de sort de niveau 9 additionnel~
+@21991 = ~Emplacement de sort de niveau 1 additionnel~
+@21992 = ~Emplacement de sort de niveau 2 additionnel~
+@21993 = ~Emplacement de sort de niveau 3 additionnel~
+@21994 = ~Emplacement de sort de niveau 4 additionnel~
+@21995 = ~Emplacement de sort de niveau 5 additionnel~
+@21996 = ~Emplacement de sort de niveau 6 additionnel~
+@21997 = ~Emplacement de sort de niveau 7 additionnel~
