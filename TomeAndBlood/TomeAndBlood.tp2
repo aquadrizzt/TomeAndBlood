@@ -1,6 +1,6 @@
 BACKUP ~TomeAndBlood/backup~
 AUTHOR ~aquadrizzt~
-VERSION ~0.9.27~ 
+VERSION ~0.9.28~ 
 
 ALWAYS
 
@@ -541,15 +541,16 @@ COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_mcsrc.qd~ //detection for this compon
 
 INCLUDE ~TomeAndBlood/comp/setup_multiclass_sorcerers.tpa~
 
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5_new_identify.d5~) BEGIN
+  LAF semi_spont_identify END
+END
+
 LAF multiclass_sorcerers END
 
 ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__semi_spont_sequencers.d5~) BEGIN
   LAF semi_spont_sequencers END
 END
 
-ACTION_IF !(FILE_EXISTS_IN_GAME ~d5_new_identify.d5~) BEGIN
-  LAF semi_spont_identify END
-END
 
 
 // -----------------------------
@@ -568,6 +569,10 @@ LAF process_semi_spells END
 
 INCLUDE ~TomeAndBlood/comp/setup_arcanist.tpa~
 
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5_new_identify.d5~) BEGIN
+  LAF semi_spont_identify END
+END
+
 LAF add_arcanist END
 
 COPY ~%MOD_FOLDER%/lib/semi_spont/d5_marker.d5~ ~override/d5__5E_casting_arcane.d5~
@@ -576,9 +581,6 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__semi_spont_sequencers.d5~) BEGIN
   LAF semi_spont_sequencers END
 END
 
-ACTION_IF !(FILE_EXISTS_IN_GAME ~d5_new_identify.d5~) BEGIN
-  LAF semi_spont_identify END
-END
 
 
 // -----------------------------
