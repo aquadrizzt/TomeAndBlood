@@ -196,7 +196,7 @@ END
 // will this work?  let's find out!
 //DEFINE SPHERE ACCESS______________________________________________________________
 //
-ACTION_INCLUDE ~%MOD_FOLDER%/lib/fnp_compat.tpa~
+ACTION_INCLUDE ~%MOD_FOLDER%/lib/fnp_compatibility.tpa~
 
  LAF ~DEFINE_FNP_KIT_INFO~
   INT_VAR
@@ -246,7 +246,7 @@ ACTION_INCLUDE ~%MOD_FOLDER%/lib/fnp_compat.tpa~
 	s_Light 		= ~x~
 	s_Shadow 		= ~x~
 	s_Magic 		= ~minor~
-	s_Perdition     = ~x~
+	s_Astral        = ~x~
  END
 
 LAF check_kit_conflict END
