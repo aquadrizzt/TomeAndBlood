@@ -1,5 +1,5 @@
 
-// v9.11 - fix fatigue effects
+// v9.12 - semi-sorc spellstate fix
 
 /*
 functions in this file:
@@ -56,24 +56,24 @@ functions in this file:
     creates spell & item to learn any sorcerer-valid spell via kjeron's spell-learning UI
     NB: this is in use and also works for alternate, coexisting versions
 
-- add_sorcerer_spells
+- add_sorcerer_spells - line 3210
     input an array, any spells in the array get added to the sorcerer spell-learning
     NB: variables must match those used in sorcerer_spell_learning
     NB: if sorcerer casting is already initialized, must "LAF semi_sorcerer_casting" again
 
-- semi_sorcerer_casting
+- semi_sorcerer_casting - line 3269
     applies sorcerer casting mechanics to all spells in sorcerer_spell_learning
     NB: variables must match those used in sorcerer_spell_learning
 
-- divine_spell_learning
+- divine_spell_learning - line 3997
     creates spell and item to learn any cleric-valid spell via kjeron's spell-learning UI
     NB: this is unused and untested so far
 
-- shaman_spell_learning
+- shaman_spell_learning - line 4184
     creates spell & item to learn any druid/shaman-valid spell via kjeron's spell-learning UI
     NB: this is unused and untested so far
 
-- semi_shaman_casting
+- semi_shaman_casting - line 4371
     applies sorcerer casting mechanics to all spells in sorcerer_spell_learning
     NB: variables must match those used in divine_spell_learning/shaman_spell_learning
     NB: this is unused and untested so far
@@ -5240,21 +5240,21 @@ COPY_EXISTING ~splprot.2da~ ~override~
 BUT_ONLY
 */
 
-ACTION_IF (FILE_CONTAINS_EVALUATED (~splstate.ids~ ~D5_MULTI_SORC~)) BEGIN
+ACTION_IF (FILE_CONTAINS_EVALUATED (~splstate.ids~ ~D5_SEMI_SORC~)) BEGIN
   COPY_EXISTING ~splstate.ids~ ~override~
 	COUNT_2DA_COLS cols
 	READ_2DA_ENTRIES_NOW rows cols
 	FOR (row = 1; row < rows; ++row) BEGIN
 	  READ_2DA_ENTRY_FORMER rows row 1 ~state_name~
 	  READ_2DA_ENTRY_FORMER rows row 0 ~state_ind~
-	  PATCH_IF (~%state_name%~ STRING_EQUAL_CASE ~D5_MULTI_SORC~) BEGIN
+	  PATCH_IF (~%state_name%~ STRING_EQUAL_CASE ~D5_SEMI_SORC~) BEGIN
 		SET semi_sorc_state = %state_ind%
 	  END
 	END
   BUT_ONLY
 END
 ACTION_IF !(VARIABLE_IS_SET %semi_sorc_state%) BEGIN
-  LAF d5_resolve_state STR_VAR new_state_id = ~D5_MULTI_SORC~ RET new_state_ind END
+  LAF d5_resolve_state STR_VAR new_state_id = ~D5_SEMI_SORC~ RET new_state_ind END
   OUTER_SET semi_sorc_state = %new_state_ind%
 END
 
@@ -5734,21 +5734,21 @@ BUT_ONLY
 //
 ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__arcane_slot_items.d5~) BEGIN
 
-ACTION_IF (FILE_CONTAINS_EVALUATED (~splstate.ids~ ~D5_MULTI_SORC~)) BEGIN
+ACTION_IF (FILE_CONTAINS_EVALUATED (~splstate.ids~ ~D5_SEMI_SORC~)) BEGIN
   COPY_EXISTING ~splstate.ids~ ~override~
 	COUNT_2DA_COLS cols
 	READ_2DA_ENTRIES_NOW rows cols
 	FOR (row = 1; row < rows; ++row) BEGIN
 	  READ_2DA_ENTRY_FORMER rows row 1 ~state_name~
 	  READ_2DA_ENTRY_FORMER rows row 0 ~state_ind~
-	  PATCH_IF (~%state_name%~ STRING_EQUAL_CASE ~D5_MULTI_SORC~) BEGIN
+	  PATCH_IF (~%state_name%~ STRING_EQUAL_CASE ~D5_SEMI_SORC~) BEGIN
 		SET semi_sorc_state = %state_ind%
 	  END
 	END
   BUT_ONLY
 END
 ACTION_IF !(VARIABLE_IS_SET %semi_sorc_state%) BEGIN
-  LAF d5_resolve_state STR_VAR new_state_id = ~D5_MULTI_SORC~ RET new_state_ind END
+  LAF d5_resolve_state STR_VAR new_state_id = ~D5_SEMI_SORC~ RET new_state_ind END
   OUTER_SET semi_sorc_state = %new_state_ind%
 END
 
