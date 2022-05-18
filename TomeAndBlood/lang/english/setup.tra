@@ -1205,8 +1205,9 @@ Casting Time: 9
 Area of Effect: Special
 Saving Throw: None
 
-This spell is the result of a Necromancer dipping his toes into the Diviner's sphere of influence. With it, an actual eyeball is enchanted to float around and send visual information to the caster's mind. The Wizard Eye can see with normal vision up to 60 ft. away in brightly lit areas, and can travel in any direction as long as the spell lasts. Solid barriers prevent the passage of a Wizard Eye. The powers of the eye cannot be enhanced by other spells or items. The caster is subject to any gaze attack met by the eye. A successful Dispel Magic spell cast on the wizard or the eye ends the spell.~
-@6135  = ~Shadow Stalker
+This spell is the result of a Necromancer dipping his toes into the Diviner's sphere of influence. With it, an actual eyeball is enchanted to float around and send visual information to the caster's mind. The Wizard Eye can see with normal vision up to 60 ft. away in brightly lit areas, and can travel in any direction as long as the spell lasts. Solid barriers prevent the passage of a Wizard Eye. The powers of the eye cannot be enhanced by other spells or items. The caster is subject to any gaze attack met by the eye. A successful Dispel Magic spell cast on the wizard or the eye ends the spell.
+~
+@6135  = ~Invisible Stalker
 Level: 6
 School: Illusion
 Range: 120 ft.
@@ -1215,7 +1216,8 @@ Casting Time: 9
 Area of Effect: Special
 Saving Throw: None
 
-This spell creates a double of the caster formed from pure shadow, and imparts upon it some degree of form and autonomy. Blurry and shapeless, this entity will fight on the caster's behalf and remain in relatively stable form for up to 9 hours (unless it meets a violent demise).~
+This spell creates an illusionary assassin that is nearly invisible to normal vision. This figure will pursue targets relentlessly, attacking with shadowy blades. It will remain in relatively stable form and serve the caster for up to 9 hours (unless it meets a violent demise).
+~
 @6136   = ~Discorporate
 Level: 6
 School: Necromancy
@@ -1334,8 +1336,8 @@ Saving Throw: vs. Death
 By means of a Ray of Enfeeblement, a wizard launches a magical attack against the vitality of an opponent, reducing its Strength and thereby the attacks that rely upon it. The victim's Strength score is automatically reduced by 4 points for the duration of the spell. Additionally, if the target fails a saving throw vs. Death, the Strength penalty is doubled to -8, and the victim suffers the effects of a Slow spell (half movement rate and -4 penalties to thac0 and AC). These effects last for 1 turn.~
 //
 //
-@6271   = ~Shadow Clone~
-@6272   = ~Shadow Clone
+@6271   = ~Misleading Clone~
+@6272   = ~Misleading Clone
 Level: 6
 School: Illusion
 Range: 0
@@ -1382,6 +1384,18 @@ Area of Effect: One creature
 Saving Throw: none
 
 This powerful spell creates a clone of the target creature, similar to the 8th-level Simulacrum spell. The clone created has 75% of the target creature's hit points, and 3-point penalties on to-hit rolls and effective caster level (if relevant). The clone may not use consumable items like potions or scrolls (which are not truly replicated). The clone can, however replicate a substantial amount of the target's arcane magical abilities, if the target has any - able to cast any arcane spells memorized that day, up to 7th spell level. Additionally, the clone is so real and has such a sense of identity that it can successfully use divine magic (if the target creature has such capabilities).
+~
+@6279  = ~Shadow Clone~
+@6280  = ~Shadow Clone
+Level: 5
+School: Illusion
+Range: 0
+Duration: 6 rounds
+Casting Time: 1
+Area of Effect: caster
+Saving Throw: none
+
+This spell renders the caster invisible, except for <PRO_HISHER> shadow. Moreover, the shadow can move apart from the caster and, while it cannot perform any actions like attacking or casting spells, it can move around and act as a decoy for the invisible mage. The caster will be protected by this invisibility as long as the shadow has not been destroyed, but will be rendered visible if the shadow is killed or dispelled.
 ~
 @6351 = ~Contingency~
 @6352 = ~Contingency

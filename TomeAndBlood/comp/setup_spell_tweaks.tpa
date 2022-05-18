@@ -65,26 +65,6 @@ OUTER_SET lesser_simulacrum_state = %new_state_ind%
 
 ACTION_IF FILE_EXISTS_IN_GAME ~spwi804.spl~ BEGIN
 
-	OUTER_SET spell_ind = 0
-	COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
-	  READ_SHORT 0x1c spell_type
-	  PATCH_IF (spell_type < 3) BEGIN
-		READ_LONG 0x34 spell_level
-		PATCH_IF (spell_level > 1) AND (spell_level < 5) BEGIN
-		  SET spell_ind = (%spell_ind% + 1)
-		  TEXT_SPRINT $d5_no_lowspells(~%spell_ind%~) ~%SOURCE_RES%~
-		END
-		PATCH_IF (spell_level > 4) AND (spell_level < 8) BEGIN
-		  SET spell_ind = (%spell_ind% + 1)
-		  TEXT_SPRINT $d5_no_midspells(~%spell_ind%~) ~%SOURCE_RES%~
-		END
-		PATCH_IF (spell_level > 8) BEGIN
-		  SET spell_ind = (%spell_ind% + 1)
-		  TEXT_SPRINT $d5_no_highspells(~%spell_ind%~) ~%SOURCE_RES%~
-		END
-	  END
-	BUT_ONLY
-
 //...apply penalties to simulacra
 //
 	COPY ~TomeAndBlood/data/spell_tweaks/simulacr.spl~ ~override~
@@ -113,15 +93,21 @@ ACTION_IF FILE_EXISTS_IN_GAME ~spwi804.spl~ BEGIN
 	  SAY UNIDENTIFIED_DESC ~ ~
 	  LPF ALTER_EFFECT INT_VAR silent = 1 power = 0 /*resist_dispel = 1*/ END
 
-//...5th level: nerfed mislead (imp. invisibility, no super invisibility. and 50% hp)
+//...5th level: shadow clone
 //
+/*
 	COPY_EXISTING ~spwi607.spl~ ~override~
 	  READ_LONG 0x08 mislead_name
 	  READ_LONG 0x50 mislead_desc
 	BUT_ONLY
+*/
 	COPY ~TomeAndBlood/data/spell_tweaks/spwi607.spl~ ~override/spwi505.spl~
+	  SAY NAME1 @6279
+	  SAY UNIDENTIFIED_DESC @6280
+/*
 	  WRITE_LONG 0x08 %mislead_name%
 	  WRITE_LONG 0x50 %mislead_desc%
+*/
 	  WRITE_LONG 0x34 5
 	  WRITE_ASCII 0x3a ~spwi505c~ #8
 	  LPF ALTER_SPELL_HEADER INT_VAR speed = 5 STR_VAR icon = ~spwi505b~ END
@@ -129,8 +115,10 @@ ACTION_IF FILE_EXISTS_IN_GAME ~spwi804.spl~ BEGIN
 	COPY ~TomeAndBlood/data/spell_tweaks/d5si505a.eff~ ~override~
 	COPY ~TomeAndBlood/data/spell_tweaks/d5si505b.spl~ ~override~
 	COPY ~TomeAndBlood/data/spell_tweaks/mislead.spl~ ~override~
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 53 target = 1 parameter1 = 25605 parameter2 = 2 timing = 1 END
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 72 target = 2 parameter1 = 7 parameter2 = 5 timing = 1 END 
 
-//...6th level: shadow clone
+//...6th level: mislead (imp. invisibility not super invisibility, and clone has 50% hp)
 //
 	COPY_EXISTING ~spwi804.spl~ ~override/spwi607.spl~
 	  SAY NAME1 @6271
@@ -237,6 +225,26 @@ ACTION_IF FILE_EXISTS_IN_GAME ~spwi804.spl~ BEGIN
 
 //...apply penalties to simulacra, part 2
 //
+	OUTER_SET spell_ind = 0
+	COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
+	  READ_SHORT 0x1c spell_type
+	  PATCH_IF (spell_type < 3) BEGIN
+		READ_LONG 0x34 spell_level
+		PATCH_IF (spell_level > 1) AND (spell_level < 5) BEGIN
+		  SET spell_ind = (%spell_ind% + 1)
+		  TEXT_SPRINT $d5_no_lowspells(~%spell_ind%~) ~%SOURCE_RES%~
+		END
+		PATCH_IF (spell_level > 4) AND (spell_level < 8) BEGIN
+		  SET spell_ind = (%spell_ind% + 1)
+		  TEXT_SPRINT $d5_no_midspells(~%spell_ind%~) ~%SOURCE_RES%~
+		END
+		PATCH_IF (spell_level > 8) BEGIN
+		  SET spell_ind = (%spell_ind% + 1)
+		  TEXT_SPRINT $d5_no_highspells(~%spell_ind%~) ~%SOURCE_RES%~
+		END
+	  END
+	BUT_ONLY
+
 	COPY ~TomeAndBlood/data/core/d5_base.spl~ ~override/d5simul6.spl~
 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 278 target = 1 parameter1 = (0 - 7) parameter2 = 0 timing = 9 END 	//	-7 thac0
 	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 191 target = 1 parameter1 = (0 - 7) parameter2 = 0 timing = 9 END 	//	-7 arcane caster level

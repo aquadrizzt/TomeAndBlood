@@ -1139,7 +1139,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN // version for Spell R
   ACTION_IF FILE_EXISTS_IN_GAME ~spwi601.spl~ THEN BEGIN
 	COPY_EXISTING ~spwi601.spl~ ~override~
 	  READ_BYTE 0x25 school
-	  PATCH_IF (%school% = 5) BEGIN		
+	  PATCH_IF (%school% = 5) BEGIN	
 		SAY UNIDENTIFIED_DESC @6135
 		INNER_ACTION BEGIN
 		  ACTION_IF FILE_EXISTS_IN_GAME ~scrl7e.itm~ BEGIN
@@ -1147,9 +1147,18 @@ ACTION_IF FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ THEN BEGIN // version for Spell R
 				SAY IDENTIFIED_DESC @6135
 			BUT_ONLY
 		  END
-		  ACTION_IF FILE_EXISTS_IN_GAME ~stalkesu.cre~ THEN BEGIN
-			COPY_EXISTING ~stalkesu.cre~ ~override~
+		  ACTION_FOR_EACH stalker IN ~stalkesu~ ~ckinvst~ ~dvstalk~ ~ohrstalk~ ~senstalk~ ~stalke~ BEGIN
+		    ACTION_IF FILE_EXISTS_IN_GAME ~%stalker%.cre~ BEGIN
+			  COPY_EXISTING ~%stalker%.cre~ ~override~
 				WRITE_BYTE 0x275 7
+			  BUT_ONLY
+		    END
+		  END
+		  ACTION_IF FILE_EXISTS_IN_GAME ~stalkesu.itm~ BEGIN
+			COPY_EXISTING ~stalkesu.itm~ ~override~
+			  LPF ALTER_ITEM_HEADER INT_VAR damage_type = 3 dicenumber = 1 STR_VAR icon = ~iphablad~ END
+			  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 53 target = 1 parameter1 = 32566 parameter2 = 2 timing = 2 END
+			  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 66 target = 1 parameter1 = 128 parameter2 = 0 END
 			BUT_ONLY
 		  END
 		END

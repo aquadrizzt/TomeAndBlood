@@ -372,21 +372,41 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5xsor1.spl~) BEGIN
     LPF ADD_SPELL_EFFECT INT_VAR opcode = 233 target = 1 parameter1 = (2 << 24) parameter2 = (115 + (0x10000 * 1)) timing = 9 END
     LPF ADD_SPELL_EFFECT INT_VAR opcode = 143 target = 1 parameter1 = 14 timing = 9 STR_VAR resource = ~d5xsorc~ END
     LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 1 STR_VAR resource = ~d5xsor1~ END
+//    LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 1 STR_VAR resource = ~d5xsor2~ END
+    LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 321 target = 1 timing = 1 STR_VAR resource = ~d5xsor1~ END
 END
 
 ACTION_IF !(FILE_EXISTS_IN_GAME ~d5xsor2.spl~) BEGIN
   COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5xsor2.spl~
     SAY NAME1 @1105
     SAY UNIDENTIFIED_DESC ~~
+    LPF ALTER_SPELL_HEADER INT_VAR target = 5 location = 4 STR_VAR icon = ~d5lernwi~ END
     LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 4 duration = 1 STR_VAR resource = ~d5xsor1~ END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 1 STR_VAR resource = ~d5xsor2~ END
+END
+
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5xsor3.spl~) BEGIN
+  COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5xsor3.spl~
+    SAY NAME1 @1105
+    SAY UNIDENTIFIED_DESC ~~
+    LPF ALTER_SPELL_HEADER INT_VAR target = 5 location = 4 STR_VAR icon = ~d5lernwi~ END
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 171 target = 1 timing = 1 STR_VAR resource = ~d5xsor2~ END
+END
+
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5xsorc.itm~) BEGIN
+  COPY_EXISTING ~d5xsorc.itm~ ~override~			//	learn spells .itm
+    LPF ADD_ITEM_EQEFFECT INT_VAR target = 1 opcode = 172 timing = 1 STR_VAR resource = ~d5xsor2~ END
+    LPF ADD_ITEM_EQEFFECT INT_VAR target = 1 opcode = 206 parameter1 = (0 - 1) timing = 2 STR_VAR resource = ~d5xsor3~ END
+    LPF ADD_ITEM_EQEFFECT INT_VAR target = 1 opcode = 206 parameter1 = (0 - 1) timing = 2 STR_VAR resource = ~d5xsor1~ END
+  BUT_ONLY
 END
 
 LAF semi_armor_casting END
 
 LAF semi_sorcerer_casting STR_VAR menu_suffix = EVAL ~%sorcerer_learn_suffix%~ spl_list = ~d5xsorc~ spl_clon_list = ~d5xclons~ END
 
-APPEND ~d5sorc.2da~ ~SORC_INIT   AP_D5XX000  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
-
+APPEND ~d5sorc.2da~ ~SORC_INIT   AP_D5XSOR3  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
+SORC_INIT   AP_D5XX000  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
 
 //set up casting slots________________________________________________________________
 //
@@ -394,14 +414,14 @@ LAF arcane_casting_slots STR_VAR slot_table = ~mxsplsrc~ table_spl = ~d5xltsr~ E
 
 COPY_EXISTING ~d5xrfsh.spl~ ~override~
 			  ~d5xx000.spl~ ~override~
-  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 326 target = 1 parameter1 = %fighter_sorcerer_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5xltsr~ END
-  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 326 target = 1 parameter1 = %sorcerer_cleric_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5xltsr~ END
-  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 326 target = 1 parameter1 = %sorcerer_thief_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5xltsr~ END
+  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 1 opcode = 326 target = 1 parameter1 = %fighter_sorcerer_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5xltsr~ END
+  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 1 opcode = 326 target = 1 parameter1 = %sorcerer_cleric_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5xltsr~ END
+  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 1 opcode = 326 target = 1 parameter1 = %sorcerer_thief_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5xltsr~ END
 
 COPY_EXISTING ~d5xxini.spl~ ~override~
-  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 326 target = 1 parameter1 = %fighter_sorcerer_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5xsor1~ END
-  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 326 target = 1 parameter1 = %sorcerer_cleric_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5xsor1~ END
-  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 326 target = 1 parameter1 = %sorcerer_thief_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5xsor1~ END
+  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 1 opcode = 326 target = 1 parameter1 = %fighter_sorcerer_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5xsor1~ END
+  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 1 opcode = 326 target = 1 parameter1 = %sorcerer_cleric_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5xsor1~ END
+  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 1 opcode = 326 target = 1 parameter1 = %sorcerer_thief_code% parameter2 = %kit_is_row% timing = 1 STR_VAR resource = ~d5xsor1~ END
 
 /*
 //make sure sequencer/contingency works if possible___________________________________
@@ -515,73 +535,155 @@ END
 //make HLA tables_____________________________________________________________________
 // ...clone sorcerer HLAs as innates
 //
-ACTION_IF FILE_EXISTS_IN_GAME ~spwi920.spl~ BEGIN
+ACTION_IF !(MOD_IS_INSTALLED ~refinements.tp2~ ~101~) AND !(MOD_IS_INSTALLED ~refinements.tp2~ ~108~) BEGIN
+
+ ACTION_IF FILE_EXISTS_IN_GAME ~spwi920.spl~ BEGIN
   COPY_EXISTING ~spwi920.spl~ ~override/d5hl920.spl~
 	WRITE_SHORT 0x1c 4
-END
-ACTION_IF FILE_EXISTS_IN_GAME ~spwi921.spl~ BEGIN
+ END
+ ACTION_IF FILE_EXISTS_IN_GAME ~spwi921.spl~ BEGIN
   COPY_EXISTING ~spwi921.spl~ ~override/d5hl921.spl~
 	WRITE_SHORT 0x1c 4
-END
-ACTION_IF FILE_EXISTS_IN_GAME ~spwi922.spl~ BEGIN
+ END
+ ACTION_IF FILE_EXISTS_IN_GAME ~spwi922.spl~ BEGIN
   COPY_EXISTING ~spwi922.spl~ ~override/d5hl922.spl~
 	WRITE_SHORT 0x1c 4
-END
-ACTION_IF FILE_EXISTS_IN_GAME ~spwi923.spl~ BEGIN
+ END
+ ACTION_IF FILE_EXISTS_IN_GAME ~spwi923.spl~ BEGIN
   COPY_EXISTING ~spwi923.spl~ ~override/d5hl923.spl~
 	WRITE_SHORT 0x1c 4
-END
-ACTION_IF FILE_EXISTS_IN_GAME ~spwi924.spl~ BEGIN
+ END
+ ACTION_IF FILE_EXISTS_IN_GAME ~spwi924.spl~ BEGIN
   COPY_EXISTING ~spwi924.spl~ ~override/d5hl924.spl~
 	WRITE_SHORT 0x1c 4
-END
-ACTION_IF FILE_EXISTS_IN_GAME ~spwi925.spl~ BEGIN
+ END
+ ACTION_IF FILE_EXISTS_IN_GAME ~spwi925.spl~ BEGIN
   COPY_EXISTING ~spwi925.spl~ ~override/d5hl925.spl~
 	WRITE_SHORT 0x1c 4
-END
-ACTION_IF FILE_EXISTS_IN_GAME ~spcl928.spl~ BEGIN
+ END
+ ACTION_IF FILE_EXISTS_IN_GAME ~spcl928.spl~ BEGIN
   COPY_EXISTING ~spcl928.spl~ ~override/d5hl928.spl~
 	LPF ALTER_EFFECT INT_VAR match_opcode = 42 opcode = 233 target = 1 parameter1 = (1 << 12) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
-END
-ACTION_IF FILE_EXISTS_IN_GAME ~spcl929.spl~ BEGIN
+ END
+ ACTION_IF FILE_EXISTS_IN_GAME ~spcl929.spl~ BEGIN
   COPY_EXISTING ~spcl929.spl~ ~override/d5hl929.spl~
 	LPF ALTER_EFFECT INT_VAR match_opcode = 42 opcode = 233 target = 1 parameter1 = (1 << 16) parameter2 = (108 + (0x10000 * 1)) timing = 9 END	
-END
-ACTION_IF FILE_EXISTS_IN_GAME ~spcl930.spl~ BEGIN
+ END
+ ACTION_IF FILE_EXISTS_IN_GAME ~spcl930.spl~ BEGIN
   COPY_EXISTING ~spcl930.spl~ ~override/d5hl930.spl~
 	LPF ALTER_EFFECT INT_VAR match_opcode = 42 opcode = 233 target = 1 parameter1 = (1 << 20) parameter2 = (108 + (0x10000 * 1)) timing = 9 END
+ END
+
+ LAF action_replace_hla STR_VAR kit_name = ~D5_FIGHTER_SORCERER~ remove_ability = ~GA_SPWI920~ ability = ~GA_D5HL920~ END
+ LAF action_replace_hla STR_VAR kit_name = ~D5_FIGHTER_SORCERER~ remove_ability = ~GA_SPWI921~ ability = ~GA_D5HL921~ END
+ LAF action_replace_hla STR_VAR kit_name = ~D5_FIGHTER_SORCERER~ remove_ability = ~GA_SPWI922~ ability = ~GA_D5HL922~ END
+ LAF action_replace_hla STR_VAR kit_name = ~D5_FIGHTER_SORCERER~ remove_ability = ~GA_SPWI923~ ability = ~GA_D5HL923~ excluded_by = ~GA_D5HL924~ END
+ LAF action_replace_hla STR_VAR kit_name = ~D5_FIGHTER_SORCERER~ remove_ability = ~GA_SPWI924~ ability = ~GA_D5HL924~ excluded_by = ~GA_D5HL923~ END
+ LAF action_replace_hla STR_VAR kit_name = ~D5_FIGHTER_SORCERER~ remove_ability = ~GA_SPWI925~ ability = ~GA_D5HL925~ END
+ LAF action_replace_hla STR_VAR kit_name = ~D5_FIGHTER_SORCERER~ remove_ability = ~AP_SPWI928~ ability = ~AP_D5HL928~ END
+ LAF action_replace_hla STR_VAR kit_name = ~D5_FIGHTER_SORCERER~ remove_ability = ~AP_SPWI929~ ability = ~AP_D5HL929~ END
+ LAF action_replace_hla STR_VAR kit_name = ~D5_FIGHTER_SORCERER~ remove_ability = ~AP_SPWI930~ ability = ~AP_D5HL930~ END
+
+ LAF action_replace_hla STR_VAR kit_name = ~D5_SORCERER_CLERIC~ remove_ability = ~GA_SPWI920~ ability = ~GA_D5HL920~ END
+ LAF action_replace_hla STR_VAR kit_name = ~D5_SORCERER_CLERIC~ remove_ability = ~GA_SPWI921~ ability = ~GA_D5HL921~ END
+ LAF action_replace_hla STR_VAR kit_name = ~D5_SORCERER_CLERIC~ remove_ability = ~GA_SPWI922~ ability = ~GA_D5HL922~ END
+ LAF action_replace_hla STR_VAR kit_name = ~D5_SORCERER_CLERIC~ remove_ability = ~GA_SPWI923~ ability = ~GA_D5HL923~ excluded_by = ~GA_D5HL924~ END
+ LAF action_replace_hla STR_VAR kit_name = ~D5_SORCERER_CLERIC~ remove_ability = ~GA_SPWI924~ ability = ~GA_D5HL924~ excluded_by = ~GA_D5HL923~ END
+ LAF action_replace_hla STR_VAR kit_name = ~D5_SORCERER_CLERIC~ remove_ability = ~GA_SPWI925~ ability = ~GA_D5HL925~ END
+ LAF action_replace_hla STR_VAR kit_name = ~D5_SORCERER_CLERIC~ remove_ability = ~AP_SPWI928~ ability = ~AP_D5HL928~ END
+ LAF action_replace_hla STR_VAR kit_name = ~D5_SORCERER_CLERIC~ remove_ability = ~AP_SPWI929~ ability = ~AP_D5HL929~ END
+ LAF action_replace_hla STR_VAR kit_name = ~D5_SORCERER_CLERIC~ remove_ability = ~AP_SPWI930~ ability = ~AP_D5HL930~ END
+
+ LAF action_replace_hla STR_VAR kit_name = ~D5_SORCERER_THIEF~ remove_ability = ~GA_SPWI920~ ability = ~GA_D5HL920~ END
+ LAF action_replace_hla STR_VAR kit_name = ~D5_SORCERER_THIEF~ remove_ability = ~GA_SPWI921~ ability = ~GA_D5HL921~ END
+ LAF action_replace_hla STR_VAR kit_name = ~D5_SORCERER_THIEF~ remove_ability = ~GA_SPWI922~ ability = ~GA_D5HL922~ END
+ LAF action_replace_hla STR_VAR kit_name = ~D5_SORCERER_THIEF~ remove_ability = ~GA_SPWI923~ ability = ~GA_D5HL923~ excluded_by = ~GA_D5HL924~ END
+ LAF action_replace_hla STR_VAR kit_name = ~D5_SORCERER_THIEF~ remove_ability = ~GA_SPWI924~ ability = ~GA_D5HL924~ excluded_by = ~GA_D5HL923~ END
+ LAF action_replace_hla STR_VAR kit_name = ~D5_SORCERER_THIEF~ remove_ability = ~GA_SPWI925~ ability = ~GA_D5HL925~ END
+ LAF action_replace_hla STR_VAR kit_name = ~D5_SORCERER_THIEF~ remove_ability = ~AP_SPWI928~ ability = ~AP_D5HL928~ END
+ LAF action_replace_hla STR_VAR kit_name = ~D5_SORCERER_THIEF~ remove_ability = ~AP_SPWI929~ ability = ~AP_D5HL929~ END
+ LAF action_replace_hla STR_VAR kit_name = ~D5_SORCERER_THIEF~ remove_ability = ~AP_SPWI930~ ability = ~AP_D5HL930~ END
+
 END
 
-LAF action_replace_hla STR_VAR kit_name = ~D5_FIGHTER_SORCERER~ remove_ability = ~GA_SPWI920~ ability = ~GA_D5HL920~ END
-LAF action_replace_hla STR_VAR kit_name = ~D5_FIGHTER_SORCERER~ remove_ability = ~GA_SPWI921~ ability = ~GA_D5HL921~ END
-LAF action_replace_hla STR_VAR kit_name = ~D5_FIGHTER_SORCERER~ remove_ability = ~GA_SPWI922~ ability = ~GA_D5HL922~ END
-LAF action_replace_hla STR_VAR kit_name = ~D5_FIGHTER_SORCERER~ remove_ability = ~GA_SPWI923~ ability = ~GA_D5HL923~ END
-LAF action_replace_hla STR_VAR kit_name = ~D5_FIGHTER_SORCERER~ remove_ability = ~GA_SPWI924~ ability = ~GA_D5HL924~ END
-LAF action_replace_hla STR_VAR kit_name = ~D5_FIGHTER_SORCERER~ remove_ability = ~GA_SPWI925~ ability = ~GA_D5HL925~ END
-LAF action_replace_hla STR_VAR kit_name = ~D5_FIGHTER_SORCERER~ remove_ability = ~AP_SPWI928~ ability = ~AP_D5HL928~ END
-LAF action_replace_hla STR_VAR kit_name = ~D5_FIGHTER_SORCERER~ remove_ability = ~AP_SPWI929~ ability = ~AP_D5HL929~ END
-LAF action_replace_hla STR_VAR kit_name = ~D5_FIGHTER_SORCERER~ remove_ability = ~AP_SPWI930~ ability = ~AP_D5HL930~ END
+ACTION_IF (MOD_IS_INSTALLED ~refinements.tp2~ ~101~) OR (MOD_IS_INSTALLED ~refinements.tp2~ ~108~) BEGIN
 
-LAF action_replace_hla STR_VAR kit_name = ~D5_SORCERER_CLERIC~ remove_ability = ~GA_SPWI920~ ability = ~GA_D5HL920~ END
-LAF action_replace_hla STR_VAR kit_name = ~D5_SORCERER_CLERIC~ remove_ability = ~GA_SPWI921~ ability = ~GA_D5HL921~ END
-LAF action_replace_hla STR_VAR kit_name = ~D5_SORCERER_CLERIC~ remove_ability = ~GA_SPWI922~ ability = ~GA_D5HL922~ END
-LAF action_replace_hla STR_VAR kit_name = ~D5_SORCERER_CLERIC~ remove_ability = ~GA_SPWI923~ ability = ~GA_D5HL923~ END
-LAF action_replace_hla STR_VAR kit_name = ~D5_SORCERER_CLERIC~ remove_ability = ~GA_SPWI924~ ability = ~GA_D5HL924~ END
-LAF action_replace_hla STR_VAR kit_name = ~D5_SORCERER_CLERIC~ remove_ability = ~GA_SPWI925~ ability = ~GA_D5HL925~ END
-LAF action_replace_hla STR_VAR kit_name = ~D5_SORCERER_CLERIC~ remove_ability = ~AP_SPWI928~ ability = ~AP_D5HL928~ END
-LAF action_replace_hla STR_VAR kit_name = ~D5_SORCERER_CLERIC~ remove_ability = ~AP_SPWI929~ ability = ~AP_D5HL929~ END
-LAF action_replace_hla STR_VAR kit_name = ~D5_SORCERER_CLERIC~ remove_ability = ~AP_SPWI930~ ability = ~AP_D5HL930~ END
+ LAF action_remove_hla STR_VAR kit_name = ~D5_FIGHTER_SORCERER~ remove_ability = ~GA_SPWI920~ END
+ LAF action_remove_hla STR_VAR kit_name = ~D5_FIGHTER_SORCERER~ remove_ability = ~GA_SPWI921~ END
+ LAF action_remove_hla STR_VAR kit_name = ~D5_FIGHTER_SORCERER~ remove_ability = ~GA_SPWI922~ END
+ LAF action_remove_hla STR_VAR kit_name = ~D5_FIGHTER_SORCERER~ remove_ability = ~GA_SPWI923~ END
+ LAF action_remove_hla STR_VAR kit_name = ~D5_FIGHTER_SORCERER~ remove_ability = ~GA_SPWI924~ END
+ LAF action_remove_hla STR_VAR kit_name = ~D5_FIGHTER_SORCERER~ remove_ability = ~GA_SPWI925~ END
+ LAF action_remove_hla STR_VAR kit_name = ~D5_FIGHTER_SORCERER~ remove_ability = ~AP_SPWI928~ END
+ LAF action_remove_hla STR_VAR kit_name = ~D5_FIGHTER_SORCERER~ remove_ability = ~AP_SPWI929~ END
+ LAF action_remove_hla STR_VAR kit_name = ~D5_FIGHTER_SORCERER~ remove_ability = ~AP_SPWI930~ END
+ LAF action_add_hla STR_VAR kit_name = ~D5_FIGHTER_SORCERER~ ability = ~GA_TG#SRES~ num_allowed = ~5~ END
+ LAF action_add_hla STR_VAR kit_name = ~D5_FIGHTER_SORCERER~ ability = ~GA_TG#SINF~ num_allowed = ~3~ END
+ LAF action_add_hla STR_VAR kit_name = ~D5_FIGHTER_SORCERER~ ability = ~GA_TG#CHAM~ num_allowed = ~5~ prerequisite = ~GA_TG#SRES~ END
+ LAF action_add_hla STR_VAR kit_name = ~D5_FIGHTER_SORCERER~ ability = ~GA_TG#SSHA~ prerequisite = ~GA_TG#SINF~ END
+ LAF action_add_hla STR_VAR kit_name = ~D5_FIGHTER_SORCERER~ ability = ~GA_TG#CAAW~ prerequisite = ~GA_TG#SINF~ END
+ LAF action_add_hla STR_VAR kit_name = ~D5_FIGHTER_SORCERER~ ability = ~GA_TG#SPSP~ num_allowed = ~3~ prerequisite = ~GA_TG#CAAW~ END
+ LAF action_add_hla STR_VAR kit_name = ~D5_FIGHTER_SORCERER~ ability = ~GA_LI#AUCL~ prerequisite = ~GA_TG#SPSP~ END
+ LAF action_add_hla STR_VAR kit_name = ~D5_FIGHTER_SORCERER~ ability = ~GA_TG#SHOC~ num_allowed = ~3~ prerequisite = ~GA_TG#CAAW~ END
+ LAF action_add_hla STR_VAR kit_name = ~D5_FIGHTER_SORCERER~ ability = ~GA_TG#ENES~ prerequisite = ~GA_TG#SHOC~ END
+ LAF action_add_hla STR_VAR kit_name = ~D5_FIGHTER_SORCERER~ ability = ~GA_TG#AQUA~ num_allowed = ~3~ excluded_by = ~GA_TG#SCST~ END
+ LAF action_add_hla STR_VAR kit_name = ~D5_FIGHTER_SORCERER~ ability = ~GA_TG#SCST~ num_allowed = ~3~ excluded_by = ~GA_TG#AQUA~ END
+ LAF action_add_hla STR_VAR kit_name = ~D5_FIGHTER_SORCERER~ ability = ~GA_TG#IDOF~ num_allowed = ~3~ excluded_by = ~GA_TG#SPOF~ END
+ LAF action_add_hla STR_VAR kit_name = ~D5_FIGHTER_SORCERER~ ability = ~GA_TG#SPOF~ num_allowed = ~3~ excluded_by = ~GA_TG#IDOF~ END
 
-LAF action_replace_hla STR_VAR kit_name = ~D5_SORCERER_THIEF~ remove_ability = ~GA_SPWI920~ ability = ~GA_D5HL920~ END
-LAF action_replace_hla STR_VAR kit_name = ~D5_SORCERER_THIEF~ remove_ability = ~GA_SPWI921~ ability = ~GA_D5HL921~ END
-LAF action_replace_hla STR_VAR kit_name = ~D5_SORCERER_THIEF~ remove_ability = ~GA_SPWI922~ ability = ~GA_D5HL922~ END
-LAF action_replace_hla STR_VAR kit_name = ~D5_SORCERER_THIEF~ remove_ability = ~GA_SPWI923~ ability = ~GA_D5HL923~ END
-LAF action_replace_hla STR_VAR kit_name = ~D5_SORCERER_THIEF~ remove_ability = ~GA_SPWI924~ ability = ~GA_D5HL924~ END
-LAF action_replace_hla STR_VAR kit_name = ~D5_SORCERER_THIEF~ remove_ability = ~GA_SPWI925~ ability = ~GA_D5HL925~ END
-LAF action_replace_hla STR_VAR kit_name = ~D5_SORCERER_THIEF~ remove_ability = ~AP_SPWI928~ ability = ~AP_D5HL928~ END
-LAF action_replace_hla STR_VAR kit_name = ~D5_SORCERER_THIEF~ remove_ability = ~AP_SPWI929~ ability = ~AP_D5HL929~ END
-LAF action_replace_hla STR_VAR kit_name = ~D5_SORCERER_THIEF~ remove_ability = ~AP_SPWI930~ ability = ~AP_D5HL930~ END
+ LAF action_remove_hla STR_VAR kit_name = ~D5_SORCERER_CLERIC~ remove_ability = ~GA_SPWI920~ END
+ LAF action_remove_hla STR_VAR kit_name = ~D5_SORCERER_CLERIC~ remove_ability = ~GA_SPWI921~ END
+ LAF action_remove_hla STR_VAR kit_name = ~D5_SORCERER_CLERIC~ remove_ability = ~GA_SPWI922~ END
+ LAF action_remove_hla STR_VAR kit_name = ~D5_SORCERER_CLERIC~ remove_ability = ~GA_SPWI923~ END
+ LAF action_remove_hla STR_VAR kit_name = ~D5_SORCERER_CLERIC~ remove_ability = ~GA_SPWI924~ END
+ LAF action_remove_hla STR_VAR kit_name = ~D5_SORCERER_CLERIC~ remove_ability = ~GA_SPWI925~ END
+ LAF action_remove_hla STR_VAR kit_name = ~D5_SORCERER_CLERIC~ remove_ability = ~AP_SPWI928~ END
+ LAF action_remove_hla STR_VAR kit_name = ~D5_SORCERER_CLERIC~ remove_ability = ~AP_SPWI929~ END
+ LAF action_remove_hla STR_VAR kit_name = ~D5_SORCERER_CLERIC~ remove_ability = ~AP_SPWI930~ END
+ LAF action_add_hla STR_VAR kit_name = ~D5_SORCERER_CLERIC~ ability = ~GA_TG#SRES~ num_allowed = ~5~ END
+ LAF action_add_hla STR_VAR kit_name = ~D5_SORCERER_CLERIC~ ability = ~GA_TG#SINF~ num_allowed = ~3~ END
+ LAF action_add_hla STR_VAR kit_name = ~D5_SORCERER_CLERIC~ ability = ~GA_TG#CHAM~ num_allowed = ~5~ prerequisite = ~GA_TG#SRES~ END
+ LAF action_add_hla STR_VAR kit_name = ~D5_SORCERER_CLERIC~ ability = ~GA_TG#SSHA~ prerequisite = ~GA_TG#SINF~ END
+ LAF action_add_hla STR_VAR kit_name = ~D5_SORCERER_CLERIC~ ability = ~GA_TG#CAAW~ prerequisite = ~GA_TG#SINF~ END
+ LAF action_add_hla STR_VAR kit_name = ~D5_SORCERER_CLERIC~ ability = ~GA_TG#SPSP~ num_allowed = ~3~ prerequisite = ~GA_TG#CAAW~ END
+ LAF action_add_hla STR_VAR kit_name = ~D5_SORCERER_CLERIC~ ability = ~GA_LI#AUCL~ prerequisite = ~GA_TG#SPSP~ END
+ LAF action_add_hla STR_VAR kit_name = ~D5_SORCERER_CLERIC~ ability = ~GA_TG#SHOC~ num_allowed = ~3~ prerequisite = ~GA_TG#CAAW~ END
+ LAF action_add_hla STR_VAR kit_name = ~D5_SORCERER_CLERIC~ ability = ~GA_TG#ENES~ prerequisite = ~GA_TG#SHOC~ END
+ LAF action_add_hla STR_VAR kit_name = ~D5_SORCERER_CLERIC~ ability = ~GA_TG#AQUA~ num_allowed = ~3~ excluded_by = ~GA_TG#SCST~ END
+ LAF action_add_hla STR_VAR kit_name = ~D5_SORCERER_CLERIC~ ability = ~GA_TG#SCST~ num_allowed = ~3~ excluded_by = ~GA_TG#AQUA~ END
+ LAF action_add_hla STR_VAR kit_name = ~D5_SORCERER_CLERIC~ ability = ~GA_TG#IDOF~ num_allowed = ~3~ excluded_by = ~GA_TG#SPOF~ END
+ LAF action_add_hla STR_VAR kit_name = ~D5_SORCERER_CLERIC~ ability = ~GA_TG#SPOF~ num_allowed = ~3~ excluded_by = ~GA_TG#IDOF~ END
 
+ LAF action_remove_hla STR_VAR kit_name = ~D5_SORCERER_THIEF~ remove_ability = ~GA_SPWI920~ END
+ LAF action_remove_hla STR_VAR kit_name = ~D5_SORCERER_THIEF~ remove_ability = ~GA_SPWI921~ END
+ LAF action_remove_hla STR_VAR kit_name = ~D5_SORCERER_THIEF~ remove_ability = ~GA_SPWI922~ END
+ LAF action_remove_hla STR_VAR kit_name = ~D5_SORCERER_THIEF~ remove_ability = ~GA_SPWI923~ END
+ LAF action_remove_hla STR_VAR kit_name = ~D5_SORCERER_THIEF~ remove_ability = ~GA_SPWI924~ END
+ LAF action_remove_hla STR_VAR kit_name = ~D5_SORCERER_THIEF~ remove_ability = ~GA_SPWI925~ END
+ LAF action_remove_hla STR_VAR kit_name = ~D5_SORCERER_THIEF~ remove_ability = ~AP_SPWI928~ END
+ LAF action_remove_hla STR_VAR kit_name = ~D5_SORCERER_THIEF~ remove_ability = ~AP_SPWI929~ END
+ LAF action_remove_hla STR_VAR kit_name = ~D5_SORCERER_THIEF~ remove_ability = ~AP_SPWI930~ END
+ LAF action_add_hla STR_VAR kit_name = ~D5_SORCERER_THIEF~ ability = ~GA_TG#SRES~ num_allowed = ~5~ END
+ LAF action_add_hla STR_VAR kit_name = ~D5_SORCERER_THIEF~ ability = ~GA_TG#SINF~ num_allowed = ~3~ END
+ LAF action_add_hla STR_VAR kit_name = ~D5_SORCERER_THIEF~ ability = ~GA_TG#CHAM~ num_allowed = ~5~ prerequisite = ~GA_TG#SRES~ END
+ LAF action_add_hla STR_VAR kit_name = ~D5_SORCERER_THIEF~ ability = ~GA_TG#SSHA~ prerequisite = ~GA_TG#SINF~ END
+ LAF action_add_hla STR_VAR kit_name = ~D5_SORCERER_THIEF~ ability = ~GA_TG#CAAW~ prerequisite = ~GA_TG#SINF~ END
+ LAF action_add_hla STR_VAR kit_name = ~D5_SORCERER_THIEF~ ability = ~GA_TG#SPSP~ num_allowed = ~3~ prerequisite = ~GA_TG#CAAW~ END
+ LAF action_add_hla STR_VAR kit_name = ~D5_SORCERER_THIEF~ ability = ~GA_LI#AUCL~ prerequisite = ~GA_TG#SPSP~ END
+ LAF action_add_hla STR_VAR kit_name = ~D5_SORCERER_THIEF~ ability = ~GA_TG#SHOC~ num_allowed = ~3~ prerequisite = ~GA_TG#CAAW~ END
+ LAF action_add_hla STR_VAR kit_name = ~D5_SORCERER_THIEF~ ability = ~GA_TG#ENES~ prerequisite = ~GA_TG#SHOC~ END
+ LAF action_add_hla STR_VAR kit_name = ~D5_SORCERER_THIEF~ ability = ~GA_TG#AQUA~ num_allowed = ~3~ excluded_by = ~GA_TG#SCST~ END
+ LAF action_add_hla STR_VAR kit_name = ~D5_SORCERER_THIEF~ ability = ~GA_TG#SCST~ num_allowed = ~3~ excluded_by = ~GA_TG#AQUA~ END
+ LAF action_add_hla STR_VAR kit_name = ~D5_SORCERER_THIEF~ ability = ~GA_TG#IDOF~ num_allowed = ~3~ excluded_by = ~GA_TG#SPOF~ END
+ LAF action_add_hla STR_VAR kit_name = ~D5_SORCERER_THIEF~ ability = ~GA_TG#SPOF~ num_allowed = ~3~ excluded_by = ~GA_TG#IDOF~ END
+
+END
+
+ACTION_IF (MOD_IS_INSTALLED ~tomeandblood.tp2~ ~52~) OR (MOD_IS_INSTALLED ~tomeandblood.tp2~ ~54~) BEGIN
+  LAF action_remove_hla STR_VAR kit_name = ~D5_FIGHTER_SORCERER~ remove_ability = ~GA_SPWI908~ END
+  LAF action_remove_hla STR_VAR kit_name = ~D5_SORCERER_CLERIC~ remove_ability = ~GA_SPWI908~ END
+  LAF action_remove_hla STR_VAR kit_name = ~D5_SORCERER_THIEF~ remove_ability = ~GA_SPWI908~ END
+END
 
 //add spell switching_________________________________________________________________
 //

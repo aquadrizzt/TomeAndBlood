@@ -11,7 +11,7 @@ INCLUDE ~TomeAndBlood/lib/hla_actions.tpa~
 // this changes the spells to delete themselves, and the sequencers to create the innates...
 // that needs to vary by install option... or does it??
 
-ACTION_IF NOT (%sequencer_method% = 5) BEGIN
+//ACTION_IF NOT (%sequencer_method% = 5) BEGIN
 
 //Sequencers
 //
@@ -56,17 +56,19 @@ COPY ~TomeAndBlood/data/metamagic/spwi809.spl~ ~override~
 COPY ~TomeAndBlood/data/metamagic/d5conti.spl~ ~override~ 
 	SAY NAME1 @6351
 	SAY UNIDENTIFIED_DESC @6352
+	LPF ALTER_SPELL_HEADER INT_VAR location = 4 END
 COPY ~TomeAndBlood/data/metamagic/spwi617.spl~ ~override~ 
 	SAY NAME1 @6351
 	SAY UNIDENTIFIED_DESC @6352
 	WRITE_SHORT 0x1c 4
+	LPF ALTER_SPELL_HEADER INT_VAR location = 4 END
 /*
 COPY ~TomeAndBlood/data/metamagic/d5wi617.spl~ ~override~
 	SAY NAME1 @6351
 	SAY UNIDENTIFIED_DESC @6352
 */
 
-//Add Chain Contingency as HLA
+//Change Chain Contingency into an HLA
 //
 COPY ~TomeAndBlood/data/metamagic/d5_ccont.spl~ ~override/spwi908.spl~
 	SAY NAME1 @6353
@@ -76,35 +78,9 @@ ACTION_IF FILE_EXISTS_IN_GAME ~scrl9a.itm~ THEN BEGIN
 	COPY_EXISTING ~scrl9l.itm~ ~override/scrl9q.itm~ 	// replace CC scrolls with Spell Trap
 END
 
-LAF action_add_hla STR_VAR kit_name = ~MAGE~ ability = ~GA_SPWI908~ num_allowed = ~1~ END
-
-COPY_EXISTING ~kitlist.2da~ ~override~
-//  COUNT_2DA_COLS num_cols
-  READ_2DA_ENTRIES_NOW ~r2en_kitlist~ 9
-	FOR (row = 3; row < r2en_kitlist; row += 1) BEGIN
-	  READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 1 kitlist_name
-	  READ_2DA_ENTRY_FORMER ~r2en_kitlist~ row 8 class_num
-	  PATCH_IF (class_num == 1) BEGIN // wizard
-		INNER_ACTION BEGIN
-		  LAF action_add_hla STR_VAR kit_name = EVAL ~%kitlist_name%~ ability = ~GA_SPWI908~ num_allowed = ~1~ END
-		END
-	  END
-	  PATCH_IF (class_num == 13) BEGIN // M/T
-		INNER_ACTION BEGIN
-		  LAF action_add_hla STR_VAR kit_name = EVAL ~%kitlist_name%~ ability = ~GA_SPWI908~ num_allowed = ~1~ END
-		END
-	  END
-	  PATCH_IF (class_num == 14) BEGIN // C/M
-		INNER_ACTION BEGIN
-		  LAF action_add_hla STR_VAR kit_name = EVAL ~%kitlist_name%~ ability = ~GA_SPWI908~ num_allowed = ~1~ END
-		END
-	  END
-	END
-BUT_ONLY	
-
-//Removing Chain Contingency from the levelup table
+//Remove Chain Contingency from the levelup table
 //
- ACTION_IF (FILE_EXISTS_IN_GAME ~HIDESPL.2DA~) THEN BEGIN 
+ACTION_IF (FILE_EXISTS_IN_GAME ~HIDESPL.2DA~) THEN BEGIN 
   ACTION_IF GAME_IS ~bgee bg2ee eet~ BEGIN
 	APPEND ~HIDESPL.2da~ ~SPWI908	1	0	0~ 		//	Chain Contingency
   END
@@ -114,16 +90,98 @@ BUT_ONLY
   ACTION_IF FILE_EXISTS ~tobex_ini/tobexcore.ini~ BEGIN
 	APPEND ~HIDESPL.2da~ ~SPWI908	****~ 			//	Chain Contingency
   END
- END 
+END 
 
-END 	//	end install method != 5
+//Add Chain Contingency to HLA tables
+//
+OUTER_TEXT_SPRINT $mage_hla_class(~MAGE~)~1~
+
+ACTION_IF (%sequencer_method% = 1) OR (%sequencer_method% = 3) BEGIN
+  OUTER_TEXT_SPRINT $mage_hla_class(~SORCERER~)~1~
+END
+
+COPY_EXISTING ~kitlist.2da~ ~override~
+  COUNT_2DA_COLS cols
+  COUNT_2DA_ROWS cols rows
+  FOR (row = 1; row < rows; ++row) BEGIN
+    READ_2DA_ENTRY row 1 cols kit_name
+    READ_2DA_ENTRY row 8 cols kit_class
+    PATCH_IF (kit_class = 1) BEGIN // mages
+      SPRINT $mage_hla_class(~%kit_name%~)~1~
+    END
+    PATCH_IF (kit_class = 7) BEGIN // fm
+      PATCH_IF !(~%kit_class%~ STRING_EQUAL_CASE ~D5_FIGHTER_SORCERER~) BEGIN
+        SPRINT $mage_hla_class(~%kit_name%~)~1~
+      END
+      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~D5_FIGHTER_SORCERER~) BEGIN
+        PATCH_IF (%sequencer_method% = 1) OR (%sequencer_method% = 3) BEGIN
+          SPRINT $mage_hla_class(~%kit_name%~)~1~
+        END
+      END
+    END
+    PATCH_IF (kit_class = 13) BEGIN // mt
+      PATCH_IF !(~%kit_class%~ STRING_EQUAL_CASE ~D5_SORCERER_THIEF~) BEGIN
+        SPRINT $mage_hla_class(~%kit_name%~)~1~
+      END
+      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~D5_SORCERER_THIEF~) BEGIN
+        PATCH_IF (%sequencer_method% = 1) OR (%sequencer_method% = 3) BEGIN
+          SPRINT $mage_hla_class(~%kit_name%~)~1~
+        END
+      END
+    END
+    PATCH_IF (kit_class = 14) BEGIN // cm
+      PATCH_IF !(~%kit_class%~ STRING_EQUAL_CASE ~D5_SORCERER_CLERIC~) BEGIN
+        SPRINT $mage_hla_class(~%kit_name%~)~1~
+      END
+      PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~D5_SORCERER_CLERIC~) BEGIN
+        PATCH_IF (%sequencer_method% = 1) OR (%sequencer_method% = 3) BEGIN
+          SPRINT $mage_hla_class(~%kit_name%~)~1~
+        END
+      END
+    END
+    PATCH_IF (kit_class = 10) BEGIN // fmt
+      SPRINT $mage_hla_class(~%kit_name%~)~1~
+    END
+    PATCH_IF (kit_class = 17) BEGIN // fmc
+      SPRINT $mage_hla_class(~%kit_name%~)~1~
+    END
+    PATCH_IF (kit_class = 19) BEGIN // sorcerers
+      PATCH_IF (%sequencer_method% = 1) OR (%sequencer_method% = 3) BEGIN
+        SPRINT $mage_hla_class(~%kit_name%~)~1~
+      END
+    END
+  END
+BUT_ONLY
+
+ACTION_PHP_EACH mage_hla_class AS kit => ind BEGIN
+  LAF get_hla_table STR_VAR kit_name = EVAL ~%kit%~ RET hla_table END
+  ACTION_IF !(FILE_CONTAINS_EVALUATED (~%hla_table%.2da~ ~GA_SPWI908~)) BEGIN
+    LAF action_add_hla STR_VAR kit_name = EVAL ~%kit%~ ability = ~GA_SPWI908~ num_allowed = ~1~ END
+  END
+END
+
+ACTION_FOR_EACH mage_table IN ~luma0~ ~lufm0~ ~lumt0~ ~lucm0~ ~lufmt~ ~lufmc~ BEGIN
+  ACTION_IF !(FILE_CONTAINS_EVALUATED (~%mage_table%.2da~ ~GA_SPWI908~)) BEGIN
+    LAF add_hla_to_table STR_VAR table_name = EVAL ~%mage_table%~ ability = ~GA_SPWI908~ num_allowed = ~1~ END
+  END
+END
+
+ACTION_IF (%sequencer_method% = 1) OR (%sequencer_method% = 3) BEGIN
+  ACTION_FOR_EACH sorc_table IN ~luso0~ ~luso1~ BEGIN
+    ACTION_IF !(FILE_CONTAINS_EVALUATED (~%sorc_table%.2da~ ~GA_SPWI908~)) BEGIN
+      LAF add_hla_to_table STR_VAR table_name = EVAL ~%sorc_table%~ ability = ~GA_SPWI908~ num_allowed = ~1~ END
+    END
+  END
+END
+
+//END 	//	end install method != 5
 
 
 // OPTION 1 + 2
 // -----------------------------
 // innate; learn metamagic automatically in CLAB; sorcerers may or may not use metamagic
 
-ACTION_IF (%sequencer_method% = 1) || (%sequencer_method% = 2) BEGIN
+ACTION_IF (%sequencer_method% = 1) OR (%sequencer_method% = 2) BEGIN
 
  ACTION_IF FILE_EXISTS_IN_GAME ~scrl6p.itm~ THEN BEGIN
 	COPY_EXISTING ~scrl6o.itm~ ~override/scrl6p.itm~ 	// replace Minor Seq. scrolls with Secret Word
@@ -281,7 +339,7 @@ END	//	end options 1+2
 // -----------------------------
 // innate; learn metamagic from scrolls; may or may not be chosen as spells
 
-ACTION_IF (%sequencer_method% = 3) || (%sequencer_method% = 4) BEGIN
+ACTION_IF (%sequencer_method% = 3) OR (%sequencer_method% = 4) BEGIN
 
  ACTION_IF FILE_EXISTS_IN_GAME ~scrl6p.itm~ THEN BEGIN		// 	minor seq. scroll
 //	COPY ~TomeAndBlood/data/metamagic/mseqscrl.itm~ ~override/scrl6p.itm~
