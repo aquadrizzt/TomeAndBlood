@@ -33,7 +33,6 @@ AUTO_TRA ~TomeAndBlood/lang/%s~
 LANGUAGE ~English~ ~english~ ~TomeAndBlood/lang/english/setup.tra~ 
 
 
-/*
 // -----------------------------
 // 11: REBALANCED SPELL SCHOOLS (Subtledoctor)
 // -----------------------------
@@ -304,7 +303,6 @@ INCLUDE ~TomeAndBlood/comp/setup_armored_casting_bard.tpa~
 
 LAF armored_bards END
 
-*/
 
 // -----------------------------
 // 50: INNATE METAMAGIC (Subtledoctor)
@@ -391,7 +389,7 @@ COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_metamagic.qd~ //detection for this co
 LAF semi_spont_sequencers END
 */
 
-/*
+
 // -----------------------------
 // 60: CANTRIPS (Subtledoctor)
 // 61: Cantrips, Original 
@@ -529,7 +527,6 @@ COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_switch3.qd~ //detection for this comp
 INCLUDE ~TomeAndBlood/comp/setup_spell_switching.tpa~
 
 LAF spell_switching INT_VAR switch_interval = 3 END
-*/
 
 
 // -----------------------------
