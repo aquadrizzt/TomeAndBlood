@@ -1,9 +1,3 @@
-// creator  : /Users/bri/Desktop/BG2EE 2-5-16.app/Contents/Resources/NearInfinity.app/Contents/MacOS/NearInfinity.jar (v2.1-20180531)
-// game     : /Users/bri/Desktop/BG2EE 2-5-16.app/Contents/Resources
-// resource : FAMIL2.DLG
-// source   : data/DIALOG.BIF
-// dialog   : lang/en_US/dialog.tlk
-// dialogF  : (none)
 
 BEGIN ~FAMIL2~
 
@@ -15,15 +9,21 @@ END
 IF ~InPartySlot(LastTalkedToBy,0)~ THEN BEGIN 1 // from: 
   SAY #58327 /* ~The impish creature regards you suspiciously, wary of a kick or slap headed its way, before sidling a step or two closer. "Yeah, boss? You want something?"~ */
   IF ~Alignment(Player1,MASK_LAWFUL)
+
 !InventoryFull(Player1)
+
 ~ THEN REPLY #58328 /* ~Come here. You're going in my pack for now.~ */ GOTO 2
   IF ~Range(LastTalkedToBy,3)~ THEN REPLY #58330 /* ~Don't be so frightened of me, idiot. *pet the familiar*~ */ GOTO 3
   IF ~Range(LastTalkedToBy,3)~ THEN REPLY #58386 /* ~*slap it in the head*~ */ GOTO 21
   IF ~Alignment(Player1,MASK_LCNEUTRAL)
+
 !InventoryFull(Player1)
+
 ~ THEN REPLY #58868 /* ~Come here. You're going in my pack for now.~ */ GOTO 25
   IF ~Alignment(Player1,MASK_CHAOTIC)
+
 !InventoryFull(Player1)
+
 ~ THEN REPLY #58869 /* ~Come here. You're going in my pack for now.~ */ GOTO 26
   IF ~~ THEN REPLY #58353 /* ~Do have any advice for me, my familiar?~ */ GOTO 4
   IF ~~ THEN REPLY #58354 /* ~Are you all right, familiar? All is well?~ */ GOTO 13
@@ -33,22 +33,31 @@ END
 IF ~~ THEN BEGIN 2 // from: 1.0 3.0 21.0 22.0 23.0
   SAY #58329 /* ~"Oh, sure. Stick me in your smelly pack. Ever thought of putting some mint in there? Baaah..." Reluctantly, the imp crawls into your pack.~ */
   IF ~~ THEN DO ~GivePartyAllEquipment()
+
 GiveItemCreate("FAMIMP",Player1,0,0,0)
+
 DestroySelf()
+
 ~ EXIT
 END
 
 IF ~~ THEN BEGIN 3 // from: 1.1
   SAY #58331 /* ~It seems disgusted as you pat it on the head. "Oh, now I'm a cute little bunny? Give me a break, boss." The imp darts away and does a heebie-jeebie dance.~ */
   IF ~Alignment(Player1,MASK_LAWFUL)
+
 !InventoryFull(Player1)
+
 ~ THEN REPLY #58332 /* ~Come here, then. Get in my pack.~ */ GOTO 2
   IF ~Range(LastTalkedToBy,3)~ THEN REPLY #58387 /* ~*slap it in the head*~ */ GOTO 21
   IF ~Alignment(Player1,MASK_LCNEUTRAL)
+
 !InventoryFull(Player1)
+
 ~ THEN REPLY #59468 /* ~Come here, then. Get in my pack.~ */ GOTO 25
   IF ~Alignment(Player1,MASK_CHAOTIC)
+
 !InventoryFull(Player1)
+
 ~ THEN REPLY #59469 /* ~Come here, then. Get in my pack.~ */ GOTO 26
   IF ~~ THEN REPLY #58333 /* ~You wouldn't happen to have any advice, would you?~ */ GOTO 4
   IF ~~ THEN REPLY #58343 /* ~Is all well down there?~ */ GOTO 13
@@ -58,8 +67,10 @@ END
 IF ~~ THEN BEGIN 4 // from: 1.5 3.4 21.4 22.1 23.1
   SAY #58334 /* ~It looks at you incredulously, wondering if you are serious or if this is a prelude to a slap. "You want *me* to give *you* advice, boss? That's a first."~ */
   IF ~Global("chapter","GLOBAL",1)
+
 AreaType(DUNGEON)~ THEN GOTO 5
   IF ~Global("chapter","GLOBAL",1)
+
 !AreaType(DUNGEON)~ THEN GOTO 6
   IF ~Global("chapter","GLOBAL",2)~ THEN GOTO 7
   IF ~Global("chapter","GLOBAL",3)~ THEN GOTO 8
@@ -112,15 +123,20 @@ END
 IF ~~ THEN BEGIN 13 // from: 1.6 3.5 21.5 22.2 23.2
   SAY #58344 /* ~It looks at you suspiciously, its sulfur eyes squinting. "Hmph. Since when are you so interested in me, boss? Up 'til now, it's all been you, you, you."~ */
   IF ~HPLT(Myself,16)
+
 !HPLT(Myself,8)~ THEN GOTO 14
   IF ~HPLT(Myself,8)~ THEN GOTO 15
   IF ~!HPLT(Myself,16)
+
 RandomNum(4,1)~ THEN GOTO 16
   IF ~!HPLT(Myself,16)
+
 RandomNum(4,2)~ THEN GOTO 17
   IF ~!HPLT(Myself,16)
+
 RandomNum(4,3)~ THEN GOTO 18
   IF ~!HPLT(Myself,16)
+
 RandomNum(4,4)~ THEN GOTO 19
 END
 
@@ -162,7 +178,9 @@ END
 IF ~~ THEN BEGIN 21 // from: 1.2 3.1
   SAY #58388 /* ~The imp reels from the blow. "HeeEEYY! Cripes! What wuz that for?! I did everything you told me to, boss! Sheesh! Some people..."~ */
   IF ~Alignment(Player1,MASK_LAWFUL)
+
 !InventoryFull(Player1)
+
 ~ THEN REPLY #59470 /* ~Come here, then. Get in my pack.~ */ GOTO 2
   IF ~RandomNum(3,1)~ THEN REPLY #58391 /* ~*slap it again*~ */ GOTO 22
   IF ~RandomNum(3,2)~ THEN REPLY #58392 /* ~*slap it again*~ */ GOTO 23
@@ -171,42 +189,58 @@ IF ~~ THEN BEGIN 21 // from: 1.2 3.1
   IF ~~ THEN REPLY #58395 /* ~Is all well down there?~ */ GOTO 13
   IF ~~ THEN REPLY #58396 /* ~All right, let's just keep going.~ */ GOTO 20
   IF ~Alignment(Player1,MASK_LCNEUTRAL)
+
 !InventoryFull(Player1)
+
 ~ THEN REPLY #59471 /* ~Come here, then. Get in my pack.~ */ GOTO 25
   IF ~Alignment(Player1,MASK_CHAOTIC)
+
 !InventoryFull(Player1)
+
 ~ THEN REPLY #59472 /* ~Come here, then. Get in my pack.~ */ GOTO 26
 END
 
 IF ~~ THEN BEGIN 22 // from: 21.1
   SAY #58389 /* ~Another slap sends it to the floor, frantically covering its head. "Gaaah! Okay! You're the boss-<PRO_MANWOMAN>! YOU boss, ME just little follower! I get it!"~ */
   IF ~Alignment(Player1,MASK_LAWFUL)
+
 !InventoryFull(Player1)
+
 ~ THEN REPLY #58399 /* ~Come here, then. Get in my pack.~ */ GOTO 2
   IF ~~ THEN REPLY #58401 /* ~You wouldn't happen to have any advice, would you?~ */ GOTO 4
   IF ~~ THEN REPLY #58403 /* ~So... is all well down there?~ */ GOTO 13
   IF ~~ THEN REPLY #58405 /* ~All right, let's just keep going.~ */ GOTO 20
   IF ~Alignment(Player1,MASK_LCNEUTRAL)
+
 !InventoryFull(Player1)
+
 ~ THEN REPLY #59473 /* ~Come here, then. Get in my pack.~ */ GOTO 25
   IF ~Alignment(Player1,MASK_CHAOTIC)
+
 !InventoryFull(Player1)
+
 ~ THEN REPLY #59474 /* ~Come here, then. Get in my pack.~ */ GOTO 26
 END
 
 IF ~~ THEN BEGIN 23 // from: 21.2
   SAY #58397 /* ~"Ow! Dammit, stop it! I'll do whatever you say, just stop slappin'!" It takes steps away, muttering something about "abusive codependent relationships" or similar.~ */
   IF ~Alignment(Player1,MASK_LAWFUL)
+
 !InventoryFull(Player1)
+
 ~ THEN REPLY #58400 /* ~Come here, then. Get in my pack.~ */ GOTO 2
   IF ~~ THEN REPLY #58402 /* ~You wouldn't happen to have any advice, would you?~ */ GOTO 4
   IF ~~ THEN REPLY #58404 /* ~So... is all well down there?~ */ GOTO 13
   IF ~~ THEN REPLY #58406 /* ~All right, let's just keep going.~ */ GOTO 20
   IF ~Alignment(Player1,MASK_LCNEUTRAL)
+
 !InventoryFull(Player1)
+
 ~ THEN REPLY #59475 /* ~Come here, then. Get in my pack.~ */ GOTO 25
   IF ~Alignment(Player1,MASK_CHAOTIC)
+
 !InventoryFull(Player1)
+
 ~ THEN REPLY #59476 /* ~Come here, then. Get in my pack.~ */ GOTO 26
 END
 
@@ -218,15 +252,21 @@ END
 IF ~~ THEN BEGIN 25 // from: 1.3 3.2 21.7 22.4 23.4
   SAY #58870 /* ~It rolls its eyes. "Oh, sure. Stick me in your smelly pack. Ever thought of sticking some mint in there? Baaah..." It reluctantly crawls in.~ */
   IF ~~ THEN DO ~GivePartyAllEquipment()
+
 GiveItemCreate("FAMDUST",Player1,0,0,0)
+
 DestroySelf()
+
 ~ EXIT
 END
 
 IF ~~ THEN BEGIN 26 // from: 1.4 3.3 21.8 22.5 23.5
   SAY #58871 /* ~It rolls its eyes. "Oh, sure. Stick me in your smelly pack. Ever thought of sticking some mint in there? Baaah..." It reluctantly crawls in.~ */
   IF ~~ THEN DO ~GivePartyAllEquipment()
+
 GiveItemCreate("FAMQUAS",Player1,0,0,0)
+
 DestroySelf()
+
 ~ EXIT
 END

@@ -515,11 +515,91 @@ DEFINE_ACTION_FUNCTION level_1_cantrips BEGIN
 
 INCLUDE ~TomeAndBlood/data/core/tnb_kit_list.tpa~ 
 
+/*
 ////////////////////////////////////////////////////////////////////////////////////
 COPY ~TomeAndBlood/data/level_one_cantrips/mxsplbrd.2da~ ~override~
 COPY ~TomeAndBlood/data/level_one_cantrips/mxsplwiz.2da~ ~override~
 COPY ~TomeAndBlood/data/level_one_cantrips/mxsplsrc.2da~ ~override~
 COPY ~TomeAndBlood/data/level_one_cantrips/mxspldd.2da~ ~override~
+
+// ***** do this programmatically! 
+*/
+
+COPY_EXISTING ~mxsplwiz.2da~ ~override~
+  COUNT_2DA_COLS cols
+  COUNT_2DA_ROWS cols rows
+  FOR (row = 1 ; row < rows ; ++row ) BEGIN
+	READ_2DA_ENTRY row 1 cols 1_splz
+	READ_2DA_ENTRY row 2 cols 2_splz
+	PATCH_IF (1_splz > 4) BEGIN
+	  SET_2DA_ENTRY row 1 cols 4
+	END
+	PATCH_IF (2_splz > 0) BEGIN
+	  SET_2DA_ENTRY row 2 cols (2_splz + 1)
+	END
+  END
+IF_EXISTS BUT_ONLY 
+COPY_EXISTING ~mxsplwiz.2da~ ~override~
+  COUNT_2DA_COLS cols
+  SET_2DA_ENTRY 1 2 cols 1
+IF_EXISTS BUT_ONLY 
+
+COPY_EXISTING ~mxsplbrd.2da~ ~override~
+  COUNT_2DA_COLS cols
+  COUNT_2DA_ROWS cols rows
+  FOR (row = 1 ; row < rows ; ++row ) BEGIN
+	READ_2DA_ENTRY row 1 cols 1_splz
+	READ_2DA_ENTRY row 2 cols 2_splz
+	PATCH_IF (1_splz > 3) BEGIN
+	  SET_2DA_ENTRY row 1 cols 3
+	END
+	PATCH_IF (2_splz > 0) BEGIN
+	  SET_2DA_ENTRY row 2 cols (2_splz + 1)
+	END
+  END
+IF_EXISTS BUT_ONLY 
+COPY_EXISTING ~mxsplbrd.2da~ ~override~
+  COUNT_2DA_COLS cols
+  SET_2DA_ENTRY 1 2 cols 1
+IF_EXISTS BUT_ONLY 
+
+COPY_EXISTING ~mxsplsrc.2da~ ~override~
+  COUNT_2DA_COLS cols
+  COUNT_2DA_ROWS cols rows
+  FOR (row = 1 ; row < rows ; ++row ) BEGIN
+	READ_2DA_ENTRY row 1 cols 1_splz
+	READ_2DA_ENTRY row 2 cols 2_splz
+	PATCH_IF (1_splz > 4) BEGIN
+	  SET_2DA_ENTRY row 1 cols 4
+	END
+	PATCH_IF (2_splz > 0) BEGIN
+	  SET_2DA_ENTRY row 2 cols (2_splz + 1)
+	END
+  END
+IF_EXISTS BUT_ONLY 
+COPY_EXISTING ~mxsplsrc.2da~ ~override~
+  COUNT_2DA_COLS cols
+  SET_2DA_ENTRY 2 2 cols 2
+IF_EXISTS BUT_ONLY 
+
+COPY_EXISTING ~mxspldd.2da~ ~override~
+  COUNT_2DA_COLS cols
+  COUNT_2DA_ROWS cols rows
+  FOR (row = 1 ; row < rows ; ++row ) BEGIN
+	READ_2DA_ENTRY row 1 cols 1_splz
+	READ_2DA_ENTRY row 2 cols 2_splz
+	PATCH_IF (1_splz > 2) BEGIN
+	  SET_2DA_ENTRY row 1 cols 2
+	END
+	PATCH_IF (2_splz > 0) BEGIN
+	  SET_2DA_ENTRY row 2 cols (2_splz + 1)
+	END
+  END
+IF_EXISTS BUT_ONLY 
+COPY_EXISTING ~mxspldd.2da~ ~override~
+  COUNT_2DA_COLS cols
+  SET_2DA_ENTRY 2 2 cols 1
+IF_EXISTS BUT_ONLY 
 ////////////////////////////////////////////////////////////////////////////////////
 
 COPY ~TomeAndBlood/data/level_one_cantrips/d5wakeup.spl~ ~override~
