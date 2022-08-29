@@ -1291,6 +1291,27 @@ ACTION_IF (~%mode%~ STRING_EQUAL_CASE ~bg2~) BEGIN
   OUTER_SET nec_opp_2 = 0x04	//	illusion
 END
 
+//pnp opposition
+//
+ACTION_IF (~%mode%~ STRING_EQUAL_CASE ~pnp~) BEGIN
+  OUTER_SET abj_opp_1 = 0x00
+  OUTER_SET abj_opp_2 = 0x24	//	alteration + illusion
+  OUTER_SET alt_opp_1 = 0x40	//	abjuration
+  OUTER_SET alt_opp_2 = 0x10	//	necromancy
+  OUTER_SET con_opp_1 = 0x00
+  OUTER_SET con_opp_2 = 0x09	//	divination + evocation
+  OUTER_SET div_opp_1 = 0x80	//	conjuration
+  OUTER_SET div_opp_2 = 0x00
+  OUTER_SET enc_opp_1 = 0x00
+  OUTER_SET enc_opp_2 = 0x18	//	evocation + necromancy
+  OUTER_SET evo_opp_1 = 0x80	//	conjuration
+  OUTER_SET evo_opp_2 = 0x02	//	enchantment
+  OUTER_SET ill_opp_1 = 0x40	//	abjuration
+  OUTER_SET ill_opp_2 = 0x18	//	evocation + necromancy
+  OUTER_SET nec_opp_1 = 0x00
+  OUTER_SET nec_opp_2 = 0x06	//	enchantment + illusion
+END
+
 PRINT ~%abj_opp_1%~
 PRINT ~%abj_opp_2%~
 PRINT ~%alt_opp_1%~

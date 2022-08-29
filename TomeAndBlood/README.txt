@@ -1,6 +1,6 @@
 # TomeAndBlood
 
-Tome And Blood: More Options for Wizards and Sorcerers v0.9.26
+Tome And Blood: More Options for Wizards and Sorcerers v0.9.36
 
 ## Overview
 
@@ -26,6 +26,8 @@ This component allows changes to which spells are in an "opposition school" and 
 -- Baldur's Gate Opposition Schools (matches BG/BG2)
 -- Icewind Dale Opposition Schools (matches IWD)
 -- No Opposition Schools (all specialists can cast all spells)
+-- PnP Opposition Schools (matches the original 2E PHB)
+
 
 COMPONENT 13: Revised Illusionary Clones
 

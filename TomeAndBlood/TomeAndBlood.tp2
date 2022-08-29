@@ -1,6 +1,6 @@
 BACKUP ~TomeAndBlood/backup~
 AUTHOR ~aquadrizzt~
-VERSION ~0.9.35~ 
+VERSION ~0.9.36~ 
 
 ALWAYS
 
@@ -93,6 +93,19 @@ COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_opp_schools.qd~ //detection for this 
 INCLUDE ~TomeAndBlood/comp/setup_spell_schools.tpa~ 
 
 LAF change_opposition_schools STR_VAR mode = ~bg2~ END
+
+//pnp opposition schools____________________________________________________________
+//
+BEGIN @1204
+DESIGNATED 1204
+SUBCOMPONENT @12 (GAME_IS ~bgt tob bgee bg2ee eet~)
+//GROUP @5
+
+COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_opp_schools.qd~ //detection for this component 
+
+INCLUDE ~TomeAndBlood/comp/setup_spell_schools.tpa~ 
+
+LAF change_opposition_schools STR_VAR mode = ~pnp~ END
 
 
 // -----------------------------

@@ -74,7 +74,7 @@ functions in this file:
     NB: this is unused and untested so far
 
 - semi_shaman_casting - line 4397
-    applies sorcerer casting mechanics to all spells in sorcerer_spell_learning
+    applies sorcerer casting mechanics to all spells in shaman_spell_learning
     NB: variables must match those used in divine_spell_learning/shaman_spell_learning
     NB: this is unused and untested so far
 
@@ -104,7 +104,7 @@ functions in this file:
 
 - semi_spont_sequencers - line 6698
     sets sequencers and contingencies to pick from known spells instead of memorized spells
-    NB: putting spells in a sequencer will no exhaust any spell slots
+    NB: putting spells in a sequencer will not exhaust any spell slots
 
 - semi_spont_identify - line 6795
    converts Identify to a spell you cast on the main screen, instead of using within the inventory screen
