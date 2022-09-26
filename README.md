@@ -172,9 +172,11 @@ COMPONENT 80: Multiclass Sorcerers
 
 What it says on the tin :O
 
-Multiclass sorcerers' casting slots are governed by MXSPLSRC.2da, just like the regular sorcerer. However, any changes to that file must be made BEFORE you install multiclass sorcerers. So if you like to change spell tables with Tweaks Anthology or something like that, make sure you do the spell-table-changing portion of that mod before installing Tome & Blood.
+NOTE: multiclass sorcerers cannot use the normal sorcerer spell-learning screen - that is hard-coded. Instead, you have to use an ability from your item abilities (the backpack icon in the main game screen) which will let you pick one spell. Use this ability as often as necessary to fill out your known spells. And remember to use it after you level up!
 
-Installation of this component will also automatically install the Revised Idenitfy spell and convert spell sequencers and contingencies to pick from any known spell, instead of from any memorized spell (changes which are necessary to work with these casters).
+COMPATIBILITY NOTE: multiclass sorcerers' casting slots are governed by MXSPLSRC.2da, just like the regular sorcerer. However, any changes to that file must be made BEFORE you install multiclass sorcerers. So if you like to change spell tables with Tweaks Anthology or something like that, make sure you do the spell-table-changing portion of that mod before installing Tome & Blood.
+
+INSTALLATION NOTE: installation of this component will also automatically install the Revised Idenitfy spell and convert spell sequencers and contingencies to pick from any known spell, instead of from any memorized spell (changes which are necessary to work with these casters).
 
 COMPONENT 82: Arcanist
 
@@ -188,7 +190,7 @@ Installation of this component will also automatically install the Revised Ident
 
 COMPONENT 80: Mana Sorcerer
 
-This component gives sorcerers (only unkitted sorcerers, for now) an innate ability to use mana points to cast spells instead of spell-level-based casting slots.  Your known spells will be the same (you must choose them manually from an item ability) but you will have a pool of mana points instead of spell slots.  Casting a spell costs as many points as its spell level; you will start with ~2 mana points and can progress to as many as 120, at level 25.  While more flexible, this is generally less firepower than a normal sorcerer has if you tally up their spell slots; so the Mana Sorcerer has a Restorative Meditation innate ability that can be used between fights, which will restore one half of the points you recently spent, rounded down.
+This component gives sorcerers (only unkitted sorcerers... for now?) an the ability to use mana points to cast spells instead of spell-level-based casting slots.  Your known spells will be the same (you must choose them manually from an item ability) but you will have a pool of mana points instead of spell slots.  Casting a spell costs as many points as its spell level; you will start with ~3 mana points and can progress to as many as 120, at level 25.  While more flexible, this is generally less firepower than a normal sorcerer has if you tally up their spell slots; so the Mana Sorcerer has a 'Restorative Meditation' innate ability that can be used between fights, which will restore one half of the points you recently spent, rounded down.
 
 COMPONENT 93: Bonus Spell Slot Items Work With Arcanists and Multiclass Sorcerers
 
