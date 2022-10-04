@@ -1,6 +1,6 @@
 BACKUP ~TomeAndBlood/backup~
 AUTHOR ~aquadrizzt~
-VERSION ~0.9.38~ 
+VERSION ~0.9.39~ 
 
 ALWAYS
 
@@ -53,6 +53,7 @@ LAF spell_schools END
 // 1201: no opposition schools
 // 1202: iwd opposition schools
 // 1203: bg2 opposition schools
+// 1204: PnP opposition schools
 // -----------------------------
 
 //no wizard opposition schools______________________________________________________

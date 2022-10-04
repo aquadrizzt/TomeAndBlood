@@ -182,6 +182,7 @@ ACTION_IF FILE_EXISTS_IN_GAME ~spwi804.spl~ BEGIN
 	COPY ~TomeAndBlood/data/spell_tweaks/d5projic.bam~ ~override~
 	COPY ~TomeAndBlood/data/spell_tweaks/d5projib.bam~ ~override~
 
+/*
 	ADD_SPELL ~override/d5si9il.spl~ 2 9 D5_WIZARD_CLONE_OTHER
 	LAF RES_NUM_OF_SPELL_NAME
 		STR_VAR spell_name = ~D5_WIZARD_CLONE_OTHER~
@@ -189,10 +190,6 @@ ACTION_IF FILE_EXISTS_IN_GAME ~spwi804.spl~ BEGIN
 	END
 	COPY_EXISTING ~%spell_res%.spl~ ~override~
 	  LPF ALTER_EFFECT INT_VAR silent = 1 match_opcode = 321 STR_VAR match_resource = ~d5si9il~ resource = EVAL ~%spell_res%~ END
-
-	COPY ~TomeAndBlood/lib/d5_base.spl~ ~override/d5simul9.spl~
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 72 target = 2 parameter1 = 4 parameter2 = 0 timing = 1 END 
-	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 241 target = 2 parameter1 = 0 parameter2 = 1002 duration = 1 END 
 
 	ACTION_IF (FILE_EXISTS_IN_GAME ~hidespl.2da~) AND (GAME_IS ~iwdee~) BEGIN
 		APPEND ~hidespl.2da~ ~%spell_res%	1		0~
@@ -204,6 +201,15 @@ ACTION_IF FILE_EXISTS_IN_GAME ~spwi804.spl~ BEGIN
 	ACTION_IF (FILE_EXISTS_IN_GAME ~clabma08.2da~) BEGIN	//	illusionist kit table
 	  APPEND ~clabma08.2da~ ~PROJ_CLONE  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        GA_%spell_res%  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
 	END
+*/
+
+	ACTION_IF (FILE_EXISTS_IN_GAME ~clabma08.2da~) BEGIN	//	illusionist kit table
+	  APPEND ~clabma08.2da~ ~PROJ_CLONE  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        GA_D5SI9IL  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+	END
+
+	COPY ~TomeAndBlood/lib/d5_base.spl~ ~override/d5simul9.spl~
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 72 target = 2 parameter1 = 4 parameter2 = 0 timing = 1 END 
+	  LPF ADD_SPELL_EFFECT INT_VAR opcode = 241 target = 2 parameter1 = 0 parameter2 = 1002 duration = 1 END 
 
 //...8th level: simulacrum
 //
