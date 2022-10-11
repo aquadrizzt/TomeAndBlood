@@ -106,11 +106,23 @@ COPY_EXISTING ~kitlist.2da~ ~override~
   FOR (row = 1; row < rows; ++row) BEGIN
     READ_2DA_ENTRY row 1 cols kit_name
     READ_2DA_ENTRY row 8 cols kit_class
-    PATCH_IF (kit_class = 1) BEGIN // mages
-      SPRINT $mage_hla_class(~%kit_name%~)~1~
+    PATCH_IF (kit_class = 1) OR (kit_class = 7) OR (kit_class = 13) OR (kit_class = 14) OR (kit_class = 10) OR (kit_class = 17) OR (kit_class = 19) BEGIN // mages
+      PATCH_IF !(~%kit_name%~ STRING_EQUAL_CASE ~D5_FIGHTER_SORCERER~) AND !(~%kit_name%~ STRING_EQUAL_CASE ~D5_SORCERER_THIEF~) AND (~%kit_name%~ STRING_EQUAL_CASE ~D5_SORCERER_CLERIC~) BEGIN
+        INNER_ACTION BEGIN
+          LAF action_add_hla STR_VAR kit_name = EVAL ~%kit_name%~ ability = ~GA_SPWI908~ num_allowed = ~1~ END
+        END
+      END
     END
+    PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~D5_FIGHTER_SORCERER~) OR (~%kit_name%~ STRING_EQUAL_CASE ~D5_SORCERER_THIEF~) OR (~%kit_name%~ STRING_EQUAL_CASE ~D5_SORCERER_CLERIC~) BEGIN
+      PATCH_IF (%sequencer_method% = 1) OR (%sequencer_method% = 3) BEGIN
+        INNER_ACTION BEGIN
+          LAF action_add_hla STR_VAR kit_name = EVAL ~%kit%~ ability = ~GA_SPWI908~ num_allowed = ~1~ END
+        END
+      END
+    END
+/*
     PATCH_IF (kit_class = 7) BEGIN // fm
-      PATCH_IF !(~%kit_class%~ STRING_EQUAL_CASE ~D5_FIGHTER_SORCERER~) BEGIN
+      PATCH_IF !(~%kit_name%~ STRING_EQUAL_CASE ~D5_FIGHTER_SORCERER~) BEGIN
         SPRINT $mage_hla_class(~%kit_name%~)~1~
       END
       PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~D5_FIGHTER_SORCERER~) BEGIN
@@ -120,7 +132,7 @@ COPY_EXISTING ~kitlist.2da~ ~override~
       END
     END
     PATCH_IF (kit_class = 13) BEGIN // mt
-      PATCH_IF !(~%kit_class%~ STRING_EQUAL_CASE ~D5_SORCERER_THIEF~) BEGIN
+      PATCH_IF !(~%kit_name%~ STRING_EQUAL_CASE ~D5_SORCERER_THIEF~) BEGIN
         SPRINT $mage_hla_class(~%kit_name%~)~1~
       END
       PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~D5_SORCERER_THIEF~) BEGIN
@@ -130,7 +142,7 @@ COPY_EXISTING ~kitlist.2da~ ~override~
       END
     END
     PATCH_IF (kit_class = 14) BEGIN // cm
-      PATCH_IF !(~%kit_class%~ STRING_EQUAL_CASE ~D5_SORCERER_CLERIC~) BEGIN
+      PATCH_IF !(~%kit_name%~ STRING_EQUAL_CASE ~D5_SORCERER_CLERIC~) BEGIN
         SPRINT $mage_hla_class(~%kit_name%~)~1~
       END
       PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~D5_SORCERER_CLERIC~) BEGIN
@@ -150,6 +162,7 @@ COPY_EXISTING ~kitlist.2da~ ~override~
         SPRINT $mage_hla_class(~%kit_name%~)~1~
       END
     END
+*/
   END
 BUT_ONLY
 
