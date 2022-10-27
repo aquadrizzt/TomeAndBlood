@@ -306,6 +306,7 @@ COPY_EXISTING ~qdscrlmap.2da~ ~override~
 	END
 BUT_ONLY
 
+/* don't void opp schools, that has its own component now
 //Updating Spells and Scrolls 
 ACTION_PHP_EACH d5_scroll_spell_school AS scroll => school BEGIN 
 	ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll_1%.spl~) BEGIN 
@@ -321,6 +322,7 @@ ACTION_PHP_EACH d5_scroll_spell_school AS scroll => school BEGIN
 		END
 	END
 END
+*/
 
 //Automatic School Spells 
 COPY ~TomeAndBlood/data/specialists/QDMG+SCH.SPL~ ~override/QDMG+ABJ.SPL~ //making the new abjuration spell 
