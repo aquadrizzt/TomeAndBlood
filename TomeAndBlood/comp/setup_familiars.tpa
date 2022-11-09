@@ -825,7 +825,7 @@ CREATE EFF ~d5famfr2~
 	WRITE_LONG 0x28 30
 	WRITE_SHORT 0x2c 100
 	WRITE_ASCII 0x30 ~d5famfr2~ #8
-//	WRITE_LONG 0x48 102
+	WRITE_LONG 0x48 102
 COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5famfr2.spl~
   LPF ALTER_SPELL_HEADER INT_VAR target = 5 projectile = 218 END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 142 target = 2 parameter2 = 126 timing = 0 duration = 7 savingthrow = 4 END
