@@ -1,6 +1,6 @@
 # TomeAndBlood
 
-Tome And Blood: More Options for Wizards and Sorcerers v0.9.40
+Tome And Blood: More Options for Wizards and Sorcerers v0.9.44
 
 ## Overview
 
@@ -168,11 +168,13 @@ COMPONENTS 71, 72: Spell Switching for Sorcerers
 
 This gives you an innate ability to switch out one of your known spells.  You can choose whether to get the ability once every level, or once every three levels.  In order for this to work, you will have to choose known spells from an item ability, like multiclass sorcerers, rather then in the traditional level-up screens.  Make sure you install this component after any other sorcerer kit mods!
 
+PLEASE NOTE: I'll say it again - with this component installed, sorcerers pick spells from an item ability under the 'backpack' icon on the main screen, instead of picking spells from the normal character generation and level-up screens.
+
 COMPONENT 80: Multiclass Sorcerers
 
 What it says on the tin :O
 
-NOTE: multiclass sorcerers cannot use the normal sorcerer spell-learning screen - that is hard-coded. Instead, you have to use an ability from your item abilities (the backpack icon in the main game screen) which will let you pick one spell. Use this ability as often as necessary to fill out your known spells. And remember to use it after you level up!
+PLEASE NOTE: multiclass sorcerers cannot use the normal sorcerer spell-learning screen - that is hard-coded. Instead, you have to use an ability from your item abilities (the backpack icon in the main game screen) which will let you pick one spell. Use this ability as often as necessary to fill out your known spells. And remember to use it after you level up!
 
 COMPATIBILITY NOTE: multiclass sorcerers' casting slots are governed by MXSPLSRC.2da, just like the regular sorcerer. However, any changes to that file must be made BEFORE you install multiclass sorcerers. So if you like to change spell tables with Tweaks Anthology or something like that, make sure you do the spell-table-changing portion of that mod before installing Tome & Blood.
 
