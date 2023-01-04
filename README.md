@@ -79,6 +79,8 @@ A student of both arcane knowledge and martial prowess, a Magus blends together 
 -- Reduced Spellcasting. The Magus gains one fewer spell slot for each spell level they can cast.
 -- One-Handed Casting. The Magus suffers a -2 penalty tocasting speed and may not use shields.
 
+PLEASE NOTE: in order to let the Magus kit cast spells in armor, it is necessary to make armor equippable by mages and sorcerers. They still cannot *cast spells* in armor - only the Magus kit can do that. But they can equip armor if they are willing to have their spellcasting disabled.
+
 COMPONENT 31: Favored Soul
 
 Favoured Souls attribute their magical powers to the blessing of some divine being. This blessing grants them potent magical protections, as well as access to spells usually beyond the reach of Sorcerers.
