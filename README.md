@@ -12,7 +12,7 @@ COMPONENT 11: Rebalanced Spell Schools
 
  This component changes the school of various spells, to make sure there is at least one spell at each level in each school, and that specialists of different schools are better-balanced against one another.  Generally:
 
--- Sequencer spells are moved to the school of Enchantment
+-- Sequencer spells are moved to the school of Enchantment<br />
 -- Power Word spells are moved to the school of Enchantment
 -- Symbol spells are moved to the school of Divination
 -- A couple other little changes
