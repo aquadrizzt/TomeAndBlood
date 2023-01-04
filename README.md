@@ -32,21 +32,19 @@ COMPONENT 13: Revised Illusionary Clones
 
 This component makes Mislead and Project Image work just as Simulacrum does, except the clones can use more magic as you go up in level, and the caster gets progressively better invisibility at the same time:
 
--- 5th Level: Mislead - clone is a pure image, cannot attack or cast spells. Caster become normal invisible - NOT super-Mislead-invisible.
--- 6th Level: Shadow Clone - clone has 40% hit points and -7 to thac0 and caster level, can cast only 1st-level arcane spells, cannot cast divine spells.
--- 7th Level: Lesser Simulacrum - clone has 60% hit points and -5 to thac0 and caster level, can cast up to 4th-level arcane spells, cannot cast divine spells.
--- 8th Level: Simulacrum - clone has 75% hit points and -3 to thac0 and caster level, and can cast any spells.
--- 9th Level: Projected Simulacrum - cast Simulacrum on another creature. (Illusionists only)
-
-NOTE: for now, you want to cast Projected Simulacrum on an ally - not an enemy. I am working on getting it working to make a friendly clone of an enemy.
+-- 5th Level: Mislead - clone is a pure image, cannot attack or cast spells. Caster become normal invisible - NOT super-Mislead-invisible.<br />
+-- 6th Level: Shadow Clone - clone has 40% hit points and -7 to thac0 and caster level, can cast only 1st-level arcane spells, cannot cast divine spells.<br />
+-- 7th Level: Lesser Simulacrum - clone has 60% hit points and -5 to thac0 and caster level, can cast up to 4th-level arcane spells, cannot cast divine spells.<br />
+-- 8th Level: Simulacrum - clone has 75% hit points and -3 to thac0 and caster level, and can cast any spells.<br />
+-- 9th Level: Projected Simulacrum - cast Simulacrum on another creature. (Illusionists only)<br />
 
 COMPONENT 14: Revised Invisiblity
 
 This component merges the effects of Invisibility and Sanctuary (you can now loot chests and open doors while invisible :) ). The upshot is: 
 
--- If you cast 2nd-level Detect Invisible, the caster will be able to see and target invisible enemies but other party members who cannot see invisible cannot. 
--- The Nondetection spell is renamed "Protection from Divination" and improved to actually block any DIVINATIONATTACK effects - including, I think, thieves' Detect Illusion skill. But, a caster of Detect Invisible or True Sight to spot and target enemies who are protected by Non-detection. 
--- The rather useless 3rd-level arcane spell "Detect Illusions" is replaced with a clone of the 3rd-level divine spell "Invisibility Purge."
+-- If you cast 2nd-level Detect Invisible, the caster will be able to see and target invisible enemies but other party members who cannot see invisible cannot. <br />
+-- The Nondetection spell is renamed "Protection from Divination" and improved to actually block any DIVINATIONATTACK effects - including, I think, thieves' Detect Illusion skill. But, a caster of Detect Invisible or True Sight to spot and target enemies who are protected by Non-detection. <br />
+-- The rather useless 3rd-level arcane spell "Detect Illusions" is replaced with a clone of the 3rd-level divine spell "Invisibility Purge."<br />
 
 Additionally, the 5th-level Oracle spell is empowered to destroy nearby illusionary creatures, including Shadow Monsters, Projected Images and the like.
 
@@ -62,21 +60,21 @@ COMPONENT 20: Revised Dragon Disciples
 
 Dragon Disciples are powerful sorcerers with dragons' blood somewhere in their lineage. Their magical talents bring out their draconic heritage, allowing them to cast powerful magical spells and exhibit dragon-like abilities.
 
--- d6 Hit Die. The Dragon Disciple rolls a d6 instead of a d4 whenever a new hit die is earned.
--- Elemental Affinity. Dragon Disciples are attuned to one of the following damage types: acid, cold, electricity, or fire. They gain a +50% bonus to resistance against that damage type and they also deal +25% more damage of the selected type.
--- Scales. While not wearing armor, the Dragon Disciple may subtract their charisma modifier from their base armor class.
--- Reduced Spellcasting. The Dragon Disciple gains one fewer spell slot for each spell level they can cast.
+-- d6 Hit Die. The Dragon Disciple rolls a d6 instead of a d4 whenever a new hit die is earned.<br />
+-- Elemental Affinity. Dragon Disciples are attuned to one of the following damage types: acid, cold, electricity, or fire. They gain a +50% bonus to resistance against that damage type and they also deal +25% more damage of the selected type.<br />
+-- Scales. While not wearing armor, the Dragon Disciple may subtract their charisma modifier from their base armor class.<br />
+-- Reduced Spellcasting. The Dragon Disciple gains one fewer spell slot for each spell level they can cast.<br />
 
 COMPONENT 25: Magus
 
 A student of both arcane knowledge and martial prowess, a Magus blends together spell and steel to devastating effect. The most defining quality of a magus is their ability to cast complicated arcane spells while wearing even the heaviest armors.
 
--- d8 Hit Die. The Magus rolls a d8 instead of a d4 whenevera new Hit Die is earned.
--- Specialization. The Magus may achieve, but not exceed, Specialization in any melee weapon, as well as two-handed and single weapon styles.
--- Weapons and Armor. The Magus may use any melee weapon and wear any armor, including helmets.
--- Armored Caster. The Magus may cast spells whilewearing any kind of armor.
--- Reduced Spellcasting. The Magus gains one fewer spell slot for each spell level they can cast.
--- One-Handed Casting. The Magus suffers a -2 penalty tocasting speed and may not use shields.
+-- d8 Hit Die. The Magus rolls a d8 instead of a d4 whenevera new Hit Die is earned.<br />
+-- Specialization. The Magus may achieve, but not exceed, Specialization in any melee weapon, as well as two-handed and single weapon styles.<br />
+-- Weapons and Armor. The Magus may use any melee weapon and wear any armor, including helmets.<br />
+-- Armored Caster. The Magus may cast spells whilewearing any kind of armor.<br />
+-- Reduced Spellcasting. The Magus gains one fewer spell slot for each spell level they can cast.<br />
+-- One-Handed Casting. The Magus suffers a -2 penalty tocasting speed and may not use shields.<br />
 
 PLEASE NOTE: in order to let the Magus kit cast spells in armor, it is necessary to make armor equippable by mages and sorcerers. They still cannot *cast spells* in armor - only the Magus kit can do that. But they can equip armor if they are willing to have their spellcasting disabled.
 
@@ -84,47 +82,47 @@ COMPONENT 31: Favored Soul
 
 Favoured Souls attribute their magical powers to the blessing of some divine being. This blessing grants them potent magical protections, as well as access to spells usually beyond the reach of Sorcerers.
 
--- Divine Spells. After character creation, the Favoured Soul may select a single divine sphere, granting them arcaneversions of the divine spells from the selected sphere.
--- Protected. The Favoured Soul is always under the effectsof a protection from evil spell, granting a +2 bonus to ArmorClass and saving throws against evil foes, as well as protection from summoned fiends.
--- Reduced Spellcasting. The Favoured Soul gains onefewer spell slot for each spell level they can cast.
+-- Divine Spells. After character creation, the Favoured Soul may select a single divine sphere, granting them arcaneversions of the divine spells from the selected sphere.<br />
+-- Protected. The Favoured Soul is always under the effectsof a protection from evil spell, granting a +2 bonus to ArmorClass and saving throws against evil foes, as well as protection from summoned fiends.<br />
+-- Reduced Spellcasting. The Favoured Soul gains onefewer spell slot for each spell level they can cast.<br />
 
 COMPONENT 33: Sylvan Disciple
 
 The capricious nature of the fey runs in the veins of Sylvan Sorcerers due to some long forgotten intermingling of fey blood or magic. These sorcerers are more emotional than most, prone to bouts of joy and rage.
 
--- Non-detectable. The Sylvan Disciple is always under the effects of a non-detection spell, providing immunity to detection via minor divination magic.
--- Feyblooded. The Sylvan Disciple has a +4 bonus to saves vs. spells and is immune to charm.
--- Reduced Spellcasting. The Sylvan Disciple gains one fewer spell slot for each spell level they can cast.
+-- Non-detectable. The Sylvan Disciple is always under the effects of a non-detection spell, providing immunity to detection via minor divination magic.<br />
+-- Feyblooded. The Sylvan Disciple has a +4 bonus to saves vs. spells and is immune to charm.<br />
+-- Reduced Spellcasting. The Sylvan Disciple gains one fewer spell slot for each spell level they can cast.<br />
 
 COMPONENT 35: Revenant Disciple
 
 The taint of the grave runs through the families of Revenant Disciples. Perhaps one of their ancestors became a powerful lich or vampire, or maybe they were born dead before suddenly returning to life. Either way, the forces of death move through them and touch their every action.
 
--- d6 Hit Die. The Revenant Disciple rolls a d6 instead of a d4 whenever a new Hit Die is earned.
--- Immunities. The Revenant Disciple is immune to sleep and death magic.
--- Deathly Resilience. The Revenant Disciple has a +4 bonus to saves vs. death.
--- Reduced Spellcasting. The Revenant Disciple gains one fewer spell slot for each spell level they can cast.
+-- d6 Hit Die. The Revenant Disciple rolls a d6 instead of a d4 whenever a new Hit Die is earned.<br />
+-- Immunities. The Revenant Disciple is immune to sleep and death magic.<br />
+-- Deathly Resilience. The Revenant Disciple has a +4 bonus to saves vs. death.<br />
+-- Reduced Spellcasting. The Revenant Disciple gains one fewer spell slot for each spell level they can cast.<br />
 
 COMPONENT 37: Amorphous Disciple
 
 The foul ichor of oozes runs through your veins, granting you magical control over noxious chemicals and slime, as well as a gift for changing your form to suit your needs.
 
--- Immunities. The Amorphous Disciple is immune to poison and disease.
--- Shifting Form. The Amorphous Disciple has a +4 bonus to saves vs. polymorph.
--- Oozeborn. The Amorphous Disciple is protected from hostile oozes, preventing the Amorphous Disciple from being attacked or targeted by oozes.
--- Reduced Spellcasting. The Amorphous Disciple gains one fewer spell slot for each spell level they can cast.
+-- Immunities. The Amorphous Disciple is immune to poison and disease.<br />
+-- Shifting Form. The Amorphous Disciple has a +4 bonus to saves vs. polymorph.<br />
+-- Oozeborn. The Amorphous Disciple is protected from hostile oozes, preventing the Amorphous Disciple from being attacked or targeted by oozes.<br />
+-- Reduced Spellcasting. The Amorphous Disciple gains one fewer spell slot for each spell level they can cast.<br />
 
 COMPONENT 40: Revised Specialists
 
 This component gives each specialist kit some active or passive innate abilities that represent their mastery over their particular school of magic.  Additionally, specialists gain the ability to spontaneously convert any of their memorized spells into a spell from their specialty school of one level lower.  The special abilities are:
-- Abjurer: when you cast a spell protection, it automatically creates a Spell Shield for free.
-- Conjurer: if SR is installed, you can cast Monster Summoning spells as if they are one level lower. In the absence of SR, you get bonus innate versions of the vanilla Monster Summoning spells.
-- Diviner: IIRC, you get innate (and early) access to Contingency. Might also be able to insert one extra spell into contingencies (two spells in Contingency, three in Chain Contingency).
-- Enchanter: the enchanter and all nearby allies get a +1 bonus to saves vs. spells.
-- Illusionist: you can use the Shadow Step ability, and have permanent Non-Detection.
-- Invoker: your spells do 20% more fire, cold, electric and magic damage.
-- Necromancer: you can innately use a modal ability to slow or control nearby undead. Also, the Chill Touch, Ghoul Touch, and Vampiric Touch spells are improved to have special effects against undead, and they are changed into innate abilities only learnable by necromancers.
-- Transmuter: you get an innate ability to temporarily create and control a golem.
+- Abjurer: when you cast a spell protection, it automatically creates a Spell Shield for free.<br />
+- Conjurer: if SR is installed, you can cast Monster Summoning spells as if they are one level lower. In the absence of SR, you get bonus innate versions of the vanilla Monster Summoning spells.<br />
+- Diviner: IIRC, you get innate (and early) access to Contingency. Might also be able to insert one extra spell into contingencies (two spells in Contingency, three in Chain Contingency).<br />
+- Enchanter: the enchanter and all nearby allies get a +1 bonus to saves vs. spells.<br />
+- Illusionist: you can use the Shadow Step ability, and have permanent Non-Detection.<br />
+- Invoker: your spells do 20% more fire, cold, electric and magic damage.<br />
+- Necromancer: you can innately use a modal ability to slow or control nearby undead. Also, the Chill Touch, Ghoul Touch, and Vampiric Touch spells are improved to have special effects against undead, and they are changed into innate abilities only learnable by necromancers.<br />
+- Transmuter: you get an innate ability to temporarily create and control a golem.<br />
 
 COMPONENT 48: Armored Casting for Bards
 
@@ -133,10 +131,10 @@ Bards can cast spells in leather armor.
 COMPONENTS 51, 52, 53, 54: Innate Metamagic
 
 These components make spell sequencers and contingencies into innate abilities (Chain Contingency becomes an HLA) so they don't cost spell slots; but "filling" them with spells still uses the spell slots associated with those spells.  These four components differ according to how you get metamagic:
--- 51: all arcane casters get sequencer and contingency abilities automatically
--- 52: only mages and bards (not sorcerers) get sequencer and contingency abilities automatically
--- 53: sequencer and contingency abilities are learned from scrolls, and can also be learned during character generation and by sorcerers
--- 54: sequencer and contingency abilities can only be learned from scrolls
+-- 51: all arcane casters get sequencer and contingency abilities automatically<br />
+-- 52: only mages and bards (not sorcerers) get sequencer and contingency abilities automatically<br />
+-- 53: sequencer and contingency abilities are learned from scrolls, and can also be learned during character generation and by sorcerers<br />
+-- 54: sequencer and contingency abilities can only be learned from scrolls<br />
 
 COMPONENTS 61, 62, 63: Cantrips
 
@@ -152,12 +150,12 @@ Component 66, "Innate Find Familiar," makes Find Familiar an innate ability and 
 
 Component 67, "Choose-Your-Own-Familiar," allows you to choose which familiar you want (from a slightly modified list) instead of being bound by your alignment. Currently, the available familiars are Pseudodragon, Ferret, Rabbit, Cat, Spider, and Rat. Each has its own special skills and abilities, and each provides a different small passive benefit to the caster:
 
--- Pseudodragon: can cast Blur, Color Spray, and Cure Light Wounds once per 3 turns.  Flies, so is immune to Grease, Entangle, and Web. Caster regenerates 1 hp/round while familiar is out of the backpack.
--- Ferret: 90% Pick Pockets skill. Once per turn, can create a small-AoE Nauseating Aura which causes 2-point combat penalties and a 25% spell failure chance in enemies. Caster has +1 CON while familiar is out of the backpack.
--- Rabbit: 90% Find Traps skill. Can burrow into the ground to escape danger, just like the Shadowstep ability. Caster is immune to Slow.
--- Cat: 90% Stealth skill. Is immune to being revealed by divinations, similar to a thief with a Cloak of Nondetection. Caster has +1 DEX while familiar is out of the backpack.
--- Spider: can shoot a Web at a single target once per 5 rounds. Bite can cause 3 extra points of poison damage over one round.  Immune to being stuck in Webs. Caster gets an extra chance to save to avoid poisons while familiar is out of the backpack.
--- Rat: can summon 1d6 more rats to assist in battle once per day. Bite can cause disease (reduced STR and 25% chance of spell failure) for a couple rounds. Caster has +1 INT while familiar is out of the backpack.
+-- Pseudodragon: can cast Blur, Color Spray, and Cure Light Wounds once per 3 turns.  Flies, so is immune to Grease, Entangle, and Web. Caster regenerates 1 hp/round while familiar is out of the backpack.<br />
+-- Ferret: 90% Pick Pockets skill. Once per turn, can create a small-AoE Nauseating Aura which causes 2-point combat penalties and a 25% spell failure chance in enemies. Caster has +1 CON while familiar is out of the backpack.<br />
+-- Rabbit: 90% Find Traps skill. Can burrow into the ground to escape danger, just like the Shadowstep ability. Caster is immune to Slow.<br />
+-- Cat: 90% Stealth skill. Is immune to being revealed by divinations, similar to a thief with a Cloak of Nondetection. Caster has +1 DEX while familiar is out of the backpack.<br />
+-- Spider: can shoot a Web at a single target once per 5 rounds. Bite can cause 3 extra points of poison damage over one round.  Immune to being stuck in Webs. Caster gets an extra chance to save to avoid poisons while familiar is out of the backpack.<br />
+-- Rat: can summon 1d6 more rats to assist in battle once per day. Bite can cause disease (reduced STR and 25% chance of spell failure) for a couple rounds. Caster has +1 INT while familiar is out of the backpack.<br />
 
 Component 67 also automatically installs component 69, "Indelible Familiars." (See below.)
 
