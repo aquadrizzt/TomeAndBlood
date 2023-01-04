@@ -13,9 +13,9 @@ COMPONENT 11: Rebalanced Spell Schools
  This component changes the school of various spells, to make sure there is at least one spell at each level in each school, and that specialists of different schools are better-balanced against one another.  Generally:
 
 -- Sequencer spells are moved to the school of Enchantment<br />
--- Power Word spells are moved to the school of Enchantment
--- Symbol spells are moved to the school of Divination
--- A couple other little changes
+-- Power Word spells are moved to the school of Enchantment<br />
+-- Symbol spells are moved to the school of Divination<br />
+-- A couple other little changes<br />
 
 These changes are determined by a list that resides in /tomeandblood/data/core/spell_list_base.tpa.  That file is human readable and you can change it as you like, so you have complete control over the school of every spell, before installing the mod. 
 
@@ -23,11 +23,10 @@ COMPONENT 12: Rebalanced Specialist Opposition Schools
 
 This component allows changes to which spells are in an "opposition school" and thus unavailable to specialists. There are currently three options, two of which will be available for install depending on which game is being played:
 
--- Baldur's Gate Opposition Schools (matches BG/BG2)
--- Icewind Dale Opposition Schools (matches IWD)
--- No Opposition Schools (all specialists can cast all spells)
--- PnP Opposition Schools (matches the original 2E PHB)
-
+-- Baldur's Gate Opposition Schools (matches BG/BG2)<br />
+-- Icewind Dale Opposition Schools (matches IWD)<br />
+-- No Opposition Schools (all specialists can cast all spells)<br />
+-- PnP Opposition Schools (matches the original 2E PHB)<br />
 
 COMPONENT 13: Revised Illusionary Clones
 
