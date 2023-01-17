@@ -82,6 +82,16 @@ APPEND ~QDMAGUS.2da~ ~ARMCAST     AP_D5ARCA1  ****        ****        ****      
 ARMCAST     AP_D5ARCA2  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 
 ARMCAST     AP_D5ARCA3  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
 
+COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5mgsir.spl~
+  PATCH_FOR_EACH val IN ~1~ ~2~ ~3~ ~4~ ~5~ BEGIN
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~ag#irs%val%~ END
+  END
+  PATCH_FOR_EACH val IN ~10~ ~15~ ~20~ ~30~ ~40~ ~50~ BEGIN
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~7c#ir%val%~ END
+  END
+
+APPEND ~QDMAGUS.2da~ ~ARMCAST     AP_D5MGSIR  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~
+
 //
 
 END 	//	end define function

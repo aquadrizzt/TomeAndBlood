@@ -29,6 +29,15 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
 	END
 BUT_ONLY
 
+/* no need - IR already allows bards to cast in (all???) armor
+COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5brdir.spl~
+  PATCH_FOR_EACH val IN ~1~ ~2~ BEGIN
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~ag#irs%val%~ END
+  END
+  PATCH_FOR_EACH val IN ~10~ ~15~ ~20~ ~30~ BEGIN
+    LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~7c#ir%val%~ END
+  END
+*/
 	
 //Description update 
 ACTION_GET_STRREF 9562 bard
