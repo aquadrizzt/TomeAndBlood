@@ -376,15 +376,16 @@ END
 //change Dispel Illusion to Invisibility Purge______________________________________
 //
 COPY_EXISTING ~sppr309.spl~ ~override~
+  READ_LONG 0x08 spell_name
+  READ_LONG 0x50 spell_desc
   PATCH_FOR_EACH second IN ~6~ ~12~ ~18~ ~24~ ~30~ BEGIN 	//	do this more often
 	LPF CLONE_EFFECT INT_VAR match_opcode = 146 match_duration = %second% duration = (%second% - 2) STR_VAR match_resource = ~sppr309d~ END
 	LPF CLONE_EFFECT INT_VAR match_opcode = 146 match_duration = %second% duration = (%second% - 4) STR_VAR match_resource = ~sppr309d~ END
   END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 101 target = 2 power = 3 parameter2 = 20 timing = 0 duration = 30 END
 IF_EXISTS
 
 COPY_EXISTING ~sppr309.spl~ ~override/spwi322.spl~
-	READ_LONG 0x08 spell_name
-	READ_LONG 0x50 spell_desc
   	WRITE_SHORT 0x1c 1
   	WRITE_SHORT 0x22 16
   	WRITE_BYTE 0x25 3
@@ -394,7 +395,7 @@ COPY_EXISTING ~sppr309.spl~ ~override/spwi322.spl~
 IF_EXISTS
 
 COPY_EXISTING ~scrl6k.itm~ ~override~
-	WRITE_LONG 0x1c %spell_name%
+	WRITE_LONG 0x0c %spell_name%
 	WRITE_LONG 0x54 %spell_desc%
 	WRITE_ASCII 0x3a ~sppr309a~ #8
 IF_EXISTS BUT_ONLY
@@ -535,6 +536,7 @@ COPY_EXISTING ~spwi310.spl~ ~override~
   SAY NAME1 @6413
   SAY UNIDENTIFIED_DESC @6414
   WRITE_BYTE 0x27 2
+  LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 69 opcode = 337 parameter1 = 20 parameter2 = 101 timing = 1 duration = 0 END
   LPF CLONE_EFFECT INT_VAR silent = 1 multi_match = 1 match_opcode = 69 opcode = 205 parameter1 = 0 parameter2 = 5 END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 321 target = 1 insert_point = 0 STR_VAR resource = ~spwi310~ END
 IF_EXISTS BUT_ONLY
