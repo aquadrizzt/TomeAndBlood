@@ -1,6 +1,6 @@
 # TomeAndBlood
 
-Tome And Blood: More Options for Wizards and Sorcerers v0.9.44
+Tome And Blood: More Options for Wizards and Sorcerers v0.9.48
 
 ## Overview
 

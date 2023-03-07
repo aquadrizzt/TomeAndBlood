@@ -1,123 +1,123 @@
 
-// v10.7 - fix semi_innate regression
+// v10.10 - semi-sorcerers and ME spells
 
 /*
 
 functions in this file:
 
-- semi_spontaneous_casting - line 232
+- semi_spontaneous_casting - line 234
     sets up structure of the 5E casting system, covers both arcane and divine spells
 
-- semi_armor_casting - line 1417
+- semi_armor_casting - line 1421
     sets armor to block arcane 5E casting
 
-- semi_divine_spells - line 1765
+- semi_divine_spells - line 1769
     adds all spells valid for divine casters to the 5E system
     NB: this works for vanilla cleric/druid spells, and for Faiths & Powers sphere systems
     ...therefore this should be run the first time *after* Faiths & Powers is installed
 
-- semi_arcane_spells - line 1938
+- semi_arcane_spells - line 1941
     adds all spells learnable from scrolls and valid for sorcerers to the 5E system
     NB: this also runs semi_armor_casting
 
 - process_semi_spells - line 2216
     applies 5E memorization and casting mechanics to the relevant spells
 
-- add_semi_spells - line 2504
+- add_semi_spells - line 2566
     add a spell to the 5E system if it was not already captured by the functions above
-    NB: if 5E has already been processed, must "LAF process_semi_spells" again after this
+    NB: even if 5E has already been processed, must "LAF process_semi_spells" again after this
 
-- free_cast_spells - line 2546
+- free_cast_spells - line 2608
     input a free_spell (can run multiple free_spells for the same list_spell)
     outputs a list_spell that makes the free_spells castable regardless of being memorized
-    list-spell can then be applied in a kit ability table
+    ...list-spell can then be applied in a kit ability table
 
-- free_known_spells - line 2580
+- free_known_spells - line 2642
     input a free_spell (can run multiple free_spells for the same list_spell)
-    outputs a list_spell that add the free_spells to one's spellbook
-    list-spell can then be applied in a kit ability table
+    outputs a list_spell that adds the free_spells to one's spellbook
+    ...list-spell can then be applied in a kit ability table
 
-- find_zclons_spell - line 2611
+- find_zclons_spell - line 2673
     input a spell that gets memorized, output its 5E index #, the spell it casts, and type
     ...just a little helper function
 
-- arcane_casting_slots - line 2637
+- arcane_casting_slots - line 2699
     patch and action functions
     input a table structured like MXSPLWIZ.2da
     outputs table_spl with 40 headers that converts the table into proficiency increases
-    apply table_spl at every level to simulate spellcasting slots
+    ...apply table_spl at every level to simulate spellcasting slots
 
-- divine_casting_slots - line 2944
+- divine_casting_slots - line 3006
     patch and action functions
     input a table structured like MXSPLWIZ.2da
     outputs table_spl with 40 headers that converts the table into proficiency increases
-    apply table_spl at every level to simulate spellcasting slots
+    ...apply table_spl at every level to simulate spellcasting slots
 
-- sorcerer_spell_learning - line 3181
+- sorcerer_spell_learning - line 3243
     creates spell & item to learn any sorcerer-valid spell via kjeron's spell-learning UI
     NB: this is in use and also works for alternate, coexisting versions
 
-- add_sorcerer_spells - line 3377
-    input an array, any spells in the array get added to the sorcerer spell-learning
-    NB: variables must match those used in sorcerer_spell_learning
-    NB: if sorcerer casting is already initialized, must "LAF semi_sorcerer_casting" again
-
-- semi_sorcerer_casting - line 3436
+- semi_sorcerer_casting - line 3456
     applies sorcerer casting mechanics to all spells in sorcerer_spell_learning
     NB: variables must match those used in sorcerer_spell_learning
 
-- divine_spell_learning - line 4177
+- add_sorcerer_spells - line 4197
+    input an array, any spells in the array get added to the sorcerer spell-learning
+    NB: variables must match those used in sorcerer_spell_learning
+    NB: even if sorcerer casting is already initialized, must "LAF semi_sorcerer_casting" again
+
+- divine_spell_learning - line 4256
     creates spell and item to learn any cleric-valid spell via kjeron's spell-learning UI
     NB: this is unused and untested so far
 
-- shaman_spell_learning - line 4367
+- shaman_spell_learning - line 4446
     creates spell & item to learn any druid/shaman-valid spell via kjeron's spell-learning UI
     NB: this is unused and untested so far
 
-- semi_shaman_casting - line 4557
+- semi_shaman_casting - line 4636
     applies sorcerer casting mechanics to all spells in sorcerer_spell_learning
     NB: variables must match those used in divine_spell_learning/shaman_spell_learning
     NB: this is unused and untested so far
 
-- semi_innate_casting - line 5192
-    sets up a pool of innate abilities that will use a pool of points to cast (up to 15 points)
-    NB: needs the "semi_innate_spells" array to be filled out
+- semi_innate_casting - line 5271
+    sets up several innate abilities that will use a communal pool of points to cast (up to 15 points)
+    NB: needs the "semi_innate_spells" array to be filled out first
 
-- semi_innate_points - line 5540
+- semi_innate_points - line 5591
     patch function to generate a spell granting innate/"ki" points at each level, according 
     to a simple two-column .2da table
     NB: make sure the %semi_innate_stat%, %semi_innate_shift%, and %semi_innate_prefix% variables 
     match the ones used in the "semi_innate_casting" function
 
-- semi_int_slots - line 5581
+- semi_int_slots - line 5650
     adds bonus casting slots for high INT scores
     bonuses are according to Tome & Blood (levels 1-7) - NB, this is not flexible
     5e_int_bonus_memorization variable can turn bonuses on or off for memorization slots
         (^^ when used with Scales of Balance spell slot bonuses)
 
-- semi_cha_slots - line 5811
+- semi_cha_slots - line 5880
     adds bonus casting slots for high CHA scores
     bonuses are according to Tome & Blood (levels 1-5) - NB, this is not flexible
 
-- semi_wis_slots - line 6063
+- semi_wis_slots - line 6132
     adds bonus casting slots for high WIS scores
     bonuses are according to Tome & Blood (spell levels 1-7) - NB, this is not flexible
     5e_wis_bonus_memorization variable can turn bonuses on or off for memorization slots
         (^^ when used with Scales of Balance spell slot bonuses)
 
-- arcane_spont_items - line 6257
+- arcane_spont_items - line 6326
     allows bonus spell slot items to give bonus casting slots in addition to memorization
     5e_plus_mem variable allows to *remove* memorization bonuses 
 
-- divine_spont_items - line 6740
+- divine_spont_items - line 6809
     allows bonus spell slot items to give bonus casting slots in addition to memorization
     5e_plus_mem variable allows to *remove* memorization bonuses 
 
-- semi_spont_sequencers - line 7292
+- semi_spont_sequencers - line 7361
     sets sequencers and contingencies to pick from known spells instead of memorized spells
     NB: putting spells in a sequencer will no exhaust any spell slots
 
-- semi_spont_identify - line 7385
+- semi_spont_identify - line 7454
    converts Identify to a spell you cast on the main screen, instead of using within the inventory screen
 
 */
@@ -871,6 +871,8 @@ COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5zprp.spl~
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 1 STR_VAR resource = ~d5zz206~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter1 = 0 parameter2 = 1 timing = 1 STR_VAR resource = ~d5zprp1~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 139 target = 1 parameter1 = %prep_message% timing = 1 END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_divine% parameter2 = 111 timing = 1 STR_VAR resource = ~d5zz010~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = %semi_spont_arcane% parameter2 = 111 timing = 1 STR_VAR resource = ~d5zz020~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 146 target = 1 parameter2 = 1 timing = 1 duration = 0 STR_VAR resource = ~d5zz172~ END
   LPF ADD_SPELL_EFFECT INT_VAR opcode = 172 target = 1 timing = 1 STR_VAR resource = ~d5zprp~ END
 
@@ -2273,9 +2275,14 @@ COPY_EXISTING ~splprot.2da~ ~override~
 	PATCH_IF (~%stat%~ STRING_EQUAL_CASE ~D5_FATIGUE_0~) BEGIN
 	  SET fatigue_zero = %row%
 	END
+	PATCH_IF (~%stat%~ STRING_EQUAL_CASE ~D5_PREP_SPLZ~) BEGIN
+	  SET prep_spells_row = %row%
+	END
+	PATCH_IF (~%stat%~ STRING_EQUAL_CASE ~D5_NOT_PREP~) BEGIN
+	  SET not_prep_row = %row%
+	END
   END
 BUT_ONLY
-
 
 ACTION_IF !(FILE_EXISTS_IN_GAME ~d5zlotr.bcs~) BEGIN
 <<<<<<<<d5/inline_script.baf
@@ -2473,7 +2480,6 @@ END
   END
 BUT_ONLY
 
-
 ACTION_IF (FILE_EXISTS_IN_GAME ~d5zw172.spl~) BEGIN
   COPY_EXISTING ~d5zw172.spl~ ~override/d5zw172l.spl~
     PATCH_IF (MOD_IS_INSTALLED ~tomeandblood.tp2~ ~48~) BEGIN
@@ -2481,6 +2487,62 @@ ACTION_IF (FILE_EXISTS_IN_GAME ~d5zw172.spl~) BEGIN
     END
   COPY_EXISTING ~d5zw172.spl~ ~override/d5zw172c.spl~
   COPY_EXISTING ~d5zw172.spl~ ~override/d5zw172p.spl~
+END
+
+COPY_EXISTING ~d5spmem.spl~ ~override/d5jpmem.spl~
+IF_EXISTS
+
+COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/d5zleav.spl~
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = 0 parameter2 = %not_prep_row% timing = 1 STR_VAR resource = ~d5zprp~ END
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 326 target = 1 parameter1 = 0 parameter2 = %not_prep_row% timing = 1 STR_VAR resource = ~d5jpmem~ END
+
+<<<<<<<< d5/leavscpt.baf
+IF
+	!InParty(Myself)
+	Global("D5_LEFT","LOCALS",0)
+	Global("D5_PNPC","LOCALS",1)
+THEN
+	RESPONSE #100
+	SetGlobal("D5_LEFT","LOCALS",1)
+	ReallyForceSpellRES("D5ZLEAV",Myself)
+	Continue()
+END
+IF
+	InParty(Myself)
+
+	Global("D5_LEFT","LOCALS",0)
+	Global("D5_PNPC","LOCALS",0)
+THEN
+	RESPONSE #100
+	SetGlobal("D5_PNPC","LOCALS",1)
+	Continue()
+END
+IF
+	InParty(Myself)
+	Global("D5_LEFT","LOCALS",1)
+THEN
+	RESPONSE #100
+	SetGlobal("D5_LEFT","LOCALS",0)
+	Continue()
+END
+>>>>>>>>
+COPY ~d5/leavscpt.baf~ ~weidu_external/%MOD_FOLDER%/compile/leavscpt.baf~
+
+LAM JOINABLE_NPC_ARRAYS
+
+ACTION_PHP_EACH JOINABLE_NPC_ARRAY AS cre => dv BEGIN
+// 	PRINT ~%cre% => %dv%~ 
+  COPY_EXISTING ~%cre%~ ~override~
+    READ_ASCII 0x248 override_script
+    PATCH_IF !(~%override_script%~ STRING_EQUAL_CASE ~SHOUT~) BEGIN
+      SPRINT $npc_scripts(~%override_script%~)~1~
+    END
+  BUT_ONLY
+END
+ACTION_PHP_EACH npc_scripts AS script => ind BEGIN
+  ACTION_IF (FILE_EXISTS_IN_GAME ~%script%.bcs~) BEGIN
+    EXTEND_TOP ~%script%.bcs~ ~weidu_external/%MOD_FOLDER%/compile/leavscpt.baf~
+  END
 END
 
 // compile script_____________________________________________________________________
@@ -3225,6 +3287,23 @@ WITH_TRA ~%MOD_FOLDER%/lib/semi_spont/%game_lang%/semi_spont.tra~ BEGIN
     END
   END
 
+  ACTION_FOR_EACH num IN ~1~ ~2~ ~3~ ~4~ ~5~ ~6~ ~7~ ~8~ ~9~ BEGIN
+    ACTION_IF (FILE_EXISTS_IN_GAME ~mewi%num%.txt~) BEGIN
+      COPY_EXISTING ~mewi%num%.txt~ ~override~
+        COUNT_2DA_ROWS 1 rows
+        FOR (row = 0; row < rows; ++row) BEGIN
+          READ_2DA_ENTRY row 0 1 me_spl
+          PATCH_IF (FILE_EXISTS_IN_GAME ~%me_spl%.spl~) BEGIN
+            PATCH_IF !(FILE_CONTAINS_EVALUATED (~%spl_list%.2da~ ~%me_spl%~)) BEGIN
+              INNER_ACTION BEGIN
+                APPEND ~%spl_list%.2da~ ~sorcerer 	%me_spl%	3~ UNLESS ~sorcerer 	%me_spl%~
+              END             
+            END
+          END
+        END
+    END
+  END
+
  END	//	end learning spell doesn't exist
   
  COPY_EXISTING ~%spl_list%.2da~ ~override~
@@ -3366,65 +3445,6 @@ IND
   LAF ~ADD_ITEM_TOOLTIPS~ STR_VAR item = EVAL ~%itm_name%~ tooltips = ~@301~ /*EVAL ~%strng%~*/ END
 
   COPY ~%MOD_FOLDER%/lib/semi_spont/d5_marker.d5~ ~override/d5__sorc_learning.d5~
-
-END		//	end with_tra
-
-END		//	end define function
-
-
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-
-
-DEFINE_ACTION_FUNCTION add_sorcerer_spells STR_VAR menu_suffix = ~W~ new_list = ~~ spl_list = ~d5xsorc~ BEGIN
-
-
-//find game install language__________________________________________________________
-//
-LAF set_lang RET game_lang END
-
-WITH_TRA ~%MOD_FOLDER%/lib/semi_spont/%game_lang%/semi_spont.tra~ BEGIN
-
-  ACTION_IF !(FILE_EXISTS_IN_GAME ~%spl_list%.2da~) BEGIN
-
-<<<<<<<<  d5/d5xsorc.2da
-2DA V1.0
-****
-            	     ResRef   Type>>>>>>>>
-   COPY ~d5/d5xsorc.2da~ ~override/%spl_list%.2da~
-   
-  END	//	end spell list doesn't exist
-
-  ACTION_PHP_EACH ~%new_list%~ AS new_spl => ind BEGIN
-    APPEND ~%spl_list%.2da~ ~sorcerer	%new_spl%	3~ UNLESS ~sorcerer	%new_spl%~
-  END
-
-  COPY_EXISTING ~%spl_list%.2da~ ~override~
-    COUNT_2DA_COLS cols
-    READ_2DA_ENTRIES_NOW ~r2en_xsorc~ cols
-    FOR (row = 0; row < r2en_xsorc; ++row) BEGIN
-      READ_2DA_ENTRY_FORMER ~r2en_xsorc~ row 1 mem_spell
-      INNER_ACTION BEGIN
-	    ACTION_IF (FILE_EXISTS_IN_GAME ~%mem_spell%.spl~) BEGIN
-		  ACTION_IF !(FILE_EXISTS_IN_GAME ~%mem_spell%%menu_suffix%.spl~) BEGIN
-            COPY_EXISTING ~%mem_spell%.spl~ ~override~
-		      READ_STRREF NAME1 spell_name
-		      READ_STRREF UNIDENTIFIED_DESC spell_description
-		      READ_LONG 0x34 spell_level
-		      READ_ASCII 0x3a spell_icon
-		    BUT_ONLY
-		    COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/%mem_spell%%menu_suffix%.spl~
-              SAY NAME1 ~%spell_name%~
-              SAY UNIDENTIFIED_DESC ~%spell_description%~
-			  WRITE_EVALUATED_ASCII 0x3a ~%spell_icon%~ #8
-			  LPF ALTER_SPELL_HEADER STR_VAR icon = EVAL ~%spell_icon%~ END
-		  	  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 171 target = 1 timing = 9 STR_VAR resource = EVAL ~%mem_spell%~ END
-		  END
-		END
-	  END
-	END
-  BUT_ONLY
-
 
 END		//	end with_tra
 
@@ -4168,6 +4188,65 @@ END
 
 END		//	end with_tra
 
+
+END		//	end define function
+
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+
+DEFINE_ACTION_FUNCTION add_sorcerer_spells STR_VAR menu_suffix = ~W~ new_list = ~~ spl_list = ~d5xsorc~ BEGIN
+
+
+//find game install language__________________________________________________________
+//
+LAF set_lang RET game_lang END
+
+WITH_TRA ~%MOD_FOLDER%/lib/semi_spont/%game_lang%/semi_spont.tra~ BEGIN
+
+  ACTION_IF !(FILE_EXISTS_IN_GAME ~%spl_list%.2da~) BEGIN
+
+<<<<<<<<  d5/d5xsorc.2da
+2DA V1.0
+****
+            	     ResRef   Type>>>>>>>>
+   COPY ~d5/d5xsorc.2da~ ~override/%spl_list%.2da~
+   
+  END	//	end spell list doesn't exist
+
+  ACTION_PHP_EACH ~%new_list%~ AS new_spl => ind BEGIN
+    APPEND ~%spl_list%.2da~ ~sorcerer	%new_spl%	3~ UNLESS ~sorcerer	%new_spl%~
+  END
+
+  COPY_EXISTING ~%spl_list%.2da~ ~override~
+    COUNT_2DA_COLS cols
+    READ_2DA_ENTRIES_NOW ~r2en_xsorc~ cols
+    FOR (row = 0; row < r2en_xsorc; ++row) BEGIN
+      READ_2DA_ENTRY_FORMER ~r2en_xsorc~ row 1 mem_spell
+      INNER_ACTION BEGIN
+	    ACTION_IF (FILE_EXISTS_IN_GAME ~%mem_spell%.spl~) BEGIN
+		  ACTION_IF !(FILE_EXISTS_IN_GAME ~%mem_spell%%menu_suffix%.spl~) BEGIN
+            COPY_EXISTING ~%mem_spell%.spl~ ~override~
+		      READ_STRREF NAME1 spell_name
+		      READ_STRREF UNIDENTIFIED_DESC spell_description
+		      READ_LONG 0x34 spell_level
+		      READ_ASCII 0x3a spell_icon
+		    BUT_ONLY
+		    COPY ~%MOD_FOLDER%/lib/semi_spont/d5_base.spl~ ~override/%mem_spell%%menu_suffix%.spl~
+              SAY NAME1 ~%spell_name%~
+              SAY UNIDENTIFIED_DESC ~%spell_description%~
+			  WRITE_EVALUATED_ASCII 0x3a ~%spell_icon%~ #8
+			  LPF ALTER_SPELL_HEADER STR_VAR icon = EVAL ~%spell_icon%~ END
+		  	  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 171 target = 1 timing = 9 STR_VAR resource = EVAL ~%mem_spell%~ END
+		  END
+		END
+	  END
+	END
+  BUT_ONLY
+
+
+END		//	end with_tra
 
 END		//	end define function
 
