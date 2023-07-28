@@ -10,8 +10,11 @@
 @12 = ~Rebalanced Arcane Opposition Schools~
 @1201 = ~No Opposition Schools~
 @1202 = ~IWD-style Opposition Schools~
+@12021 = ~IWD-style Opposition Schools, Low-Level Spells Allowed~
 @1203 = ~BG2-style Opposition Schools~
+@12031 = ~BG2-style Opposition Schools, Low-Level Spells Allowed~
 @1204 = ~PnP Opposition Schools~
+@12041 = ~PnP Opposition Schools, Low-Level Spells Allowed~
 @13 = ~Revised Illusionary Clones~
 @14 = ~Revised Invisibility and True Seeing~
 @15 = ~Revised Haste and Free Action~

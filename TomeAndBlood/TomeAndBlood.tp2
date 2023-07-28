@@ -1,6 +1,6 @@
 BACKUP ~weidu_external/backup/TomeAndBlood~
 AUTHOR ~aquadrizzt~
-VERSION ~0.9.48~ 
+VERSION ~0.9.49~ 
 
 ALWAYS
 
@@ -52,8 +52,11 @@ LAF spell_schools END
 // 12: CHANGE ARCANE OPPOSITION SCHOOLS (Subtledoctor)
 // 1201: no opposition schools
 // 1202: iwd opposition schools
+// 12021: iwd opposition schools, low-level spells universal
 // 1203: bg2 opposition schools
+// 12031: bg2 opposition schools, low-level spells universal
 // 1204: PnP opposition schools
+// 12041: PnP opposition schools, low-level spells universal
 // -----------------------------
 
 //no wizard opposition schools______________________________________________________
@@ -80,7 +83,20 @@ COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_opp_schools.qd~ //detection for this 
 
 INCLUDE ~TomeAndBlood/comp/setup_spell_schools.tpa~ 
 
-LAF change_opposition_schools STR_VAR mode = ~iwd~ END
+LAF change_opposition_schools INT_VAR low_level_allowed = 0 STR_VAR mode = ~iwd~ END
+
+//iwd opposition schools > level 4__________________________________________________
+//
+BEGIN @12021
+DESIGNATED 12021
+SUBCOMPONENT @12 (GAME_IS ~bgt tob bgee bg2ee eet iwd iwdee~)
+//GROUP @5
+
+COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_opp_schools.qd~ //detection for this component 
+
+INCLUDE ~TomeAndBlood/comp/setup_spell_schools.tpa~ 
+
+LAF change_opposition_schools INT_VAR low_level_allowed = 3 STR_VAR mode = ~iwd~ END
 
 //bg2 opposition schools____________________________________________________________
 //
@@ -93,20 +109,46 @@ COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_opp_schools.qd~ //detection for this 
 
 INCLUDE ~TomeAndBlood/comp/setup_spell_schools.tpa~ 
 
-LAF change_opposition_schools STR_VAR mode = ~bg2~ END
+LAF change_opposition_schools INT_VAR low_level_allowed = 0 STR_VAR mode = ~bg2~ END
 
-//pnp opposition schools____________________________________________________________
+//bg2 opposition schools > level 4__________________________________________________
 //
-BEGIN @1204
-DESIGNATED 1204
-SUBCOMPONENT @12 (GAME_IS ~bgt tob bgee bg2ee eet~)
+BEGIN @12031
+DESIGNATED 12031
+SUBCOMPONENT @12 (GAME_IS ~bgt tob bgee bg2ee eet iwd iwdee~)
 //GROUP @5
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_opp_schools.qd~ //detection for this component 
 
 INCLUDE ~TomeAndBlood/comp/setup_spell_schools.tpa~ 
 
-LAF change_opposition_schools STR_VAR mode = ~pnp~ END
+LAF change_opposition_schools INT_VAR low_level_allowed = 3 STR_VAR mode = ~bg2~ END
+
+//pnp opposition schools____________________________________________________________
+//
+BEGIN @1204
+DESIGNATED 1204
+SUBCOMPONENT @12 (GAME_IS ~bgt tob bgee bg2ee eet iwd iwdee~)
+//GROUP @5
+
+COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_opp_schools.qd~ //detection for this component 
+
+INCLUDE ~TomeAndBlood/comp/setup_spell_schools.tpa~ 
+
+LAF change_opposition_schools INT_VAR low_level_allowed = 0 STR_VAR mode = ~pnp~ END
+
+//pnp opposition schools > level 4__________________________________________________
+//
+BEGIN @12041
+DESIGNATED 12041
+SUBCOMPONENT @12 (GAME_IS ~bgt tob bgee bg2ee eet iwd iwdee~)
+//GROUP @5
+
+COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_opp_schools.qd~ //detection for this component 
+
+INCLUDE ~TomeAndBlood/comp/setup_spell_schools.tpa~ 
+
+LAF change_opposition_schools INT_VAR low_level_allowed = 3 STR_VAR mode = ~pnp~ END
 
 
 // -----------------------------

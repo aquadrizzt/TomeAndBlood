@@ -1,6 +1,6 @@
 # TomeAndBlood
 
-Tome And Blood: More Options for Wizards and Sorcerers v0.9.48
+Tome And Blood: More Options for Wizards and Sorcerers v0.9.49
 
 ## Overview
 
@@ -23,10 +23,13 @@ COMPONENT 12: Rebalanced Specialist Opposition Schools
 
 This component allows changes to which spells are in an "opposition school" and thus unavailable to specialists. There are currently three options, two of which will be available for install depending on which game is being played:
 
--- Baldur's Gate Opposition Schools (matches BG/BG2)<br />
--- Icewind Dale Opposition Schools (matches IWD)<br />
 -- No Opposition Schools (all specialists can cast all spells)<br />
+-- Baldur's Gate Opposition Schools (matches BG/BG2)<br />
+-- Baldur's Gate Opposition Schools, low-level allowed (matches BG/BG2, but up to 3rd-level spells are universal)<br />
+-- Icewind Dale Opposition Schools (matches IWD)<br />
+-- Icewind Dale Opposition Schools, low-level allowed (matches IWD, but up to 3rd-level spells are universal)<br />
 -- PnP Opposition Schools (matches the original 2E PHB)<br />
+-- PnP Opposition Schools, low-level allowed (matches the original 2E PHB, but up to 3rd-level spells are universal)<br />
 
 COMPONENT 13: Revised Illusionary Clones
 

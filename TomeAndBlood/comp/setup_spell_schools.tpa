@@ -1226,7 +1226,7 @@ END 	//	end define function
 
 
 
-DEFINE_ACTION_FUNCTION change_opposition_schools STR_VAR mode = ~none~ BEGIN
+DEFINE_ACTION_FUNCTION change_opposition_schools INT_VAR low_level_allowed = 0 STR_VAR mode = ~none~ BEGIN
 
 //no opposition
 // 
@@ -1347,14 +1347,31 @@ ACTION_PHP_EACH d5_scroll_spell_school AS scroll => school BEGIN
 	ACTION_IF (~%school%~ STRING_EQUAL_CASE ~abjuration~) BEGIN // abjuration
 		ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll_1%.spl~) BEGIN 
 			COPY_EXISTING ~%scroll_1%.spl~ ~override~
+				READ_LONG 0x34 spell_level
+				PATCH_IF (spell_level > low_level_allowed) BEGIN
 					WRITE_BYTE 0x1e ~%abj_opp_1%~
 					WRITE_BYTE 0x1f ~%abj_opp_2%~
-			BUT_ONLY
-		END
-		ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll%.itm~) BEGIN 
-			COPY_EXISTING ~%scroll%.itm~ ~override~
-					WRITE_BYTE 0x2f ~%abj_opp_1%~
-					WRITE_BYTE 0x2d ~%abj_opp_2%~
+					PATCH_IF (FILE_EXISTS_IN_GAME ~%scroll%.itm~) BEGIN 
+					  INNER_ACTION BEGIN
+						COPY_EXISTING ~%scroll%.itm~ ~override~
+							WRITE_BYTE 0x2f ~%abj_opp_1%~
+							WRITE_BYTE 0x2d ~%abj_opp_2%~
+						BUT_ONLY
+					  END
+					END
+				END
+				PATCH_IF (spell_level <= low_level_allowed) BEGIN
+					WRITE_BYTE 0x1e ~0x00~
+					WRITE_BYTE 0x1f ~0x00~
+					PATCH_IF (FILE_EXISTS_IN_GAME ~%scroll%.itm~) BEGIN 
+					  INNER_ACTION BEGIN
+						COPY_EXISTING ~%scroll%.itm~ ~override~
+							WRITE_BYTE 0x2f ~0x00~
+							WRITE_BYTE 0x2d ~0x00~
+						BUT_ONLY
+					  END
+					END
+				END
 			BUT_ONLY
 		END
 	END
@@ -1363,14 +1380,31 @@ ACTION_PHP_EACH d5_scroll_spell_school AS scroll => school BEGIN
 	ACTION_IF (~%school%~ STRING_EQUAL_CASE ~alteration~) BEGIN // alteration
 		ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll_1%.spl~) BEGIN 
 			COPY_EXISTING ~%scroll_1%.spl~ ~override~
+				READ_LONG 0x34 spell_level
+				PATCH_IF (spell_level > low_level_allowed) BEGIN
 					WRITE_BYTE 0x1e ~%alt_opp_1%~
 					WRITE_BYTE 0x1f ~%alt_opp_2%~
-			BUT_ONLY
-		END
-		ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll%.itm~) BEGIN 
-			COPY_EXISTING ~%scroll%.itm~ ~override~
-					WRITE_BYTE 0x2f ~%alt_opp_1%~
-					WRITE_BYTE 0x2d ~%alt_opp_2%~
+					PATCH_IF (FILE_EXISTS_IN_GAME ~%scroll%.itm~) BEGIN 
+					  INNER_ACTION BEGIN
+						COPY_EXISTING ~%scroll%.itm~ ~override~
+							WRITE_BYTE 0x2f ~%alt_opp_1%~
+							WRITE_BYTE 0x2d ~%alt_opp_2%~
+						BUT_ONLY
+					  END
+					END
+				END
+				PATCH_IF (spell_level <= low_level_allowed) BEGIN
+					WRITE_BYTE 0x1e ~0x00~
+					WRITE_BYTE 0x1f ~0x00~
+					PATCH_IF (FILE_EXISTS_IN_GAME ~%scroll%.itm~) BEGIN 
+					  INNER_ACTION BEGIN
+						COPY_EXISTING ~%scroll%.itm~ ~override~
+							WRITE_BYTE 0x2f ~0x00~
+							WRITE_BYTE 0x2d ~0x00~
+						BUT_ONLY
+					  END
+					END
+				END
 			BUT_ONLY
 		END
 	END
@@ -1379,14 +1413,31 @@ ACTION_PHP_EACH d5_scroll_spell_school AS scroll => school BEGIN
 	ACTION_IF (~%school%~ STRING_EQUAL_CASE ~conjuration~) BEGIN // conjuration
 		ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll_1%.spl~) BEGIN 
 			COPY_EXISTING ~%scroll_1%.spl~ ~override~
+				READ_LONG 0x34 spell_level
+				PATCH_IF (spell_level > low_level_allowed) BEGIN
 					WRITE_BYTE 0x1e ~%con_opp_1%~
 					WRITE_BYTE 0x1f ~%con_opp_2%~
-			BUT_ONLY
-		END
-		ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll%.itm~) BEGIN 
-			COPY_EXISTING ~%scroll%.itm~ ~override~
-					WRITE_BYTE 0x2f ~%con_opp_1%~
-					WRITE_BYTE 0x2d ~%con_opp_2%~
+					PATCH_IF (FILE_EXISTS_IN_GAME ~%scroll%.itm~) BEGIN 
+					  INNER_ACTION BEGIN
+						COPY_EXISTING ~%scroll%.itm~ ~override~
+							WRITE_BYTE 0x2f ~%con_opp_1%~
+							WRITE_BYTE 0x2d ~%con_opp_2%~
+						BUT_ONLY
+					  END
+					END
+				END
+				PATCH_IF (spell_level <= low_level_allowed) BEGIN
+					WRITE_BYTE 0x1e ~0x00~
+					WRITE_BYTE 0x1f ~0x00~
+					PATCH_IF (FILE_EXISTS_IN_GAME ~%scroll%.itm~) BEGIN 
+					  INNER_ACTION BEGIN
+						COPY_EXISTING ~%scroll%.itm~ ~override~
+							WRITE_BYTE 0x2f ~0x00~
+							WRITE_BYTE 0x2d ~0x00~
+						BUT_ONLY
+					  END
+					END
+				END
 			BUT_ONLY
 		END
 	END
@@ -1395,14 +1446,31 @@ ACTION_PHP_EACH d5_scroll_spell_school AS scroll => school BEGIN
 	ACTION_IF (~%school%~ STRING_EQUAL_CASE ~divination~) BEGIN // divination
 		ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll_1%.spl~) BEGIN 
 			COPY_EXISTING ~%scroll_1%.spl~ ~override~
+				READ_LONG 0x34 spell_level
+				PATCH_IF (spell_level > low_level_allowed) BEGIN
 					WRITE_BYTE 0x1e ~%div_opp_1%~
 					WRITE_BYTE 0x1f ~%div_opp_2%~
-			BUT_ONLY
-		END
-		ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll%.itm~) BEGIN 
-			COPY_EXISTING ~%scroll%.itm~ ~override~
-					WRITE_BYTE 0x2f ~%div_opp_1%~
-					WRITE_BYTE 0x2d ~%div_opp_2%~
+					PATCH_IF (FILE_EXISTS_IN_GAME ~%scroll%.itm~) BEGIN 
+					  INNER_ACTION BEGIN
+						COPY_EXISTING ~%scroll%.itm~ ~override~
+							WRITE_BYTE 0x2f ~%div_opp_1%~
+							WRITE_BYTE 0x2d ~%div_opp_2%~
+						BUT_ONLY
+					  END
+					END
+				END
+				PATCH_IF (spell_level <= low_level_allowed) BEGIN
+					WRITE_BYTE 0x1e ~0x00~
+					WRITE_BYTE 0x1f ~0x00~
+					PATCH_IF (FILE_EXISTS_IN_GAME ~%scroll%.itm~) BEGIN 
+					  INNER_ACTION BEGIN
+						COPY_EXISTING ~%scroll%.itm~ ~override~
+							WRITE_BYTE 0x2f ~0x00~
+							WRITE_BYTE 0x2d ~0x00~
+						BUT_ONLY
+					  END
+					END
+				END
 			BUT_ONLY
 		END
 	END
@@ -1411,14 +1479,31 @@ ACTION_PHP_EACH d5_scroll_spell_school AS scroll => school BEGIN
 	ACTION_IF (~%school%~ STRING_EQUAL_CASE ~enchantment~) BEGIN // enchantment
 		ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll_1%.spl~) BEGIN 
 			COPY_EXISTING ~%scroll_1%.spl~ ~override~
+				READ_LONG 0x34 spell_level
+				PATCH_IF (spell_level > low_level_allowed) BEGIN
 					WRITE_BYTE 0x1e ~%enc_opp_1%~
 					WRITE_BYTE 0x1f ~%enc_opp_2%~
-			BUT_ONLY
-		END
-		ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll%.itm~) BEGIN 
-			COPY_EXISTING ~%scroll%.itm~ ~override~
-					WRITE_BYTE 0x2f ~%enc_opp_1%~
-					WRITE_BYTE 0x2d ~%enc_opp_2%~
+					PATCH_IF (FILE_EXISTS_IN_GAME ~%scroll%.itm~) BEGIN 
+					  INNER_ACTION BEGIN
+						COPY_EXISTING ~%scroll%.itm~ ~override~
+							WRITE_BYTE 0x2f ~%enc_opp_1%~
+							WRITE_BYTE 0x2d ~%enc_opp_2%~
+						BUT_ONLY
+					  END
+					END
+				END
+				PATCH_IF (spell_level <= low_level_allowed) BEGIN
+					WRITE_BYTE 0x1e ~0x00~
+					WRITE_BYTE 0x1f ~0x00~
+					PATCH_IF (FILE_EXISTS_IN_GAME ~%scroll%.itm~) BEGIN 
+					  INNER_ACTION BEGIN
+						COPY_EXISTING ~%scroll%.itm~ ~override~
+							WRITE_BYTE 0x2f ~0x00~
+							WRITE_BYTE 0x2d ~0x00~
+						BUT_ONLY
+					  END
+					END
+				END
 			BUT_ONLY
 		END
 	END
@@ -1427,14 +1512,31 @@ ACTION_PHP_EACH d5_scroll_spell_school AS scroll => school BEGIN
 	ACTION_IF (~%school%~ STRING_EQUAL_CASE ~evocation~) BEGIN // evocation
 		ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll_1%.spl~) BEGIN 
 			COPY_EXISTING ~%scroll_1%.spl~ ~override~
+				READ_LONG 0x34 spell_level
+				PATCH_IF (spell_level > low_level_allowed) BEGIN
 					WRITE_BYTE 0x1e ~%evo_opp_1%~
 					WRITE_BYTE 0x1f ~%evo_opp_2%~
-			BUT_ONLY
-		END
-		ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll%.itm~) BEGIN 
-			COPY_EXISTING ~%scroll%.itm~ ~override~
-					WRITE_BYTE 0x2f ~%evo_opp_1%~
-					WRITE_BYTE 0x2d ~%evo_opp_2%~
+					PATCH_IF (FILE_EXISTS_IN_GAME ~%scroll%.itm~) BEGIN 
+					  INNER_ACTION BEGIN
+						COPY_EXISTING ~%scroll%.itm~ ~override~
+							WRITE_BYTE 0x2f ~%evo_opp_1%~
+							WRITE_BYTE 0x2d ~%evo_opp_2%~
+						BUT_ONLY
+					  END
+					END
+				END
+				PATCH_IF (spell_level <= low_level_allowed) BEGIN
+					WRITE_BYTE 0x1e ~0x00~
+					WRITE_BYTE 0x1f ~0x00~
+					PATCH_IF (FILE_EXISTS_IN_GAME ~%scroll%.itm~) BEGIN 
+					  INNER_ACTION BEGIN
+						COPY_EXISTING ~%scroll%.itm~ ~override~
+							WRITE_BYTE 0x2f ~0x00~
+							WRITE_BYTE 0x2d ~0x00~
+						BUT_ONLY
+					  END
+					END
+				END
 			BUT_ONLY
 		END
 	END
@@ -1443,14 +1545,31 @@ ACTION_PHP_EACH d5_scroll_spell_school AS scroll => school BEGIN
 	ACTION_IF (~%school%~ STRING_EQUAL_CASE ~illusion~) BEGIN // illusion
 		ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll_1%.spl~) BEGIN 
 			COPY_EXISTING ~%scroll_1%.spl~ ~override~
+				READ_LONG 0x34 spell_level
+				PATCH_IF (spell_level > low_level_allowed) BEGIN
 					WRITE_BYTE 0x1e ~%ill_opp_1%~
 					WRITE_BYTE 0x1f ~%ill_opp_2%~
-			BUT_ONLY
-		END
-		ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll%.itm~) BEGIN 
-			COPY_EXISTING ~%scroll%.itm~ ~override~
-					WRITE_BYTE 0x2f ~%ill_opp_1%~
-					WRITE_BYTE 0x2d ~%ill_opp_2%~
+					PATCH_IF (FILE_EXISTS_IN_GAME ~%scroll%.itm~) BEGIN 
+					  INNER_ACTION BEGIN
+						COPY_EXISTING ~%scroll%.itm~ ~override~
+							WRITE_BYTE 0x2f ~%ill_opp_1%~
+							WRITE_BYTE 0x2d ~%ill_opp_2%~
+						BUT_ONLY
+					  END
+					END
+				END
+				PATCH_IF (spell_level <= low_level_allowed) BEGIN
+					WRITE_BYTE 0x1e ~0x00~
+					WRITE_BYTE 0x1f ~0x00~
+					PATCH_IF (FILE_EXISTS_IN_GAME ~%scroll%.itm~) BEGIN 
+					  INNER_ACTION BEGIN
+						COPY_EXISTING ~%scroll%.itm~ ~override~
+							WRITE_BYTE 0x2f ~0x00~
+							WRITE_BYTE 0x2d ~0x00~
+						BUT_ONLY
+					  END
+					END
+				END
 			BUT_ONLY
 		END
 	END
@@ -1459,14 +1578,31 @@ ACTION_PHP_EACH d5_scroll_spell_school AS scroll => school BEGIN
 	ACTION_IF (~%school%~ STRING_EQUAL_CASE ~necromancy~) BEGIN // necromancy
 		ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll_1%.spl~) BEGIN 
 			COPY_EXISTING ~%scroll_1%.spl~ ~override~
+				READ_LONG 0x34 spell_level
+				PATCH_IF (spell_level > low_level_allowed) BEGIN
 					WRITE_BYTE 0x1e ~%nec_opp_1%~
 					WRITE_BYTE 0x1f ~%nec_opp_2%~
-			BUT_ONLY
-		END
-		ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll%.itm~) BEGIN 
-			COPY_EXISTING ~%scroll%.itm~ ~override~
-					WRITE_BYTE 0x2f ~%nec_opp_1%~
-					WRITE_BYTE 0x2d ~%nec_opp_2%~
+					PATCH_IF (FILE_EXISTS_IN_GAME ~%scroll%.itm~) BEGIN 
+					  INNER_ACTION BEGIN
+						COPY_EXISTING ~%scroll%.itm~ ~override~
+							WRITE_BYTE 0x2f ~%nec_opp_1%~
+							WRITE_BYTE 0x2d ~%nec_opp_2%~
+						BUT_ONLY
+					  END
+					END
+				END
+				PATCH_IF (spell_level <= low_level_allowed) BEGIN
+					WRITE_BYTE 0x1e ~0x00~
+					WRITE_BYTE 0x1f ~0x00~
+					PATCH_IF (FILE_EXISTS_IN_GAME ~%scroll%.itm~) BEGIN 
+					  INNER_ACTION BEGIN
+						COPY_EXISTING ~%scroll%.itm~ ~override~
+							WRITE_BYTE 0x2f ~0x00~
+							WRITE_BYTE 0x2d ~0x00~
+						BUT_ONLY
+					  END
+					END
+				END
 			BUT_ONLY
 		END
 	END	
