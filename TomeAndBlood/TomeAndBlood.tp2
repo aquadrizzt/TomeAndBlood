@@ -1,6 +1,6 @@
 BACKUP ~weidu_external/backup/TomeAndBlood~
 AUTHOR ~aquadrizzt~
-VERSION ~0.9.49~ 
+VERSION ~0.9.50~ 
 
 ALWAYS
 
@@ -620,7 +620,12 @@ REQUIRE_PREDICATE (FILE_EXISTS_IN_GAME ~enginest.2da~) @3
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_arcanist.qd~ //detection for this component 
 
 LAF semi_spontaneous_casting END
-LAF semi_arcane_spells END
+ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__5E_casting_arcane.d5~) BEGIN
+  ACTION_IF !(FILE_EXISTS_IN_GAME ~d5_new_identify.d5~) BEGIN
+    LAF semi_spont_identify END
+  END
+  LAF semi_arcane_spells END
+END
 LAF process_semi_spells END
 
 INCLUDE ~TomeAndBlood/comp/setup_arcanist.tpa~
