@@ -1,63 +1,12 @@
 # TomeAndBlood
 
-Tome And Blood: More Options for Wizards and Sorcerers v0.9.49
+Tome And Blood: More Options for Wizards and Sorcerers v1.0
 
 ## Overview
 
 Tome and Blood is a mod that revises and expands the class options for Mages and Sorcerers. This mod began as the Sorcerous Origins kitpack, which took advantage of the newly added Sorcerer kit options to add several kits to Sorcerers. It has since grown into a mod that makes changes to all Mage and Sorcerer kits, spells and items as well as adding dozens of new kits, abilities and functionality. 
  
 ##Features
-
-COMPONENT 11: Rebalanced Spell Schools
-
- This component changes the school of various spells, to make sure there is at least one spell at each level in each school, and that specialists of different schools are better-balanced against one another.  Generally:
-
--- Sequencer spells are moved to the school of Enchantment<br />
--- Power Word spells are moved to the school of Enchantment<br />
--- Symbol spells are moved to the school of Divination<br />
--- A couple other little changes<br />
-
-These changes are determined by a list that resides in /tomeandblood/data/core/spell_list_base.tpa.  That file is human readable and you can change it as you like, so you have complete control over the school of every spell, before installing the mod. 
-
-COMPONENT 12: Rebalanced Specialist Opposition Schools
-
-This component allows changes to which spells are in an "opposition school" and thus unavailable to specialists. There are currently three options, two of which will be available for install depending on which game is being played:
-
--- No Opposition Schools (all specialists can cast all spells)<br />
--- Baldur's Gate Opposition Schools (matches BG/BG2)<br />
--- Baldur's Gate Opposition Schools, low-level allowed (matches BG/BG2, but up to 3rd-level spells are universal)<br />
--- Icewind Dale Opposition Schools (matches IWD)<br />
--- Icewind Dale Opposition Schools, low-level allowed (matches IWD, but up to 3rd-level spells are universal)<br />
--- PnP Opposition Schools (matches the original 2E PHB)<br />
--- PnP Opposition Schools, low-level allowed (matches the original 2E PHB, but up to 3rd-level spells are universal)<br />
-
-COMPONENT 13: Revised Illusionary Clones
-
-This component makes Mislead and Project Image work just as Simulacrum does, except the clones can use more magic as you go up in level, and the caster gets progressively better invisibility at the same time:
-
--- 5th Level: Mislead - clone is a pure image, cannot attack or cast spells. Caster become normal invisible - NOT super-Mislead-invisible.<br />
--- 6th Level: Shadow Clone - clone has 40% hit points and -7 to thac0 and caster level, can cast only 1st-level arcane spells, cannot cast divine spells.<br />
--- 7th Level: Lesser Simulacrum - clone has 60% hit points and -5 to thac0 and caster level, can cast up to 4th-level arcane spells, cannot cast divine spells.<br />
--- 8th Level: Simulacrum - clone has 75% hit points and -3 to thac0 and caster level, and can cast any spells.<br />
--- 9th Level: Projected Simulacrum - cast Simulacrum on another creature. (Illusionists only)<br />
-
-COMPONENT 14: Revised Invisiblity
-
-This component merges the effects of Invisibility and Sanctuary (you can now loot chests and open doors while invisible :) ). The upshot is: 
-
--- If you cast 2nd-level Detect Invisible, the caster will be able to see and target invisible enemies but other party members who cannot see invisible cannot. <br />
--- The Nondetection spell is renamed "Protection from Divination" and improved to actually block any DIVINATIONATTACK effects - including, I think, thieves' Detect Illusion skill. But, a caster of Detect Invisible or True Sight to spot and target enemies who are protected by Non-detection. <br />
--- The rather useless 3rd-level arcane spell "Detect Illusions" is replaced with a clone of the 3rd-level divine spell "Invisibility Purge."<br />
-
-Additionally, the 5th-level Oracle spell is empowered to destroy nearby illusionary creatures, including Shadow Monsters, Projected Images and the like.
-
-Finally, SR's Faerie Fire and Glitterdust will be able to counter Reflected Image and Mirror Image, since the insubstantial images will not be affected by the spells.
-
-COMPONENT 16: Revised Identify Spell
-
-This component changes Identify into a 2nd-level spell, and allows it to scale with level, such that at 13th level the caster can identify 4 items with a single casting of the spell. There is a setting in "TomeandBlood/qd_TnB_settings.ini" that you can modify before installation to change the spell level of the new Identify to whatever you want (e.g. if you prefer to keep it at 1st level.)
-
-(NB: this component involves modifications to the UI. It *may* not work with some UI overhauls installed beforehand, and it likely won't work with any UI overhauls installed afterward.)
 
 COMPONENT 20: Revised Dragon Disciples
 
@@ -124,12 +73,8 @@ This component gives each specialist kit some active or passive innate abilities
 - Enchanter: the enchanter and all nearby allies get a +1 bonus to saves vs. spells.<br />
 - Illusionist: you can use the Shadow Step ability, and have permanent Non-Detection.<br />
 - Invoker: your spells do 20% more fire, cold, electric and magic damage.<br />
-- Necromancer: you can innately use a modal ability to slow or control nearby undead. Also, the Chill Touch, Ghoul Touch, and Vampiric Touch spells are improved to have special effects against undead, and they are changed into innate abilities only learnable by necromancers.<br />
+- Necromancer: you can innately use a modal ability to slow or control nearby undead. Also, you get innate abilities similar to (but better than) the Chill Touch, Ghoul Touch, and Vampiric Touch spells.<br />
 - Transmuter: you get an innate ability to temporarily create and control a golem.<br />
-
-COMPONENT 48: Armored Casting for Bards
-
-Bards can cast spells in leather armor.
 
 COMPONENTS 51, 52, 53, 54: Innate Metamagic
 
@@ -139,32 +84,9 @@ These components make spell sequencers and contingencies into innate abilities (
 -- 53: sequencer and contingency abilities are learned from scrolls, and can also be learned during character generation and by sorcerers<br />
 -- 54: sequencer and contingency abilities can only be learned from scrolls<br />
 
-COMPONENTS 61, 62, 63: Cantrips
+COMPONENT 66: Innate Find Familiar
 
-Component 61 allows mages and sorcerers to use one cantrip as an innate ability with unlimited uses.
-
-Component 62 allows mages and sorcerers and bards to cast an unlimited number of 1st-level spells without needing to rest. Some spells are slightly rebalanced or moved to 2nd level to account for this.
-
-Component 63 gives you a "wand" that you equip in a weapon slot, which allows you to use one of eight cantrips as item abilities with unlimited uses.
-
-COMPONENTS 66-69: Revised Familiars
-
-Component 66, "Innate Find Familiar," makes Find Familiar an innate ability and replaces its scrolls with scrolls of Magic Missile.
-
-Component 67, "Choose-Your-Own-Familiar," allows you to choose which familiar you want (from a slightly modified list) instead of being bound by your alignment. Currently, the available familiars are Pseudodragon, Ferret, Rabbit, Cat, Spider, and Rat. Each has its own special skills and abilities, and each provides a different small passive benefit to the caster:
-
--- Pseudodragon: can cast Blur, Color Spray, and Cure Light Wounds once per 3 turns.  Flies, so is immune to Grease, Entangle, and Web. Caster regenerates 1 hp/round while familiar is out of the backpack.<br />
--- Ferret: 90% Pick Pockets skill. Once per turn, can create a small-AoE Nauseating Aura which causes 2-point combat penalties and a 25% spell failure chance in enemies. Caster has +1 CON while familiar is out of the backpack.<br />
--- Rabbit: 90% Find Traps skill. Can burrow into the ground to escape danger, just like the Shadowstep ability. Caster is immune to Slow.<br />
--- Cat: 90% Stealth skill. Is immune to being revealed by divinations, similar to a thief with a Cloak of Nondetection. Caster has +1 DEX while familiar is out of the backpack.<br />
--- Spider: can shoot a Web at a single target once per 5 rounds. Bite can cause 3 extra points of poison damage over one round.  Immune to being stuck in Webs. Caster gets an extra chance to save to avoid poisons while familiar is out of the backpack.<br />
--- Rat: can summon 1d6 more rats to assist in battle once per day. Bite can cause disease (reduced STR and 25% chance of spell failure) for a couple rounds. Caster has +1 INT while familiar is out of the backpack.<br />
-
-Component 67 also automatically installs component 69, "Indelible Familiars." (See below.)
-
-Component 68, "Imbue Familiars," allows you to imbue your familiar with up to five spells (one each from spell levels 1 through 5, from your known spells).  The familiar will be able to cast each spell as an innate ability, once every three turns.
-
-Component 69, "Indelible Familiars," eliminates the hp damage and CON loss you take when a familiar dies.  So you can re-summon/revive the familiar without penalty, once per day.  As a consequence, this also eliminates the flat hit point bonus you get from summoning a familiar.  Instead, you will get a 15% boost to your max hit points, whenever your familiar is out of yoru pack and within your general vicinity.
+This component makes Find Familiar an innate ability and replaces its scrolls with scrolls of Magic Missile.
 
 COMPONENTS 71, 72: Spell Switching for Sorcerers
 
@@ -192,11 +114,7 @@ Installation of this component will also automatically install the Revised Ident
 
 **DO NOT INSTALL THIS COMPONENT** if you plan to install the "5E-Style Spellcasting" mod. That mod basically applies the Arcanist spellcasting style to every spellcaster (except sorcerers and shamans). This would make the Arcanist entirely moot as a kit, and installing both on top of each other might cause technical problems.
 
-COMPONENT 80: Mana Sorcerer
-
-This component gives sorcerers (only unkitted sorcerers... for now?) an the ability to use mana points to cast spells instead of spell-level-based casting slots.  Your known spells will be the same (you must choose them manually from an item ability) but you will have a pool of mana points instead of spell slots.  Casting a spell costs as many points as its spell level; you will start with ~3 mana points and can progress to as many as 120, at level 25.  While more flexible, this is generally less firepower than a normal sorcerer has if you tally up their spell slots; so the Mana Sorcerer has a 'Restorative Meditation' innate ability that can be used between fights, which will restore one half of the points you recently spent, rounded down.
-
-COMPONENT 93: Bonus Spell Slot Items Work With Arcanists and Multiclass Sorcerers
+COMPONENT 93: Bonus Spell Slot Items Work With Multiclass Sorcerers and Arcanist
 
 Items like the Ring of Wizardry work by giving bonus spell slots to mages and bonus casting slots to sorcerers. Since Arcanists, multi-sorcerers, and other 5E-style casters are, as a technical matter, a species of wizard, this means tose items will increase your memorization slots but not your casting slots. This component will change such items to give casting slot bonuses to Arcanists, multi-sorcerers, and other 5E casters. 
 
