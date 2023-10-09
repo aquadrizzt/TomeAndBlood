@@ -1,12 +1,10 @@
 BACKUP ~weidu_external/backup/TomeAndBlood~
 AUTHOR ~aquadrizzt~
-VERSION ~0.9.50~ 
+VERSION ~1.0~ 
 
 ALWAYS
 
 	INCLUDE ~TomeAndBlood/lib/misc_tnb_functions.tpa~
-
-	INCLUDE ~TomeAndBlood/lib/semi_spontaneous.tpa~
 
 	INCLUDE ~TomeAndBlood/lib/fl#add_kit_ee.tpa~
 
@@ -31,187 +29,7 @@ END
 /* Language Settings */
 AUTO_TRA ~TomeAndBlood/lang/%s~
 LANGUAGE ~English~ ~english~ ~TomeAndBlood/lang/english/setup.tra~ 
-LANGUAGE ~French~ ~french~
-		~TomeAndBlood/lang/french/setup.tra~
-		~TomeAndBlood/lang/french/cantrips.tra~
-		~TomeAndBlood/lang/french/crafting.tra~
-		~TomeAndBlood/lang/french/familiars.tra~
-		~TomeAndBlood/lang/french/spells.tra~
 
-
-// -----------------------------
-// 11: REBALANCED SPELL SCHOOLS (Subtledoctor)
-// -----------------------------
-BEGIN @11
-DESIGNATED 11
-REQUIRE_PREDICATE (ENGINE_IS ~soa tob iwd bgee bg2ee iwdee eet~) @1 
-//GROUP @5
-
-COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_schools.qd~ //detection for this component 
-
-INCLUDE ~TomeAndBlood/comp/setup_spell_schools.tpa~ 
-
-LAF spell_schools END
-
-
-// -----------------------------
-// 12: CHANGE ARCANE OPPOSITION SCHOOLS (Subtledoctor)
-// 1201: no opposition schools
-// 1202: iwd opposition schools
-// 12021: iwd opposition schools, low-level spells universal
-// 1203: bg2 opposition schools
-// 12031: bg2 opposition schools, low-level spells universal
-// 1204: PnP opposition schools
-// 12041: PnP opposition schools, low-level spells universal
-// -----------------------------
-
-//no wizard opposition schools______________________________________________________
-//
-BEGIN @1201
-DESIGNATED 1201
-SUBCOMPONENT @12
-//GROUP @5
-
-COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_opp_schools.qd~ //detection for this component 
-
-INCLUDE ~TomeAndBlood/comp/setup_spell_schools.tpa~ 
-
-LAF change_opposition_schools STR_VAR mode = ~none~ END
-
-//iwd opposition schools____________________________________________________________
-//
-BEGIN @1202
-DESIGNATED 1202
-SUBCOMPONENT @12 (GAME_IS ~bgt tob bgee bg2ee eet~)
-//GROUP @5
-
-COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_opp_schools.qd~ //detection for this component 
-
-INCLUDE ~TomeAndBlood/comp/setup_spell_schools.tpa~ 
-
-LAF change_opposition_schools INT_VAR low_level_allowed = 0 STR_VAR mode = ~iwd~ END
-
-//iwd opposition schools > level 4__________________________________________________
-//
-BEGIN @12021
-DESIGNATED 12021
-SUBCOMPONENT @12 (GAME_IS ~bgt tob bgee bg2ee eet iwd iwdee~)
-//GROUP @5
-
-COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_opp_schools.qd~ //detection for this component 
-
-INCLUDE ~TomeAndBlood/comp/setup_spell_schools.tpa~ 
-
-LAF change_opposition_schools INT_VAR low_level_allowed = 3 STR_VAR mode = ~iwd~ END
-
-//bg2 opposition schools____________________________________________________________
-//
-BEGIN @1203
-DESIGNATED 1203
-SUBCOMPONENT @12 (GAME_IS ~iwd iwdee~)
-//GROUP @5
-
-COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_opp_schools.qd~ //detection for this component 
-
-INCLUDE ~TomeAndBlood/comp/setup_spell_schools.tpa~ 
-
-LAF change_opposition_schools INT_VAR low_level_allowed = 0 STR_VAR mode = ~bg2~ END
-
-//bg2 opposition schools > level 4__________________________________________________
-//
-BEGIN @12031
-DESIGNATED 12031
-SUBCOMPONENT @12 (GAME_IS ~bgt tob bgee bg2ee eet iwd iwdee~)
-//GROUP @5
-
-COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_opp_schools.qd~ //detection for this component 
-
-INCLUDE ~TomeAndBlood/comp/setup_spell_schools.tpa~ 
-
-LAF change_opposition_schools INT_VAR low_level_allowed = 3 STR_VAR mode = ~bg2~ END
-
-//pnp opposition schools____________________________________________________________
-//
-BEGIN @1204
-DESIGNATED 1204
-SUBCOMPONENT @12 (GAME_IS ~bgt tob bgee bg2ee eet iwd iwdee~)
-//GROUP @5
-
-COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_opp_schools.qd~ //detection for this component 
-
-INCLUDE ~TomeAndBlood/comp/setup_spell_schools.tpa~ 
-
-LAF change_opposition_schools INT_VAR low_level_allowed = 0 STR_VAR mode = ~pnp~ END
-
-//pnp opposition schools > level 4__________________________________________________
-//
-BEGIN @12041
-DESIGNATED 12041
-SUBCOMPONENT @12 (GAME_IS ~bgt tob bgee bg2ee eet iwd iwdee~)
-//GROUP @5
-
-COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_opp_schools.qd~ //detection for this component 
-
-INCLUDE ~TomeAndBlood/comp/setup_spell_schools.tpa~ 
-
-LAF change_opposition_schools INT_VAR low_level_allowed = 3 STR_VAR mode = ~pnp~ END
-
-
-// -----------------------------
-// 13: SPELL TWEAKS: CLONE CHANGES (Subtledoctor)
-// -----------------------------
-BEGIN @13
-DESIGNATED 13
-REQUIRE_PREDICATE (ENGINE_IS ~bgee bg2ee iwdee eet~) @1 
-//GROUP @5
-
-COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_spelltweaks_clone.qd~ //detection for this component 
-
-INCLUDE ~TomeAndBlood/comp/setup_spell_tweaks.tpa~
-
-LAF illusion_clone_tweaks END
-
-
-// -----------------------------
-// 14: SPELL TWEAKS: INVISIBILITY CHANGES (Subtledoctor)
-// -----------------------------
-BEGIN @14
-DESIGNATED 14
-REQUIRE_PREDICATE (ENGINE_IS ~bgee bg2ee iwdee eet~) @1 
-//GROUP @5
-
-COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_spelltweaks_invis.qd~ //detection for this component 
-
-INCLUDE ~TomeAndBlood/comp/setup_spell_tweaks.tpa~
-
-LAF invisibility_tweaks END
-
-/*
-// -----------------------------
-// 15: SPELL TWEAKS: HASTE CHANGES (Subtledoctor)
-// -----------------------------
-BEGIN @15
-DESIGNATED 15
-REQUIRE_PREDICATE (ENGINE_IS ~bgee bg2ee iwdee eet~) @1 
-//GROUP @5
-
-COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_spelltweaks_haste.qd~ //detection for this component 
-
-INCLUDE ~TomeAndBlood/comp/setup_spell_tweaks.tpa~
-
-LAF  END
-*/
-
-// -----------------------------
-// 16: SPELL TWEAKS: REVISED IDENTIFY SPELL
-// -----------------------------
-BEGIN @16
-DESIGNATED 16
-REQUIRE_PREDICATE !(FILE_EXISTS_IN_GAME ~qdtnb_identify.qd~) @1
-REQUIRE_PREDICATE !(FILE_EXISTS_IN_GAME ~d5_new_identify.d5~) @1
-//GROUP @5
-
-LAF semi_spont_identify END
 
 
 // -----------------------------
@@ -334,6 +152,7 @@ INCLUDE ~TomeAndBlood/comp/setup_specialists.tpa~
 LAF revised_specialists END
 
 
+/*
 // -----------------------------
 // 45: ARCANE CRAFTING (grammarsalad)
 // -----------------------------
@@ -349,21 +168,7 @@ COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_crafting.qd~ //detection for this com
 INCLUDE ~TomeAndBlood/comp/setup_crafting.tpa~
 
 LAF arcane_crafting END
-
-
-// -----------------------------
-// 48: ARMORED CASTING FOR BARDS
-// -----------------------------
-BEGIN @48
-DESIGNATED 48
-//REQUIRE_PREDICATE (FILE_EXISTS_IN_GAME ~enginest.2da~) @3
-//GROUP @7
-
-COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_acbards.qd~ //detection for this component 
-
-INCLUDE ~TomeAndBlood/comp/setup_armored_casting_bard.tpa~
-
-LAF armored_bards END
+*/
 
 
 // -----------------------------
@@ -453,52 +258,6 @@ LAF semi_spont_sequencers END
 
 
 // -----------------------------
-// 60: CANTRIPS (Subtledoctor)
-// 61: Cantrips, Original 
-// 62: Cantrips, Level One
-// 63: Cantrips via Wand Weapon
-// -----------------------------
-
-BEGIN @61
-DESIGNATED 61
-SUBCOMPONENT @60 
-//REQUIRE_PREDICATE (ENGINE_IS ~soa tob iwd bgee bg2ee iwdee eet~) @1 
-//GROUP @7
-
-COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_cantrips.qd~ //detection for this component 
-
-INCLUDE ~TomeAndBlood/comp/setup_cantrips.tpa~
-
-LAF innate_cantrips END
-
-// -----------------------------
-
-BEGIN @62
-DESIGNATED 62
-SUBCOMPONENT @60 (GAME_IS ~bgee bg2ee eet iwdee~)
-//GROUP @7
-
-COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_l1cantrips.qd~ //detection for this component 
-
-INCLUDE ~TomeAndBlood/comp/setup_cantrips.tpa~
-
-LAF level_1_cantrips END
-
-// -----------------------------
-
-BEGIN @63
-DESIGNATED 63
-SUBCOMPONENT @60
-//GROUP @7
-
-COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_cantwand.qd~ //detection for this component 
-
-INCLUDE ~TomeAndBlood/comp/setup_cantrips.tpa~
-
-LAF cantrip_wands END
-
-
-// -----------------------------
 // 66: INNATE FIND FAMILIAR
 // -----------------------------
 BEGIN @66
@@ -513,55 +272,6 @@ LAF innate_familiars END
 
 
 // -----------------------------
-// 67: CHOOSE-YOUR-OWN FAMILIAR
-// -----------------------------
-BEGIN @67
-DESIGNATED 67
-REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee iwdee eet~) @1
-//GROUP @7
-
-COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_familiar_choice.qd~ //detection for this component 
-COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_familiar_changes.qd~ //detection for this component 
-
-INCLUDE ~TomeAndBlood/comp/setup_familiars.tpa~ 
-
-LAF familiar_choice END
-LAF familiar_changes END
-LAF indelible_familiars END
-
-
-// -----------------------------
-// 68: POOKY'S MOD: IMBUE FAMILIARS
-// -----------------------------
-BEGIN @68
-DESIGNATED 68
-REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee iwdee eet~) @1
-//GROUP @7
-
-COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_imbue_familiars.qd~ //detection for this component 
-
-INCLUDE ~TomeAndBlood/comp/setup_familiars.tpa~ 
-
-LAF imbue_familiars END
-
-
-// -----------------------------
-// 69: INDELIBLE FAMILIARS
-// -----------------------------
-BEGIN @69
-DESIGNATED 69
-REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee iwdee eet~) @1
-FORBID_COMPONENT ~TomeandBlood.tp2~ ~67~ @4
-//GROUP @7
-
-COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_indelible_familiars.qd~ //detection for this component 
-
-INCLUDE ~TomeAndBlood/comp/setup_familiars.tpa~ 
-
-LAF indelible_familiars END
-
-
-// -----------------------------
 // 71-72: SORCERER SPELL SWITCHING
 // -----------------------------
 BEGIN @71
@@ -571,6 +281,8 @@ REQUIRE_PREDICATE (FILE_EXISTS_IN_GAME ~enginest.2da~) @3
 //GROUP @7
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_switch1.qd~ //detection for this component 
+
+INCLUDE ~TomeAndBlood/lib/semi_sorcerer.tpa~
 
 INCLUDE ~TomeAndBlood/comp/setup_spell_switching.tpa~
 
@@ -585,6 +297,8 @@ REQUIRE_PREDICATE (FILE_EXISTS_IN_GAME ~enginest.2da~) @3
 //GROUP @7
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_switch3.qd~ //detection for this component 
+
+INCLUDE ~TomeAndBlood/lib/semi_sorcerer.tpa~
 
 INCLUDE ~TomeAndBlood/comp/setup_spell_switching.tpa~
 
@@ -601,6 +315,8 @@ REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee iwdee eet~) @3
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_mcsrc.qd~ //detection for this component 
 
+INCLUDE ~TomeAndBlood/lib/semi_sorcerer.tpa~
+
 INCLUDE ~TomeAndBlood/comp/setup_multiclass_sorcerers.tpa~
 
 ACTION_IF !(FILE_EXISTS_IN_GAME ~d5_new_identify.d5~) BEGIN
@@ -614,7 +330,6 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__semi_spont_sequencers.d5~) BEGIN
 END
 
 
-
 // -----------------------------
 // 82: ARCANIST
 // -----------------------------
@@ -624,6 +339,9 @@ REQUIRE_PREDICATE (FILE_EXISTS_IN_GAME ~enginest.2da~) @3
 //GROUP @6
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_arcanist.qd~ //detection for this component 
+
+INCLUDE ~TomeAndBlood/lib/semi_spontaneous.tpa~
+INCLUDE ~TomeAndBlood/comp/setup_arcanist.tpa~
 
 LAF semi_spontaneous_casting END
 ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__5E_casting_arcane.d5~) BEGIN
@@ -649,7 +367,6 @@ ACTION_IF !(FILE_EXISTS_IN_GAME ~d5__semi_spont_sequencers.d5~) BEGIN
 END
 
 
-
 // -----------------------------
 // 85: MANA SORCERER(S)
 // -----------------------------
@@ -657,6 +374,7 @@ BEGIN @85
 DESIGNATED 85
 REQUIRE_PREDICATE (FILE_EXISTS_IN_GAME ~enginest.2da~) @3
 //GROUP @6
+DEPRECATED @4
 
 COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_manasrc.qd~ //detection for this component 
 
@@ -677,6 +395,8 @@ SUBCOMPONENT @91
 REQUIRE_PREDICATE (FILE_EXISTS_IN_GAME ~enginest.2da~) @3
 //REQUIRE_PREDICATE (MOD_IS_INSTALLED ~tomeandblood.tp2~ ~80~) OR (MOD_IS_INSTALLED ~tomeandblood.tp2~ ~82~) @4
 
+INCLUDE ~TomeAndBlood/lib/semi_spont/semi_misc_functions.tpa~
+
 ACTION_IF (MOD_IS_INSTALLED ~tomeandblood.tp2~ ~80~) OR (MOD_IS_INSTALLED ~tomeandblood.tp2~ ~82~) BEGIN
  COPY ~%MOD_FOLDER%/lib/semi_spont/d5_marker.d5~ ~override/d5__spont_items_mem.d5~
 
@@ -690,31 +410,14 @@ BEGIN @93
 DESIGNATED 93
 SUBCOMPONENT @91
 
+INCLUDE ~TomeAndBlood/lib/semi_spont/semi_misc_functions.tpa~
+
 ACTION_IF (MOD_IS_INSTALLED ~tomeandblood.tp2~ ~80~) OR (MOD_IS_INSTALLED ~tomeandblood.tp2~ ~82~) BEGIN
  COPY ~%MOD_FOLDER%/lib/semi_spont/d5_marker.d5~ ~override/d5__spont_items_no_mem.d5~
 
  LAF arcane_spont_items INT_VAR 5e_plus_mem = 0 END
 // LAF divine_spont_items INT_VAR 5e_plus_mem = 0 END
 END
-
-
-/*
-// -----------------------------
-// 95: ABILITY SCORE BONUSES
-// -----------------------------
-BEGIN @95
-DESIGNATED 95
-DEPRECATED @4
-REQUIRE_PREDICATE (FILE_EXISTS_IN_GAME ~enginest.2da~) @3
-REQUIRE_PREDICATE !(MOD_IS_INSTALLED ~scales_of_balance.tp2~ ~201~) @1
-//GROUP @7
-
-COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_attrbon.qd~ //detection for this component 
-
-INCLUDE ~TomeAndBlood/comp/setup_ability_bonuses.tpa~
-
-LAF ability_bonus_spells END
-*/
 
 
 ////////////////////////////////////////////////////////////////////////////////////////

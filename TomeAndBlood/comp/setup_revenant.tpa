@@ -35,5 +35,12 @@ END
 
 COPY ~TomeAndBlood/data/revenant/QDREVS1.spl~ ~override~ //+4 vs. death, imm to sleep+death,-1 spell
 
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5ctp00.spl~) BEGIN
+  APPEND ~QDREVSR.2da~ ~CANTRIPS    GA_D5CTP00  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****    ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~ UNLESS ~CANTRIPS~
+END
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5cantw1.spl~) BEGIN
+  APPEND ~QDREVSR.2da~ ~CANTRIPS	AP_D5CANTW1 ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~ UNLESS ~CANTRIPS~
+END
+
 END 	//	end define function
 //____________________________________________________________________________________

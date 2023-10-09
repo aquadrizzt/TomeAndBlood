@@ -34,5 +34,12 @@ END
 
 COPY ~TomeAndBlood/data/sylvan/QDSLVS1.spl~ ~override~ //+4 vs. spells, imm to charm, nondetection, -1 spell
 
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5ctp00.spl~) BEGIN
+  APPEND ~QDSYLSR.2da~ ~CANTRIPS    GA_D5CTP00  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****    ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~ UNLESS ~CANTRIPS~
+END
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5cantw1.spl~) BEGIN
+  APPEND ~QDSYLSR.2da~ ~CANTRIPS	AP_D5CANTW1 ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~ UNLESS ~CANTRIPS~
+END
+
 END 	//	end define function
 //____________________________________________________________________________________

@@ -268,14 +268,22 @@ COPY_EXISTING - ~kitlist.2da~ ~override~
 		
 	
 //New CLAB Files
-COPY ~TomeAndBlood/data/specialists/CLABMA02.2da~ ~override~ //abjurer
-	 ~TomeAndBlood/data/specialists/CLABMA03.2da~ ~override~ //necromancer
-	 ~TomeAndBlood/data/specialists/CLABMA04.2da~ ~override~ //transmuter
-	 ~TomeAndBlood/data/specialists/CLABMA05.2da~ ~override~ //diviner
-	 ~TomeAndBlood/data/specialists/CLABMA06.2da~ ~override~ //conjurer
-	 ~TomeAndBlood/data/specialists/CLABMA07.2da~ ~override~ //invoker
-	 ~TomeAndBlood/data/specialists/CLABMA08.2da~ ~override~ //illusionist
-	 ~TomeAndBlood/data/specialists/CLABMA09.2da~ ~override~ //enchanter
+COPY_EXISTING ~CLABMA02.2da~ ~override~ //abjurer
+  APPEND_FILE ~TomeAndBlood/data/specialists/CLABMA02_add.txt~
+COPY_EXISTING ~CLABMA03.2da~ ~override~ //necromancer
+  APPEND_FILE ~TomeAndBlood/data/specialists/CLABMA03_add.txt~
+COPY_EXISTING ~CLABMA04.2da~ ~override~ //transmuter
+  APPEND_FILE ~TomeAndBlood/data/specialists/CLABMA04_add.txt~
+COPY_EXISTING ~CLABMA05.2da~ ~override~ //diviner
+  APPEND_FILE ~TomeAndBlood/data/specialists/CLABMA05_add.txt~
+COPY_EXISTING ~CLABMA06.2da~ ~override~ //conjurer
+  APPEND_FILE ~TomeAndBlood/data/specialists/CLABMA06_add.txt~
+COPY_EXISTING ~CLABMA07.2da~ ~override~ //invoker
+  APPEND_FILE ~TomeAndBlood/data/specialists/CLABMA07_add.txt~
+COPY_EXISTING ~CLABMA08.2da~ ~override~ //illusionist
+  APPEND_FILE ~TomeAndBlood/data/specialists/CLABMA08_add.txt~
+COPY_EXISTING ~CLABMA09.2da~ ~override~ //enchanter
+  APPEND_FILE ~TomeAndBlood/data/specialists/CLABMA09_add.txt~
 
 /*
 .
@@ -338,9 +346,11 @@ COPY ~TomeAndBlood/data/specialists/QDMG+SCH.SPL~ ~override/QDMG+ABJ.SPL~ //maki
 ACTION_PHP_EACH d5_scroll_spell_school AS scroll => school BEGIN 
 	ACTION_IF (FILE_EXISTS_IN_GAME ~%scroll_1%.spl~) BEGIN 
 		ACTION_IF (~%scroll_1%~ STRING_EQUAL_CASE ~SPWI123~ OR //Find Familiar
+/*
 				   ~%scroll_1%~ STRING_EQUAL_CASE ~SPWI117~ OR //Chill Touch
 				   ~%scroll_1%~ STRING_EQUAL_CASE ~SPWI218~ OR //Ghoul Touch
 				   ~%scroll_1%~ STRING_EQUAL_CASE ~SPWI314~ OR //Vampiric Touch
+*/
 				   ~%scroll_1%~ STRING_EQUAL_CASE ~SPWI124~ OR //NRD
 				   ~%scroll_1%~ STRING_EQUAL_CASE ~SPWI222~ OR //Chaos Shield
 				   ~%scroll_1%~ STRING_EQUAL_CASE ~SPWI723~ OR //Improved Chaos Shield
@@ -700,6 +710,7 @@ COPY ~TomeAndBlood/data/specialists/d5nect3.itm~ ~override~
 	SAY IDENTIFIED_DESC @6255
 COPY ~TomeAndBlood/data/specialists/d5_nect3.bam~ ~override~
 
+/*
 APPEND ~hidespl.2da~ ~SPWI117	1	0	0~ //add chill touch to hidespl
 APPEND ~hidespl.2da~ ~SPWI218	1	0	0~ //add ghoul touch to hidespl
 APPEND ~hidespl.2da~ ~SPWI314	1	0	0~ //add vampiric touch to hidespl
@@ -739,6 +750,7 @@ COPY_EXISTING ~clabma03.2da~ ~override~
   REPLACE_TEXTUALLY ~GA_D5NECT2~ ~****      ~
   REPLACE_TEXTUALLY ~GA_D5NECT3~ ~****      ~
 BUT_ONLY
+*/
 
 
 END 	//	end define function

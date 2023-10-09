@@ -9,21 +9,8 @@
 DEFINE_ACTION_FUNCTION multiclass_sorcerers BEGIN 
 
 
-ACTION_IF (FILE_EXISTS_IN_GAME ~5E_casting_settings.ini~) BEGIN
-  	INCLUDE ~override/5E_casting_settings.ini~
-END
-ACTION_IF !(FILE_EXISTS_IN_GAME ~5E_casting_settings.ini~) BEGIN
-  	INCLUDE ~%MOD_FOLDER%/lib/semi_spont/5E_casting_settings.ini~
-END
-
-LAM 5E_casting_settings
-
 INCLUDE ~tomeandblood/lib/qd_multiclass.tpa~
 
-
-//base .2da file
-//
-//COPY ~tomeandblood/data/multi_sorcerers/d5sorc.2da~ ~override~
 
 <<<<<<<< d5/d5sorc.2da
 ABILITY     ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** 

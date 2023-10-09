@@ -124,5 +124,12 @@ COPY ~TomeAndBlood/data/favoured_soul/QDFVSLS.spl~ ~override~
 	END 
 	LPF ADD_SPELL_EFFECT INT_VAR opcode = 206 target = 1 parameter1 = (0 - 1) timing = 9 STR_VAR resource = EVAL ~%SOURCE_RES%~ END
 
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5ctp00.spl~) BEGIN
+  APPEND ~QDFAVSL.2da~ ~CANTRIPS    GA_D5CTP00  ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****    ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~ UNLESS ~CANTRIPS~
+END
+ACTION_IF (FILE_EXISTS_IN_GAME ~d5cantw1.spl~) BEGIN
+  APPEND ~QDFAVSL.2da~ ~CANTRIPS	AP_D5CANTW1 ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        ****        **** ~ UNLESS ~CANTRIPS~
+END
+
 END 	//	end define function
 //____________________________________________________________________________________
