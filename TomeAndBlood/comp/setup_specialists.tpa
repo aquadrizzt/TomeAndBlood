@@ -850,3 +850,2049 @@ APPEND ~CLABMA01.2da~ ~SPEC_FIX	 	AP_QDNEC#~
 .
 .
 */
+
+
+//____________________________________________________________________________________
+//____________________________________________________________________________________
+
+
+DEFINE_ACTION_FUNCTION multiclass_specialists BEGIN 
+
+// This component uses code by Subtledoctor; all such code is used with permission of the original author. 
+
+/*
+ACTION_FOR_EACH race IN ~D~ ~E~ ~G~ ~H~ ~HE~ ~HL~ ~HO~ BEGIN
+  ACTION_IF !(FILE_EXISTS ~override/K_M_%race%.2da~) BEGIN
+    COPY_EXISTING ~K_M_%race%.2da~ ~override~
+  END
+END
+*/
+
+COPY_EXISTING ~weapprof.2da~ ~override~
+    COUNT_2DA_COLS weapprof_cols
+	READ_2DA_ENTRIES_NOW r2en_weapprof weapprof_cols
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 8 12 fm_bastardsword
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 9 12 fm_longsword
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 10 12 fm_shortsword
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 11 12 fm_axe
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 12 12 fm_2handsword
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 13 12 fm_katana
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 14 12 fm_scimitar
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 15 12 fm_dagger
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 16 12 fm_hammer
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 17 12 fm_club
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 18 12 fm_spear
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 19 12 fm_halberd
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 20 12 fm_flail
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 21 12 fm_mace
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 22 12 fm_staff
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 23 12 fm_xbow
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 24 12 fm_longbow
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 25 12 fm_shortbow
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 26 12 fm_dart
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 27 12 fm_sling
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 28 12 fm_2handed
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 29 12 fm_swordandshield
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 30 12 fm_singleweapon
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 31 12 fm_2weapon
+
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 8 17 cm_bastardsword
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 9 17 cm_longsword
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 10 17 cm_shortsword
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 11 17 cm_axe
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 12 17 cm_2handsword
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 13 17 cm_katana
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 14 17 cm_scimitar
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 15 17 cm_dagger
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 16 17 cm_hammer
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 17 17 cm_club
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 18 17 cm_spear
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 19 17 cm_halberd
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 20 17 cm_flail
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 21 17 cm_mace
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 22 17 cm_staff
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 23 17 cm_xbow
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 24 17 cm_longbow
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 25 17 cm_shortbow
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 26 17 cm_dart
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 27 17 cm_sling
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 28 17 cm_2handed
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 29 17 cm_swordandshield
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 30 17 cm_singleweapon
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 31 17 cm_2weapon
+
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 8 16 mt_bastardsword
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 9 16 mt_longsword
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 10 16 mt_shortsword
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 11 16 mt_axe
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 12 16 mt_2handsword
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 13 16 mt_katana
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 14 16 mt_scimitar
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 15 16 mt_dagger
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 16 16 mt_hammer
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 17 16 mt_club
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 18 16 mt_spear
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 19 16 mt_halberd
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 20 16 mt_flail
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 21 16 mt_mace
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 22 16 mt_staff
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 23 16 mt_xbow
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 24 16 mt_longbow
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 25 16 mt_shortbow
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 26 16 mt_dart
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 27 16 mt_sling
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 28 16 mt_2handed
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 29 16 mt_swordandshield
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 30 16 mt_singleweapon
+	READ_2DA_ENTRY_FORMER ~r2en_weapprof~ 31 16 mt_2weapon
+BUT_ONLY
+
+OUTER_SPRINT fm_weapprof ~0 0 0 0 0 0 0 0 %fm_bastardsword% %fm_longsword% %fm_shortsword% %fm_axe% %fm_2handsword% %fm_katana% %fm_scimitar% %fm_dagger% %fm_hammer% %fm_club% %fm_spear% %fm_halberd% %fm_flail% %fm_mace% %fm_staff% %fm_xbow% %fm_longbow% %fm_shortbow% %fm_dart% %fm_sling% %fm_2handed% %fm_swordandshield% %fm_singleweapon% %fm_2weapon% 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
+
+OUTER_SPRINT cm_weapprof ~0 0 0 0 0 0 0 0 %cm_bastardsword% %cm_longsword% %cm_shortsword% %cm_axe% %cm_2handsword% %cm_katana% %cm_scimitar% %cm_dagger% %cm_hammer% %cm_club% %cm_spear% %cm_halberd% %cm_flail% %cm_mace% %cm_staff% %cm_xbow% %cm_longbow% %cm_shortbow% %cm_dart% %cm_sling% %cm_2handed% %cm_swordandshield% %cm_singleweapon% %cm_2weapon% 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
+
+OUTER_SPRINT mt_weapprof ~0 0 0 0 0 0 0 0 %mt_bastardsword% %mt_longsword% %mt_shortsword% %mt_axe% %mt_2handsword% %mt_katana% %mt_scimitar% %mt_dagger% %mt_hammer% %mt_club% %mt_spear% %mt_halberd% %mt_flail% %mt_mace% %mt_staff% %mt_xbow% %mt_longbow% %mt_shortbow% %mt_dart% %mt_sling% %mt_2handed% %mt_swordandshield% %mt_singleweapon% %mt_2weapon% 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
+
+//____________________________________________________________________________________
+// ABJURER
+
+/*
+LAF GET_KIT_EX STR_VAR kit_name = ~ABJURER~
+  RET alignmnt
+      luabbr
+      abclasrq
+      clsrcreq
+      stweap
+      bdstweap 
+      unusable
+      kittable
+END
+*/
+
+COPY_EXISTING ~kitlist.2da~ ~override~
+  COUNT_2DA_COLS kitlist_cols
+  READ_2DA_ENTRIES_NOW r2en_kitlist kitlist_cols
+  FOR (row = 1; row < r2en_kitlist; ++row) BEGIN
+    READ_2DA_ENTRY_FORMER r2en_kitlist row 1 kit_name
+    PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~ABJURER~) BEGIN
+      READ_2DA_ENTRY_FORMER r2en_kitlist row 2 lower
+      READ_2DA_ENTRY_FORMER r2en_kitlist row 3 mixed
+      READ_2DA_ENTRY_FORMER r2en_kitlist row 4 help
+      READ_2DA_ENTRY_FORMER r2en_kitlist row 7 usable
+    END
+  END
+BUT_ONLY
+
+ACTION_GET_STRREF %lower% abjurer_lower_string
+OUTER_SET new_fm_lower = RESOLVE_STR_REF (~fighter/%abjurer_lower_string%~)
+OUTER_SET new_cm_lower = RESOLVE_STR_REF (~cleric/%abjurer_lower_string%~)
+OUTER_SET new_mt_lower = RESOLVE_STR_REF (~thief/%abjurer_lower_string%~)
+ACTION_GET_STRREF %mixed% abjurer_mixed_string
+OUTER_SET new_fm_mixed = RESOLVE_STR_REF (~Fighter/%abjurer_mixed_string%~)
+OUTER_SET new_cm_mixed = RESOLVE_STR_REF (~Cleric/%abjurer_mixed_string%~)
+OUTER_SET new_mt_mixed = RESOLVE_STR_REF (~Thief/%abjurer_mixed_string%~)
+OUTER_SET abjurer_help = %help%
+OUTER_SPRINT abjurer_alignmnt ~%alignmnt%~
+OUTER_SPRINT abjurer_luabbr ~%luabbr%~
+OUTER_SPRINT abjurer_abclsrq ~%abclasrq%~
+OUTER_SPRINT abjurer_clsrcreq ~%clsrcreq%~
+OUTER_SPRINT abjurer_stweap ~%stweap%~
+OUTER_SPRINT abjurer_bdstweap ~%bdstweap%~
+OUTER_SPRINT abjurer_unusable ~%unusable%~
+
+OUTER_SPRINT abjurer_FM_kittable ~~
+OUTER_SPRINT abjurer_CM_kittable ~~
+OUTER_SPRINT abjurer_MT_kittable ~~
+COPY_EXISTING ~CLSRCREQ.2da~ ~override~
+  COUNT_2DA_COLS clsrcreq_cols
+  READ_2DA_ENTRIES_NOW r2en_clsrcreq clsrcreq_cols
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 34 1 human_fm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 46 1 human_mt
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 47 1 human_cm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 34 2 elf_fm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 46 2 elf_mt
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 47 2 elf_cm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 34 3 halfelf_fm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 46 3 halfelf_mt
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 47 3 halfelf_cm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 34 4 dwarf_fm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 46 4 dwarf_mt
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 47 4 dwarf_cm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 34 5 halfling_fm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 46 5 halfling_mt
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 47 5 halfling_cm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 34 6 gnome_fm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 46 6 gnome_mt
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 47 6 gnome_cm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 34 7 halforc_fm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 46 7 halforc_mt
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 47 7 halforc_cm
+/*
+  PATCH_PRINT ~human fm = %human_fm%~
+  PATCH_PRINT ~human cm = %human_mt%~
+  PATCH_PRINT ~human mt = %human_cm%~
+  PATCH_PRINT ~elf fm = %elf_fm%~
+  PATCH_PRINT ~elf cm = %elf_mt%~
+  PATCH_PRINT ~elf mt = %elf_cm%~
+  PATCH_PRINT ~halfelf fm = %halfelf_fm%~
+  PATCH_PRINT ~halfelf cm = %halfelf_mt%~
+  PATCH_PRINT ~halfelf mt = %halfelf_cm%~
+  PATCH_PRINT ~dwarf fm = %dwarf_fm%~
+  PATCH_PRINT ~dwarf cm = %dwarf_mt%~
+  PATCH_PRINT ~dwarf mt = %dwarf_cm%~
+  PATCH_PRINT ~halfling fm = %halfling_fm%~
+  PATCH_PRINT ~halfling cm = %halfling_mt%~
+  PATCH_PRINT ~halfling mt = %halfling_cm%~
+  PATCH_PRINT ~gnome fm = %gnome_fm%~
+  PATCH_PRINT ~gnome cm = %gnome_mt%~
+  PATCH_PRINT ~gnome mt = %gnome_cm%~
+  PATCH_PRINT ~halforc fm = %halforc_fm%~
+  PATCH_PRINT ~halforc cm = %halforc_mt%~
+  PATCH_PRINT ~halforc mt = %halforc_cm%~
+*/
+  PATCH_IF (FILE_CONTAINS_EVALUATED (~K_M_D.2da~ ~[%TAB% ]22[%WNL%%LNL%]~)) BEGIN
+    PATCH_IF (dwarf_fm = 1) BEGIN
+      SPRINT abjurer_FM_kittable ~%abjurer_FM_kittable% K_FM_D~
+    END
+    PATCH_IF (dwarf_cm = 1) BEGIN
+      SPRINT abjurer_CM_kittable ~%abjurer_CM_kittable% K_CM_D~
+    END
+    PATCH_IF (dwarf_mt = 1) BEGIN
+      SPRINT abjurer_MT_kittable ~%abjurer_MT_kittable% K_MT_D~
+    END
+  END
+  PATCH_IF (FILE_CONTAINS_EVALUATED (~K_M_E.2da~ ~[%TAB% ]22[%WNL%%LNL%]~)) BEGIN
+    PATCH_IF (elf_fm = 1) BEGIN
+      SPRINT abjurer_FM_kittable ~%abjurer_FM_kittable% K_FM_E~
+    END
+    PATCH_IF (elf_cm = 1) BEGIN
+      SPRINT abjurer_CM_kittable ~%abjurer_CM_kittable% K_CM_E~
+    END
+    PATCH_IF (elf_mt = 1) BEGIN
+      SPRINT abjurer_MT_kittable ~%abjurer_MT_kittable% K_MT_E~
+    END
+  END
+  PATCH_IF (FILE_CONTAINS_EVALUATED (~K_M_G.2da~ ~[%TAB% ]22[%WNL%%LNL%]~)) BEGIN
+    PATCH_IF (gnome_fm = 1) BEGIN
+      SPRINT abjurer_FM_kittable ~%abjurer_FM_kittable% K_FM_G~
+    END
+    PATCH_IF (gnome_cm = 1) BEGIN
+      SPRINT abjurer_CM_kittable ~%abjurer_CM_kittable% K_CM_G~
+    END
+    PATCH_IF (gnome_mt = 1) BEGIN
+      SPRINT abjurer_MT_kittable ~%abjurer_MT_kittable% K_MT_G~
+    END
+  END
+  PATCH_IF (FILE_CONTAINS_EVALUATED (~K_M_H.2da~ ~[%TAB% ]22[%WNL%%LNL%]~)) BEGIN
+      SPRINT abjurer_FM_kittable ~%abjurer_FM_kittable% K_FM_H~
+      SPRINT abjurer_CM_kittable ~%abjurer_CM_kittable% K_CM_H~
+      SPRINT abjurer_MT_kittable ~%abjurer_MT_kittable% K_MT_H~
+  END
+  PATCH_IF (FILE_CONTAINS_EVALUATED (~K_M_HE.2da~ ~[%TAB% ]22[%WNL%%LNL%]~)) BEGIN
+    PATCH_IF (halfelf_fm = 1) BEGIN
+      SPRINT abjurer_FM_kittable ~%abjurer_FM_kittable% K_FM_HE~
+    END
+    PATCH_IF (halfelf_cm = 1) BEGIN
+      SPRINT abjurer_CM_kittable ~%abjurer_CM_kittable% K_CM_HE~
+    END
+    PATCH_IF (halfelf_mt = 1) BEGIN
+      SPRINT abjurer_MT_kittable ~%abjurer_MT_kittable% K_MT_HE~
+    END
+  END
+  PATCH_IF (FILE_CONTAINS_EVALUATED (~K_M_HL.2da~ ~[%TAB% ]22[%WNL%%LNL%]~)) BEGIN
+    PATCH_IF (halfling_fm = 1) BEGIN
+      SPRINT abjurer_FM_kittable ~%abjurer_FM_kittable% K_FM_HL~
+    END
+    PATCH_IF (halfling_cm = 1) BEGIN
+      SPRINT abjurer_CM_kittable ~%abjurer_CM_kittable% K_CM_HL~
+    END
+    PATCH_IF (halfling_mt = 1) BEGIN
+      SPRINT abjurer_MT_kittable ~%abjurer_MT_kittable% K_MT_HL~
+    END
+  END
+  PATCH_IF (FILE_CONTAINS_EVALUATED (~K_M_HO.2da~ ~[%TAB% ]22[%WNL%%LNL%]~)) BEGIN
+    PATCH_IF (halforc_fm = 1) BEGIN
+      SPRINT abjurer_FM_kittable ~%abjurer_FM_kittable% K_FM_HO~
+    END
+    PATCH_IF (halforc_cm = 1) BEGIN
+      SPRINT abjurer_CM_kittable ~%abjurer_CM_kittable% K_CM_HO~
+    END
+    PATCH_IF (halforc_mt = 1) BEGIN
+      SPRINT abjurer_MT_kittable ~%abjurer_MT_kittable% K_MT_HO~
+    END
+  END
+  FOR (row = 1; row < r2en_clsrcreq; ++row) BEGIN
+    READ_2DA_ENTRY_FORMER r2en_clsrcreq row 0 name
+    PATCH_IF (~%name%~ STRING_EQUAL_CASE ~ABJURER~) BEGIN
+      READ_2DA_ENTRY_FORMER r2en_clsrcreq row 1 h_val
+      READ_2DA_ENTRY_FORMER r2en_clsrcreq row 2 e_val
+      READ_2DA_ENTRY_FORMER r2en_clsrcreq row 3 he_val
+      READ_2DA_ENTRY_FORMER r2en_clsrcreq row 4 d_val
+      READ_2DA_ENTRY_FORMER r2en_clsrcreq row 5 g_val
+      READ_2DA_ENTRY_FORMER r2en_clsrcreq row 6 hl_val
+      READ_2DA_ENTRY_FORMER r2en_clsrcreq row 7 ho_val
+      SPRINT clsrc ~%h_val% %e_val% %he_val% %d_val% %g_val% %hl_val% %ho_val%~
+    END
+  END
+BUT_ONLY 
+
+COPY_EXISTING ~alignmnt.2da~ ~override~
+  COUNT_2DA_COLS alignmnt_cols
+  READ_2DA_ENTRIES_NOW r2en_alignmnt alignmnt_cols
+  FOR (row = 1; row < r2en_alignmnt; ++row) BEGIN
+    READ_2DA_ENTRY_FORMER r2en_alignmnt row 0 name
+    PATCH_IF (~%name%~ STRING_EQUAL_CASE ~ABJURER~) BEGIN
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 1 l_g
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 2 l_n
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 3 l_e
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 4 n_g
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 5 n_n
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 6 n_e
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 7 c_g
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 8 c_n
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 9 c_e
+      SPRINT align ~%l_g% %l_n% %l_e% %n_g% %n_n% %n_e% %c_g% %c_n% %c_e%~
+    END
+  END
+BUT_ONLY 
+
+/*
+COPY_EXISTING ~luabbr.2da~ ~override~
+  COUNT_2DA_COLS luabbr_cols
+  READ_2DA_ENTRIES_NOW r2en_luabbr luabbr_cols
+  FOR (row = 1; row < 40; ++row) BEGIN
+    READ_2DA_ENTRY_FORMER r2en_alignmnt row 0 name
+    PATCH_IF (~%name%~ STRING_EQUAL_CASE ~ABJURER~) BEGIN
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 1 hla_table
+    END
+  END
+BUT_ONLY 
+*/
+
+/*
+PRINT ~works for these: %abjurer_FM_kittable%~
+PRINT ~works for these: %abjurer_CM_kittable%~
+PRINT ~works for these: %abjurer_MT_kittable%~
+*/
+
+ACTION_IF !(FILE_EXISTS ~override/clabma02.2da~) BEGIN
+  COPY_EXISTING ~clabma02.2da~ ~override~
+END
+
+LAF ADD_KIT_EX 
+  INT_VAR
+    kit_class   = 9
+    lower       = %new_fm_lower%
+    mixed       = %new_fm_mixed%
+    help        = %abjurer_help%
+  STR_VAR
+    kit_name    = ~D5_ABJURER_FM~
+    clab_base_m = ~override/clabma02.2da~
+    unusable    = EVAL ~%usable%~
+    clasweap    = ~0 0 0 0 0 0 0 0~
+    weapprof    = EVAL ~%fm_weapprof%~
+//    abclasrq    = EVAL ~%abjurer_abclsrq%~
+    alignmnt    = EVAL ~%align%~
+    clsrcreq    = EVAL ~%clsrc%~
+    kittable    = EVAL ~%abjurer_FM_kittable%~
+    clswpbon    = ~1 0 2~
+//    luabbr      = EVAL ~%hla_table%~
+//    stweap      = ~%abjurer_stweap%~
+//    bdstweap    = ~%abjurer_bdstweap%~
+  RET D5_ABJURER_FM = kit_id
+END
+LAF ADD_KIT_EX 
+  INT_VAR
+    kit_class   = 14
+    lower       = %new_cm_lower%
+    mixed       = %new_cm_mixed%
+    help        = %abjurer_help%
+  STR_VAR
+    kit_name    = ~D5_ABJURER_CM~
+    clab_base_m = ~override/clabma02.2da~
+    unusable    = EVAL ~%usable%~
+    clasweap    = ~0 0 0 0 0 0 0 0~
+    weapprof    = EVAL ~%cm_weapprof%~
+//    abclasrq    = EVAL ~%abjurer_abclsrq%~
+    alignmnt    = EVAL ~%align%~
+    clsrcreq    = EVAL ~%clsrc%~
+    kittable    = EVAL ~%abjurer_CM_kittable%~
+    clswpbon    = ~0 0 3~
+ //   luabbr      = EVAL ~%hla_table%~
+//    stweap      = ~%abjurer_stweap%~
+//    bdstweap    = ~%abjurer_bdstweap%~
+  RET D5_ABJURER_CM = kit_id
+END
+LAF ADD_KIT_EX 
+  INT_VAR
+    kit_class   = 13
+    lower       = %new_mt_lower%
+    mixed       = %new_mt_mixed%
+    help        = %abjurer_help%
+  STR_VAR
+    kit_name    = ~D5_ABJURER_MT~
+    clab_base_m = ~override/clabma02.2da~
+    unusable    = EVAL ~%usable%~
+    clasweap    = ~0 0 0 0 0 0 0 0~
+    weapprof    = EVAL ~%mt_weapprof%~
+//    abclasrq    = EVAL ~%abjurer_abclsrq%~
+    alignmnt    = EVAL ~%align%~
+    clsrcreq    = EVAL ~%clsrc%~
+    kittable    = EVAL ~%abjurer_MT_kittable%~
+    clswpbon    = ~0 0 5~
+ //   luabbr      = EVAL ~%hla_table%~
+//    stweap      = ~%abjurer_stweap%~
+//    bdstweap    = ~%abjurer_bdstweap%~
+  RET D5_ABJURER_MT = kit_id
+END
+
+//____________________________________________________________________________________
+// CONJURER
+
+COPY_EXISTING ~kitlist.2da~ ~override~
+  COUNT_2DA_COLS kitlist_cols
+  READ_2DA_ENTRIES_NOW r2en_kitlist kitlist_cols
+  FOR (row = 1; row < r2en_kitlist; ++row) BEGIN
+    READ_2DA_ENTRY_FORMER r2en_kitlist row 1 kit_name
+    PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~CONJURER~) BEGIN
+      READ_2DA_ENTRY_FORMER r2en_kitlist row 2 lower
+      READ_2DA_ENTRY_FORMER r2en_kitlist row 3 mixed
+      READ_2DA_ENTRY_FORMER r2en_kitlist row 4 help
+      READ_2DA_ENTRY_FORMER r2en_kitlist row 7 usable
+    END
+  END
+BUT_ONLY
+
+ACTION_GET_STRREF %lower% conjurer_lower_string
+OUTER_SET new_fm_lower = RESOLVE_STR_REF (~fighter/%conjurer_lower_string%~)
+OUTER_SET new_cm_lower = RESOLVE_STR_REF (~cleric/%conjurer_lower_string%~)
+OUTER_SET new_mt_lower = RESOLVE_STR_REF (~thief/%conjurer_lower_string%~)
+ACTION_GET_STRREF %mixed% conjurer_mixed_string
+OUTER_SET new_fm_mixed = RESOLVE_STR_REF (~Fighter/%conjurer_mixed_string%~)
+OUTER_SET new_cm_mixed = RESOLVE_STR_REF (~Cleric/%conjurer_mixed_string%~)
+OUTER_SET new_mt_mixed = RESOLVE_STR_REF (~Thief/%conjurer_mixed_string%~)
+OUTER_SET conjurer_help = %help%
+
+OUTER_SPRINT conjurer_FM_kittable ~~
+OUTER_SPRINT conjurer_CM_kittable ~~
+OUTER_SPRINT conjurer_MT_kittable ~~
+COPY_EXISTING ~CLSRCREQ.2da~ ~override~
+  COUNT_2DA_COLS clsrcreq_cols
+  READ_2DA_ENTRIES_NOW r2en_clsrcreq clsrcreq_cols
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 34 1 human_fm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 46 1 human_mt
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 47 1 human_cm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 34 2 elf_fm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 46 2 elf_mt
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 47 2 elf_cm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 34 3 halfelf_fm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 46 3 halfelf_mt
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 47 3 halfelf_cm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 34 4 dwarf_fm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 46 4 dwarf_mt
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 47 4 dwarf_cm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 34 5 halfling_fm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 46 5 halfling_mt
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 47 5 halfling_cm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 34 6 gnome_fm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 46 6 gnome_mt
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 47 6 gnome_cm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 34 7 halforc_fm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 46 7 halforc_mt
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 47 7 halforc_cm
+  PATCH_IF (FILE_CONTAINS_EVALUATED (~K_M_D.2da~ ~[%TAB% ]23[%WNL%%LNL%]~)) BEGIN
+    PATCH_IF (dwarf_fm = 1) BEGIN
+      SPRINT conjurer_FM_kittable ~%conjurer_FM_kittable% K_FM_D~
+    END
+    PATCH_IF (dwarf_cm = 1) BEGIN
+      SPRINT conjurer_CM_kittable ~%conjurer_CM_kittable% K_CM_D~
+    END
+    PATCH_IF (dwarf_mt = 1) BEGIN
+      SPRINT conjurer_MT_kittable ~%conjurer_MT_kittable% K_MT_D~
+    END
+  END
+  PATCH_IF (FILE_CONTAINS_EVALUATED (~K_M_E.2da~ ~[%TAB% ]23[%WNL%%LNL%]~)) BEGIN
+    PATCH_IF (elf_fm = 1) BEGIN
+      SPRINT conjurer_FM_kittable ~%conjurer_FM_kittable% K_FM_E~
+    END
+    PATCH_IF (elf_cm = 1) BEGIN
+      SPRINT conjurer_CM_kittable ~%conjurer_CM_kittable% K_CM_E~
+    END
+    PATCH_IF (elf_mt = 1) BEGIN
+      SPRINT conjurer_MT_kittable ~%conjurer_MT_kittable% K_MT_E~
+    END
+  END
+  PATCH_IF (FILE_CONTAINS_EVALUATED (~K_M_G.2da~ ~[%TAB% ]23[%WNL%%LNL%]~)) BEGIN
+    PATCH_IF (gnome_fm = 1) BEGIN
+      SPRINT conjurer_FM_kittable ~%conjurer_FM_kittable% K_FM_G~
+    END
+    PATCH_IF (gnome_cm = 1) BEGIN
+      SPRINT conjurer_CM_kittable ~%conjurer_CM_kittable% K_CM_G~
+    END
+    PATCH_IF (gnome_mt = 1) BEGIN
+      SPRINT conjurer_MT_kittable ~%conjurer_MT_kittable% K_MT_G~
+    END
+  END
+  PATCH_IF (FILE_CONTAINS_EVALUATED (~K_M_H.2da~ ~[%TAB% ]23[%WNL%%LNL%]~)) BEGIN
+      SPRINT conjurer_FM_kittable ~%conjurer_FM_kittable% K_FM_H~
+      SPRINT conjurer_CM_kittable ~%conjurer_CM_kittable% K_CM_H~
+      SPRINT conjurer_MT_kittable ~%conjurer_MT_kittable% K_MT_H~
+  END
+  PATCH_IF (FILE_CONTAINS_EVALUATED (~K_M_HE.2da~ ~[%TAB% ]23[%WNL%%LNL%]~)) BEGIN
+    PATCH_IF (halfelf_fm = 1) BEGIN
+      SPRINT conjurer_FM_kittable ~%conjurer_FM_kittable% K_FM_HE~
+    END
+    PATCH_IF (halfelf_cm = 1) BEGIN
+      SPRINT conjurer_CM_kittable ~%conjurer_CM_kittable% K_CM_HE~
+    END
+    PATCH_IF (halfelf_mt = 1) BEGIN
+      SPRINT conjurer_MT_kittable ~%conjurer_MT_kittable% K_MT_HE~
+    END
+  END
+  PATCH_IF (FILE_CONTAINS_EVALUATED (~K_M_HL.2da~ ~[%TAB% ]23[%WNL%%LNL%]~)) BEGIN
+    PATCH_IF (halfling_fm = 1) BEGIN
+      SPRINT conjurer_FM_kittable ~%conjurer_FM_kittable% K_FM_HL~
+    END
+    PATCH_IF (halfling_cm = 1) BEGIN
+      SPRINT conjurer_CM_kittable ~%conjurer_CM_kittable% K_CM_HL~
+    END
+    PATCH_IF (halfling_mt = 1) BEGIN
+      SPRINT conjurer_MT_kittable ~%conjurer_MT_kittable% K_MT_HL~
+    END
+  END
+  PATCH_IF (FILE_CONTAINS_EVALUATED (~K_M_HO.2da~ ~[%TAB% ]23[%WNL%%LNL%]~)) BEGIN
+    PATCH_IF (halforc_fm = 1) BEGIN
+      SPRINT conjurer_FM_kittable ~%conjurer_FM_kittable% K_FM_HO~
+    END
+    PATCH_IF (halforc_cm = 1) BEGIN
+      SPRINT conjurer_CM_kittable ~%conjurer_CM_kittable% K_CM_HO~
+    END
+    PATCH_IF (halforc_mt = 1) BEGIN
+      SPRINT conjurer_MT_kittable ~%conjurer_MT_kittable% K_MT_HO~
+    END
+  END
+  FOR (row = 1; row < r2en_clsrcreq;++row) BEGIN
+    READ_2DA_ENTRY_FORMER r2en_clsrcreq row 0 name
+    PATCH_IF (~%name%~ STRING_EQUAL_CASE ~CONJURER~) BEGIN
+      READ_2DA_ENTRY_FORMER r2en_clsrcreq row 1 h_val
+      READ_2DA_ENTRY_FORMER r2en_clsrcreq row 2 e_val
+      READ_2DA_ENTRY_FORMER r2en_clsrcreq row 3 he_val
+      READ_2DA_ENTRY_FORMER r2en_clsrcreq row 4 d_val
+      READ_2DA_ENTRY_FORMER r2en_clsrcreq row 5 g_val
+      READ_2DA_ENTRY_FORMER r2en_clsrcreq row 6 hl_val
+      READ_2DA_ENTRY_FORMER r2en_clsrcreq row 7 ho_val
+      SPRINT clsrc ~%h_val% %e_val% %he_val% %d_val% %g_val% %hl_val% %ho_val%~
+    END
+  END
+BUT_ONLY 
+
+COPY_EXISTING ~alignmnt.2da~ ~override~
+  COUNT_2DA_COLS alignmnt_cols
+  READ_2DA_ENTRIES_NOW r2en_alignmnt alignmnt_cols
+  FOR (row = 1; row < r2en_alignmnt;++row) BEGIN
+    READ_2DA_ENTRY_FORMER r2en_alignmnt row 0 name
+    PATCH_IF (~%name%~ STRING_EQUAL_CASE ~CONJURER~) BEGIN
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 1 l_g
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 2 l_n
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 3 l_e
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 4 n_g
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 5 n_n
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 6 n_e
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 7 c_g
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 8 c_n
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 9 c_e
+      SPRINT align ~%l_g% %l_n% %l_e% %n_g% %n_n% %n_e% %c_g% %c_n% %c_e%~
+    END
+  END
+BUT_ONLY 
+
+/*
+COPY_EXISTING ~luabbr.2da~ ~override~
+  COUNT_2DA_COLS luabbr_cols
+  READ_2DA_ENTRIES_NOW r2en_luabbr luabbr_cols
+  FOR (row = 1; row < 40; ++row) BEGIN
+    READ_2DA_ENTRY_FORMER r2en_alignmnt row 0 name
+    PATCH_IF (~%name%~ STRING_EQUAL_CASE ~CONJURER~) BEGIN
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 1 hla_table
+    END
+  END
+BUT_ONLY 
+*/
+
+ACTION_IF !(FILE_EXISTS ~override/clabma06.2da~) BEGIN
+  COPY_EXISTING ~clabma06.2da~ ~override~
+END
+
+LAF ADD_KIT_EX 
+  INT_VAR
+    kit_class   = 9
+    lower       = %new_fm_lower%
+    mixed       = %new_fm_mixed%
+    help        = %help%
+  STR_VAR
+    kit_name    = ~D5_CONJURER_FM~
+    clab_base_m = ~override/clabma06.2da~
+    unusable    = EVAL ~%usable%~
+    clasweap    = ~0 0 0 0 0 0 0 0~
+    weapprof    = EVAL ~%fm_weapprof%~
+    alignmnt    = EVAL ~%align%~
+    clsrcreq    = EVAL ~%clsrc%~
+    kittable    = EVAL ~%conjurer_FM_kittable%~
+    clswpbon    = ~1 0 2~
+//    luabbr      = EVAL ~%hla_table%~
+  RET D5_CONJURER_FM = kit_id
+END
+LAF ADD_KIT_EX 
+  INT_VAR
+    kit_class   = 14
+    lower       = %new_cm_lower%
+    mixed       = %new_cm_mixed%
+    help        = %help%
+  STR_VAR
+    kit_name    = ~D5_CONJURER_CM~
+    clab_base_m = ~override/clabma06.2da~
+    unusable    = EVAL ~%usable%~
+    clasweap    = ~0 0 0 0 0 0 0 0~
+    weapprof    = EVAL ~%cm_weapprof%~
+    alignmnt    = EVAL ~%align%~
+    clsrcreq    = EVAL ~%clsrc%~
+    kittable    = EVAL ~%conjurer_CM_kittable%~
+    clswpbon    = ~0 0 3~
+//    luabbr      = EVAL ~%hla_table%~
+  RET D5_CONJURER_CM = kit_id
+END
+LAF ADD_KIT_EX 
+  INT_VAR
+    kit_class   = 13
+    lower       = %new_mt_lower%
+    mixed       = %new_mt_mixed%
+    help        = %help%
+  STR_VAR
+    kit_name    = ~D5_CONJURER_MT~
+    clab_base_m = ~override/clabma06.2da~
+    unusable    = EVAL ~%usable%~
+    clasweap    = ~0 0 0 0 0 0 0 0~
+    weapprof    = EVAL ~%mt_weapprof%~
+    alignmnt    = EVAL ~%align%~
+    clsrcreq    = EVAL ~%clsrc%~
+    kittable    = EVAL ~%conjurer_MT_kittable%~
+    clswpbon    = ~0 0 5~
+//    luabbr      = EVAL ~%hla_table%~
+  RET D5_CONJURER_MT = kit_id
+END
+
+//____________________________________________________________________________________
+// DIVINER
+
+COPY_EXISTING ~kitlist.2da~ ~override~
+  COUNT_2DA_COLS kitlist_cols
+  READ_2DA_ENTRIES_NOW r2en_kitlist kitlist_cols
+  FOR (row = 1; row < r2en_kitlist; ++row) BEGIN
+    READ_2DA_ENTRY_FORMER r2en_kitlist row 1 kit_name
+    PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~DIVINER~) BEGIN
+      READ_2DA_ENTRY_FORMER r2en_kitlist row 2 lower
+      READ_2DA_ENTRY_FORMER r2en_kitlist row 3 mixed
+      READ_2DA_ENTRY_FORMER r2en_kitlist row 4 help
+      READ_2DA_ENTRY_FORMER r2en_kitlist row 7 usable
+    END
+  END
+BUT_ONLY
+
+ACTION_GET_STRREF %lower% diviner_lower_string
+OUTER_SET new_fm_lower = RESOLVE_STR_REF (~fighter/%diviner_lower_string%~)
+OUTER_SET new_cm_lower = RESOLVE_STR_REF (~cleric/%diviner_lower_string%~)
+OUTER_SET new_mt_lower = RESOLVE_STR_REF (~thief/%diviner_lower_string%~)
+ACTION_GET_STRREF %mixed% diviner_mixed_string
+OUTER_SET new_fm_mixed = RESOLVE_STR_REF (~Fighter/%diviner_mixed_string%~)
+OUTER_SET new_cm_mixed = RESOLVE_STR_REF (~Cleric/%diviner_mixed_string%~)
+OUTER_SET new_mt_mixed = RESOLVE_STR_REF (~Thief/%diviner_mixed_string%~)
+OUTER_SET diviner_help = %help%
+
+OUTER_SPRINT diviner_FM_kittable ~~
+OUTER_SPRINT diviner_CM_kittable ~~
+OUTER_SPRINT diviner_MT_kittable ~~
+COPY_EXISTING ~CLSRCREQ.2da~ ~override~
+  COUNT_2DA_COLS clsrcreq_cols
+  READ_2DA_ENTRIES_NOW r2en_clsrcreq clsrcreq_cols
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 34 1 human_fm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 46 1 human_mt
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 47 1 human_cm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 34 2 elf_fm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 46 2 elf_mt
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 47 2 elf_cm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 34 3 halfelf_fm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 46 3 halfelf_mt
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 47 3 halfelf_cm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 34 4 dwarf_fm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 46 4 dwarf_mt
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 47 4 dwarf_cm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 34 5 halfling_fm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 46 5 halfling_mt
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 47 5 halfling_cm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 34 6 gnome_fm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 46 6 gnome_mt
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 47 6 gnome_cm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 34 7 halforc_fm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 46 7 halforc_mt
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 47 7 halforc_cm
+  PATCH_IF (FILE_CONTAINS_EVALUATED (~K_M_D.2da~ ~[%TAB% ]24[%WNL%%LNL%]~)) BEGIN
+    PATCH_IF (dwarf_fm = 1) BEGIN
+      SPRINT diviner_FM_kittable ~%diviner_FM_kittable% K_FM_D~
+    END
+    PATCH_IF (dwarf_cm = 1) BEGIN
+      SPRINT diviner_CM_kittable ~%diviner_CM_kittable% K_CM_D~
+    END
+    PATCH_IF (dwarf_mt = 1) BEGIN
+      SPRINT diviner_MT_kittable ~%diviner_MT_kittable% K_MT_D~
+    END
+  END
+  PATCH_IF (FILE_CONTAINS_EVALUATED (~K_M_E.2da~ ~[%TAB% ]24[%WNL%%LNL%]~)) BEGIN
+    PATCH_IF (elf_fm = 1) BEGIN
+      SPRINT diviner_FM_kittable ~%diviner_FM_kittable% K_FM_E~
+    END
+    PATCH_IF (elf_cm = 1) BEGIN
+      SPRINT diviner_CM_kittable ~%diviner_CM_kittable% K_CM_E~
+    END
+    PATCH_IF (elf_mt = 1) BEGIN
+      SPRINT diviner_MT_kittable ~%diviner_MT_kittable% K_MT_E~
+    END
+  END
+  PATCH_IF (FILE_CONTAINS_EVALUATED (~K_M_G.2da~ ~[%TAB% ]24[%WNL%%LNL%]~)) BEGIN
+    PATCH_IF (gnome_fm = 1) BEGIN
+      SPRINT diviner_FM_kittable ~%diviner_FM_kittable% K_FM_G~
+    END
+    PATCH_IF (gnome_cm = 1) BEGIN
+      SPRINT diviner_CM_kittable ~%diviner_CM_kittable% K_CM_G~
+    END
+    PATCH_IF (gnome_mt = 1) BEGIN
+      SPRINT diviner_MT_kittable ~%diviner_MT_kittable% K_MT_G~
+    END
+  END
+  PATCH_IF (FILE_CONTAINS_EVALUATED (~K_M_H.2da~ ~[%TAB% ]24[%WNL%%LNL%]~)) BEGIN
+      SPRINT diviner_FM_kittable ~%diviner_FM_kittable% K_FM_H~
+      SPRINT diviner_CM_kittable ~%diviner_CM_kittable% K_CM_H~
+      SPRINT diviner_MT_kittable ~%diviner_MT_kittable% K_MT_H~
+  END
+  PATCH_IF (FILE_CONTAINS_EVALUATED (~K_M_HE.2da~ ~[%TAB% ]24[%WNL%%LNL%]~)) BEGIN
+    PATCH_IF (halfelf_fm = 1) BEGIN
+      SPRINT diviner_FM_kittable ~%diviner_FM_kittable% K_FM_HE~
+    END
+    PATCH_IF (halfelf_cm = 1) BEGIN
+      SPRINT diviner_CM_kittable ~%diviner_CM_kittable% K_CM_HE~
+    END
+    PATCH_IF (halfelf_mt = 1) BEGIN
+      SPRINT diviner_MT_kittable ~%diviner_MT_kittable% K_MT_HE~
+    END
+  END
+  PATCH_IF (FILE_CONTAINS_EVALUATED (~K_M_HL.2da~ ~[%TAB% ]24[%WNL%%LNL%]~)) BEGIN
+    PATCH_IF (halfling_fm = 1) BEGIN
+      SPRINT diviner_FM_kittable ~%diviner_FM_kittable% K_FM_HL~
+    END
+    PATCH_IF (halfling_cm = 1) BEGIN
+      SPRINT diviner_CM_kittable ~%diviner_CM_kittable% K_CM_HL~
+    END
+    PATCH_IF (halfling_mt = 1) BEGIN
+      SPRINT diviner_MT_kittable ~%diviner_MT_kittable% K_MT_HL~
+    END
+  END
+  PATCH_IF (FILE_CONTAINS_EVALUATED (~K_M_HO.2da~ ~[%TAB% ]24[%WNL%%LNL%]~)) BEGIN
+    PATCH_IF (halforc_fm = 1) BEGIN
+      SPRINT diviner_FM_kittable ~%diviner_FM_kittable% K_FM_HO~
+    END
+    PATCH_IF (halforc_cm = 1) BEGIN
+      SPRINT diviner_CM_kittable ~%diviner_CM_kittable% K_CM_HO~
+    END
+    PATCH_IF (halforc_mt = 1) BEGIN
+      SPRINT diviner_MT_kittable ~%diviner_MT_kittable% K_MT_HO~
+    END
+  END
+  FOR (row = 1; row < r2en_clsrcreq;++row) BEGIN
+    READ_2DA_ENTRY_FORMER r2en_clsrcreq row 0 name
+    PATCH_IF (~%name%~ STRING_EQUAL_CASE ~DIVINER~) BEGIN
+      READ_2DA_ENTRY_FORMER r2en_clsrcreq row 1 h_val
+      READ_2DA_ENTRY_FORMER r2en_clsrcreq row 2 e_val
+      READ_2DA_ENTRY_FORMER r2en_clsrcreq row 3 he_val
+      READ_2DA_ENTRY_FORMER r2en_clsrcreq row 4 d_val
+      READ_2DA_ENTRY_FORMER r2en_clsrcreq row 5 g_val
+      READ_2DA_ENTRY_FORMER r2en_clsrcreq row 6 hl_val
+      READ_2DA_ENTRY_FORMER r2en_clsrcreq row 7 ho_val
+      SPRINT clsrc ~%h_val% %e_val% %he_val% %d_val% %g_val% %hl_val% %ho_val%~
+    END
+  END
+BUT_ONLY 
+
+COPY_EXISTING ~alignmnt.2da~ ~override~
+  COUNT_2DA_COLS alignmnt_cols
+  READ_2DA_ENTRIES_NOW r2en_alignmnt alignmnt_cols
+  FOR (row = 1; row < r2en_alignmnt;++row) BEGIN
+    READ_2DA_ENTRY_FORMER r2en_alignmnt row 0 name
+    PATCH_IF (~%name%~ STRING_EQUAL_CASE ~DIVINER~) BEGIN
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 1 l_g
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 2 l_n
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 3 l_e
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 4 n_g
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 5 n_n
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 6 n_e
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 7 c_g
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 8 c_n
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 9 c_e
+      SPRINT align ~%l_g% %l_n% %l_e% %n_g% %n_n% %n_e% %c_g% %c_n% %c_e%~
+    END
+  END
+BUT_ONLY 
+
+/*
+COPY_EXISTING ~luabbr.2da~ ~override~
+  COUNT_2DA_COLS luabbr_cols
+  READ_2DA_ENTRIES_NOW r2en_luabbr luabbr_cols
+  FOR (row = 1; row < 40; ++row) BEGIN
+    READ_2DA_ENTRY_FORMER r2en_alignmnt row 0 name
+    PATCH_IF (~%name%~ STRING_EQUAL_CASE ~DIVINER~) BEGIN
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 1 hla_table
+    END
+  END
+BUT_ONLY 
+*/
+
+ACTION_IF !(FILE_EXISTS ~override/clabma05.2da~) BEGIN
+  COPY_EXISTING ~clabma05.2da~ ~override~
+END
+
+LAF ADD_KIT_EX 
+  INT_VAR
+    kit_class   = 9
+    lower       = %new_fm_lower%
+    mixed       = %new_fm_mixed%
+    help        = %help%
+  STR_VAR
+    kit_name    = ~D5_DIVINER_FM~
+    clab_base_m = ~override/clabma05.2da~
+    unusable    = EVAL ~%usable%~
+    clasweap    = ~0 0 0 0 0 0 0 0~
+    weapprof    = EVAL ~%fm_weapprof%~
+    alignmnt    = EVAL ~%align%~
+    clsrcreq    = EVAL ~%clsrc%~
+    kittable    = EVAL ~%diviner_FM_kittable%~
+    clswpbon    = ~1 0 2~
+//    luabbr      = EVAL ~%hla_table%~
+  RET D5_DIVINER_FM = kit_id
+END
+LAF ADD_KIT_EX 
+  INT_VAR
+    kit_class   = 14
+    lower       = %new_cm_lower%
+    mixed       = %new_cm_mixed%
+    help        = %help%
+  STR_VAR
+    kit_name    = ~D5_DIVINER_CM~
+    clab_base_m = ~override/clabma05.2da~
+    unusable    = EVAL ~%usable%~
+    clasweap    = ~0 0 0 0 0 0 0 0~
+    weapprof    = EVAL ~%cm_weapprof%~
+    alignmnt    = EVAL ~%align%~
+    clsrcreq    = EVAL ~%clsrc%~
+    kittable    = EVAL ~%diviner_CM_kittable%~
+    clswpbon    = ~0 0 3~
+//    luabbr      = EVAL ~%hla_table%~
+  RET D5_DIVINER_CM = kit_id
+END
+LAF ADD_KIT_EX 
+  INT_VAR
+    kit_class   = 13
+    lower       = %new_mt_lower%
+    mixed       = %new_mt_mixed%
+    help        = %help%
+  STR_VAR
+    kit_name    = ~D5_DIVINER_MT~
+    clab_base_m = ~override/clabma05.2da~
+    unusable    = EVAL ~%usable%~
+    clasweap    = ~0 0 0 0 0 0 0 0~
+    weapprof    = EVAL ~%mt_weapprof%~
+    alignmnt    = EVAL ~%align%~
+    clsrcreq    = EVAL ~%clsrc%~
+    kittable    = EVAL ~%diviner_MT_kittable%~
+    clswpbon    = ~0 0 5~
+//    luabbr      = EVAL ~%hla_table%~
+  RET D5_DIVINER_MT = kit_id
+END
+
+//____________________________________________________________________________________
+// ENCHANTER
+
+COPY_EXISTING ~kitlist.2da~ ~override~
+  COUNT_2DA_COLS kitlist_cols
+  READ_2DA_ENTRIES_NOW r2en_kitlist kitlist_cols
+  FOR (row = 1; row < r2en_kitlist; ++row) BEGIN
+    READ_2DA_ENTRY_FORMER r2en_kitlist row 1 kit_name
+    PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~ENCHANTER~) BEGIN
+      READ_2DA_ENTRY_FORMER r2en_kitlist row 2 lower
+      READ_2DA_ENTRY_FORMER r2en_kitlist row 3 mixed
+      READ_2DA_ENTRY_FORMER r2en_kitlist row 4 help
+      READ_2DA_ENTRY_FORMER r2en_kitlist row 7 usable
+    END
+  END
+BUT_ONLY
+
+ACTION_GET_STRREF %lower% enchanter_lower_string
+OUTER_SET new_fm_lower = RESOLVE_STR_REF (~fighter/%enchanter_lower_string%~)
+OUTER_SET new_cm_lower = RESOLVE_STR_REF (~cleric/%enchanter_lower_string%~)
+OUTER_SET new_mt_lower = RESOLVE_STR_REF (~thief/%enchanter_lower_string%~)
+ACTION_GET_STRREF %mixed% enchanter_mixed_string
+OUTER_SET new_fm_mixed = RESOLVE_STR_REF (~Fighter/%enchanter_mixed_string%~)
+OUTER_SET new_cm_mixed = RESOLVE_STR_REF (~Cleric/%enchanter_mixed_string%~)
+OUTER_SET new_mt_mixed = RESOLVE_STR_REF (~Thief/%enchanter_mixed_string%~)
+OUTER_SET enchanter_help = %help%
+
+OUTER_SPRINT enchanter_FM_kittable ~~
+OUTER_SPRINT enchanter_CM_kittable ~~
+OUTER_SPRINT enchanter_MT_kittable ~~
+COPY_EXISTING ~CLSRCREQ.2da~ ~override~
+  COUNT_2DA_COLS clsrcreq_cols
+  READ_2DA_ENTRIES_NOW r2en_clsrcreq clsrcreq_cols
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 34 1 human_fm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 46 1 human_mt
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 47 1 human_cm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 34 2 elf_fm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 46 2 elf_mt
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 47 2 elf_cm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 34 3 halfelf_fm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 46 3 halfelf_mt
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 47 3 halfelf_cm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 34 4 dwarf_fm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 46 4 dwarf_mt
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 47 4 dwarf_cm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 34 5 halfling_fm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 46 5 halfling_mt
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 47 5 halfling_cm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 34 6 gnome_fm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 46 6 gnome_mt
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 47 6 gnome_cm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 34 7 halforc_fm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 46 7 halforc_mt
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 47 7 halforc_cm
+  PATCH_IF (FILE_CONTAINS_EVALUATED (~K_M_D.2da~ ~[%TAB% ]25[%WNL%%LNL%]~)) BEGIN
+    PATCH_IF (dwarf_fm = 1) BEGIN
+      SPRINT enchanter_FM_kittable ~%enchanter_FM_kittable% K_FM_D~
+    END
+    PATCH_IF (dwarf_cm = 1) BEGIN
+      SPRINT enchanter_CM_kittable ~%enchanter_CM_kittable% K_CM_D~
+    END
+    PATCH_IF (dwarf_mt = 1) BEGIN
+      SPRINT enchanter_MT_kittable ~%enchanter_MT_kittable% K_MT_D~
+    END
+  END
+  PATCH_IF (FILE_CONTAINS_EVALUATED (~K_M_E.2da~ ~[%TAB% ]25[%WNL%%LNL%]~)) BEGIN
+    PATCH_IF (elf_fm = 1) BEGIN
+      SPRINT enchanter_FM_kittable ~%enchanter_FM_kittable% K_FM_E~
+    END
+    PATCH_IF (elf_cm = 1) BEGIN
+      SPRINT enchanter_CM_kittable ~%enchanter_CM_kittable% K_CM_E~
+    END
+    PATCH_IF (elf_mt = 1) BEGIN
+      SPRINT enchanter_MT_kittable ~%enchanter_MT_kittable% K_MT_E~
+    END
+  END
+  PATCH_IF (FILE_CONTAINS_EVALUATED (~K_M_G.2da~ ~[%TAB% ]25[%WNL%%LNL%]~)) BEGIN
+    PATCH_IF (gnome_fm = 1) BEGIN
+      SPRINT enchanter_FM_kittable ~%enchanter_FM_kittable% K_FM_G~
+    END
+    PATCH_IF (gnome_cm = 1) BEGIN
+      SPRINT enchanter_CM_kittable ~%enchanter_CM_kittable% K_CM_G~
+    END
+    PATCH_IF (gnome_mt = 1) BEGIN
+      SPRINT enchanter_MT_kittable ~%enchanter_MT_kittable% K_MT_G~
+    END
+  END
+  PATCH_IF (FILE_CONTAINS_EVALUATED (~K_M_H.2da~ ~[%TAB% ]25[%WNL%%LNL%]~)) BEGIN
+      SPRINT enchanter_FM_kittable ~%enchanter_FM_kittable% K_FM_H~
+      SPRINT enchanter_CM_kittable ~%enchanter_CM_kittable% K_CM_H~
+      SPRINT enchanter_MT_kittable ~%enchanter_MT_kittable% K_MT_H~
+  END
+  PATCH_IF (FILE_CONTAINS_EVALUATED (~K_M_HE.2da~ ~[%TAB% ]25[%WNL%%LNL%]~)) BEGIN
+    PATCH_IF (halfelf_fm = 1) BEGIN
+      SPRINT enchanter_FM_kittable ~%enchanter_FM_kittable% K_FM_HE~
+    END
+    PATCH_IF (halfelf_cm = 1) BEGIN
+      SPRINT enchanter_CM_kittable ~%enchanter_CM_kittable% K_CM_HE~
+    END
+    PATCH_IF (halfelf_mt = 1) BEGIN
+      SPRINT enchanter_MT_kittable ~%enchanter_MT_kittable% K_MT_HE~
+    END
+  END
+  PATCH_IF (FILE_CONTAINS_EVALUATED (~K_M_HL.2da~ ~[%TAB% ]25[%WNL%%LNL%]~)) BEGIN
+    PATCH_IF (halfling_fm = 1) BEGIN
+      SPRINT enchanter_FM_kittable ~%enchanter_FM_kittable% K_FM_HL~
+    END
+    PATCH_IF (halfling_cm = 1) BEGIN
+      SPRINT enchanter_CM_kittable ~%enchanter_CM_kittable% K_CM_HL~
+    END
+    PATCH_IF (halfling_mt = 1) BEGIN
+      SPRINT enchanter_MT_kittable ~%enchanter_MT_kittable% K_MT_HL~
+    END
+  END
+  PATCH_IF (FILE_CONTAINS_EVALUATED (~K_M_HO.2da~ ~[%TAB% ]25[%WNL%%LNL%]~)) BEGIN
+    PATCH_IF (halforc_fm = 1) BEGIN
+      SPRINT enchanter_FM_kittable ~%enchanter_FM_kittable% K_FM_HO~
+    END
+    PATCH_IF (halforc_cm = 1) BEGIN
+      SPRINT enchanter_CM_kittable ~%enchanter_CM_kittable% K_CM_HO~
+    END
+    PATCH_IF (halforc_mt = 1) BEGIN
+      SPRINT enchanter_MT_kittable ~%enchanter_MT_kittable% K_MT_HO~
+    END
+  END
+  FOR (row = 1; row < r2en_clsrcreq;++row) BEGIN
+    READ_2DA_ENTRY_FORMER r2en_clsrcreq row 0 name
+    PATCH_IF (~%name%~ STRING_EQUAL_CASE ~ENCHANTER~) BEGIN
+      READ_2DA_ENTRY_FORMER r2en_clsrcreq row 1 h_val
+      READ_2DA_ENTRY_FORMER r2en_clsrcreq row 2 e_val
+      READ_2DA_ENTRY_FORMER r2en_clsrcreq row 3 he_val
+      READ_2DA_ENTRY_FORMER r2en_clsrcreq row 4 d_val
+      READ_2DA_ENTRY_FORMER r2en_clsrcreq row 5 g_val
+      READ_2DA_ENTRY_FORMER r2en_clsrcreq row 6 hl_val
+      READ_2DA_ENTRY_FORMER r2en_clsrcreq row 7 ho_val
+      SPRINT clsrc ~%h_val% %e_val% %he_val% %d_val% %g_val% %hl_val% %ho_val%~
+    END
+  END
+BUT_ONLY 
+
+COPY_EXISTING ~alignmnt.2da~ ~override~
+  COUNT_2DA_COLS alignmnt_cols
+  READ_2DA_ENTRIES_NOW r2en_alignmnt alignmnt_cols
+  FOR (row = 1; row < r2en_alignmnt;++row) BEGIN
+    READ_2DA_ENTRY_FORMER r2en_alignmnt row 0 name
+    PATCH_IF (~%name%~ STRING_EQUAL_CASE ~ENCHANTER~) BEGIN
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 1 l_g
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 2 l_n
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 3 l_e
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 4 n_g
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 5 n_n
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 6 n_e
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 7 c_g
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 8 c_n
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 9 c_e
+      SPRINT align ~%l_g% %l_n% %l_e% %n_g% %n_n% %n_e% %c_g% %c_n% %c_e%~
+    END
+  END
+BUT_ONLY 
+
+/*
+COPY_EXISTING ~luabbr.2da~ ~override~
+  COUNT_2DA_COLS luabbr_cols
+  READ_2DA_ENTRIES_NOW r2en_luabbr luabbr_cols
+  FOR (row = 1; row < 40; ++row) BEGIN
+    READ_2DA_ENTRY_FORMER r2en_alignmnt row 0 name
+    PATCH_IF (~%name%~ STRING_EQUAL_CASE ~ENCHANTER~) BEGIN
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 1 hla_table
+    END
+  END
+BUT_ONLY 
+*/
+
+ACTION_IF !(FILE_EXISTS ~override/clabma09.2da~) BEGIN
+  COPY_EXISTING ~clabma09.2da~ ~override~
+END
+
+LAF ADD_KIT_EX 
+  INT_VAR
+    kit_class   = 9
+    lower       = %new_fm_lower%
+    mixed       = %new_fm_mixed%
+    help        = %help%
+  STR_VAR
+    kit_name    = ~D5_ENCHANTER_FM~
+    clab_base_m = ~override/clabma09.2da~
+    unusable    = EVAL ~%usable%~
+    clasweap    = ~0 0 0 0 0 0 0 0~
+    weapprof    = EVAL ~%fm_weapprof%~
+    alignmnt    = EVAL ~%align%~
+    clsrcreq    = EVAL ~%clsrc%~
+    kittable    = EVAL ~%enchanter_FM_kittable%~
+    clswpbon    = ~1 0 2~
+//    luabbr      = EVAL ~%hla_table%~
+  RET D5_ENCHANTER_FM = kit_id
+END
+LAF ADD_KIT_EX 
+  INT_VAR
+    kit_class   = 14
+    lower       = %new_cm_lower%
+    mixed       = %new_cm_mixed%
+    help        = %help%
+  STR_VAR
+    kit_name    = ~D5_ENCHANTER_CM~
+    clab_base_m = ~override/clabma09.2da~
+    unusable    = EVAL ~%usable%~
+    clasweap    = ~0 0 0 0 0 0 0 0~
+    weapprof    = EVAL ~%cm_weapprof%~
+    alignmnt    = EVAL ~%align%~
+    clsrcreq    = EVAL ~%clsrc%~
+    kittable    = EVAL ~%enchanter_CM_kittable%~
+    clswpbon    = ~0 0 3~
+//    luabbr      = EVAL ~%hla_table%~
+  RET D5_ENCHANTER_CM = kit_id
+END
+LAF ADD_KIT_EX 
+  INT_VAR
+    kit_class   = 13
+    lower       = %new_mt_lower%
+    mixed       = %new_mt_mixed%
+    help        = %help%
+  STR_VAR
+    kit_name    = ~D5_ENCHANTER_MT~
+    clab_base_m = ~override/clabma09.2da~
+    unusable    = EVAL ~%usable%~
+    clasweap    = ~0 0 0 0 0 0 0 0~
+    weapprof    = EVAL ~%mt_weapprof%~
+    alignmnt    = EVAL ~%align%~
+    clsrcreq    = EVAL ~%clsrc%~
+    kittable    = EVAL ~%enchanter_MT_kittable%~
+    clswpbon    = ~0 0 5~
+//    luabbr      = EVAL ~%hla_table%~
+  RET D5_ENCHANTER_MT = kit_id
+END
+
+//____________________________________________________________________________________
+// ILLUSIONIST
+
+COPY_EXISTING ~kitlist.2da~ ~override~
+  COUNT_2DA_COLS kitlist_cols
+  READ_2DA_ENTRIES_NOW r2en_kitlist kitlist_cols
+  FOR (row = 1; row < r2en_kitlist; ++row) BEGIN
+    READ_2DA_ENTRY_FORMER r2en_kitlist row 1 kit_name
+    PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~ILLUSIONIST~) BEGIN
+      READ_2DA_ENTRY_FORMER r2en_kitlist row 2 lower
+      READ_2DA_ENTRY_FORMER r2en_kitlist row 3 mixed
+      READ_2DA_ENTRY_FORMER r2en_kitlist row 4 help
+      READ_2DA_ENTRY_FORMER r2en_kitlist row 7 usable
+    END
+  END
+BUT_ONLY
+
+ACTION_GET_STRREF %lower% illusionist_lower_string
+OUTER_SET new_fm_lower = RESOLVE_STR_REF (~fighter/%illusionist_lower_string%~)
+OUTER_SET new_cm_lower = RESOLVE_STR_REF (~cleric/%illusionist_lower_string%~)
+OUTER_SET new_mt_lower = RESOLVE_STR_REF (~thief/%illusionist_lower_string%~)
+ACTION_GET_STRREF %mixed% illusionist_mixed_string
+OUTER_SET new_fm_mixed = RESOLVE_STR_REF (~Fighter/%illusionist_mixed_string%~)
+OUTER_SET new_cm_mixed = RESOLVE_STR_REF (~Cleric/%illusionist_mixed_string%~)
+OUTER_SET new_mt_mixed = RESOLVE_STR_REF (~Thief/%illusionist_mixed_string%~)
+OUTER_SET illusionist_help = %help%
+
+OUTER_SPRINT illusionist_FM_kittable ~~
+OUTER_SPRINT illusionist_CM_kittable ~~
+OUTER_SPRINT illusionist_MT_kittable ~~
+COPY_EXISTING ~CLSRCREQ.2da~ ~override~
+  COUNT_2DA_COLS clsrcreq_cols
+  READ_2DA_ENTRIES_NOW r2en_clsrcreq clsrcreq_cols
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 34 1 human_fm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 46 1 human_mt
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 47 1 human_cm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 34 2 elf_fm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 46 2 elf_mt
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 47 2 elf_cm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 34 3 halfelf_fm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 46 3 halfelf_mt
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 47 3 halfelf_cm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 34 4 dwarf_fm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 46 4 dwarf_mt
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 47 4 dwarf_cm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 34 5 halfling_fm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 46 5 halfling_mt
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 47 5 halfling_cm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 34 6 gnome_fm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 46 6 gnome_mt
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 47 6 gnome_cm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 34 7 halforc_fm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 46 7 halforc_mt
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 47 7 halforc_cm
+  PATCH_IF (FILE_CONTAINS_EVALUATED (~K_M_D.2da~ ~[%TAB% ]26[%WNL%%LNL%]~)) BEGIN
+    PATCH_IF (dwarf_fm = 1) BEGIN
+      SPRINT illusionist_FM_kittable ~%illusionist_FM_kittable% K_FM_D~
+    END
+    PATCH_IF (dwarf_cm = 1) BEGIN
+      SPRINT illusionist_CM_kittable ~%illusionist_CM_kittable% K_CM_D~
+    END
+    PATCH_IF (dwarf_mt = 1) BEGIN
+      SPRINT illusionist_MT_kittable ~%illusionist_MT_kittable% K_MT_D~
+    END
+  END
+  PATCH_IF (FILE_CONTAINS_EVALUATED (~K_M_E.2da~ ~[%TAB% ]26[%WNL%%LNL%]~)) BEGIN
+    PATCH_IF (elf_fm = 1) BEGIN
+      SPRINT illusionist_FM_kittable ~%illusionist_FM_kittable% K_FM_E~
+    END
+    PATCH_IF (elf_cm = 1) BEGIN
+      SPRINT illusionist_CM_kittable ~%illusionist_CM_kittable% K_CM_E~
+    END
+    PATCH_IF (elf_mt = 1) BEGIN
+      SPRINT illusionist_MT_kittable ~%illusionist_MT_kittable% K_MT_E~
+    END
+  END
+  PATCH_IF (FILE_CONTAINS_EVALUATED (~K_M_G.2da~ ~[%TAB% ]26[%WNL%%LNL%]~)) BEGIN
+    PATCH_IF (gnome_fm = 1) BEGIN
+      SPRINT illusionist_FM_kittable ~%illusionist_FM_kittable% K_FM_G~
+    END
+    PATCH_IF (gnome_cm = 1) BEGIN
+      SPRINT illusionist_CM_kittable ~%illusionist_CM_kittable% K_CM_G~
+    END
+    PATCH_IF (gnome_mt = 1) BEGIN
+      SPRINT illusionist_MT_kittable ~%illusionist_MT_kittable% K_MT_G~
+    END
+  END
+  PATCH_IF (FILE_CONTAINS_EVALUATED (~K_M_H.2da~ ~[%TAB% ]26[%WNL%%LNL%]~)) BEGIN
+      SPRINT illusionist_FM_kittable ~%illusionist_FM_kittable% K_FM_H~
+      SPRINT illusionist_CM_kittable ~%illusionist_CM_kittable% K_CM_H~
+      SPRINT illusionist_MT_kittable ~%illusionist_MT_kittable% K_MT_H~
+  END
+  PATCH_IF (FILE_CONTAINS_EVALUATED (~K_M_HE.2da~ ~[%TAB% ]26[%WNL%%LNL%]~)) BEGIN
+    PATCH_IF (halfelf_fm = 1) BEGIN
+      SPRINT illusionist_FM_kittable ~%illusionist_FM_kittable% K_FM_HE~
+    END
+    PATCH_IF (halfelf_cm = 1) BEGIN
+      SPRINT illusionist_CM_kittable ~%illusionist_CM_kittable% K_CM_HE~
+    END
+    PATCH_IF (halfelf_mt = 1) BEGIN
+      SPRINT illusionist_MT_kittable ~%illusionist_MT_kittable% K_MT_HE~
+    END
+  END
+  PATCH_IF (FILE_CONTAINS_EVALUATED (~K_M_HL.2da~ ~[%TAB% ]26[%WNL%%LNL%]~)) BEGIN
+    PATCH_IF (halfling_fm = 1) BEGIN
+      SPRINT illusionist_FM_kittable ~%illusionist_FM_kittable% K_FM_HL~
+    END
+    PATCH_IF (halfling_cm = 1) BEGIN
+      SPRINT illusionist_CM_kittable ~%illusionist_CM_kittable% K_CM_HL~
+    END
+    PATCH_IF (halfling_mt = 1) BEGIN
+      SPRINT illusionist_MT_kittable ~%illusionist_MT_kittable% K_MT_HL~
+    END
+  END
+  PATCH_IF (FILE_CONTAINS_EVALUATED (~K_M_HO.2da~ ~[%TAB% ]26[%WNL%%LNL%]~)) BEGIN
+    PATCH_IF (halforc_fm = 1) BEGIN
+      SPRINT illusionist_FM_kittable ~%illusionist_FM_kittable% K_FM_HO~
+    END
+    PATCH_IF (halforc_cm = 1) BEGIN
+      SPRINT illusionist_CM_kittable ~%illusionist_CM_kittable% K_CM_HO~
+    END
+    PATCH_IF (halforc_mt = 1) BEGIN
+      SPRINT illusionist_MT_kittable ~%illusionist_MT_kittable% K_MT_HO~
+    END
+  END
+  FOR (row = 1; row < r2en_clsrcreq;++row) BEGIN
+    READ_2DA_ENTRY_FORMER r2en_clsrcreq row 0 name
+    PATCH_IF (~%name%~ STRING_EQUAL_CASE ~ILLUSIONIST~) BEGIN
+      READ_2DA_ENTRY_FORMER r2en_clsrcreq row 1 h_val
+      READ_2DA_ENTRY_FORMER r2en_clsrcreq row 2 e_val
+      READ_2DA_ENTRY_FORMER r2en_clsrcreq row 3 he_val
+      READ_2DA_ENTRY_FORMER r2en_clsrcreq row 4 d_val
+      READ_2DA_ENTRY_FORMER r2en_clsrcreq row 5 g_val
+      READ_2DA_ENTRY_FORMER r2en_clsrcreq row 6 hl_val
+      READ_2DA_ENTRY_FORMER r2en_clsrcreq row 7 ho_val
+      SPRINT clsrc ~%h_val% %e_val% %he_val% %d_val% %g_val% %hl_val% %ho_val%~
+    END
+  END
+BUT_ONLY 
+
+COPY_EXISTING ~alignmnt.2da~ ~override~
+  COUNT_2DA_COLS alignmnt_cols
+  READ_2DA_ENTRIES_NOW r2en_alignmnt alignmnt_cols
+  FOR (row = 1; row < r2en_alignmnt;++row) BEGIN
+    READ_2DA_ENTRY_FORMER r2en_alignmnt row 0 name
+    PATCH_IF (~%name%~ STRING_EQUAL_CASE ~ILLUSIONIST~) BEGIN
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 1 l_g
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 2 l_n
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 3 l_e
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 4 n_g
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 5 n_n
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 6 n_e
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 7 c_g
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 8 c_n
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 9 c_e
+      SPRINT align ~%l_g% %l_n% %l_e% %n_g% %n_n% %n_e% %c_g% %c_n% %c_e%~
+    END
+  END
+BUT_ONLY 
+
+/*
+COPY_EXISTING ~luabbr.2da~ ~override~
+  COUNT_2DA_COLS luabbr_cols
+  READ_2DA_ENTRIES_NOW r2en_luabbr luabbr_cols
+  FOR (row = 1; row < 40; ++row) BEGIN
+    READ_2DA_ENTRY_FORMER r2en_alignmnt row 0 name
+    PATCH_IF (~%name%~ STRING_EQUAL_CASE ~ILLUSIONIST~) BEGIN
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 1 hla_table
+    END
+  END
+BUT_ONLY 
+*/
+
+ACTION_IF !(FILE_EXISTS ~override/clabma08.2da~) BEGIN
+  COPY_EXISTING ~clabma08.2da~ ~override~
+END
+
+LAF ADD_KIT_EX 
+  INT_VAR
+    kit_class   = 9
+    lower       = %new_fm_lower%
+    mixed       = %new_fm_mixed%
+    help        = %help%
+  STR_VAR
+    kit_name    = ~D5_ILLUSIONIST_FM~
+    clab_base_m = ~override/clabma08.2da~
+    unusable    = EVAL ~%usable%~
+    clasweap    = ~0 0 0 0 0 0 0 0~
+    weapprof    = EVAL ~%fm_weapprof%~
+    alignmnt    = EVAL ~%align%~
+    clsrcreq    = EVAL ~%clsrc%~
+    kittable    = EVAL ~%illusionist_FM_kittable%~
+    clswpbon    = ~1 0 2~
+//    luabbr      = EVAL ~%hla_table%~
+  RET D5_ILLUSIONIST_FM = kit_id
+END
+LAF ADD_KIT_EX 
+  INT_VAR
+    kit_class   = 14
+    lower       = %new_cm_lower%
+    mixed       = %new_cm_mixed%
+    help        = %help%
+  STR_VAR
+    kit_name    = ~D5_ILLUSIONIST_CM~
+    clab_base_m = ~override/clabma08.2da~
+    unusable    = EVAL ~%usable%~
+    clasweap    = ~0 0 0 0 0 0 0 0~
+    weapprof    = EVAL ~%cm_weapprof%~
+    alignmnt    = EVAL ~%align%~
+    clsrcreq    = EVAL ~%clsrc%~
+    kittable    = EVAL ~%illusionist_CM_kittable%~
+    clswpbon    = ~0 0 3~
+//    luabbr      = EVAL ~%hla_table%~
+  RET D5_ILLUSIONIST_CM = kit_id
+END
+LAF ADD_KIT_EX 
+  INT_VAR
+    kit_class   = 13
+    lower       = %new_mt_lower%
+    mixed       = %new_mt_mixed%
+    help        = %help%
+  STR_VAR
+    kit_name    = ~D5_ILLUSIONIST_MT~
+    clab_base_m = ~override/clabma08.2da~
+    unusable    = EVAL ~%usable%~
+    clasweap    = ~0 0 0 0 0 0 0 0~
+    weapprof    = EVAL ~%mt_weapprof%~
+    alignmnt    = EVAL ~%align%~
+    clsrcreq    = EVAL ~%clsrc%~
+    kittable    = EVAL ~%illusionist_MT_kittable%~
+    clswpbon    = ~0 0 5~
+//    luabbr      = EVAL ~%hla_table%~
+  RET D5_ILLUSIONIST_MT = kit_id
+END
+
+//____________________________________________________________________________________
+// INVOKER
+
+COPY_EXISTING ~kitlist.2da~ ~override~
+  COUNT_2DA_COLS kitlist_cols
+  READ_2DA_ENTRIES_NOW r2en_kitlist kitlist_cols
+  FOR (row = 1; row < r2en_kitlist; ++row) BEGIN
+    READ_2DA_ENTRY_FORMER r2en_kitlist row 1 kit_name
+    PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~INVOKER~) BEGIN
+      READ_2DA_ENTRY_FORMER r2en_kitlist row 2 lower
+      READ_2DA_ENTRY_FORMER r2en_kitlist row 3 mixed
+      READ_2DA_ENTRY_FORMER r2en_kitlist row 4 help
+      READ_2DA_ENTRY_FORMER r2en_kitlist row 7 usable
+    END
+  END
+BUT_ONLY
+
+ACTION_GET_STRREF %lower% invoker_lower_string
+OUTER_SET new_fm_lower = RESOLVE_STR_REF (~fighter/%invoker_lower_string%~)
+OUTER_SET new_cm_lower = RESOLVE_STR_REF (~cleric/%invoker_lower_string%~)
+OUTER_SET new_mt_lower = RESOLVE_STR_REF (~thief/%invoker_lower_string%~)
+ACTION_GET_STRREF %mixed% invoker_mixed_string
+OUTER_SET new_fm_mixed = RESOLVE_STR_REF (~Fighter/%invoker_mixed_string%~)
+OUTER_SET new_cm_mixed = RESOLVE_STR_REF (~Cleric/%invoker_mixed_string%~)
+OUTER_SET new_mt_mixed = RESOLVE_STR_REF (~Thief/%invoker_mixed_string%~)
+OUTER_SET invoker_help = %help%
+
+OUTER_SPRINT invoker_FM_kittable ~~
+OUTER_SPRINT invoker_CM_kittable ~~
+OUTER_SPRINT invoker_MT_kittable ~~
+COPY_EXISTING ~CLSRCREQ.2da~ ~override~
+  COUNT_2DA_COLS clsrcreq_cols
+  READ_2DA_ENTRIES_NOW r2en_clsrcreq clsrcreq_cols
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 34 1 human_fm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 46 1 human_mt
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 47 1 human_cm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 34 2 elf_fm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 46 2 elf_mt
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 47 2 elf_cm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 34 3 halfelf_fm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 46 3 halfelf_mt
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 47 3 halfelf_cm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 34 4 dwarf_fm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 46 4 dwarf_mt
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 47 4 dwarf_cm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 34 5 halfling_fm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 46 5 halfling_mt
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 47 5 halfling_cm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 34 6 gnome_fm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 46 6 gnome_mt
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 47 6 gnome_cm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 34 7 halforc_fm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 46 7 halforc_mt
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 47 7 halforc_cm
+  PATCH_IF (FILE_CONTAINS_EVALUATED (~K_M_D.2da~ ~[%TAB% ]27[%WNL%%LNL%]~)) BEGIN
+    PATCH_IF (dwarf_fm = 1) BEGIN
+      SPRINT invoker_FM_kittable ~%invoker_FM_kittable% K_FM_D~
+    END
+    PATCH_IF (dwarf_cm = 1) BEGIN
+      SPRINT invoker_CM_kittable ~%invoker_CM_kittable% K_CM_D~
+    END
+    PATCH_IF (dwarf_mt = 1) BEGIN
+      SPRINT invoker_MT_kittable ~%invoker_MT_kittable% K_MT_D~
+    END
+  END
+  PATCH_IF (FILE_CONTAINS_EVALUATED (~K_M_E.2da~ ~[%TAB% ]27[%WNL%%LNL%]~)) BEGIN
+    PATCH_IF (elf_fm = 1) BEGIN
+      SPRINT invoker_FM_kittable ~%invoker_FM_kittable% K_FM_E~
+    END
+    PATCH_IF (elf_cm = 1) BEGIN
+      SPRINT invoker_CM_kittable ~%invoker_CM_kittable% K_CM_E~
+    END
+    PATCH_IF (elf_mt = 1) BEGIN
+      SPRINT invoker_MT_kittable ~%invoker_MT_kittable% K_MT_E~
+    END
+  END
+  PATCH_IF (FILE_CONTAINS_EVALUATED (~K_M_G.2da~ ~[%TAB% ]27[%WNL%%LNL%]~)) BEGIN
+    PATCH_IF (gnome_fm = 1) BEGIN
+      SPRINT invoker_FM_kittable ~%invoker_FM_kittable% K_FM_G~
+    END
+    PATCH_IF (gnome_cm = 1) BEGIN
+      SPRINT invoker_CM_kittable ~%invoker_CM_kittable% K_CM_G~
+    END
+    PATCH_IF (gnome_mt = 1) BEGIN
+      SPRINT invoker_MT_kittable ~%invoker_MT_kittable% K_MT_G~
+    END
+  END
+  PATCH_IF (FILE_CONTAINS_EVALUATED (~K_M_H.2da~ ~[%TAB% ]27[%WNL%%LNL%]~)) BEGIN
+      SPRINT invoker_FM_kittable ~%invoker_FM_kittable% K_FM_H~
+      SPRINT invoker_CM_kittable ~%invoker_CM_kittable% K_CM_H~
+      SPRINT invoker_MT_kittable ~%invoker_MT_kittable% K_MT_H~
+  END
+  PATCH_IF (FILE_CONTAINS_EVALUATED (~K_M_HE.2da~ ~[%TAB% ]27[%WNL%%LNL%]~)) BEGIN
+    PATCH_IF (halfelf_fm = 1) BEGIN
+      SPRINT invoker_FM_kittable ~%invoker_FM_kittable% K_FM_HE~
+    END
+    PATCH_IF (halfelf_cm = 1) BEGIN
+      SPRINT invoker_CM_kittable ~%invoker_CM_kittable% K_CM_HE~
+    END
+    PATCH_IF (halfelf_mt = 1) BEGIN
+      SPRINT invoker_MT_kittable ~%invoker_MT_kittable% K_MT_HE~
+    END
+  END
+  PATCH_IF (FILE_CONTAINS_EVALUATED (~K_M_HL.2da~ ~[%TAB% ]27[%WNL%%LNL%]~)) BEGIN
+    PATCH_IF (halfling_fm = 1) BEGIN
+      SPRINT invoker_FM_kittable ~%invoker_FM_kittable% K_FM_HL~
+    END
+    PATCH_IF (halfling_cm = 1) BEGIN
+      SPRINT invoker_CM_kittable ~%invoker_CM_kittable% K_CM_HL~
+    END
+    PATCH_IF (halfling_mt = 1) BEGIN
+      SPRINT invoker_MT_kittable ~%invoker_MT_kittable% K_MT_HL~
+    END
+  END
+  PATCH_IF (FILE_CONTAINS_EVALUATED (~K_M_HO.2da~ ~[%TAB% ]27[%WNL%%LNL%]~)) BEGIN
+    PATCH_IF (halforc_fm = 1) BEGIN
+      SPRINT invoker_FM_kittable ~%invoker_FM_kittable% K_FM_HO~
+    END
+    PATCH_IF (halforc_cm = 1) BEGIN
+      SPRINT invoker_CM_kittable ~%invoker_CM_kittable% K_CM_HO~
+    END
+    PATCH_IF (halforc_mt = 1) BEGIN
+      SPRINT invoker_MT_kittable ~%invoker_MT_kittable% K_MT_HO~
+    END
+  END
+  FOR (row = 1; row < r2en_clsrcreq;++row) BEGIN
+    READ_2DA_ENTRY_FORMER r2en_clsrcreq row 0 name
+    PATCH_IF (~%name%~ STRING_EQUAL_CASE ~INVOKER~) BEGIN
+      READ_2DA_ENTRY_FORMER r2en_clsrcreq row 1 h_val
+      READ_2DA_ENTRY_FORMER r2en_clsrcreq row 2 e_val
+      READ_2DA_ENTRY_FORMER r2en_clsrcreq row 3 he_val
+      READ_2DA_ENTRY_FORMER r2en_clsrcreq row 4 d_val
+      READ_2DA_ENTRY_FORMER r2en_clsrcreq row 5 g_val
+      READ_2DA_ENTRY_FORMER r2en_clsrcreq row 6 hl_val
+      READ_2DA_ENTRY_FORMER r2en_clsrcreq row 7 ho_val
+      SPRINT clsrc ~%h_val% %e_val% %he_val% %d_val% %g_val% %hl_val% %ho_val%~
+    END
+  END
+BUT_ONLY 
+
+COPY_EXISTING ~alignmnt.2da~ ~override~
+  COUNT_2DA_COLS alignmnt_cols
+  READ_2DA_ENTRIES_NOW r2en_alignmnt alignmnt_cols
+  FOR (row = 1; row < r2en_alignmnt;++row) BEGIN
+    READ_2DA_ENTRY_FORMER r2en_alignmnt row 0 name
+    PATCH_IF (~%name%~ STRING_EQUAL_CASE ~INVOKER~) BEGIN
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 1 l_g
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 2 l_n
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 3 l_e
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 4 n_g
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 5 n_n
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 6 n_e
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 7 c_g
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 8 c_n
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 9 c_e
+      SPRINT align ~%l_g% %l_n% %l_e% %n_g% %n_n% %n_e% %c_g% %c_n% %c_e%~
+    END
+  END
+BUT_ONLY 
+
+/*
+COPY_EXISTING ~luabbr.2da~ ~override~
+  COUNT_2DA_COLS luabbr_cols
+  READ_2DA_ENTRIES_NOW r2en_luabbr luabbr_cols
+  FOR (row = 1; row < 40; ++row) BEGIN
+    READ_2DA_ENTRY_FORMER r2en_alignmnt row 0 name
+    PATCH_IF (~%name%~ STRING_EQUAL_CASE ~INVOKER~) BEGIN
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 1 hla_table
+    END
+  END
+BUT_ONLY 
+*/
+
+ACTION_IF !(FILE_EXISTS ~override/clabma07.2da~) BEGIN
+  COPY_EXISTING ~clabma07.2da~ ~override~
+END
+
+LAF ADD_KIT_EX 
+  INT_VAR
+    kit_class   = 9
+    lower       = %new_fm_lower%
+    mixed       = %new_fm_mixed%
+    help        = %help%
+  STR_VAR
+    kit_name    = ~D5_INVOKER_FM~
+    clab_base_m = ~override/clabma07.2da~
+    unusable    = EVAL ~%usable%~
+    clasweap    = ~0 0 0 0 0 0 0 0~
+    weapprof    = EVAL ~%fm_weapprof%~
+    alignmnt    = EVAL ~%align%~
+    clsrcreq    = EVAL ~%clsrc%~
+    kittable    = EVAL ~%invoker_FM_kittable%~
+    clswpbon    = ~1 0 2~
+//    luabbr      = EVAL ~%hla_table%~
+  RET D5_INVOKER_FM = kit_id
+END
+LAF ADD_KIT_EX 
+  INT_VAR
+    kit_class   = 14
+    lower       = %new_cm_lower%
+    mixed       = %new_cm_mixed%
+    help        = %help%
+  STR_VAR
+    kit_name    = ~D5_INVOKER_CM~
+    clab_base_m = ~override/clabma07.2da~
+    unusable    = EVAL ~%usable%~
+    clasweap    = ~0 0 0 0 0 0 0 0~
+    weapprof    = EVAL ~%cm_weapprof%~
+    alignmnt    = EVAL ~%align%~
+    clsrcreq    = EVAL ~%clsrc%~
+    kittable    = EVAL ~%invoker_CM_kittable%~
+    clswpbon    = ~0 0 3~
+//    luabbr      = EVAL ~%hla_table%~
+  RET D5_INVOKER_CM = kit_id
+END
+LAF ADD_KIT_EX 
+  INT_VAR
+    kit_class   = 13
+    lower       = %new_mt_lower%
+    mixed       = %new_mt_mixed%
+    help        = %help%
+  STR_VAR
+    kit_name    = ~D5_INVOKER_MT~
+    clab_base_m = ~override/clabma07.2da~
+    unusable    = EVAL ~%usable%~
+    clasweap    = ~0 0 0 0 0 0 0 0~
+    weapprof    = EVAL ~%mt_weapprof%~
+    alignmnt    = EVAL ~%align%~
+    clsrcreq    = EVAL ~%clsrc%~
+    kittable    = EVAL ~%invoker_MT_kittable%~
+    clswpbon    = ~0 0 5~
+//    luabbr      = EVAL ~%hla_table%~
+  RET D5_INVOKER_MT = kit_id
+END
+
+//____________________________________________________________________________________
+// NECROMANCER
+
+COPY_EXISTING ~kitlist.2da~ ~override~
+  COUNT_2DA_COLS kitlist_cols
+  READ_2DA_ENTRIES_NOW r2en_kitlist kitlist_cols
+  FOR (row = 1; row < r2en_kitlist; ++row) BEGIN
+    READ_2DA_ENTRY_FORMER r2en_kitlist row 1 kit_name
+    PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~NECROMANCER~) BEGIN
+      READ_2DA_ENTRY_FORMER r2en_kitlist row 2 lower
+      READ_2DA_ENTRY_FORMER r2en_kitlist row 3 mixed
+      READ_2DA_ENTRY_FORMER r2en_kitlist row 4 help
+      READ_2DA_ENTRY_FORMER r2en_kitlist row 7 usable
+    END
+  END
+BUT_ONLY
+
+ACTION_GET_STRREF %lower% necromancer_lower_string
+OUTER_SET new_fm_lower = RESOLVE_STR_REF (~fighter/%necromancer_lower_string%~)
+OUTER_SET new_cm_lower = RESOLVE_STR_REF (~cleric/%necromancer_lower_string%~)
+OUTER_SET new_mt_lower = RESOLVE_STR_REF (~thief/%necromancer_lower_string%~)
+ACTION_GET_STRREF %mixed% necromancer_mixed_string
+OUTER_SET new_fm_mixed = RESOLVE_STR_REF (~Fighter/%necromancer_mixed_string%~)
+OUTER_SET new_cm_mixed = RESOLVE_STR_REF (~Cleric/%necromancer_mixed_string%~)
+OUTER_SET new_mt_mixed = RESOLVE_STR_REF (~Thief/%necromancer_mixed_string%~)
+OUTER_SET necromancer_help = %help%
+
+OUTER_SPRINT necromancer_FM_kittable ~~
+OUTER_SPRINT necromancer_CM_kittable ~~
+OUTER_SPRINT necromancer_MT_kittable ~~
+COPY_EXISTING ~CLSRCREQ.2da~ ~override~
+  COUNT_2DA_COLS clsrcreq_cols
+  READ_2DA_ENTRIES_NOW r2en_clsrcreq clsrcreq_cols
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 34 1 human_fm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 46 1 human_mt
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 47 1 human_cm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 34 2 elf_fm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 46 2 elf_mt
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 47 2 elf_cm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 34 3 halfelf_fm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 46 3 halfelf_mt
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 47 3 halfelf_cm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 34 4 dwarf_fm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 46 4 dwarf_mt
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 47 4 dwarf_cm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 34 5 halfling_fm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 46 5 halfling_mt
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 47 5 halfling_cm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 34 6 gnome_fm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 46 6 gnome_mt
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 47 6 gnome_cm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 34 7 halforc_fm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 46 7 halforc_mt
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 47 7 halforc_cm
+  PATCH_IF (FILE_CONTAINS_EVALUATED (~K_M_D.2da~ ~[%TAB% ]28[%WNL%%LNL%]~)) BEGIN
+    PATCH_IF (dwarf_fm = 1) BEGIN
+      SPRINT necromancer_FM_kittable ~%necromancer_FM_kittable% K_FM_D~
+    END
+    PATCH_IF (dwarf_cm = 1) BEGIN
+      SPRINT necromancer_CM_kittable ~%necromancer_CM_kittable% K_CM_D~
+    END
+    PATCH_IF (dwarf_mt = 1) BEGIN
+      SPRINT necromancer_MT_kittable ~%necromancer_MT_kittable% K_MT_D~
+    END
+  END
+  PATCH_IF (FILE_CONTAINS_EVALUATED (~K_M_E.2da~ ~[%TAB% ]28[%WNL%%LNL%]~)) BEGIN
+    PATCH_IF (elf_fm = 1) BEGIN
+      SPRINT necromancer_FM_kittable ~%necromancer_FM_kittable% K_FM_E~
+    END
+    PATCH_IF (elf_cm = 1) BEGIN
+      SPRINT necromancer_CM_kittable ~%necromancer_CM_kittable% K_CM_E~
+    END
+    PATCH_IF (elf_mt = 1) BEGIN
+      SPRINT necromancer_MT_kittable ~%necromancer_MT_kittable% K_MT_E~
+    END
+  END
+  PATCH_IF (FILE_CONTAINS_EVALUATED (~K_M_G.2da~ ~[%TAB% ]28[%WNL%%LNL%]~)) BEGIN
+    PATCH_IF (gnome_fm = 1) BEGIN
+      SPRINT necromancer_FM_kittable ~%necromancer_FM_kittable% K_FM_G~
+    END
+    PATCH_IF (gnome_cm = 1) BEGIN
+      SPRINT necromancer_CM_kittable ~%necromancer_CM_kittable% K_CM_G~
+    END
+    PATCH_IF (gnome_mt = 1) BEGIN
+      SPRINT necromancer_MT_kittable ~%necromancer_MT_kittable% K_MT_G~
+    END
+  END
+  PATCH_IF (FILE_CONTAINS_EVALUATED (~K_M_H.2da~ ~[%TAB% ]28[%WNL%%LNL%]~)) BEGIN
+      SPRINT necromancer_FM_kittable ~%necromancer_FM_kittable% K_FM_H~
+      SPRINT necromancer_CM_kittable ~%necromancer_CM_kittable% K_CM_H~
+      SPRINT necromancer_MT_kittable ~%necromancer_MT_kittable% K_MT_H~
+  END
+  PATCH_IF (FILE_CONTAINS_EVALUATED (~K_M_HE.2da~ ~[%TAB% ]28[%WNL%%LNL%]~)) BEGIN
+    PATCH_IF (halfelf_fm = 1) BEGIN
+      SPRINT necromancer_FM_kittable ~%necromancer_FM_kittable% K_FM_HE~
+    END
+    PATCH_IF (halfelf_cm = 1) BEGIN
+      SPRINT necromancer_CM_kittable ~%necromancer_CM_kittable% K_CM_HE~
+    END
+    PATCH_IF (halfelf_mt = 1) BEGIN
+      SPRINT necromancer_MT_kittable ~%necromancer_MT_kittable% K_MT_HE~
+    END
+  END
+  PATCH_IF (FILE_CONTAINS_EVALUATED (~K_M_HL.2da~ ~[%TAB% ]28[%WNL%%LNL%]~)) BEGIN
+    PATCH_IF (halfling_fm = 1) BEGIN
+      SPRINT necromancer_FM_kittable ~%necromancer_FM_kittable% K_FM_HL~
+    END
+    PATCH_IF (halfling_cm = 1) BEGIN
+      SPRINT necromancer_CM_kittable ~%necromancer_CM_kittable% K_CM_HL~
+    END
+    PATCH_IF (halfling_mt = 1) BEGIN
+      SPRINT necromancer_MT_kittable ~%necromancer_MT_kittable% K_MT_HL~
+    END
+  END
+  PATCH_IF (FILE_CONTAINS_EVALUATED (~K_M_HO.2da~ ~[%TAB% ]28[%WNL%%LNL%]~)) BEGIN
+    PATCH_IF (halforc_fm = 1) BEGIN
+      SPRINT necromancer_FM_kittable ~%necromancer_FM_kittable% K_FM_HO~
+    END
+    PATCH_IF (halforc_cm = 1) BEGIN
+      SPRINT necromancer_CM_kittable ~%necromancer_CM_kittable% K_CM_HO~
+    END
+    PATCH_IF (halforc_mt = 1) BEGIN
+      SPRINT necromancer_MT_kittable ~%necromancer_MT_kittable% K_MT_HO~
+    END
+  END
+  FOR (row = 1; row < r2en_clsrcreq;++row) BEGIN
+    READ_2DA_ENTRY_FORMER r2en_clsrcreq row 0 name
+    PATCH_IF (~%name%~ STRING_EQUAL_CASE ~NECROMANCER~) BEGIN
+      READ_2DA_ENTRY_FORMER r2en_clsrcreq row 1 h_val
+      READ_2DA_ENTRY_FORMER r2en_clsrcreq row 2 e_val
+      READ_2DA_ENTRY_FORMER r2en_clsrcreq row 3 he_val
+      READ_2DA_ENTRY_FORMER r2en_clsrcreq row 4 d_val
+      READ_2DA_ENTRY_FORMER r2en_clsrcreq row 5 g_val
+      READ_2DA_ENTRY_FORMER r2en_clsrcreq row 6 hl_val
+      READ_2DA_ENTRY_FORMER r2en_clsrcreq row 7 ho_val
+      SPRINT clsrc ~%h_val% %e_val% %he_val% %d_val% %g_val% %hl_val% %ho_val%~
+    END
+  END
+BUT_ONLY 
+
+COPY_EXISTING ~alignmnt.2da~ ~override~
+  COUNT_2DA_COLS alignmnt_cols
+  READ_2DA_ENTRIES_NOW r2en_alignmnt alignmnt_cols
+  FOR (row = 1; row < r2en_alignmnt;++row) BEGIN
+    READ_2DA_ENTRY_FORMER r2en_alignmnt row 0 name
+    PATCH_IF (~%name%~ STRING_EQUAL_CASE ~NECROMANCER~) BEGIN
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 1 l_g
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 2 l_n
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 3 l_e
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 4 n_g
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 5 n_n
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 6 n_e
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 7 c_g
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 8 c_n
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 9 c_e
+      SPRINT align ~%l_g% %l_n% %l_e% %n_g% %n_n% %n_e% %c_g% %c_n% %c_e%~
+    END
+  END
+BUT_ONLY 
+
+/*
+COPY_EXISTING ~luabbr.2da~ ~override~
+  COUNT_2DA_COLS luabbr_cols
+  READ_2DA_ENTRIES_NOW r2en_luabbr luabbr_cols
+  FOR (row = 1; row < 40; ++row) BEGIN
+    READ_2DA_ENTRY_FORMER r2en_alignmnt row 0 name
+    PATCH_IF (~%name%~ STRING_EQUAL_CASE ~NECROMANCER~) BEGIN
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 1 hla_table
+    END
+  END
+BUT_ONLY 
+*/
+
+ACTION_IF !(FILE_EXISTS ~override/clabma03.2da~) BEGIN
+  COPY_EXISTING ~clabma03.2da~ ~override~
+END
+
+LAF ADD_KIT_EX 
+  INT_VAR
+    kit_class   = 9
+    lower       = %new_fm_lower%
+    mixed       = %new_fm_mixed%
+    help        = %help%
+  STR_VAR
+    kit_name    = ~D5_NECROMANCER_FM~
+    clab_base_m = ~override/clabma03.2da~
+    unusable    = EVAL ~%usable%~
+    clasweap    = ~0 0 0 0 0 0 0 0~
+    weapprof    = EVAL ~%fm_weapprof%~
+    alignmnt    = EVAL ~%align%~
+    clsrcreq    = EVAL ~%clsrc%~
+    kittable    = EVAL ~%necromancer_FM_kittable%~
+    clswpbon    = ~1 0 2~
+//    luabbr      = EVAL ~%hla_table%~
+  RET D5_NECROMANCER_FM = kit_id
+END
+LAF ADD_KIT_EX 
+  INT_VAR
+    kit_class   = 14
+    lower       = %new_cm_lower%
+    mixed       = %new_cm_mixed%
+    help        = %help%
+  STR_VAR
+    kit_name    = ~D5_NECROMANCER_CM~
+    clab_base_m = ~override/clabma03.2da~
+    unusable    = EVAL ~%usable%~
+    clasweap    = ~0 0 0 0 0 0 0 0~
+    weapprof    = EVAL ~%cm_weapprof%~
+    alignmnt    = EVAL ~%align%~
+    clsrcreq    = EVAL ~%clsrc%~
+    kittable    = EVAL ~%necromancer_CM_kittable%~
+    clswpbon    = ~0 0 3~
+//    luabbr      = EVAL ~%hla_table%~
+  RET D5_NECROMANCER_CM = kit_id
+END
+LAF ADD_KIT_EX 
+  INT_VAR
+    kit_class   = 13
+    lower       = %new_mt_lower%
+    mixed       = %new_mt_mixed%
+    help        = %help%
+  STR_VAR
+    kit_name    = ~D5_NECROMANCER_MT~
+    clab_base_m = ~override/clabma03.2da~
+    unusable    = EVAL ~%usable%~
+    clasweap    = ~0 0 0 0 0 0 0 0~
+    weapprof    = EVAL ~%mt_weapprof%~
+    alignmnt    = EVAL ~%align%~
+    clsrcreq    = EVAL ~%clsrc%~
+    kittable    = EVAL ~%necromancer_MT_kittable%~
+    clswpbon    = ~0 0 5~
+//    luabbr      = EVAL ~%hla_table%~
+  RET D5_NECROMANCER_MT = kit_id
+END
+
+//____________________________________________________________________________________
+// TRANSMUTER
+
+COPY_EXISTING ~kitlist.2da~ ~override~
+  COUNT_2DA_COLS kitlist_cols
+  READ_2DA_ENTRIES_NOW r2en_kitlist kitlist_cols
+  FOR (row = 1; row < r2en_kitlist; ++row) BEGIN
+    READ_2DA_ENTRY_FORMER r2en_kitlist row 1 kit_name
+    PATCH_IF (~%kit_name%~ STRING_EQUAL_CASE ~TRANSMUTER~) BEGIN
+      READ_2DA_ENTRY_FORMER r2en_kitlist row 2 lower
+      READ_2DA_ENTRY_FORMER r2en_kitlist row 3 mixed
+      READ_2DA_ENTRY_FORMER r2en_kitlist row 4 help
+      READ_2DA_ENTRY_FORMER r2en_kitlist row 7 usable
+    END
+  END
+BUT_ONLY
+
+ACTION_GET_STRREF %lower% transmuter_lower_string
+OUTER_SET new_fm_lower = RESOLVE_STR_REF (~fighter/%transmuter_lower_string%~)
+OUTER_SET new_cm_lower = RESOLVE_STR_REF (~cleric/%transmuter_lower_string%~)
+OUTER_SET new_mt_lower = RESOLVE_STR_REF (~thief/%transmuter_lower_string%~)
+ACTION_GET_STRREF %mixed% transmuter_mixed_string
+OUTER_SET new_fm_mixed = RESOLVE_STR_REF (~Fighter/%transmuter_mixed_string%~)
+OUTER_SET new_cm_mixed = RESOLVE_STR_REF (~Cleric/%transmuter_mixed_string%~)
+OUTER_SET new_mt_mixed = RESOLVE_STR_REF (~Thief/%transmuter_mixed_string%~)
+OUTER_SET transmuter_help = %help%
+
+OUTER_SPRINT transmuter_FM_kittable ~~
+OUTER_SPRINT transmuter_CM_kittable ~~
+OUTER_SPRINT transmuter_MT_kittable ~~
+COPY_EXISTING ~CLSRCREQ.2da~ ~override~
+  COUNT_2DA_COLS clsrcreq_cols
+  READ_2DA_ENTRIES_NOW r2en_clsrcreq clsrcreq_cols
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 34 1 human_fm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 46 1 human_mt
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 47 1 human_cm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 34 2 elf_fm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 46 2 elf_mt
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 47 2 elf_cm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 34 3 halfelf_fm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 46 3 halfelf_mt
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 47 3 halfelf_cm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 34 4 dwarf_fm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 46 4 dwarf_mt
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 47 4 dwarf_cm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 34 5 halfling_fm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 46 5 halfling_mt
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 47 5 halfling_cm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 34 6 gnome_fm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 46 6 gnome_mt
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 47 6 gnome_cm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 34 7 halforc_fm
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 46 7 halforc_mt
+  READ_2DA_ENTRY_FORMER r2en_clsrcreq 47 7 halforc_cm
+  PATCH_IF (FILE_CONTAINS_EVALUATED (~K_M_D.2da~ ~[%TAB% ]29[%WNL%%LNL%]~)) BEGIN
+    PATCH_IF (dwarf_fm = 1) BEGIN
+      SPRINT transmuter_FM_kittable ~%transmuter_FM_kittable% K_FM_D~
+    END
+    PATCH_IF (dwarf_cm = 1) BEGIN
+      SPRINT transmuter_CM_kittable ~%transmuter_CM_kittable% K_CM_D~
+    END
+    PATCH_IF (dwarf_mt = 1) BEGIN
+      SPRINT transmuter_MT_kittable ~%transmuter_MT_kittable% K_MT_D~
+    END
+  END
+  PATCH_IF (FILE_CONTAINS_EVALUATED (~K_M_E.2da~ ~[%TAB% ]29[%WNL%%LNL%]~)) BEGIN
+    PATCH_IF (elf_fm = 1) BEGIN
+      SPRINT transmuter_FM_kittable ~%transmuter_FM_kittable% K_FM_E~
+    END
+    PATCH_IF (elf_cm = 1) BEGIN
+      SPRINT transmuter_CM_kittable ~%transmuter_CM_kittable% K_CM_E~
+    END
+    PATCH_IF (elf_mt = 1) BEGIN
+      SPRINT transmuter_MT_kittable ~%transmuter_MT_kittable% K_MT_E~
+    END
+  END
+  PATCH_IF (FILE_CONTAINS_EVALUATED (~K_M_G.2da~ ~[%TAB% ]29[%WNL%%LNL%]~)) BEGIN
+    PATCH_IF (gnome_fm = 1) BEGIN
+      SPRINT transmuter_FM_kittable ~%transmuter_FM_kittable% K_FM_G~
+    END
+    PATCH_IF (gnome_cm = 1) BEGIN
+      SPRINT transmuter_CM_kittable ~%transmuter_CM_kittable% K_CM_G~
+    END
+    PATCH_IF (gnome_mt = 1) BEGIN
+      SPRINT transmuter_MT_kittable ~%transmuter_MT_kittable% K_MT_G~
+    END
+  END
+  PATCH_IF (FILE_CONTAINS_EVALUATED (~K_M_H.2da~ ~[%TAB% ]29[%WNL%%LNL%]~)) BEGIN
+      SPRINT transmuter_FM_kittable ~%transmuter_FM_kittable% K_FM_H~
+      SPRINT transmuter_CM_kittable ~%transmuter_CM_kittable% K_CM_H~
+      SPRINT transmuter_MT_kittable ~%transmuter_MT_kittable% K_MT_H~
+  END
+  PATCH_IF (FILE_CONTAINS_EVALUATED (~K_M_HE.2da~ ~[%TAB% ]29[%WNL%%LNL%]~)) BEGIN
+    PATCH_IF (halfelf_fm = 1) BEGIN
+      SPRINT transmuter_FM_kittable ~%transmuter_FM_kittable% K_FM_HE~
+    END
+    PATCH_IF (halfelf_cm = 1) BEGIN
+      SPRINT transmuter_CM_kittable ~%transmuter_CM_kittable% K_CM_HE~
+    END
+    PATCH_IF (halfelf_mt = 1) BEGIN
+      SPRINT transmuter_MT_kittable ~%transmuter_MT_kittable% K_MT_HE~
+    END
+  END
+  PATCH_IF (FILE_CONTAINS_EVALUATED (~K_M_HL.2da~ ~[%TAB% ]29[%WNL%%LNL%]~)) BEGIN
+    PATCH_IF (halfling_fm = 1) BEGIN
+      SPRINT transmuter_FM_kittable ~%transmuter_FM_kittable% K_FM_HL~
+    END
+    PATCH_IF (halfling_cm = 1) BEGIN
+      SPRINT transmuter_CM_kittable ~%transmuter_CM_kittable% K_CM_HL~
+    END
+    PATCH_IF (halfling_mt = 1) BEGIN
+      SPRINT transmuter_MT_kittable ~%transmuter_MT_kittable% K_MT_HL~
+    END
+  END
+  PATCH_IF (FILE_CONTAINS_EVALUATED (~K_M_HO.2da~ ~[%TAB% ]29[%WNL%%LNL%]~)) BEGIN
+    PATCH_IF (halforc_fm = 1) BEGIN
+      SPRINT transmuter_FM_kittable ~%transmuter_FM_kittable% K_FM_HO~
+    END
+    PATCH_IF (halforc_cm = 1) BEGIN
+      SPRINT transmuter_CM_kittable ~%transmuter_CM_kittable% K_CM_HO~
+    END
+    PATCH_IF (halforc_mt = 1) BEGIN
+      SPRINT transmuter_MT_kittable ~%transmuter_MT_kittable% K_MT_HO~
+    END
+  END
+  FOR (row = 1; row < r2en_clsrcreq;++row) BEGIN
+    READ_2DA_ENTRY_FORMER r2en_clsrcreq row 0 name
+    PATCH_IF (~%name%~ STRING_EQUAL_CASE ~TRANSMUTER~) BEGIN
+      READ_2DA_ENTRY_FORMER r2en_clsrcreq row 1 h_val
+      READ_2DA_ENTRY_FORMER r2en_clsrcreq row 2 e_val
+      READ_2DA_ENTRY_FORMER r2en_clsrcreq row 3 he_val
+      READ_2DA_ENTRY_FORMER r2en_clsrcreq row 4 d_val
+      READ_2DA_ENTRY_FORMER r2en_clsrcreq row 5 g_val
+      READ_2DA_ENTRY_FORMER r2en_clsrcreq row 6 hl_val
+      READ_2DA_ENTRY_FORMER r2en_clsrcreq row 7 ho_val
+      SPRINT clsrc ~%h_val% %e_val% %he_val% %d_val% %g_val% %hl_val% %ho_val%~
+    END
+  END
+BUT_ONLY 
+
+COPY_EXISTING ~alignmnt.2da~ ~override~
+  COUNT_2DA_COLS alignmnt_cols
+  READ_2DA_ENTRIES_NOW r2en_alignmnt alignmnt_cols
+  FOR (row = 1; row < r2en_alignmnt;++row) BEGIN
+    READ_2DA_ENTRY_FORMER r2en_alignmnt row 0 name
+    PATCH_IF (~%name%~ STRING_EQUAL_CASE ~TRANSMUTER~) BEGIN
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 1 l_g
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 2 l_n
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 3 l_e
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 4 n_g
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 5 n_n
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 6 n_e
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 7 c_g
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 8 c_n
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 9 c_e
+      SPRINT align ~%l_g% %l_n% %l_e% %n_g% %n_n% %n_e% %c_g% %c_n% %c_e%~
+    END
+  END
+BUT_ONLY 
+
+/*
+COPY_EXISTING ~luabbr.2da~ ~override~
+  COUNT_2DA_COLS luabbr_cols
+  READ_2DA_ENTRIES_NOW r2en_luabbr luabbr_cols
+  FOR (row = 1; row < 40; ++row) BEGIN
+    READ_2DA_ENTRY_FORMER r2en_alignmnt row 0 name
+    PATCH_IF (~%name%~ STRING_EQUAL_CASE ~TRANSMUTER~) BEGIN
+      READ_2DA_ENTRY_FORMER r2en_alignmnt row 1 hla_table
+    END
+  END
+BUT_ONLY 
+*/
+
+ACTION_IF !(FILE_EXISTS ~override/clabma04.2da~) BEGIN
+  COPY_EXISTING ~clabma04.2da~ ~override~
+END
+
+LAF ADD_KIT_EX 
+  INT_VAR
+    kit_class   = 9
+    lower       = %new_fm_lower%
+    mixed       = %new_fm_mixed%
+    help        = %help%
+  STR_VAR
+    kit_name    = ~D5_TRANSMUTER_FM~
+    clab_base_m = ~override/clabma04.2da~
+    unusable    = EVAL ~%usable%~
+    clasweap    = ~0 0 0 0 0 0 0 0~
+    weapprof    = EVAL ~%fm_weapprof%~
+    alignmnt    = EVAL ~%align%~
+    clsrcreq    = EVAL ~%clsrc%~
+    kittable    = EVAL ~%transmuter_FM_kittable%~
+    clswpbon    = ~1 0 2~
+//    luabbr      = EVAL ~%hla_table%~
+  RET D5_TRANSMUTER_FM = kit_id
+END
+LAF ADD_KIT_EX 
+  INT_VAR
+    kit_class   = 14
+    lower       = %new_cm_lower%
+    mixed       = %new_cm_mixed%
+    help        = %help%
+  STR_VAR
+    kit_name    = ~D5_TRANSMUTER_CM~
+    clab_base_m = ~override/clabma04.2da~
+    unusable    = EVAL ~%usable%~
+    clasweap    = ~0 0 0 0 0 0 0 0~
+    weapprof    = EVAL ~%cm_weapprof%~
+    alignmnt    = EVAL ~%align%~
+    clsrcreq    = EVAL ~%clsrc%~
+    kittable    = EVAL ~%transmuter_CM_kittable%~
+    clswpbon    = ~0 0 3~
+//    luabbr      = EVAL ~%hla_table%~
+  RET D5_TRANSMUTER_CM = kit_id
+END
+LAF ADD_KIT_EX 
+  INT_VAR
+    kit_class   = 13
+    lower       = %new_mt_lower%
+    mixed       = %new_mt_mixed%
+    help        = %help%
+  STR_VAR
+    kit_name    = ~D5_TRANSMUTER_MT~
+    clab_base_m = ~override/clabma04.2da~
+    unusable    = EVAL ~%usable%~
+    clasweap    = ~0 0 0 0 0 0 0 0~
+    weapprof    = EVAL ~%mt_weapprof%~
+    alignmnt    = EVAL ~%align%~
+    clsrcreq    = EVAL ~%clsrc%~
+    kittable    = EVAL ~%transmuter_MT_kittable%~
+    clswpbon    = ~0 0 5~
+//    luabbr      = EVAL ~%hla_table%~
+  RET D5_TRANSMUTER_MT = kit_id
+END
+
+END	//	end multiclass specialists
+
+
+//____________________________________________________________________________________
+//____________________________________________________________________________________

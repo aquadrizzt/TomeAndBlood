@@ -1,6 +1,6 @@
 BACKUP ~weidu_external/backup/TomeAndBlood~
 AUTHOR ~aquadrizzt~
-VERSION ~1.0.1~ 
+VERSION ~1.1~ 
 
 ALWAYS
 
@@ -418,6 +418,23 @@ ACTION_IF (MOD_IS_INSTALLED ~tomeandblood.tp2~ ~80~) OR (MOD_IS_INSTALLED ~tomea
  LAF arcane_spont_items INT_VAR 5e_plus_mem = 0 END
 // LAF divine_spont_items INT_VAR 5e_plus_mem = 0 END
 END
+
+
+// -----------------------------
+// 95: MULTICLASS SPECIALISTS
+// -----------------------------
+BEGIN @95
+DESIGNATED 95
+REQUIRE_PREDICATE (ENGINE_IS ~bgee bg2ee iwdee eet~) @1 
+//GROUP @6
+
+COPY_EXISTING ~sw1h01.itm~ ~override/qdtnb_mc_specialists.qd~ //detection for this component 
+
+INCLUDE ~TomeAndBlood/lib/a7#add_kit_ex.tpa~
+
+INCLUDE ~TomeAndBlood/comp/setup_specialists.tpa~ 
+
+LAF multiclass_specialists END
 
 
 ////////////////////////////////////////////////////////////////////////////////////////

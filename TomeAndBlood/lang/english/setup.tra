@@ -27,12 +27,12 @@
 @72 = ~Change spells once every three levels~
 @79 = ~Spell Selection by Dialogue~
 @80 = ~Multiclass Sorcerers~
-@82 = ~Mage Kit: Arcanist (Do not install if you plan to use 5E spellcasting for everyone)~
+@82 = ~Mage Kit: Arcanist (do not install if you plan to use 5E spellcasting for everyone)~
 @85 = ~Sorcerer Kit: Mana Sorcerer~
 @91 = ~Make +Spell Slot Items work with MultiSorcerers/Arcanists~
 @92 = ~Bonuses for both memorization and casting slots~
 @93 = ~Bonuses for casting slots only~
-@95 = ~Ability Score Spellcasting Bonuses (install AFTER any mod that changes spell tables!)~
+@95 = ~Multiclass Specialists~
 //
 //
 @100 = ~~ 
