@@ -856,7 +856,7 @@ APPEND ~CLABMA01.2da~ ~SPEC_FIX	 	AP_QDNEC#~
 //____________________________________________________________________________________
 
 
-DEFINE_ACTION_FUNCTION multiclass_specialists BEGIN 
+DEFINE_ACTION_FUNCTION multiclass_specialists_complex BEGIN 
 
 // This component uses code by Subtledoctor; all such code is used with permission of the original author. 
 
@@ -984,14 +984,21 @@ COPY_EXISTING ~kitlist.2da~ ~override~
 BUT_ONLY
 
 ACTION_GET_STRREF %lower% abjurer_lower_string
-OUTER_SET new_fm_lower = RESOLVE_STR_REF (~fighter/%abjurer_lower_string%~)
-OUTER_SET new_cm_lower = RESOLVE_STR_REF (~cleric/%abjurer_lower_string%~)
-OUTER_SET new_mt_lower = RESOLVE_STR_REF (~thief/%abjurer_lower_string%~)
+OUTER_SPRINT fm_lower_string ~fighter/%abjurer_lower_string%~
+OUTER_SPRINT cm_lower_string ~cleric/%abjurer_lower_string%~
+OUTER_SPRINT mt_lower_string ~thief/%abjurer_lower_string%~
+OUTER_SET new_fm_lower = RESOLVE_STR_REF (~%fm_lower_string%~)
+OUTER_SET new_cm_lower = RESOLVE_STR_REF (~%cm_lower_string%~)
+OUTER_SET new_mt_lower = RESOLVE_STR_REF (~%mt_lower_string%~)
 ACTION_GET_STRREF %mixed% abjurer_mixed_string
-OUTER_SET new_fm_mixed = RESOLVE_STR_REF (~Fighter/%abjurer_mixed_string%~)
-OUTER_SET new_cm_mixed = RESOLVE_STR_REF (~Cleric/%abjurer_mixed_string%~)
-OUTER_SET new_mt_mixed = RESOLVE_STR_REF (~Thief/%abjurer_mixed_string%~)
+OUTER_SPRINT fm_mixed_string ~Fighter/%abjurer_mixed_string%~
+OUTER_SPRINT cm_mixed_string ~Cleric/%abjurer_mixed_string%~
+OUTER_SPRINT mt_mixed_string ~Thief/%abjurer_mixed_string%~
+OUTER_SET new_fm_mixed = RESOLVE_STR_REF (~%fm_mixed_string%~)
+OUTER_SET new_cm_mixed = RESOLVE_STR_REF (~%cm_mixed_string%~)
+OUTER_SET new_mt_mixed = RESOLVE_STR_REF (~%mt_mixed_string%~)
 OUTER_SET abjurer_help = %help%
+/*
 OUTER_SPRINT abjurer_alignmnt ~%alignmnt%~
 OUTER_SPRINT abjurer_luabbr ~%luabbr%~
 OUTER_SPRINT abjurer_abclsrq ~%abclasrq%~
@@ -999,6 +1006,7 @@ OUTER_SPRINT abjurer_clsrcreq ~%clsrcreq%~
 OUTER_SPRINT abjurer_stweap ~%stweap%~
 OUTER_SPRINT abjurer_bdstweap ~%bdstweap%~
 OUTER_SPRINT abjurer_unusable ~%unusable%~
+*/
 
 OUTER_SPRINT abjurer_FM_kittable ~~
 OUTER_SPRINT abjurer_CM_kittable ~~
@@ -1264,13 +1272,19 @@ COPY_EXISTING ~kitlist.2da~ ~override~
 BUT_ONLY
 
 ACTION_GET_STRREF %lower% conjurer_lower_string
-OUTER_SET new_fm_lower = RESOLVE_STR_REF (~fighter/%conjurer_lower_string%~)
-OUTER_SET new_cm_lower = RESOLVE_STR_REF (~cleric/%conjurer_lower_string%~)
-OUTER_SET new_mt_lower = RESOLVE_STR_REF (~thief/%conjurer_lower_string%~)
+OUTER_SPRINT fm_lower_string ~fighter/%conjurer_lower_string%~
+OUTER_SPRINT cm_lower_string ~cleric/%conjurer_lower_string%~
+OUTER_SPRINT mt_lower_string ~thief/%conjurer_lower_string%~
+OUTER_SET new_fm_lower = RESOLVE_STR_REF (~%fm_lower_string%~)
+OUTER_SET new_cm_lower = RESOLVE_STR_REF (~%cm_lower_string%~)
+OUTER_SET new_mt_lower = RESOLVE_STR_REF (~%mt_lower_string%~)
 ACTION_GET_STRREF %mixed% conjurer_mixed_string
-OUTER_SET new_fm_mixed = RESOLVE_STR_REF (~Fighter/%conjurer_mixed_string%~)
-OUTER_SET new_cm_mixed = RESOLVE_STR_REF (~Cleric/%conjurer_mixed_string%~)
-OUTER_SET new_mt_mixed = RESOLVE_STR_REF (~Thief/%conjurer_mixed_string%~)
+OUTER_SPRINT fm_mixed_string ~Fighter/%conjurer_mixed_string%~
+OUTER_SPRINT cm_mixed_string ~Cleric/%conjurer_mixed_string%~
+OUTER_SPRINT mt_mixed_string ~Thief/%conjurer_mixed_string%~
+OUTER_SET new_fm_mixed = RESOLVE_STR_REF (~%fm_mixed_string%~)
+OUTER_SET new_cm_mixed = RESOLVE_STR_REF (~%cm_mixed_string%~)
+OUTER_SET new_mt_mixed = RESOLVE_STR_REF (~%mt_mixed_string%~)
 OUTER_SET conjurer_help = %help%
 
 OUTER_SPRINT conjurer_FM_kittable ~~
@@ -1499,13 +1513,19 @@ COPY_EXISTING ~kitlist.2da~ ~override~
 BUT_ONLY
 
 ACTION_GET_STRREF %lower% diviner_lower_string
-OUTER_SET new_fm_lower = RESOLVE_STR_REF (~fighter/%diviner_lower_string%~)
-OUTER_SET new_cm_lower = RESOLVE_STR_REF (~cleric/%diviner_lower_string%~)
-OUTER_SET new_mt_lower = RESOLVE_STR_REF (~thief/%diviner_lower_string%~)
+OUTER_SPRINT fm_lower_string ~fighter/%diviner_lower_string%~
+OUTER_SPRINT cm_lower_string ~cleric/%diviner_lower_string%~
+OUTER_SPRINT mt_lower_string ~thief/%diviner_lower_string%~
+OUTER_SET new_fm_lower = RESOLVE_STR_REF (~%fm_lower_string%~)
+OUTER_SET new_cm_lower = RESOLVE_STR_REF (~%cm_lower_string%~)
+OUTER_SET new_mt_lower = RESOLVE_STR_REF (~%mt_lower_string%~)
 ACTION_GET_STRREF %mixed% diviner_mixed_string
-OUTER_SET new_fm_mixed = RESOLVE_STR_REF (~Fighter/%diviner_mixed_string%~)
-OUTER_SET new_cm_mixed = RESOLVE_STR_REF (~Cleric/%diviner_mixed_string%~)
-OUTER_SET new_mt_mixed = RESOLVE_STR_REF (~Thief/%diviner_mixed_string%~)
+OUTER_SPRINT fm_mixed_string ~Fighter/%diviner_mixed_string%~
+OUTER_SPRINT cm_mixed_string ~Cleric/%diviner_mixed_string%~
+OUTER_SPRINT mt_mixed_string ~Thief/%diviner_mixed_string%~
+OUTER_SET new_fm_mixed = RESOLVE_STR_REF (~%fm_mixed_string%~)
+OUTER_SET new_cm_mixed = RESOLVE_STR_REF (~%cm_mixed_string%~)
+OUTER_SET new_mt_mixed = RESOLVE_STR_REF (~%mt_mixed_string%~)
 OUTER_SET diviner_help = %help%
 
 OUTER_SPRINT diviner_FM_kittable ~~
@@ -1734,13 +1754,19 @@ COPY_EXISTING ~kitlist.2da~ ~override~
 BUT_ONLY
 
 ACTION_GET_STRREF %lower% enchanter_lower_string
-OUTER_SET new_fm_lower = RESOLVE_STR_REF (~fighter/%enchanter_lower_string%~)
-OUTER_SET new_cm_lower = RESOLVE_STR_REF (~cleric/%enchanter_lower_string%~)
-OUTER_SET new_mt_lower = RESOLVE_STR_REF (~thief/%enchanter_lower_string%~)
+OUTER_SPRINT fm_lower_string ~fighter/%enchanter_lower_string%~
+OUTER_SPRINT cm_lower_string ~cleric/%enchanter_lower_string%~
+OUTER_SPRINT mt_lower_string ~thief/%enchanter_lower_string%~
+OUTER_SET new_fm_lower = RESOLVE_STR_REF (~%fm_lower_string%~)
+OUTER_SET new_cm_lower = RESOLVE_STR_REF (~%cm_lower_string%~)
+OUTER_SET new_mt_lower = RESOLVE_STR_REF (~%mt_lower_string%~)
 ACTION_GET_STRREF %mixed% enchanter_mixed_string
-OUTER_SET new_fm_mixed = RESOLVE_STR_REF (~Fighter/%enchanter_mixed_string%~)
-OUTER_SET new_cm_mixed = RESOLVE_STR_REF (~Cleric/%enchanter_mixed_string%~)
-OUTER_SET new_mt_mixed = RESOLVE_STR_REF (~Thief/%enchanter_mixed_string%~)
+OUTER_SPRINT fm_mixed_string ~Fighter/%enchanter_mixed_string%~
+OUTER_SPRINT cm_mixed_string ~Cleric/%enchanter_mixed_string%~
+OUTER_SPRINT mt_mixed_string ~Thief/%enchanter_mixed_string%~
+OUTER_SET new_fm_mixed = RESOLVE_STR_REF (~%fm_mixed_string%~)
+OUTER_SET new_cm_mixed = RESOLVE_STR_REF (~%cm_mixed_string%~)
+OUTER_SET new_mt_mixed = RESOLVE_STR_REF (~%mt_mixed_string%~)
 OUTER_SET enchanter_help = %help%
 
 OUTER_SPRINT enchanter_FM_kittable ~~
@@ -1969,13 +1995,19 @@ COPY_EXISTING ~kitlist.2da~ ~override~
 BUT_ONLY
 
 ACTION_GET_STRREF %lower% illusionist_lower_string
-OUTER_SET new_fm_lower = RESOLVE_STR_REF (~fighter/%illusionist_lower_string%~)
-OUTER_SET new_cm_lower = RESOLVE_STR_REF (~cleric/%illusionist_lower_string%~)
-OUTER_SET new_mt_lower = RESOLVE_STR_REF (~thief/%illusionist_lower_string%~)
+OUTER_SPRINT fm_lower_string ~fighter/%illusionist_lower_string%~
+OUTER_SPRINT cm_lower_string ~cleric/%illusionist_lower_string%~
+OUTER_SPRINT mt_lower_string ~thief/%illusionist_lower_string%~
+OUTER_SET new_fm_lower = RESOLVE_STR_REF (~%fm_lower_string%~)
+OUTER_SET new_cm_lower = RESOLVE_STR_REF (~%cm_lower_string%~)
+OUTER_SET new_mt_lower = RESOLVE_STR_REF (~%mt_lower_string%~)
 ACTION_GET_STRREF %mixed% illusionist_mixed_string
-OUTER_SET new_fm_mixed = RESOLVE_STR_REF (~Fighter/%illusionist_mixed_string%~)
-OUTER_SET new_cm_mixed = RESOLVE_STR_REF (~Cleric/%illusionist_mixed_string%~)
-OUTER_SET new_mt_mixed = RESOLVE_STR_REF (~Thief/%illusionist_mixed_string%~)
+OUTER_SPRINT fm_mixed_string ~Fighter/%illusionist_mixed_string%~
+OUTER_SPRINT cm_mixed_string ~Cleric/%illusionist_mixed_string%~
+OUTER_SPRINT mt_mixed_string ~Thief/%illusionist_mixed_string%~
+OUTER_SET new_fm_mixed = RESOLVE_STR_REF (~%fm_mixed_string%~)
+OUTER_SET new_cm_mixed = RESOLVE_STR_REF (~%cm_mixed_string%~)
+OUTER_SET new_mt_mixed = RESOLVE_STR_REF (~%mt_mixed_string%~)
 OUTER_SET illusionist_help = %help%
 
 OUTER_SPRINT illusionist_FM_kittable ~~
@@ -2204,13 +2236,19 @@ COPY_EXISTING ~kitlist.2da~ ~override~
 BUT_ONLY
 
 ACTION_GET_STRREF %lower% invoker_lower_string
-OUTER_SET new_fm_lower = RESOLVE_STR_REF (~fighter/%invoker_lower_string%~)
-OUTER_SET new_cm_lower = RESOLVE_STR_REF (~cleric/%invoker_lower_string%~)
-OUTER_SET new_mt_lower = RESOLVE_STR_REF (~thief/%invoker_lower_string%~)
+OUTER_SPRINT fm_lower_string ~fighter/%invoker_lower_string%~
+OUTER_SPRINT cm_lower_string ~cleric/%invoker_lower_string%~
+OUTER_SPRINT mt_lower_string ~thief/%invoker_lower_string%~
+OUTER_SET new_fm_lower = RESOLVE_STR_REF (~%fm_lower_string%~)
+OUTER_SET new_cm_lower = RESOLVE_STR_REF (~%cm_lower_string%~)
+OUTER_SET new_mt_lower = RESOLVE_STR_REF (~%mt_lower_string%~)
 ACTION_GET_STRREF %mixed% invoker_mixed_string
-OUTER_SET new_fm_mixed = RESOLVE_STR_REF (~Fighter/%invoker_mixed_string%~)
-OUTER_SET new_cm_mixed = RESOLVE_STR_REF (~Cleric/%invoker_mixed_string%~)
-OUTER_SET new_mt_mixed = RESOLVE_STR_REF (~Thief/%invoker_mixed_string%~)
+OUTER_SPRINT fm_mixed_string ~Fighter/%invoker_mixed_string%~
+OUTER_SPRINT cm_mixed_string ~Cleric/%invoker_mixed_string%~
+OUTER_SPRINT mt_mixed_string ~Thief/%invoker_mixed_string%~
+OUTER_SET new_fm_mixed = RESOLVE_STR_REF (~%fm_mixed_string%~)
+OUTER_SET new_cm_mixed = RESOLVE_STR_REF (~%cm_mixed_string%~)
+OUTER_SET new_mt_mixed = RESOLVE_STR_REF (~%mt_mixed_string%~)
 OUTER_SET invoker_help = %help%
 
 OUTER_SPRINT invoker_FM_kittable ~~
@@ -2439,13 +2477,19 @@ COPY_EXISTING ~kitlist.2da~ ~override~
 BUT_ONLY
 
 ACTION_GET_STRREF %lower% necromancer_lower_string
-OUTER_SET new_fm_lower = RESOLVE_STR_REF (~fighter/%necromancer_lower_string%~)
-OUTER_SET new_cm_lower = RESOLVE_STR_REF (~cleric/%necromancer_lower_string%~)
-OUTER_SET new_mt_lower = RESOLVE_STR_REF (~thief/%necromancer_lower_string%~)
+OUTER_SPRINT fm_lower_string ~fighter/%necromancer_lower_string%~
+OUTER_SPRINT cm_lower_string ~cleric/%necromancer_lower_string%~
+OUTER_SPRINT mt_lower_string ~thief/%necromancer_lower_string%~
+OUTER_SET new_fm_lower = RESOLVE_STR_REF (~%fm_lower_string%~)
+OUTER_SET new_cm_lower = RESOLVE_STR_REF (~%cm_lower_string%~)
+OUTER_SET new_mt_lower = RESOLVE_STR_REF (~%mt_lower_string%~)
 ACTION_GET_STRREF %mixed% necromancer_mixed_string
-OUTER_SET new_fm_mixed = RESOLVE_STR_REF (~Fighter/%necromancer_mixed_string%~)
-OUTER_SET new_cm_mixed = RESOLVE_STR_REF (~Cleric/%necromancer_mixed_string%~)
-OUTER_SET new_mt_mixed = RESOLVE_STR_REF (~Thief/%necromancer_mixed_string%~)
+OUTER_SPRINT fm_mixed_string ~Fighter/%necromancer_mixed_string%~
+OUTER_SPRINT cm_mixed_string ~Cleric/%necromancer_mixed_string%~
+OUTER_SPRINT mt_mixed_string ~Thief/%necromancer_mixed_string%~
+OUTER_SET new_fm_mixed = RESOLVE_STR_REF (~%fm_mixed_string%~)
+OUTER_SET new_cm_mixed = RESOLVE_STR_REF (~%cm_mixed_string%~)
+OUTER_SET new_mt_mixed = RESOLVE_STR_REF (~%mt_mixed_string%~)
 OUTER_SET necromancer_help = %help%
 
 OUTER_SPRINT necromancer_FM_kittable ~~
@@ -2674,13 +2718,19 @@ COPY_EXISTING ~kitlist.2da~ ~override~
 BUT_ONLY
 
 ACTION_GET_STRREF %lower% transmuter_lower_string
-OUTER_SET new_fm_lower = RESOLVE_STR_REF (~fighter/%transmuter_lower_string%~)
-OUTER_SET new_cm_lower = RESOLVE_STR_REF (~cleric/%transmuter_lower_string%~)
-OUTER_SET new_mt_lower = RESOLVE_STR_REF (~thief/%transmuter_lower_string%~)
+OUTER_SPRINT fm_lower_string ~fighter/%transmuter_lower_string%~
+OUTER_SPRINT cm_lower_string ~cleric/%transmuter_lower_string%~
+OUTER_SPRINT mt_lower_string ~thief/%transmuter_lower_string%~
+OUTER_SET new_fm_lower = RESOLVE_STR_REF (~%fm_lower_string%~)
+OUTER_SET new_cm_lower = RESOLVE_STR_REF (~%cm_lower_string%~)
+OUTER_SET new_mt_lower = RESOLVE_STR_REF (~%mt_lower_string%~)
 ACTION_GET_STRREF %mixed% transmuter_mixed_string
-OUTER_SET new_fm_mixed = RESOLVE_STR_REF (~Fighter/%transmuter_mixed_string%~)
-OUTER_SET new_cm_mixed = RESOLVE_STR_REF (~Cleric/%transmuter_mixed_string%~)
-OUTER_SET new_mt_mixed = RESOLVE_STR_REF (~Thief/%transmuter_mixed_string%~)
+OUTER_SPRINT fm_mixed_string ~Fighter/%transmuter_mixed_string%~
+OUTER_SPRINT cm_mixed_string ~Cleric/%transmuter_mixed_string%~
+OUTER_SPRINT mt_mixed_string ~Thief/%transmuter_mixed_string%~
+OUTER_SET new_fm_mixed = RESOLVE_STR_REF (~%fm_mixed_string%~)
+OUTER_SET new_cm_mixed = RESOLVE_STR_REF (~%cm_mixed_string%~)
+OUTER_SET new_mt_mixed = RESOLVE_STR_REF (~%mt_mixed_string%~)
 OUTER_SET transmuter_help = %help%
 
 OUTER_SPRINT transmuter_FM_kittable ~~
@@ -2896,3 +2946,42 @@ END	//	end multiclass specialists
 
 //____________________________________________________________________________________
 //____________________________________________________________________________________
+
+
+DEFINE_ACTION_FUNCTION multiclass_specialists_simple BEGIN 
+
+<<<<<<<< d5/kmr.2da
+2DA  V1.0
+*
+                    KIT
+1    0
+>>>>>>>> 
+
+ACTION_FOR_EACH num IN ~22~ ~23~ ~24~ ~25~ ~26~ ~27~ ~28~ ~29~ BEGIN
+  ACTION_FOR_EACH rac IN ~D~ ~E~ ~G~ ~H~ ~HE~ ~HL~ ~HO~ BEGIN
+    ACTION_IF (FILE_CONTAINS_EVALUATED (~K_M_%rac%.2da~ ~[%TAB% ]%num%[%WNL%%LNL%]~)) BEGIN
+      ACTION_FOR_EACH mc IN ~FM~ ~CM~ ~MT~ BEGIN
+        ACTION_IF !(FILE_EXISTS_IN_GAME ~K_%mc%_%rac%~) BEGIN
+          COPY ~d5/kmr.2da~ ~override/K_%mc%_%rac%.2da~
+        END
+      END
+    END
+  END
+END
+
+ACTION_FOR_EACH num IN ~22~ ~23~ ~24~ ~25~ ~26~ ~27~ ~28~ ~29~ BEGIN
+  ACTION_FOR_EACH rac IN ~D~ ~E~ ~G~ ~H~ ~HE~ ~HL~ ~HO~ BEGIN
+    ACTION_IF (FILE_CONTAINS_EVALUATED (~K_M_%rac%.2da~ ~[%TAB% ]%num%[%WNL%%LNL%]~)) BEGIN
+      ACTION_FOR_EACH mc IN ~FM~ ~CM~ ~MT~ BEGIN
+        APPEND ~K_%mc%_%rac%.2da~ ~99     %num%~
+      END
+    END
+  END
+END
+
+END	//	end multiclass specialists
+
+
+//____________________________________________________________________________________
+//____________________________________________________________________________________
+

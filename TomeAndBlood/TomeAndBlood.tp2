@@ -434,7 +434,7 @@ INCLUDE ~TomeAndBlood/lib/a7#add_kit_ex.tpa~
 
 INCLUDE ~TomeAndBlood/comp/setup_specialists.tpa~ 
 
-LAF multiclass_specialists END
+LAF multiclass_specialists_simple END
 
 
 ////////////////////////////////////////////////////////////////////////////////////////
