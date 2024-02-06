@@ -120,8 +120,8 @@ COMPILE ~weidu_external/tomeandblood/d5swtch.baf~
 COPY ~%MOD_FOLDER%/lib/semi_spont/d5zpurp.bam~ ~override/d5swtch.bam~
 
 COPY ~tomeandblood/lib/d5_base.spl~ ~override/d5swtch.spl~
-  SAY NAME1 ~Change known spell~
-  SAY UNIDENTIFIED_DESC ~Change known spell~
+  SAY NAME1 @8301
+  SAY UNIDENTIFIED_DESC @8301
   WRITE_SHORT 0x1c 4
   WRITE_ASCII 0x3a ~d5swtch~ #8
   LPF ALTER_SPELL_HEADER INT_VAR location = 4 target = 5 STR_VAR icon = ~d5swtch~ END
