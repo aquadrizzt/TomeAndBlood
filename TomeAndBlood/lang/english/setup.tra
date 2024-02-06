@@ -741,6 +741,14 @@ This ability allows the Arcanist to change which spells are prepared for the nex
 @21996 = ~Extra sixth level spell slot~
 @21997 = ~Extra seventh level spell slot~
 //
+//
+@95001 = ~fighter~
+@95002 = ~cleric~
+@95003 = ~thief~
+@95006 = ~Fighter~
+@95007 = ~Cleric~
+@95008 = ~Thief~
+//
 //Grammarsalad TRA strings
 //
 @115003 = ~Scribe Scrolls~

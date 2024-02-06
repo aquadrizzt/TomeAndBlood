@@ -1,6 +1,6 @@
 # TomeAndBlood
 
-Tome And Blood: More Options for Wizards and Sorcerers v1.0
+Tome And Blood: More Options for Wizards and Sorcerers v1.1
 
 ## Overview
 
@@ -120,8 +120,13 @@ Items like the Ring of Wizardry work by giving bonus spell slots to mages and bo
 
 Due to certain limitations, this can only allow each item to grant a +1 bonus at any given spell level. So for the sake of balance, all bonus-slot items will be modified to give a +1 bonus at their respective spell levels. This will notably change Edwin's Amulet in bg2 to give +1 spell per level instead of +2. Also BG2's Ring of Acuity, which usually grants +2 2nd-level spell slots, will instead grant +1 2nd-level slot. It may similarly change a few items in IWDEE.
 
-The "double spell slots" items, specifically the "Evermemory" Ring of Wizardry in BG1 and Kontik's& Edion's Rings of Wizardry in IWDEE, will work as normal for normal spellcasters and sorcerers; and for 5E-style casters and multiclass sorcerers they will get a once-per-day item ability to refresh all casting slots of the relevant levels. This way they can achieve their original design, doubling your spellcasting slots, even with these new technical limitations.
+The "double spell slots" items, specifically the "Evermemory" Ring of Wizardry in BG1 and Kontik's & Edion's Rings of Wizardry in IWDEE, will work as normal for normal spellcasters and sorcerers; and for 5E-style casters and multiclass sorcerers they will get a once-per-day item ability to refresh all casting slots of the relevant levels. This way they can achieve their original design, doubling your spellcasting slots, even with these new technical limitations.
 
+COMPONENT 95: Multiclass Specialists
+
+This component makes all of the specialist mage kits available in all of the fighter/mage, cleric/mage, and mage/thief kit screens. It does however adhere to the usual racial restrictions for both class access and kit access - so in an otherwise-unmodded game you will only see an effect with elves and half-elves.
+
+If you use a mod to broaden access to wizard multiclasses at the class or kit level, this component should be installed afterward.
 
 ##Bugs 
 

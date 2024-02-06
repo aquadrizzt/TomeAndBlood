@@ -742,3 +742,12 @@ Cette compétence permet à l'arcaniste de préparer une nouvelle collection de 
 @21995 = ~Emplacement de sort de niveau 5 additionnel~
 @21996 = ~Emplacement de sort de niveau 6 additionnel~
 @21997 = ~Emplacement de sort de niveau 7 additionnel~
+
+//
+//
+@95001 = ~fighter~
+@95002 = ~cleric~
+@95003 = ~thief~
+@95006 = ~Fighter~
+@95007 = ~Cleric~
+@95008 = ~Thief~
